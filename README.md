@@ -8,54 +8,28 @@
 校园新生通将会尽可能为同学们提供最大的帮助，让同学们有一个美好的校园时光。
 
 项目地址
-	* 
 https://github.com/wangyahong423/OneDirection
 
 
 项目成员
-	* 
 王亚红（项目经理，前端工程师）
-
-		* 
-Email：2976716563@qq.com
-		* 
-GitHub： https://github.com/wangyahong423
-	* 
+	Email：2976716563@qq.com
+	GitHub： https://github.com/wangyahong423
 范珂欣（后端工程师，数据库管理员）
-
-		* 
-Email：974094944@qq.com
-		* 
-GitHub： https://github.com/Fankexin
-	* 
+	Email：974094944@qq.com
+	GitHub： https://github.com/Fankexin 
 董晓倩（前端工程师）
-
-		* 
-Email：2504189164@qq.com
-		* 
-GitHub： https://github.com/qiannvyouhun
-	* 
+	Email：2504189164@qq.com
+	GitHub： https://github.com/qiannvyouhun
 孙妍（前端工程师）
-
-		* 
-Email： 1694614518@qq.com
-		* 
-GitHub： https://github.com/liuyanyansun
-	* 
+	Email： 1694614518@qq.com
+	GitHub： https://github.com/liuyanyansun
 李雪（后端工程师）
-
-		* 
-Email：2319684501@qq.com
-		* 
-GitHub： https://github.com/aalixue
-	* 
-黄远龙（后端工程师）
-
-		* 
-Email：2334168774@qq.com
-		* 
-GitHub： https://github.com/2334168774
-
+	Email：2319684501@qq.com
+	GitHub： https://github.com/aalixue
+黄远龙（后端工程师） 
+	Email：2334168774@qq.com
+	GitHub： https://github.com/2334168774
 
 项目截图
 
