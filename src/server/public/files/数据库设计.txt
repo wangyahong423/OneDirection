@@ -1,0 +1,6 @@
+学习交流：title content name time
+社区管理：title content name clicks time
+用户管理：name numbers college sex
+用户反馈：content numbers time
+管理员：name numbers sex
+文件管理：name time type

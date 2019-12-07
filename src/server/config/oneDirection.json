@@ -1,0 +1,6 @@
+{
+    "port":5432,
+    "database":"xinsheng",
+    "user":"postgres",
+    "password":"123456"
+}
