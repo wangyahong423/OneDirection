@@ -1,0 +1,626 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #09d3ac;
+}
+
+.flex-container {
+  margin: 0 15px;
+}
+.flex-container .inline {
+  width: 80px!important;
+  margin: 9px 9px 9px 0;
+}
+.flex-container .small {
+  height: 20px!important;
+  line-height: 20px!important;
+}
+.sub-title {
+  /* color: #888; */
+  font-size: 14px;
+  padding: 30px 0 18px 0;
+}
+.placeholder {
+  color: #bbb;
+  text-align: center;
+  height: 160px;
+  line-height: 30px;
+}
+.onecardImg{
+  background: url('./images/yika.png');
+  height:93vh;
+  width:100vw;
+  background-size:cover;
+  /* opacity: 0.5; */
+}
+.onecardjihuo{
+  height: 13vh;
+  width: 36vw;
+  background-color: rgba(187, 187, 187, 1);
+  border-radius: 18vw;
+  position: relative;
+  top:15vh;
+  left: 10vw;
+  opacity: 0.8;
+}
+.onecardchongzhi{
+  height: 13vh;
+  width: 36vw;
+  background-color: rgba(187, 187, 187, 1);
+  border-radius: 18vw;
+  position: relative;
+  top:20vh;
+  left: 10vw;
+  opacity: 0.8;
+
+}
+.onecardguashi{
+  height: 13vh;
+  opacity: 0.8;
+  width: 36vw;
+  background-color: rgba(187, 187, 187, 1);
+  border-radius: 18vw;
+  position: relative;
+  top:25vh;
+  left: 10vw;
+}
+.jihuoword{
+  font-size: 18px;
+  color: black;
+  position: absolute;
+  top:5vh;
+  left: 5vw;
+}
+.jihuoImg{
+  background: url('./images/onecardxiangqing.png');
+  height:93vh;
+  width:100vw;
+  background-size:cover;
+}
+.jihuoBox{
+  height: 87vh;
+  width: 85vw;
+  background-color: rgb(213, 204, 204);
+  position: relative;
+  opacity: 0.8;
+  top:4vh;
+  left: 7vw;
+}
+.orgBox{
+  height: 40vh;
+  width: 100vw;
+  background-color: chartreuse;
+  margin-top: -2.4vh;
+}
+.ten{
+  height: 6vh;
+  background-color: white;
+  font-size: 16px;
+  line-height: 6vh;
+  padding-left: 3vw;
+  margin-bottom: 0vh;
+}
+.sort{
+  height: 7vh;
+  background-color: white;
+  font-size: 16px;
+  line-height: 7vh;
+  padding-left: 3vw;
+  margin-bottom: 0vh;
+  margin-top: 0vh;
+}
+.sortlist1{
+  padding-left:20px;
+  border-bottom:1px solid grey;
+  height:9vh;
+  border-top:1px solid grey;
+}
+.sortlist2{
+  padding-left:20px;
+  border-bottom:1px solid grey;
+  height:9vh;
+}
+.sortWord{
+  margin-left: 9vw;
+  font-size: 18px;
+}
+.schoolBox1{
+  height: 22vh;
+  width: 38vw;
+  background-color: white;
+  display: inline-block;
+  margin-right: 9vw;
+  border-radius: 5vh;
+  margin-left: 5vw;
+}
+
+.schoolBox2{
+  height: 25vh;
+  width: 38vw;
+  background-color: white;
+  display: inline-block;
+  border-radius: 5vh;
+}
+.schoolxueshenghui{
+  height: 17vh;
+  width: 38vw;
+  overflow: hidden;
+  background: url('./images/xueshenghui.jpg');
+  background-size: 38vw 17vh ;
+  border-top-right-radius: 5vh;
+  border-top-left-radius: 5vh;
+}
+.qingxie{
+  height: 17vh;
+  width: 38vw;
+  overflow: hidden;
+  background: url('./images/qingxie.jpeg');
+  background-size: 38vw 17vh ;
+  border-top-right-radius: 5vh;
+  border-top-left-radius: 5vh;
+}
+.tuanwei{
+  height: 17vh;
+  width: 38vw;
+  overflow: hidden;
+  background: url('./images/tuanwei.jpg');
+  background-size: 38vw 17vh ;
+  border-top-right-radius: 5vh;
+  border-top-left-radius: 5vh;
+}
+.tushuguan{
+  height: 17vh;
+  width: 38vw;
+  overflow: hidden;
+  background: url('./images/tushuguan.jpg');
+  background-size: 38vw 17vh ;
+  border-top-right-radius: 5vh;
+  border-top-left-radius: 5vh;
+}
+.hongshizihui{
+  height: 17vh;
+  width: 38vw;
+  overflow: hidden;
+  background: url('./images/hongshizihui.jpg');
+  background-size: 38vw 17vh ;
+  border-top-right-radius: 5vh;
+  border-top-left-radius: 5vh;
+}
+.yishutuan{
+  height: 17vh;
+  width: 38vw;
+  overflow: hidden;
+  background: url('./images/yishutuan.jpg');
+  background-size: 38vw 17vh ;
+  border-top-right-radius: 5vh;
+  border-top-left-radius: 5vh;
+}
+.guoqidui{
+  height: 17vh;
+  width: 38vw;
+  overflow: hidden;
+  background: url('./images/guoqidui.jpg');
+  background-size: 38vw 17vh ;
+  border-top-right-radius: 5vh;
+  border-top-left-radius: 5vh;
+}
+.libindui{
+  height: 17vh;
+  width: 38vw;
+  overflow: hidden;
+  background: url('./images/libindui.jpg');
+  background-size: 38vw 17vh ;
+  border-top-right-radius: 5vh;
+  border-top-left-radius: 5vh;
+}
+.guangbotai{
+  height: 17vh;
+  width: 38vw;
+  overflow: hidden;
+  background: url('./images/guangbotai.jpg');
+  background-size: 38vw 17vh ;
+  border-top-right-radius: 5vh;
+  border-top-left-radius: 5vh;
+}
+.qinzhuzhongxin{
+  height: 17vh;
+  width: 38vw;
+  overflow: hidden;
+  background: url('./images/qinzhuzhongxin.jpg');
+  background-size: 38vw 17vh ;
+  border-top-right-radius: 5vh;
+  border-top-left-radius: 5vh;
+}
+.gongyulou{
+  height: 17vh;
+  width: 38vw;
+  overflow: hidden;
+  background: url('./images/gongyulou.jpg');
+  background-size: 38vw 17vh ;
+  border-top-right-radius: 5vh;
+  border-top-left-radius: 5vh;
+}
+/* 体育健身 */
+.taiquandao{
+  height: 17vh;
+  width: 38vw;
+  overflow: hidden;
+  background: url('./images/taiquandao.jpg');
+  background-size: 38vw 17vh ;
+  border-top-right-radius: 5vh;
+  border-top-left-radius: 5vh;
+}
+.pingpangqiu{
+  height: 17vh;
+  width: 38vw;
+  overflow: hidden;
+  background: url('./images/pingpangqiu.jpg');
+  background-size: 38vw 17vh ;
+  border-top-right-radius: 5vh;
+  border-top-left-radius: 5vh;
+}
+.yangguangyundong{
+  height: 17vh;
+  width: 38vw;
+  overflow: hidden;
+  background: url('./images/yangguangyundong.jpg');
+  background-size: 38vw 17vh ;
+  border-top-right-radius: 5vh;
+  border-top-left-radius: 5vh;
+}
+.yumaoqiu{
+  height: 17vh;
+  width: 38vw;
+  overflow: hidden;
+  background: url('./images/yumaoqiu.jpg');
+  background-size: 38vw 17vh ;
+  border-top-right-radius: 5vh;
+  border-top-left-radius: 5vh;
+}
+.zixingche{
+  height: 17vh;
+  width: 38vw;
+  overflow: hidden;
+  background: url('./images/zixingche.jpg');
+  background-size: 38vw 17vh ;
+  border-top-right-radius: 5vh;
+  border-top-left-radius: 5vh;
+}
+.piaoyiban{
+  height: 17vh;
+  width: 38vw;
+  overflow: hidden;
+  background: url('./images/piaoyiban.jpg');
+  background-size: 38vw 17vh ;
+  border-top-right-radius: 5vh;
+  border-top-left-radius: 5vh;
+}
+
+/* 实践服务 */
+.yanyang{
+  height: 17vh;
+  width: 38vw;
+  overflow: hidden;
+  background: url('./images/yanyang.jfif');
+  background-size: 38vw 17vh ;
+  border-top-right-radius: 5vh;
+  border-top-left-radius: 5vh;
+}
+.tianshi{
+  height: 17vh;
+  width: 38vw;
+  overflow: hidden;
+  background: url('./images/tianshiaixin.jpg');
+  background-size: 38vw 17vh ;
+  border-top-right-radius: 5vh;
+  border-top-left-radius: 5vh;
+}
+.yanjing{
+  height: 17vh;
+  width: 38vw;
+  overflow: hidden;
+  background: url('./images/yanjing.jpg');
+  background-size: 38vw 17vh ;
+  border-top-right-radius: 5vh;
+  border-top-left-radius: 5vh;
+}
+.qingchun{
+  height: 17vh;
+  width: 38vw;
+  overflow: hidden;
+  background: url('./images/qingchun.jpg');
+  background-size: 38vw 17vh ;
+  border-top-right-radius: 5vh;
+  border-top-left-radius: 5vh;
+}
+.chunyu{
+  height: 17vh;
+  width: 38vw;
+  overflow: hidden;
+  background: url('./images/hongshizihui.jpg');
+  background-size: 38vw 17vh ;
+  border-top-right-radius: 5vh;
+  border-top-left-radius: 5vh;
+}
+.ziqiang{
+  height: 17vh;
+  width: 38vw;
+  overflow: hidden;
+  background: url('./images/ziqiang.jpg');
+  background-size: 38vw 17vh ;
+  border-top-right-radius: 5vh;
+  border-top-left-radius: 5vh;
+}
+.lvhang{
+  height: 17vh;
+  width: 38vw;
+  overflow: hidden;
+  background: url('./images/xueshenghui.jpg');
+  background-size: 38vw 17vh ;
+  border-top-right-radius: 5vh;
+  border-top-left-radius: 5vh;
+}
+.aixin{
+  height: 17vh;
+  width: 38vw;
+  overflow: hidden;
+  background: url('./images/aixin.jpg');
+  background-size: 38vw 17vh ;
+  border-top-right-radius: 5vh;
+  border-top-left-radius: 5vh;
+}
+.lvse{
+  height: 17vh;
+  width: 38vw;
+  overflow: hidden;
+  background: url('./images/lvse.jpg');
+  background-size: 38vw 17vh ;
+  border-top-right-radius: 5vh;
+  border-top-left-radius: 5vh;
+}
+.zhonghua{
+  height: 17vh;
+  width: 38vw;
+  overflow: hidden;
+  background: url('./images/xueshenghui.jpg');
+  background-size: 38vw 17vh ;
+  border-top-right-radius: 5vh;
+  border-top-left-radius: 5vh;
+}
+
+/* 学术研究 */
+.xueshu{
+  height: 17vh;
+  width: 38vw;
+  overflow: hidden;
+  background: url('./images/xueshenghui.jpg');
+  background-size: 38vw 17vh ;
+  border-top-right-radius: 5vh;
+  border-top-left-radius: 5vh;
+}
+/* 文化艺术 */
+.wenhua{
+  height: 17vh;
+  width: 38vw;
+  overflow: hidden;
+  background: url('./images/xueshenghui.jpg');
+  background-size: 38vw 17vh ;
+  border-top-right-radius: 5vh;
+  border-top-left-radius: 5vh;
+}
+
+.schoolbox1{
+  width: 96vw;
+  height: 6vh;
+  margin-left: 2vw;
+  margin-top: 4vh;
+  background-color: #37376F;
+}
+.schoolbox2{
+  width: 96vw;
+  height: 6vh;
+  margin-left: 2vw;
+  margin-top: 2vh;
+  background-color: #37376F;
+}
+
+
+.jianjieword{
+  font-size: 17px;
+  color: black;
+  position: absolute;
+  left: 3vw;
+  right: 3vw;
+  text-indent:2em;
+  text-align: left;
+  line-height: 4.1vh;
+  top:-1vh;
+}
+.jianjieImg{
+  background: url('./images/jianjie.png');
+  height:93vh;
+  width:100vw;
+  background-size:cover;
+}
+.jianjieBox{
+  height: 87vh;
+  width: 85vw;
+  background-color: rgb(213, 204, 204);
+  position: relative;
+  opacity: 0.8;
+  top:4vh;
+  left: 7vw;
+}
+
+/* 攻略-学习 */
+.studyImg{
+  background: url('./images/study.png');
+  height:93vh;
+  width:100vw;
+  background-size:cover;
+}
+.cepingword{
+  font-size: 17px;
+  color: black;
+  position: absolute;
+  left: 3vw;
+  right: 3vw;
+  text-indent:2em;
+  text-align: left;
+  line-height: 3.7vh;
+  top:-2vh;
+}
+.cepingImg{
+  background: url('./images/ceping.png');
+  height:217vh;
+  width:100vw;
+  background-size:cover;
+}
+.cepingBox{
+  height: 210vh;
+  width: 85vw;
+  background-color: rgb(213, 204, 204);
+  position: relative;
+  opacity: 0.8;
+  top:4vh;
+  left: 7vw;
+}
+
+/* 攻略-杰出校友 */
+.alumnus {
+  /* color: red; */
+  text-align: center;
+  height: 200px;
+  line-height: 30px;
+}
+.mates1{
+  height: 27vh;
+  width: 38vw;
+  margin-left: 3vw;
+  border-radius: 3vh;
+}
+
+.mates2{
+  height: 27vh;
+  width: 38vw;
+  margin-top: 0vh;
+  margin-left: 18vw;
+  border-radius: 3vh;
+}
+.name1{
+  position: relative;
+  top: -22vh;
+  left: 43vw;
+  width: 5vw;
+  height: auto;
+}
+.name2{
+  position: relative;
+  top: -22vh;
+  left: 11vw;
+  width: 5vw;
+  height: auto;
+}
+.name3{
+  position: relative;
+  top: -24vh;
+  left: 43vw;
+  width: 5vw;
+  height: auto;
+}
+.name4{
+  position: relative;
+  top: -20vh;
+  left: 11vw;
+  width: 5vw;
+  height: auto;
+}
+
+/* 攻略-学院 */
+.collegeImg{
+  background: url('./images/college.png');
+  height:93vh;
+  width:100vw;
+  background-size:cover;
+}
+.collegejieshao{
+  height: 9vh;
+  width: 50vw;
+  background-color: rgb(121, 180, 209);
+  position: relative;
+  top:15vh;
+  left: 25vw;
+  opacity: 0.8;
+  margin-bottom: 5vh;
+}
+.onecardchongzhi{
+  height: 13vh;
+  width: 36vw;
+  background-color: rgba(187, 187, 187, 1);
+  border-radius: 18vw;
+  position: relative;
+  top:20vh;
+  left: 10vw;
+  opacity: 0.7;
+}
+.collegeword{
+  font-size: 18px;
+  color: black;
+  position: absolute;
+  /* top:0.8vh; */
+  line-height: 4vh;
+  left: 14vw;
+}
+.cword{
+  font-size: 17px;
+  color: black;
+  position: absolute;
+  left: 3vw;
+  right: 3vw;
+  text-indent:2em;
+  text-align: left;
+  line-height: 4vh;
+  top:-1vh;
+}
+
+.teacherword{
+  font-size: 17px;
+  color: black;
+  position: absolute;
+  /* left: 3vw; */
+  /* right: 3vw; */
+  opacity: 0.8;
+  text-align: left;
+  line-height: 4.1vh;
+  top:-1vh;
+  width: 100vw;
+}
+.teacherImg{
+  background: url('./images/jianjie.png');
+  height:93vh;
+  width:100vw;
+  background-size:cover;
+}
+.communicateImg{
+  background: url('./images/3-1dxq.jpg');
+  height:93vh;
+  width:100vw;
+  background-size:cover;
+}

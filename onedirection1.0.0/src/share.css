@@ -1,0 +1,120 @@
+.three{
+    margin:2vh 5vw 3vh 5vw;
+    text-align: center;
+    height: 5vh;
+    width: 23vw;
+    float: left;
+    line-height: 5vh;
+    border-radius: 3vh;
+}
+.word:focus{
+    background-color: red;
+    margin:2vh 5vw 3vh 5vw;
+    text-align: center;
+    height: 5vh;
+    width: 23vw;
+    float: left;
+    line-height: 5vh;
+    border-radius: 3vh;
+}
+.data1{
+    border-top:1px solid #4f4f83;
+    height:10vh;
+    line-height:10vh;
+    width:100vw;
+    float:left;
+}
+.icon-word{
+    margin:0 5vw 0 5vw;
+    font-size:50px;
+    color:#1c57a5;
+    float:left;
+}
+.font1{
+    height:6vh;
+    width:50vw;
+    margin:1vh 0 2vh 0;
+    float:left;
+    line-height:4vh;
+}
+.data2{
+    height:4vh;
+    width:15vw;
+    margin:3vh 0 3vh 0;
+    float:right;
+    line-height:4vh;
+}
+.icon-pdf2{
+    margin:0 5vw 0 5vw;
+    font-size:50px;
+    color:#960d0d;
+    float:left;
+}
+.icon-ppt{
+    margin:0 5vw 0 5vw;
+    font-size:50px;
+    color:#e24c4c;
+    float:left;    
+}
+.button{
+    font-size:15px;
+    color:#fff;
+    position:absolute;
+    top:90vh;
+    margin-left:75vw;
+    height:6vh;
+    width:18vw;
+    background-color: #373763;
+    border-radius:25vh;
+    line-height:6vh;
+    text-align:center;
+    border: none;
+}
+.icon-ico_leftarrow{
+    font-size:17px;
+    color:white;
+}
+.resourceShare{
+    height:15vh;
+    width:50vw;
+    background-color:#675858;
+    position:absolute;
+    top:30vh;
+    margin-left:25vw;
+    opacity:0.7;
+    font-size:25px;
+    color:#fff;
+}
+.icon-shuji{
+    font-size:30px;
+    position:absolute;
+    top:10%;
+    left:50%;
+    margin-left:-15px;
+}
+.StudyCommunicate{
+    height:15vh;
+    width:50vw;
+    background-color:#675858;
+    position:absolute;
+    top:60%;
+    margin-left:25%;
+    opacity:0.7;
+    font-size:25px;
+    color:#fff;
+}
+.icon-changyongtubiao-xianxingdaochu-zhuanqu-{
+    font-size:30px;
+    position:absolute;
+    top:10%;
+    left:50%;
+    margin-left:-15px;
+}
+.icon-ico_leftarrow{
+    font-size:17px;
+    color:white;
+}
+.icon-dianzan{
+    font-size:5vw;
+    margin:0 12vw 0 13vw
+}
