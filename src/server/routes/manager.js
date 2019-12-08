@@ -19,8 +19,8 @@ con.connect();
 
 router.get('/addManager', async (req, res, next) =>{
   try{
-    let sql = 'insert into manager(name,sex,tel,pwd) values($1,$2,$3,$4)';
-    let r = await con.query(sql, [req.query.name, req.query.sex, req.query.tel, req.query.pwd]);
+    let sql = 'insert into manager(name,tel,pwd) values($1,$2,$3,$4)';
+    let r = await con.query(sql, [req.query.name, req.query.tel, req.query.pwd]);
     console.log(r.rows);
     res.json({ ok: true, msg: "注册成功" });
   }catch(err){

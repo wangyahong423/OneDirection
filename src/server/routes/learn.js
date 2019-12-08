@@ -19,22 +19,18 @@ con.on('error', err => {
 
 con.connect();
 
-/* GET home page. */
-router.get('/', function (req, res, next) {
-  res.render('addLearn');
-});
 
 router.get('/addLearn', async (req, res, next)=> {
   // var data = req.query.data;
   // checkToken(data, async (r) => {
     // console.log(r);
     try {
-      let sql = 'insert into learn(title,content,name,time) values($1,$2,$3,$4)';
-      let l = await con.query(sql, [req.query.title, req.query.content, req.query.name, req.query.time]);
+      let sql = 'insert into learn(content,name,time,pic) values($1,$2,$3,$4)';
+      let l = await con.query(sql, [ req.query.content, req.query.name, req.query.time,req.query.pic]);
       console.log(l.rows);
-      res.send({ ok: true, msg: "发布成功" });
+      res.json({ ok: true, msg: "发布成功" });
     } catch (err) {
-      res.send({ ok: false, msg: "发布失败" });
+      res.json({ ok: false, msg: "发布失败" });
     }
   // })
 
@@ -42,17 +38,17 @@ router.get('/addLearn', async (req, res, next)=> {
 
 router.get('/deleteLearn', async (req, res, next) =>{
   try {
-    var time = req.query.time;
-    var reg = /%20/;
-    time = time.replace(reg, ' ');
-    let parsedUrl = url.parse(req.url, true);
-    let name = parsedUrl.query.name;
-    let sql = 'delete from learn where time=$1 and name=$2';
-    let r = await con.query(sql, [time, name]);
+    // var time = req.query.time;
+    // var reg = /%20/;
+    // time = time.replace(reg, ' ');
+    // let parsedUrl = url.parse(req.url, true);
+    // let name = parsedUrl.query.name;
+    let sql = 'delete from learn where id=$1';
+    let r = await con.query(sql, [req.query.id]);
     console.log(r.rows);
-    res.send({ ok: true, msg: "删除成功" });
+    res.json({ ok: true, msg: "删除成功" });
   } catch (err) {
-    res.send({ ok: false, msg: "删除失败" });
+    res.json({ ok: false, msg: "删除失败" });
   }
 });
 
@@ -61,7 +57,7 @@ router.get('/list', async (req, res, next)=> {
     let sql = 'select * from learn';
     let r = await con.query(sql, []);
     console.log(r.rows);
-    res.render('learn', { learnList: r.rows });
+    res.json(r.rows);
   } catch (err) {
     console.log(err);
   }
