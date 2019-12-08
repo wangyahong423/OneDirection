@@ -22,11 +22,11 @@ router.get('/addUser', async (req, res, next) => {
     var pic = null;
     var name = req.query.name;
     var tel = req.query.tel;
-    var college = null;
-    var sex = null;
+    var college = req.query.college;
+    college = '河北师范大学 '+college;
     var pwd = req.query.pwd;
-    let sql = 'insert into users(pic, name, tel, college, sex, pwd) values($1,$2,$3,$4,$5,$6)';
-    let r = await con.query(sql, [pic, name, tel, college, sex, pwd]);
+    let sql = 'insert into users(pic, name, tel, college, pwd) values($1,$2,$3,$4,$5)';
+    let r = await con.query(sql, [pic, name, tel, college, pwd]);
     console.log(r.rows);
     res.json({ ok: true, msg: '注册成功！' });
   } catch (err) {
@@ -37,11 +37,9 @@ router.get('/addUser', async (req, res, next) => {
 router.get('/change', async (req, res, next)=> {
   try {
       var pic = req.query.pic
-      var college = req.query.college;
-      var sex = req.query.sex;
       var name = req.query.name;
-      let sql = 'update users set pic=$1,college=$2,sex=$3 where name=$4';
-      let r1 = await con.query(sql, [pic,college, sex, name]);
+      let sql = 'update users set pic=$1 where name=$3';
+      let r1 = await con.query(sql, [pic,name]);
       console.log(r1.rows);
       res.json({ ok: true, msg: '修改成功！' });
   } catch (err) {

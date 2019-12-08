@@ -16,26 +16,25 @@ con.on('error', err => {
 
 con.connect();
 
-router.get('/addCommunity', async (req, res, next) => {
+router.get('/add', async (req, res, next) => {
   try {
     var id = req.query.id;
-    var content = req.query.content;
+    var cid = req.query.cid;
     var name = req.query.name;
-    var clicks = req.query.clicks;
-    var time = req.query.time;
-    let sql = 'insert into community(id,content, name, clicks, time) values($1,$2,$3,$4,$5)';
-    let r = await con.query(sql, [id, content, name, clicks, time]);
+    var content = req.query.content;
+    let sql = 'insert into communitytalk(id, cid, name, content) values($1,$2,$3,$4)';
+    let r = await con.query(sql, [id, cid, name, content]);
     console.log(r.rows);
-    res.json({ ok: true, msg: '添加成功！' });
+    res.json({ ok: true, msg: '评论成功！' });
   } catch (err) {
-    res.json({ ok: false, msg: '添加失败！' });
+    res.json({ ok: false, msg: '评论失败！' });
   }
 
 });
 
 router.get('/list', async (req, res, next) => {
   try {
-    let sql = 'select * from community';
+    let sql = 'select * from communitytalk';
     let r = await con.query(sql, []);
     console.log(r.rows);
   } catch (err) {
@@ -43,35 +42,19 @@ router.get('/list', async (req, res, next) => {
   }
 })
 
-router.get('/deleteCommunity', async (req, res, next) => {
+router.get('/delete', async (req, res, next) => {
   try {
     // var name = req.query.name;
     // var time = req.query.time;
     // var reg = /%20/;
     // time = time.replace(reg, ' ');
     var id = req.query.id;
-    let sql = 'delete from community where id=$1';
+    let sql = 'delete from communitylike where id=$1';
     let r = await con.query(sql, [id]);
     console.log(r.rows);
     res.json({ ok: true, msg: "删除成功！" });
   } catch (err) {
     res.json({ ok: false, msg: "删除失败！" });
-  }
-})
-//更新点击量
-router.get('/updateCommunity',async(req,res,next)=>{
-  try{
-    var clicks = req.query.clicks;
-    // var name = req.query.name;
-    // var time = req.query.time;
-    // var reg = /%20/;
-    var id = req.query.id;
-    time = time.replace(reg, ' ');
-    let sql = 'update community set clicks=$1 where id=$2';
-    let r = await con.query(sql, [clicks,id]);
-    console.log(r.rows);
-  }catch(err){
-    console.log(err);
   }
 })
 
