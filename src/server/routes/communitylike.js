@@ -32,7 +32,7 @@ router.get('/add', async (req, res, next) => {
 
 router.get('/list', async (req, res, next) => {
   try {
-    let sql = 'select * from communitylike';
+    let sql = 'select * from communitylike order by desc';
     let r = await con.query(sql, []);
     res.json({ communitylikeList: r.rows });
     console.log(r.rows);

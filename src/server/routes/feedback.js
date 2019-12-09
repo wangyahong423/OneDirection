@@ -35,7 +35,7 @@ router.get('/addFeedback', async (req, res, next) => {
 
 router.get('/list', async (req, res, next) => {
   try {
-    let sql = 'select * from feedback';
+    let sql = 'select * from feedback order by tel,time desc';
     let r = await con.query(sql, []);
     res.json({feedback:r.rows});
     console.log(r.rows);

@@ -33,7 +33,7 @@ router.get('/add', async (req, res, next) => {
 
 router.get('/list', async (req, res, next) => {
   try {
-    let sql = 'select * from communitytalk';
+    let sql = 'select * from communitytalk order by id desc';
     let r = await con.query(sql, []);
     res.json({communitytalk:r.rows});
     console.log(r.rows);

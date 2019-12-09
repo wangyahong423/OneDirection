@@ -35,7 +35,7 @@ router.get('/addCommunity', async (req, res, next) => {
 
 router.get('/list', async (req, res, next) => {
   try {
-    let sql = 'select * from community';
+    let sql = 'select * from community order by id desc';
     let r = await con.query(sql, []);
     res.json({ communityList: r.rows });
     console.log(r.rows);

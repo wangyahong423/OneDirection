@@ -17,7 +17,6 @@ con.on('error', err => {
 con.connect();
 /* GET home page. */
 //用户注册
-
 router.get('/addUser', async (req, res, next) => {
   try {
     var pic = null;
@@ -37,8 +36,7 @@ router.get('/addUser', async (req, res, next) => {
 //用户资料修改
 router.get('/change', async (req, res, next)=> {
   try {
-      var num = req.query.pic;
-      var pic = num;
+      var pic = req.query.pic
       var name = req.query.name;
       let sql = 'update users set pic=$1 where name=$3';
       let r1 = await con.query(sql, [pic,name]);
@@ -51,7 +49,7 @@ router.get('/change', async (req, res, next)=> {
 
 router.get('/list', async (req, res, next) => {
   try {
-    let sql = 'select * from users';
+    let sql = 'select * from users order by name desc';
     let r = await con.query(sql, []);
     res.json({ usersList: r.rows });
   } catch (err) {
