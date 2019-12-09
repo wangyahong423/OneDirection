@@ -22,8 +22,9 @@ router.get('/addCommunity', async (req, res, next) => {
     var name = req.query.name;
     var clicks = req.query.clicks;
     var time = req.query.time;
-    let sql = 'insert into community(content, name, clicks, time) values($1,$2,$3,$4)';
-    let r = await con.query(sql, [id, content, name, clicks, time]);
+    var pic = req.query.pic;
+    let sql = 'insert into community(content, name, clicks, time, pic) values($1,$2,$3,$4,$5)';
+    let r = await con.query(sql, [id, content, name, clicks, time, pic]);
     console.log(r.rows);
     res.json({ ok: true, msg: '添加成功！' });
   } catch (err) {
