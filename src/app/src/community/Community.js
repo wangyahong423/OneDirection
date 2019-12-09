@@ -1,7 +1,9 @@
 import { NavBar,SearchBar,ActionSheet} from 'antd-mobile';
 import React, { Component } from 'react'
 import { BrowserRouter as Router,Route,Link} from 'react-router-dom'; 
+import axios from 'axios'
 const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
+
 let wrapProps;
 if (isIPhone) {
   wrapProps = {
@@ -18,11 +20,12 @@ export default class Community1 extends Component {
           clicked3: true,
           clicked4: true
         };
+        this.state = {
+            data: []
+        }
       }
     
       dataList = [
-        { url: 'OpHiXAcYzmPQHcdlLFrc', title: '发送给朋友' },
-        { url: 'wvEzCMiDZjthhAOcwTOu', title: '新浪微博' },
         { url: 'cTTayShKtEIdQVEMuiWt', title: '朋友圈' },
         { url: 'umnHwvEgSyQtXlZjNJTt', title: '微信好友' },
         { url: 'SxpunpETIwdxNjcJamwB', title: 'QQ' },
@@ -75,6 +78,19 @@ export default class Community1 extends Component {
             clicked4:!this.state.clicked4
         })
       }
+
+    componentDidMount() {
+      console.log(this.state.data);
+      let url = `http://localhost:3005/community/list`;
+      axios(url)
+          .then((res) => {
+            console.log(res.data)
+              this.setState({
+                  data: res.data
+              })
+          })
+    }
+    
     render() {
         let color1 = {
             color:this.state.clicked2 ? "black" : "red",
@@ -92,7 +108,7 @@ export default class Community1 extends Component {
             marginLeft:'23%'
           }
         return (
-            <>
+            // <>
               <div>
                   <NavBar 
                     style={{ backgroundColor: '#37376F', color: '#fff',position:'sticky ',top:'0',zIndex:10,textAlign:'center',height:'7vh'}}
@@ -101,92 +117,41 @@ export default class Community1 extends Component {
                     ]}
                   >
                     <span>社区</span>
-                    {/* <span className="iconfont icon-shuaxin-sy" style={{marginLeft:"2%",fontSize:'12px',marginTop:'2%'}}></span> */}
                   </NavBar>
                   <div style={{width:'100vw',backgroundColor:'#EFEFF4'}}>
                     <SearchBar placeholder="搜索" maxLength={10} style={{width:'100vw',float:"left",position:'fixed',top:'7vh'}}/>
-                    
                     {
                       this.props.selected == 'community'&&<Link to='/add'><div style={{position:"fixed",top:"85%",left:'85%'}}>
                         <span className="iconfont icon-add-sy" style={{fontSize:"6vh",color:"#37376F"}}></span>
                       </div></Link>
                     }
+
+
                     
-
-
-                    <div style={{height:'20%',background:'#fff',color:'black',marginTop:'7vh'}}>
-                      <div style={{float:"left"}}>
-                      <img src={require('./img/touxiang1.jpg')} style={{height:'7.8vh',width:'14vw',borderRadius:'50%',marginLeft:15,marginTop:9}}/>
-                      </div>
-                      <div>
-                          <p style={{marginLeft:75,fontSize:'2.5vh',lineHeight:2.5,marginTop:6}}>路子野</p>
-                          <div style={{marginLeft:75,color:'gray',fontSize:'2vw',marginTop:"-5vw"}}>今天11:03</div>
-                      </div>
-                      <Link to="/aboutyouknow">
-                      <p style={{marginLeft:25,color:'black',marginTop:20}}>有没有学姐说一下软件工程大一上学期学的什么科目呀？</p>
-                      </Link>
-                      <div style={{marginTop:20}}>
+                  <div style={{marginTop:'7vh'}}>
+                    {
+                      this.state.data.map((item, idx) => 
+                        <div style={{height:'20vh',background:'#fff',color:'black'}}>
+                          <div style={{float:"left"}}>
+                            <img src={require('./img/touxiang1.jpg')} style={{height:'7.8vh',width:'14vw',borderRadius:'50%',marginLeft:15,marginTop:9}}/>
+                          </div>
+                        <div>
+                          </div>
+                        <p style={{marginLeft:75,fontSize:'2.5vh',lineHeight:2.5,marginTop:6}}>{item.name}</p>
+                        <div style={{marginLeft:75,color:'gray',fontSize:'2vw',marginTop:"-5vw"}}>{item.time}</div>
+                        <Link to="/aboutyouknow">
+                        <p style={{marginLeft:25,color:'black',marginTop:20}}>{item.content}</p>
+                        </Link>
+                        <div style={{marginTop:20}}>
                           <sapn className="iconfont icon-zhuanfa" onClick={this.showShareActionSheet} style={{fontSize:'2.5vh',marginLeft:'17%',color:'black'}}></sapn>
                           <sapn className="iconfont icon-pinglun" onClick={this.showActionSheet} style={{fontSize:'3.2vh',marginLeft:'22%',color:'black'}}></sapn>
                           <sapn className="iconfont icon-dianzan" onClick={this.changeColor.bind(this)}  style={color1}></sapn>
-                      </div>
-                    </div>
-                    <div style={{height:'20%',background:'#fff',color:'black'}}>
-                      <div style={{float:"left"}}>
-                      <img src={require('./img/touxiang.jpg')} style={{height:'7.8vh',width:'14vw',borderRadius:'50%',marginLeft:15,marginTop:9}}/>
-                      </div>
-                      <div>
-                          <p style={{marginLeft:75,fontSize:'2.5vh',lineHeight:2.3,marginTop:5,color:'orange'}}>范思哲</p>
-                          <div style={{marginLeft:75,marginTop:-21,color:'gray',fontSize:'2vw'}}>今天00:03</div>
-                      </div>
-                      <Link to="/aboutyouknow">
-                      <p style={{marginLeft:25,color:'black',marginTop:20}}>现金可以充饭卡嘛</p>
-                      </Link>
-                      <div style={{marginTop:20}}>
-                          <sapn className="iconfont icon-zhuanfa" onClick={this.showShareActionSheet} style={{fontSize:'2.5vh',marginLeft:'17%',color:'black'}}></sapn>
-                          <sapn className="iconfont icon-pinglun" onClick={this.showActionSheet} style={{fontSize:'3.2vh',marginLeft:'22%',color:'black'}}></sapn>
-                          <sapn className="iconfont icon-dianzan" onClick={this.changeColor1.bind(this)}  style={color2}></sapn>
-                      </div>
-                    </div>
-                    <div style={{height:'20%',background:'#fff',color:'black'}}>
-                      <div style={{float:"left"}}>
-                      <img src={require('./img/touxiang2.jpg')} style={{height:'7.8vh',width:'14vw',borderRadius:'50%',marginLeft:15,marginTop:9}}/>
-                      </div>
-                      <div>
-                          <p style={{marginLeft:75,fontSize:'2.5vh',lineHeight:2.5,marginTop:5}}>我爱吃蛋糕</p>
-                          <div style={{marginLeft:75,marginTop:-21,color:'gray',fontSize:'2vw'}}>昨天00:00</div>
-                      </div>
-                      <Link to="/aboutyouknow">
-                      <p style={{marginLeft:25,color:'black',marginTop:20}}>祝自己生日快乐</p>
-                      <img src={require('./img/biaoqing.jpg')} style={{height:'80px',width:'80px',marginLeft:20}}/>
-                      </Link>
-                      <div style={{marginTop:20}}>
-                      <sapn className="iconfont icon-zhuanfa" onClick={this.showShareActionSheet} style={{fontSize:'2.5vh',marginLeft:'17%',color:'black'}}></sapn>
-                          <Link to='/pinglunone' className="iconfont icon-pinglun" onClick={this.showActionSheet} style={{fontSize:'3.2vh',marginLeft:'22%',color:'black'}}></Link>
-                          <sapn className="iconfont icon-dianzan" onClick={this.changeColor2.bind(this)}  style={color3}></sapn>
-                      </div>
-                    </div>
-                    <div style={{height:'20%',background:'#fff',color:'black'}}>
-                      <div style={{float:"left"}}>
-                      <img src={require('./img/touxiang2.jpg')} style={{height:'7.8vh',width:'14vw',borderRadius:'50%',marginLeft:15,marginTop:9}}/>
-                      </div>
-                      <div>
-                          <p style={{marginLeft:75,fontSize:'2.5vh',lineHeight:2.5,marginTop:5}}>我爱吃蛋糕</p>
-                          <div style={{marginLeft:75,marginTop:-21,color:'gray',fontSize:'2vw'}}>昨天00:00</div>
-                      </div>
-                      <Link to="/aboutyouknow">
-                      <p style={{marginLeft:25,color:'black',marginTop:20}}>祝自己生日快乐</p>
-                      <img src={require('./img/biaoqing.jpg')} style={{height:'80px',width:'80px',marginLeft:20}}/>
-                      </Link>
-                      <div style={{marginTop:20}}>
-                      <sapn className="iconfont icon-zhuanfa" onClick={this.showShareActionSheet} style={{fontSize:'2.5vh',marginLeft:'17%',color:'black'}}></sapn>
-                          <Link to='/pinglunone' className="iconfont icon-pinglun" onClick={this.showActionSheet} style={{fontSize:'3.2vh',marginLeft:'22%',color:'black'}}></Link>
-                          <sapn className="iconfont icon-dianzan" onClick={this.changeColor2.bind(this)}  style={color3}></sapn>
-                      </div>
+                        </div>
+                      </div>)}
                     </div>
                   </div>
               </div>
-            </>
+            // </>
         )
     }
 }
