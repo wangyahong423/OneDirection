@@ -21,7 +21,7 @@ con.connect();
 
 router.get('/list', async (req, res, next) => {
     try {
-        let sql = 'select * from collect';
+        let sql = 'select * from learnlike';
         let r = await con.query(sql, []);
         console.log(r.rows);
         res.json(r.rows);
@@ -34,7 +34,7 @@ router.get('/add', async (req, res, next) => {
     try {
         var lid = req.query.lid;
         var name = req.query.name;
-        let sql = 'insert into collect(lid,name) values($1,$2)';
+        let sql = 'insert into learnlike(lid,name) values($1,$2)';
         let r = await con.query(sql, [lid,name]);
         console.log(r.rows);
     } catch (err) {
@@ -47,7 +47,7 @@ router.get('/delete', async (req, res, next) => {
         var id = req.query.id;
         // var name = req.query.name;
         // var name =  req.query.name;
-        let sql = 'delete from collect where id=$1';
+        let sql = 'delete from learnlike where id=$1';
         let r = await con.query(sql, [id]);
         console.log(r.rows);
     } catch (err) {

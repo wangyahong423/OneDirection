@@ -17,6 +17,7 @@ con.on('error', err => {
 con.connect();
 /* GET home page. */
 //用户注册
+
 router.get('/addUser', async (req, res, next) => {
   try {
     var pic = null;
@@ -36,7 +37,8 @@ router.get('/addUser', async (req, res, next) => {
 //用户资料修改
 router.get('/change', async (req, res, next)=> {
   try {
-      var pic = req.query.pic
+      var num = req.query.pic;
+      var pic = num;
       var name = req.query.name;
       let sql = 'update users set pic=$1 where name=$3';
       let r1 = await con.query(sql, [pic,name]);
