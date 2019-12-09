@@ -37,6 +37,7 @@ router.get('/list', async (req, res, next) => {
   try {
     let sql = 'select * from feedback';
     let r = await con.query(sql, []);
+    res.json({feedback:r.rows});
     console.log(r.rows);
   } catch (err) {
     console.log(err);

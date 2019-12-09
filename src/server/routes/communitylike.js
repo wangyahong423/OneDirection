@@ -18,11 +18,10 @@ con.connect();
 
 router.get('/add', async (req, res, next) => {
   try {
-    var id = req.query.id;
     var cid = req.query.cid;
     var name = req.query.name;
-    let sql = 'insert into communitylike(id, cid, name) values($1,$2,$3)';
-    let r = await con.query(sql, [id, cid, name]);
+    let sql = 'insert into communitylike(cid, name) values($1,$2)';
+    let r = await con.query(sql, [cid, name]);
     console.log(r.rows);
     res.json({ ok: true, msg: '点赞成功！' });
   } catch (err) {
@@ -35,6 +34,7 @@ router.get('/list', async (req, res, next) => {
   try {
     let sql = 'select * from communitylike';
     let r = await con.query(sql, []);
+    res.json({ communitylikeList: r.rows });
     console.log(r.rows);
   } catch (err) {
     console.log(err);
