@@ -54,7 +54,7 @@ router.get('/deleteLearn', async (req, res, next) =>{
 
 router.get('/list', async (req, res, next)=> {
   try {
-    let sql = 'select * from learn';
+    let sql = 'select * from learn order by id desc';
     let r = await con.query(sql, []);
     console.log(r.rows);
     res.json(r.rows);
