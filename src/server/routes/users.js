@@ -23,7 +23,7 @@ router.get('/addUser', async (req, res, next) => {
     var name = req.query.name;
     var tel = req.query.tel;
     var college = req.query.college;
-    college = '河北师范大学 '+college;
+    college = '河北师范大学 ' + college;
     var pwd = req.query.pwd;
     let sql = 'insert into users(pic, name, tel, college, pwd) values($1,$2,$3,$4,$5)';
     let r = await con.query(sql, [pic, name, tel, college, pwd]);
@@ -32,16 +32,16 @@ router.get('/addUser', async (req, res, next) => {
   } catch (err) {
     res.json({ ok: false, msg: '注册失败！' });
   }
-});  
+});
 //用户资料修改
-router.get('/change', async (req, res, next)=> {
+router.get('/change', async (req, res, next) => {
   try {
-      var pic = req.query.pic
-      var name = req.query.name;
-      let sql = 'update users set pic=$1 where name=$3';
-      let r1 = await con.query(sql, [pic,name]);
-      console.log(r1.rows);
-      res.json({ ok: true, msg: '修改成功！' });
+    var pic = req.query.pic
+    var name = req.query.name;
+    let sql = 'update users set pic=$1 where name=$2';
+    let r1 = await con.query(sql, [pic, name]);
+    console.log(r1.rows);
+    res.json({ ok: true, msg: '修改成功！' });
   } catch (err) {
     res.json({ ok: false, msg: '修改失败！' });
   }
@@ -74,6 +74,40 @@ router.get('/login', async (req, res, next) => {
   } catch (err) {
     res.json({ ok: false, msg: '此用户不存在！' });
   }
+});
+//判断用户名称与电话是否匹配
+router.get('/judge', async (req, res, next) => {
+  try {
+    let sql = 'select tel from users WHERE name=$1';
+    let r = await con.query(sql, [req.query.name]);
+    var message = JSON.parse(JSON.stringify(r.rows));
+    if (!message.length) {
+      res.json({ ok: false, msg: '此用户不存在！' });
+    }
+    else if (message[0].tel == req.query.tel) {
+      res.json({ ok: true, msg: '成功！' });
+    }
+    else {
+      res.json({ ok: false, msg: '失败！' });
+    }
+  } catch (err) {
+    res.json({ ok: false, msg: '此用户不存在！' });
+  }
+})
+
+
+//修改密码
+router.get('/alter', async (req, res, next) => {
+  try {
+        var name = req.query.name;
+        var pwd = req.query.pwd;
+        let sql = 'update users set pwd=$1 where name=$2';
+        let r1 = await con.query(sql, [pwd,name]);
+        console.log(r1.rows);
+        res.json({ ok: true, msg: '修改成功！' });
+    } catch (err) {
+      res.json({ ok: false, msg: '修改失败！' });
+    }
 });
 
 module.exports = router;
