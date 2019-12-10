@@ -25,8 +25,8 @@ router.get('/addLearn', async (req, res, next)=> {
   // checkToken(data, async (r) => {
     // console.log(r);
     try {
-      let sql = 'insert into learn(content,name,time) values($1,$2,$3)';
-      let l = await con.query(sql, [ req.query.content, req.query.name, req.query.time]);
+      let sql = 'insert into learn(content,name,time,pic) values($1,$2,$3,$4)';
+      let l = await con.query(sql, [ req.query.content, req.query.name, req.query.time,req.query.pic]);
       console.log(l.rows);
       res.json({ ok: true, msg: "发布成功" });
     } catch (err) {
