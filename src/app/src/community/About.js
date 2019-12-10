@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {NavBar,ActionSheet} from 'antd-mobile';
 import { BrowserRouter as Router,Route,Link} from 'react-router-dom';
+import axios from 'axios'
 const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
 let wrapProps;
 if (isIPhone) {
@@ -13,12 +14,13 @@ export default class About extends Component {
     super();
     this.state = {
       clicked1: 'none',
-      clicked:'none'
+      clicked:'none',
+      clicked2: true,
+      data:[]
     };
   }
 
   dataList = [
-    { url: 'OpHiXAcYzmPQHcdlLFrc', title: '发送给朋友' },
     { url: 'wvEzCMiDZjthhAOcwTOu', title: '新浪微博' },
     { url: 'cTTayShKtEIdQVEMuiWt', title: '朋友圈' },
     { url: 'umnHwvEgSyQtXlZjNJTt', title: '微信好友' },
@@ -40,7 +42,32 @@ export default class About extends Component {
       });
     });
   } 
+  changeColor(){
+    this.setState({
+        clicked2:!this.state.clicked2
+    })
+  }
+  componentDidMount() {
+    console.log(this.state.data);
+    var id =this.props.match.params.id;
+    console.log(this.props)
+    console.log(id)
+    let url = `http://localhost:3005/community/list/`+id;
+    axios(url)
+        .then((res) => {
+          console.log(res.data)
+          console.log(res.data.communityList)
+            this.setState({
+              data: res.data.communityList[id-1]                 
+            })
+        })
+  }
   render() {
+    let color1 = {
+      color:this.state.clicked2 ? "black" : "red",
+      fontSize:'3vh',
+      marginLeft:'23%'
+    }
     return (
       <div style={{position:'relative'}}>
         <NavBar
@@ -51,48 +78,20 @@ export default class About extends Component {
             >
             <span>详情</span>
         </NavBar>
-        <div style={{height:'20%',color:'black'}}>
-            <div style={{float:"left"}}>
-            <img src={require('./img/touxiang1.jpg')} style={{height:'55px',width:'55px',borderRadius:'50%',marginLeft:15}}/>
+        <div style={{height:'20vh',background:'#fff',color:'black'}} >
+          <div style={{float:"left"}}>
+            <img src={require('./img/touxiang1.jpg')} style={{height:'7.8vh',width:'14vw',borderRadius:'50%',marginLeft:15,marginTop:9}}/>
+          </div>
+          <p style={{marginLeft:75,fontSize:'2.5vh',lineHeight:2.5,marginTop:6}}>{this.state.data.name}</p>
+          <div style={{marginLeft:75,color:'gray',fontSize:'2vw',marginTop:"-5vw"}}>{this.state.data.time}</div>
+            <p style={{marginLeft:25,color:'black',marginTop:20}}>{this.state.data.content}</p>
+            <div style={{marginTop:20}}>
+              <sapn className="iconfont icon-zhuanfa" onClick={this.showShareActionSheet} style={{fontSize:'2.5vh',marginLeft:'17%',color:'black'}}></sapn>
+              <sapn className="iconfont icon-pinglun" onClick={this.showActionSheet} style={{fontSize:'3.2vh',marginLeft:'22%',color:'black'}}></sapn>
+              <sapn className="iconfont icon-dianzan" onClick={this.changeColor.bind(this)}  style={color1}></sapn>
             </div>
-            <div>
-              <p style={{marginLeft:75,fontSize:20,lineHeight:1.8}}>路子野</p>
-              <div style={{marginLeft:75,marginTop:-20,color:'gray'}}>今天11:03</div>
-            </div>
-            <p style={{marginLeft:20}}>有没有学姐说一下软件工程大一上学期学的什么科目呀？</p>
-            <div style={{float:'right'}}>
-              <sapn className="iconfont icon-zhuanfa" onClick={this.showShareActionSheet} style={{fontSize:'2.5vh',marginRight:30,color:'black'}}></sapn>
-              <sapn className="iconfont icon-pinglun" style={{fontSize:'3.1vh',marginRight:30}}></sapn>
-              <sapn className="iconfont icon-dianzan" style={{fontSize:'3.1vh',marginRight:30}}></sapn>
-            </div>  
+          </div>
         </div>
-        <div style={{height:'20%',color:'black',marginTop:60,marginLeft:10}}>
-            <div style={{float:"left"}}>
-                <div className="iconfont icon-avatar-lady-sy" style={{fontSize:37,marginLeft:5}}></div>
-            </div>
-            <div>
-                <p style={{marginLeft:50,color:'orange'}}>莫得感情的胖子</p>
-                <p style={{marginLeft:55,fontSize:12,color:'gray'}}>我也想知道...+1</p>
-            </div>
-            <div style={{float:'right',marginRight:25,marginTop:-35,fontSize:10}}>
-              <span style={{marginRight:25}}>今天18:48</span>
-              <span>回复</span>
-            </div>  
-        </div>
-        <div style={{height:'20%',color:'black',marginTop:30,marginLeft:10}}>
-            <div style={{float:"left"}}>
-                <div className="iconfont icon-avatar-lady-sy" style={{fontSize:37,marginLeft:5}}></div>
-            </div>
-            <div>
-                <p style={{marginLeft:50,color:'green'}}>小黑</p>
-                <p style={{marginLeft:55,fontSize:12,color:'gray'}}>四级六级可以加</p>
-            </div>
-            <div style={{float:'right',marginRight:25,marginTop:-35,fontSize:10}}>
-              <span style={{marginRight:25}}>刚刚</span>
-              <span>回复</span>
-            </div>  
-        </div>
-      </div>
     );
   }
 }

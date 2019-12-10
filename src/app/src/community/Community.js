@@ -1,6 +1,6 @@
 import { NavBar,SearchBar,ActionSheet} from 'antd-mobile';
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'; 
+import { BrowserRouter as Router,Route,Link} from 'react-router-dom'; 
 import axios from 'axios'
 const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
 
@@ -21,21 +21,13 @@ export default class Community1 extends Component {
           clicked4: true
         };
         this.state = {
-            // searchContent:'',
             data: []
         }
       }
-      // getSearchContent = (e)=>{
-      //   this.setState({
-      //     searchContent:'kai'
-      //   },()=>{
-      //     console.log(e.target)
-      //     console.log(this.state.searchContent)
+      
     
-      //   })
-      // }
       dataList = [
-        { url: 'cTTayShKtEIdQVEMuiWt',title: '朋友圈' },
+        { url: 'cTTayShKtEIdQVEMuiWt', title: '朋友圈' },
         { url: 'umnHwvEgSyQtXlZjNJTt', title: '微信好友' },
         { url: 'SxpunpETIwdxNjcJamwB', title: 'QQ' },
       ].map(obj => ({
@@ -82,18 +74,33 @@ export default class Community1 extends Component {
             clicked3:!this.state.clicked3
         })
       }
-      changeColor2(){ 
+      changeColor2(){
         this.setState({
             clicked4:!this.state.clicked4
         })
+      };
+      
+      changeStyle=(e)=>{
+        const i = parseInt(e.target.style.value);
+        console.log(i)
+        if(i%2 == 1){
+          e.target.style.color = 'red';
+          e.target.style.value+=1
+        }
+        else if(i%2==0){
+          e.target.style.color = 'black';
+          e.target.style.value+=1
+        }
       }
 
     componentDidMount() {
+      console.log(this.state.data);
       let url = `http://localhost:3005/community/list`;
       axios(url)
           .then((res) => {
+            console.log(res.data)
               this.setState({
-                  data: res.data
+                  data: res.data.communityList
               })
           })
     }
@@ -104,7 +111,18 @@ export default class Community1 extends Component {
             fontSize:'3vh',
             marginLeft:'23%'
           }
+        let color2 = {
+            color:this.state.clicked3 ? "black" : "red",
+            fontSize:'3vh',
+            marginLeft:'23%'
+          }
+        let color3 = {
+            color:this.state.clicked4 ? "black" : "red",
+            fontSize:'3vh',
+            marginLeft:'23%'
+          }
         return (
+            // <>
               <div>
                   <NavBar 
                     style={{ backgroundColor: '#37376F', color: '#fff',position:'sticky ',top:'0',zIndex:10,textAlign:'center',height:'7vh'}}
@@ -114,19 +132,15 @@ export default class Community1 extends Component {
                   >
                     <span>社区</span>
                   </NavBar>
-                <div>
                   <div style={{width:'100vw',backgroundColor:'#EFEFF4'}}>
-                    <SearchBar 
-                      // onChange={this.getSearchContent} 
-                      placeholder="搜索" maxLength={10} 
-                      style={{width:'100vw',float:"left",position:'fixed',top:'7vh'}}/>
+                    <SearchBar placeholder="搜索" maxLength={10} style={{width:'100vw',float:"left",position:'fixed',top:'7vh'}}/>
                     {
                       this.props.selected == 'community'&&<Link to='/add'><div style={{position:"fixed",top:"85%",left:'85%'}}>
                         <span className="iconfont icon-add-sy" style={{fontSize:"6vh",color:"#37376F"}}></span>
                       </div></Link>
                     }
                   <div style={{marginTop:'7vh'}}>
-                  {
+                    {
                       this.state.data.map((item, idx) => 
                         <div style={{height:'20vh',background:'#fff',color:'black'}}>
                           <div style={{float:"left"}}>
@@ -136,19 +150,20 @@ export default class Community1 extends Component {
                           </div>
                         <p style={{marginLeft:75,fontSize:'2.5vh',lineHeight:2.5,marginTop:6}}>{item.name}</p>
                         <div style={{marginLeft:75,color:'gray',fontSize:'2vw',marginTop:"-5vw"}}>{item.time}</div>
-                        <Link to="/aboutyouknow">
+                        <Link to={`/aboutyouknow/${item.id}`}>
                         <p style={{marginLeft:25,color:'black',marginTop:20}}>{item.content}</p>
                         </Link>
                         <div style={{marginTop:20}}>
                           <sapn className="iconfont icon-zhuanfa" onClick={this.showShareActionSheet} style={{fontSize:'2.5vh',marginLeft:'17%',color:'black'}}></sapn>
                           <sapn className="iconfont icon-pinglun" onClick={this.showActionSheet} style={{fontSize:'3.2vh',marginLeft:'22%',color:'black'}}></sapn>
-                          <sapn className="iconfont icon-dianzan" onClick={this.changeColor.bind(this)}  style={color1}></sapn>
+                          {/* <sapn className="iconfont icon-dianzan" onClick={this.changeColor.bind(this)}  style={color1}></sapn> */}
+                          <sapn className="iconfont icon-dianzan" onClick={this.changeStyle} style={{value:1,marginLeft:'26%'}}></sapn>
                         </div>
                       </div>)}
                     </div>
                   </div>
-                </div>
               </div>
+            // </>
         )
     }
 }
