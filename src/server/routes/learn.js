@@ -63,4 +63,17 @@ router.get('/list', async (req, res, next)=> {
   }
 });
 
+router.get('/select', async (req, res, next)=> {
+  try {
+    var content = req.query.content;
+    let sql = 'select * from learn where content like $1';
+    let r = await con.query(sql, [content]);
+    // console.log(r.rows,typeof(r.rows));
+    // var list = r.rows;
+    console.log(r.rows);
+    res.josn({ ok: true, msg: r.rows});
+  } catch (err) {
+    res.josn({ ok: false, msg: '查找失败'});
+  }
+});
 module.exports = router;
