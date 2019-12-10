@@ -1,112 +1,13 @@
-/* 在CSS文件中引入antd的css文件 */
-@import '~antd/dist/antd.css';
-*{
-    padding: 0;
-    margin: 0;
-}
-/* body{
-    background:url("../src/img/xx.jpg");
-    width:100%;
-    height:100%;
-    z-index: 10;
-    background-size: cover;
-    opacity: 0.3;
-} */
-body{
-    background: url('./img/2.jpg')no-repeat;
-    background-size: cover; 
-}
-.loginimg{
-    background: url('./img/xx.jpg')no-repeat;
-    background-size: cover;
-    text-align: center;
-    position: relative;
-    top:120px;
-}
-.header{
-    height: 50px;
-    background-color: #444;
-}
-.header header{
-    width: 1200px;
-    line-height: 50px;
-    margin: 0 auto;
-}
-.header header a{
-    margin: 0 20px;
-    color: #fff;
-}
-.header img{
-    width: 120px;
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* content */
-.content{
-    width: 1200px;
-    margin: 30px auto 0;
-}
-.left{
-    width: 900px;
-    float: left;
-}
-.right{
-    width: 270px;
-    float: right;
-    height: 500px;
-    background-color: red;
-}
-.homeLogin{
-    background:url("./img/xx.jpg");
-    width:100%;
-    height: 100%; 
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    opacity: 0.5;
-}
-.homediv1{
-    height: 55px;
-    width: 100%;
-    border-bottom: 2px solid #555151;
-    float: left;
-    margin-top: -3%;
-}
-.homediv2{
-    height: 550px;
-    width: 10%;
-    float: left;
-    text-align: center;
-    color:#555151;
-    border-bottom: 2px solid black;
-    border-left: 2px solid black;
-    border-right: 2px solid black;
-}
-.homediv3{
-    width: 90%;
-    height: 675px;
-    float: left;
-}
-.homedivlist{
-    
-    height:55px;
-    width:65%;
-    float:left;
-    margin-left: 15%;
-    border-top: 2px solid black;
-    border-left: 2px solid black;
-    border-right: 2px solid black;
-}
-.homedivlisttop{
-    margin-top: 1px;
-    height:70px;
-    width:65%;
-    float:left;
-    margin-left: 16%;
-}
-.homedivlistbottom{
-    height:55px;
-    width:65%;
-    float:left;
-    margin-left: 15%;
-    border: 2px solid black;
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }
