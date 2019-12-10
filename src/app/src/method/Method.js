@@ -1,19 +1,8 @@
-import { NavBar, Icon,Tabs,Carousel} from 'antd-mobile';
+import { NavBar,Carousel} from 'antd-mobile';
 import React, { Component } from 'react'
-import { Flex, WhiteSpace } from 'antd-mobile';
-import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
+import { Flex} from 'antd-mobile';
+import {Link} from 'react-router-dom';
 import '../App.css';
-
-const PlaceHolder = ({ className = '', ...restProps }) => (
-    <div className={`${className} placeholder`} {...restProps} style={{margin:'0 auto'}}>
-        <div style={{height:'100px',width:'100px'}}>
-            <Link to='/onecard' ><div style={{height:'100px',width:'100px',backgroundColor:'#343466',display:'inline-block',marginRight:'34px',borderRadius:'50px'}}></div>
-                <i className='iconfont icon-card' style={{color: 'white','fontSize':'40px',position:'relative',top:'-75px',left:'22px'}}></i>
-                <span style={{position: 'relative',top: '-12px',left: '-22px',color:'black',fontSize:'16px'}} >一卡通</span>   
-            </Link>
-        </div>
-    </div>
-);
 
 export default class Method extends Component {
     render() { 
@@ -24,8 +13,8 @@ export default class Method extends Component {
                         autoplay={true}
                         infinite
                         dots={false}
-                        beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
-                        afterChange={index => console.log('slide to', index)}
+                        // beforeChange={(from, to) => }
+                        // afterChange={index => console.log('slide to', index)}
                     >
                     {[1,2,3,4].map(val => (
                         <a key={val} style={{ display: 'inline-block', width: '100vw', height: '35vh' }} >

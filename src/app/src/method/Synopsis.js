@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import {BrowserRouter as Router,Link} from 'react-router-dom';
-import { NavBar, Icon,Tabs,Carousel,List} from 'antd-mobile';
+import {Link} from 'react-router-dom';
+import { NavBar} from 'antd-mobile';
 
 export default class Synopsis extends Component {
     render() {

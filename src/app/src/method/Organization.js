@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
-import { NavBar, Icon,Tabs,Carousel} from 'antd-mobile';
+import {Link} from 'react-router-dom';
+import { NavBar,Carousel} from 'antd-mobile';
 import '../App.css';
-import { SearchBar, Button, WhiteSpace, WingBlank } from 'antd-mobile';
+import { SearchBar} from 'antd-mobile';
 import { List } from 'antd-mobile';
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -34,10 +34,6 @@ export default class Organization extends Component {
                         社团组织
                 </NavBar> 
                 <div>
-                    <div>
-                        <SearchBar placeholder="Search" maxLength={8} />
-                    </div>
-
                     <div className='orgBox'>
                         <p className='ten'>十佳社团</p>
                         <Carousel

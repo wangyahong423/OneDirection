@@ -1,6 +1,6 @@
-import { NavBar, Icon,Tabs,Carousel,SearchBar,Flex, WhiteSpace} from 'antd-mobile';
+import { NavBar,SearchBar,Flex} from 'antd-mobile';
 import React, { Component } from 'react'
-import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import '../App.css';
 
 
@@ -16,9 +16,6 @@ export default class Alumnus extends Component {
                     杰出校友
                 </NavBar>
                 <div>
-                    <div>
-                        <SearchBar placeholder="搜索" maxLength={8} />
-                    </div>
                     <div style={{height:'auto'}}>
                         <Flex style={{marginTop:'3vh'}}>
                             <div className='alumnus'>

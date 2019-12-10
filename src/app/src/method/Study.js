@@ -1,7 +1,7 @@
-import { NavBar, Icon,Tabs,Carousel} from 'antd-mobile';
+import { NavBar} from 'antd-mobile';
 import React, { Component } from 'react'
-import { Flex, WhiteSpace } from 'antd-mobile';
-import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
+import { Flex} from 'antd-mobile';
+import {Link} from 'react-router-dom';
 import '../App.css';
 
 const PlaceHolder = ({ className = '', ...restProps }) => (

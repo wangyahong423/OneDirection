@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {BrowserRouter as Router,Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import { NavBar,List,SearchBar,Accordion } from 'antd-mobile';
 import '../App.css';
 
@@ -14,9 +14,6 @@ export default class CollegeOther extends Component {
                     ]}>
                         其他学院
                 </NavBar>
-                <div style={{height:'7vh',marginTop:'7vh'}}>
-                    <SearchBar placeholder="搜索" maxLength={8} />
-                </div>
                 <div style={{height:'86vh'}}>
                     <Accordion accordion openAnimation={{}} className="my-accordion" onChange={this.onChange}>
                         <Accordion.Panel header="马克思主义学院">

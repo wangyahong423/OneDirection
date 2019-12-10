@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
-import { NavBar, Flex, WhiteSpace, List,SearchBar } from 'antd-mobile';
+import {Link} from 'react-router-dom';
+import { NavBar} from 'antd-mobile';
 import '../App.css';
 
 export default class CollegeHistory extends Component {

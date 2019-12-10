@@ -1,7 +1,6 @@
-import { NavBar, Icon,Tabs,Carousel} from 'antd-mobile';
+import { NavBar} from 'antd-mobile';
 import React, { Component } from 'react'
-import { Flex, WhiteSpace } from 'antd-mobile';
-import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import '../App.css';
 
 export default class Zongheceping extends Component {
@@ -9,7 +8,7 @@ export default class Zongheceping extends Component {
         return (
             <div>
                 <NavBar
-                    style={{ backgroundColor: '#37376F', color: '#fff',position:'sticky ',top:'0',zIndex:10,textAlign:'center',height:'7vh'}}
+                    style={{ backgroundColor: '#37376F', color: '#fff',position:'fixed ',width:'100%',top:'0',zIndex:10,textAlign:'center',height:'7vh'}}
                     leftContent={[
                     <Link to="/study"><span style={{fontSize:'17px',color:'white'}} className="iconfont icon-ico_leftarrow"></span></Link>
                 ]}>

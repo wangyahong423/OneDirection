@@ -1,6 +1,6 @@
-import { NavBar, Icon,Tabs,Carousel,SearchBar,Flex, WhiteSpace} from 'antd-mobile';
+import { NavBar} from 'antd-mobile';
 import React, { Component } from 'react'
-import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import '../App.css';
 
 export default class College extends Component {

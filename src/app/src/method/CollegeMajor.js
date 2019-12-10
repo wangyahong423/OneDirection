@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
-import { NavBar, Flex, WhiteSpace, List,SearchBar,Accordion } from 'antd-mobile';
+import {Link} from 'react-router-dom';
+import { NavBar,List,Accordion } from 'antd-mobile';
 import '../App.css';
 
 export default class CollegeStudents extends Component {

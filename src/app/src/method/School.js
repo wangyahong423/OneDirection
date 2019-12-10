@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import {BrowserRouter as Router,Link} from 'react-router-dom';
-import { NavBar, Icon,Tabs,Carousel,List} from 'antd-mobile';
+import {Link} from 'react-router-dom';
+import { NavBar,Carousel,List} from 'antd-mobile';
 import '../App.css';
 const Item = List.Item;
 const Brief = Item.Brief;

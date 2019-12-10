@@ -1,6 +1,6 @@
 import { NavBar,SearchBar,ActionSheet} from 'antd-mobile';
 import React, { Component } from 'react'
-import { BrowserRouter as Router,Route,Link} from 'react-router-dom'; 
+import {Link} from 'react-router-dom'; 
 import axios from 'axios'
 const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
 
@@ -21,12 +21,21 @@ export default class Community1 extends Component {
           clicked4: true
         };
         this.state = {
+            // searchContent:'',
             data: []
         }
       }
+      // getSearchContent = (e)=>{
+      //   this.setState({
+      //     searchContent:'kai'
+      //   },()=>{
+      //     console.log(e.target)
+      //     console.log(this.state.searchContent)
     
+      //   })
+      // }
       dataList = [
-        { url: 'cTTayShKtEIdQVEMuiWt', title: '朋友圈' },
+        { url: 'cTTayShKtEIdQVEMuiWt',title: '朋友圈' },
         { url: 'umnHwvEgSyQtXlZjNJTt', title: '微信好友' },
         { url: 'SxpunpETIwdxNjcJamwB', title: 'QQ' },
       ].map(obj => ({
@@ -73,18 +82,16 @@ export default class Community1 extends Component {
             clicked3:!this.state.clicked3
         })
       }
-      changeColor2(){
+      changeColor2(){ 
         this.setState({
             clicked4:!this.state.clicked4
         })
       }
 
     componentDidMount() {
-      console.log(this.state.data);
       let url = `http://localhost:3005/community/list`;
       axios(url)
           .then((res) => {
-            console.log(res.data)
               this.setState({
                   data: res.data
               })
@@ -97,18 +104,7 @@ export default class Community1 extends Component {
             fontSize:'3vh',
             marginLeft:'23%'
           }
-        let color2 = {
-            color:this.state.clicked3 ? "black" : "red",
-            fontSize:'3vh',
-            marginLeft:'23%'
-          }
-        let color3 = {
-            color:this.state.clicked4 ? "black" : "red",
-            fontSize:'3vh',
-            marginLeft:'23%'
-          }
         return (
-            // <>
               <div>
                   <NavBar 
                     style={{ backgroundColor: '#37376F', color: '#fff',position:'sticky ',top:'0',zIndex:10,textAlign:'center',height:'7vh'}}
@@ -118,18 +114,19 @@ export default class Community1 extends Component {
                   >
                     <span>社区</span>
                   </NavBar>
+                <div>
                   <div style={{width:'100vw',backgroundColor:'#EFEFF4'}}>
-                    <SearchBar placeholder="搜索" maxLength={10} style={{width:'100vw',float:"left",position:'fixed',top:'7vh'}}/>
+                    <SearchBar 
+                      // onChange={this.getSearchContent} 
+                      placeholder="搜索" maxLength={10} 
+                      style={{width:'100vw',float:"left",position:'fixed',top:'7vh'}}/>
                     {
                       this.props.selected == 'community'&&<Link to='/add'><div style={{position:"fixed",top:"85%",left:'85%'}}>
                         <span className="iconfont icon-add-sy" style={{fontSize:"6vh",color:"#37376F"}}></span>
                       </div></Link>
                     }
-
-
-                    
                   <div style={{marginTop:'7vh'}}>
-                    {
+                  {
                       this.state.data.map((item, idx) => 
                         <div style={{height:'20vh',background:'#fff',color:'black'}}>
                           <div style={{float:"left"}}>
@@ -150,8 +147,8 @@ export default class Community1 extends Component {
                       </div>)}
                     </div>
                   </div>
+                </div>
               </div>
-            // </>
         )
     }
 }

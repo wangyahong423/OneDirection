@@ -1,7 +1,6 @@
-import { NavBar, Icon,Tabs,Carousel} from 'antd-mobile';
+import { NavBar} from 'antd-mobile';
 import React, { Component } from 'react'
-import { Flex, WhiteSpace } from 'antd-mobile';
-import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import '../App.css';
 
 export default class StudyJiangxuejin extends Component {
@@ -9,41 +8,42 @@ export default class StudyJiangxuejin extends Component {
         return (
             <div>
                 <NavBar
-                    style={{ backgroundColor: '#37376F', color: '#fff',position:'sticky ',top:'0',zIndex:10,textAlign:'center',height:'7vh'}}
+                    style={{ backgroundColor: '#37376F', color: '#fff',position:'fixed',top:'0',zIndex:10,textAlign:'center',height:'7vh',width:'100%'}}
                     leftContent={[
                     <Link to="/study"><span style={{fontSize:'17px',color:'white'}} className="iconfont icon-ico_leftarrow"></span></Link>
                 ]}>
                     奖学金
-                </NavBar>
+                </NavBar> 
                 <div  className='cepingImg'>
                     <div className='cepingBox' >
                         <div className='cepingword'>
-                            <p>综合测评地内容包括品德表现测评、学业表现测评、文体表现测评和能力表现测评四个方面。品德表现测评主要评估学生政治表现、思想修养和道德品质；学业表现测评朱要评估学生的学习成绩与学习效果；文体表现测评主要评估学生在文体活动中的表现及成绩；能力表现测评主要评估学生的职业技能、组织管理以及创新等能力。</p>
-                            <p style={{marginTop:'-2vh'}}>综合测评成绩的构成和比例为：满分为100分，其中品德测评得分占10%，学业测评得分占60%，文体测评得分占15%，能力测评得分占15%。</p>
-                            <p style={{marginTop:'-2vh'}}>综合测评成绩的计算公式：综合测评得分=品德表现测评得分*10%+学业表现测评得分*60%+文体表现测评得分*15%+能力表现测评得分*15%。</p>
-                            <p style={{marginTop:'-2vh',color:'red'}}>一、品德表现测评得分途径：</p>
-                            <p style={{marginTop:'-2.7vh'}}>1.社会实践。受院级、校级、市级、省级（及以上）表彰奖励者分别加分。顶岗支教，优秀实习生。</p>
-                            <p style={{marginTop:'-2.7vh'}}>2.热心公益，积极参加志愿服务活动，义务献血。</p>
-                            <p style={{marginTop:'-2.7vh'}}>3.见义勇为、拾金不昧、助人为乐等行为受表扬。</p>
-                            <p style={{marginTop:'-2.7vh'}}>4.校级文明宿舍、优良学风星级宿舍。</p>
-                            <p style={{marginTop:'-2vh',color:'red'}}>二、能力表现测评得分途径：基本分50分+奖励分（奖励分满分50，最低0分）</p>
-                            <p style={{marginTop:'-2.7vh'}}>1.按《职业素质培养方案》单项验收为优秀、良好、合格者。</p>
-                            <p style={{marginTop:'-2.7vh'}}>2.参加与职业技能相关的各类竞赛活动（如朗诵、演讲、书法等）。</p>
-                            <p style={{marginTop:'-2.7vh'}}>3.参加各种征文比赛、知识竞赛和社会调查报告评选者。</p>
-                            <p style={{marginTop:'-2.7vh'}}>4.在公开发行的刊物上发表非学术性文章和文艺作品者。</p>
-                            <p style={{marginTop:'-2.7vh'}}>5.参加科技成果展览评比及建模大赛、数控大赛、“挑战杯”等各种竞赛活动者。</p>
-                            <p style={{marginTop:'-2.7vh'}}>6.担任学生干部工作满一年且能履行职责者。</p>
-                            <p style={{marginTop:'-2.7vh'}}>7.被评为优秀共产党员者。</p>
-                            <p style={{marginTop:'-2vh',color:'red'}}>三、学业表现测评得分途径：基本分90分+奖励分（奖励分满分10，最低0分）</p>
-                            <p style={{marginTop:'-2.7vh'}}>1.在公开出版发行的刊物（有CN或ISSN登记号）上发表专业学术论文著。</p>
-                            <p style={{marginTop:'-2.7vh'}}>2.科研成果获得国家专利者。</p>
-                            <p style={{marginTop:'-2.7vh'}}>3.在国家英语等级考试中，通过英语四级、英语六级。外语专业过级加分标准有外语学院自定。</p>
-                            <p style={{marginTop:'-2.7vh'}}>4.在计算机等级考试中，通过一、二、三级者分别加分。</p>
-                            <p style={{marginTop:'-2vh',color:'red'}}>四、文体表现测评得分途径：基本分50分+奖励分（奖励分满分50，最低0分）</p>
-                            <p style={{marginTop:'-2.7vh'}}>1.参加体育竞赛的运动员；参加院级及以上竞赛担任裁判、礼宾人员等。</p>
-                            <p style={{marginTop:'-2.7vh'}}>2.在各种体育竞赛中获得名次的运动员。</p>
-                            <p style={{marginTop:'-2.7vh'}}>3.参加文艺演出或竞赛者。</p>
-                            <p style={{marginTop:'-2.7vh'}}>4.在文艺竞赛中获得名次的演出者。</p>
+                            <p>为了激励广大学生奋发向上，刻苦学习，充分调动学生学习的积极性和主动性，根据国家教育部、财政部有关规定制定。</p>
+                            <p style={{marginTop:'-2vh',color:'red'}}>第一条 </p>
+                            <p style={{marginTop:'-2.7vh'}}>本办法适用于我校在籍的全日制本、专科学生</p>
+                            <p style={{marginTop:'-2vh',color:'red'}}>第二条 </p>
+                            <p style={{marginTop:'-2.7vh'}}>奖学金分一、二、三等，奖金分别为2000元、1000元、500元。一等奖学金按学生总人数的5%评定；二等奖学金按学生总人数的10%评定；三等奖学金按学生总人数的25%评定。设单项奖，奖金额度为300元，单项奖按学生总数的5%评定。</p>
+                            <p style={{marginTop:'-2vh',color:'red'}}>第三条 </p>
+                            <p style={{marginTop:'-2.7vh'}}>学生从第二学年开始每学年以学生年级（班级）为单位进行奖学金评定。年级（班级）奖学金评定小组由辅导员、学生干部代表和普通学生代表5-7人组成，其中普通学生代表不得少于小组成员中学生人数的1/2。评选结果经学院领导小组审核并签署意见后，交学生处审核，报主管校长审批</p>
+                            <p style={{marginTop:'-2vh',color:'red'}}>第四条 </p>
+                            <p style={{marginTop:'-2.7vh'}}>获得奖学金的同学，学校同时发给荣誉证书，并填写学生奖学金登记表，存入学生本人档案</p>
+                            <p style={{marginTop:'-2vh',color:'red'}}>第五条 </p>
+                            <p style={{marginTop:'-2.7vh'}}>同一学年内，获得学校奖学金（单项奖除外）的学生不能同时获得其他类别的奖学金，但家庭经济困难的学生可以同时申请并获得各种级别的助学金。获得学校奖学金的学生可以同时获得校、院级三好学生，但奖金不重复发放，取最高项。</p>
+                            <p style={{marginTop:'-2vh',color:'red'}}>第六条 </p>
+                            <p style={{marginTop:'-2.7vh'}}>奖学金评选的基本条件：</p>
+                            <p style={{marginTop:'-2.7vh'}}>1、坚持四项基本原则，努力学习社会主义理论，关心时事政治，积极参加政治学习，团结同学，尊敬师长，自觉遵守国家法律、法规和学校规章制度，拥护党的路线、方针、政策，思想品德品质良好</p>
+                            <p style={{marginTop:'-2.7vh'}}>2、学习目的明确，学习态度端正，热爱所学专业，学习努力，较好地掌握了所学基础理论和知识，有一定分析、解决问题的能力。</p>
+                            <p style={{marginTop:'-2.7vh'}}>3、积极参加学校、学院组织的活动，热心公益事业。</p>
+                            <p style={{marginTop:'-2.7vh'}}>4、积极参加体育锻炼，身体健康，体育成绩合格。</p>
+                            <p style={{marginTop:'-2.7vh'}}>5、一、二、三等奖学金获得者按学业成绩（公公必修课程和专业必修、选修课程成绩）平均学分绩排名产生。单项奖奖励在思想品德、劳动卫生、科研创新、文体活动、社会实践、职业素质、顶岗支教方面能力突出、有较大贡献的学生，由年级（班级）奖学金评定小组评选产生。</p>
+                            <p style={{marginTop:'-2vh',color:'red'}}>第七条</p>
+                            <p style={{marginTop:'-2.7vh'}}>凡有以下情况之一者，一年内取消一、二、三等奖的评定资格，已发奖学金的予以收回：</p>
+                            <p style={{marginTop:'-2.7vh'}}>1、体育成绩不达标者；</p>
+                            <p style={{marginTop:'-2.7vh'}}>2、学年内有两门（含两门）以上考试不及格者；</p>
+                            <p style={{marginTop:'-2.7vh'}}>3、受到学校通报（含通报）以上批评及各种处分者；</p>
+                            <p style={{marginTop:'-2.7vh'}}>4、无故欠缴学费者；</p>
+                            <p style={{marginTop:'-2.7vh'}}>5、有不良诚信记录者。</p>
+                            <p style={{marginTop:'-2vh',color:'red'}}>第八条</p>
+                            <p style={{marginTop:'-2.7vh'}}>本办法由学生工作部负责解释，自印发之日起施行</p>
                         </div>
                     </div>
                 </div>

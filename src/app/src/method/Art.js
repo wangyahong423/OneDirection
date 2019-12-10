@@ -2,20 +2,8 @@ import React, { Component } from 'react'
 import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
 import { NavBar, Flex, WhiteSpace, List,SearchBar } from 'antd-mobile';
 import '../App.css';
-// import { } from 'antd-mobile';
-// import {} from 'antd-mobile';
 const Item = List.Item;
 const Brief = Item.Brief;
-// import { Flex, WhiteSpace } from 'antd-mobile';
-
-const PlaceHolder = ({ className = '', ...restProps }) => (
-  <div className={`${className} placeholder`} {...restProps}>
-        <div className='schoolBox1' >
-            <div className='schoolxueshenghui' ></div>
-            <span style={{color:'#000'}}>校学生会</span>
-        </div>
-  </div>
-);
 
 export default class SchoolOrg extends Component {
     render() {

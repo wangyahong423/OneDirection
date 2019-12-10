@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import { NavBar} from 'antd-mobile';
 
 export default class Activate extends Component {
