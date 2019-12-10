@@ -17,26 +17,25 @@ con.on('error', err => {
   process.exit(1);
 });
 
-con.connect();
-
-
-router.get('/addLearn', async (req, res, next)=> {
+router.get('/addLearn', async (req, res, next) => {
+  con.connect();
   // var data = req.query.data;
   // checkToken(data, async (r) => {
-    // console.log(r);
-    try {
-      let sql = 'insert into learn(content,name,time,pic) values($1,$2,$3,$4)';
-      let l = await con.query(sql, [ req.query.content, req.query.name, req.query.time,req.query.pic]);
-      console.log(l.rows);
-      res.json({ ok: true, msg: "发布成功" });
-    } catch (err) {
-      res.json({ ok: false, msg: "发布失败" });
-    }
+  // console.log(r);
+  try {
+    let sql = 'insert into learn(content,name,time,pic) values($1,$2,$3,$4)';
+    let l = await con.query(sql, [req.query.content, req.query.name, req.query.time, req.query.pic]);
+    console.log(l.rows);
+    res.json({ ok: true, msg: "发布成功" });
+  } catch (err) {
+    res.json({ ok: false, msg: "发布失败" });
+  }
   // })
-
+  con.end();
 });
 
-router.get('/deleteLearn', async (req, res, next) =>{
+router.get('/deleteLearn', async (req, res, next) => {
+  con.connect();
   try {
     // var time = req.query.time;
     // var reg = /%20/;
@@ -50,9 +49,11 @@ router.get('/deleteLearn', async (req, res, next) =>{
   } catch (err) {
     res.json({ ok: false, msg: "删除失败" });
   }
+  con.end();
 });
 
-router.get('/list', async (req, res, next)=> {
+router.get('/list', async (req, res, next) => {
+  con.connect();
   try {
     let sql = 'select * from learn order by id desc';
     let r = await con.query(sql, []);
@@ -61,9 +62,11 @@ router.get('/list', async (req, res, next)=> {
   } catch (err) {
     console.log(err);
   }
+  con.end();
 });
 
-router.get('/select', async (req, res, next)=> {
+router.get('/select', async (req, res, next) => {
+  con.connect();
   try {
     var content = req.query.content;
     let sql = 'select * from learn where content like $1';
@@ -71,9 +74,10 @@ router.get('/select', async (req, res, next)=> {
     // console.log(r.rows,typeof(r.rows));
     // var list = r.rows;
     console.log(r.rows);
-    res.josn({ ok: true, msg: r.rows});
+    res.josn({ ok: true, msg: r.rows });
   } catch (err) {
-    res.josn({ ok: false, msg: '查找失败'});
+    res.josn({ ok: false, msg: '查找失败' });
   }
+  con.end();
 });
 module.exports = router;

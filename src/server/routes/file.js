@@ -17,14 +17,13 @@ con.on('error', err => {
   process.exit(1);
 });
 
-con.connect();
-
 var multiparty = require('multiparty');
 var util = require('util');
 var fs = require('fs');
 
 /* 上传 */
 router.post('/addFile', function(req, res, next) {
+  con.connect();
   /* 生成multiparty对象，并配置上传目标路径 */
   var form = new multiparty.Form();
   /* 设置编辑 */
@@ -90,9 +89,11 @@ router.post('/addFile', function(req, res, next) {
     res.write('received upload:\n\n');
     res.end(util.inspect({fields: fields, files: filesTemp}))
   })
+  con.end();
 })
 
 router.get('/list', async (req, res, next)=> {
+  con.connect();
   try {
     let sql = 'select * from file';
     let r = await con.query(sql, []);
@@ -101,9 +102,11 @@ router.get('/list', async (req, res, next)=> {
   } catch (err) {
     console.log(err);
   }
+  con.end();
 });
 
 router.get('/deleteFile', async (req, res, next) =>{
+  con.connect();
   try {
     let parsedUrl = url.parse(req.url, true);
     let filepath = parsedUrl.query.filepath;
@@ -118,9 +121,11 @@ router.get('/deleteFile', async (req, res, next) =>{
   } catch (err) {
     res.send({ ok: false, msg: "删除失败" });
   }
+  con.end();
 });
 
 router.get('/select', async (req, res, next)=> {
+  con.connect();
   try {
     var filepath = '%' + req.query.title + '%';
     let sql = 'select * from file where filepath like $1';
@@ -132,5 +137,6 @@ router.get('/select', async (req, res, next)=> {
   } catch (err) {
     res.josn({ ok: false, msg: '查找失败'});
   }
+  con.end();
 });
 module.exports = router;

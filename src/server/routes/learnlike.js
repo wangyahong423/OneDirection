@@ -17,9 +17,9 @@ con.on('error', err => {
   process.exit(1);
 });
 
-con.connect();
 
 router.get('/list', async (req, res, next) => {
+    con.connect();
     try {
         let sql = 'select * from learnlike';
         let r = await con.query(sql, []);
@@ -28,9 +28,11 @@ router.get('/list', async (req, res, next) => {
     } catch (err) {
         console.log(err);
     }
+    con.end();
 });
 
 router.get('/add', async (req, res, next) => {
+    con.connect();
     try {
         var lid = req.query.lid;
         var name = req.query.name;
@@ -40,9 +42,11 @@ router.get('/add', async (req, res, next) => {
     } catch (err) {
         console.log(err);
     }
+    con.end();
 });
 
 router.get('/delete', async (req, res, next) => {
+    con.connect();
     try {
         var id = req.query.id;
         // var name = req.query.name;
@@ -53,5 +57,6 @@ router.get('/delete', async (req, res, next) => {
     } catch (err) {
         console.log(err);
     }
+    con.end();
 });
 module.exports = router;

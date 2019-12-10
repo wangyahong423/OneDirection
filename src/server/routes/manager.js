@@ -14,10 +14,11 @@ con.on('error', err => {
   process.exit(1);
 });
 
-con.connect();
+// con.connect();
 /* GET home page. */
 
 router.get('/addManager', async (req, res, next) =>{
+  con.connect();
   try{
     let sql = 'insert into manager(name,tel,pwd) values($1,$2,$3,$4)';
     let r = await con.query(sql, [req.query.name, req.query.tel, req.query.pwd]);
@@ -26,9 +27,11 @@ router.get('/addManager', async (req, res, next) =>{
   }catch(err){
     res.json({ ok: false, msg: "注册失败" });
   }
+  con.end();
 });
 
 router.get('/login', async (req, res, next)=> {
+  con.connect();
     try {
       let sql = 'select pwd from manager WHERE name=$1';
       let r = await con.query(sql, [req.query.name]);
@@ -46,9 +49,11 @@ router.get('/login', async (req, res, next)=> {
     } catch (err) {
       res.json({ ok: false, msg: "此用户不存在" });
     }
+    con.end();
 });
 
 router.get('/list', async (req, res, next)=> {
+  con.connect();
   try {
     let sql = 'select * from manager';
     let r = await con.query(sql, []);
@@ -57,6 +62,7 @@ router.get('/list', async (req, res, next)=> {
   } catch (err) {
     console.log(err);
   }
+  con.end();
 });
 
 module.exports = router;
