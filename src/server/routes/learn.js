@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var url = require("url");
 var { checkToken } = require('../config/token');
+var con = require('./postgreSQL');
 
 
 //处理error事件，如果出错则退出
