@@ -50,17 +50,18 @@ router.get('/list', (req, res)=> {
   });
 });
 
-// router.get('/select', (req, res)=> {
-//   let sql = 'select * from manager';
-//   con.query(sql, [], (err, result) =>{
-//     if (err) {
-//       // res.send('error');
-//       console.log(err);
-//     } else {
-//       res.send(result.rows);
-//     }
-//   });
-// });
+router.get('/select', (req, res) => {
+  var name = req.query.name;
+  name = '%'+name+'%';
+  let sql = 'select * from manager where name like $1';
+  con.query(sql, [name], (err, result) => {
+    if (err) {
+      res.json({ ok: false, msg: '查找失败！' });
+    } else {
+      res.send(result.rows);
+    }
+  });
+});
 
 
 module.exports = router;
