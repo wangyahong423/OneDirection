@@ -56,6 +56,7 @@ router.get('/login', (req, res) => {
       res.json({ ok: false, msg: "此用户不存在" });
       console.log(err);
     } else {
+      var message = JSON.parse(JSON.stringify(result.rows));
       if (message.length == 0) {
         res.json({ ok: false, msg: "此用户不存在" });
       }
@@ -75,6 +76,7 @@ router.get('/judge', (req, res) => {
       res.json({ ok: false, msg: "此用户不存在" });
       console.log(err);
     } else {
+      var message = JSON.parse(JSON.stringify(result.rows));
       if (message.length == 0) {
         res.json({ ok: false, msg: "此用户不存在" });
       }
@@ -85,8 +87,6 @@ router.get('/judge', (req, res) => {
       }
     }
   });
-
-
 })
 
 
