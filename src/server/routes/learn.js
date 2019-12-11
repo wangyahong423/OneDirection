@@ -52,8 +52,10 @@ router.get('/list', (req, res) => {
 });
 
 router.get('/select', (req, res) => {
+  var content =req.query.content;
+  content = '%'+content+'%';
   let sql = 'select * from learn where content like $1';
-  con.query(sql, [req.query.content], (err, result) => {
+  con.query(sql, [content], (err, result) => {
     if (err) {
       // res.send('error');
       res.josn({ ok: false, msg: '查找失败' });

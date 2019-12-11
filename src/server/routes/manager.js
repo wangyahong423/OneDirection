@@ -48,7 +48,19 @@ router.get('/list', (req, res)=> {
       res.send(result.rows);
     }
   });
-})
+});
+
+// router.get('/select', (req, res)=> {
+//   let sql = 'select * from manager';
+//   con.query(sql, [], (err, result) =>{
+//     if (err) {
+//       // res.send('error');
+//       console.log(err);
+//     } else {
+//       res.send(result.rows);
+//     }
+//   });
+// });
 
 
 module.exports = router;

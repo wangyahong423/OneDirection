@@ -9,6 +9,11 @@ var multiparty = require('multiparty');
 var util = require('util');
 var fs = require('fs');
 
+
+router.get('/addLearn', (req, res) => {
+  res.render("addFile");
+})
+
 /* 上传 */
 router.post('/addFile', (req, res) => {
   /* 生成multiparty对象，并配置上传目标路径 */
@@ -55,26 +60,26 @@ router.post('/addFile', (req, res) => {
     }
 
     var type1 = inputFile.originalFilename.split('.');
-      var type = type1[1];
-      var myDate = new Date();
-      var time1 = myDate.toLocaleDateString();
-      var time2 = myDate.toLocaleTimeString();
-      var reg = / /g;
-      time2 = time2.replace(reg, '');
-      var time = time1 + ' ' + time2;
-      // var name = '张三';
-      var name = req.body.name;
-      console.log(inputFile.originalFilename, name, time, type);
-      let sql = 'insert into file(filepath,name,time,type) values($1,$2,$3,$4)';
+    var type = type1[1];
+    var myDate = new Date();
+    var time1 = myDate.toLocaleDateString();
+    var time2 = myDate.toLocaleTimeString();
+    var reg = / /g;
+    time2 = time2.replace(reg, '');
+    var time = time1 + ' ' + time2;
+    var name = '张三';
+    // var name = req.body.name;
+    console.log(inputFile.originalFilename, name, time, type);
+    let sql = 'insert into file(filepath,name,time,type) values($1,$2,$3,$4)';
     con.query(sql, [inputFile.originalFilename, name, time, type], (err, result) => {
       if (err) {
         // res.send('error');
-        console.log(err);
+        
       } else {
-        res.send(result.rows);
+        
       }
     });
-    
+
     res.writeHead(200, { 'content-type': 'text/plain;charset=utf-8' });
     // res.json();
     res.write('received upload:\n\n');

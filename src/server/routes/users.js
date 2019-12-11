@@ -56,7 +56,6 @@ router.get('/login', (req, res) => {
       res.json({ ok: false, msg: "此用户不存在" });
       console.log(err);
     } else {
-      var message = JSON.parse(JSON.stringify(result.rows));
       if (message.length == 0) {
         res.json({ ok: false, msg: "此用户不存在" });
       }
@@ -76,7 +75,6 @@ router.get('/judge', (req, res) => {
       res.json({ ok: false, msg: "此用户不存在" });
       console.log(err);
     } else {
-      var message = JSON.parse(JSON.stringify(result.rows));
       if (message.length == 0) {
         res.json({ ok: false, msg: "此用户不存在" });
       }
@@ -89,7 +87,6 @@ router.get('/judge', (req, res) => {
   });
 })
 
-
 //修改密码
 router.get('/alter', (req, res) => {
   var name = req.query.name;
@@ -100,6 +97,19 @@ router.get('/alter', (req, res) => {
       res.json({ ok: false, msg: '修改失败！' });
     } else {
       res.json({ ok: true, msg: '修改成功！' });
+    }
+  });
+});
+
+router.get('/select', (req, res) => {
+  var name = req.query.name;
+  name = '%'+name+'%';
+  let sql = 'select * from users where name like $1';
+  con.query(sql, [name], (err, result) => {
+    if (err) {
+      res.json({ ok: false, msg: '查找失败！' });
+    } else {
+      res.send(result.rows);
     }
   });
 });
