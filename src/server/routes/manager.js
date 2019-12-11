@@ -1,43 +1,29 @@
 var express = require('express');
 var router = express.Router();
-const pg = require('pg');
-var con = new pg.Client({
-  user: 'postgres',
-  password: 'duxiu2017!',
-  port: 5432,
-  database: 'xinsheng',
-  host: '139.155.44.190'
-});
-//处理error事件，如果出错则退出
-con.on('error', err => {
-  console.log(err);
-  process.exit(1);
-});
+var con = require('./postgreSQL');
+
 
 // con.connect();
 /* GET home page. */
 
-router.get('/addManager', async (req, res, next) =>{
-  con.connect();
-  try{
-    let sql = 'insert into manager(name,tel,pwd) values($1,$2,$3,$4)';
-    let r = await con.query(sql, [req.query.name, req.query.tel, req.query.pwd]);
-    console.log(r.rows);
-    res.json({ ok: true, msg: "注册成功" });
-  }catch(err){
-    res.json({ ok: false, msg: "注册失败" });
-  }
-  con.end();
+router.get('/addManager', (req, res)=> {
+  let sql = 'insert into manager(name,tel,pwd) values($1,$2,$3,$4)';
+  con.query(sql, [req.query.name, req.query.tel, req.query.pwd], (err, result) =>{
+    if (err) {
+      res.json({ ok: false, msg: "注册失败" });
+    } else {
+      res.json({ ok: true, msg: "注册成功" });
+    }
+  });
 });
 
-router.get('/login', async (req, res, next)=> {
-  con.connect();
-    try {
-      let sql = 'select pwd from manager WHERE name=$1';
-      let r = await con.query(sql, [req.query.name]);
-      console.log(r.rows);
-      var message = JSON.stringify(r.rows);
-      message = JSON.parse(message);
+router.get('/login', (req, res)=> {
+  let sql = 'select pwd from manager WHERE name=$1';
+  con.query(sql, [req.query.name], (err, result) =>{
+    if (err) {
+      res.json({ ok: false, msg: "此用户不存在" });
+      console.log(err);
+    } else {
       if (message.length == 0) {
         res.json({ ok: false, msg: "此用户不存在" });
       }
@@ -46,23 +32,22 @@ router.get('/login', async (req, res, next)=> {
       } else {
         res.json({ ok: false, msg: "密码错误" });
       }
-    } catch (err) {
-      res.json({ ok: false, msg: "此用户不存在" });
     }
-    con.end();
+  });
+
 });
 
-router.get('/list', async (req, res, next)=> {
-  con.connect();
-  try {
-    let sql = 'select * from manager';
-    let r = await con.query(sql, []);
-    res.json(r.rows);
-    console.log(r.rows);
-  } catch (err) {
-    console.log(err);
-  }
-  con.end();
-});
+router.get('/list', (req, res)=> {
+  let sql = 'select * from manager';
+  con.query(sql, [], (err, result) =>{
+    if (err) {
+      // res.send('error');
+      console.log(err);
+    } else {
+      res.send(result.rows);
+    }
+  });
+})
+
 
 module.exports = router;
