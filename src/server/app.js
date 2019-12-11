@@ -17,6 +17,7 @@ var learntalkRouter = require('./routes/learntalk');
 var communitytalkRouter = require('./routes/communitytalk');
 var learnlikeRouter = require('./routes/learnlike');
 var communitylikeRouter = require('./routes/communitylike');
+var collegesRouter = require('./routes/colleges');
 
 var app = express();
 
@@ -42,6 +43,7 @@ app.use('/communitytalk',communitytalkRouter);
 app.use('/learnlike', learnlikeRouter);
 app.use('/communitylike',communitylikeRouter);
 app.use('/learntalk', learntalkRouter);
+app.use('/colleges',collegesRouter);
 
 // catch 404 and forward to error handler  
 app.use(function(req, res, next) {
