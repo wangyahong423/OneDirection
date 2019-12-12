@@ -52,16 +52,16 @@ router.get('/list', (req, res) => {
 });
 
 router.get('/select', (req, res) => {
-  var content =req.query.content;
+  var content = req.query.content;
   content = '%'+content+'%';
   let sql = 'select * from learn where content like $1';
   con.query(sql, [content], (err, result) => {
     if (err) {
-      // res.send('error');
       res.josn({ ok: false, msg: '查找失败' });
     } else {
-      res.josn({ ok: true, msg: result.rows });
+      res.send({ ok: true, msg: result.rows });
     }
   });
 });
+
 module.exports = router;

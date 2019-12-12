@@ -6,6 +6,13 @@ var con = require('./postgreSQL');
 // con.connect();
 /* GET home page. */
 
+var managername='';
+
+router.get('/getName', (req, res)=> {
+  managername = req.query.name ? req.query.name : managername;
+  res.json({name: managername});
+});
+
 router.get('/addManager', (req, res)=> {
   let sql = 'insert into manager(name,tel,pwd) values($1,$2,$3)';
   con.query(sql, [req.query.name, req.query.tel, req.query.pwd], (err, result) =>{
