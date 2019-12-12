@@ -7,7 +7,7 @@ var con = require('./postgreSQL');
 /* GET home page. */
 
 router.get('/addManager', (req, res)=> {
-  let sql = 'insert into manager(name,tel,pwd) values($1,$2,$3,$4)';
+  let sql = 'insert into manager(name,tel,pwd) values($1,$2,$3)';
   con.query(sql, [req.query.name, req.query.tel, req.query.pwd], (err, result) =>{
     if (err) {
       res.json({ ok: false, msg: "注册失败" });
