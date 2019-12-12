@@ -13,7 +13,6 @@ router.get('/addCommunity', (req, res) => {
     if (err) {
       res.json({ ok: false, msg: '添加失败！' });
     } else {
-      console.log(result.rows);
       res.json({ ok: true, msg: '添加成功！' });
     }
   });
@@ -60,16 +59,16 @@ router.get('/deleteCommunity', (req, res) => {
 })
 //更新点击量
 router.get('/updateCommunity', (req, res) => {
-    var clicks = req.query.clicks;
-    var id = req.query.id;
-    let sql = 'update community set clicks=$1 where id=$2';
-    con.query(sql, [clicks, id],(err,result)=>{
-      if(err){
-         console.log(err);
-      }else{
-        console.log(result.rows);
-      }
-    });
+  var clicks = req.query.clicks;
+  var id = req.query.id;
+  let sql = 'update community set clicks=$1 where id=$2';
+  con.query(sql, [clicks, id], (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('true');
+    }
+  });
 })
 
 module.exports = router;

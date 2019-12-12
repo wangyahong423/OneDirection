@@ -4,11 +4,9 @@ const url = require('url');
 const path = require('path');
 var con = require('./postgreSQL');
 
-
 var multiparty = require('multiparty');
 var util = require('util');
 var fs = require('fs');
-
 
 router.get('/addLearn', (req, res) => {
   res.render("addFile");
@@ -31,14 +29,14 @@ router.post('/addFile', (req, res) => {
     if (err) {
       console.log('parse error:' + err);
     } else {
-      console.log('parse files:' + filesTemp);
+      // console.log('parse files:' + filesTemp);
       var inputFile = files.inputFile[0];
       var uploadedPath = inputFile.path;
       var dstPath = './public/files/' + inputFile.originalFilename;
-      console.log('filespath=' + uploadedPath);
-      console.log('dstPath=' + dstPath);
-      console.log('filesTmp: ' + inputFile);
-      console.log('Filename: ' + inputFile.originalFilename);
+      // console.log('filespath=' + uploadedPath);
+      // console.log('dstPath=' + dstPath);
+      // console.log('filesTmp: ' + inputFile);
+      // console.log('Filename: ' + inputFile.originalFilename);
       //重命名为真实文件名
       // var path1 = inputFile.originalFilename.split('.');
       // var myDate = new Date();
@@ -67,23 +65,22 @@ router.post('/addFile', (req, res) => {
     var reg = / /g;
     time2 = time2.replace(reg, '');
     var time = time1 + ' ' + time2;
-    var name = '张三';
-    // var name = req.body.name;
+    var name = req.body.name;
     console.log(inputFile.originalFilename, name, time, type);
     let sql = 'insert into file(filepath,name,time,type) values($1,$2,$3,$4)';
     con.query(sql, [inputFile.originalFilename, name, time, type], (err, result) => {
       if (err) {
         // res.send('error');
-        
+
       } else {
-        
+
       }
     });
 
-    res.writeHead(200, { 'content-type': 'text/plain;charset=utf-8' });
-    // res.json();
-    res.write('received upload:\n\n');
-    res.end(util.inspect({ fields: fields, files: filesTemp }))
+    // res.writeHead(200, { 'content-type': 'text/plain;charset=utf-8' });
+    // // res.json();
+    // res.write('received upload:\n\n');
+    // res.end(util.inspect({ fields: fields, files: filesTemp }))
   })
 })
 

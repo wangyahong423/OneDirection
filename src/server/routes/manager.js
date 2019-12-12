@@ -6,16 +6,16 @@ var con = require('./postgreSQL');
 // con.connect();
 /* GET home page. */
 
-var managername='';
+var managername = '';
 
-router.get('/getName', (req, res)=> {
+router.get('/getName', (req, res) => {
   managername = req.query.name ? req.query.name : managername;
-  res.json({name: managername});
+  res.json({ name: managername });
 });
 
-router.get('/addManager', (req, res)=> {
+router.get('/addManager', (req, res) => {
   let sql = 'insert into manager(name,tel,pwd) values($1,$2,$3)';
-  con.query(sql, [req.query.name, req.query.tel, req.query.pwd], (err, result) =>{
+  con.query(sql, [req.query.name, req.query.tel, req.query.pwd], (err, result) => {
     if (err) {
       res.json({ ok: false, msg: "注册失败" });
     } else {
@@ -24,9 +24,9 @@ router.get('/addManager', (req, res)=> {
   });
 });
 
-router.get('/login', (req, res)=> {
+router.get('/login', (req, res) => {
   let sql = 'select pwd from manager WHERE name=$1';
-  con.query(sql, [req.query.name], (err, result) =>{
+  con.query(sql, [req.query.name], (err, result) => {
     if (err) {
       res.json({ ok: false, msg: "此用户不存在" });
       console.log(err);
@@ -45,9 +45,9 @@ router.get('/login', (req, res)=> {
 
 });
 
-router.get('/list', (req, res)=> {
+router.get('/list', (req, res) => {
   let sql = 'select * from manager';
-  con.query(sql, [], (err, result) =>{
+  con.query(sql, [], (err, result) => {
     if (err) {
       // res.send('error');
       console.log(err);
@@ -59,7 +59,7 @@ router.get('/list', (req, res)=> {
 
 router.get('/select', (req, res) => {
   var name = req.query.name;
-  name = '%'+name+'%';
+  name = '%' + name + '%';
   let sql = 'select * from manager where name like $1';
   con.query(sql, [name], (err, result) => {
     if (err) {

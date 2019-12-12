@@ -25,23 +25,23 @@ router.get('/add', (req, res) => {
             // res.send('error');
             console.log(err);
         } else {
-            console.log(result.rows);
+            console.log('true');
         }
     });
 });
 
-router.get('/delete', (req, res)=> {
+router.get('/delete', (req, res) => {
     var id = req.query.id;
-        // var name = req.query.name;
-        // var name =  req.query.name;
-        let sql = 'delete from learnlike where id=$1';
-    con.query(sql, [id], (err, result) =>{
-      if (err) {
-        // res.send('error');
-        console.log(err);
-      } else {
-        console.log(result.rows);
-      }
+    // var name = req.query.name;
+    // var name =  req.query.name;
+    let sql = 'delete from learnlike where id=$1';
+    con.query(sql, [id], (err, result) => {
+        if (err) {
+            // res.send('error');
+            console.log(err);
+        } else {
+            console.log('true');
+        }
     });
 });
 module.exports = router;

@@ -11,7 +11,6 @@ router.get('/add', (req, res) => {
     if (err) {
       res.json({ ok: false, msg: '评论失败！' });
     } else {
-      console.log(result.rows);
       res.json({ ok: true, msg: '评论成功！' });
     }
   });
@@ -24,7 +23,6 @@ router.get('/list', (req, res) => {
       console.log(err);
     } else {
       res.json({ communitytalk: result.rows });
-      console.log(result.rows);
     }
   });
 })
@@ -40,7 +38,6 @@ router.get('/delete', (req, res) => {
     if (err) {
       res.json({ ok: false, msg: "删除失败！" });
     } else {
-      console.log(result.rows);
       res.json({ ok: true, msg: "删除成功！" });
     }
   });

@@ -11,7 +11,7 @@ router.get('/list', (req, res) => {
             // res.send('error');
             console.log(err);
         } else {
-            res.send(result.rows);
+            res.send("true");
         }
     });
 });
@@ -26,7 +26,7 @@ router.get('/add', (req, res) => {
             // res.send('error');
             console.log(err);
         } else {
-            console.log(result.rows);
+            console.log("true");
         }
     });
 });
@@ -41,7 +41,7 @@ router.get('/delete', (req, res) => {
             // res.send('error');
             console.log(err);
         } else {
-            console.log(result.rows);
+            console.log('true');
         }
     });
 });
