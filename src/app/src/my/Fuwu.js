@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import {Link} from 'react-router-dom';
 import { NavBar} from 'antd-mobile';
+=======
+import { BrowserRouter as Router,Route,Link} from 'react-router-dom';
+import { NavBar, Icon, Tabs ,Carousel} from 'antd-mobile';
+>>>>>>> 4004362fd519ca4779bc49934f7a98539be190ac
 export default class Fuwu extends Component {
   render() {
     return (
@@ -57,3 +62,7 @@ export default class Fuwu extends Component {
     );
   }
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4004362fd519ca4779bc49934f7a98539be190ac

@@ -16,10 +16,17 @@ export default class Community1 extends Component {
     this.state = {
       clicked: 'none',
       clicked1: 'none',
-      clicks: 0,
+      clicks: 1,
       data: [],
       todo: [],
+      search:''
     };
+  }
+
+  changeSearch = (e)=>{
+    this.setState({
+       search: e.target.value
+    })
   }
 
   dataList = [
@@ -62,7 +69,6 @@ export default class Community1 extends Component {
 
 
   changeStyle = (e) => {
-    console.log(this.state.clicks)
     if ((this.state.clicks) % 2 == 1) {
       e.target.style.color = 'red';
       this.setState({
@@ -79,62 +85,78 @@ export default class Community1 extends Component {
   }
 
   componentDidMount() {
-    console.log(this.state.data);
     let url = `http://localhost:3005/community/list`;
-    let url1 = `http://localhost:3005/communitytalk/list/`;
     axios(url)
       .then((res) => {
-        console.log(res.data)
         this.setState({
           data: res.data
         })
       })
-    axios(url1)
-      .then((res) => {
-        console.log(res.data)
-        this.setState({
-          todo: res.data.communitytalk
+  }
+
+
+  onkeydown = (e) => {
+    if (e.keyCode === 13) {
+        console.log(e.target.value)
+        this.handleSend(e);
+    }
+  }
+
+  // handleSend = (e) => {
+  //   //要执行的代码
+  //   let url = `http://localhost:3005/community/select?content=${e.target.value}`;
+  //   axios(url)
+  //       .then((res) => {
+  //           if (res.data.false) {
+  //               console.log('false');
+  //           } else {
+  //               console.log(res.data);
+  //               for (var i = 0; i < res.data.length; i++) {
+  //                   res.data[i].pic = "http://localhost:3005" + res.data[i].pic;
+  //               }
+  //               this.setState({
+  //                   data: res.data
+  //               })
+  //               console.log(res.data);
+  //           }
+            
+  //       })
+  // }
+
+  clickSend = () => {
+    //要执行的代码
+    let url = `http://localhost:3005/community/select?content=${this.state.search}`;
+    axios(url)
+        .then((res) => {
+            if (res.data.false) {
+                console.log('false');
+            } else {
+                console.log(res.data);
+                for (var i = 0; i < res.data.length; i++) {
+                    res.data[i].pic = "http://localhost:3005" + res.data[i].pic;
+                }
+                this.setState({
+                    data: res.data
+                })
+                console.log(res.data);
+            }
+            
         })
-      })
   }
 
   render() {
-    let color1 = {
-      color: this.state.clicked2 ? "black" : "red",
-      fontSize: '3vh',
-      marginLeft: '23%'
-    }
-    let color2 = {
-      color: this.state.clicked3 ? "black" : "red",
-      fontSize: '3vh',
-      marginLeft: '23%'
-    }
-    let color3 = {
-      color: this.state.clicked4 ? "black" : "red",
-      fontSize: '3vh',
-      marginLeft: '23%'
-    }
     return (
       <div>
-        {/* <NavBar 
-                    style={{ backgroundColor: '#37376F', color: '#fff',position:'sticky ',top:0,zIndex:10,textAlign:'center',height:'7vh'}}
-                    rightContent={[
-                        <Link to="/xinnews"><span className="iconfont icon-xiaoxi-copy-sy" style={{fontSize:'20px',color:'white'}}></span></Link>
-                    ]}
-                  >
-                    <span>社区</span>
-                  </NavBar> */}
         <NavBar style={{ backgroundColor: '#37376F', color: '#fff', position: 'fixed ',width:"100vw", top: '0', zIndex: 10, textAlign: 'center', height: '7vh' }}
           rightContent={[
             <Link to="/xinnews"><span style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-xiaoxi-copy-sy"></span></Link>
           ]}>
           社区</NavBar>
-        <div style={{ marginTop: "-6vh" ,position:"fixed",top:'6vh',width:"100vw"}}>
-          <WingBlank><div className="sub-title"></div></WingBlank>
-          <SearchBar placeholder="搜索" maxLength={8} />
+        <div style={{position:"fixed",top:'7vh',width:"100vw"}}>
+          <input placeholder='搜索' onChange={this.changeSearch}  style={{textAlign:'center',fontSize:'4vw',width:'85vw',float:'left',height:'6vh',borderRight:"none"}}></input>
+          <div onClick={this.clickSend} style={{width:'15vw',float:'left',height:'6vh',textAlign:'center',lineHeight:'6vh',fontSize:'4vw',borderBottom:'1px solid grey',borderTop:'1px solid grey',borderRight:'1px solid grey'}}>搜索</div>
         </div>
         <div style={{ width: '100vw', backgroundColor: '#EFEFF4' }}>
-          {/* <SearchBar placeholder="搜索" maxLength={10} style={{width:'100vw',float:"left"}}/> */}
           {
             this.props.selected == 'community' && <Link to='/add'><div style={{ position: "fixed", top: "85%", left: '85%' }}>
               <span className="iconfont icon-add-sy" style={{ fontSize: "6vh", color: "#37376F" }}></span>
@@ -142,10 +164,10 @@ export default class Community1 extends Component {
           }
           <div style={{ marginTop: '13vh' }}>
             {
-              this.state.data.map((item, idx) =>
+              this.state.data.map((item) =>
                 <div style={{ height: '20vh', background: '#fff', color: 'black' }}>
                   <div style={{ float: "left" }}>
-                    <img src={require('./img/touxiang1.jpg')} style={{ height: '7.8vh', width: '14vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
+                    <img src={require('./img/touxiang2.jpg')} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
                   </div>
                   <div>
                   </div>
@@ -156,7 +178,6 @@ export default class Community1 extends Component {
                   </Link>
                   <div style={{ marginTop: 20 }}>
                     <sapn className="iconfont icon-zhuanfa" onClick={this.showShareActionSheet} style={{ fontSize: '2.5vh', marginLeft: '17%', color: 'black' }}></sapn>
-                    {/* <sapn className="iconfont icon-pinglun" onClick={this.showActionSheet} style={{fontSize:'3.2vh',marginLeft:'22%',color:'black'}}></sapn> */}
                     <Link to={`/pinglunone/${item.id}`}>
                       <sapn className="iconfont icon-pinglun" style={{ fontSize: '3.2vh', marginLeft: '22%', color: 'black' }}></sapn>
                     </Link>

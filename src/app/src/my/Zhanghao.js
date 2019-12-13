@@ -9,7 +9,7 @@ export default class Zhanghao extends Component {
     return (
       <div>
          <NavBar
-            style={{ backgroundColor: '#37376F', color: '#fff',position:'sticky ',top:'20',zIndex:10,textAlign:'center',height:'7vh'}}
+            style={{ backgroundColor: '#37376F', color: '#fff',zIndex:10,textAlign:'center',height:'7vh'}}
             leftContent={[
               <Link to="/Shezhi"><span className="iconfont icon-ico_leftarrow"></span></Link>
           ]}

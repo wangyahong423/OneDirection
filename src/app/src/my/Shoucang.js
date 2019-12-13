@@ -1,38 +1,69 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router,Route,Link} from 'react-router-dom';
-import { NavBar, Icon, Tabs ,Carousel,SearchBar} from 'antd-mobile';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { NavBar, Icon, Tabs, WingBlank, SearchBar } from 'antd-mobile';
+import axios from 'axios';
+
 export default class Shoucang extends Component {
+  constructor() {
+    super();
+    this.state = {
+      data: [],
+    }
+  }
+  componentDidMount() {
+    let url = `http://localhost:3005/collect/list`;
+    axios(url)
+      .then((res) => {
+        this.setState({
+          data: res.data
+        })
+      })
+  }
+  delFile = (filepath, name) => {
+    let url1 = `http://localhost:3005/collect/delete?filepath=${name}&name=李四`;
+    axios(url1)
+      .then((res) => {
+        if (res.err) {
+          alert('收藏失败');
+        } else {
+          console.log(1);
+          alert('收藏成功');
+        }
+      })
+    console.log(this.state.name);
+
+  }
   render() {
     return (
-      <div style={{position:'relative'}}>
+      <div style={{ position: 'relative' }}>
         <NavBar
-            style={{ backgroundColor: '#37376F', color: '#fff',position:'sticky ',top:'20',zIndex:10,textAlign:'center',height:'7vh'}}
-            leftContent={[
-                <Link to="/my"><span style={{fontSize:'17px',color:'white'}} className="iconfont icon-ico_leftarrow"></span></Link>
-            ]}
-            >
-            <span>我的收藏</span>
+          style={{ backgroundColor: '#37376F', color: '#fff', position: 'fixed ', width: "100vw", top: '0', zIndex: 10, textAlign: 'center', height: '7vh' }}
+          leftContent={[
+            <Link to="/my"><span style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span></Link>
+          ]}
+        >
+          <span>我的收藏</span>
         </NavBar>
-        <SearchBar placeholder="搜索" ref={ref => this.autoFocusInst = ref} />
-        <div style={{width:'100%',height:'10%',background:'#aeaed2'}}>
-          <span className="iconfont icon-xinxinicon" style={{color:'white',fontSize:23,lineHeight:2.5,marginLeft:10}}></span>
-          <span style={{color:'white',fontSize:23,lineHeight:2.7,marginLeft:50}}>文件名称</span>
-          <button style={{marginLeft:130,fontSize:18}}>删除</button>
+        <div style={{ position: 'fixed', top: '0', width: "100vw" }}>
+          <WingBlank><div className="sub-title"></div></WingBlank>
+          <SearchBar placeholder="搜索" maxLength={8} />
         </div>
-        <div style={{width:'100%',height:'10%',background:'#aeaed2',marginTop:5}}>
-          <span className="iconfont icon-xinxinicon" style={{color:'white',fontSize:23,lineHeight:2.5,marginLeft:10}}></span>
-          <span style={{color:'white',fontSize:23,lineHeight:2.7,marginLeft:50}}>文件名称</span>
-          <button style={{marginLeft:130,fontSize:18}}>删除</button>
-        </div>
-        <div style={{width:'100%',height:'10%',background:'#aeaed2',marginTop:5}}>
-          <span className="iconfont icon-xinxinicon" style={{color:'white',fontSize:23,lineHeight:2.5,marginLeft:10}}></span>
-          <span style={{color:'white',fontSize:23,lineHeight:2.7,marginLeft:50}}>文件名称</span>
-          <button style={{marginLeft:130,fontSize:18}}>删除</button>
-        </div>
-        <div style={{width:'100%',height:'10%',background:'#aeaed2',marginTop:5}}>
-          <span className="iconfont icon-xinxinicon" style={{color:'white',fontSize:23,lineHeight:2.5,marginLeft:10}}></span>
-          <span style={{color:'white',fontSize:23,lineHeight:2.7,marginLeft:50}}>文件名称</span>
-          <button style={{marginLeft:130,fontSize:18}}>删除</button>
+        <div style={{ marginTop: "13vh" }}>
+          {
+            this.state.data.map((item) => (
+              <div>
+                <div className="data1">
+                  <div style={{ float: "left" }}>
+                    <div className="iconfont icon-wenjian"></div>
+                    <div className="shoucangFont">
+                      <span>{item.filepath}</span><br />
+                    </div>
+                  </div>
+                  <span className="iconfont icon-collection" style={{ fontSize: "25px" }} onClick={this.delFile.bind(this, (item.filepath, item.name))}></span><br />
+                </div>
+              </div>
+            ))
+          }
         </div>
       </div>
     );

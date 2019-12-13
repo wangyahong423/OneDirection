@@ -8,7 +8,7 @@ export default class Share extends Component {
               <NavBar style={{backgroundColor:'#37376F',color:'#fff',position:'sticky ',top:'0',zIndex:10,textAlign:'center',height:'7vh'}}>
                 学习交流</NavBar> 
                 <div>
-                    <Link to="/Word">
+                    <Link to="/MaterialSharing">
                         <div className="resourceShare">
                             <span className="iconfont icon-shuji"></span>
                             <p style={{fontSize:"22px",margin:"27% auto",textAlign:"center"}}>资源共享</p>

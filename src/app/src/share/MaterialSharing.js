@@ -1,84 +1,87 @@
 import React, { Component } from 'react'
-import { NavBar, SearchBar, WingBlank, SegmentedControl} from 'antd-mobile';
-import {HashRouter as Router,Route,Link} from 'react-router-dom';
+import { NavBar, SearchBar, WingBlank, SegmentedControl } from 'antd-mobile';
+import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import '../share.css'
+import axios from 'axios';
 
 export default class MaterialSharing extends Component {
     constructor() {
         super();
         this.state = {
-            backgroundColor1: true,
-            backgroundColor2: true,
-            backgroundColor3: true,
+            data: [],
+            color:false,
         }
-      }
-      changeHeight= ()=> {
-        this.setState({
-            backgroundColor1: !this.state.backgroundColor1,
-            backgroundColor2: this.state.backgroundColor2,
-            backgroundColor3: this.state.backgroundColor3,
-        })
-      }
-      changeHeight1= ()=> {
-        this.setState({
-            backgroundColor1: this.state.backgroundColor1,
-            backgroundColor2: !this.state.backgroundColor2,
-            backgroundColor3: this.state.backgroundColor3,
-        })
-      }
-      changeHeight2= ()=> {
-        this.setState({
-            backgroundColor1: this.state.backgroundColor1,
-            backgroundColor2: this.state.backgroundColor2,
-            backgroundColor3: !this.state.backgroundColor3,
-        })
-      }
+    }
+    componentDidMount() {
+        let url = `http://localhost:3005/file/list`;
+        axios(url)
+            .then((res) => {
+                this.setState({
+                    data: res.data
+                })
+            })
+    }
+    addCollect = (name, filepath) => {
+        let url1 = `http://localhost:3005/collect/add?filepath=${name}&name=李四`;
+        axios(url1)
+            .then((res) => {
+                console.log('收藏成功');
+                // if (res.err) {
+                //     alert('收藏失败');
+                // } else {
+                //     console.log(1);
+                //     alert('收藏成功');
+                // }
+            })
+            console.log(this.state.name);
+
+
+    }
     render() {
-        let Word={
-            backgroundColor: this.state.backgroundColor1?  'transparent' : '#98B4E7'
-        }
-        let PDF={
-            backgroundColor: this.state.backgroundColor2? 'transparent' : '#98B4E7'
-        }
-        let PPT={
-            backgroundColor: this.state.backgroundColor3? 'transparent' : '#98B4E7'
-        }
         return (
             <div>
-            {/* <NavBar style={{backgroundColor:'#37376F',color:'#fff',position:'sticky ',top:'0',zIndex:10,textAlign:'center',height:"7vh"}}
-                leftContent={[
-                    <Link to="/Share"><span className="iconfont icon-ico_leftarrow"></span></Link>
-                ]}>
-                资料共享</NavBar>  */}
                 <NavBar
-                    style={{ backgroundColor: '#37376F', color: '#fff',position:'sticky ',top:'0',zIndex:10,textAlign:'center',height:'7vh'}}
+                    style={{ backgroundColor: '#37376F', color: '#fff', width: '100vw', position: 'fixed', top: '0', zIndex: 10, textAlign: 'center', height: '7vh' }}
                     leftContent={[
-                        <Link to="/Share"><span style={{fontSize:'17px',color:'white'}} className="iconfont icon-ico_leftarrow"></span></Link>
+                        <Link to="/Share"><span style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span></Link>
+                    ]}
+                    rightContent={[
+                        <form method="post" action="http://localhost:3005/file/addFile" encType="multipart/form-data">
+                            <div style={{ height: "5vh", width: "5vh", fontSize:"3vh",marginTop:"2vh"}} className=" iconfont icon-shangchuanwenjian">
+                            <input type="submit" value="上传" style={{opacity:"0", position: "fixed", top: "1vh", left: "80vw" }}></input>
+                            </div>
+                            <div style={{ height: '8vh', width: '8vh', position: "fixed", top: "88%", left: "75vw" }}>
+                                <span className="iconfont icon-jiahao" style={{ fontSize: "8vh", color: "#37376F" }}></span>
+                                <input type="file" name="inputFile" multiple="multiple" style={{ opacity: 0, height: '8vh', width: '8vh', borderRadius: "50%", position: "fixed", top: "88%", left: "80vw" }}></input>
+                            </div>
+                        </form>
                     ]}>
-                        资料共享
-                </NavBar> 
-                <div>
+                    资料共享
+                </NavBar>
+                <div style={{ position: 'fixed',top:'0', width: "100vw" }}>
+                    <WingBlank><div className="sub-title"></div></WingBlank>
                     <SearchBar placeholder="搜索" maxLength={8} />
-                    <div className="three"  style={Word} onClick={()=>this.changeHeight()}>
-                        <Link to ="/Word">
-                            <span style={{color:"#000"}}>Word</span>
-                        </Link>
-                    </div>
-                    <div className="three" style={PDF} onClick={()=>this.changeHeight1()}>
-                        <Link to ="/PDF">
-                            <span style={{color:"#000"}}>PDF</span>
-                        </Link>
-                    </div>
-                    <div className="three" style={PPT} onClick={()=>this.changeHeight2()}>
-                        <Link to ="/PPT">
-                            <span style={{color:"#000"}}>PPT</span>
-                        </Link>
-                    </div>
                 </div>
-           
-        </div>
-      
+                <div style={{marginTop:"13vh"}}>
+                    {
+                        this.state.data.map((item) => (
+                            <div>
+                                <div className="data1">
+                                    <div style={{ float: "left" }}>
+                                        <div className="iconfont icon-wenjian"></div>
+                                        <div className="font1">
+                                            <span>{item.filepath}</span><br />
+                                            <span style={{ fontSize: "1vh" }}>{item.time}</span>&nbsp;&nbsp;
+                                        <span style={{ fontSize: "1vh" }}>{item.name}</span>&nbsp;&nbsp;
+                                        </div>
+                                    </div>
+                                    <span className="iconfont icon-collection" style={{ fontSize: "25px" }} onClick={this.addCollect.bind(this, (item.name, item.filepath))}></span><br />
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
         )
     }
-
 }
