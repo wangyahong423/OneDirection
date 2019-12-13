@@ -8,15 +8,15 @@ class Add extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        content: 'fabiao111111',
-        name: '11',
+        content: '',
+        name: '呼呼',
         clicks:5,
-        time: new Date().toLocaleString(),
-        // pic:7,
+        time: new Date().toLocaleString()
     }
 }
 handleRegister = () => {
-    let url = `http://localhost:3005/community/addCommunity?content=${this.state.content}&name=${this.state.name}&time=${this.state.time}&clicks=${this.clicks}`;
+    let url = `http://localhost:3005/community/addCommunity?content=${this.state.content}&name=${this.state.name}&time=${this.state.time}&clicks=${this.state.clicks}`;
+    console.log(url);
     axios(url)
         .then((res) => {
           console.log(this.state.content);
@@ -30,10 +30,11 @@ handleRegister = () => {
         })
 }
 getContent = (e) => {
+    console.log(e.target.value)
     this.setState({
         content: e.target.value
     })
-    console.log(e.target.value)
+    
 }
   
   render() {

@@ -1,58 +1,65 @@
 import React, { Component } from 'react'
 import MaterialSharing from './MaterialSharing'
-import {HashRouter as Router,Route,Link} from 'react-router-dom';
+import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import '../share.css'
+import axios from 'axios';
+
 
 export default class PDF extends Component {
+    constructor() {
+        super();
+        this.state = {
+            data: []
+        }
+    }
+    componentDidMount() {
+        let url = `http://localhost:3005/file/list`;
+        axios(url)
+            .then((res) => {
+                this.setState({
+                    data: res.data
+                })
+            })
+    }
     render() {
         return (
             <div>
-            <div>
-                <MaterialSharing/>
-            </div>
-            <div className="data1">
-                <div className="iconfont icon-pdf2"></div>
-                <div className="font1">
-                    <span style={{fontSize:"18px",fontFamily:"微软雅黑"}}>复习资料</span><br/>
-                    <span>11-04</span>&nbsp;&nbsp;
-                    <span>来自张晓红</span>&nbsp;&nbsp;
-                    <span style={{fontSize:"13px"}}>516k</span>
+                <div>
+                    <MaterialSharing />
                 </div>
-                <div className="data2">
-                    <span className="iconfont icon-collection" style={{fontSize:"25px"}}></span><br/>
+                <div style={{ marginTop: '22vh' }}>
+                    {
+                        this.state.data.map((item) => (
+                            <div className="data1">
+                                <div className="iconfont icon-pdf2"></div>
+                                <div className="font1">
+                                    <span>{item.filepath}</span><br />
+                                    <span style={{ fontSize: "1vh" }}>{item.time}</span>&nbsp;&nbsp;
+                   <span style={{ fontSize: "1vh" }}>{item.name}</span>&nbsp;&nbsp;
+                    </div>
+                                <div className="data2">
+                                    <span className="iconfont icon-collection" style={{ fontSize: "25px" }}></span><br />
+                                </div>
+                            </div>
+                        ))
+                    }
                 </div>
-            </div>
-            <div className="data1">
-                <div className="iconfont icon-pdf2"></div>
-                <div className="font1">
-                    <span style={{fontSize:"18px",fontFamily:"微软雅黑"}}>复习资料</span><br/>
-                    <span>11-04</span>&nbsp;&nbsp;
-                    <span>来自张晓红</span>&nbsp;&nbsp;
-                    <span style={{fontSize:"13px"}}>516k</span>
-                </div>
-                <div className="data2">
-                    <span className="iconfont icon-collection" style={{fontSize:"25px"}}></span><br/>
-                </div>
-            </div>
-            <div className="data1" style={{borderBottom:"1px solid #4f4f83"}}>
-                <div className="iconfont icon-pdf2"></div>
-                <div className="font1">
-                    <span style={{fontSize:"18px",fontFamily:"微软雅黑"}}>复习资料</span><br/>
-                    <span>11-04</span>&nbsp;&nbsp;
-                    <span>来自张晓红</span>&nbsp;&nbsp;
-                    <span style={{fontSize:"13px"}}>516k</span>
-                </div>
-                <div className="data2">
-                    <span className="iconfont icon-collection" style={{fontSize:"25px"}}></span><br/>
 
+                <Link to="AddFile">
+                    <div style={{ position: "fixed", top: "88%", left: "80vw" }}>
+                        <span className="iconfont icon-jiahao" style={{ fontSize: "8vh", color: "#37376F" }}></span>
+                    </div>
+                </Link>
+                <div>
+                    <form method="post" action="http://localhost:3005/file/addFile" encType="multipart/form-data">
+                        <input type="file" name="inputFile" multiple="multiple"></input>
+                        <input type="submit" value="上传"></input>
+
+                    </form>
                 </div>
+
+
             </div>
-            <Link to ="AddFile">
-            <div style={{position:"fixed",top:"88%",left:"80vw"}}>
-                <span className="iconfont icon-jiahao" style={{fontSize:"8vh",color:"#37376F"}}></span>
-            </div>
-            </Link>  
-        </div>
         )
     }
 }

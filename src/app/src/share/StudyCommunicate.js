@@ -15,23 +15,27 @@ export default class MaterialSharing extends Component {
         axios(url)
             .then((res) => {
                 this.setState({
-                    data: res.data.learnList
+                    data: res.data
                 })
             })
     }
     render() {
         return (
             <div>
-                <NavBar style={{ backgroundColor: '#37376F', color: '#fff', position: 'sticky ', top: '0', zIndex: 10, textAlign: 'center', height: '7vh' }}
+                <NavBar style={{ backgroundColor: '#37376F', color: '#fff', position: 'fixed ', width:"100vw",top: '0', zIndex: 10, textAlign: 'center', height: '7vh' }}
                     leftContent={[
                         <Link to="/Share"><span style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span></Link>
                     ]}>
                     学习交流</NavBar>
-                <div style={{ marginTop: "-6vh" }}>
+                    <div style={{ position: 'fixed',top:'0', width: "100vw" }}>
                     <WingBlank><div className="sub-title"></div></WingBlank>
                     <SearchBar placeholder="搜索" maxLength={8} />
                 </div>
-                <div>
+                {/* <div style={{ marginTop: "-6vh" }}>
+                    <WingBlank><div className="sub-title"></div></WingBlank>
+                    <SearchBar placeholder="搜索" maxLength={8} />
+                </div> */}
+                <div style={{marginTop:"13vh"}}>
                     {
                         this.state.data.map((item) => (
                             <div style={{ width: "96vw", paddingBottom: "1vh", backgroundColor: "#fff", borderRadius: "2vh", margin: "2vw" }}>

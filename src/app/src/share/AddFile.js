@@ -58,7 +58,7 @@ export default class AddFile extends Component {
                 ))}
             </List>
             </div>
-            <Link to="/Word">
+            <Link to="/MaterialSharing">
             <button className="button">发送</button>
             </Link>
                 

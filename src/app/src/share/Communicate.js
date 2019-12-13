@@ -12,7 +12,6 @@ class Communicate extends Component {
             content: '',
             name: '',
             time: new Date().toLocaleString(),
-            // pic:1,
         }
     }
     handleRegister = () => {
@@ -20,9 +19,11 @@ class Communicate extends Component {
         &name=${this.state.name}&time=${this.state.time}`;
         axios(url)
             .then((res) => {
+                console.log(555);
                 if (res.data.ok) {
                     alert(res.data.msg);
                 } else {
+                    console.log(1);
                     alert(res.data.msg);
                 }
             })
