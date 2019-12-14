@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-// import { Link } from 'react-router-dom'
+import '../App.css';
 export default class Login extends Component {
     constructor(props) {
         super(props);
@@ -10,49 +10,43 @@ export default class Login extends Component {
         }
     }
     handleRegister = () => {
-        console.log(this.state.name,this.state.pwd);
         let url = `http://localhost:3005/manager/login?name=${this.state.name}&pwd=${this.state.pwd}`;
-
         axios(url)
             .then((res) => {
                 if (res.data.ok) {
-                    window.location.href="/home";
+                    let url1 = `http://localhost:3005/manager/getName?name=${this.state.name}`;
+                    axios(url1)
+                        .then((res) => {
+
+                        })
+                    window.location.href = "/home";
                 } else {
                     alert(res.data.msg);
                 }
-                console.log(res.data);
-
             })
-            // .catch(error => alert("账户不存在！"));
+    }
 
-    }
-    nameChange=(e)=>{
+    nameChange = (e) => {
         this.setState({
-            name:e.target.value
+            name: e.target.value
         })
-        // console.log(this.state);
     }
-    pwdChange=(e)=>{
+    pwdChange = (e) => {
         this.setState({
-            pwd:e.target.value
+            pwd: e.target.value
         })
-        // console.log(this.state);
     }
-    
+
     render() {
-
         return (
-                <div>
-                    <div style={{ fontSize: 200, color: "gray" }}>
-                    </div>
-                    <input onChange={this.nameChange}  placeholder="请输入用户名">
-                    </input>
-                    <p></p>
-                    <input onChange={this.pwdChange} placeholder="请输入密码" >
-                    </input>
-                    <p></p>
-                    <button onClick={this.handleRegister} >登录</button>
-                </div>
+            <div className='loginBackground' style={{ marginTop: '12%', backgroundColor: 'rgba(0,0,0, 0.7)' }}>
+                <input onChange={this.nameChange} style={{ marginTop: '100px', height: '38px', width: '300px', fontSize: '20px', paddingLeft: '20px',fontFamily:'楷体' }} placeholder="请输入用户名"></input>
+                <p></p>
+                <input type='password' onChange={this.pwdChange} maxlength="16" style={{ height: '38px', width: '300px', fontSize: '20px', paddingLeft: '20px', marginTop: '20px',fontFamily:'楷体' }} placeholder="请输入密码" ></input>
+                <p></p>
+                <button onClick={this.handleRegister} style={{ height: '40px', width: '80px', fontSize: '28px', marginTop: '20px',fontFamily:'楷体' }} >登录</button>
+                <p style={{ color: 'white', fontSize: '20px', marginTop: '50px' }}>欢迎登陆校园新生通后台管理系统！</p>
+            </div>
         )
     }
 }

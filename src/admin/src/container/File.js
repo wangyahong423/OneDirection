@@ -1,50 +1,134 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 export default class File extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: []
+            data: [],
+            indexList: [],
+            current: 1,
+            pageSize: 14,
+            num: 0,
+            totalPage: 0
+        }
+    }
+
+    setNext = () => {
+        if (this.state.current < this.state.totalPage) {
+            this.setState({
+                num: this.state.num + this.state.pageSize,
+                current: this.state.current + 1,
+            }, function () {
+                this.setState({
+                    indexList: this.state.data.slice(this.state.num, this.state.num + this.state.pageSize)
+                })
+            })
+        }
+    }
+    setUp = () => {
+        if (this.state.current > 1) {
+            this.setState({
+                num: this.state.num - this.state.pageSize,
+                current: this.state.current - 1
+            }, function () {
+                this.setState({
+                    indexList: this.state.data.slice(this.state.num, this.state.num + this.state.pageSize)
+                })
+            })
+        }
+    }
+    handleSend = (e) => {
+        //要执行的代码
+        console.log(e.target.value);
+        let url = `http://localhost:3005/file/select?filepath=${e.target.value}`;
+        axios(url)
+            .then((res) => {
+                if (res.data.false) {
+                } else {
+                    for (var i = 0; i < res.data.length; i++) {
+                        res.data[i].pic = "http://localhost:3005" + res.data[i].pic;
+                    }
+                    this.setState({
+                        data: res.data,
+                        totalPage: Math.ceil(res.data.length / this.state.pageSize),
+                        indexList: res.data.slice(this.state.num, this.state.num + this.state.pageSize)
+                    })
+                }
+            })
+    }
+
+    onkeydown = (e) => {
+        if (e.keyCode === 13) {
+            this.handleSend(e);
         }
     }
     componentDidMount() {
-        // console.log(this.state.username,this.state.pwd);
         let url = `http://localhost:3005/file/list`;
-        // let url = `http://localhost:3005/manager/list`;
         axios(url)
             .then((res) => {
-                
+                for (var i = 0; i < res.data.length; i++) {
+                    res.data[i].pic = "http://localhost:3005" + res.data[i].pic;
+                }
                 this.setState({
-                    data: res.data
+                    data: res.data,
+                    totalPage: Math.ceil(res.data.length / this.state.pageSize),
+                    indexList: res.data.slice(this.state.num, this.state.num + this.state.pageSize)
                 })
             })
-        // .catch(error => alert("账户不存在！"));
+    }
+
+    handleRegister = (filepath, e) => {
+        let url = `http://localhost:3005/file/deleteFile?filepath=${filepath}`;
+        axios(url)
+            .then((res) => {
+                if (res.data.ok) {
+                    window.location.reload();
+                } else {
+                }
+            })
     }
     render() {
         return (
-            <table>
-                <tr>
-                    <th>文件名</th>
-                    <th>名字</th>
-                    
-                    <th>时间</th>
-                    <th>类型</th>
-                </tr>
-
-                {
-                    this.state.data.map(
-                        (item, idx) => <tr key={idx}>
-                            <td>{item.filepath}</td>
-                            <td>{item.name}</td>
-                            
-                            <td>{item.time}</td>
-                            <td>{item.type}</td>
-                        </tr>
-                    )
-                }
-
-
-            </table>
+            <div>
+                <div style={{ position: 'relative', width: '850px', overflow: 'hidden', height: '580px', margin: '0 auto', backgroundColor: 'rgba(136, 136, 136, 0.3)', paddingTop: '0px'}}>
+                    <div style={{ height: '40px', width: '700px' }}>
+                        <input type='search' onKeyDown={(e) => this.onkeydown(e)} placeholder="回车进行搜索" style={{ height: '40px', width: '850px', fontSize: '20px', paddingLeft: '30px' }} ></input>
+                    </div>
+                    <table style={{ width: '700px', tableLayout: 'fixed' ,paddingLeft:'20px'}}>
+                        <thead>
+                            <tr style={{height:'55px'}}>
+                                <th style={{ width: '210px', textAlign: 'left', fontSize: '28px', color: 'white' }}>文件名</th>
+                                <th style={{ width: '110px', textAlign: 'left', fontSize: '28px', color: 'white' }}>名字</th>
+                                <th style={{ width: '250px', textAlign: 'left', fontSize: '28px', color: 'white' }}>时间</th>
+                                <th style={{ width: '100px', textAlign: 'left', fontSize: '28px', color: 'white' }}>类型</th>
+                                <th style={{ width: '150px', textAlign: 'left', fontSize: '28px', color: 'white' }}>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                this.state.indexList.map(
+                                    (item, idx) => <tr key={idx}>
+                                        <td style={{ fontSize: '20px', color: 'white', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '200px' }}>{item.filepath}</td>
+                                        <td style={{ fontSize: '20px', color: 'white', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '110px' }} >{item.name}</td>
+                                        <td style={{ fontSize: '20px', color: 'white' }}>{item.time}</td>
+                                        <td style={{ fontSize: '20px', color: 'white' }}>{item.type}</td>
+                                        <td>
+                                        <button onClick={this.handleRegister.bind(this, (item.tel), (item.time))} style={{ height: '28px', fontFamily: '楷体', fontSize: '20px' }}>删除</button>
+                                        <button  style={{ height: '28px', fontFamily: '楷体', fontSize: '20px', marginLeft: '10px' }}>查看</button>
+                                    </td>
+                                    </tr>
+                                )
+                            }
+                        </tbody>
+                        <div style={{ position: 'absolute', bottom: '5px', right: '40px' }}>
+                            <Link style={{ textDecoration: 'none', marginRight: '6px' }}><span onClick={this.setUp} style={{ color: 'black', backgroundColor: 'white', fontSize: '19px' }}>上一页</span></Link>
+                            <span style={{ fontSize: '19px', color: 'white' }}>{this.state.current}页/ {this.state.totalPage}页</span>
+                            <Link style={{ textDecoration: 'none', marginLeft: '6px' }}><span onClick={this.setNext} style={{ color: 'black', backgroundColor: 'white', fontSize: '19px' }}>下一页</span></Link>
+                        </div>
+                    </table>
+                </div>
+            </div>
         )
     }
 }

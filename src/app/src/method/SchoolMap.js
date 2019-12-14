@@ -78,7 +78,7 @@ export default class SchoolMap extends Component {
                 </div>
 
                 {/* 下半部分地图 */}
-                <div>
+                <div style={{height:'53vh'}}>
                     <Tabs tabs={[{ title: '我的位置' }, { title: '校内精确地点' }]} initialPage={0} animated={false} useOnPan={false}>
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '90vw', backgroundColor: '#fff' }}>
                             <MyLocation />

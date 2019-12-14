@@ -106,7 +106,7 @@
 .orgBox{
   height: 40vh;
   width: 100vw;
-  background-color: #fff;
+  background-color: white;
   margin-top: -2.4vh;
 }
 .ten{
@@ -405,7 +405,6 @@
   border-top-left-radius: 5vh;
 }
 
-/* 学术研究 */
 .dexinshe{
   height: 17vh;
   width: 38vw;
@@ -1458,7 +1457,7 @@
 }
 .qin_back{
   width: 100%;
-  height: 70vw;
+  height: 40vh;
   background:url('http://img5.imgtn.bdimg.com/it/u=3831228085,2977293884&fm=26&gp=0.jpg') ;
   background-size: cover;  
 }

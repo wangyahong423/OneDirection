@@ -18,6 +18,7 @@ import ShoolLogo from './method/ShoolLogo';
 import Scenery from './method/Scenery';
 import Govern from './method/Govern';
 import Map from './method/Map';
+import SchoolMap from './method/SchoolMap';
 import Study from './method/Study';
 import Zongheceping from './method/Zongheceping';
 import Second from './method/Second';
@@ -58,14 +59,12 @@ import PDF from "./share/PDF";
 import PPT from "./share/PPT";
 import AddFile from "./share/AddFile";
 import Communicate from "./share/Communicate";
-import Share from "./share/Share";
 import AppTab3 from "./container/AppTab3";
 import CommunicataDetails from "./share/CommunicataDetails"
 import Comment from "./share/Comment"
-// import My from "./my/My"
 import Success from "./my/Success"
-import ChangeTel from "./my/ChangeTel"
-import ChangePsd from "./my/ChangePsd"
+import ResetPwd from "./my/ResetPwd"
+import Forget from './login/Forget';
 
 export default class App extends Component {
     render() {
@@ -75,6 +74,7 @@ export default class App extends Component {
                     {/* 登陆 */}
                     <Route exact path="/" component={Login}/>
                     <Route path="/login" component={AppTab}/>
+                    <Route path='/forget' component={Forget} />
                     <Route path="/zhuce" component={Zhuce}/>
                     {/* 攻略-一卡通 */}
                     <Route path='/onecard' component={OneCard} />
@@ -95,7 +95,7 @@ export default class App extends Component {
                     <Route path='/schoollogo' component={ShoolLogo} />
                     <Route path='/scenery' component={Scenery} />
                     <Route path='/govern' component={Govern} />
-                    <Route path='/map' component={Map} />
+                    <Route path='/map' component={SchoolMap} />
                     {/* 攻略-学习 */}
                     <Route path='/study' component={Study} />
                     <Route path='/zongheceping' component={Zongheceping} />
@@ -117,8 +117,8 @@ export default class App extends Component {
                     <Route path="/add" component={Add}/>
                     <Route path="/xinnews" component={Message}/>
                     <Route path="/newsone" component={Messageone}/>
-                    <Route path="/aboutyouknow" component={About}/>
-                    <Route path="/pinglunone" component={Ping}/>
+                    <Route path="/aboutyouknow/:id" component={About}/>
+                    <Route path="/pinglunone/:id" component={Ping}/>
                     <Route path="/shoucangone" component={Shoucang}/>
                     <Route path="/tongxunlvone" component={Tongxun}/>
                     <Route path="/wm" component={Women}/>
