@@ -12,10 +12,14 @@ var communityRouter = require('./routes/community');
 var managerRouter = require('./routes/manager');
 var fileRouter = require('./routes/file');
 var learnRouter = require('./routes/learn');
+var learntalkRouter = require('./routes/learntalk');
+var learnlikeRouter = require('./routes/learnlike');
 var communitytalkRouter = require('./routes/communitytalk');
 var communitylikeRouter = require('./routes/communitylike');
 var collegesRouter = require('./routes/colleges');
 var leadersRouter = require('./routes/leaders');
+var collectRouter = require('./routes/collect');
+var majorRouter = require('./routes/major');
 
 var app = express();
 
@@ -36,10 +40,15 @@ app.use('/community',communityRouter);
 app.use('/manager', managerRouter);
 app.use('/file', fileRouter);
 app.use('/learn', learnRouter);
+app.use('/learntalk',learntalkRouter);
+qpp.use('/learnlike',learnlikeRouter);
 app.use('/communitytalk',communitytalkRouter);
 app.use('/communitylike',communitylikeRouter);
 app.use('/colleges',collegesRouter);
 app.use('/leaders',leadersRouter);
+app.use('/collect',collectRouter);
+app.use('/major',majorRouter);
+
 
 // catch 404 and forward to error handler  
 app.use(function(req, res, next) {
