@@ -6,14 +6,12 @@ export default class Ping extends Component {
   constructor() {
     super();
     this.state = {
-      data:[],//详情页
-      todo:[],//评论页面
-      list:[],//喜欢页面
-      arr:[],//存储id
+      data:[],
+      todo:[],
       cid:1,
       name:'张三',
       content:'',
-      color:[],
+      clicks:1
     };
   }
   dataList = [
@@ -44,12 +42,8 @@ export default class Ping extends Component {
     console.log(id)
     let url = `http://localhost:3005/community/list/`+id;
     let url1 = `http://localhost:3005/communitytalk/list`;
-    let url2 = `http://localhost:3005/communitylike/list`;
     axios(url)
         .then((res)=>{
-          for(var i=0;i<res.data.length;i++){
-            res.data[i].pic="http://localhost:3005"+res.data[i].pic
-          }
           this.setState({
             data:res.data
           })
@@ -63,6 +57,7 @@ export default class Ping extends Component {
               data:brr
             })
           })
+          console.log(this.state.data);
         })
     /**
       *评论的请求 
@@ -82,22 +77,23 @@ export default class Ping extends Component {
                 })
             })
         })
-    axios(url2)
-      .then((res)=>{
-        this.setState({
-          list:res.data
-        })
-        this.state.data.map((item)=>{
-          this.setState({
-            arr:item.id
-          })
-        })
-        console.log(this.state.arr)
-      })
-    
+        console.log(this.state.todo)
   }
-  changeStyle=(e)=>{
-
+  changeStyle = (e) => {
+    console.log(this.state.clicks)
+    if ((this.state.clicks) % 2 == 1) {
+      e.target.style.color = 'red';
+      this.setState({
+        clicks: (this.state.clicks) + 1
+      })
+    }
+    else if ((this.state.clicks) % 2 == 0) {
+      e.target.style.color = 'black';
+      this.setState({
+        clicks: (this.state.clicks) + 1
+      })
+    }
+    console.log(this.state.data[0].clicks)
   }
   render() {
     let color1 = {
@@ -119,7 +115,7 @@ export default class Ping extends Component {
               this.state.data.map((item) =>
                 <div style={{ background: '#fff', color: 'black' }}>
                   <div style={{ float: "left" }}>
-                    <img src={item.pic} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
+                    <img src={require('./img/touxiang2.jpg')} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
                   </div>
                   <p style={{ marginLeft: 75, fontSize: '2.5vh', lineHeight: 2.5, marginTop: 6 }}>{item.name}</p>
                   <div style={{ marginLeft: 75, color: 'gray', fontSize: '2vw', marginTop: "-5vw" }}>{item.time}</div>
@@ -131,7 +127,7 @@ export default class Ping extends Component {
                     <Link to={`/pinglunone/${item.id}`}>
                       <sapn className="iconfont icon-pinglun" style={{ fontSize: '3.2vh', marginLeft: '22%', color: 'black' }}></sapn>
                     </Link>
-                    <sapn className="iconfont icon-dianzan" style={{ value: 1, marginLeft: '26%' }}></sapn>
+                    <sapn className="iconfont icon-dianzan"  onClick={this.changeStyle} style={{ value: 1, marginLeft: '26%' }}></sapn>
                   </div>
                   <div style={{width:'100%',height:'2vh',backgroundColor:'white'}}>
                   </div>

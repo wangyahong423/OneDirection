@@ -9,7 +9,7 @@ export default class Ping extends Component {
       data:[],
       todo:[],
       clicked2: true,
-      cid:18,
+      cid:parseInt(''),
       name:'',
       content:''
     };
@@ -22,26 +22,15 @@ export default class Ping extends Component {
     icon: <img src={`https://gw.alipayobjects.com/zos/rmsportal/${obj.url}.png`} alt={obj.title} style={{ width: 36 }} />,
     title: obj.title,
   }));
-  showShareActionSheet = () => {
-    ActionSheet.showShareActionSheetWithOptions({
-      options: this.dataList,
-      message: '分享',
-    },
-    (buttonIndex) => {
-      this.setState({ clicked1: buttonIndex > -1 ? this.dataList[buttonIndex].title : 'cancel' });
-      return new Promise((resolve) => {
-        setTimeout(resolve, 0);
-      });
-    });
-  } 
   addItem=()=>{
     let url = `http://localhost:3005/communitytalk/add?cid=${this.state.cid}
     &name=${this.state.name}&content=${this.state.content}`;
     axios(url)
         .then((res) => {
             if (res.data.ok) {
-                alert(res.data.msg);
-                window.location.reload();
+               
+                  alert(res.data.msg);
+                  window.location.reload();
             } else {
                 alert(res.data.msg);
             }
@@ -55,9 +44,19 @@ export default class Ping extends Component {
     console.log(id)
     let url = `http://localhost:3005/community/list/`+id;
     let url1 = `http://localhost:3005/communitytalk/list/`;
+    let url3 = `http://localhost:3005/users/getName`;
+    axios(url3)
+      .then((res) => {
+        this.setState({
+          name: res.data.name
+      }) 
+    })
     axios(url)
         .then((res)=>{
-          this.setState({
+          for(var i=0;i<res.data.length;i++){
+            res.data[i].pic="http://localhost:3005"+res.data[i].pic
+          }
+          this.setState({            
             data:res.data
           })
           console.log(this.state.data)
@@ -90,8 +89,11 @@ export default class Ping extends Component {
   }
   getContent=(e)=>{
     this.setState({
-        content:e.target.value
+      cid:this.props.match.params.id,
+      content:e.target.value,    
     })
+    console.log(this.state.cid);
+    console.log(this.props.match.params.id);
   }
   changeColor(){
     this.setState({
@@ -99,11 +101,6 @@ export default class Ping extends Component {
     })
   }
   render() {
-    let color1 = {
-      color: this.state.clicked2 ? "black" : "red",
-      fontSize: '3vh',
-      marginLeft: '23%'
-    }
     return (
       <div style={{position:'relative'}}>
         <NavBar
@@ -118,7 +115,7 @@ export default class Ping extends Component {
               this.state.data.map((item, idx) =>
                 <div style={{height: '20vh',background: '#fff', color: 'black' }}>
                   <div style={{ float: "left" }}>
-                    <img src={require('./img/touxiang2.jpg')} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
+                    <img src={item.pic} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
                   </div>
                   <div>
                   </div>
@@ -129,27 +126,22 @@ export default class Ping extends Component {
                   </Link>
 
                 </div>)}
-          <input placeholder="       添加评论" style={{width:'82%',marginTop:'1vh',height:'37px',borderBottomColor:'gray'}} onChange={this.getContent}/>
-          <button style={{width:'16%',marginTop:'vh',height:'42px',borderBottomColor:'gray'}} onClick={this.addItem}>发送</button>
-          <span style={{fontSize:15}}>评论列表</span>
-          <hr ></hr>  
-          <div marginTop="4vh">
+          <input placeholder="       添加评论" style={{width:'82%',marginTop:'1vh',height:'37px',borderColor:'red',borderRadius:'15px',border:'none'}} onChange={this.getContent}/>
+          <button style={{width:'18%',height:'40px',borderBottomColor:'gray',borderRadius:'30px',backgroundColor:'#3385FF',color:'white',border:'none'}} onClick={this.addItem} >发送</button>
+          
+          <p style={{fontSize:15,marginLeft:5}}>评论列表</p>
+          <hr style={{marginTop:-5}}></hr>  
+          {/* <div style={{borderBottom:'1px soild black'}}></div> */}
             {
                 this.state.todo.map((item)=>(
                   <div style={{ background: '#fff', color: 'black' }}>
-                    <div style={{ float: "left" }}>
-                      <img src={require('./img/touxiang.jpg')} style={{ height: '5vh', width: '9vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
-                    </div>
-                    <p style={{ marginLeft: 25, fontSize: '2vh', lineHeight: 2.5, marginTop: 6 }}>{item.name}</p>
-                    <div style={{ marginLeft: 25, color: 'gray', fontSize: '3vw', marginTop: "-5vw" }}>{this.state.data[0].time}
-                    </div>
-                    <p style={{ marginLeft: 30, color: 'black', marginTop: 10,fontSize:15 }}>{item.content}</p>            
+                    <p style={{folat:"left"}}>{item.name}{this.state.data[0].time}</p>
+                    <p>{item.content}</p>
+                    <div style={{width:'100%',height:'2vh',backgroundColor:'white'}}>
+                    </div>           
                   </div>
                 )
-            )}
-              
-          </div>
-        
+            )}          
         </div>
        
     );
