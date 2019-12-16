@@ -9,7 +9,7 @@ export default class Message extends Component {
             <NavBar
                 style={{ backgroundColor: '#37376F', color: '#fff',position:'sticky ',top:'20',zIndex:10,textAlign:'center'}}
                 leftContent={[
-                  <Link to="/community"><span style={{fontSize:'17px',color:'white'}} className="iconfont icon-ico_leftarrow"></span></Link>
+                  <Link to="/community"><span style={{fontSize:'17px',color:'white'}} className="iconfont icon-icon-copy-sy"></span></Link>
                 ]}
                 >
                 <span>消息列表</span>
@@ -17,7 +17,7 @@ export default class Message extends Component {
             <Link to="/newsone">
               <div style={{height:'20%'}}>
                 <div style={{float:"left"}}>
-                  <div className="iconfont icon-avatar-lady-sy" style={{fontSize:37,marginLeft:5,color:'black'}}></div>
+                  <div className="iconfont icon-mingxing-sy" style={{fontSize:37,marginLeft:5,color:'black'}}></div>
                   </div>
                   <div>
                     <p style={{marginLeft:55,fontSize:18,color:'black'}}>KIKO</p>
@@ -28,7 +28,7 @@ export default class Message extends Component {
             </Link>
             <div style={{height:'20%'}}>
               <div style={{float:"left"}}>
-                <div className="iconfont icon-avatar-lady-sy" style={{fontSize:37,marginLeft:5}}></div>
+                <div className="iconfont icon-Mian-sy" style={{fontSize:37,marginLeft:5}}></div>
                 </div>
                 <div>
                   <p style={{marginLeft:55,fontSize:18}}>宝宝</p>
@@ -38,7 +38,7 @@ export default class Message extends Component {
             </div>
             <div style={{height:'20%'}}>
               <div style={{float:"left"}}>
-                <div className="iconfont icon-avatar-lady-sy" style={{fontSize:37,marginLeft:5}}></div>
+                <div className="iconfont icon-Mian-sy" style={{fontSize:37,marginLeft:5}}></div>
                 </div>
                 <div>
                   <p style={{marginLeft:55,fontSize:18}}>秋风</p>

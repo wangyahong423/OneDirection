@@ -8,7 +8,7 @@ export default class Messageone extends Component {
             <NavBar
                 style={{ backgroundColor: '#37376F', color: '#fff',position:'sticky ',top:'20',zIndex:10,textAlign:'center'}}
                 leftContent={[
-                    <Link to="/xinnews"><span style={{fontSize:'17px',color:'white'}} className="iconfont icon-ico_leftarrow"></span></Link>
+                    <Link to="/xinnews"><span style={{fontSize:'17px',color:'white'}} className="iconfont icon-icon-copy-sy"></span></Link>
                 ]}
                 >
                 <span>KIKO</span>
