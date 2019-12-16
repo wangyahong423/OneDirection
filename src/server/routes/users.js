@@ -3,23 +3,39 @@ var router = express.Router();
 var con = require('./postgreSQL');
 
 /* GET home page. */
+
+var username='';
+
+router.get('/getName', (req, res)=> {
+  username = req.query.name ? req.query.name : username;
+  res.json({name: username});
+});
+
+router.get('/',function(req,res,next){
+  res.render('usersPost');
+})
+
 //用户注册
 router.get('/addUser', (req, res) => {
-  var pic = null;
+  var pic = '/images/1.jpg';
   var name = req.query.name;
   var tel = req.query.tel;
   var college = req.query.college;
-  college = '河北师范大学 ' + college;
   var pwd = req.query.pwd;
-  let sql = 'insert into users(pic, name, tel, college, pwd) values($1,$2,$3,$4,$5)';
-  con.query(sql, [pic, name, tel, college, pwd], (err, result) => {
-    if (err) {
-      res.json({ ok: false, msg: '注册失败！' });
-    } else {
-      res.json({ ok: true, msg: '注册成功！' });
-
-    }
-  });
+  if(name && tel && college && pwd){
+    let sql = 'insert into users(pic, name, tel, college, pwd) values($1,$2,$3,$4,$5)';
+    con.query(sql, [pic, name, tel, college, pwd], (err, result) => {
+      if (err) {
+        res.json({ ok: false, msg: '用户名已存在！' });
+      } else {
+        res.json({ ok: true, msg: '注册成功！' });
+  
+      }
+    });
+  }
+  else{
+    res.json({ msg: "所有项应该非空" });
+  }
 });
 //用户资料修改
 router.get('/change', (req, res) => {
@@ -104,5 +120,18 @@ router.get('/alter', (req, res) => {
   });
 });
 
-module.exports = router;
+// 用户搜索
+router.get('/select', (req, res) => {
+  var name = req.query.name;
+  name = '%'+name+'%';
+  let sql = 'select * from users where name like $1';
+  con.query(sql, [name], (err, result) => {
+    if (err) {
+      res.json({ ok: false, msg: '查找失败！' });
+    } else {
+      res.send(result.rows);
+    }
+  });
+});
 
+module.exports = router;
