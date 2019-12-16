@@ -1,70 +1,123 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom';
-import { NavBar,Accordion, List} from 'antd-mobile';
+import { Link } from 'react-router-dom';
+import { NavBar, Accordion, List } from 'antd-mobile';
 import '../App.css';
+import axios from 'axios';
 const Item = List.Item;
 const Brief = Item.Brief;
+
 
 export default class CollegeTeachers extends Component {
     onChange = (key) => {
         console.log(key);
     }
+    constructor() {
+        super();
+        this.state = {
+            name: '',
+            college: "",
+            data: [],
+            todo:[]
+        }
+    }
+    componentDidMount() {
+        let url3 = `http://localhost:3005/users/getName`;
+        axios(url3)
+            .then((res) => {
+                this.setState({
+                    name: res.data.name
+                })
+            })
+
+        console.log(this.state.name)
+        let url2 = `http://localhost:3005/users/list`;
+        axios(url2)
+            .then((res) => {
+                this.setState({
+                    todo: res.data
+                })
+                this.state.todo.map((item)=>{
+                    if(item.name == this.state.name){
+                        this.setState({
+                            college:item.college
+                        })
+                    }
+                })
+            })
+        // this.state.todo.map((item)=>{
+        //     if(item.name == this.state.name){
+        //         this.setState({
+        //             college:item.college
+        //         })
+        //     }
+        // })
+        let url = `http://localhost:3005/leaders/list`;
+        axios(url)
+            .then((res) => {
+                this.setState({
+                    data: res.data
+                })
+                var brr = []
+                this.state.data.map((item) => {
+                    if (item.college == this.state.college) {
+                        brr.push(item);
+                    }
+                    this.setState({
+                        data: brr
+                    })
+                })
+                console.log(this.state.college)
+                console.log(this.state.name)
+            })
+    }
     render() {
         return (
             <div>
                 <NavBar
-                    style={{ backgroundColor: '#37376F', color: '#fff',position:'sticky ',top:'0',zIndex:10,textAlign:'center',height:'7vh'}}
+                    style={{ backgroundColor: '#37376F', color: '#fff', position: 'sticky ', top: '0', zIndex: 10, textAlign: 'center', height: '7vh' }}
                     leftContent={[
-                        <Link to="/college"><span style={{fontSize:'17px',color:'white'}} className="iconfont icon-ico_leftarrow"></span></Link>
+                        <Link to="/college"><span style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span></Link>
                     ]}>
-                        学院领导
-                </NavBar> 
-                <div  className='jianjieImg'>
-                        <div className='teacherword'>                        
-                            <Accordion style={{marginTop:'11vh',width:'100vw'}} accordion openAnimation={{}} className="my-accordion" onChange={this.onChange}>
-                                <Accordion.Panel header="管委会主任">
+                    学院领导
+                </NavBar>
+                <div className='jianjieImg'>
+                    {
+
+                        this.state.data.map((item) => (
+                            <div>
+                                {/* <Accordion style={{marginTop:'11vh',width:'100vw'}} accordion openAnimation={{}} className="my-accordion" onChange={this.onChange}>
+                                <Accordion.Panel header={item.job}>
                                     <List className="my-list">
-                                        <List.Item style={{height:'10vh',marginLeft:'5vw'}}><p>张子龙&emsp;80786213&emsp;zlzhang@hebtu.edu.cn</p></List.Item>
+                                        <List.Item style={{height:'10vh',marginLeft:'5vw'}}><p>{item.name}&emsp;{item.tel}&emsp;{item.emial}</p></List.Item>
                                     </List>
                                 </Accordion.Panel>
-                                <Accordion.Panel header="党总支书记" className="pad">
-                                    <List className="my-list">
-                                        <List.Item style={{height:'10vh',marginLeft:'5vw'}}><p>杨春明&emsp;80786203&emsp;Ychm@hebtu.edu.cn</p></List.Item>
-                                    </List>
-                                </Accordion.Panel>
-                                <Accordion.Panel header="院长" className="pad">
-                                    <List className="my-list">
-                                        <List.Item style={{height:'10vh',marginLeft:'5vw'}}><p>赵书良&emsp;80786202&emsp;zhaoshuliang@onest.net</p></List.Item>
-                                    </List>
-                                </Accordion.Panel>
-                                <Accordion.Panel header="副书记、副院长" className="pad">
-                                    <List className="my-list">
-                                        <List.Item style={{height:'10vh',marginLeft:'5vw'}}><p>闵杰&emsp;80786204&emsp;minjie@hebtu.edu.cn</p></List.Item>
-                                    </List>
-                                </Accordion.Panel>
-                                <Accordion.Panel header="副院长" className="pad">
-                                    <List className="my-list">
-                                        <List.Item style={{height:'10vh',marginLeft:'5vw'}}><p>杨树元&emsp;80786205&emsp;368392@qq.com</p></List.Item>
-                                    </List>
-                                </Accordion.Panel>
-                                <Accordion.Panel header="副院长" className="pad">
-                                    <List className="my-list">
-                                        <List.Item style={{height:'10vh',marginLeft:'5vw'}}><p>张鑫&emsp;80786213&emsp;zhangxin@onest.net</p></List.Item>
-                                    </List>
-                                </Accordion.Panel>
-                                <Accordion.Panel header="副院长" className="pad">
-                                    <List className="my-list">
-                                        <List.Item style={{height:'10vh',marginLeft:'5vw'}}><p>张玉华&emsp;80786212&emsp;zhangyuhua@onest.net</p></List.Item>
-                                    </List>
-                                </Accordion.Panel>
-                                <Accordion.Panel header="副院长" className="pad">
-                                    <List className="my-list">
-                                        <List.Item style={{height:'10vh',marginLeft:'5vw'}}><p>单博&emsp;80786213&emsp;shanbo@onest.net</p></List.Item>
-                                    </List>
-                                </Accordion.Panel>
-                            </Accordion>
-                        </div>
+                            </Accordion> */}
+                                <p style={{ fontSize: '20px', textIndent: '0.3em' }}>{item.job}</p>
+                                <span style={{ marginLeft: '30px', fontSize: '15px' }}>{item.name}</span>
+                                <span style={{ marginLeft: '10px', fontSize: '15px' }}>{item.tel}</span>
+                                <span style={{ marginLeft: '10px', fontSize: '15px' }}>{item.email}</span>
+                            </div>
+                        )
+                        )}
                 </div>
+                <Accordion style={{ marginTop: '11vh', width: '100vw' }} accordion openAnimation={{}} className="my-accordion" onChange={this.onChange}>
+                    {/* <Accordion.Panel header={this.state.data[0].job}>
+                        <List className="my-list">
+                        <List.Item style={{height:'10vh',marginLeft:'5vw'}}><p>{this.state.data[0].name}&emsp;{this.state.data[0].tel}&emsp;{this.state.data[0].emial}</p></List.Item>
+                        </List>
+                    </Accordion.Panel> */}
+                    {/* <Accordion.Panel header={this.state.data[1].job}>
+                        <List className="my-list">
+                        <List.Item style={{height:'10vh',marginLeft:'5vw'}}><p>{this.state.data[1].name}&emsp;{this.state.data[1].tel}&emsp;{this.state.data[1].emial}</p></List.Item>
+                        </List>
+                    </Accordion.Panel>
+                    <Accordion.Panel header={this.state.data[2].job}>
+                        <List className="my-list">
+                        <List.Item style={{height:'10vh',marginLeft:'5vw'}}><p>{this.state.data[2].name}&emsp;{this.state.data.tel}&emsp;{this.state.data[2].emial}</p></List.Item>
+                        </List>
+                    </Accordion.Panel> */}
+                </Accordion>
+
             </div>
         )
     }
