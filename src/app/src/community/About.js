@@ -1,25 +1,202 @@
+// import React, { Component } from 'react';
+// import {NavBar,ActionSheet} from 'antd-mobile';
+// import { BrowserRouter as Router,Route,Link} from 'react-router-dom';
+// import axios from 'axios'
+// export default class Ping extends Component {
+//   constructor() {
+//     super();
+//     this.state = {
+//       data:[],//详情页
+//       todo:[],//评论页面
+//       list:[],//喜欢页面
+//       arr:[],//存储id
+//       yonghu:[],//存储的是users/list
+//       pic:[],//存储的照片
+//       cid:1,
+//       name:'张三',
+//       content:'',
+//       color:[],
+//     };
+//   }
+//   dataList = [
+//     { url: 'cTTayShKtEIdQVEMuiWt', title: '朋友圈' },
+//     { url: 'umnHwvEgSyQtXlZjNJTt', title: '微信好友' },
+//     { url: 'SxpunpETIwdxNjcJamwB', title: 'QQ' },
+//   ].map(obj => ({
+//     icon: <img src={`https://gw.alipayobjects.com/zos/rmsportal/${obj.url}.png`} alt={obj.title} style={{ width: 36 }} />,
+//     title: obj.title,
+//   }));
+//   showShareActionSheet = () => {
+//     ActionSheet.showShareActionSheetWithOptions({
+//       options: this.dataList,
+//       message: '分享',
+//     },
+//     (buttonIndex) => {
+//       this.setState({ clicked1: buttonIndex > -1 ? this.dataList[buttonIndex].title : 'cancel' });
+//       return new Promise((resolve) => {
+//         setTimeout(resolve, 0);
+//       });
+//     });
+//   } 
+//   componentDidMount() {
+//     var id =this.props.match.params.id;
+//     let url = `http://localhost:3005/community/list/`+id;
+//     let url1 = `http://localhost:3005/communitytalk/list`;
+//     let url2 = `http://localhost:3005/communitylike/list`;
+//     let url4 = `http://localhost:3005/users/list`;
+//     axios(url)
+//         .then((res)=>{
+//           this.setState({
+//             data:res.data
+//           })
+//           var brr = []
+//           this.state.data.map((item)=>{
+//             if(item.id == id){
+//               brr.push(item);
+//             }
+//             this.setState({
+//               data:brr
+//             })
+//           })
+//         })
+//     /**
+//       *评论的请求 
+//     */
+//     axios(url1)
+//         .then((res) => {
+//             this.setState({
+//               todo: res.data.communitytalk                      
+//             })
+//             var arr = [];
+//               this.state.todo.map((item)=>{
+//                 if(item.cid == id){
+//                   arr.push(item);                 
+//                 }
+//                 this.setState({
+//                   todo:arr
+//                 })
+//             })
+//         })
+//     axios(url2)
+//       .then((res)=>{
+//         this.setState({
+//           list:res.data
+//         })
+//         this.state.data.map((item)=>{
+//           this.setState({
+//             arr:item.id
+//           })
+//         })
+//       })
+//       axios(url4)
+//       .then((res)=>{
+//         for (var i = 0; i < res.data.length; i++) {
+//           res.data[i].pic = "http://localhost:3005" + res.data[i].pic
+//         }
+//         this.setState({
+//           yonghu:res.data
+//         })
+        
+//         var qrr=[]
+//         var a=0;
+//         for(var i=0;i<this.state.data.length;i++){
+//           for(var j=0;j<this.state.yonghu.length;j++){
+//             if(this.state.data[i].name == this.state.yonghu[j].name){
+//               a=this.state.yonghu[j].pic;
+//               break;
+//             }
+//             else{
+//               a=0;
+//             }
+//           }
+//           if(a!=0){
+//             qrr.push(a)
+//           }
+//         }
+//         this.setState({
+//           pic:qrr
+//         })
+//       })
+//   }
+//   render() {
+//     let color1 = {
+//       color: this.state.clicked2 ? "black" : "red",
+//       fontSize: '3vh',
+//       marginLeft: '23%'
+//     }
+//     return (
+//       <div style={{position:'relative'}}>
+//         <NavBar
+//             style={{  backgroundColor: '#37376F', color: '#fff', position: 'sticky ', top: 0, zIndex: 18, textAlign: 'center', height: '7vh'}}
+//             leftContent={[
+//                 <Link to="/community"><span style={{fontSize:'17px',color:'white'}} className="iconfont icon-ico_leftarrow"></span></Link>
+//             ]}
+//             >
+//             <span>详情</span>
+//         </NavBar>
+//             {
+//               this.state.data.map((item,idx) =>
+//                 <div style={{ background: '#fff', color: 'black' }}>
+//                   <div style={{ float: "left" }}>
+//                     <img src={this.state.pic[idx]} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
+//                   </div>
+//                   <p style={{ marginLeft: 75, fontSize: '2.5vh', lineHeight: 2.5, marginTop: 6 }}>{item.name}</p>
+//                   <div style={{ marginLeft: 75, color: 'gray', fontSize: '2vw', marginTop: "-5vw" }}>{item.time}</div>
+//                   <Link to={`/aboutyouknow/${item.id}`}>
+//                     <p style={{ marginLeft: 25, color: 'black', marginTop: 20 ,fontSize:17}}>{item.content}</p>
+//                   </Link>
+//                   <div style={{width:'100%',height:'2vh',backgroundColor:'white'}}>
+//                   </div>
+//                 </div>)}
+//           <span style={{fontSize:15}}>评论列表</span>
+//           <hr ></hr>  
+//           <div marginTop="4vh">
+//           {
+//           this.state.todo.map((item, idx) => (
+//             <div style={{ background: '#fff', color: 'black' }}>
+//                   <div style={{ float: "left" }}>
+//                     <img src={this.state.photo[idx]} style={{ height: '5vh', width: '10vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
+//                   </div>
+//                   <div style={{height:'1px',width:'100%'}}></div>
+//                   <p style={{ marginLeft:70,color: 'gray',fontSize:'1.5vh' }}>{item.name}</p>
+//                   <div style={{height:'2px',width:'100%'}}></div>
+//                   <div style={{ marginLeft:70,marginTop:'-10px',fontSize:'2.3vh' }}>{item.content}</div>
+//                   <p style={{ marginLeft:75,  color: 'gray', marginTop:7,fontSize: '2vw', }}>{item.time}</p>
+//                   <div style={{ width: '100%', height: '2vh', backgroundColor: 'white' }}>
+//                   </div>
+//             </div>
+//           )
+//           )}
+              
+//           </div>
+        
+//         </div>
+       
+//     );
+//   }
+// }
+
 import React, { Component } from 'react';
-import {NavBar,ActionSheet} from 'antd-mobile';
-import { BrowserRouter as Router,Route,Link} from 'react-router-dom';
-const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
-let wrapProps;
-if (isIPhone) {
-  wrapProps = {
-    onTouchStart: e => e.preventDefault(),
-  };
-}
+import { NavBar, ActionSheet } from 'antd-mobile';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import axios from 'axios'
 export default class About extends Component {
   constructor() {
     super();
     this.state = {
-      clicked1: 'none',
-      clicked:'none'
+      data: [],
+      todo: [],
+      clicked2: true,
+      cid: parseInt(''),
+      name: '',
+      content: '',
+      yonghu: [],
+      pic: [],
+      photo: [],
+      time: new Date().toLocaleString()
     };
   }
-
   dataList = [
-    { url: 'OpHiXAcYzmPQHcdlLFrc', title: '发送给朋友' },
-    { url: 'wvEzCMiDZjthhAOcwTOu', title: '新浪微博' },
     { url: 'cTTayShKtEIdQVEMuiWt', title: '朋友圈' },
     { url: 'umnHwvEgSyQtXlZjNJTt', title: '微信好友' },
     { url: 'SxpunpETIwdxNjcJamwB', title: 'QQ' },
@@ -27,72 +204,168 @@ export default class About extends Component {
     icon: <img src={`https://gw.alipayobjects.com/zos/rmsportal/${obj.url}.png`} alt={obj.title} style={{ width: 36 }} />,
     title: obj.title,
   }));
+  
+  componentDidMount() {
+    var id = this.props.match.params.id;
+    let url = `http://localhost:3005/community/list/` + id;
+    let url1 = `http://localhost:3005/communitytalk/list/`;
+    let url3 = `http://localhost:3005/users/getName`;
+    let url4 = `http://localhost:3005/users/list`;
+    axios(url3)
+      .then((res) => {
+        this.setState({
+          name: res.data.name
+        })
+      })
+    axios(url)
+      .then((res) => {
+        for (var i = 0; i < res.data.length; i++) {
+          res.data[i].pic = "http://localhost:3005" + res.data[i].pic
+        }
+        this.setState({
+          data: res.data
+        })
+        var brr = []
+        this.state.data.map((item) => {
+          if (item.id == id) {
+            brr.push(item);
+          }
+          this.setState({
+            data: brr
+          })
+        })
+      })
+    
+    axios(url4)
+      .then((res) => {
+        for (var i = 0; i < res.data.length; i++) {
+          res.data[i].pic = "http://localhost:3005" + res.data[i].pic
+        }
+        this.setState({
+          yonghu: res.data
+        })
 
-  showShareActionSheet = () => {
-    ActionSheet.showShareActionSheetWithOptions({
-      options: this.dataList,
-      message: '分享',
-    },
-    (buttonIndex) => {
-      this.setState({ clicked1: buttonIndex > -1 ? this.dataList[buttonIndex].title : 'cancel' });
-      return new Promise((resolve) => {
-        setTimeout(resolve, 0);
-      });
-    });
+        var qrr = []
+        var a = 0;
+        for (var i = 0; i < this.state.data.length; i++) {
+          for (var j = 0; j < this.state.yonghu.length; j++) {
+            if (this.state.data[i].name == this.state.yonghu[j].name) {
+              a = this.state.yonghu[j].pic;
+              break;
+            }
+            else {
+              a = 0;
+            }
+          }
+          if (a != 0) {
+            qrr.push(a)
+          }
+        }
+        this.setState({
+          pic: qrr
+        })
+      })
+
+
+
+      axios(url1)
+      .then((res) => {
+        this.setState({
+          todo: res.data.communitytalk
+        })
+        var arr = [];
+        this.state.todo.map((item) => {
+          if (item.cid == id) {
+            arr.push(item);
+          }
+          this.setState({
+            todo: arr
+          })
+        })
+        var qrr = []
+        var a = 0;
+        for (var i = 0; i < this.state.todo.length; i++) {
+          for (var j = 0; j < this.state.yonghu.length; j++) {
+            if (this.state.todo[i].name == this.state.yonghu[j].name) {
+              a = this.state.yonghu[j].pic;
+              console.log(a)
+              break;
+            }
+            else {
+              a = 0;
+            }
+          }
+          if (a != 0) {
+            qrr.push(a)
+          }
+        }
+        this.setState({
+          photo: qrr
+        })
+        console.log(this.state.yonghu)
+      })
+  }
+  getContent = (e) => {
+    this.setState({
+      cid: this.props.match.params.id,
+      content: e.target.value,
+    })
+
+  }
+  changeColor() {
+    this.setState({
+      clicked2: !this.state.clicked2
+    })
   }
   render() {
     return (
-      <div style={{position:'relative'}}>
+      <div style={{ position: 'relative' }}>
         <NavBar
-            style={{ backgroundColor: '#37376F', color: '#fff',position:'sticky ',top:'20',zIndex:10,textAlign:'center'}}
-            leftContent={[
-                <Link to="/community"><span style={{fontSize:'17px',color:'white'}} className="iconfont icon-icon-copy-sy"></span></Link>
-            ]}
-            >
-            <span>详情</span>
+          style={{ backgroundColor: '#37376F', color: '#fff', position: 'sticky ', top: 0, zIndex: 18, textAlign: 'center', height: '7vh' }}
+          leftContent={[
+            <Link to="/community"><span style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span></Link>
+          ]}
+        >
+          <span>详情</span>
         </NavBar>
-        <div style={{height:'20%',color:'black'}}>
-            <div style={{float:"left"}}>
-            <img src={require('./img/touxiang1.jpg')} style={{height:'55px',width:'55px',borderRadius:'50%',marginLeft:15}}/>
+        {
+          this.state.data.map((item, idx) =>
+            <div style={{ background: '#fff', color: 'black' }}>
+              <div style={{ float: "left" }}>
+                <img src={this.state.pic[idx]} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
+              </div>
+              <div>
+              </div>
+              <p style={{ marginLeft: 75, fontSize: '2.5vh', lineHeight: 2.5, marginTop: 6 }}>{item.name}</p>
+              <div style={{ marginLeft: 75, color: 'gray', fontSize: '2vw', marginTop: "-5vw" }}>{item.time}</div>
+              <Link to={`/aboutyouknow/${item.id}`}>
+                <p style={{ marginLeft: 25, color: 'black', marginTop: 20, fontSize: 17 }}>{item.content}</p>
+              </Link>
+              <div style={{ width: '100%', height: '2vh', backgroundColor: 'white' }}>
+              </div>
+            </div>)}
+
+        <p style={{ fontSize: 15, marginLeft: 5 }}>评论列表</p>
+        <hr style={{ marginTop: -5 }}></hr>
+        {
+          this.state.todo.map((item, idx) => (
+            <div style={{ background: '#fff', color: 'black' }}>
+                  <div style={{ float: "left" }}>
+                    <img src={this.state.photo[idx]} style={{ height: '5vh', width: '10vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
+                  </div>
+                  <div style={{height:'1px',width:'100%'}}></div>
+                  <p style={{ marginLeft:70,color: 'gray',fontSize:'1.5vh' }}>{item.name}</p>
+                  <div style={{height:'2px',width:'100%'}}></div>
+                  <div style={{ marginLeft:70,marginTop:'-10px',fontSize:'2.3vh' }}>{item.content}</div>
+                  <p style={{ marginLeft:75,  color: 'gray', marginTop:7,fontSize: '2vw', }}>{item.time}</p>
+                  <div style={{ width: '100%', height: '2vh', backgroundColor: 'white' }}>
+                  </div>
             </div>
-            <div>
-              <p style={{marginLeft:75,fontSize:20,lineHeight:1.8}}>路子野</p>
-              <div style={{marginLeft:75,marginTop:-20,color:'gray'}}>今天11:03</div>
-            </div>
-            <p style={{marginLeft:20}}>有没有学姐说一下软件工程大一上学期学的什么科目呀？</p>
-            <div style={{float:'right'}}>
-              <sapn className="iconfont icon-fenxiang1-sy" onClick={this.showShareActionSheet} style={{fontSize:25,marginRight:30,color:'black'}}></sapn>
-              <sapn className="iconfont icon-icon-test-sy" style={{fontSize:25,marginRight:30}}></sapn>
-              <sapn className="iconfont icon-zan-sy" style={{fontSize:28,marginRight:30}}></sapn>
-            </div>  
-        </div>
-        <div style={{height:'20%',color:'black',marginTop:60,marginLeft:10}}>
-            <div style={{float:"left"}}>
-                <div className="iconfont icon-avatar-lady-sy" style={{fontSize:37,marginLeft:5}}></div>
-            </div>
-            <div>
-                <p style={{marginLeft:50,color:'orange'}}>莫得感情的胖子</p>
-                <p style={{marginLeft:55,fontSize:12,color:'gray'}}>我也想知道...+1</p>
-            </div>
-            <div style={{float:'right',marginRight:25,marginTop:-35,fontSize:10}}>
-              <span style={{marginRight:25}}>今天18:48</span>
-              <span>回复</span>
-            </div>  
-        </div>
-        <div style={{height:'20%',color:'black',marginTop:30,marginLeft:10}}>
-            <div style={{float:"left"}}>
-                <div className="iconfont icon-avatar-lady-sy" style={{fontSize:37,marginLeft:5}}></div>
-            </div>
-            <div>
-                <p style={{marginLeft:50,color:'green'}}>小黑</p>
-                <p style={{marginLeft:55,fontSize:12,color:'gray'}}>四级六级可以加</p>
-            </div>
-            <div style={{float:'right',marginRight:25,marginTop:-35,fontSize:10}}>
-              <span style={{marginRight:25}}>刚刚</span>
-              <span>回复</span>
-            </div>  
-        </div>
+          )
+          )}
       </div>
+
     );
   }
 }
+
