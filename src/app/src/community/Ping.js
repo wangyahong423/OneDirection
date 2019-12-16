@@ -11,7 +11,9 @@ export default class Ping extends Component {
       clicked2: true,
       cid:parseInt(''),
       name:'',
-      content:''
+      content:'',
+      yonghu:[],
+      pic:[],
     };
   }
   dataList = [
@@ -38,13 +40,11 @@ export default class Ping extends Component {
     
   }
   componentDidMount() {
-    console.log(this.state.data);
     var id =this.props.match.params.id;
-    console.log(this.props)
-    console.log(id)
     let url = `http://localhost:3005/community/list/`+id;
     let url1 = `http://localhost:3005/communitytalk/list/`;
     let url3 = `http://localhost:3005/users/getName`;
+    let url4 = `http://localhost:3005/users/list`;
     axios(url3)
       .then((res) => {
         this.setState({
@@ -59,7 +59,6 @@ export default class Ping extends Component {
           this.setState({            
             data:res.data
           })
-          console.log(this.state.data)
           var brr = []
           this.state.data.map((item)=>{
             if(item.id == id){
@@ -69,7 +68,6 @@ export default class Ping extends Component {
               data:brr
             })
           })
-          console.log(this.state.data);
         })
     axios(url1)
         .then((res) => {
@@ -86,14 +84,42 @@ export default class Ping extends Component {
                 })
             })
         })
+        axios(url4)
+        .then((res)=>{
+          for (var i = 0; i < res.data.length; i++) {
+            res.data[i].pic = "http://localhost:3005" + res.data[i].pic
+          }
+          this.setState({
+            yonghu:res.data
+          })
+          
+          var qrr=[]
+          var a=0;
+          for(var i=0;i<this.state.data.length;i++){
+            for(var j=0;j<this.state.yonghu.length;j++){
+              if(this.state.data[i].name == this.state.yonghu[j].name){
+                a=this.state.yonghu[j].pic;
+                break;
+              }
+              else{
+                a=0;
+              }
+            }
+            if(a!=0){
+              qrr.push(a)
+            }
+          }
+          this.setState({
+            pic:qrr
+          })
+        })
   }
   getContent=(e)=>{
     this.setState({
       cid:this.props.match.params.id,
       content:e.target.value,    
     })
-    console.log(this.state.cid);
-    console.log(this.props.match.params.id);
+
   }
   changeColor(){
     this.setState({
@@ -115,7 +141,7 @@ export default class Ping extends Component {
               this.state.data.map((item, idx) =>
                 <div style={{height: '20vh',background: '#fff', color: 'black' }}>
                   <div style={{ float: "left" }}>
-                    <img src={item.pic} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
+                    <img src={this.state.pic[idx]} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
                   </div>
                   <div>
                   </div>
