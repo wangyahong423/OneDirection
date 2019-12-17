@@ -195,8 +195,16 @@ export default class Community1 extends Component {
           })
         }
       })
-  };
-
+  }
+  delTie=(id)=>{   
+    
+      let url9 = `http://localhost:3005/community/deleteCommunity?id=${id}`
+      axios(url9)
+        .then((res)=>{
+          window.location.href = "http://localhost:3000/shequ"
+        })
+      
+  }
   render() {
     return (
       <div>
@@ -204,7 +212,7 @@ export default class Community1 extends Component {
           leftContent={[
             <Link to="/tiezi"><span style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span></Link>
           ]}>
-          我发布的社区动态</NavBar>
+          已发布的社区动态</NavBar>
         <div style={{ width: '100vw', backgroundColor: '#EFEFF4' }}>
           <div style={{ marginTop: '7vh' }}>
             {
@@ -213,9 +221,10 @@ export default class Community1 extends Component {
                   <div style={{ float: "left" }}>
                     <img src={this.state.pic[idx]} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
                   </div>
-                  <p style={{ marginLeft: 75, fontSize: '2.5vh', lineHeight: 2.5, marginTop: 6 }}>{item.name}</p>
+                  <span style={{marginLeft:'89%'}}><button  onClick={this.delTie.bind(this,(item.id))}>删除</button></span>
+                  <p style={{ marginLeft: 75, fontSize: '2.5vh', lineHeight: 2.5, marginTop:'-21vw',}}>{item.name}</p>
                   <div style={{ marginLeft: 75, color: 'gray', fontSize: '2vw', marginTop: "-5vw" }}>{item.time}</div>
-                  <Link to={`/aboutyouknow/${item.id}`}>
+                  <Link to={`/shequyouknow/${item.id}`}>
                     <p style={{ marginLeft: 25, color: 'black', marginTop: 20 }}>{item.content}</p>
                   </Link>
                   <div style={{ width: '100%', height: '2vh', backgroundColor: 'white' }}>

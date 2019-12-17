@@ -187,32 +187,40 @@ export default class MaterialSharing extends Component {
                 }
             })
     };
-
+    delTie=(id)=>{   
+    
+        let url9 = `http://localhost:3005/learn/deleteLearn?id=${id}`
+        axios(url9)
+          .then((res)=>{
+            window.location.href = "http://localhost:3000/xuexi"
+          })
+        
+    }
     render() {
         return (
             <div>
                 <NavBar style={{ backgroundColor: '#37376F', color: '#fff', position: 'sticky ', top: '0', zIndex: 10, textAlign: 'center', height: '7vh' }}
                     leftContent={[
-                        <Link to="tiezi"><span style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span></Link>
+                        <Link to="/tiezi"><span style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span></Link>
                     ]}>
-                    已发布的学习交流动态</NavBar>
+                    已发布的学习动态</NavBar>
                 <div style={{ width: '100vw', backgroundColor: '#EFEFF4' }}>
                     <div>
-                        {
-                            this.state.data.map((item, idx) =>
-                                <div style={{ background: '#fff', color: 'black' }}>
-                                    <div style={{ float: "left" }}>
-                                        <img src={this.state.pic[idx]} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
-                                    </div>
-                                    <div>
-                                    </div>
-                                    <p style={{ marginLeft: 75, fontSize: '2.5vh', lineHeight: 2.5, marginTop: 6 }}>{item.name}</p>
-                                    <div style={{ marginLeft: 75, color: 'gray', fontSize: '2vw', marginTop: "-5vw" }}>{item.time}</div>
-                                    <p style={{ marginLeft: 25, color: 'black', marginTop: 20 }}>{item.content}</p>
-                                    
-                                    <div style={{ width: '100%', height: '2vh', backgroundColor: 'white' }}>
-                                    </div>
-                                </div>)}
+                    {
+              this.state.data.map((item, idx) =>
+                <div style={{ background: '#fff', color: 'black' }}>
+                  <div style={{ float: "left" }}>
+                    <img src={this.state.pic[idx]} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
+                  </div>
+                  <span style={{marginLeft:'89%'}}><button style={{border:'none'}} onClick={this.delTie.bind(this,(item.id))}>删除</button></span>
+                  <p style={{ marginLeft: 75, fontSize: '2.5vh', lineHeight: 2.5, marginTop:'-21vw',}}>{item.name}</p>
+                  <div style={{ marginLeft: 75, color: 'gray', fontSize: '2vw', marginTop: "-5vw" }}>{item.time}</div>
+                  <Link to={`/xuexiyouknow/${item.id}`}>
+                    <p style={{ marginLeft: 25, color: 'black', marginTop: 20 }}>{item.content}</p>
+                  </Link>
+                  <div style={{ width: '100%', height: '2vh', backgroundColor: 'white' }}>
+                  </div>
+                </div>)}
                     </div>
                 </div>
             </div>
