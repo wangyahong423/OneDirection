@@ -5,276 +5,6 @@ import { createForm } from 'rc-form';
 import {  provinceLite } from 'antd-mobile-demo-data';
 import axios from 'axios';
 
-// const colorStyle = {
-//   display: 'inline-block',
-//   verticalAlign: 'middle',
-//   width: '16px',
-//   height: '16px',
-//   marginRight: '10px',
-// };
-// const colors = [
-//   {
-//     label:
-//     (<div>
-//       <span
-//         style={{ ...colorStyle, }}
-//       />
-//       <span>马克思主义学院</span>
-//     </div>),
-//     value: '#FF0000',
-//   },
-//   {
-//     label:
-//     (<div>
-//       <span
-//         style={{ ...colorStyle,}}
-//       />
-//       <span>历史文化学院</span>
-//     </div>),
-//     value: '#00FF00',
-//   },
-//   {
-//     label:
-//     (<div>
-//       <span
-//         style={{ ...colorStyle,}}
-//       />
-//       <span>美术与设计学院</span>
-//     </div>),
-//     value: '#0000FF',
-//   },
-//   {
-//     label:
-//     (<div>
-//       <span
-//         style={{ ...colorStyle,}}
-//       />
-//       <span>法政与公共管理学院</span>
-//     </div>),
-//     value: '#0000FF',
-//   },
-//   {
-//     label:
-//     (<div>
-//       <span
-//         style={{ ...colorStyle,}}
-//       />
-//       <span>化学与材料科学学院</span>
-//     </div>),
-//     value: '#0000FF',
-//   },
-//   {
-//     label:
-//     (<div>
-//       <span
-//         style={{ ...colorStyle,}}
-//       />
-//       <span>体育学院</span>
-//     </div>),
-//     value: '#0000FF',
-//   },
-//   {
-//     label:
-//     (<div>
-//       <span
-//         style={{ ...colorStyle,}}
-//       />
-//       <span>国际文化交流学院</span>
-//     </div>),
-//     value: '#0000FF',
-//   },
-//   {
-//     label:
-//     (<div>
-//       <span
-//         style={{ ...colorStyle,}}
-//       />
-//       <span>初等教育系</span>
-//     </div>),
-//     value: '#0000FF',
-//   },
-//   {
-//     label:
-//     (<div>
-//       <span
-//         style={{ ...colorStyle,}}
-//       />
-//       <span>软件学院</span>
-//     </div>),
-//     value: '#0000FF',
-//   },
-//   {
-//     label:
-//     (<div>
-//       <span
-//         style={{ ...colorStyle,}}
-//       />
-//       <span>教育学院</span>
-//     </div>),
-//     value: '#0000FF',
-//   },
-//   {
-//     label:
-//     (<div>
-//       <span
-//         style={{ ...colorStyle,}}
-//       />
-//       <span>外国语学院</span>
-//     </div>),
-//     value: '#0000FF',
-//   },
-//   {
-//     label:
-//     (<div>
-//       <span
-//         style={{ ...colorStyle,}}
-//       />
-//       <span>新闻传播学院</span>
-//     </div>),
-//     value: '#0000FF',
-//   },
-//   {
-//     label:
-//     (<div>
-//       <span
-//         style={{ ...colorStyle,}}
-//       />
-//       <span>数学科学学院（田家炳教育学院）</span>
-//     </div>),
-//     value: '#0000FF',
-//   },
-//   {
-//     label:
-//     (<div>
-//       <span
-//         style={{ ...colorStyle,}}
-//       />
-//       <span>生命科学学院</span>
-//     </div>),
-//     value: '#0000FF',
-//   },
-//   {
-//     label:
-//     (<div>
-//       <span
-//         style={{ ...colorStyle,}}
-//       />
-//       <span>计算机与网络空间安全学院、计算机教学部</span>
-//     </div>),
-//     value: '#0000FF',
-//   },
-//   {
-//     label:
-//     (<div>
-//       <span
-//         style={{ ...colorStyle,}}
-//       />
-//       <span>教师教育学院</span>
-//     </div>),
-//     value: '#0000FF',
-//   },
-//   {
-//     label:
-//     (<div>
-//       <span
-//         style={{ ...colorStyle,}}
-//       />
-//       <span>大学外语教学部</span>
-//     </div>),
-//     value: '#0000FF',
-//   },
-//   {
-//     label:
-//     (<div>
-//       <span
-//         style={{ ...colorStyle,}}
-//       />
-//       <span>汇华学院</span>
-//     </div>),
-//     value: '#0000FF',
-//   },
-//   {
-//     label:
-//     (<div>
-//       <span
-//         style={{ ...colorStyle,}}
-//       />
-//       <span>文学院</span>
-//     </div>),
-//     value: '#0000FF',
-//   },
-//   {
-//     label:
-//     (<div>
-//       <span
-//         style={{ ...colorStyle,}}
-//       />
-//       <span>音乐学院</span>
-//     </div>),
-//     value: '#0000FF',
-//   },
-//   {
-//     label:
-//     (<div>
-//       <span
-//         style={{ ...colorStyle,}}
-//       />
-//       <span>商学院</span>
-//     </div>),
-//     value: '#0000FF',
-//   },
-//   {
-//     label:
-//     (<div>
-//       <span
-//         style={{ ...colorStyle,}}
-//       />
-//       <span>物理学院</span>
-//     </div>),
-//     value: '#0000FF',
-//   },
-//   {
-//     label:
-//     (<div>
-//       <span
-//         style={{ ...colorStyle,}}
-//       />
-//       <span>资源与环境科学学院</span>
-//     </div>),
-//     value: '#0000FF',
-//   },
-//   {
-//     label:
-//     (<div>
-//       <span
-//         style={{ ...colorStyle,}}
-//       />
-//       <span>职业技术学院、中燃工学院</span>
-//     </div>),
-//     value: '#0000FF',
-//   },
-//   {
-//     label:
-//     (<div>
-//       <span
-//         style={{ ...colorStyle,}}
-//       />
-//       <span>学前教育学院（旅游系）</span>
-//     </div>),
-//     value: '#0000FF',
-//   },
-//   {
-//     label:
-//     (<div>
-//       <span
-//         style={{ ...colorStyle,}}
-//       />
-//       <span>公共体育教学部</span>
-//     </div>),
-//     value: '#0000FF',
-//   }
-// ];
-
 class Zhuce extends Component {
   constructor(props){
     super(props);
@@ -326,7 +56,6 @@ class Zhuce extends Component {
   getCode=()=>{
     let url = `http://localhost:3005/users/Getnum?tel=${this.state.tel}`;
     axios(url)
-    // .then(res=>res.json)
     .then(
         data=>{
             console.log(data);
@@ -386,7 +115,7 @@ class Zhuce extends Component {
     return (
       <div style={{position:'relative'}}>
         <NavBar
-            style={{ backgroundColor: '#37376F', color: '#fff',position:'sticky ',top:'20',zIndex:10,textAlign:'center'}}
+            style={{ backgroundColor: '#37376F', color: '#fff',position:'sticky ',top:'20',zIndex:10,textAlign:'center',height:'7vh'}}
             leftContent={[
               <Link to="/"><span style={{fontSize:'17px',color:'white'}} className="iconfont icon-ico_leftarrow"></span></Link>
             ]}
@@ -399,8 +128,8 @@ class Zhuce extends Component {
         <input style={{width:'75vw',height:'6vh',marginLeft:'10vw',marginTop:'3vh',border:'none',borderRadius:'3vw',paddingLeft:'5vw'}} className="iconfont icon-wode" count={100} onChange={this.telChange} placeholder="请输入手机号"></input>
         <input style={{width:'50vw',height:'6vh',marginLeft:'10vw',marginTop:'3vh',border:'none',borderRadius:'3vw',paddingLeft:'5vw'}} className="iconfont icon-wode" count={100} onChange={this.numChange} placeholder="请输入验证码"></input>
         <button onClick={this.getCode} style={{marginTop:'5vh',height:'5vh',marginLeft:'5%'}}>获取验证码</button>
-        <input style={{width:'75vw',height:'6vh',marginLeft:'10vw',marginTop:'3vh',border:'none',borderRadius:'3vw',paddingLeft:'5vw'}} className="iconfont icon-wode" count={100} onChange={this.pwdChange} placeholder="请输入密码"></input>
-        <input style={{width:'75vw',height:'6vh',marginLeft:'10vw',marginTop:'3vh',border:'none',borderRadius:'3vw',paddingLeft:'5vw'}} className="iconfont icon-wode" count={100} onChange={this.repwdChange} placeholder="请再次输入密码"></input>
+        <input type='password' style={{width:'75vw',height:'6vh',marginLeft:'10vw',marginTop:'3vh',border:'none',borderRadius:'3vw',paddingLeft:'5vw'}} className="iconfont icon-wode" count={100} onChange={this.pwdChange} placeholder="请输入密码"></input>
+        <input type='password' style={{width:'75vw',height:'6vh',marginLeft:'10vw',marginTop:'3vh',border:'none',borderRadius:'3vw',paddingLeft:'5vw'}} className="iconfont icon-wode" count={100} onChange={this.repwdChange} placeholder="请再次输入密码"></input>
         <div style={{width:"70%",textAlign:'center',marginTop:'6vh',}}>
             <Button onClick={this.getConnect} style={{background:'#37376f',marginLeft:'40%'}}>
                 <span style={{color:'white',textAlign:'center'}}>注册</span>

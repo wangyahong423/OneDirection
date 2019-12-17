@@ -11,18 +11,12 @@ export default class Organization extends Component {
     state = {
         value: '',
       };
-    //   componentDidMount() {
-    //     this.autoFocusInst.focus();
-    //   }
       onChange= (value) => {
         this.setState({ value });
       };
       clear = () => {
         this.setState({ value: '' });
       };
-    //   handleClick = () => {
-    //     this.manualFocusInst.focus();
-    //   }
     render() {
         return (
             <div>
@@ -53,7 +47,7 @@ export default class Organization extends Component {
                             <p className='sort'>分类排行</p>
                         </div>
                         <div>
-                        <List style={{marginTop:'2vh'}}>
+                        <List>
                             <Link to='/schoolorg' >
                                 <Item
                                     arrow="horizontal"

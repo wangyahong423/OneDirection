@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>修改</title>
+</head>
+
+<body>
+  <!-- <h1>hello</h1> -->
+  <div>
+    <form>
+      学院：<input type="text" name="college" />
+      <br />
+      性别：<input type="text" name="sex" />
+      <br />
+    </form>
+    <button id='change'>修改</button>
+  </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+  // const token = require('../config/token.js');
+  $('#change').click(function () {
+    var college = $("input[name='college']").val();
+    var sex = $("input[name='sex']").val();
+    var name = '王五';
+    // let tokenContent = {
+    //   college: college,
+    //   sex: sex,
+    //   name: name
+    // };
+    // let params = {
+    //   expiresIn: 60 * 60 * 24 * 31  // 31天过期
+    // }
+
+    // let token1 = token.getToken(tokenContent, params);
+    $.ajax({
+      url: '/users/change',
+      data: {
+        // token:token1
+        college: college,
+        sex: sex,
+        name: name
+      },
+      success: function (json) {
+        // var json = eval("("+str+")");
+        // 这边直接返回json,所以上面那个转化就不需要了
+        if (json.ok) {
+          alert(json.msg);
+        } else {
+          alert(json.msg);
+        }
+      },
+      error: function (err) {
+        alert("修改失败！");
+      }
+    })
+  });
+</script>
+
+</html>

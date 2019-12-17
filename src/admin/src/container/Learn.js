@@ -8,7 +8,7 @@ export default class Learn extends Component {
             data: [],
             indexList: [],
             current: 1,
-            pageSize: 8,
+            pageSize: 16,
             num: 0,
             totalPage: 0,
             display_block: 'block',
@@ -73,7 +73,7 @@ export default class Learn extends Component {
                     totalPage: Math.ceil(res.data.length / this.state.pageSize),
                     indexList: res.data.slice(this.state.num, this.state.num + this.state.pageSize)
                 })
-            })
+            }) 
     }
 
     handleRegister = (id, e) => {
@@ -88,11 +88,10 @@ export default class Learn extends Component {
     }
     render() {
         return (
-            <div style={{ position: 'relative', width: '850px', overflow: 'hidden', height: '580px', margin: '0 auto', backgroundColor: 'rgba(136, 136, 136, 0.3)', paddingTop: '0px' }}>
+            <div style={{ position: 'relative', width: '800px', overflow: 'hidden', height: '580px', margin: '0 auto', backgroundColor: 'rgba(136, 136, 136, 0.3)', paddingTop: '0px' }}>
                 <table style={{ width: '700px', tableLayout: 'fixed',paddingLeft:'20px' }}>
                     <thead>
                         <tr style={{height:'55px'}}>
-                            <th style={{ width: '80px', textAlign: 'left', fontSize: '28px',color:'white' }}>头像</th>
                             <th style={{ width: '110px', textAlign: 'left', fontSize: '28px',color:'white' }}>名字</th>
                             <th style={{ width: '250px', textAlign: 'left', fontSize: '28px',color:'white' }}>时间</th>
                             <th style={{ width: '230px', textAlign: 'left', fontSize: '28px',color:'white' }}>内容</th>
@@ -103,12 +102,11 @@ export default class Learn extends Component {
                         {
                             this.state.indexList.map(
                                 (item, idx) => <tr key={idx}>
-                                    <td><img style={{ height: '53px', width: '53px',borderRadius:'50%' }} src="http://localhost:3005/images/1.jpg" ></img></td>
                                     <td style={{ fontSize: '20px',color:'white', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '110px' }}>{item.name}</td>
                                     <td style={{ fontSize: '20px' ,color:'white'}}>{item.time}</td>
                                     <td style={{ fontSize: '20px',color:'white', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '150px' }}>{item.content}</td>
                                     <td>
-                                        <button onClick={this.handleRegister.bind(this, (item.tel), (item.time))} style={{ height: '28px', fontFamily: '楷体', fontSize: '20px' }}>删除</button>
+                                        <button onClick={this.handleRegister.bind(this, (item.id))} style={{ height: '28px', fontFamily: '楷体', fontSize: '20px' }}>删除</button>
                                         <button onClick={this.lookContent.bind(this, (item.content))} style={{ height: '28px', fontFamily: '楷体', fontSize: '20px', marginLeft: '10px' }}>查看</button>
                                     </td>
                                 </tr>

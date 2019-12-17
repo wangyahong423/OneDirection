@@ -72,7 +72,6 @@ export default class SchoolMap extends Component {
                         校园地图
                 </NavBar>
                 <div className='qin_back'>
-                    {/* <div className='iconfont icon-ico_leftarrow' id='qin_fanhui' onClick={this.fanhui}></div> */}
                     <input placeholder='&nbsp;河北师范大学' ref={ref => this.autoFocusInst = ref} onChange={this.change} onKeyDown={this.keydown} />
                     <div className='iconfont icon-search' id='qin_MapSearch' onClick={this.click}></div>
                 </div>

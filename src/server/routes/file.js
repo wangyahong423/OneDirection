@@ -8,9 +8,18 @@ var multiparty = require('multiparty');
 var util = require('util');
 var fs = require('fs');
 
-router.get('/addLearn', (req, res) => {
-  res.render("addFile");
-})
+// router.get('/add', (req, res) => {
+//   res.render("addFile");
+// })
+
+
+
+// router.get('/read', (req, res) => {
+//   var filepath = req.query.filepath;
+//   var filePath = path.join("./public/files/"+filepath);
+//   var data = fs.readFileSync(filePath, 'utf8');
+//   res.send({msg: data});
+// });
 
 /* 上传 */
 router.post('/addFile', (req, res) => {
@@ -65,7 +74,7 @@ router.post('/addFile', (req, res) => {
     var reg = / /g;
     time2 = time2.replace(reg, '');
     var time = time1 + ' ' + time2;
-    var name = req.body.name;
+    var name = req.query.name;
     console.log(inputFile.originalFilename, name, time, type);
     let sql = 'insert into file(filepath,name,time,type) values($1,$2,$3,$4)';
     con.query(sql, [inputFile.originalFilename, name, time, type], (err, result) => {
@@ -118,9 +127,9 @@ router.get('/select', (req, res) => {
   let sql = 'select * from file where filepath like $1';
   con.query(sql, [filepath], (err, result) => {
     if (err) {
-      res.josn({ ok: false, msg: '查找失败' });
+      res.json({ ok: false, msg: '查找失败' });
     } else {
-      res.josn({ ok: true, msg: result.rows });
+      res.send(result.rows);
     }
   });
 });

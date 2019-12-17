@@ -62,7 +62,7 @@ export default class CollegeMajor extends Component {
     }
     render() {
         return (
-            <div>
+            <div >
                 <NavBar
                     style={{ backgroundColor: '#37376F', color: '#fff', position: 'sticky ', top: '0', zIndex: 10, textAlign: 'center', height: '7vh' }}
                     leftContent={[
@@ -77,14 +77,12 @@ export default class CollegeMajor extends Component {
                             <div>
                                 <p style={{fontSize:'20px',textIndent:'0.3em'}}>{item.name}</p>
                                 <span style={{marginLeft:'30px',fontSize:'15px'}}>{item.content}</span>
-                                
                             </div>
                     )
                     )}
                 </div>
-                <Accordion style={{ marginTop: '11vh', width: '100vw' }} accordion openAnimation={{}} className="my-accordion" onChange={this.onChange}>
-                </Accordion>
-
+                
+                <Accordion style={{ marginTop: '11vh', width: '100vw' }} accordion openAnimation={{}} className="my-accordion" onChange={this.onChange}></Accordion>
             </div>
         )
     }

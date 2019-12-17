@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <form class="myform">
+    <input type="text" placeholder="标题" id="title" />
+    <input type="text" placeholder="内容" id="content" />
+
+    <button type="button" id="fabu">
+      发布
+    </button>
+  </form>
+</body>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+  // const token = require('../config/token.js');
+  $('#fabu').click(function () {
+    var title = $('#title').val();
+    var content = $('#content').val();
+    var myDate = new Date();
+    var time = myDate.toLocaleString();
+    var name = '张三';
+    // let tokenContent = {
+    //   title: title,
+    //   content: content,
+    //   time: time,
+    //   name: name
+    // };
+    // let params = {
+    //   expiresIn: 60 * 60 * 24 * 31  // 31天过期
+    // }
+    // let token1 = token.getToken(tokenContent, params);
+    $.ajax({
+      url: '/learn/addLearn',
+      data: {
+        // token:token1 
+        title: title,
+        content: content,
+        time: time,
+        name: name
+      },
+      success: function (json) {
+        if (json.ok) {
+          alert("添加成功");
+        } else {
+          alert(json.msg);
+        }
+      },
+      error: function (err) {
+
+      }
+    })
+  });
+</script>
+
+</html>

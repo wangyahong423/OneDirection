@@ -1,5 +1,5 @@
 import React from 'react';
-import { TabBar ,NavBar,Icon} from 'antd-mobile';
+import { TabBar} from 'antd-mobile';
 import Method from '../method/Method';
 import Community from '../community/Community';
 import Share from '../share/Share';

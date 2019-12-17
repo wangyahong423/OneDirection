@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>账户注册</title>
+</head>
+<body>
+    <!-- <h1>hello</h1> -->
+    <div>
+        <form>
+            账号：<input type="text" name="name" />
+            <br/>
+            电话：<input type="text" name="tel" />
+            <br/>
+            密码：<input type="text" name="pwd" />
+            <br/>
+          </form>
+          <button id='zhuce'>注册</button>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+    $('#zhuce').click(function(){
+        var name = $("input[name='name']").val();
+        var tel = $("input[name='tel']").val();
+        var pwd = $("input[name='pwd']").val();
+        $.ajax({
+        url:'/users/addUser',
+        data:{
+          name:name,
+          tel:tel,
+          college:college,
+          pwd:pwd
+        },
+        success:function(json){
+          // var json = eval("("+str+")");
+          // 这边直接返回json,所以上面那个转化就不需要了
+          if(json.ok){
+            alert(json.msg);
+          }else{
+            alert(json.msg);
+          }
+        },
+        error:function(err){
+          alert("注册失败！");
+        }
+      })
+    });
+</script>
+</html>

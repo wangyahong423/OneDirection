@@ -58,7 +58,7 @@ export default class App extends Component {
             <span style={{ fontSize: '38px', color: 'white', letterSpacing: '25px', marginLeft: '20%' }}>校园新生通后台管理系统</span>
           </div>
           <div style={{ width: '20%', height: '70px', float: 'left', marginLeft: '10px' }}>
-            <span onClick={this.goback} style={{ float: 'right', lineHeight: '70px', marginLeft: '20px', marginRight: '20px' }}><button style={{ fontSize: '24px',fontFamily:'楷体',border:'none',borderRadius:'12px',height:'33px' }}>退出</button></span>
+            <span onClick={this.goback} style={{marginTop:'4px', float: 'right', lineHeight: '70px', marginLeft: '20px', marginRight: '20px' }}><button style={{ fontSize: '24px',fontFamily:'楷体',border:'none',borderRadius:'12px',height:'33px' }}>退出</button></span>
             <span style={{ float: 'right', lineHeight: '70px', fontSize: '28px', color: 'white' }}>Admin</span>
             <span className='iconfont icon-lingdang' style={{ fontSize: '40px', color: 'white', lineHeight: '70px', float: 'right', marginRight: '10px' }}></span>
           </div>

@@ -12,22 +12,22 @@ var communityRouter = require('./routes/community');
 var managerRouter = require('./routes/manager');
 var fileRouter = require('./routes/file');
 var learnRouter = require('./routes/learn');
+var collectRouter = require('./routes/collect');
 var learntalkRouter = require('./routes/learntalk');
-var learnlikeRouter = require('./routes/learnlike');
 var communitytalkRouter = require('./routes/communitytalk');
+var learnlikeRouter = require('./routes/learnlike');
 var communitylikeRouter = require('./routes/communitylike');
 var collegesRouter = require('./routes/colleges');
-var leadersRouter = require('./routes/leaders');
-var collectRouter = require('./routes/collect');
 var majorRouter = require('./routes/major');
+var leadersRouter = require('./routes/leaders');
 
 var app = express();
 
-app.use(cors());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -40,15 +40,14 @@ app.use('/community',communityRouter);
 app.use('/manager', managerRouter);
 app.use('/file', fileRouter);
 app.use('/learn', learnRouter);
-app.use('/learntalk',learntalkRouter);
-qpp.use('/learnlike',learnlikeRouter);
+app.use('/leaders', leadersRouter);
+app.use('/collect', collectRouter);
 app.use('/communitytalk',communitytalkRouter);
+app.use('/learnlike', learnlikeRouter);
 app.use('/communitylike',communitylikeRouter);
+app.use('/learntalk', learntalkRouter);
 app.use('/colleges',collegesRouter);
-app.use('/leaders',leadersRouter);
-app.use('/collect',collectRouter);
-app.use('/major',majorRouter);
-
+app.use('/major', majorRouter);
 
 // catch 404 and forward to error handler  
 app.use(function(req, res, next) {
@@ -65,5 +64,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
 
 module.exports = app;

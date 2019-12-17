@@ -26,9 +26,7 @@ export default class Practice extends Component {
                         实践服务类
                 </NavBar> 
                 <div>
-                    <div>
-                        <SearchBar placeholder="Search" maxLength={8} />
-                    </div>
+                <div  style={{height:'3vh',width:'100vw'}}></div>
                     <Flex style={{marginBottom:'5vh'}}>
                         <div className='placeholder'>
                             <div className='schoolBox1' >

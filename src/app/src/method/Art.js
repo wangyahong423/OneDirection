@@ -376,25 +376,12 @@ export default class SchoolOrg extends Component {
                         </div>
                         <div className='placeholder'>
                             <div className='schoolBox1' >
-                                <div className='star' ></div>
-                                <span style={{color:'#000'}}>冀star艺术团</span>
-                            </div>
-                        </div>
-                    </Flex>
-                    <Flex style={{marginBottom:'5vh'}}>
-                        <div className='placeholder'>
-                            <div className='schoolBox1' >
                                 <div className='chuangyi' ></div>
                                 <span style={{color:'#000'}}>创译游漫社</span>
                             </div>
                         </div>
-                        <div className='placeholder'>
-                            <div className='schoolBox1' >
-                                <div className='zhumeng' ></div>
-                                <span style={{color:'#000'}}>筑梦园</span>
-                            </div>
-                        </div>
                     </Flex>
+                    
                 </div>
             </div>
         )

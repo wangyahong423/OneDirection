@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <%for(var i = 0;i<fileList.length;i++){%>
+        <li>
+            <%=fileList[i]["filepath"]%>
+            <a href = "/file/deleteFile?filepath=<%=fileList[i]["filepath"]%>">删除</a>
+            <a href = "/collect/add?filepath=<%=fileList[i]["filepath"]%>">收藏</a>
+            <a href = "/collect/delete?filepath=<%=fileList[i]["filepath"]%>">取消收藏</a>
+        </li>
+    <%}%>
+</body>
+</html>

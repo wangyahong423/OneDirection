@@ -1,0 +1,31 @@
+【Content-Type是post提交的数据】
+1、Content-Type是指http/https发送信息至服务器时的内容编码类型，
+   contentType用于表明发送数据流的类型，服务器根据编码类型使用特定的解析方式，获取数据流中的数据。
+
+2、在网络请求中，常用的Content-Type有如下：
+   ①text/html, text/plain, text/css, text/javascript, image/jpeg, image/png, image/gif,
+   ②application/x-www-form-urlencoded, multipart/form-data, application/json, application/xml 等。
+     其中：text/html, text/plain, text/css, text/javascript, image/jpeg, image/png, image/gif, 
+     都是常见的页面资源类型。
+   ③application/x-www-form-urlencoded, multipart/form-data, application/json, application/xml 
+     这四个是ajax的请求，表单提交或上传文件的常用的资源类型。form表单中可以定义enctype属性，
+     该属性的含义是在发送到服务器之前应该如何对表单数据进行编码。默认的情况下，表单数据会编码为
+     "application/x-www-form-unlencoded".
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

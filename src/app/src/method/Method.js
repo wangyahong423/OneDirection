@@ -13,8 +13,6 @@ export default class Method extends Component {
                         autoplay={true}
                         infinite
                         dots={false}
-                        // beforeChange={(from, to) => }
-                        // afterChange={index => console.log('slide to', index)}
                     >
                     {[1,2,3,4].map(val => (
                         <a key={val} style={{ display: 'inline-block', width: '100vw', height: '35vh' }} >

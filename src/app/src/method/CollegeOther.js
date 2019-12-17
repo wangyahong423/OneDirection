@@ -50,7 +50,6 @@ export default class CollegeOther extends Component {
                    data:brr
                })
             })
-            console.log(this.state.data)        
         })
       }
     render() {
@@ -63,7 +62,7 @@ export default class CollegeOther extends Component {
                     ]}>
                         其他学院
                 </NavBar>
-                <div style={{height:'86vh'}}>
+                <div style={{height:'86vh',marginTop:'1vh'}}>
                     {
                     this.state.data.map((item)=>(
                         <Accordion accordion openAnimation={{}} className="my-accordion" onChange={this.onChange}>

@@ -8,7 +8,7 @@ export default class Community extends Component {
             data: [],
             indexList: [],
             current: 1,
-            pageSize: 8,
+            pageSize: 16,
             num: 0,
             totalPage: 0,
             display_block: 'block',
@@ -94,7 +94,6 @@ export default class Community extends Component {
                 <table style={{ width: '800px', tableLayout: 'fixed', paddingLeft: '20px' }}>
                     <thead>
                         <tr style={{ height: '55px' }}>
-                            <th style={{ color: 'white', width: '80px', textAlign: 'left', fontSize: '28px' }}>头像</th>
                             <th style={{ color: 'white', width: '100px', textAlign: 'left', fontSize: '28px' }}>名字</th>
                             <th style={{ color: 'white', width: '240px', textAlign: 'left', fontSize: '28px' }}>时间</th>
                             <th style={{ color: 'white', width: '200px', textAlign: 'left', fontSize: '28px' }}>内容</th>
@@ -105,7 +104,6 @@ export default class Community extends Component {
                         {
                             this.state.indexList.map(
                                 (item, idx) => <tr key={idx}>
-                                    <td><img style={{ height: '53px', width: '53px', borderRadius: '50%' }} src="http://localhost:3005/images/1.jpg" ></img></td>
                                     <td style={{ fontSize: '20px', color: 'white', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '150px' }}>{item.name}</td>
                                     <td style={{ fontSize: '20px', color: 'white' }}>{item.time}</td>
                                     <td style={{ fontSize: '20px', color: 'white', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '200px' }}>{item.content}</td>

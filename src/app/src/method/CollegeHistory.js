@@ -65,7 +65,7 @@ export default class CollegeHistory extends Component {
                 </NavBar>
                 {
                     this.state.data.map((item) => (
-                        <div className='jianjieImg'>
+                        <div className='jianjieImg2'>
                             <div className='jianjieBox' >
                                 <div className='cword'>
                                     <p>{item.history}</p>

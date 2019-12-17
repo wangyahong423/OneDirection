@@ -28,13 +28,10 @@ router.get('/list', (req, res) => {
 })
 
 router.get('/delete', (req, res) => {
-  // var name = req.query.name;
-  // var time = req.query.time;
-  // var reg = /%20/;
-  // time = time.replace(reg, ' ');
-  var id = req.query.id;
-  let sql = 'delete from communitylike where id=$1';
-  con.query(sql, [id], (err, result) => {
+  var cid = req.query.cid;
+  var name = req.query.name;
+  let sql = 'delete from communitylike where cid=$1 and name=$2';
+  con.query(sql, [cid,name], (err, result) => {
     if (err) {
       res.json({ ok: false, msg: "取消赞失败！" });
     } else {

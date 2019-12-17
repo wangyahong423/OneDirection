@@ -21,12 +21,12 @@ export default class Shezhi extends Component {
           <span>设置</span>
         </NavBar>
         <List>
-          <Link to="/zhanghao">
+          <Link to="/reset">
             <Item
               arrow="horizontal"
               onClick={() => { }}
               style={{ paddingLeft: '20px', borderBottom: '1px solid grey', height: '60px' }}
-            ><span style={{ marginLeft: '10px', fontSize: '20px' }}>账号与安全</span></Item>
+            ><span style={{ marginLeft: '10px', fontSize: '20px' }}>密码重置</span></Item>
           </Link>
           <Link to="/xiaoxixi">
             <Item

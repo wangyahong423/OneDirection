@@ -28,13 +28,13 @@ export default class ShoolLogo extends Component {
                             </Accordion.Panel>
                             <Accordion.Panel header="校训" className="pad">
                                 <List className="my-list">
-                                    <List.Item><img style={{height:'45vh',width:'40vw'}} src='gonglve/xiaoxun.png'></img></List.Item>
+                                    <List.Item><img style={{height:'45vh',width:'40vw',marginLeft:'25%'}} src='gonglve/xiaoxun.png'></img></List.Item>
                                 </List>
                             </Accordion.Panel>
                             <Accordion.Panel header="校徽" className="pad">
                                 <List className="my-list">
                                     <List.Item>
-                                        <img style={{height:'33vh',width:'60vw'}} src='gonglve/xiaohui.gif'></img>
+                                        <img style={{height:'33vh',width:'60vw',marginLeft:'18%'}} src='gonglve/xiaohui.gif'></img>
                                     </List.Item>
                                 </List>
                             </Accordion.Panel>

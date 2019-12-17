@@ -93,7 +93,7 @@ export default class File extends Component {
             <div>
                 <div style={{ position: 'relative', width: '850px', overflow: 'hidden', height: '580px', margin: '0 auto', backgroundColor: 'rgba(136, 136, 136, 0.3)', paddingTop: '0px'}}>
                     <div style={{ height: '40px', width: '700px' }}>
-                        <input type='search' onKeyDown={(e) => this.onkeydown(e)} placeholder="回车进行搜索" style={{ height: '40px', width: '850px', fontSize: '20px', paddingLeft: '30px' }} ></input>
+                        <input type='search' onKeyDown={(e) => this.onkeydown(e)} placeholder="回车进行搜索" style={{opacity:'0.4',fontFamily:'楷体', height: '40px', width: '850px', fontSize: '20px', paddingLeft: '30px' }} ></input>
                     </div>
                     <table style={{ width: '700px', tableLayout: 'fixed' ,paddingLeft:'20px'}}>
                         <thead>
@@ -114,8 +114,10 @@ export default class File extends Component {
                                         <td style={{ fontSize: '20px', color: 'white' }}>{item.time}</td>
                                         <td style={{ fontSize: '20px', color: 'white' }}>{item.type}</td>
                                         <td>
-                                        <button onClick={this.handleRegister.bind(this, (item.tel), (item.time))} style={{ height: '28px', fontFamily: '楷体', fontSize: '20px' }}>删除</button>
-                                        <button  style={{ height: '28px', fontFamily: '楷体', fontSize: '20px', marginLeft: '10px' }}>查看</button>
+                                        <button onClick={this.handleRegister.bind(this,(item.filepath))} style={{ height: '28px', fontFamily: '楷体', fontSize: '20px' }}>删除</button>
+                                        <button style={{ height: '28px', fontFamily: '楷体', fontSize: '20px', marginLeft: '10px'  }}>
+                                            <a href={"http://localhost:3005/files/" + item.filepath} style={{fontFamily: '楷体', fontSize: '20px',color:'black',textDecoration:'none'}}>下载</a>
+                                        </button>
                                     </td>
                                     </tr>
                                 )

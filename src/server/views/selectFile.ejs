@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <form class="myform">
+    <input type="text" placeholder="标题" id="title" />
+    
+    <button type="button" id="fabu">
+      查找
+    </button>
+  </form>
+  <div id='demo'></div>
+</body>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+  // const token = require('../config/token.js');
+  $('#fabu').click(function () {
+    var title = $('#title').val();
+    $.ajax({
+      url: '/file/select',
+      data: {
+        // token:token1 
+        title: title
+      },
+      success: function (json) {
+        if (json.ok) {
+            for(var i =0;i<json.msg.length;i++){
+                var m = json.msg[i].filepath+json.msg[i].name+json.msg[i].time+json.msg[i].type;
+                document.getElementById("demo").innerHTML += m;
+            }
+            
+        } else {
+          alert(json.msg);
+        }
+      },
+      error: function (err) {
+
+      }
+    })
+  });
+</script>
+
+</html>

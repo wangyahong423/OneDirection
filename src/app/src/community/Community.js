@@ -203,23 +203,23 @@ export default class Community1 extends Component {
               <span className="iconfont icon-add-sy" style={{ fontSize: "6vh", color: "#37376F" }}></span>
             </div></Link>
           }
-          <div style={{ marginTop: '12vh' }}>
+          <div style={{ marginTop: '13vh' }}>
             {
               this.state.data.map((item, idx) =>
-                <div style={{ background: '#fff', color: 'black' }}>
+                <div style={{ background: '#fff', color: 'black' }}> 
                   <div style={{ float: "left" }}>
                     <img src={this.state.pic[idx]} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
                   </div>
                   <p style={{ marginLeft: 75, fontSize: '2.5vh', lineHeight: 2.5, marginTop: 6 }}>{item.name}</p>
                   <div style={{ marginLeft: 75, color: 'gray', fontSize: '2vw', marginTop: "-5vw" }}>{item.time}</div>
                   <Link to={`/aboutyouknow/${item.id}`}>
-                    <p style={{ marginLeft: 25, color: 'black', marginTop: 20 }}>{item.content}</p>
+                    <p style={{ marginLeft: 25, color: 'black', marginTop: 20,fontSize:'17px',width:'87vw', overflow: "hidden",textOverflow: "ellipsis",whiteSpace: "nowrap" }}>{item.content}</p>
                   </Link>
                   <div style={{ marginTop: 20 }}>
                     <Link to={`/pinglunone/${item.id}`}>
-                      <sapn className="iconfont icon-pinglun" style={{ marginLeft: '27%',fontSize: '3.2vh', color: 'black' }}></sapn>
+                      <sapn className="iconfont icon-pinglun" style={{ marginLeft: '27%',fontSize: '24px', color: 'black' }}></sapn>
                     </Link>
-                    <sapn className="iconfont icon-dianzan" onClick={this.change.bind(this,(idx))} style={{marginLeft: '26%',color: this.state.color[idx]}}></sapn>
+                    <sapn className="iconfont icon-dianzan" onClick={this.change.bind(this,(idx))} style={{fontSize: '24px',marginLeft: '26%',color: this.state.color[idx]}}></sapn>
                   </div>
                   <div style={{ width: '100%', height: '2vh', backgroundColor: 'white' }}>
                   </div>

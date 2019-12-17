@@ -29,7 +29,6 @@ export default class CollegeTeachers extends Component {
                 })
             })
 
-        console.log(this.state.name)
         let url2 = `http://localhost:3005/users/list`;
         axios(url2)
             .then((res) => {
@@ -44,13 +43,6 @@ export default class CollegeTeachers extends Component {
                     }
                 })
             })
-        // this.state.todo.map((item)=>{
-        //     if(item.name == this.state.name){
-        //         this.setState({
-        //             college:item.college
-        //         })
-        //     }
-        // })
         let url = `http://localhost:3005/leaders/list`;
         axios(url)
             .then((res) => {
@@ -66,8 +58,6 @@ export default class CollegeTeachers extends Component {
                         data: brr
                     })
                 })
-                console.log(this.state.college)
-                console.log(this.state.name)
             })
     }
     render() {
@@ -85,13 +75,6 @@ export default class CollegeTeachers extends Component {
 
                         this.state.data.map((item) => (
                             <div>
-                                {/* <Accordion style={{marginTop:'11vh',width:'100vw'}} accordion openAnimation={{}} className="my-accordion" onChange={this.onChange}>
-                                <Accordion.Panel header={item.job}>
-                                    <List className="my-list">
-                                        <List.Item style={{height:'10vh',marginLeft:'5vw'}}><p>{item.name}&emsp;{item.tel}&emsp;{item.emial}</p></List.Item>
-                                    </List>
-                                </Accordion.Panel>
-                            </Accordion> */}
                                 <p style={{ fontSize: '20px', textIndent: '0.3em' }}>{item.job}</p>
                                 <span style={{ marginLeft: '30px', fontSize: '15px' }}>{item.name}</span>
                                 <span style={{ marginLeft: '10px', fontSize: '15px' }}>{item.tel}</span>
@@ -101,21 +84,7 @@ export default class CollegeTeachers extends Component {
                         )}
                 </div>
                 <Accordion style={{ marginTop: '11vh', width: '100vw' }} accordion openAnimation={{}} className="my-accordion" onChange={this.onChange}>
-                    {/* <Accordion.Panel header={this.state.data[0].job}>
-                        <List className="my-list">
-                        <List.Item style={{height:'10vh',marginLeft:'5vw'}}><p>{this.state.data[0].name}&emsp;{this.state.data[0].tel}&emsp;{this.state.data[0].emial}</p></List.Item>
-                        </List>
-                    </Accordion.Panel> */}
-                    {/* <Accordion.Panel header={this.state.data[1].job}>
-                        <List className="my-list">
-                        <List.Item style={{height:'10vh',marginLeft:'5vw'}}><p>{this.state.data[1].name}&emsp;{this.state.data[1].tel}&emsp;{this.state.data[1].emial}</p></List.Item>
-                        </List>
-                    </Accordion.Panel>
-                    <Accordion.Panel header={this.state.data[2].job}>
-                        <List className="my-list">
-                        <List.Item style={{height:'10vh',marginLeft:'5vw'}}><p>{this.state.data[2].name}&emsp;{this.state.data.tel}&emsp;{this.state.data[2].emial}</p></List.Item>
-                        </List>
-                    </Accordion.Panel> */}
+                    
                 </Accordion>
 
             </div>

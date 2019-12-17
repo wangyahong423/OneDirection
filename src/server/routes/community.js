@@ -7,12 +7,12 @@ router.get('/addCommunity', (req, res) => {
   var name = req.query.name;
   var clicks = req.query.clicks;
   var time = req.query.time;
-  var pic = req.query.pic;
-  let sql = 'insert into community(content, name, clicks, time, pic) values($1,$2,$3,$4,$5)';
-  con.rquery(sql, [content, name, clicks, time, pic], (err, result) => {
+  let sql = 'insert into community(content, name, clicks, time) values($1,$2,$3,$4)';
+  con.query(sql, [content, name, clicks, time], (err, result) => {
     if (err) {
       res.json({ ok: false, msg: '添加失败！' });
     } else {
+      console.log(result.rows);
       res.json({ ok: true, msg: '添加成功！' });
     }
   });
@@ -43,10 +43,6 @@ router.get('/list/:id', (req, res) => {
 
 
 router.get('/deleteCommunity', (req, res) => {
-  // var name = req.query.name;
-  // var time = req.query.time;
-  // var reg = /%20/;
-  // time = time.replace(reg, ' ');
   var id = req.query.id;
   let sql = 'delete from community where id=$1';
   con.query(sql, [id], (err, result) => {
@@ -59,16 +55,30 @@ router.get('/deleteCommunity', (req, res) => {
 })
 //更新点击量
 router.get('/updateCommunity', (req, res) => {
-  var clicks = req.query.clicks;
-  var id = req.query.id;
-  let sql = 'update community set clicks=$1 where id=$2';
-  con.query(sql, [clicks, id], (err, result) => {
+    var clicks = req.query.clicks;
+    var id = req.query.id;
+    let sql = 'update community set clicks=$1 where id=$2';
+    con.query(sql, [clicks, id],(err,result)=>{
+      if(err){
+         console.log(err);
+      }else{
+        console.log(result.rows);
+      }
+    });
+});
+
+// 社区搜索
+router.get('/select', (req, res) => {
+  var content = req.query.content;
+  content = '%'+content+'%';
+  let sql = 'select * from community where content like $1';
+  con.query(sql, [content], (err, result) => {
     if (err) {
-      console.log(err);
+      res.json({ ok: false, msg: '查找失败！' });
     } else {
-      console.log('true');
+      res.send(result.rows);
     }
   });
-})
+});
 
 module.exports = router;

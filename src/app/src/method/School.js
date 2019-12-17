@@ -27,7 +27,7 @@ export default class School extends Component {
                 >
                     {[1,2,3,4].map(val => (
                         <a key={val} style={{ display: 'inline-block', width: '100vw', height: '30vh' }} >
-                            <img src={`gonglve/method${val}.jpg`} alt="" style={{ width: '100vw', verticalAlign: 'top' }} onLoad={() => { window.dispatchEvent(new Event('resize')); this.setState({ imgHeight: 'auto' });}}/>
+                            <img src={`gonglve/gonglve${val}.jpg`} alt="" style={{ width: '100vw', verticalAlign: 'top' }} onLoad={() => { window.dispatchEvent(new Event('resize')); this.setState({ imgHeight: 'auto' });}}/>
                         </a>
                     ))}
                 </Carousel>

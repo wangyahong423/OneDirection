@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .login {
+            /* background: url(./login_bg.jpg) no-repeat; */
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            display: -webkit-flex;
+        }
+
+        .leftpart {
+            background: no-repeat;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            width: 60%;
+        }
+
+        .loginform {
+            width: 40%;
+            position: fixed;
+            top: 0px;
+            right: 0px;
+            bottom: 0px;
+        }
+
+        .el-input__inner {
+            -webkit-appearance: none;
+            background-color: #FFF;
+            background-image: none;
+            border-radius: 4px;
+            border: 1px solid #DCDFE6;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            color: #606266;
+            display: inline-block;
+            font-size: inherit;
+            height: 40px;
+            line-height: 40px;
+            outline: 0;
+            padding: 0 15px;
+            -webkit-transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+            transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+            width: 100%;
+        }
+
+        .myform {
+            width: 80%;
+            margin: 0 auto;
+            margin-top: 150px;
+        }
+
+        .myform input {
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        .login-btn-submit {
+            width: 100%;
+            margin-top: 38px;
+        }
+
+        .el-button {
+            display: inline-block;
+            line-height: 1;
+            white-space: nowrap;
+            cursor: pointer;
+            background: #FFF;
+            border: 1px solid #DCDFE6;
+            color: #606266;
+            -webkit-appearance: none;
+            text-align: center;
+            box-sizing: border-box;
+            outline: 0;
+            margin: 0;
+            -webkit-transition: .1s;
+            transition: .1s;
+            font-weight: 500;
+            padding: 12px 20px;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+
+        .el-button--primary {
+            color: #FFF;
+            background-color: #409EFF;
+            border-color: #409EFF;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login">
+        <div class="leftpart"></div>
+        <div class="loginform">
+            <form class="myform">
+                <input type="text" autocomplete="off" placeholder="帐号" class="el-input__inner" id="username" />
+                <input type="text" autocomplete="off" placeholder="性别" class="el-input__inner" id="sex" />
+                <input type="text" autocomplete="off" placeholder="电话号码" class="el-input__inner" id="tel" />
+                <input type="password" autocomplete="off" placeholder="密码" class="el-input__inner" id="pwd" />
+
+                <button type="button" class="el-button login-btn-submit el-button--primary" id="login">
+                    <!---->
+                    <!----><span>注册</span></button>
+            </form>
+        </div>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+    $('#login').click(function () {
+        var uesrname = $('#username').val();
+        var sex = $('#sex').val();
+        var tel = $('#tel').val();
+        var pwd = $('#pwd').val();
+        $.ajax({
+            url: '/manager/addManager',
+            data: {
+                name: uesrname,
+                sex: sex,
+                tel: tel,
+                pwd: pwd
+            },
+            success: function (json) {
+                // var json = eval("("+str+")");
+                // 这边直接返回json,所以上面那个转化就不需要了
+                if (json.ok) {
+                    alert("注册成功");
+                } else {
+                    alert(json.msg);
+                }
+            },
+            error: function (err) {
+            }
+        })
+    });
+
+
+</script>
+
+</html>

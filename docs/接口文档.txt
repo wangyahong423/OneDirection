@@ -1,0 +1,50 @@
+管理员：
+	添加：/manager/addManager
+	登录：/manager/login
+	列表信息：/manager/list
+
+用户：
+	添加：/users/addUser
+	完善资料：/users/change
+	登录：/users/login
+	列表信息：/users/list
+学习交流：
+	添加：/learn/addLearn
+	删除：/learn/deleteLearn
+	列表信息：/learn/list
+文件：
+	上传文件：/file/addFile（post）
+	列表信息：/file/list
+	删除：/file/deleteFile
+	查询：/file/select
+反馈：
+	添加：/feedback/addFeedback
+	删除：/feedback/deleteFeedback
+	列表信息：/feedback/list
+社区：
+	添加：/community/addCommunity
+	删除：/community/deleteCommunity
+	列表信息：/community/list
+	修改点击量：/community/updateCommunity
+文件收藏：
+	添加：/collect/add
+	删除：/collect/delete
+	列表信息：/collect/list
+
+
+
+
+用户信息表：users
+管理员信息表：manager
+学习交流表：learn
+文件表：file
+反馈表：feedback
+社区表：community
+文件收藏表：collect
+学习交流点赞表：learnlike
+社区交流点赞表：communitylike
+学习交流评论表：learntalk
+社区交流评论表：communitytalk
+学院表：colleges
+学院领导表：leaders
+专业介绍表：major

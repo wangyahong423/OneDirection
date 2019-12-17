@@ -66,8 +66,8 @@ class Add extends Component {
             {...getFieldProps(' ', {
               initialValue: '',
             })}
-            rows={5}
-            count={200}
+            rows={10}
+            count={500}
           />
         </List>
       </div>

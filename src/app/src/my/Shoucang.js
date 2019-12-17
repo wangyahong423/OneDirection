@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import { NavBar, Icon, Tabs, WingBlank, SearchBar } from 'antd-mobile';
+import { Link } from 'react-router-dom';
+import { NavBar } from 'antd-mobile';
 import axios from 'axios';
 
 export default class Shoucang extends Component {
@@ -8,31 +8,56 @@ export default class Shoucang extends Component {
     super();
     this.state = {
       data: [],
+      name: ''
     }
   }
   componentDidMount() {
+    let url1 = `http://localhost:3005/users/getName`;
+    axios(url1)
+      .then((res) => {
+        this.setState({
+          name: res.data.name
+        })
+      })
     let url = `http://localhost:3005/collect/list`;
     axios(url)
       .then((res) => {
         this.setState({
           data: res.data
         })
+        var arr = [];
+
+        this.state.data.map((item) => {
+          if (item.name == this.state.name) {
+            arr.push(item);
+            console.log(arr);
+            console.log(item.name, this.state.name)
+          }
+          console.log(item.name, this.state.name)
+
+          this.setState({
+            data: arr
+          })
+          console.log(item.name == this.state.name)
+
+        })
       })
-  }
-  delFile = (filepath, name) => {
-    let url1 = `http://localhost:3005/collect/delete?filepath=${name}&name=李四`;
-    axios(url1)
-      .then((res) => {
-        if (res.err) {
-          alert('收藏失败');
-        } else {
-          console.log(1);
-          alert('收藏成功');
-        }
-      })
-    console.log(this.state.name);
+
+
+
 
   }
+  delFile = (filepath) => {
+    let url1 = `http://localhost:3005/collect/delete?filepath=${filepath}&name=${this.state.name}`;
+    axios(url1)
+      .then((res) => {
+      })
+    window.location.reload();
+  }
+  // onLoad=(filepath)=>{
+  //   http://localhost:3005/files/filepath
+
+  // }
   render() {
     return (
       <div style={{ position: 'relative' }}>
@@ -44,28 +69,31 @@ export default class Shoucang extends Component {
         >
           <span>我的收藏</span>
         </NavBar>
-        <div style={{ position: 'fixed', top: '0', width: "100vw" }}>
-          <WingBlank><div className="sub-title"></div></WingBlank>
-          <SearchBar placeholder="搜索" maxLength={8} />
-        </div>
-        <div style={{ marginTop: "13vh" }}>
+
+        <div style={{ marginTop: "7vh" }}>
           {
             this.state.data.map((item) => (
               <div>
                 <div className="data1">
                   <div style={{ float: "left" }}>
                     <div className="iconfont icon-wenjian"></div>
-                    <div className="shoucangFont">
+                    <div className="shoucangFont" style={{
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap"
+                    }}>
                       <span>{item.filepath}</span><br />
                     </div>
                   </div>
-                  <span className="iconfont icon-collection" style={{ fontSize: "25px" }} onClick={this.delFile.bind(this, (item.filepath, item.name))}></span><br />
+                  <button style={{ height: "7vw", width: '10vw', display: "inline", margin: "3vh 1vw 0 3vw", float: "left", backgroundColor: "#437DFF", border: "none", borderRadius: "1vw", color: '#fff', fontSize: "1vh" }} onClick={this.delFile.bind(this, (item.filepath))}>取消<br />收藏</button>
+                  <button style={{ height: "7vw", width: '10vw', display: "inline", margin: "3vh 0 0 0", float: "left", backgroundColor: "#437DFF", border: "none", borderRadius: "1vw", fontSize: "1vh" }}>
+                    <a href={"http://localhost:3005/files/" + item.filepath} style={{ color: 'white', fontSize: "3vw" }}>下载</a> </button>
                 </div>
               </div>
             ))
           }
         </div>
-      </div>
+      </div >
     );
   }
 }

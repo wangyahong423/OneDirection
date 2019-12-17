@@ -26,7 +26,7 @@ router.get('/add', (req, res) => {
             // res.send('error');
             console.log(err);
         } else {
-            console.log('true');
+            console.log(result.rows);
         }
     });
 });
@@ -41,7 +41,7 @@ router.get('/delete', (req, res) => {
             // res.send('error');
             console.log(err);
         } else {
-            console.log('true');
+            console.log(result.rows);
         }
     });
 });

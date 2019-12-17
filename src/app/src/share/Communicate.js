@@ -14,19 +14,34 @@ class Communicate extends Component {
             time: new Date().toLocaleString(),
         }
     }
-    handleRegister = () => {
-        let url = `http://localhost:3005/learn/addLearn?content=${this.state.content}
-        &name=${this.state.name}&time=${this.state.time}`;
-        axios(url)
+    componentDidMount() {
+        let url3 = `http://localhost:3005/users/getName`;
+        axios(url3)
             .then((res) => {
-                console.log(555);
-                if (res.data.ok) {
-                    alert(res.data.msg);
-                } else {
-                    console.log(1);
-                    alert(res.data.msg);
-                }
+                this.setState({
+                    name: res.data.name
+                })
             })
+    }
+    handleRegister = () => {
+        if (this.state.content) {
+            let url = `http://localhost:3005/learn/addLearn?content=${this.state.content}
+        &name=${this.state.name}&time=${this.state.time}`;
+            console.log(this.state.name)
+            axios(url)
+                .then((res) => {
+                    console.log(555);
+                    if (res.data.ok) {
+                        alert(res.data.msg);
+                    } else {
+                        console.log(1);
+                        alert(res.data.msg);
+                    }
+                })
+        }
+        else {
+            alert("未填写内容")
+        }
     }
     getContent = (e) => {
         this.setState({
@@ -63,8 +78,8 @@ class Communicate extends Component {
                         {...getFieldProps('count', {
                             initialValue: '',
                         })}
-                        rows={5}
-                        count={100}
+                        rows={10}
+                        count={500}
                     />
                 </List>
             </div>

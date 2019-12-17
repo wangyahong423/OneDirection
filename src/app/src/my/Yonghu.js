@@ -14,6 +14,7 @@ export default class Yonghu extends Component {
   }
   handleRegister = () => {
     let url = `http://localhost:3005/feedback/addFeedback?content=${this.state.content}&tel=${this.state.tel}&time=${this.state.time}`;
+    console.log(this.state.time)
     axios(url)
       .then((res) => {
         if (res.data.ok) {

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= title %></title>
+</head>
+
+<body>
+    <div>
+        <form>
+          <input type="text" autocomplete="off" placeholder="帐号" id="username" />
+          <input type="password" autocomplete="off" placeholder="密码" id="pwd" />
+
+          <button type="button" id="login">
+              <!---->
+              <!----><span>登录</span></button>
+        </form>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+    $('#login').click(function(){
+        var name = $('#username').val();
+        var pwd = $('#pwd').val();
+        $.ajax({
+        url:'/users/login',
+        data:{
+          name:name,
+          pwd:pwd
+        },
+        success:function(json){
+          // var json = eval("("+str+")");
+          // 这边直接返回json,所以上面那个转化就不需要了
+          if(json.ok){
+            alert(json.msg);
+          }else{
+            alert(json.msg);
+          }
+        },
+        error:function(err){
+          alert("账户不存在！");
+        }
+      })
+    });
+</script>
+
+</html>

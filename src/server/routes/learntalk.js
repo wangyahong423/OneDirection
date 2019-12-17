@@ -11,7 +11,7 @@ router.get('/list', (req, res) => {
             // res.send('error');
             console.log(err);
         } else {
-            res.send("true");
+            res.send(result.rows);
         }
     });
 });
@@ -20,13 +20,13 @@ router.get('/add', (req, res) => {
     var lid = req.query.lid;
     var name = req.query.name;
     var content = req.query.content;
-    let sql = 'insert into learntalk(lid,name,content) values($1,$2,$3)';
-    con.query(sql, [lid, name, content], (err, result) => {
+    var time = req.query.time;
+    let sql = 'insert into learntalk(lid,name,content,time) values($1,$2,$3,$4)';
+    con.query(sql, [lid, name, content,time], (err, result) => {
         if (err) {
-            // res.send('error');
-            console.log(err);
+            res.json({ ok: false, msg: '评论失败！' });
         } else {
-            console.log("true");
+            res.json({ ok: true, msg: '评论成功！' });
         }
     });
 });
@@ -41,9 +41,10 @@ router.get('/delete', (req, res) => {
             // res.send('error');
             console.log(err);
         } else {
-            console.log('true');
+            console.log(result.rows);
         }
     });
 });
+
 
 module.exports = router;

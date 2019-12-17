@@ -18,9 +18,7 @@ export default class SchoolOrg extends Component {
                         校级组织类
                 </NavBar> 
                 <div>
-                    <div>
-                        <SearchBar placeholder="搜索" maxLength={8} />
-                    </div>
+                    <div  style={{height:'3vh',width:'100vw'}}></div>
                     <Flex style={{marginBottom:'5vh'}}>
                         <div className='placeholder'>
                             <div className='schoolBox1' >

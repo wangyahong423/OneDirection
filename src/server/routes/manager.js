@@ -13,15 +13,25 @@ router.get('/getName', (req, res) => {
   res.json({ name: managername });
 });
 
+
 router.get('/addManager', (req, res) => {
-  let sql = 'insert into manager(name,tel,pwd) values($1,$2,$3)';
-  con.query(sql, [req.query.name, req.query.tel, req.query.pwd], (err, result) => {
-    if (err) {
-      res.json({ ok: false, msg: "注册失败" });
-    } else {
-      res.json({ ok: true, msg: "注册成功" });
-    }
-  });
+  var name = req.query.name;
+  var tel = req.query.tel;
+  var pwd = req.query.pwd;
+  if (name && tel && pwd) {
+    let sql = 'insert into manager(name,tel,pwd) values($1,$2,$3)';
+    con.query(sql, [req.query.name, req.query.tel, req.query.pwd], (err, result) => {
+      if (err) {
+        res.json({ ok: false, msg: "注册失败" });
+      } else {
+        res.json({ ok: true, msg: "注册成功" });
+      }
+    });
+  }
+  else{
+    res.json({ msg: "所有项应该非空" });
+  }
+
 });
 
 router.get('/login', (req, res) => {

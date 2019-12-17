@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>用户反馈</title>
+  <style>
+    ul,
+    li {
+      display: inline;
+      list-style: none;
+    }
+  </style>
+</head>
+
+<body>
+  <form>
+    内容：<textarea type="text" id="content"></textarea>
+    电话：<input type="text" id="tel" />
+    <button type="button" id='add'>反馈</button>
+  </form>
+</body>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+  $('#add').click(function () {
+    var content = $("#content").val();
+    var tel = $("#tel").val();
+    var time = new Date().toLocaleString();
+    $.ajax({
+      url: '/feedback/addFeedback',
+      data: {
+        content:content,
+        tel:tel,
+        time:time
+      },
+      success: function (json) {
+        // var json = eval("("+str+")");
+        // 这边直接返回json,所以上面那个转化就不需要了
+        if (json.ok) {
+          alert('反馈成功');
+        } else {
+          alert('反馈失败');
+        }
+      },
+      error: function (err) {
+        alert("反馈失败！");
+      }
+    })
+  });
+</script>
+
+</html>

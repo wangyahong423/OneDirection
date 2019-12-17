@@ -14,7 +14,7 @@ export default class Subject extends Component {
                         ]}>
                             学科专业
                     </NavBar>
-                    <div  className='jianjieImg'>
+                    <div  className='jianjieImg2'>
                         <div className='jianjieBox' >
                             <div className='jianjieword'>
                                 <p>我校于1981年获批硕士学位授权单位，是全国首批硕士学位授权单位之一；1998年，学校获批博士学位授权单位。经过三十多年的努力，学校的学科建设取得了长足的进步和发展。</p>

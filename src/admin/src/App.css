@@ -36,3 +36,49 @@
     transform: rotate(360deg);
   }
 }
+
+body{
+  background: url('./img/bg.jpg');
+  background-size: cover;
+  font-family: '楷体';
+}
+/* 登陆 */
+.loginBackground{
+    background-color: rgba(0,0,0, 0.4);
+    opacity: 0.4;
+    text-align: center;
+    height: 400px;
+    width:400px;
+    margin: 0 auto;
+}
+
+/* Home */
+.home{
+  position: fixed;
+  top:125px;
+}
+.logo{
+  width: 100%;
+  height: 70px;
+  line-height: 20px;
+  background-color: rgba(136, 136, 136, 0.3);
+  border-bottom: 1px solid grey;
+  text-align: center;
+  position: fixed;
+  top:0;
+}
+.manager{
+  height: 65px;
+  width:140px;
+  line-height: 65px;
+  text-align: center;
+  font-size: 24px;
+  background-color: rgba(136, 136, 136, 0.3);
+  border-top:1px solid rgba(136, 136, 136, 1);
+  border-right:1px solid rgba(136, 136, 136, 1);
+  color: white;
+}
+.tab:focus{
+  color: blue;
+  
+}

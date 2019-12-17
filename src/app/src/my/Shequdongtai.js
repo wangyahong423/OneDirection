@@ -17,9 +17,9 @@ export default class Community1 extends Component {
       list: [],//存储的我的喜欢
       arr: [],//存储id
       color: [],//存储颜色,
-      yonghu:[],
-      pic:[],
-      name:''
+      yonghu: [],
+      pic: [],
+      name: ''
     };
   }
   dataList = [
@@ -49,20 +49,20 @@ export default class Community1 extends Component {
     let url2 = `http://localhost:3005/communitylike/list`;
     let url3 = `http://localhost:3005/users/getName`;
     let url4 = `http://localhost:3005/users/list`;
-    
+
     axios(url)
       .then((res) => {
         this.setState({
           data: res.data
         })
-        var arr=[]
-        this.state.data.map((item)=>{
-            if(item.name == this.state.name){
-                arr.push(item)
-            }
-            this.setState({
-                data:arr
-            })
+        var arr = []
+        this.state.data.map((item) => {
+          if (item.name == this.state.name) {
+            arr.push(item)
+          }
+          this.setState({
+            data: arr
+          })
         })
       })
     axios(url2)
@@ -113,36 +113,36 @@ export default class Community1 extends Component {
       })
     })
     axios(url4)
-      .then((res)=>{
+      .then((res) => {
         for (var i = 0; i < res.data.length; i++) {
           res.data[i].pic = "http://localhost:3005" + res.data[i].pic
         }
         this.setState({
-          yonghu:res.data
+          yonghu: res.data
         })
-        
-        var qrr=[]
-        var a=0;
-        for(var i=0;i<this.state.data.length;i++){
-          for(var j=0;j<this.state.yonghu.length;j++){
-            if(this.state.data[i].name == this.state.yonghu[j].name){
-              a=this.state.yonghu[j].pic;
+
+        var qrr = []
+        var a = 0;
+        for (var i = 0; i < this.state.data.length; i++) {
+          for (var j = 0; j < this.state.yonghu.length; j++) {
+            if (this.state.data[i].name == this.state.yonghu[j].name) {
+              a = this.state.yonghu[j].pic;
               break;
             }
-            else{
-              a=0;
+            else {
+              a = 0;
             }
           }
-          if(a!=0){
+          if (a != 0) {
             qrr.push(a)
           }
         }
         this.setState({
-          pic:qrr
+          pic: qrr
         })
-        
+
       })
-      
+
   }
   changeSearch = (e) => {
     if (e.target.value == "") {
@@ -153,29 +153,29 @@ export default class Community1 extends Component {
       })
     }
   }
-  change=(id)=>{
-    var crr =this.state.color;
-    if(this.state.color[id] == "black"){
-      crr=this.state.color
-      crr[id]="red";
+  change = (id) => {
+    var crr = this.state.color;
+    if (this.state.color[id] == "black") {
+      crr = this.state.color
+      crr[id] = "red";
       this.setState({
-        color:crr
+        color: crr
       })
       let url9 = `http://localhost:3005/communitylike/add?cid=${this.state.data[id].id}&name=${this.state.name}`
       axios(url9)
-        .then((res)=>{
+        .then((res) => {
 
         })
     }
-    else if(this.state.color[id] == "red"){
-      crr=this.state.color
-      crr[id]="black";
+    else if (this.state.color[id] == "red") {
+      crr = this.state.color
+      crr[id] = "black";
       this.setState({
-        color:crr
+        color: crr
       })
       let url10 = `http://localhost:3005/communitylike/delete?cid=${this.state.data[id].id}&name=${this.state.name}`
       axios(url10)
-        .then((res)=>{
+        .then((res) => {
 
         })
     }
@@ -196,15 +196,18 @@ export default class Community1 extends Component {
         }
       })
   }
-  delTie=(id)=>{   
-    
-      let url9 = `http://localhost:3005/community/deleteCommunity?id=${id}`
-      axios(url9)
-        .then((res)=>{
-          window.location.href = "http://localhost:3000/shequ"
-        })
-      
+  delTie = (id) => {
+
+    let url9 = `http://localhost:3005/community/deleteCommunity?id=${id}`
+    axios(url9)
+      .then((res) => {
+        window.location.href = "http://localhost:3000/shequ"
+        window.location.reload();
+
+      })
+
   }
+
   render() {
     return (
       <div>
@@ -217,23 +220,32 @@ export default class Community1 extends Component {
           <div style={{ marginTop: '7vh' }}>
             {
               this.state.data.map((item, idx) =>
-                <div style={{ background: '#fff', color: 'black' }}>
-                  <div style={{ float: "left" }}>
-                    <img src={this.state.pic[idx]} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
+
+                <div style={{ background: '#fff', color: 'black', position: 'relative', height: '18vh', marginBottom: '1vh' }}>
+                  <div style={{ float: "left", position: 'absolute', left: '4vw', top: '2vh' }}>
+                    <img src={this.state.pic[idx]} style={{ height: '7vh', width: '12vw', borderRadius: '50%' }} />
                   </div>
-                  <span style={{marginLeft:'89%'}}><button  onClick={this.delTie.bind(this,(item.id))}>删除</button></span>
-                  <p style={{ marginLeft: 75, fontSize: '2.5vh', lineHeight: 2.5, marginTop:'-21vw',}}>{item.name}</p>
-                  <div style={{ marginLeft: 75, color: 'gray', fontSize: '2vw', marginTop: "-5vw" }}>{item.time}</div>
+
+                  <p style={{ fontSize: '2.5vh', lineHeight: 2.5, position: 'absolute', top: '-2vh', left: '20vw' }}>{item.name}</p>
+                  <div style={{ color: 'gray', fontSize: '2vw', position: 'absolute', left: '20vw', top: '7vh' }}>{item.time}</div>
                   <Link to={`/shequyouknow/${item.id}`}>
-                    <p style={{ marginLeft: 25, color: 'black', marginTop: 20 }}>{item.content}</p>
+                    <p style={{
+                      color: 'black', position: 'absolute', top: '9vh', left: '10vw', width: '80vw', fontSize: '17px', overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap"
+                    }}>{item.content}</p>
                   </Link>
-                  <div style={{ width: '100%', height: '2vh', backgroundColor: 'white' }}>
-                  </div>
-                </div>)}
+                  <span style={{ position: 'absolute', right: '5vw', top: '2vh' }}>
+                    <button style={{ borderRadius: '50%', border: 'none', height: '4vh', backgroundColor: 'white' }} className='iconfont icon-chahao' onClick={this.delTie.bind(this, (item.id))}></button>
+                  </span>
+                  <div style={{ width: '100%', height: '2vh', backgroundColor: 'white' }}></div>
+
+                </div>
+              )
+            }
           </div>
         </div>
       </div>
-      // </>
     )
   }
 }

@@ -32,15 +32,16 @@ export default class MaterialSharing extends Component {
                 this.setState({
                     data: res.data
                 })
-                var arr=[];
-                this.state.data.map((item)=>{
-                    if(item.name==this.state.name){
+                var arr = [];
+                this.state.data.map((item) => {
+                    if (item.name == this.state.name) {
                         arr.push(item)
                     }
                     this.setState({
-                        data:arr
+                        data: arr
                     })
                 })
+
             })
         axios(url2)
             .then((res) => {
@@ -187,14 +188,17 @@ export default class MaterialSharing extends Component {
                 }
             })
     };
-    delTie=(id)=>{   
-    
+    delTie = (id) => {
+
         let url9 = `http://localhost:3005/learn/deleteLearn?id=${id}`
         axios(url9)
-          .then((res)=>{
-            window.location.href = "http://localhost:3000/xuexi"
-          })
-        
+            .then((res) => {
+                console.log(1111)
+                window.location.href = "http://localhost:3000/tiezi"
+                window.location.href = "http://localhost:3000/xuexi"
+                window.location.reload();
+            })
+
     }
     render() {
         return (
@@ -206,25 +210,31 @@ export default class MaterialSharing extends Component {
                     已发布的学习动态</NavBar>
                 <div style={{ width: '100vw', backgroundColor: '#EFEFF4' }}>
                     <div>
-                    {
-              this.state.data.map((item, idx) =>
-                <div style={{ background: '#fff', color: 'black' }}>
-                  <div style={{ float: "left" }}>
-                    <img src={this.state.pic[idx]} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
-                  </div>
-                  <span style={{marginLeft:'89%'}}><button style={{border:'none'}} onClick={this.delTie.bind(this,(item.id))}>删除</button></span>
-                  <p style={{ marginLeft: 75, fontSize: '2.5vh', lineHeight: 2.5, marginTop:'-21vw',}}>{item.name}</p>
-                  <div style={{ marginLeft: 75, color: 'gray', fontSize: '2vw', marginTop: "-5vw" }}>{item.time}</div>
-                  <Link to={`/xuexiyouknow/${item.id}`}>
-                    <p style={{ marginLeft: 25, color: 'black', marginTop: 20 }}>{item.content}</p>
-                  </Link>
-                  <div style={{ width: '100%', height: '2vh', backgroundColor: 'white' }}>
-                  </div>
-                </div>)}
+                        {
+                            this.state.data.map((item, idx) =>
+                                <div style={{ background: '#fff', color: 'black', position: 'relative', height: '18vh', marginBottom: '1vh' }}>
+                                    <div style={{ float: "left", position: 'absolute', left: '4vw', top: '2vh' }}>
+                                        <img src={this.state.pic[idx]} style={{ height: '7vh', width: '12vw', borderRadius: '50%' }} />
+                                    </div>
+
+                                    <p style={{ fontSize: '2.5vh', lineHeight: 2.5, position: 'absolute', top: '-2vh', left: '20vw' }}>{item.name}</p>
+                                    <div style={{ color: 'gray', fontSize: '2vw', position: 'absolute', left: '20vw', top: '7vh' }}>{item.time}</div>
+                                    <Link to={`/xuexiyouknow/${item.id}`}>
+                                        <p style={{
+                                            color: 'black', position: 'absolute', top: '9vh', left: '10vw', width: '80vw', fontSize: '17px', overflow: "hidden",
+                                            textOverflow: "ellipsis",
+                                            whiteSpace: "nowrap"
+                                        }}>{item.content}</p>
+                                    </Link>
+                                    <span style={{ position: 'absolute', right: '5vw', top: '2vh' }}>
+                                        <button style={{borderRadius:'50%',border:'none',height:'4vh',backgroundColor:'white'}} className='iconfont icon-chahao' onClick={this.delTie.bind(this, (item.id))}></button>
+                                    </span>
+                                    <div style={{ width: '100%', height: '2vh', backgroundColor: 'white' }}></div>
+
+                                </div>)}
                     </div>
                 </div>
             </div>
-            // </>
         )
     }
 }

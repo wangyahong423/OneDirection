@@ -6,15 +6,31 @@ router.get('/add', (req, res) => {
   var cid = req.query.cid;
   var name = req.query.name;
   var content = req.query.content;
-  let sql = 'insert into communitytalk(cid, name, content) values($1,$2,$3)';
-  con.query(sql, [cid, name, content], (err, result) => {
+  var time = req.query.time;
+  let sql = 'insert into communitytalk(cid, name, content,time) values($1,$2,$3,$4)';
+  con.query(sql, [cid, name, content,time], (err, result) => {
     if (err) {
       res.json({ ok: false, msg: '评论失败！' });
     } else {
-      console.log(result.rows);
       res.json({ ok: true, msg: '评论成功！' });
     }
   });
+});
+
+router.get('/add', (req, res) => {
+    var lid = req.query.lid;
+    var name = req.query.name;
+    var content = req.query.content;
+    var time = req.query.time;
+    let sql = 'insert into learntalk(lid,name,content,time) values($1,$2,$3,$4)';
+    con.query(sql, [lid, name, content,time], (err, result) => {
+        if (err) {
+            // res.send('error');
+            console.log(err);
+        } else {
+            console.log("true");
+        }
+    });
 });
 
 router.get('/list', (req, res) => {
@@ -30,12 +46,8 @@ router.get('/list', (req, res) => {
 })
 
 router.get('/delete', (req, res) => {
-  // var name = req.query.name;
-  // var time = req.query.time;
-  // var reg = /%20/;
-  // time = time.replace(reg, ' ');
   var id = req.query.id;
-  let sql = 'delete from communitytalk where id=$1';
+  let sql = 'delete from communitylike where id=$1';
   con.query(sql, [id], (err, result) => {
     if (err) {
       res.json({ ok: false, msg: "删除失败！" });

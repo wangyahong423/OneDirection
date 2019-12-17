@@ -121,12 +121,14 @@ export default class Manager extends Component {
                 data => {
                     if (data.data.ok == 1) {
                         window.alert("添加成功");
-                        window.location.href = 'http://localhost:3000/';
+                        window.location.href = 'http://localhost:3000/home#';
                     }
                     else if (data.data.ok == 0) {
                         window.alert("添加失败，管理员已存在");
                     }
-
+                    else{
+                        window.alert(data.data.msg);
+                    }
                 }
             )
 
@@ -158,8 +160,8 @@ export default class Manager extends Component {
         return (
             <div style={{ position: 'relative', width: '800px', overflow: 'hidden', height: '580px', margin: '0 auto', backgroundColor: 'rgba(136, 136, 136, 0.3)', paddingTop: '0px' }}>
                 <div style={{ height: '40px', width: '800px' }}>
-                    <input type='search' onKeyDown={(e) => this.onkeydown(e)} placeholder="回车进行搜索" style={{ height: '40px', width: '620px', fontSize: '20px', paddingLeft: '30px', border: 'none',marginTop:'0px' }} ></input>
-                    <button onClick={this.del.bind(this)} style={{ height: '41px', marginLeft: '0px', fontSize: '20px', width: '180px',fontFamily:'楷体' }}>添加管理员</button>
+                    <input type='search' onKeyDown={(e) => this.onkeydown(e)} placeholder="回车进行搜索" style={{opacity:'0.4',fontFamily:'楷体', height: '40px', width: '620px', fontSize: '20px', paddingLeft: '30px', border: 'none',marginTop:'0px' }} ></input>
+                    <button onClick={this.del.bind(this)} style={{ opacity:'0.5',height: '41px', marginLeft: '0px', fontSize: '20px', width: '180px',fontFamily:'楷体' }}>添加管理员</button>
                 </div>
                 <table style={{ width: '800px', tableLayout: 'fixed',paddingLeft:'20px' }}>
                     <thead>

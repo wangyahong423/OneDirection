@@ -33,10 +33,20 @@
   line-height: 20px!important;
 }
 .sub-title {
-  /* color: #888; */
   font-size: 14px;
   padding: 30px 0 18px 0;
 }
+
+.lizhanshu{
+  background-image: url(./images/bg4.png);
+  height: 93vh;
+  width: 100vw;
+  background-size:cover;
+
+}
+
+
+
 .placeholder {
   color: #bbb;
   text-align: center;
@@ -45,10 +55,11 @@
 }
 .onecardImg{
   background: url('./images/yika.png');
+  position: fixed;
+  top: 0;
   height:93vh;
   width:100vw;
   background-size:cover;
-  /* opacity: 0.5; */
 }
 .onecardjihuo{
   height: 13vh;
@@ -372,7 +383,7 @@
   height: 17vh;
   width: 38vw;
   overflow: hidden;
-  background: url('./images/xueshenghui.jpg');
+  background: url('./images/huanbao.jpg');
   background-size: 38vw 17vh ;
   border-top-right-radius: 5vh;
   border-top-left-radius: 5vh;
@@ -399,7 +410,7 @@
   height: 17vh;
   width: 38vw;
   overflow: hidden;
-  background: url('./images/xueshenghui.jpg');
+  background: url('./images/minsu.jpg');
   background-size: 38vw 17vh ;
   border-top-right-radius: 5vh;
   border-top-left-radius: 5vh;
@@ -772,7 +783,7 @@
   height: 17vh;
   width: 38vw;
   overflow: hidden;
-  background: url('./images/xueshenghui.jpg');
+  background: url('./images/youman.jpg');
   background-size: 38vw 17vh ;
   border-top-right-radius: 5vh;
   border-top-left-radius: 5vh;
@@ -781,7 +792,7 @@
   height: 17vh;
   width: 38vw;
   overflow: hidden;
-  background: url('./images/xueshenghui.jpg');
+  background: url('./images/youman.jpg');
   background-size: 38vw 17vh ;
   border-top-right-radius: 5vh;
   border-top-left-radius: 5vh;
@@ -799,7 +810,7 @@
   height: 17vh;
   width: 38vw;
   overflow: hidden;
-  background: url('./images/xueshenghui.jpg');
+  background: url('./images/lingtu.jpg');
   background-size: 38vw 17vh ;
   border-top-right-radius: 5vh;
   border-top-left-radius: 5vh;
@@ -808,7 +819,7 @@
   height: 17vh;
   width: 38vw;
   overflow: hidden;
-  background: url('./images/xueshenghui.jpg');
+  background: url('./images/shuxuejianmo.jpg');
   background-size: 38vw 17vh ;
   border-top-right-radius: 5vh;
   border-top-left-radius: 5vh;
@@ -817,7 +828,7 @@
   height: 17vh;
   width: 38vw;
   overflow: hidden;
-  background: url('./images/xueshenghui.jpg');
+  background: url('./images/yingxaingshiguan.jpg');
   background-size: 38vw 17vh ;
   border-top-right-radius: 5vh;
   border-top-left-radius: 5vh;
@@ -826,7 +837,7 @@
   height: 17vh;
   width: 38vw;
   overflow: hidden;
-  background: url('./images/xueshenghui.jpg');
+  background: url('./images/caimohuihua.jpg');
   background-size: 38vw 17vh ;
   border-top-right-radius: 5vh;
   border-top-left-radius: 5vh;
@@ -835,7 +846,7 @@
   height: 17vh;
   width: 38vw;
   overflow: hidden;
-  background: url('./images/xueshenghui.jpg');
+  background: url('./images/dianshang.jpg');
   background-size: 38vw 17vh ;
   border-top-right-radius: 5vh;
   border-top-left-radius: 5vh;
@@ -1256,8 +1267,14 @@
   top:-1vh;
 }
 .jianjieImg{
-  background: url('./images/jianjie.png');
-  height:93vh;
+  height:auto;
+  width:90vw;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  background-size:cover;
+}
+.jianjieImg2{
+  height:auto;
   width:100vw;
   background-size:cover;
 }
@@ -1324,6 +1341,7 @@
   text-align: center;
   height: 200px;
   line-height: 30px;
+  color: black;
 }
 .mates1{
   height: 27vh;

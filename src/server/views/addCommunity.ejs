@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>社区管理</title>
+  <style>
+    ul,
+    li {
+      display: inline;
+      list-style: none;
+    }
+  </style>
+</head>
+
+<body>
+  <form>
+    标题：<input type="text" name="title" />
+    内容：<textarea type="text" name="content"></textarea>
+  </form>
+  <button id='add'>添加</button>
+</body>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+  const token = require('../config/token.js');
+  $('#add').click(function () {
+    var title = $("input[name='title']").val();
+    var content = $("input[name='content']").val();
+    var name = '张三';
+    var clicks = 1;
+    var time = new Date().toLocaleString();
+    let tokenContent = {
+      title: title,
+      content: content,
+      name: name,
+      clicks: clicks,
+      time: time
+    };
+    let params = {
+      expiresIn: 60 * 60 * 24 * 31  // 31天过期
+    }
+
+    let token1 = token.getToken(tokenContent, params);
+    // console.log(token);
+    $.ajax({
+      url: '/users/addCommunity',
+      data: {
+        token:token1
+      },
+      success: function (json) {
+        // var json = eval("("+str+")");
+        // 这边直接返回json,所以上面那个转化就不需要了
+        if (json.ok) {
+          alert(json.msg);
+        } else {
+          alert(json.msg);
+        }
+      },
+      error: function (err) {
+        alert("添加失败！");
+      }
+    })
+  });
+</script>
+
+</html>
