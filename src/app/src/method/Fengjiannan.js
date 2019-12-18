@@ -15,7 +15,7 @@ export default class Fengjiannan extends Component {
                     冯健男
                 </NavBar>
                 <div className='lizhanshu' >
-                    <img style={{height:'20vh',width:'30vw',marginLeft:'35%',marginTop:'30%'}} src='gonglve/冯健男.jpg'></img>
+                    <img style={{height:'20vh',width:'30vw',marginLeft:'35%',marginTop:'30%'}} src='gonglve/冯建男.jpg'></img>
                     <p style={{color:'white',textAlign:'center',fontSize:'18px'}}>【冯/健/男】</p>
                     <hr style={{width:'80vw',textAlign:'center'}} />
                     <p style={{width:'70vw',color:'white',textAlign:'left',marginLeft:'15vw',lineHeight:'3vh'}}>冯健男，湖北黄梅人。中共党员。1949年毕业于北京大学西方语言文学系。</p>

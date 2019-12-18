@@ -14,9 +14,9 @@ export default class Community1 extends Component {
     super();
     this.state = {
       data: [],
-      list: [],//存储的我的喜欢
-      arr: [],//存储id
-      color: [],//存储颜色,
+      list: [],
+      arr: [],
+      color: [],
       yonghu: [],
       pic: [],
       name: ''
@@ -181,7 +181,6 @@ export default class Community1 extends Component {
     }
   }
   clickSend = (id) => {
-    //要执行的代码
     let url = `http://localhost:3005/community/select?content=${this.state.search}`;
     axios(url)
       .then((res) => {
@@ -197,15 +196,12 @@ export default class Community1 extends Component {
       })
   }
   delTie = (id) => {
-
     let url9 = `http://localhost:3005/community/deleteCommunity?id=${id}`
     axios(url9)
       .then((res) => {
         window.location.href = "http://localhost:3000/shequ"
         window.location.reload();
-
       })
-
   }
 
   render() {
@@ -220,7 +216,6 @@ export default class Community1 extends Component {
           <div style={{ marginTop: '7vh' }}>
             {
               this.state.data.map((item, idx) =>
-
                 <div style={{ background: '#fff', color: 'black', position: 'relative', height: '18vh', marginBottom: '1vh' }}>
                   <div style={{ float: "left", position: 'absolute', left: '4vw', top: '2vh' }}>
                     <img src={this.state.pic[idx]} style={{ height: '7vh', width: '12vw', borderRadius: '50%' }} />
@@ -239,7 +234,6 @@ export default class Community1 extends Component {
                     <button style={{ borderRadius: '50%', border: 'none', height: '4vh', backgroundColor: 'white' }} className='iconfont icon-chahao' onClick={this.delTie.bind(this, (item.id))}></button>
                   </span>
                   <div style={{ width: '100%', height: '2vh', backgroundColor: 'white' }}></div>
-
                 </div>
               )
             }

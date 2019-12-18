@@ -14,9 +14,9 @@ export default class MaterialSharing extends Component {
         super();
         this.state = {
             data: [],
-            list: [],//存储的我的喜欢
-            arr: [],//存储id
-            color: [],//存储颜色,
+            list: [],
+            arr: [],
+            color: [],
             yonghu: [],
             pic: [],
             name: ''
@@ -41,7 +41,6 @@ export default class MaterialSharing extends Component {
                         data: arr
                     })
                 })
-
             })
         axios(url2)
             .then((res) => {
@@ -57,7 +56,6 @@ export default class MaterialSharing extends Component {
                         list: brr
                     })
                 })
-                console.log(this.state.list)
                 var arr = [];
                 var a = 0;
                 for (var i = 0; i < this.state.data.length; i++) {
@@ -69,7 +67,6 @@ export default class MaterialSharing extends Component {
                             a = 0;
                         }
                     }
-                    console.log(a);
                     if (a == 1) {
                         arr.push('red');
                         a = 0;
@@ -80,7 +77,6 @@ export default class MaterialSharing extends Component {
                 this.setState({
                     color: arr
                 })
-                console.log(this.state.color)
             })
         axios(url3)
             .then((res) => {
@@ -93,7 +89,6 @@ export default class MaterialSharing extends Component {
                 arr: item.id
             })
         })
-        console.log(this.state.arr)
         axios(url4)
             .then((res) => {
                 for (var i = 0; i < res.data.length; i++) {
@@ -102,7 +97,6 @@ export default class MaterialSharing extends Component {
                 this.setState({
                     yonghu: res.data
                 })
-
                 var qrr = []
                 var a = 0;
                 for (var i = 0; i < this.state.data.length; i++) {
@@ -122,11 +116,7 @@ export default class MaterialSharing extends Component {
                 this.setState({
                     pic: qrr
                 })
-                console.log(this.state.pic)
-                console.log(this.state.yonghu)//users/list
-                console.log(this.state.name)
             })
-
     }
     changeSearch = (e) => {
         if (e.target.value == "") {
@@ -136,23 +126,18 @@ export default class MaterialSharing extends Component {
                 search: e.target.value
             })
         }
-        console.log(this.state.arr)
     }
     change = (id) => {
         var crr = this.state.color;
-        console.log(crr[id]);
-        console.log(id);
         if (this.state.color[id] == "black") {
             crr = this.state.color
             crr[id] = "red";
-            console.log(crr)
             this.setState({
                 color: crr
             })
             let url9 = `http://localhost:3005/learnlike/add?lid=${this.state.data[id].id}&name=${this.state.name}`
             axios(url9)
                 .then((res) => {
-
                 })
         }
         else if (this.state.color[id] == "red") {
@@ -164,27 +149,21 @@ export default class MaterialSharing extends Component {
             let url10 = `http://localhost:3005/learnlike/delete?lid=${this.state.data[id].id}&name=${this.state.name}`
             axios(url10)
                 .then((res) => {
-
                 })
         }
-        console.log(this.state.color)
     }
     clickSend = (id) => {
-        //要执行的代码
         let url = `http://localhost:3005/learn/select?content=${this.state.search}`;
         axios(url)
             .then((res) => {
                 if (res.data.false) {
-                    console.log('false');
                 } else {
-                    console.log(res.data);
                     for (var i = 0; i < res.data.length; i++) {
                         res.data[i].pic = "http://localhost:3005" + res.data[i].pic;
                     }
                     this.setState({
                         data: res.data
                     })
-                    console.log(res.data);
                 }
             })
     };
@@ -193,12 +172,10 @@ export default class MaterialSharing extends Component {
         let url9 = `http://localhost:3005/learn/deleteLearn?id=${id}`
         axios(url9)
             .then((res) => {
-                console.log(1111)
                 window.location.href = "http://localhost:3000/tiezi"
                 window.location.href = "http://localhost:3000/xuexi"
                 window.location.reload();
             })
-
     }
     render() {
         return (
@@ -216,7 +193,6 @@ export default class MaterialSharing extends Component {
                                     <div style={{ float: "left", position: 'absolute', left: '4vw', top: '2vh' }}>
                                         <img src={this.state.pic[idx]} style={{ height: '7vh', width: '12vw', borderRadius: '50%' }} />
                                     </div>
-
                                     <p style={{ fontSize: '2.5vh', lineHeight: 2.5, position: 'absolute', top: '-2vh', left: '20vw' }}>{item.name}</p>
                                     <div style={{ color: 'gray', fontSize: '2vw', position: 'absolute', left: '20vw', top: '7vh' }}>{item.time}</div>
                                     <Link to={`/xuexiyouknow/${item.id}`}>
@@ -227,10 +203,9 @@ export default class MaterialSharing extends Component {
                                         }}>{item.content}</p>
                                     </Link>
                                     <span style={{ position: 'absolute', right: '5vw', top: '2vh' }}>
-                                        <button style={{borderRadius:'50%',border:'none',height:'4vh',backgroundColor:'white'}} className='iconfont icon-chahao' onClick={this.delTie.bind(this, (item.id))}></button>
+                                        <button style={{ borderRadius: '50%', border: 'none', height: '4vh', backgroundColor: 'white' }} className='iconfont icon-chahao' onClick={this.delTie.bind(this, (item.id))}></button>
                                     </span>
                                     <div style={{ width: '100%', height: '2vh', backgroundColor: 'white' }}></div>
-
                                 </div>)}
                     </div>
                 </div>

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { NavBar } from 'antd-mobile';
 import { List } from 'antd-mobile';
 import axios from 'axios';
-
 const Item = List.Item;
 const Brief = Item.Brief;
 
@@ -21,9 +20,7 @@ export default class My extends Component {
         axios(url)
             .then((res) => {
                 if (res.err) {
-                    console.log("err");
                 } else {
-                    console.log(2);
                     this.setState({
                         data: res.data
                     })

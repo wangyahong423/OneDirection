@@ -26,7 +26,7 @@ export default class About extends Component {
     icon: <img src={`https://gw.alipayobjects.com/zos/rmsportal/${obj.url}.png`} alt={obj.title} style={{ width: 36 }} />,
     title: obj.title,
   }));
-  
+
   componentDidMount() {
     var id = this.props.match.params.id;
     let url = `http://localhost:3005/community/list/` + id;
@@ -57,7 +57,7 @@ export default class About extends Component {
           })
         })
       })
-    
+
     axios(url4)
       .then((res) => {
         for (var i = 0; i < res.data.length; i++) {
@@ -87,10 +87,7 @@ export default class About extends Component {
           pic: qrr
         })
       })
-
-
-
-      axios(url1)
+    axios(url1)
       .then((res) => {
         this.setState({
           todo: res.data.communitytalk
@@ -132,7 +129,6 @@ export default class About extends Component {
       cid: this.props.match.params.id,
       content: e.target.value,
     })
-
   }
   changeColor() {
     this.setState({
@@ -166,27 +162,25 @@ export default class About extends Component {
               <div style={{ width: '100%', height: '2vh', backgroundColor: 'white' }}>
               </div>
             </div>)}
-
         <p style={{ fontSize: 15, marginLeft: 5 }}>评论列表</p>
         <hr style={{ marginTop: -5 }}></hr>
         {
           this.state.todo.map((item, idx) => (
             <div style={{ background: '#fff', color: 'black' }}>
-                  <div style={{ float: "left" }}>
-                    <img src={this.state.photo[idx]} style={{ height: '5vh', width: '10vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
-                  </div>
-                  <div style={{height:'1px',width:'100%'}}></div>
-                  <p style={{ marginLeft:70,color: 'gray',fontSize:'1.5vh' }}>{item.name}</p>
-                  <div style={{height:'2px',width:'100%'}}></div>
-                  <div style={{ marginLeft:70,marginTop:'-10px',fontSize:'2.3vh' }}>{item.content}</div>
-                  <p style={{ marginLeft:75,  color: 'gray', marginTop:7,fontSize: '2vw', }}>{item.time}</p>
-                  <div style={{ width: '100%', height: '2vh', backgroundColor: 'white' }}>
-                  </div>
+              <div style={{ float: "left" }}>
+                <img src={this.state.photo[idx]} style={{ height: '5vh', width: '10vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
+              </div>
+              <div style={{ height: '1px', width: '100%' }}></div>
+              <p style={{ marginLeft: 70, color: 'gray', fontSize: '1.5vh' }}>{item.name}</p>
+              <div style={{ height: '2px', width: '100%' }}></div>
+              <div style={{ marginLeft: 70, marginTop: '-10px', fontSize: '2.3vh' }}>{item.content}</div>
+              <p style={{ marginLeft: 75, color: 'gray', marginTop: 7, fontSize: '2vw', }}>{item.time}</p>
+              <div style={{ width: '100%', height: '2vh', backgroundColor: 'white' }}>
+              </div>
             </div>
           )
           )}
       </div>
-
     );
   }
 }

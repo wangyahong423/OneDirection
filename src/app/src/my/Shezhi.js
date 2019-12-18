@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import {  Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { NavBar } from 'antd-mobile';
 import { List } from 'antd-mobile';
-import { Toast, WhiteSpace, WingBlank, Button } from 'antd-mobile';
+import { Toast } from 'antd-mobile';
 function showToast() {
   Toast.info('清除成功', 1);
 }
@@ -27,38 +27,6 @@ export default class Shezhi extends Component {
               onClick={() => { }}
               style={{ paddingLeft: '20px', borderBottom: '1px solid grey', height: '60px' }}
             ><span style={{ marginLeft: '10px', fontSize: '20px' }}>密码重置</span></Item>
-          </Link>
-          <Link to="/xiaoxixi">
-            <Item
-              arrow="horizontal"
-              onClick={() => { }}
-              style={{ paddingLeft: '20px', borderBottom: '1px solid grey', height: '60px' }}
-            ><span style={{ marginLeft: '10px', fontSize: '20px' }}>消息与提醒</span></Item>
-          </Link>
-          <Link to="/yinsione">
-            <Item
-              arrow="horizontal"
-              onClick={() => { }}
-              style={{ paddingLeft: '20px', borderBottom: '1px solid grey', height: '60px' }}
-            ><span style={{ marginLeft: '10px', fontSize: '20px' }}>隐私</span></Item>
-          </Link>
-          <Item
-            arrow="horizontal"
-            onClick={() => {
-            }}
-            style={{ paddingLeft: '20px', borderBottom: '1px solid grey', height: '60px' }}
-          >
-            <WingBlank>
-              <WhiteSpace />
-              <div style={{ border: "none", fontSize: '20px', margin: "-1vh 0 0 -1vw" }} onClick={showToast}>清除缓存</div>
-            </WingBlank>
-          </Item>
-          <Link to="/fuwu">
-            <Item
-              arrow="horizontal"
-              onClick={() => { }}
-              style={{ paddingLeft: '20px', borderBottom: '1px solid grey', height: '60px' }}
-            ><span style={{ marginLeft: '10px', fontSize: '20px' }}>服务协议和隐私政策</span></Item>
           </Link>
           <Link to="/">
             <Item

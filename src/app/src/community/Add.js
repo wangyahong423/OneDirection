@@ -14,29 +14,28 @@ class Add extends Component {
       time: new Date().toLocaleString()
     }
   }
-
   componentDidMount() {
     let url3 = `http://localhost:3005/users/getName`;
     axios(url3)
       .then((res) => {
         this.setState({
           name: res.data.name
-        })        
+        })
       })
   }
   handleRegister = () => {
-    if(this.state.content){
+    if (this.state.content) {
       let url = `http://localhost:3005/community/addCommunity?content=${this.state.content}&name=${this.state.name}&time=${this.state.time}`;
-    axios(url)
-      .then((res) => {
-        if (res.data.ok) {
-          alert(res.data.msg);
-        } else {
-          alert(res.data.msg);
-        }
-      })
+      axios(url)
+        .then((res) => {
+          if (res.data.ok) {
+            alert(res.data.msg);
+          } else {
+            alert(res.data.msg);
+          }
+        })
     }
-    else{
+    else {
       alert("未填写内容")
     }
   }
@@ -45,7 +44,6 @@ class Add extends Component {
       content: e.target.value
     })
   }
-
   render() {
     const { getFieldProps } = this.props.form;
     return (

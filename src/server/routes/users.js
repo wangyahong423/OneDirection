@@ -2,8 +2,6 @@ var express = require('express');
 var router = express.Router();
 var con = require('./postgreSQL');
 
-/* GET home page. */
-
 var username='';
 
 router.get('/getName', (req, res)=> {
@@ -11,7 +9,6 @@ router.get('/getName', (req, res)=> {
   res.json({name: username});
 });
 
-//用户注册
 router.get('/addUser', (req, res) => {
   var pic = "/images/1.jpg";
   var name = req.query.name;
@@ -29,7 +26,6 @@ router.get('/addUser', (req, res) => {
     }
   });
 });
-//用户资料修改
 router.get('/change', (req, res) => {
   var pic = req.query.pic;
   var name = req.query.name;
@@ -52,11 +48,7 @@ router.get('/list', (req, res) => {
       res.send(result.rows);
     }
   });
-
-
-
 })
-//用户登录
 router.get('/login', (req, res) => {
   let sql = 'select pwd from users WHERE name=$1';
   con.query(sql, [req.query.name], (err, result) => {
@@ -76,7 +68,6 @@ router.get('/login', (req, res) => {
     }
   });
 });
-//判断用户名称与电话是否匹配
 router.get('/judge', (req, res) => {
   let sql = 'select tel from users WHERE name=$1';
   con.query(sql, [req.query.name], (err, result) => {
@@ -97,8 +88,6 @@ router.get('/judge', (req, res) => {
   });
 })
 
-
-//修改密码
 router.get('/alter', (req, res) => {
   var name = req.query.name;
   var pwd = req.query.pwd;
@@ -112,7 +101,6 @@ router.get('/alter', (req, res) => {
   });
 });
 
-// 用户搜索
 router.get('/select', (req, res) => {
   var name = req.query.name;
   name = '%'+name+'%';
@@ -126,7 +114,6 @@ router.get('/select', (req, res) => {
   });
 });
 
-/**获取验证码 */
 router.get('/Getnum',(req,res)=>{
   function randomn(n) {
       if (n > 21) return null
@@ -136,17 +123,11 @@ router.get('/Getnum',(req,res)=>{
   let message1 = {success:true,trueNum:trueCode};
   let phoneNum = JSON.parse(req.query.tel); 
   var QcloudSms = require("qcloudsms_js");
-  // 短信应用 SDK AppID
-  var appid = 1400294829;  // SDK AppID 以1400开头
-  // 短信应用 SDK AppKey
+  var appid = 1400294829;
   var appkey = "a3ef6be1ae92fb5e9f9cd66789bed33a";
-  // 需要发送短信的手机号码
   var phoneNumbers = [phoneNum];
-  // 短信模板 ID，需要在短信控制台中申请
-  var templateId = 492759;  // NOTE: 这里的模板ID`7839`只是示例，真实的模板 ID 需要在短信控制台中申请
-  // 签名
-  var smsSign = "独秀三两枝";  // NOTE: 签名参数使用的是`签名内容`，而不是`签名ID`。这里的签名"腾讯云"只是示例，真实的签名需要在短信控制台申请
-  // 设置请求回调处理, 这里只是演示，用户需要自定义相应处理回调
+  var templateId = 492759;
+  var smsSign = "独秀三两枝";
   function callback(err, res, resData) {
       if (err) {
           console.log("err: ", err);
@@ -155,7 +136,6 @@ router.get('/Getnum',(req,res)=>{
           console.log("response data: ", resData);
       }
   }
-  // 实例化 QcloudSms
   var qcloudsms = QcloudSms(appid, appkey);
   var ssender = qcloudsms.SmsSingleSender();
   var params = [trueCode];

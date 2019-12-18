@@ -52,10 +52,8 @@ export default class Feedback extends Component {
                     totalPage: Math.ceil(res.data.length / this.state.pageSize),
                     indexList: res.data.slice(this.state.num, this.state.num + this.state.pageSize)
                 })
-                console.log(this.state.data)
             })
     }
-
     handleRegister = (tel, time, e) => {
         let url = `http://localhost:3005/feedback/deleteFeedback?tel=${tel}&time=${time}`;
         axios(url)
@@ -66,7 +64,6 @@ export default class Feedback extends Component {
                 }
             })
     }
-
     lookContent = (tel, time, e) => {
         let url = `http://localhost:3005/feedback/`
     }
@@ -83,7 +80,7 @@ export default class Feedback extends Component {
                 display_none: 'block'
             })
         }
-        this.refs.p.innerHTML=content;
+        this.refs.p.innerHTML = content;
     }
     render() {
         return (
@@ -112,8 +109,8 @@ export default class Feedback extends Component {
                             )
                         }
                     </tbody>
-                    <div style={{ position: 'absolute', top: '30%', left: '35%', height: 'auto', width: '400px', textAlign: 'center', backgroundColor: 'rgba(136, 136, 136)', color: 'white',display: this.state.display_none}}>
-                        <p ref='p' style={{lineHeight:'50px',fontSize:'22px'}}></p>
+                    <div style={{ position: 'absolute', top: '30%', left: '35%', height: 'auto', width: '400px', textAlign: 'center', backgroundColor: 'rgba(136, 136, 136)', color: 'white', display: this.state.display_none }}>
+                        <p ref='p' style={{ lineHeight: '50px', fontSize: '22px' }}></p>
                     </div>
                     <div style={{ position: 'absolute', bottom: '5px', right: '40px' }}>
                         <Link style={{ textDecoration: 'none', marginRight: '6px' }}><span onClick={this.setUp} style={{ color: 'black', backgroundColor: 'white', fontSize: '19px' }}>上一页</span></Link>

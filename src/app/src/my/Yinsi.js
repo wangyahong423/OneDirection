@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { Link} from 'react-router-dom';
-import { NavBar} from 'antd-mobile';
-import { List, Switch } from 'antd-mobile';
+import { Link } from 'react-router-dom';
+import { NavBar, List, Switch } from 'antd-mobile';
 import { createForm } from 'rc-form';
 class Yinsi extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
-      checked:false,
+    this.state = {
+      checked: false,
       checked1: true
     }
   }
@@ -15,15 +14,14 @@ class Yinsi extends Component {
     const { getFieldProps } = this.props.form;
     return (
       <div>
-         <NavBar
-            style={{ width:'100vw',backgroundColor:'#37376f',color:'#fff',position:'fixed ',top:'0',zIndex:1,height:'7vh'}}
-            leftContent={[
-                <Link to="/shezhi"><span style={{fontSize:'17px',color:'white'}} className="iconfont icon-ico_leftarrow"></span></Link>
-            ]}
-            >
-            <span>隐私</span>
+        <NavBar
+          style={{ width: '100vw', backgroundColor: '#37376f', color: '#fff', position: 'fixed ', top: '0', zIndex: 1, height: '7vh' }}
+          leftContent={[
+            <Link to="/shezhi"><span style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span></Link>
+          ]}
+        >
+          <span>隐私</span>
         </NavBar>
-        
         <List.Item
           extra={<Switch
             checked={this.state.checked}
@@ -32,10 +30,9 @@ class Yinsi extends Component {
                 checked: !this.state.checked,
               });
             }}
-            /> }
-          style={{margin:'10vh 0 3vh 0'}}
+          />}
+          style={{ margin: '10vh 0 3vh 0' }}
         >允许别人查看我的分享</List.Item>
-
         <List.Item
           extra={<Switch
             {...getFieldProps('Switch1', {
@@ -57,4 +54,4 @@ class Yinsi extends Component {
   }
 }
 const Se = createForm()(Yinsi);
- export default Se;
+export default Se;

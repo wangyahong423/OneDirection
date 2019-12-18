@@ -42,7 +42,6 @@ body{
   background-size: cover;
   font-family: '楷体';
 }
-/* 登陆 */
 .loginBackground{
     background-color: rgba(0,0,0, 0.4);
     opacity: 0.4;
@@ -52,7 +51,6 @@ body{
     margin: 0 auto;
 }
 
-/* Home */
 .home{
   position: fixed;
   top:125px;

@@ -13,7 +13,6 @@ export default class File extends Component {
             totalPage: 0
         }
     }
-
     setNext = () => {
         if (this.state.current < this.state.totalPage) {
             this.setState({
@@ -39,8 +38,6 @@ export default class File extends Component {
         }
     }
     handleSend = (e) => {
-        //要执行的代码
-        console.log(e.target.value);
         let url = `http://localhost:3005/file/select?filepath=${e.target.value}`;
         axios(url)
             .then((res) => {
@@ -57,7 +54,6 @@ export default class File extends Component {
                 }
             })
     }
-
     onkeydown = (e) => {
         if (e.keyCode === 13) {
             this.handleSend(e);
@@ -77,7 +73,6 @@ export default class File extends Component {
                 })
             })
     }
-
     handleRegister = (filepath, e) => {
         let url = `http://localhost:3005/file/deleteFile?filepath=${filepath}`;
         axios(url)
@@ -91,13 +86,13 @@ export default class File extends Component {
     render() {
         return (
             <div>
-                <div style={{ position: 'relative', width: '850px', overflow: 'hidden', height: '580px', margin: '0 auto', backgroundColor: 'rgba(136, 136, 136, 0.3)', paddingTop: '0px'}}>
+                <div style={{ position: 'relative', width: '850px', overflow: 'hidden', height: '580px', margin: '0 auto', backgroundColor: 'rgba(136, 136, 136, 0.3)', paddingTop: '0px' }}>
                     <div style={{ height: '40px', width: '700px' }}>
-                        <input type='search' onKeyDown={(e) => this.onkeydown(e)} placeholder="回车进行搜索" style={{opacity:'0.4',fontFamily:'楷体', height: '40px', width: '850px', fontSize: '20px', paddingLeft: '30px' }} ></input>
+                        <input type='search' onKeyDown={(e) => this.onkeydown(e)} placeholder="回车进行搜索" style={{ opacity: '0.4', fontFamily: '楷体', height: '40px', width: '850px', fontSize: '20px', paddingLeft: '30px' }} ></input>
                     </div>
-                    <table style={{ width: '700px', tableLayout: 'fixed' ,paddingLeft:'20px'}}>
+                    <table style={{ width: '700px', tableLayout: 'fixed', paddingLeft: '20px' }}>
                         <thead>
-                            <tr style={{height:'55px'}}>
+                            <tr style={{ height: '55px' }}>
                                 <th style={{ width: '210px', textAlign: 'left', fontSize: '28px', color: 'white' }}>文件名</th>
                                 <th style={{ width: '110px', textAlign: 'left', fontSize: '28px', color: 'white' }}>名字</th>
                                 <th style={{ width: '250px', textAlign: 'left', fontSize: '28px', color: 'white' }}>时间</th>
@@ -114,11 +109,11 @@ export default class File extends Component {
                                         <td style={{ fontSize: '20px', color: 'white' }}>{item.time}</td>
                                         <td style={{ fontSize: '20px', color: 'white' }}>{item.type}</td>
                                         <td>
-                                        <button onClick={this.handleRegister.bind(this,(item.filepath))} style={{ height: '28px', fontFamily: '楷体', fontSize: '20px' }}>删除</button>
-                                        <button style={{ height: '28px', fontFamily: '楷体', fontSize: '20px', marginLeft: '10px'  }}>
-                                            <a href={"http://localhost:3005/files/" + item.filepath} style={{fontFamily: '楷体', fontSize: '20px',color:'black',textDecoration:'none'}}>下载</a>
-                                        </button>
-                                    </td>
+                                            <button onClick={this.handleRegister.bind(this, (item.filepath))} style={{ height: '28px', fontFamily: '楷体', fontSize: '20px' }}>删除</button>
+                                            <button style={{ height: '28px', fontFamily: '楷体', fontSize: '20px', marginLeft: '10px' }}>
+                                                <a href={"http://localhost:3005/files/" + item.filepath} style={{ fontFamily: '楷体', fontSize: '20px', color: 'black', textDecoration: 'none' }}>下载</a>
+                                            </button>
+                                        </td>
                                     </tr>
                                 )
                             }

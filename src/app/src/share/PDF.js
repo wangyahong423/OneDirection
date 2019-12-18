@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import MaterialSharing from './MaterialSharing'
-import { HashRouter as Router, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../share.css'
 import axios from 'axios';
-
 
 export default class PDF extends Component {
     constructor() {
@@ -44,7 +43,6 @@ export default class PDF extends Component {
                         ))
                     }
                 </div>
-
                 <Link to="AddFile">
                     <div style={{ position: "fixed", top: "88%", left: "80vw" }}>
                         <span className="iconfont icon-jiahao" style={{ fontSize: "8vh", color: "#37376F" }}></span>
@@ -54,11 +52,8 @@ export default class PDF extends Component {
                     <form method="post" action="http://localhost:3005/file/addFile" encType="multipart/form-data">
                         <input type="file" name="inputFile" multiple="multiple"></input>
                         <input type="submit" value="上传"></input>
-
                     </form>
                 </div>
-
-
             </div>
         )
     }

@@ -53,7 +53,6 @@ router.get('/deleteCommunity', (req, res) => {
     }
   });
 })
-//更新点击量
 router.get('/updateCommunity', (req, res) => {
     var clicks = req.query.clicks;
     var id = req.query.id;
@@ -67,7 +66,6 @@ router.get('/updateCommunity', (req, res) => {
     });
 });
 
-// 社区搜索
 router.get('/select', (req, res) => {
   var content = req.query.content;
   content = '%'+content+'%';

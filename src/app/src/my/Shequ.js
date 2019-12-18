@@ -27,7 +27,7 @@ export default class Shequ extends Component {
     icon: <img src={`https://gw.alipayobjects.com/zos/rmsportal/${obj.url}.png`} alt={obj.title} style={{ width: 36 }} />,
     title: obj.title,
   }));
-  
+
   componentDidMount() {
     var id = this.props.match.params.id;
     let url = `http://localhost:3005/community/list/` + id;
@@ -58,7 +58,7 @@ export default class Shequ extends Component {
           })
         })
       })
-    
+
     axios(url4)
       .then((res) => {
         for (var i = 0; i < res.data.length; i++) {
@@ -88,10 +88,7 @@ export default class Shequ extends Component {
           pic: qrr
         })
       })
-
-
-
-      axios(url1)
+    axios(url1)
       .then((res) => {
         this.setState({
           todo: res.data.communitytalk
@@ -111,7 +108,6 @@ export default class Shequ extends Component {
           for (var j = 0; j < this.state.yonghu.length; j++) {
             if (this.state.todo[i].name == this.state.yonghu[j].name) {
               a = this.state.yonghu[j].pic;
-              console.log(a)
               break;
             }
             else {
@@ -125,7 +121,6 @@ export default class Shequ extends Component {
         this.setState({
           photo: qrr
         })
-        console.log(this.state.yonghu)
       })
   }
   getContent = (e) => {
@@ -133,7 +128,6 @@ export default class Shequ extends Component {
       cid: this.props.match.params.id,
       content: e.target.value,
     })
-
   }
   changeColor() {
     this.setState({
@@ -161,7 +155,7 @@ export default class Shequ extends Component {
               </div>
               <p style={{ marginLeft: 75, fontSize: '2.5vh', lineHeight: 2.5, marginTop: 6 }}>{item.name}</p>
               <div style={{ marginLeft: 75, color: 'gray', fontSize: '2vw', marginTop: "-5vw" }}>{item.time}</div>
-                <p style={{ marginLeft: 25, color: 'black', marginTop: 20, fontSize: 17 }}>{item.content}</p>
+              <p style={{ marginLeft: 25, color: 'black', marginTop: 20, fontSize: 17 }}>{item.content}</p>
               <div style={{ width: '100%', height: '2vh', backgroundColor: 'white' }}>
               </div>
             </div>)}
@@ -171,16 +165,16 @@ export default class Shequ extends Component {
         {
           this.state.todo.map((item, idx) => (
             <div style={{ background: '#fff', color: 'black' }}>
-                  <div style={{ float: "left" }}>
-                    <img src={this.state.photo[idx]} style={{ height: '5vh', width: '10vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
-                  </div>
-                  <div style={{height:'1px',width:'100%'}}></div>
-                  <p style={{ marginLeft:70,color: 'gray',fontSize:'1.5vh' }}>{item.name}</p>
-                  <div style={{height:'2px',width:'100%'}}></div>
-                  <div style={{ marginLeft:70,marginTop:'-10px',fontSize:'2.3vh' }}>{item.content}</div>
-                  <p style={{ marginLeft:75,  color: 'gray', marginTop:7,fontSize: '2vw', }}>{item.time}</p>
-                  <div style={{ width: '100%', height: '2vh', backgroundColor: 'white' }}>
-                  </div>
+              <div style={{ float: "left" }}>
+                <img src={this.state.photo[idx]} style={{ height: '5vh', width: '10vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
+              </div>
+              <div style={{ height: '1px', width: '100%' }}></div>
+              <p style={{ marginLeft: 70, color: 'gray', fontSize: '1.5vh' }}>{item.name}</p>
+              <div style={{ height: '2px', width: '100%' }}></div>
+              <div style={{ marginLeft: 70, marginTop: '-10px', fontSize: '2.3vh' }}>{item.content}</div>
+              <p style={{ marginLeft: 75, color: 'gray', marginTop: 7, fontSize: '2vw', }}>{item.time}</p>
+              <div style={{ width: '100%', height: '2vh', backgroundColor: 'white' }}>
+              </div>
             </div>
           )
           )}

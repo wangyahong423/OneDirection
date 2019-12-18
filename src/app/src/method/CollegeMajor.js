@@ -9,15 +9,14 @@ const Brief = Item.Brief;
 
 export default class CollegeMajor extends Component {
     onChange = (key) => {
-        console.log(key);
     }
     constructor() {
         super();
         this.state = {
             college: "",
             data: [],
-            name:'',
-            todo:[]
+            name: '',
+            todo: []
         }
     }
     componentDidMount() {
@@ -27,17 +26,17 @@ export default class CollegeMajor extends Component {
                 this.setState({
                     name: res.data.name
                 })
-        })
+            })
         let url2 = `http://localhost:3005/users/list`;
         axios(url2)
             .then((res) => {
                 this.setState({
                     todo: res.data
                 })
-                this.state.todo.map((item)=>{
-                    if(item.name == this.state.name){
+                this.state.todo.map((item) => {
+                    if (item.name == this.state.name) {
                         this.setState({
-                            college:item.college
+                            college: item.college
                         })
                     }
                 })
@@ -57,7 +56,6 @@ export default class CollegeMajor extends Component {
                         data: brr
                     })
                 })
-                console.log(this.state.data)
             })
     }
     render() {
@@ -71,17 +69,15 @@ export default class CollegeMajor extends Component {
                     专业
                 </NavBar>
                 <div className='jianjieImg'>
-                {
-
-                    this.state.data.map((item) => (
+                    {
+                        this.state.data.map((item) => (
                             <div>
-                                <p style={{fontSize:'20px',textIndent:'0.3em'}}>{item.name}</p>
-                                <span style={{marginLeft:'30px',fontSize:'15px'}}>{item.content}</span>
+                                <p style={{ fontSize: '20px', textIndent: '0.3em' }}>{item.name}</p>
+                                <span style={{ marginLeft: '30px', fontSize: '15px' }}>{item.content}</span>
                             </div>
-                    )
-                    )}
+                        )
+                        )}
                 </div>
-                
                 <Accordion style={{ marginTop: '11vh', width: '100vw' }} accordion openAnimation={{}} className="my-accordion" onChange={this.onChange}></Accordion>
             </div>
         )

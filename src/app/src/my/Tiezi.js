@@ -20,7 +20,7 @@ export default class Tiezi extends Component {
             <Item
               arrow="horizontal"
               onClick={() => { }}
-              style={{ paddingLeft: '20px', borderBottom: '1px solid grey', height: '60px',marginTop:'50px' }}
+              style={{ paddingLeft: '20px', borderBottom: '1px solid grey', height: '60px', marginTop: '50px' }}
             ><span style={{ marginLeft: '10px', fontSize: '20px' }}>社区动态</span></Item>
           </Link>
           <Link to="/xuexi">

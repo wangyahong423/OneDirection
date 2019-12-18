@@ -25,7 +25,6 @@ router.get('/add', (req, res) => {
     let sql = 'insert into learntalk(lid,name,content,time) values($1,$2,$3,$4)';
     con.query(sql, [lid, name, content,time], (err, result) => {
         if (err) {
-            // res.send('error');
             console.log(err);
         } else {
             console.log("true");

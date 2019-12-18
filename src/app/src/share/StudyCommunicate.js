@@ -1,4 +1,4 @@
-import { NavBar, SearchBar, ActionSheet, WingBlank } from 'antd-mobile';
+import { NavBar, ActionSheet } from 'antd-mobile';
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios'
@@ -14,9 +14,9 @@ export default class MaterialSharing extends Component {
         super();
         this.state = {
             data: [],
-            list: [],//存储的我的喜欢
-            arr: [],//存储id
-            color: [],//存储颜色,
+            list: [],
+            arr: [],
+            color: [],
             yonghu: [],
             pic: [],
             name: ''
@@ -43,7 +43,6 @@ export default class MaterialSharing extends Component {
                 });
             });
     }
-
     componentDidMount() {
         let url = `http://localhost:3005/learn/list`;
         let url2 = `http://localhost:3005/learnlike/list`;
@@ -54,7 +53,6 @@ export default class MaterialSharing extends Component {
                 this.setState({
                     data: res.data
                 })
-                console.log(this.state.data)
             })
         axios(url2)
             .then((res) => {
@@ -70,7 +68,6 @@ export default class MaterialSharing extends Component {
                         list: brr
                     })
                 })
-                console.log(this.state.list)
                 var arr = [];
                 var a = 0;
                 for (var i = 0; i < this.state.data.length; i++) {
@@ -82,7 +79,6 @@ export default class MaterialSharing extends Component {
                             a = 0;
                         }
                     }
-                    console.log(a);
                     if (a == 1) {
                         arr.push('red');
                         a = 0;
@@ -93,7 +89,6 @@ export default class MaterialSharing extends Component {
                 this.setState({
                     color: arr
                 })
-                console.log(this.state.color)
             })
         axios(url3)
             .then((res) => {
@@ -106,7 +101,6 @@ export default class MaterialSharing extends Component {
                 arr: item.id
             })
         })
-        console.log(this.state.arr)
         axios(url4)
             .then((res) => {
                 for (var i = 0; i < res.data.length; i++) {
@@ -115,7 +109,6 @@ export default class MaterialSharing extends Component {
                 this.setState({
                     yonghu: res.data
                 })
-
                 var qrr = []
                 var a = 0;
                 for (var i = 0; i < this.state.data.length; i++) {
@@ -135,11 +128,7 @@ export default class MaterialSharing extends Component {
                 this.setState({
                     pic: qrr
                 })
-                console.log(this.state.pic)
-                console.log(this.state.yonghu)//users/list
-                console.log(this.state.name)
             })
-
     }
     changeSearch = (e) => {
         if (e.target.value == "") {
@@ -149,16 +138,12 @@ export default class MaterialSharing extends Component {
                 search: e.target.value
             })
         }
-        console.log(this.state.arr)
     }
     change = (id) => {
         var crr = this.state.color;
-        console.log(crr[id]);
-        console.log(id);
         if (this.state.color[id] == "black") {
             crr = this.state.color
             crr[id] = "red";
-            console.log(crr)
             this.setState({
                 color: crr
             })
@@ -177,31 +162,24 @@ export default class MaterialSharing extends Component {
             let url10 = `http://localhost:3005/learnlike/delete?lid=${this.state.data[id].id}&name=${this.state.name}`
             axios(url10)
                 .then((res) => {
-
                 })
         }
-        console.log(this.state.color)
     }
     clickSend = (id) => {
-        //要执行的代码
         let url = `http://localhost:3005/learn/select?content=${this.state.search}`;
         axios(url)
             .then((res) => {
                 if (res.data.false) {
-                    console.log('false');
                 } else {
-                    console.log(res.data);
                     for (var i = 0; i < res.data.length; i++) {
                         res.data[i].pic = "http://localhost:3005" + res.data[i].pic;
                     }
                     this.setState({
                         data: res.data
                     })
-                    console.log(res.data);
                 }
             })
     };
-
     render() {
         return (
             <div>
@@ -229,13 +207,13 @@ export default class MaterialSharing extends Component {
                                     </div>
                                     <p style={{ marginLeft: 75, fontSize: '2.5vh', lineHeight: 2.5, marginTop: 6 }}>{item.name}</p>
                                     <div style={{ marginLeft: 75, color: 'gray', fontSize: '2vw', marginTop: "-5vw" }}>{item.time}</div>
-                                    <p style={{ marginLeft: 25, color: 'black', marginTop: 20,fontSize:'17px',width:'87vw', overflow: "hidden",textOverflow: "ellipsis",whiteSpace: "nowrap" }}>{item.content}</p>
+                                    <p style={{ marginLeft: 25, color: 'black', marginTop: 20, fontSize: '17px', width: '87vw', overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{item.content}</p>
                                     <div style={{ marginTop: 20 }}>
                                         <Link to={`/CommunicataDetails/${item.id}`}>
-                                            <sapn className="iconfont icon-pinglun" style={{fontSize:'24px', marginLeft: '27%',fontSize: '3.2vh', color: 'black' }}></sapn>
+                                            <sapn className="iconfont icon-pinglun" style={{ fontSize: '24px', marginLeft: '27%', fontSize: '3.2vh', color: 'black' }}></sapn>
                                         </Link>
-                                        
-                                        <sapn className="iconfont icon-dianzan" onClick={this.change.bind(this,(idx))} style={{fontSize:'24px',marginLeft: '26%',color: this.state.color[idx]}}></sapn>
+
+                                        <sapn className="iconfont icon-dianzan" onClick={this.change.bind(this, (idx))} style={{ fontSize: '24px', marginLeft: '26%', color: this.state.color[idx] }}></sapn>
                                     </div>
                                     <div style={{ width: '100%', height: '2vh', backgroundColor: 'white' }}>
                                     </div>
@@ -243,7 +221,6 @@ export default class MaterialSharing extends Component {
                     </div>
                 </div>
             </div>
-            // </>
         )
     }
 }

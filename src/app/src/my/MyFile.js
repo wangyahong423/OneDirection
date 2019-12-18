@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import { NavBar } from 'antd-mobile';
-import { List } from 'antd-mobile';
 import axios from 'axios';
 
 export default class MyFile extends Component {
@@ -31,21 +30,12 @@ export default class MyFile extends Component {
                 this.state.data.map((item) => {
                     if (item.name == this.state.name) {
                         arr.push(item);
-                        console.log(arr);
-                        console.log(item.name, this.state.name)
                     }
-                    console.log(item.name, this.state.name)
-
                     this.setState({
                         data: arr
                     })
-                    console.log(item.name == this.state.name)
-
                 })
             })
-
-
-
     }
     delFile = (filepath) => {
         let url1 = `http://localhost:3005/file/deleteFile?filepath=${filepath}&name=${this.state.name}`;

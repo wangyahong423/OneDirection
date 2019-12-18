@@ -15,7 +15,6 @@ export default class Community extends Component {
             display_none: 'none',
         }
     }
-
     setNext = () => {
         if (this.state.current < this.state.totalPage) {
             this.setState({
@@ -58,7 +57,6 @@ export default class Community extends Component {
 
     handleRegister = (id, e) => {
         let url = `http://localhost:3005/community/deleteCommunity?id=${id}`;
-        console.log(url);
         axios(url)
             .then((res) => {
                 if (res.data.ok) {
@@ -80,13 +78,7 @@ export default class Community extends Component {
                 display_none: 'block'
             })
         }
-        console.log(content);
-        // return (
-        //     <div>
-        //         {content}
-        //     </div>
-        // )
-        this.refs.p.innerHTML=content;
+        this.refs.p.innerHTML = content;
     }
     render() {
         return (
@@ -116,8 +108,8 @@ export default class Community extends Component {
                             )
                         }
                     </tbody>
-                    <div style={{ position: 'absolute', top: '30%', left: '35%', height: 'auto', width: '400px', textAlign: 'center', backgroundColor: 'rgba(136, 136, 136)', color: 'white',display: this.state.display_none}}>
-                        <p ref='p' style={{lineHeight:'50px',fontSize:'22px'}}></p>
+                    <div style={{ position: 'absolute', top: '30%', left: '35%', height: 'auto', width: '400px', textAlign: 'center', backgroundColor: 'rgba(136, 136, 136)', color: 'white', display: this.state.display_none }}>
+                        <p ref='p' style={{ lineHeight: '50px', fontSize: '22px' }}></p>
                     </div>
                     <div style={{ position: 'absolute', bottom: '5px', right: '40px' }}>
                         <Link style={{ textDecoration: 'none', marginRight: '6px' }}><span onClick={this.setUp} style={{ color: 'black', backgroundColor: 'white', fontSize: '19px' }}>上一页</span></Link>

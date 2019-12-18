@@ -30,22 +30,12 @@ export default class Shoucang extends Component {
         this.state.data.map((item) => {
           if (item.name == this.state.name) {
             arr.push(item);
-            console.log(arr);
-            console.log(item.name, this.state.name)
           }
-          console.log(item.name, this.state.name)
-
           this.setState({
             data: arr
           })
-          console.log(item.name == this.state.name)
-
         })
       })
-
-
-
-
   }
   delFile = (filepath) => {
     let url1 = `http://localhost:3005/collect/delete?filepath=${filepath}&name=${this.state.name}`;
@@ -54,10 +44,6 @@ export default class Shoucang extends Component {
       })
     window.location.reload();
   }
-  // onLoad=(filepath)=>{
-  //   http://localhost:3005/files/filepath
-
-  // }
   render() {
     return (
       <div style={{ position: 'relative' }}>
@@ -69,7 +55,6 @@ export default class Shoucang extends Component {
         >
           <span>我的收藏</span>
         </NavBar>
-
         <div style={{ marginTop: "7vh" }}>
           {
             this.state.data.map((item) => (

@@ -14,7 +14,7 @@ export default class Manager extends Component {
             pwd: '',
             indexList: [],
             current: 1,
-            pageSize:15,
+            pageSize: 15,
             num: 0,
             totalPage: 0
         };
@@ -81,7 +81,6 @@ export default class Manager extends Component {
     };
 
     handleSend = (e) => {
-        //要执行的代码
         let url = `http://localhost:3005/manager/select?name=${e.target.value}`;
         axios(url)
             .then((res) => {
@@ -97,7 +96,6 @@ export default class Manager extends Component {
 
             })
     };
-
     getName = (e) => {
         this.setState({
             name: e.target.value
@@ -126,12 +124,11 @@ export default class Manager extends Component {
                     else if (data.data.ok == 0) {
                         window.alert("添加失败，管理员已存在");
                     }
-                    else{
+                    else {
                         window.alert(data.data.msg);
                     }
                 }
             )
-
     };
 
     onkeydown = (e) => {
@@ -139,7 +136,6 @@ export default class Manager extends Component {
             this.handleSend(e);
         }
     };
-
     changehref = () => {
         if (this.state.display_block == 'none') {
             this.setState({
@@ -152,7 +148,6 @@ export default class Manager extends Component {
                 display_block: 'none',
                 display_none: 'block'
             })
-
         }
     }
 
@@ -160,12 +155,12 @@ export default class Manager extends Component {
         return (
             <div style={{ position: 'relative', width: '800px', overflow: 'hidden', height: '580px', margin: '0 auto', backgroundColor: 'rgba(136, 136, 136, 0.3)', paddingTop: '0px' }}>
                 <div style={{ height: '40px', width: '800px' }}>
-                    <input type='search' onKeyDown={(e) => this.onkeydown(e)} placeholder="回车进行搜索" style={{opacity:'0.4',fontFamily:'楷体', height: '40px', width: '620px', fontSize: '20px', paddingLeft: '30px', border: 'none',marginTop:'0px' }} ></input>
-                    <button onClick={this.del.bind(this)} style={{ opacity:'0.5',height: '41px', marginLeft: '0px', fontSize: '20px', width: '180px',fontFamily:'楷体' }}>添加管理员</button>
+                    <input type='search' onKeyDown={(e) => this.onkeydown(e)} placeholder="回车进行搜索" style={{ opacity: '0.4', fontFamily: '楷体', height: '40px', width: '620px', fontSize: '20px', paddingLeft: '30px', border: 'none', marginTop: '0px' }} ></input>
+                    <button onClick={this.del.bind(this)} style={{ opacity: '0.5', height: '41px', marginLeft: '0px', fontSize: '20px', width: '180px', fontFamily: '楷体' }}>添加管理员</button>
                 </div>
-                <table style={{ width: '800px', tableLayout: 'fixed',paddingLeft:'20px' }}>
+                <table style={{ width: '800px', tableLayout: 'fixed', paddingLeft: '20px' }}>
                     <thead>
-                        <tr style={{height:'55px'}}>
+                        <tr style={{ height: '55px' }}>
                             <th style={{ width: '200px', textAlign: 'left', fontSize: '28px', color: 'white' }}>名字</th>
                             <th style={{ width: '250px', textAlign: 'left', fontSize: '28px', color: 'white' }}>电话</th>
                             <th style={{ width: '200px', textAlign: 'left', fontSize: '28px', color: 'white' }}>密码</th>
@@ -188,13 +183,13 @@ export default class Manager extends Component {
                         <Link style={{ textDecoration: 'none', marginLeft: '6px' }}><span onClick={this.setNext} style={{ color: 'black', backgroundColor: 'white', fontSize: '19px' }}>下一页</span></Link>
                     </div>
                 </table>
-                <div style={{ paddingTop:'20px',backgroundColor: 'grey', position:'relative', textAlign: 'center', lineHeight: '70px', display: this.state.display_none, height: '300px', width: '500px', opacity: '1', margin: '0 auto', marginTop: '-20%' }}>
-                    <input onChange={this.getName} style={{ height: '30px', width: '300px',fontFamily:'楷体',fontSize:'16px' }} type='text' placeholder='请输入管理员昵称'></input>
-                    <input onChange={this.getTel} style={{ height: '30px', width: '300px',fontFamily:'楷体',fontSize:'16px' }} type='text' placeholder='请输入管理员电话'></input>
-                    <input onChange={this.getPwd} style={{ height: '30px', width: '300px', margin: '0 auto',fontFamily:'楷体',fontSize:'16px' }} type='password' placeholder='请输入管理员密码'></input>
-                    <br/>
-                    <button onClick={this.addManager} style={{ height: '30px', width: '100px',fontFamily:'楷体',fontSize:'16px' }}>确定</button>
-                    <button onClick={this.changehref} style={{ height: '30px', width: '100px', marginLeft: '20px',fontFamily:'楷体',fontSize:'16px' }}>取消</button>
+                <div style={{ paddingTop: '20px', backgroundColor: 'grey', position: 'relative', textAlign: 'center', lineHeight: '70px', display: this.state.display_none, height: '300px', width: '500px', opacity: '1', margin: '0 auto', marginTop: '-20%' }}>
+                    <input onChange={this.getName} style={{ height: '30px', width: '300px', fontFamily: '楷体', fontSize: '16px' }} type='text' placeholder='请输入管理员昵称'></input>
+                    <input onChange={this.getTel} style={{ height: '30px', width: '300px', fontFamily: '楷体', fontSize: '16px' }} type='text' placeholder='请输入管理员电话'></input>
+                    <input onChange={this.getPwd} style={{ height: '30px', width: '300px', margin: '0 auto', fontFamily: '楷体', fontSize: '16px' }} type='password' placeholder='请输入管理员密码'></input>
+                    <br />
+                    <button onClick={this.addManager} style={{ height: '30px', width: '100px', fontFamily: '楷体', fontSize: '16px' }}>确定</button>
+                    <button onClick={this.changehref} style={{ height: '30px', width: '100px', marginLeft: '20px', fontFamily: '楷体', fontSize: '16px' }}>取消</button>
                 </div>
             </div>
 

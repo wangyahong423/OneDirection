@@ -9,7 +9,6 @@ const Brief = Item.Brief;
 
 export default class CollegeTeachers extends Component {
     onChange = (key) => {
-        console.log(key);
     }
     constructor() {
         super();
@@ -17,7 +16,7 @@ export default class CollegeTeachers extends Component {
             name: '',
             college: "",
             data: [],
-            todo:[]
+            todo: []
         }
     }
     componentDidMount() {
@@ -28,17 +27,16 @@ export default class CollegeTeachers extends Component {
                     name: res.data.name
                 })
             })
-
         let url2 = `http://localhost:3005/users/list`;
         axios(url2)
             .then((res) => {
                 this.setState({
                     todo: res.data
                 })
-                this.state.todo.map((item)=>{
-                    if(item.name == this.state.name){
+                this.state.todo.map((item) => {
+                    if (item.name == this.state.name) {
                         this.setState({
-                            college:item.college
+                            college: item.college
                         })
                     }
                 })
@@ -72,7 +70,6 @@ export default class CollegeTeachers extends Component {
                 </NavBar>
                 <div className='jianjieImg'>
                     {
-
                         this.state.data.map((item) => (
                             <div>
                                 <p style={{ fontSize: '20px', textIndent: '0.3em' }}>{item.job}</p>
@@ -84,9 +81,7 @@ export default class CollegeTeachers extends Component {
                         )}
                 </div>
                 <Accordion style={{ marginTop: '11vh', width: '100vw' }} accordion openAnimation={{}} className="my-accordion" onChange={this.onChange}>
-                    
                 </Accordion>
-
             </div>
         )
     }

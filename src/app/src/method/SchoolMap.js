@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom';
-import { NavBar,Tabs} from 'antd-mobile';
+import { Link } from 'react-router-dom';
+import { NavBar, Tabs } from 'antd-mobile';
 import { Map } from 'react-amap';
 import MyLocation from '../method/MyLocation';
 import '../App.css';
@@ -34,7 +34,6 @@ export default class SchoolMap extends Component {
                     res.json().then(data => {
                         if (data.status == 1) {
                             data = data.geocodes[0].location.split(',');
-                            console.log(data);
                             this.setState({
                                 center: {
                                     longitude: Number(data[0]),
@@ -55,9 +54,8 @@ export default class SchoolMap extends Component {
             {
                 name: 'ToolBar',
                 options: {
-                    visible: true,  // 不设置该属性默认就是 true
+                    visible: true,
                     onCreated(ins) {
-                        console.log(ins);
                     },
                 },
             }
@@ -65,19 +63,18 @@ export default class SchoolMap extends Component {
         return (
             <div>
                 <NavBar
-                    style={{ backgroundColor: '#37376F', color: '#fff',position:'sticky ',top:'0',zIndex:10,textAlign:'center',height:'7vh'}}
+                    style={{ backgroundColor: '#37376F', color: '#fff', position: 'sticky ', top: '0', zIndex: 10, textAlign: 'center', height: '7vh' }}
                     leftContent={[
-                        <Link to="/school"><span style={{fontSize:'17px',color:'white'}} className="iconfont icon-ico_leftarrow"></span></Link>
+                        <Link to="/school"><span style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span></Link>
                     ]}>
-                        校园地图
+                    校园地图
                 </NavBar>
                 <div className='qin_back'>
                     <input placeholder='&nbsp;河北师范大学' ref={ref => this.autoFocusInst = ref} onChange={this.change} onKeyDown={this.keydown} />
                     <div className='iconfont icon-search' id='qin_MapSearch' onClick={this.click}></div>
                 </div>
 
-                {/* 下半部分地图 */}
-                <div style={{height:'53vh'}}>
+                <div style={{ height: '53vh' }}>
                     <Tabs tabs={[{ title: '我的位置' }, { title: '校内精确地点' }]} initialPage={0} animated={false} useOnPan={false}>
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '90vw', backgroundColor: '#fff' }}>
                             <MyLocation />

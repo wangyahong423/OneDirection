@@ -28,13 +28,7 @@ export default class Learn extends Component {
                 display_none: 'block'
             })
         }
-        console.log(content);
-        // return (
-        //     <div>
-        //         {content}
-        //     </div>
-        // )
-        this.refs.p.innerHTML=content;
+        this.refs.p.innerHTML = content;
     }
     setNext = () => {
         if (this.state.current < this.state.totalPage) {
@@ -60,7 +54,6 @@ export default class Learn extends Component {
             })
         }
     }
-
     componentDidMount() {
         let url = `http://localhost:3005/learn/list`;
         axios(url)
@@ -73,9 +66,8 @@ export default class Learn extends Component {
                     totalPage: Math.ceil(res.data.length / this.state.pageSize),
                     indexList: res.data.slice(this.state.num, this.state.num + this.state.pageSize)
                 })
-            }) 
+            })
     }
-
     handleRegister = (id, e) => {
         let url = `http://localhost:3005/learn/deleteLearn?id=${id}`;
         axios(url)
@@ -89,22 +81,22 @@ export default class Learn extends Component {
     render() {
         return (
             <div style={{ position: 'relative', width: '800px', overflow: 'hidden', height: '580px', margin: '0 auto', backgroundColor: 'rgba(136, 136, 136, 0.3)', paddingTop: '0px' }}>
-                <table style={{ width: '700px', tableLayout: 'fixed',paddingLeft:'20px' }}>
+                <table style={{ width: '700px', tableLayout: 'fixed', paddingLeft: '20px' }}>
                     <thead>
-                        <tr style={{height:'55px'}}>
-                            <th style={{ width: '110px', textAlign: 'left', fontSize: '28px',color:'white' }}>名字</th>
-                            <th style={{ width: '250px', textAlign: 'left', fontSize: '28px',color:'white' }}>时间</th>
-                            <th style={{ width: '230px', textAlign: 'left', fontSize: '28px',color:'white' }}>内容</th>
-                            <th style={{ width: '150px', textAlign: 'left', fontSize: '28px',color:'white' }}>操作</th>
+                        <tr style={{ height: '55px' }}>
+                            <th style={{ width: '110px', textAlign: 'left', fontSize: '28px', color: 'white' }}>名字</th>
+                            <th style={{ width: '250px', textAlign: 'left', fontSize: '28px', color: 'white' }}>时间</th>
+                            <th style={{ width: '230px', textAlign: 'left', fontSize: '28px', color: 'white' }}>内容</th>
+                            <th style={{ width: '150px', textAlign: 'left', fontSize: '28px', color: 'white' }}>操作</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             this.state.indexList.map(
                                 (item, idx) => <tr key={idx}>
-                                    <td style={{ fontSize: '20px',color:'white', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '110px' }}>{item.name}</td>
-                                    <td style={{ fontSize: '20px' ,color:'white'}}>{item.time}</td>
-                                    <td style={{ fontSize: '20px',color:'white', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '150px' }}>{item.content}</td>
+                                    <td style={{ fontSize: '20px', color: 'white', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '110px' }}>{item.name}</td>
+                                    <td style={{ fontSize: '20px', color: 'white' }}>{item.time}</td>
+                                    <td style={{ fontSize: '20px', color: 'white', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '150px' }}>{item.content}</td>
                                     <td>
                                         <button onClick={this.handleRegister.bind(this, (item.id))} style={{ height: '28px', fontFamily: '楷体', fontSize: '20px' }}>删除</button>
                                         <button onClick={this.lookContent.bind(this, (item.content))} style={{ height: '28px', fontFamily: '楷体', fontSize: '20px', marginLeft: '10px' }}>查看</button>
@@ -113,14 +105,14 @@ export default class Learn extends Component {
                             )
                         }
                     </tbody>
-                    <div style={{ position: 'absolute', top: '30%', left: '35%', height: 'auto', width: '400px', textAlign: 'center', backgroundColor: 'rgba(136, 136, 136)', color: 'white',display: this.state.display_none}}>
-                        <p ref='p' style={{lineHeight:'50px',fontSize:'22px'}}></p>
+                    <div style={{ position: 'absolute', top: '30%', left: '35%', height: 'auto', width: '400px', textAlign: 'center', backgroundColor: 'rgba(136, 136, 136)', color: 'white', display: this.state.display_none }}>
+                        <p ref='p' style={{ lineHeight: '50px', fontSize: '22px' }}></p>
                     </div>
                     <div style={{ position: 'absolute', bottom: '5px', right: '40px' }}>
-                    <Link style={{ textDecoration: 'none', marginRight: '6px' }}><span onClick={this.setUp} style={{ color: 'black', backgroundColor: 'white', fontSize: '19px' }}>上一页</span></Link>
-                    <span style={{ fontSize: '19px', color: 'white' }}>{this.state.current}页/ {this.state.totalPage}页</span>
-                    <Link style={{ textDecoration: 'none', marginLeft: '6px' }}><span onClick={this.setNext} style={{ color: 'black', backgroundColor: 'white', fontSize: '19px' }}>下一页</span></Link>
-                </div>
+                        <Link style={{ textDecoration: 'none', marginRight: '6px' }}><span onClick={this.setUp} style={{ color: 'black', backgroundColor: 'white', fontSize: '19px' }}>上一页</span></Link>
+                        <span style={{ fontSize: '19px', color: 'white' }}>{this.state.current}页/ {this.state.totalPage}页</span>
+                        <Link style={{ textDecoration: 'none', marginLeft: '6px' }}><span onClick={this.setNext} style={{ color: 'black', backgroundColor: 'white', fontSize: '19px' }}>下一页</span></Link>
+                    </div>
                 </table>
             </div>
         )

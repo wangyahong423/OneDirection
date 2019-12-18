@@ -2,8 +2,6 @@ var express = require('express');
 var router = express.Router();
 var con = require('./postgreSQL');
 
-/* GET users listing. */
-
 router.get('/addFeedback', (req, res) => {
   var content = req.query.content;
   var tel = req.query.tel;

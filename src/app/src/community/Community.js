@@ -14,12 +14,12 @@ export default class Community1 extends Component {
     super();
     this.state = {
       data: [],
-      list: [],//存储的我的喜欢
-      arr: [],//存储id
-      color: [],//存储颜色,
-      yonghu:[],
-      pic:[],
-      name:''
+      list: [],
+      arr: [],
+      color: [],
+      yonghu: [],
+      pic: [],
+      name: ''
     };
   }
   dataList = [
@@ -43,7 +43,6 @@ export default class Community1 extends Component {
         });
       });
   }
-
   componentDidMount() {
     let url = `http://localhost:3005/community/list`;
     let url2 = `http://localhost:3005/communitylike/list`;
@@ -103,36 +102,33 @@ export default class Community1 extends Component {
       })
     })
     axios(url4)
-      .then((res)=>{
+      .then((res) => {
         for (var i = 0; i < res.data.length; i++) {
           res.data[i].pic = "http://localhost:3005" + res.data[i].pic
         }
         this.setState({
-          yonghu:res.data
+          yonghu: res.data
         })
-        
-        var qrr=[]
-        var a=0;
-        for(var i=0;i<this.state.data.length;i++){
-          for(var j=0;j<this.state.yonghu.length;j++){
-            if(this.state.data[i].name == this.state.yonghu[j].name){
-              a=this.state.yonghu[j].pic;
+        var qrr = []
+        var a = 0;
+        for (var i = 0; i < this.state.data.length; i++) {
+          for (var j = 0; j < this.state.yonghu.length; j++) {
+            if (this.state.data[i].name == this.state.yonghu[j].name) {
+              a = this.state.yonghu[j].pic;
               break;
             }
-            else{
-              a=0;
+            else {
+              a = 0;
             }
           }
-          if(a!=0){
+          if (a != 0) {
             qrr.push(a)
           }
         }
         this.setState({
-          pic:qrr
+          pic: qrr
         })
-        
       })
-      
   }
   changeSearch = (e) => {
     if (e.target.value == "") {
@@ -143,35 +139,32 @@ export default class Community1 extends Component {
       })
     }
   }
-  change=(id)=>{
-    var crr =this.state.color;
-    if(this.state.color[id] == "black"){
-      crr=this.state.color
-      crr[id]="red";
+  change = (id) => {
+    var crr = this.state.color;
+    if (this.state.color[id] == "black") {
+      crr = this.state.color
+      crr[id] = "red";
       this.setState({
-        color:crr
+        color: crr
       })
       let url9 = `http://localhost:3005/communitylike/add?cid=${this.state.data[id].id}&name=${this.state.name}`
       axios(url9)
-        .then((res)=>{
-
+        .then((res) => {
         })
     }
-    else if(this.state.color[id] == "red"){
-      crr=this.state.color
-      crr[id]="black";
+    else if (this.state.color[id] == "red") {
+      crr = this.state.color
+      crr[id] = "black";
       this.setState({
-        color:crr
+        color: crr
       })
       let url10 = `http://localhost:3005/communitylike/delete?cid=${this.state.data[id].id}&name=${this.state.name}`
       axios(url10)
-        .then((res)=>{
-
+        .then((res) => {
         })
     }
   }
   clickSend = (id) => {
-    //要执行的代码
     let url = `http://localhost:3005/community/select?content=${this.state.search}`;
     axios(url)
       .then((res) => {
@@ -186,12 +179,11 @@ export default class Community1 extends Component {
         }
       })
   };
-
   render() {
     return (
       <div>
         <NavBar style={{ backgroundColor: '#37376F', color: '#fff', position: 'fixed ', width: "100vw", top: '0', zIndex: 10, textAlign: 'center', height: '7vh' }}
-          >
+        >
           社区</NavBar>
         <div style={{ position: "fixed", top: '7vh', width: "100vw", height: '6vh', backgroundColor: '#EFEFF4' }}>
           <input placeholder='搜索' onChange={this.changeSearch} style={{ height: '5vh', borderRadius: '20px', border: 'none', marginTop: '0.5vh', textAlign: 'center', fontSize: '4vw', width: '85vw', float: 'left', borderRight: "none" }}></input>
@@ -206,20 +198,20 @@ export default class Community1 extends Component {
           <div style={{ marginTop: '13vh' }}>
             {
               this.state.data.map((item, idx) =>
-                <div style={{ background: '#fff', color: 'black' }}> 
+                <div style={{ background: '#fff', color: 'black' }}>
                   <div style={{ float: "left" }}>
                     <img src={this.state.pic[idx]} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
                   </div>
                   <p style={{ marginLeft: 75, fontSize: '2.5vh', lineHeight: 2.5, marginTop: 6 }}>{item.name}</p>
                   <div style={{ marginLeft: 75, color: 'gray', fontSize: '2vw', marginTop: "-5vw" }}>{item.time}</div>
                   <Link to={`/aboutyouknow/${item.id}`}>
-                    <p style={{ marginLeft: 25, color: 'black', marginTop: 20,fontSize:'17px',width:'87vw', overflow: "hidden",textOverflow: "ellipsis",whiteSpace: "nowrap" }}>{item.content}</p>
+                    <p style={{ marginLeft: 25, color: 'black', marginTop: 20, fontSize: '17px', width: '87vw', overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{item.content}</p>
                   </Link>
                   <div style={{ marginTop: 20 }}>
                     <Link to={`/pinglunone/${item.id}`}>
-                      <sapn className="iconfont icon-pinglun" style={{ marginLeft: '27%',fontSize: '24px', color: 'black' }}></sapn>
+                      <sapn className="iconfont icon-pinglun" style={{ marginLeft: '27%', fontSize: '24px', color: 'black' }}></sapn>
                     </Link>
-                    <sapn className="iconfont icon-dianzan" onClick={this.change.bind(this,(idx))} style={{fontSize: '24px',marginLeft: '26%',color: this.state.color[idx]}}></sapn>
+                    <sapn className="iconfont icon-dianzan" onClick={this.change.bind(this, (idx))} style={{ fontSize: '24px', marginLeft: '26%', color: this.state.color[idx] }}></sapn>
                   </div>
                   <div style={{ width: '100%', height: '2vh', backgroundColor: 'white' }}>
                   </div>
@@ -227,7 +219,6 @@ export default class Community1 extends Component {
           </div>
         </div>
       </div>
-      // </>
     )
   }
 }

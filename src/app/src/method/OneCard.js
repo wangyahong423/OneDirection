@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom';
 import { NavBar} from 'antd-mobile';
 import '../App.css';
 
-
 export default class OneCard extends Component {
     render() {
         return (

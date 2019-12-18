@@ -8,19 +8,17 @@ export default class MyLocation extends Component {
             center: { longitude: 114.522920, latitude: 37.997690 },
         }
     }
-    
     render() {
         const plugins = [
             'MapType',
             'Scale',
             'OverView',
-            'ControlBar', // v1.1.0 新增
+            'ControlBar',
             {
                 name: 'ToolBar',
                 options: {
-                    visible: true,  // 不设置该属性默认就是 true
+                    visible: true,
                     onCreated(ins) {
-                        console.log(ins);
                     },
                 },
             }

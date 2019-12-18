@@ -58,13 +58,11 @@ export default class Users extends Component {
     }
 
     handleSend = (e) => {
-        console.log(e.target.value)
         let url = `http://localhost:3005/users/select?name=${e.target.value}`;
         axios(url)
             .then((res) => {
                 if (res.data.false) {
                 } else {
-                    console.log(res.indexList)
                     for (var i = 0; i < res.data.length; i++) {
                         res.data[i].pic = "http://localhost:3005" + res.data[i].pic;
                     }
@@ -83,18 +81,18 @@ export default class Users extends Component {
     }
     render() {
         return (
-            <div style={{ position: 'relative', width: '800px', height: '580px', margin: '0 auto', backgroundColor: 'rgba(136, 136, 136, 0.3)', paddingTop: '0px'}}>
-                <div style={{ height: '40px', width: '700px',marginTop:'1px' }}>
-                    <input type='search' onKeyDown={(e) => this.onkeydown(e)} placeholder="回车进行搜索" style={{opacity:'0.4',fontFamily:'楷体', height: '40px', width: '800px', fontSize: '20px', paddingLeft: '30px',border:'none' }} ></input>
+            <div style={{ position: 'relative', width: '800px', height: '580px', margin: '0 auto', backgroundColor: 'rgba(136, 136, 136, 0.3)', paddingTop: '0px' }}>
+                <div style={{ height: '40px', width: '700px', marginTop: '1px' }}>
+                    <input type='search' onKeyDown={(e) => this.onkeydown(e)} placeholder="回车进行搜索" style={{ opacity: '0.4', fontFamily: '楷体', height: '40px', width: '800px', fontSize: '20px', paddingLeft: '30px', border: 'none' }} ></input>
                 </div>
-                <table style={{ width: '700px', tableLayout: 'fixed',paddingLeft:'20px' }}>
+                <table style={{ width: '700px', tableLayout: 'fixed', paddingLeft: '20px' }}>
                     <thead>
-                        <tr style={{height:'55px'}}>
+                        <tr style={{ height: '55px' }}>
                             <th style={{ width: '100px', textAlign: 'left', fontSize: '28px', color: 'white' }}>头像</th>
-                            <th style={{ width: '130px', textAlign: 'left', fontSize: '28px',color: 'white' }}>名字</th>
-                            <th style={{ width: '150px', textAlign: 'left', fontSize: '28px',color: 'white' }}>电话</th>
-                            <th style={{ width: '250px', textAlign: 'left', fontSize: '28px',color: 'white' }}>学院</th>
-                            <th style={{ width: '130px', textAlign: 'left', fontSize: '28px',color: 'white' }}>密码</th>
+                            <th style={{ width: '130px', textAlign: 'left', fontSize: '28px', color: 'white' }}>名字</th>
+                            <th style={{ width: '150px', textAlign: 'left', fontSize: '28px', color: 'white' }}>电话</th>
+                            <th style={{ width: '250px', textAlign: 'left', fontSize: '28px', color: 'white' }}>学院</th>
+                            <th style={{ width: '130px', textAlign: 'left', fontSize: '28px', color: 'white' }}>密码</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -102,10 +100,10 @@ export default class Users extends Component {
                             this.state.data.map(
                                 (item, idx) => <tr key={idx}>
                                     <td><img style={{ height: '53px', width: '53px', borderRadius: '50%' }} src={item.pic} ></img></td>
-                                    <td style={{ fontSize: '20px', color: 'white', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '130px'  }}>{item.name}</td>
+                                    <td style={{ fontSize: '20px', color: 'white', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '130px' }}>{item.name}</td>
                                     <td style={{ fontSize: '20px', color: 'white' }}>{item.tel}</td>
                                     <td style={{ fontSize: '20px', color: 'white', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '270px' }}>{item.college}</td>
-                                    <td style={{ fontSize: '20px', color: 'white', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '130px'  }}>{item.pwd}</td>
+                                    <td style={{ fontSize: '20px', color: 'white', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '130px' }}>{item.pwd}</td>
                                 </tr>
                             )
                         }

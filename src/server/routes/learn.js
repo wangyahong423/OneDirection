@@ -4,14 +4,10 @@ var url = require("url");
 var { checkToken } = require('../config/token');
 var con = require('./postgreSQL');
 
-
-//处理error事件，如果出错则退出
- 
 router.get('/addLearn', (req, res)=> {
   let sql = 'insert into learn(content,name,time) values($1,$2,$3)';
   con.query(sql, [req.query.content, req.query.name, req.query.time], (err, result) =>{
     if (err) {
-      // res.send('error');
       res.json({ ok: false, msg: "发布失败" });
     } else {
       res.json({ ok: true, msg: "发布成功" });
@@ -34,7 +30,6 @@ router.get('/list', (req, res) => {
   let sql = 'select * from learn order by id desc';
   con.query(sql, [], (err, result) => {
     if (err) {
-      // res.send('error');
       console.log(err);
     } else {
       res.send(result.rows);

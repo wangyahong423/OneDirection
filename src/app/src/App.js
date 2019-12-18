@@ -66,7 +66,6 @@ import Wangzhixin from './method/Wangzhixin';
 import Zhanghe from './method/Zhanghe';
 import Cailimin from './method/Cailimin';
 import Longzhuangwei from './method/Longzhuangwei';
-// 孙妍
 import AppTab1 from './container/AppTab1'
 import AppTab2 from './container/AppTab2'
 import Add from './community/Add';
@@ -85,14 +84,11 @@ import Yinsi from './my/Yinsi';
 import Fuwu from './my/Fuwu';
 import Login from './login/Login';
 import Zhuce from './login/Zhuce';
-
 import Tiezi from "./my/Tiezi"
 import Shequdongtai from "./my/Shequdongtai"
 import Xuexijiaoliu from "./my/Xuexijiaoliu"
 import Xuexi from "./my/Xuexi"
 import Shequ from "./my/Shequ"
-
-// 董小贱
 import MaterialSharing from "./share/MaterialSharing";
 import StudyCommunicate from "./share/StudyCommunicate";
 import Word from "./share/Word";
@@ -108,31 +104,26 @@ import ResetPwd from "./my/ResetPwd"
 import Forget from './login/Forget';
 import ChangeImg from './my/ChangeImg';
 import MyFile from './my/MyFile';
-// import Liujianya from './method/Liujianya';
 
 export default class App extends Component {
     render() {
         return (
             <div>
                 <Router>
-                    {/* 登陆 */}
                     <Route exact path="/" component={Login}/>
                     <Route path="/login" component={AppTab}/>
                     <Route path="/zhuce" component={Zhuce}/>
                     <Route path='/forget' component={Forget} />
-                    {/* 攻略-一卡通 */}
                     <Route path='/onecard' component={OneCard} />
                     <Route exact path='/activate' component={Activate} />
                     <Route exact path='/invest' component={Invest} />
                     <Route exact path='/loss' component={Loss} />
-                    {/* 攻略-社团组织 */}
                     <Route path='/organization' component={Organization} />
                     <Route path='/schoolorg' component={SchoolOrg} />
                     <Route path='/practice' component={Practice} />
                     <Route path='/physical' component={Physical} />
                     <Route path='/academic' component={Academic} />
                     <Route path='/art' component={Art} />
-                    {/* 攻略-学校 */}
                     <Route path='/school' component={School} />
                     <Route path='/synopsis' component={Synopsis} />
                     <Route path='/subject' component={Subject} />
@@ -140,19 +131,16 @@ export default class App extends Component {
                     <Route path='/scenery' component={Scenery} />
                     <Route path='/govern' component={Govern} />
                     <Route path='/map' component={SchoolMap} />
-                    {/* 攻略-学习 */}
                     <Route path='/study' component={Study} />
                     <Route path='/zongheceping' component={Zongheceping} />
                     <Route path='/second' component={Second} />
                     <Route path='/jiangxuejin' component={StudyJiangxuejin} />
                     <Route path='/zhuxuejin' component={StudyZhuxuejin} />
-                    {/* 攻略-杰出校友 */}
                     <Route path='/alumnus' component={Alumnus} />
                     <Route path='/lizhanshu' component={Lizhanshu} />
                     <Route path ='/dengyingchao' component={Dengyingchao} />
                     <Route path='/situlanfang' component={Situlanfang} />
                     <Route path='/liujianya' component={Liujianya} />
-
                     <Route path='/hehong' component={Hehong} />
                     <Route path='/zhangzhiwei' component={Zhangzhiwei} />
                     <Route path='/lishushen' component={Lishushen} />
@@ -186,15 +174,11 @@ export default class App extends Component {
                     <Route path='/zhanghe' component={Zhanghe} />
                     <Route path='/cailimin' component={Cailimin} />
                     <Route path='/longzhuangwei' component={Longzhuangwei} />
-
-                    {/* 攻略--学院 */}
                     <Route path='/college' component={College} />
                     <Route path='/collegeHistory' component={CollegeHistory} />
                     <Route path='/collegeTeachers' component={CollegeTeachers} />
                     <Route path='/collegeMajor' component={CollegeMajor} />
                     <Route path='/collegeOther' component={CollegeOther} />
-
-                    {/* 孙妍 */}
                     <Route path="/community" component={AppTab1}/>
                     <Route path="/my" component={AppTab2}/>
                     <Route path="/add" component={Add}/>
@@ -216,9 +200,6 @@ export default class App extends Component {
                     <Route path="/xuexi" component={Xuexijiaoliu}/>
                     <Route path="/shequyouknow/:id" component={Shequ}/>
                     <Route path="/xuexiyouknow/:id" component={Xuexi}/>
-
-
-                    {/* 董晓倩 */}
                     <Route path="/MaterialSharing" component={MaterialSharing}/>
                     <Route path="/StudyCommunicate" component={StudyCommunicate}/>
                     <Route path="/Word" component={Word}/>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import MaterialSharing from './MaterialSharing'
-import {HashRouter as Router,Route,Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import '../share.css'
 
 export default class PPT extends Component {

@@ -2,10 +2,6 @@ var express = require('express');
 var router = express.Router();
 var con = require('./postgreSQL');
 
-
-// con.connect();
-/* GET home page. */
-
 var managername = '';
 
 router.get('/getName', (req, res) => {
@@ -59,7 +55,6 @@ router.get('/list', (req, res) => {
   let sql = 'select * from manager';
   con.query(sql, [], (err, result) => {
     if (err) {
-      // res.send('error');
       console.log(err);
     } else {
       res.send(result.rows);

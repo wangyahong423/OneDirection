@@ -16,7 +16,6 @@ router.get('/add', (req, res) => {
 });
 
 router.get('/list', (req, res) => {
-
   let sql = 'select * from communitylike';
   con.query(sql, [], (err, result) => {
     if (err) {

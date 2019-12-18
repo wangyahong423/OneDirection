@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { NavBar, SearchBar, WingBlank, SegmentedControl } from 'antd-mobile';
-import { HashRouter as Router, Route, Link } from 'react-router-dom';
+import { NavBar } from 'antd-mobile';
+import { Link } from 'react-router-dom';
 import '../share.css'
 import axios from 'axios';
 
@@ -13,7 +13,10 @@ export default class MaterialSharing extends Component {
             start: true,
             name: "",
             defaultColor: false,
-            search: ''
+            search: '',
+            list: [],
+            arr: [],
+            color: [],
         }
     }
     changeSearch = (e) => {
@@ -32,44 +35,78 @@ export default class MaterialSharing extends Component {
         let url1 = `http://localhost:3005/users/getName`;
         axios(url1)
             .then((res) => {
-                console.log(res.data.name);
                 this.setState({
                     name: res.data.name
                 })
-                console.log(this.state.name)
             })
-
+        let url2 = `http://localhost:3005/collect/list`;
+        axios(url2)
+            .then((res) => {
+                this.setState({
+                    list: res.data
+                })
+                var brr = [];
+                this.state.list.map((item) => {
+                    if (item.name == this.state.name) {
+                        brr.push(item);
+                    }
+                    this.setState({
+                        list: brr
+                    })
+                })
+                var arr = [];
+                var a = 0;
+                for (var i = 0; i < this.state.data.length; i++) {//data是所有文件list
+                    for (var j = 0; j < this.state.list.length; j++) {
+                        if (this.state.data[i].filepath == this.state.list[j].filepath) {//id和cid改成filepath
+                            a = 1;
+                            break;
+                        } else {
+                            a = 0;
+                        }
+                    }
+                    if (a == 1) {
+                        arr.push('#FFD664');
+                        a = 0;
+                    } else {
+                        arr.push('black');
+                    }
+                }
+                this.setState({
+                    color: arr
+                })
+            })
     }
-
-    addCollect = (filepath, e) => {
-        this.setState({
-            start: !this.state.start
-        })
-        console.log(this.state.start);
-        if (this.state.start == true) {
-            let url = `http://localhost:3005/collect/add?filepath=${filepath}&name=${this.state.name}`;
-            console.log(url)
-
-            axios(url)
+    addCollect = (id) => {
+        var crr = this.state.color;
+        if (this.state.color[id] == "black") {
+            crr = this.state.color
+            crr[id] = "#FFD664";
+            this.setState({
+                color: crr
+            })
+            let url3 = `http://localhost:3005/collect/add?filepath=${this.state.data[id].filepath}&name=${this.state.name}`;
+            axios(url3)
                 .then((res) => {
                 })
-
         }
-        else {
-
-            let url1 = `http://localhost:3005/collect/delete?filepath=${filepath}&name=${this.state.name}`;
-            axios(url1)
+        else if (this.state.color[id] == "#FFD664") {
+            crr = this.state.color
+            crr[id] = "black";
+            this.setState({
+                color: crr
+            })
+            let url4 = `http://localhost:3005/collect/delete?filepath=${this.state.data[id].filepath}&name=${this.state.name}`;
+            axios(url4)
                 .then((res) => {
                     if (res.err) {
                         alert('收藏失败');
                     } else {
-                        console.log(1);
                         alert('收藏成功');
                     }
                 })
         }
     }
-
     reloadPage = () => {
         window.location.reload();
     }
@@ -81,29 +118,24 @@ export default class MaterialSharing extends Component {
                 search: e.target.value
             })
         }
-        console.log(this.state.arr)
     }
     clickSend = (id) => {
-        //要执行的代码
         let url = `http://localhost:3005/file/select?title=${this.state.search}`;
         axios(url)
             .then((res) => {
-                console.log(res.data)
                 if (res.data.false) {
-                    console.log('false');
                 }
                 else {
-                    console.log(res.data);
                     for (var i = 0; i < res.data.length; i++) {
                         res.data[i].pic = "http://localhost:3005" + res.data[i].pic;
                     }
                     this.setState({
                         data: res.data
                     })
-                    console.log(res.data);
                 }
             })
     };
+
     render() {
         return (
             <div>
@@ -131,7 +163,7 @@ export default class MaterialSharing extends Component {
                 </div>
                 <div style={{ marginTop: "13vh" }}>
                     {
-                        this.state.data.map((item) => (
+                        this.state.data.map((item, idx) => (
                             <div>
                                 <div className="data1">
                                     <div style={{ float: "left" }}>
@@ -142,7 +174,7 @@ export default class MaterialSharing extends Component {
                                         <span style={{ fontSize: "1vh" }}>{item.name}</span>&nbsp;&nbsp;
                                         </div>
                                     </div>
-                                    <span className="iconfont icon-collection" onClick={this.addCollect.bind(this, (item.filepath))}></span><br />
+                                    <span style={{ color: this.state.color[idx], fontSize: '3.3vh' }} className="iconfont icon-collection" onClick={this.addCollect.bind(this, (idx))}></span><br />
                                 </div>
                             </div>
                         ))
