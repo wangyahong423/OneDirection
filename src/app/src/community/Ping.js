@@ -28,7 +28,7 @@ export default class Ping extends Component {
   }));
   addItem = () => {
     if (this.state.content) {
-      let url = `http://localhost:3005/communitytalk/add?cid=${this.state.cid}
+      let url = `http://139.155.44.190:3005/communitytalk/add?cid=${this.state.cid}
     &name=${this.state.name}&content=${this.state.content}&time=${this.state.time}`;
       axios(url)
         .then((res) => {
@@ -46,10 +46,10 @@ export default class Ping extends Component {
   }
   componentDidMount() {
     var id = this.props.match.params.id;
-    let url = `http://localhost:3005/community/list/` + id;
-    let url1 = `http://localhost:3005/communitytalk/list/`;
-    let url3 = `http://localhost:3005/users/getName`;
-    let url4 = `http://localhost:3005/users/list`;
+    let url = `http://139.155.44.190:3005/community/list/` + id;
+    let url1 = `http://139.155.44.190:3005/communitytalk/list/`;
+    let url3 = `http://139.155.44.190:3005/users/getName`;
+    let url4 = `http://139.155.44.190:3005/users/list`;
     axios(url3)
       .then((res) => {
         this.setState({
@@ -59,7 +59,7 @@ export default class Ping extends Component {
     axios(url)
       .then((res) => {
         for (var i = 0; i < res.data.length; i++) {
-          res.data[i].pic = "http://localhost:3005" + res.data[i].pic
+          res.data[i].pic = "http://139.155.44.190:3005" + res.data[i].pic
         }
         this.setState({
           data: res.data
@@ -77,7 +77,7 @@ export default class Ping extends Component {
     axios(url4)
       .then((res) => {
         for (var i = 0; i < res.data.length; i++) {
-          res.data[i].pic = "http://localhost:3005" + res.data[i].pic
+          res.data[i].pic = "http://139.155.44.190:3005" + res.data[i].pic
         }
         this.setState({
           yonghu: res.data
@@ -101,43 +101,44 @@ export default class Ping extends Component {
         this.setState({
           pic: qrr
         })
-      })
-    axios(url1)
-      .then((res) => {
-        this.setState({
-          todo: res.data.communitytalk
-        })
-        var arr = [];
-        this.state.todo.map((item) => {
-          if (item.cid == id) {
-            arr.push(item);
-          }
-          this.setState({
-            todo: arr
+        axios(url1)
+          .then((res) => {
+            this.setState({
+              todo: res.data.communitytalk
+            })
+            var arr = [];
+            this.state.todo.map((item) => {
+              if (item.cid == id) {
+                arr.push(item);
+              }
+              this.setState({
+                todo: arr
+              })
+            })
+            var qrr = []
+            var a = 0;
+            for (var i = 0; i < this.state.todo.length; i++) {
+              for (var j = 0; j < this.state.yonghu.length; j++) {
+                if (this.state.todo[i].name == this.state.yonghu[j].name) {
+                  a = this.state.yonghu[j].pic;
+                  console.log(a)
+                  break;
+                }
+                else {
+                  a = 0;
+                }
+              }
+              if (a != 0) {
+                qrr.push(a)
+              }
+            }
+            this.setState({
+              photo: qrr
+            })
+            console.log(this.state.yonghu)
           })
-        })
-        var qrr = []
-        var a = 0;
-        for (var i = 0; i < this.state.todo.length; i++) {
-          for (var j = 0; j < this.state.yonghu.length; j++) {
-            if (this.state.todo[i].name == this.state.yonghu[j].name) {
-              a = this.state.yonghu[j].pic;
-              console.log(a)
-              break;
-            }
-            else {
-              a = 0;
-            }
-          }
-          if (a != 0) {
-            qrr.push(a)
-          }
-        }
-        this.setState({
-          photo: qrr
-        })
-        console.log(this.state.yonghu)
       })
+
   }
   getContent = (e) => {
     this.setState({

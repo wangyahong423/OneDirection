@@ -16,7 +16,7 @@ export default class My extends Component {
         }
     }
     componentDidMount() {
-        let url = `http://localhost:3005/users/list`;
+        let url = `http://139.155.44.190:3005/users/list`;
         axios(url)
             .then((res) => {
                 if (res.err) {
@@ -35,24 +35,26 @@ export default class My extends Component {
                     })
                 }
             })
-        let url1 = `http://localhost:3005/users/getName`;
+        let url1 = `http://139.155.44.190:3005/users/getName`;
         axios(url1)
             .then((res) => {
                 this.setState({
                     name: res.data.name
                 })
             })
-        let url2 = `http://localhost:3005/users/list`;
+        let url2 = `http://139.155.44.190:3005/users/list`;
         axios(url2)
             .then((res) => {
+                console.log(res.data)
                 this.setState({
                     todo: res.data
                 })
+                console.log(this.state.todo) 
                 this.state.todo.map((item) => {
                     if (item.name == this.state.name) {
                         this.setState({
                             college: item.college,
-                            pic: item.pic
+                            pic: "http://139.155.44.190:3005" + item.pic
                         })
                     }
                 })
@@ -92,7 +94,7 @@ export default class My extends Component {
                             <Item
                                 arrow="horizontal"
                                 onClick={() => { }}
-                                className='iconfont icon-collection'
+                                className='iconfont icon-tieziguanli'
                                 style={{ paddingLeft: '20px', borderBottom: '1px solid grey', height: '60px', color: 'black' }}
                             ><span style={{ marginLeft: '40px', fontSize: '20px' }}>我的帖子</span></Item>
                         </Link>
@@ -100,8 +102,8 @@ export default class My extends Component {
                             <Item
                                 arrow="horizontal"
                                 onClick={() => { }}
-                                className='iconfont icon-collection'
-                                style={{ paddingLeft: '20px', borderBottom: '1px solid grey', height: '60px', color: 'black' }}
+                                className='iconfont icon-icon--'
+                                style={{ paddingLeft: '16px', borderBottom: '1px solid grey', height: '60px', color: 'black',fontSize:'22px' }}
                             ><span style={{ marginLeft: '40px', fontSize: '20px' }}>我的文件</span></Item>
                         </Link>
                         <Link to="/tongxunlvone">
@@ -124,7 +126,7 @@ export default class My extends Component {
                             <Item
                                 arrow="horizontal"
                                 onClick={() => { }}
-                                className='iconfont icon-tianmaotishi-yiwen'
+                                className='iconfont icon-fankui'
                                 style={{ paddingLeft: '20px', borderBottom: '1px solid grey', height: '60px', color: 'black' }}
                             ><span style={{ marginLeft: '40px', fontSize: '20px' }}>用户反馈</span></Item>
                         </Link>

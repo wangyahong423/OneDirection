@@ -12,33 +12,36 @@ export default class Shoucang extends Component {
     }
   }
   componentDidMount() {
-    let url1 = `http://localhost:3005/users/getName`;
+    let url1 = `http://139.155.44.190:3005/users/getName`;
+    let url = `http://139.155.44.190:3005/collect/list`;
+
     axios(url1)
       .then((res) => {
         this.setState({
           name: res.data.name
         })
-      })
-    let url = `http://localhost:3005/collect/list`;
-    axios(url)
-      .then((res) => {
-        this.setState({
-          data: res.data
-        })
-        var arr = [];
+        axios(url)
+          .then((res) => {
+            this.setState({
+              data: res.data
+            })
+            var arr = [];
 
-        this.state.data.map((item) => {
-          if (item.name == this.state.name) {
-            arr.push(item);
-          }
-          this.setState({
-            data: arr
+            this.state.data.map((item) => {
+              if (item.name == this.state.name) {
+                arr.push(item);
+              }
+              this.setState({
+                data: arr
+              })
+            })
           })
-        })
       })
+
+
   }
   delFile = (filepath) => {
-    let url1 = `http://localhost:3005/collect/delete?filepath=${filepath}&name=${this.state.name}`;
+    let url1 = `http://139.155.44.190:3005/collect/delete?filepath=${filepath}&name=${this.state.name}`;
     axios(url1)
       .then((res) => {
       })
@@ -72,7 +75,7 @@ export default class Shoucang extends Component {
                   </div>
                   <button style={{ height: "7vw", width: '10vw', display: "inline", margin: "3vh 1vw 0 3vw", float: "left", backgroundColor: "#437DFF", border: "none", borderRadius: "1vw", color: '#fff', fontSize: "1vh" }} onClick={this.delFile.bind(this, (item.filepath))}>取消<br />收藏</button>
                   <button style={{ height: "7vw", width: '10vw', display: "inline", margin: "3vh 0 0 0", float: "left", backgroundColor: "#437DFF", border: "none", borderRadius: "1vw", fontSize: "1vh" }}>
-                    <a href={"http://localhost:3005/files/" + item.filepath} style={{ color: 'white', fontSize: "3vw" }}>下载</a> </button>
+                    <a href={"http://139.155.44.190:3005/files/" + item.filepath} style={{ color: 'white', fontSize: "3vw" }}>下载</a> </button>
                 </div>
               </div>
             ))

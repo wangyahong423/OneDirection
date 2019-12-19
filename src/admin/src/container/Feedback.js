@@ -41,11 +41,11 @@ export default class Feedback extends Component {
         }
     }
     componentDidMount() {
-        let url = `http://localhost:3005/feedback/list`;
+        let url = `http://139.155.44.190:3005/feedback/list`;
         axios(url)
             .then((res) => {
                 for (var i = 0; i < res.data.length; i++) {
-                    res.data[i].pic = "http://localhost:3005" + res.data[i].pic;
+                    res.data[i].pic = "http://139.155.44.190:3005/" + res.data[i].pic;
                 }
                 this.setState({
                     data: res.data,
@@ -55,7 +55,7 @@ export default class Feedback extends Component {
             })
     }
     handleRegister = (tel, time, e) => {
-        let url = `http://localhost:3005/feedback/deleteFeedback?tel=${tel}&time=${time}`;
+        let url = `http://139.155.44.190:3005/feedback/deleteFeedback?tel=${tel}&time=${time}`;
         axios(url)
             .then((res) => {
                 if (res.data.ok) {
@@ -65,7 +65,7 @@ export default class Feedback extends Component {
             })
     }
     lookContent = (tel, time, e) => {
-        let url = `http://localhost:3005/feedback/`
+        let url = `http://139.155.44.190:3005/feedback/`
     }
     lookContent = (content, e) => {
         if (this.state.display_block == 'none') {

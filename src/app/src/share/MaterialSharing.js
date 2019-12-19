@@ -25,57 +25,61 @@ export default class MaterialSharing extends Component {
         })
     }
     componentDidMount() {
-        let url = `http://localhost:3005/file/list`;
+        let url = `http://139.155.44.190:3005/file/list`;
+        let url1 = `http://139.155.44.190:3005/users/getName`;
+        let url2 = `http://139.155.44.190:3005/collect/list`;
         axios(url)
             .then((res) => {
                 this.setState({
                     data: res.data
                 })
-            })
-        let url1 = `http://localhost:3005/users/getName`;
-        axios(url1)
-            .then((res) => {
-                this.setState({
-                    name: res.data.name
-                })
-            })
-        let url2 = `http://localhost:3005/collect/list`;
-        axios(url2)
-            .then((res) => {
-                this.setState({
-                    list: res.data
-                })
-                var brr = [];
-                this.state.list.map((item) => {
-                    if (item.name == this.state.name) {
-                        brr.push(item);
-                    }
-                    this.setState({
-                        list: brr
+                axios(url1)
+                    .then((res) => {
+                        this.setState({
+                            name: res.data.name
+                        })
+                        axios(url2)
+                            .then((res) => {
+                                this.setState({
+                                    list: res.data
+                                })
+                                var brr = [];
+                                this.state.list.map((item) => {
+                                    if (item.name == this.state.name) {
+                                        brr.push(item);
+                                    }
+                                    this.setState({
+                                        list: brr
+                                    })
+                                })
+                                var arr = [];
+                                var a = 0;
+                                for (var i = 0; i < this.state.data.length; i++) {//data是所有文件list
+                                    for (var j = 0; j < this.state.list.length; j++) {
+                                        if (this.state.data[i].filepath == this.state.list[j].filepath) {//id和cid改成filepath
+                                            a = 1;
+                                            break;
+                                        } else {
+                                            a = 0;
+                                        }
+                                    }
+                                    if (a == 1) {
+                                        arr.push('#FFD664');
+                                        a = 0;
+                                    } else {
+                                        arr.push('black');
+                                    }
+                                }
+                                this.setState({
+                                    color: arr
+                                })
+                            })
                     })
-                })
-                var arr = [];
-                var a = 0;
-                for (var i = 0; i < this.state.data.length; i++) {//data是所有文件list
-                    for (var j = 0; j < this.state.list.length; j++) {
-                        if (this.state.data[i].filepath == this.state.list[j].filepath) {//id和cid改成filepath
-                            a = 1;
-                            break;
-                        } else {
-                            a = 0;
-                        }
-                    }
-                    if (a == 1) {
-                        arr.push('#FFD664');
-                        a = 0;
-                    } else {
-                        arr.push('black');
-                    }
-                }
-                this.setState({
-                    color: arr
-                })
             })
+
+
+
+
     }
     addCollect = (id) => {
         var crr = this.state.color;
@@ -85,7 +89,7 @@ export default class MaterialSharing extends Component {
             this.setState({
                 color: crr
             })
-            let url3 = `http://localhost:3005/collect/add?filepath=${this.state.data[id].filepath}&name=${this.state.name}`;
+            let url3 = `http://139.155.44.190:3005/collect/add?filepath=${this.state.data[id].filepath}&name=${this.state.name}`;
             axios(url3)
                 .then((res) => {
                 })
@@ -96,7 +100,7 @@ export default class MaterialSharing extends Component {
             this.setState({
                 color: crr
             })
-            let url4 = `http://localhost:3005/collect/delete?filepath=${this.state.data[id].filepath}&name=${this.state.name}`;
+            let url4 = `http://139.155.44.190:3005/collect/delete?filepath=${this.state.data[id].filepath}&name=${this.state.name}`;
             axios(url4)
                 .then((res) => {
                     if (res.err) {
@@ -120,14 +124,14 @@ export default class MaterialSharing extends Component {
         }
     }
     clickSend = (id) => {
-        let url = `http://localhost:3005/file/select?title=${this.state.search}`;
+        let url = `http://139.155.44.190:3005/file/select?title=${this.state.search}`;
         axios(url)
             .then((res) => {
                 if (res.data.false) {
                 }
                 else {
                     for (var i = 0; i < res.data.length; i++) {
-                        res.data[i].pic = "http://localhost:3005" + res.data[i].pic;
+                        res.data[i].pic = "http://139.155.44.190:3005/" + res.data[i].pic;
                     }
                     this.setState({
                         data: res.data
@@ -145,7 +149,7 @@ export default class MaterialSharing extends Component {
                         <Link to="/Share"><span style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span></Link>
                     ]}
                     rightContent={[
-                        <form method="post" action={"http://localhost:3005/file/addFile?name=" + this.state.name} encType="multipart/form-data">
+                        <form method="post" action={"http://139.155.44.190:3005/file/addFile?name=" + this.state.name} encType="multipart/form-data">
                             <div style={{ height: "5vh", width: "5vh", fontSize: "3vh", marginTop: "2vh" }} className=" iconfont icon-shangchuanwenjian" >
                                 <input type="submit" value="上传" style={{ opacity: "0", position: "fixed", top: "1vh", left: "80vw" }} onClick={this.reloadPage}></input>
                             </div>

@@ -55,11 +55,11 @@ export default class Learn extends Component {
         }
     }
     componentDidMount() {
-        let url = `http://localhost:3005/learn/list`;
+        let url = `http://139.155.44.190:3005/learn/list`;
         axios(url)
             .then((res) => {
                 for (var i = 0; i < res.data.length; i++) {
-                    res.data[i].pic = "http://localhost:3005" + res.data[i].pic;
+                    res.data[i].pic = "http://139.155.44.190:3005/" + res.data[i].pic;
                 }
                 this.setState({
                     data: res.data,
@@ -69,7 +69,7 @@ export default class Learn extends Component {
             })
     }
     handleRegister = (id, e) => {
-        let url = `http://localhost:3005/learn/deleteLearn?id=${id}`;
+        let url = `http://139.155.44.190:3005/learn/deleteLearn?id=${id}`;
         axios(url)
             .then((res) => {
                 if (res.data.ok) {

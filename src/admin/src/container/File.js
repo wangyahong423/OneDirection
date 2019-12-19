@@ -38,14 +38,12 @@ export default class File extends Component {
         }
     }
     handleSend = (e) => {
-        let url = `http://localhost:3005/file/select?filepath=${e.target.value}`;
+        let url = `http://139.155.44.190:3005/file/select?title=${e.target.value}`;
         axios(url)
             .then((res) => {
+                console.log(res)
                 if (res.data.false) {
                 } else {
-                    for (var i = 0; i < res.data.length; i++) {
-                        res.data[i].pic = "http://localhost:3005" + res.data[i].pic;
-                    }
                     this.setState({
                         data: res.data,
                         totalPage: Math.ceil(res.data.length / this.state.pageSize),
@@ -60,11 +58,11 @@ export default class File extends Component {
         }
     }
     componentDidMount() {
-        let url = `http://localhost:3005/file/list`;
+        let url = `http://139.155.44.190:3005/file/list`;
         axios(url)
             .then((res) => {
                 for (var i = 0; i < res.data.length; i++) {
-                    res.data[i].pic = "http://localhost:3005" + res.data[i].pic;
+                    res.data[i].pic = "http://139.155.44.190:3005/" + res.data[i].pic;
                 }
                 this.setState({
                     data: res.data,
@@ -74,7 +72,7 @@ export default class File extends Component {
             })
     }
     handleRegister = (filepath, e) => {
-        let url = `http://localhost:3005/file/deleteFile?filepath=${filepath}`;
+        let url = `http://139.155.44.190:3005/file/deleteFile?filepath=${filepath}`;
         axios(url)
             .then((res) => {
                 if (res.data.ok) {
@@ -111,7 +109,7 @@ export default class File extends Component {
                                         <td>
                                             <button onClick={this.handleRegister.bind(this, (item.filepath))} style={{ height: '28px', fontFamily: '楷体', fontSize: '20px' }}>删除</button>
                                             <button style={{ height: '28px', fontFamily: '楷体', fontSize: '20px', marginLeft: '10px' }}>
-                                                <a href={"http://localhost:3005/files/" + item.filepath} style={{ fontFamily: '楷体', fontSize: '20px', color: 'black', textDecoration: 'none' }}>下载</a>
+                                                <a href={"http://139.155.44.190:3005/files/" + item.filepath} style={{ fontFamily: '楷体', fontSize: '20px', color: 'black', textDecoration: 'none' }}>下载</a>
                                             </button>
                                         </td>
                                     </tr>

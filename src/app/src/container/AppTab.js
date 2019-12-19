@@ -24,6 +24,8 @@ export default class AppTab extends React.Component {
             }
             selected={this.state.selectedTab === 'method'}
             onPress={() => {
+              window.location.href='http://localhost:3000/method'
+
               this.setState({
                 selectedTab: 'method',
               });
@@ -39,6 +41,8 @@ export default class AppTab extends React.Component {
             key="Community"
             selected={this.state.selectedTab === 'community'}
             onPress={() => {
+              window.location.href='http://localhost:3000/community'
+
               this.setState({
                 selectedTab: 'community',
               });
@@ -54,6 +58,8 @@ export default class AppTab extends React.Component {
             key="Share"
             selected={this.state.selectedTab === 'share'}
             onPress={() => {
+              window.location.href='http://localhost:3000/Share'
+
               this.setState({
                 selectedTab: 'share',
               });
@@ -69,6 +75,8 @@ export default class AppTab extends React.Component {
             key="My"
             selected={this.state.selectedTab === 'my'}
             onPress={() => {
+              window.location.href='http://localhost:3000/My'
+
               this.setState({
                 selectedTab: 'my',
               });

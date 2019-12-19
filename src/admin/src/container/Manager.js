@@ -62,11 +62,11 @@ export default class Manager extends Component {
     };
 
     componentDidMount() {
-        let url = `http://localhost:3005/manager/list`;
+        let url = `http://139.155.44.190:3005/manager/list`;
         axios(url)
             .then((res) => {
                 for (var i = 0; i < res.data.length; i++) {
-                    res.data[i].pic = "http://localhost:3005" + res.data[i].pic;
+                    res.data[i].pic = "http://139.155.44.190:3005/" + res.data[i].pic;
                 }
                 this.setState({
                     data: res.data,
@@ -81,13 +81,13 @@ export default class Manager extends Component {
     };
 
     handleSend = (e) => {
-        let url = `http://localhost:3005/manager/select?name=${e.target.value}`;
+        let url = `http://139.155.44.190:3005/manager/select?name=${e.target.value}`;
         axios(url)
             .then((res) => {
                 if (res.data.false) {
                 } else {
                     for (var i = 0; i < res.data.length; i++) {
-                        res.data[i].pic = "http://localhost:3005" + res.data[i].pic;
+                        res.data[i].pic = "http://139.155.44.190:3005/" + res.data[i].pic;
                     }
                     this.setState({
                         data: res.data
@@ -114,12 +114,12 @@ export default class Manager extends Component {
     addManager = () => {
         let text = { name: this.state.name, pwd: this.state.pwd, tel: this.state.tel };
         let send = JSON.stringify(text);
-        axios(`http://localhost:3005/manager/addManager?name=${this.state.name}&pwd=${this.state.pwd}&tel=${this.state.tel}`)
+        axios(`http://139.155.44.190:3005/manager/addManager?name=${this.state.name}&pwd=${this.state.pwd}&tel=${this.state.tel}`)
             .then(
                 data => {
                     if (data.data.ok == 1) {
                         window.alert("添加成功");
-                        window.location.href = 'http://localhost:3000/home#';
+                        window.location.href = 'http://localhost:3010/home#';
                     }
                     else if (data.data.ok == 0) {
                         window.alert("添加失败，管理员已存在");

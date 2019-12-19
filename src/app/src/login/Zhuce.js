@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { NavBar, Button } from 'antd-mobile';
-import { createForm } from 'rc-form';
-import { provinceLite } from 'antd-mobile-demo-data';
-import axios from 'axios';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { NavBar, Button } from "antd-mobile";
+import { createForm } from "rc-form";
+import { provinceLite } from "antd-mobile-demo-data";
+import axios from "axios";
 
 class Zhuce extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      college: '',
-      tel: '',
-      pwd: '',
-      repwd: '',
+      name: "",
+      college: "",
+      tel: "",
+      pwd: "",
+      repwd: "",
       trueNum: "",
       checkNum: ""
     }
@@ -52,7 +52,7 @@ class Zhuce extends Component {
   }
 
   getCode = () => {
-    let url = `http://localhost:3005/users/Getnum?tel=${this.state.tel}`;
+    let url = `http://139.155.44.190:3005/users/Getnum?tel=${this.state.tel}`;
     axios(url)
       .then(
         data => {
@@ -69,12 +69,12 @@ class Zhuce extends Component {
       window.alert("验证码不能为空");
     }
     else if (this.state.checkNum == this.state.trueNum) {
-      axios(`http://localhost:3005/users/addUser?name=${this.state.name}&pwd=${this.state.pwd}&tel=${this.state.tel}&college=${this.state.college}`)
+      axios(`http://139.155.44.190:3005/users/addUser?name=${this.state.name}&pwd=${this.state.pwd}&tel=${this.state.tel}&college=${this.state.college}`)
         .then(
           data => {
             if (data.data.ok == 1) {
               window.alert("注册成功");
-              window.location.href = 'http://localhost:3000/';
+              window.location.href = "http://localhost:3000/";
             }
             else if (data.data.ok == 0) {
               window.alert("注册失败，用户名已存在");
@@ -87,7 +87,7 @@ class Zhuce extends Component {
     }
   }
   state = {
-    colorValue: ['#00FF00'],
+    colorValue: ["#00FF00"],
   };
   onClick = () => {
     setTimeout(() => {
@@ -104,25 +104,25 @@ class Zhuce extends Component {
   render() {
     const { getFieldProps } = this.props.form;
     return (
-      <div style={{ position: 'relative' }}>
+      <div style={{ position: "relative" }}>
         <NavBar
-          style={{ backgroundColor: '#37376F', color: '#fff', position: 'sticky ', top: '20', zIndex: 10, textAlign: 'center', height: '7vh' }}
+          style={{ backgroundColor: "#37376F", color: "#fff", position: "sticky ", top: "20", zIndex: 10, textAlign: "center", height: "7vh" }}
           leftContent={[
-            <Link to="/"><span style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span></Link>
+            <Link to="/"><span style={{ fontSize: "17px", color: "white" }} className="iconfont icon-ico_leftarrow"></span></Link>
           ]}
         >
           <span>用户注册</span>
         </NavBar>
-        <input style={{ width: '75vw', height: '6vh', marginLeft: '10vw', marginTop: '10vh', border: 'none', borderRadius: '3vw', paddingLeft: '5vw' }} className="iconfont icon-wode" count={100} onChange={this.nameChange} placeholder="请输入昵称"></input>
-        <input onChange={this.collegeChange} style={{ width: '75vw', height: '6vh', marginLeft: '10vw', marginTop: '3vh', border: 'none', borderRadius: '3vw', paddingLeft: '5vw' }} className="iconfont icon-wode" count={100} placeholder="请输入所在学院"></input>
-        <input style={{ width: '75vw', height: '6vh', marginLeft: '10vw', marginTop: '3vh', border: 'none', borderRadius: '3vw', paddingLeft: '5vw' }} className="iconfont icon-wode" count={100} onChange={this.telChange} placeholder="请输入手机号"></input>
-        <input style={{ width: '50vw', height: '6vh', marginLeft: '10vw', marginTop: '3vh', border: 'none', borderRadius: '3vw', paddingLeft: '5vw' }} className="iconfont icon-wode" count={100} onChange={this.numChange} placeholder="请输入验证码"></input>
-        <button onClick={this.getCode} style={{ marginTop: '5vh', height: '5vh', marginLeft: '5%' }}>获取验证码</button>
-        <input type='password' style={{ width: '75vw', height: '6vh', marginLeft: '10vw', marginTop: '3vh', border: 'none', borderRadius: '3vw', paddingLeft: '5vw' }} className="iconfont icon-wode" count={100} onChange={this.pwdChange} placeholder="请输入密码"></input>
-        <input type='password' style={{ width: '75vw', height: '6vh', marginLeft: '10vw', marginTop: '3vh', border: 'none', borderRadius: '3vw', paddingLeft: '5vw' }} className="iconfont icon-wode" count={100} onChange={this.repwdChange} placeholder="请再次输入密码"></input>
-        <div style={{ width: "70%", textAlign: 'center', marginTop: '6vh', }}>
-          <Button onClick={this.getConnect} style={{ background: '#37376f', marginLeft: '40%' }}>
-            <span style={{ color: 'white', textAlign: 'center' }}>注册</span>
+        <input style={{ width: "75vw", height: "6vh", marginLeft: "10vw", marginTop: "10vh", border: "none", borderRadius: "3vw", paddingLeft: "5vw" }} className="iconfont icon-wode" count={100} onChange={this.nameChange} placeholder="请输入昵称"></input>
+        <input onChange={this.collegeChange} style={{ width: "75vw", height: "6vh", marginLeft: "10vw", marginTop: "3vh", border: "none", borderRadius: "3vw", paddingLeft: "5vw" }} className="iconfont icon-wode" count={100} placeholder="请输入所在学院"></input>
+        <input style={{ width: "75vw", height: "6vh", marginLeft: "10vw", marginTop: "3vh", border: "none", borderRadius: "3vw", paddingLeft: "5vw" }} className="iconfont icon-wode" count={100} onChange={this.telChange} placeholder="请输入手机号"></input>
+        <input style={{ width: "50vw", height: "6vh", marginLeft: "10vw", marginTop: "3vh", border: "none", borderRadius: "3vw", paddingLeft: "5vw" }} className="iconfont icon-wode" count={100} onChange={this.numChange} placeholder="请输入验证码"></input>
+        <button onClick={this.getCode} style={{ marginTop: "5vh", height: "5vh", marginLeft: "5%" }}>获取验证码</button>
+        <input type="password" style={{ width: "75vw", height: "6vh", marginLeft: "10vw", marginTop: "3vh", border: "none", borderRadius: "3vw", paddingLeft: "5vw" }} className="iconfont icon-wode" count={100} onChange={this.pwdChange} placeholder="请输入密码"></input>
+        <input type="password" style={{ width: "75vw", height: "6vh", marginLeft: "10vw", marginTop: "3vh", border: "none", borderRadius: "3vw", paddingLeft: "5vw" }} className="iconfont icon-wode" count={100} onChange={this.repwdChange} placeholder="请再次输入密码"></input>
+        <div style={{ width: "70%", textAlign: "center", marginTop: "6vh", }}>
+          <Button onClick={this.getConnect} style={{ background: "#37376f", marginLeft: "40%" }}>
+            <span style={{ color: "white", textAlign: "center" }}>注册</span>
           </Button>
         </div>
       </div>

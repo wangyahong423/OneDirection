@@ -18,30 +18,16 @@ export default class MaterialSharing extends Component {
             arr: [],
             color: [],
             yonghu: [],
-            pic: [],
+            pic: '',
             name: ''
         };
     }
     componentDidMount() {
-        let url = `http://localhost:3005/learn/list`;
-        let url2 = `http://localhost:3005/learnlike/list`;
-        let url3 = `http://localhost:3005/users/getName`;
-        let url4 = `http://localhost:3005/users/list`;
-        axios(url)
-            .then((res) => {
-                this.setState({
-                    data: res.data
-                })
-                var arr = [];
-                this.state.data.map((item) => {
-                    if (item.name == this.state.name) {
-                        arr.push(item)
-                    }
-                    this.setState({
-                        data: arr
-                    })
-                })
-            })
+        let url = `http://139.155.44.190:3005/learn/list`;
+        let url2 = `http://139.155.44.190:3005/learnlike/list`;
+        let url3 = `http://139.155.44.190:3005/users/getName`;
+        let url4 = `http://139.155.44.190:3005/users/list`;
+
         axios(url2)
             .then((res) => {
                 this.setState({
@@ -79,44 +65,36 @@ export default class MaterialSharing extends Component {
                 })
             })
         axios(url3)
-            .then((res) => {
-                this.setState({
-                    name: res.data.name
+            .then((re) => {
+
+                axios(url4).then(res=>{
+                    res.data.map(item=>{
+                        if(item.name==re.data.name){
+                            this.setState({pic:'http://139.155.44.190:3005'+item.pic})
+                        }
+                    })
                 })
+
+                axios(url)
+                    .then((res) => {
+                        var arr = [];
+                        res.data.map((item) => {
+                            if (item.name == re.data.name) {
+                                arr.push(item)
+                            }
+                        })
+                        console.log(arr)
+                        this.setState({
+                            data: arr
+                        })
+                    })
+               
             })
         this.state.data.map((item) => {
             this.setState({
                 arr: item.id
             })
         })
-        axios(url4)
-            .then((res) => {
-                for (var i = 0; i < res.data.length; i++) {
-                    res.data[i].pic = "http://localhost:3005" + res.data[i].pic
-                }
-                this.setState({
-                    yonghu: res.data
-                })
-                var qrr = []
-                var a = 0;
-                for (var i = 0; i < this.state.data.length; i++) {
-                    for (var j = 0; j < this.state.yonghu.length; j++) {
-                        if (this.state.data[i].name == this.state.yonghu[j].name) {
-                            a = this.state.yonghu[j].pic;
-                            break;
-                        }
-                        else {
-                            a = 0;
-                        }
-                    }
-                    if (a != 0) {
-                        qrr.push(a)
-                    }
-                }
-                this.setState({
-                    pic: qrr
-                })
-            })
     }
     changeSearch = (e) => {
         if (e.target.value == "") {
@@ -135,7 +113,7 @@ export default class MaterialSharing extends Component {
             this.setState({
                 color: crr
             })
-            let url9 = `http://localhost:3005/learnlike/add?lid=${this.state.data[id].id}&name=${this.state.name}`
+            let url9 = `http://139.155.44.190:3005/learnlike/add?lid=${this.state.data[id].id}&name=${this.state.name}`
             axios(url9)
                 .then((res) => {
                 })
@@ -146,20 +124,20 @@ export default class MaterialSharing extends Component {
             this.setState({
                 color: crr
             })
-            let url10 = `http://localhost:3005/learnlike/delete?lid=${this.state.data[id].id}&name=${this.state.name}`
+            let url10 = `http://139.155.44.190:3005/learnlike/delete?lid=${this.state.data[id].id}&name=${this.state.name}`
             axios(url10)
                 .then((res) => {
                 })
         }
     }
     clickSend = (id) => {
-        let url = `http://localhost:3005/learn/select?content=${this.state.search}`;
+        let url = `http://139.155.44.190:3005/learn/select?content=${this.state.search}`;
         axios(url)
             .then((res) => {
                 if (res.data.false) {
                 } else {
                     for (var i = 0; i < res.data.length; i++) {
-                        res.data[i].pic = "http://localhost:3005" + res.data[i].pic;
+                        res.data[i].pic = "http://139.155.44.190:3005/" + res.data[i].pic;
                     }
                     this.setState({
                         data: res.data
@@ -169,7 +147,7 @@ export default class MaterialSharing extends Component {
     };
     delTie = (id) => {
 
-        let url9 = `http://localhost:3005/learn/deleteLearn?id=${id}`
+        let url9 = `http://139.155.44.190:3005/learn/deleteLearn?id=${id}`
         axios(url9)
             .then((res) => {
                 window.location.href = "http://localhost:3000/tiezi"
@@ -191,7 +169,7 @@ export default class MaterialSharing extends Component {
                             this.state.data.map((item, idx) =>
                                 <div style={{ background: '#fff', color: 'black', position: 'relative', height: '18vh', marginBottom: '1vh' }}>
                                     <div style={{ float: "left", position: 'absolute', left: '4vw', top: '2vh' }}>
-                                        <img src={this.state.pic[idx]} style={{ height: '7vh', width: '12vw', borderRadius: '50%' }} />
+                                        <img src={this.state.pic} style={{ height: '7vh', width: '12vw', borderRadius: '50%' }} />
                                     </div>
                                     <p style={{ fontSize: '2.5vh', lineHeight: 2.5, position: 'absolute', top: '-2vh', left: '20vw' }}>{item.name}</p>
                                     <div style={{ color: 'gray', fontSize: '2vw', position: 'absolute', left: '20vw', top: '7vh' }}>{item.time}</div>

@@ -20,43 +20,47 @@ export default class CollegeTeachers extends Component {
         }
     }
     componentDidMount() {
-        let url3 = `http://localhost:3005/users/getName`;
+        let url3 = `http://139.155.44.190:3005/users/getName`;
+        let url2 = `http://139.155.44.190:3005/users/list`;
+        let url = `http://139.155.44.190:3005/leaders/list`;
         axios(url3)
             .then((res) => {
                 this.setState({
                     name: res.data.name
                 })
-            })
-        let url2 = `http://localhost:3005/users/list`;
-        axios(url2)
-            .then((res) => {
-                this.setState({
-                    todo: res.data
-                })
-                this.state.todo.map((item) => {
-                    if (item.name == this.state.name) {
+                axios(url2)
+                    .then((res) => {
                         this.setState({
-                            college: item.college
+                            todo: res.data
                         })
-                    }
-                })
-            })
-        let url = `http://localhost:3005/leaders/list`;
-        axios(url)
-            .then((res) => {
-                this.setState({
-                    data: res.data
-                })
-                var brr = []
-                this.state.data.map((item) => {
-                    if (item.college == this.state.college) {
-                        brr.push(item);
-                    }
-                    this.setState({
-                        data: brr
+                        this.state.todo.map((item) => {
+                            if (item.name == this.state.name) {
+                                this.setState({
+                                    college: item.college
+                                })
+                            }
+                        })
+                        axios(url)
+                            .then((res) => {
+                                this.setState({
+                                    data: res.data
+                                })
+                                var brr = []
+                                this.state.data.map((item) => {
+                                    if (item.college == this.state.college) {
+                                        brr.push(item);
+                                    }
+                                    this.setState({
+                                        data: brr
+                                    })
+                                })
+                            })
                     })
-                })
             })
+
+
+
+
     }
     render() {
         return (

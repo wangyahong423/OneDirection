@@ -12,7 +12,7 @@ export default class PDF extends Component {
         }
     }
     componentDidMount() {
-        let url = `http://localhost:3005/file/list`;
+        let url = `http://139.155.44.190:3005/file/list`;
         axios(url)
             .then((res) => {
                 this.setState({
@@ -49,7 +49,7 @@ export default class PDF extends Component {
                     </div>
                 </Link>
                 <div>
-                    <form method="post" action="http://localhost:3005/file/addFile" encType="multipart/form-data">
+                    <form method="post" action="http://139.155.44.190:3005/file/addFile" encType="multipart/form-data">
                         <input type="file" name="inputFile" multiple="multiple"></input>
                         <input type="submit" value="上传"></input>
                     </form>

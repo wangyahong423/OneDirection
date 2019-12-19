@@ -4,7 +4,7 @@ var con = new pg.Client({
   password: 'duxiu2017!',
   port: 5432,
   database: 'xinsheng',
-  host: '127.0.0.1'
+  host: '139.155.44.190'
 });
 con.on('error', err => {
   console.log(err);

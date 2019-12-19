@@ -32,11 +32,11 @@ export default class Forget extends Component {
         })
     }
     getRepwd = () => {
-        axios(`http://localhost:3005/users/judge?name=${this.state.name}&tel=${this.state.tel}`)
+        axios(`http://139.155.44.190:3005/users/judge?name=${this.state.name}&tel=${this.state.tel}`)
             .then(
                 data => {
                     if (data.data.ok == 1) {
-                        axios(`http://localhost:3005/users/alter?name=${this.state.name}&pwd=${this.state.newPwd}&tel=${this.state.tel}`)
+                        axios(`http://139.155.44.190:3005/users/alter?name=${this.state.name}&pwd=${this.state.newPwd}&tel=${this.state.tel}`)
                             .then(
                                 data => {
                                 }

@@ -65,7 +65,7 @@ body{
   position: fixed;
   top:0;
 }
-.manager{
+.tab{
   height: 65px;
   width:140px;
   line-height: 65px;
@@ -75,8 +75,5 @@ body{
   border-top:1px solid rgba(136, 136, 136, 1);
   border-right:1px solid rgba(136, 136, 136, 1);
   color: white;
-}
-.tab:focus{
-  color: blue;
-  
+  margin-bottom: -24px;
 }

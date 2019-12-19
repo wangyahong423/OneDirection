@@ -10,11 +10,11 @@ export default class Login extends Component {
         }
     }
     handleRegister = () => {
-        let url = `http://localhost:3005/manager/login?name=${this.state.name}&pwd=${this.state.pwd}`;
+        let url = `http://139.155.44.190:3005/manager/login?name=${this.state.name}&pwd=${this.state.pwd}`;
         axios(url)
             .then((res) => {
                 if (res.data.ok) {
-                    let url1 = `http://localhost:3005/manager/getName?name=${this.state.name}`;
+                    let url1 = `http://139.155.44.190:3005/manager/getName?name=${this.state.name}`;
                     axios(url1)
                         .then((res) => {
 

@@ -13,7 +13,7 @@ export default class Yonghu extends Component {
     }
   }
   handleRegister = () => {
-    let url = `http://localhost:3005/feedback/addFeedback?content=${this.state.content}&tel=${this.state.tel}&time=${this.state.time}`;
+    let url = `http://139.155.44.190:3005/feedback/addFeedback?content=${this.state.content}&tel=${this.state.tel}&time=${this.state.time}`;
     axios(url)
       .then((res) => {
         if (res.data.ok) {

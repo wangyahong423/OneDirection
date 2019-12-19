@@ -14,11 +14,77 @@ export default class App extends Component {
     super();
     this.state = {
       date: new Date(),
-      name: ''
+      name: '',
+      click1: true,
+      click2: false,
+      click3: false,
+      click4: false,
+      click5: false,
+      click6:false
     };
   }
+  onClick1=()=>{
+    this.setState({
+        click1:true,
+        click2:false,
+        click3:false,
+        click4:false,
+        click5:false,
+        click6:false
+    })
+}
+onClick2=()=>{
+    this.setState({
+        click1:false,
+        click2:true,
+        click3:false,
+        click4:false,
+        click5:false,
+        click6:false
+    })
+}
+onClick3=()=>{
+    this.setState({
+        click1:false,
+        click2:false,
+        click3:true,
+        click4:false,
+        click5:false,
+        click6:false
+    })
+}
+onClick4=()=>{
+    this.setState({
+        click1:false,
+        click2:false,
+        click3:false,
+        click4:true,
+        click5:false,
+        click6:false
+    })
+}
+onClick5=()=>{
+    this.setState({
+        click1:false,
+        click2:false,
+        click3:false,
+        click4:false,
+        click5:true,
+        click6:false
+    })
+}
+onClick6=()=>{
+  this.setState({
+      click1:false,
+      click2:false,
+      click3:false,
+      click4:false,
+      click5:false,
+      click6:true
+  })
+}
   componentDidMount() {
-    let url1 = `http://localhost:3005/manager/getName`;
+    let url1 = `http://139.155.44.190:3005/manager/getName`;
     axios(url1)
       .then((res) => {
         this.setState({
@@ -38,9 +104,28 @@ export default class App extends Component {
     this.timer = null;
   }
   goback = () => {
-    window.location.href = 'http://localhost:3000'
+    window.location.href = 'http://localhost:3010'
   }
+
   render() {
+    const S1 = {
+      backgroundColor:this.state.click1?"rgba(136, 136, 136, 0.7)":"rgba(136, 136, 136, 0.3)"
+  }
+  const S2 = {
+    backgroundColor:this.state.click2?"rgba(136, 136, 136, 0.7)":"rgba(136, 136, 136, 0.3)"
+  }
+  const S3 = {
+    backgroundColor:this.state.click3?"rgba(136, 136, 136, 0.7)":"rgba(136, 136, 136, 0.3)"
+  }
+  const S4 = {
+    backgroundColor:this.state.click4?"rgba(136, 136, 136, 0.7)":"rgba(136, 136, 136, 0.3)"
+  }
+  const S5 = {
+    backgroundColor:this.state.click5?"rgba(136, 136, 136, 0.7)":"rgba(136, 136, 136, 0.3)"
+  }
+  const S6 = {
+    backgroundColor:this.state.click6?"rgba(136, 136, 136, 0.7)":"rgba(136, 136, 136, 0.3)"
+  }
     let t = this.state.date;
     let year = t.getFullYear();
     let month = (((t.getMonth() + 1) < 10) ? "0" : "") + (t.getMonth() + 1);
@@ -74,12 +159,12 @@ export default class App extends Component {
         <div style={{ width: "100%", height: '150px' }}>
         </div>
         <div className='home'>
-          <Link to='/' className='tab' style={{ textDecoration: 'none', display: 'block', height: '65px' }}><div className='manager'>用户管理</div></Link>
-          <Link to='/feedback' className='tab' style={{ textDecoration: 'none', display: 'block', height: '65px' }}><div className='manager'>用户反馈</div></Link>
-          <Link to='/learn' className='tab' style={{ textDecoration: 'none', display: 'block', height: '65px' }}><div className='manager'>学习交流</div></Link>
-          <Link to='/file' className='tab' style={{ textDecoration: 'none', display: 'block', height: '65px' }}><div className='manager'>文件管理</div></Link>
-          <Link to='/community' className='tab' style={{ textDecoration: 'none', display: 'block', height: '65px' }}><div className='manager'>社区管理</div></Link>
-          <Link to='/manager' className='tab' style={{ textDecoration: 'none', display: 'block', height: '65px' }}><div className='manager' style={{ borderBottom: '1px solid rgba(136, 136, 136, 1)' }}>管理员</div></Link>
+          <Link to='/'  style={{ textDecoration: 'none', height: '65px' }} ><p className='tab' style={S1} onClick={this.onClick1}>用户管理</p></Link>
+          <Link to='/feedback' style={{ textDecoration: 'none', height: '65px' }}><p className='tab' style={S2} onClick={this.onClick2}>用户反馈</p></Link>
+          <Link to='/learn' style={{ textDecoration: 'none', height: '65px' }}><p className='tab' style={S3} onClick={this.onClick3}>学习交流</p></Link>
+          <Link to='/file' style={{ textDecoration: 'none', height: '65px' }}><p className='tab' style={S4} onClick={this.onClick4}>文件管理</p></Link>
+          <Link to='/community' style={{ textDecoration: 'none', height: '65px' }}><p className='tab' style={S5} onClick={this.onClick5}>社区管理</p></Link>
+          <Link to='/manager' style={{ textDecoration: 'none', height: '65px', borderBottom: '1px solid rgba(136, 136, 136, 1)' }}><p className='tab' style={S6} onClick={this.onClick6}>管理员</p></Link>
         </div>
         <div>
           <Route exact path='/' component={Users} />

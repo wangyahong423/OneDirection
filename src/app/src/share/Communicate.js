@@ -15,7 +15,7 @@ class Communicate extends Component {
         }
     }
     componentDidMount() {
-        let url3 = `http://localhost:3005/users/getName`;
+        let url3 = `http://139.155.44.190:3005/users/getName`;
         axios(url3)
             .then((res) => {
                 this.setState({
@@ -25,7 +25,7 @@ class Communicate extends Component {
     }
     handleRegister = () => {
         if (this.state.content) {
-            let url = `http://localhost:3005/learn/addLearn?content=${this.state.content}
+            let url = `http://139.155.44.190:3005/learn/addLearn?content=${this.state.content}
         &name=${this.state.name}&time=${this.state.time}`;
             axios(url)
                 .then((res) => {

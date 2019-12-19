@@ -12,7 +12,6 @@ router.get('/addCommunity', (req, res) => {
     if (err) {
       res.json({ ok: false, msg: '添加失败！' });
     } else {
-      console.log(result.rows);
       res.json({ ok: true, msg: '添加成功！' });
     }
   });
@@ -61,7 +60,7 @@ router.get('/updateCommunity', (req, res) => {
       if(err){
          console.log(err);
       }else{
-        console.log(result.rows);
+        res.send(result.rows);
       }
     });
 });

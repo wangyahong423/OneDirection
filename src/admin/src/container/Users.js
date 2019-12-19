@@ -39,11 +39,11 @@ export default class Users extends Component {
         }
     }
     componentDidMount() {
-        let url = `http://localhost:3005/users/list`;
+        let url = `http://139.155.44.190:3005/users/list`;
         axios(url)
             .then((res) => {
                 for (var i = 0; i < res.data.length; i++) {
-                    res.data[i].pic = "http://localhost:3005" + res.data[i].pic;
+                    res.data[i].pic = "http://139.155.44.190:3005" + res.data[i].pic;
                 }
                 this.setState({
                     data: res.data,
@@ -58,17 +58,19 @@ export default class Users extends Component {
     }
 
     handleSend = (e) => {
-        let url = `http://localhost:3005/users/select?name=${e.target.value}`;
+        let url = `http://139.155.44.190:3005/users/select?name=${e.target.value}`;
         axios(url)
             .then((res) => {
                 if (res.data.false) {
                 } else {
                     for (var i = 0; i < res.data.length; i++) {
-                        res.data[i].pic = "http://localhost:3005" + res.data[i].pic;
+                        res.data[i].pic = "http://139.155.44.190:3005" + res.data[i].pic;
+                        console.log(res.data[i].pic)
                     }
                     this.setState({
                         data: res.data
                     })
+                    
                 }
 
             })
@@ -79,11 +81,20 @@ export default class Users extends Component {
             this.handleSend(e);
         }
     }
+    changeSearch = (e) => {
+        if (e.target.value == "") {
+          window.location.href = "http://localhost:3010/home#/";
+        } else {
+          this.setState({
+            search: e.target.value
+          })
+        }
+      }
     render() {
         return (
             <div style={{ position: 'relative', width: '800px', height: '580px', margin: '0 auto', backgroundColor: 'rgba(136, 136, 136, 0.3)', paddingTop: '0px' }}>
                 <div style={{ height: '40px', width: '700px', marginTop: '1px' }}>
-                    <input type='search' onKeyDown={(e) => this.onkeydown(e)} placeholder="回车进行搜索" style={{ opacity: '0.4', fontFamily: '楷体', height: '40px', width: '800px', fontSize: '20px', paddingLeft: '30px', border: 'none' }} ></input>
+                    <input type='search' onChange={this.changeSearch} onKeyDown={(e) => this.onkeydown(e)} placeholder="回车进行搜索" style={{ opacity: '0.4', fontFamily: '楷体', height: '40px', width: '800px', fontSize: '20px', paddingLeft: '30px', border: 'none' }} ></input>
                 </div>
                 <table style={{ width: '700px', tableLayout: 'fixed', paddingLeft: '20px' }}>
                     <thead>

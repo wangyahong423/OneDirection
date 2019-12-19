@@ -30,7 +30,7 @@ router.post('/addFile', (req, res) => {
     }
 
     var type1 = inputFile.originalFilename.split('.');
-    var type = type1[1];
+    var type = type1[type1.length-1];
     var myDate = new Date();
     var time1 = myDate.toLocaleDateString();
     var time2 = myDate.toLocaleTimeString();

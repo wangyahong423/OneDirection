@@ -12,14 +12,14 @@ export default class MyFile extends Component {
         }
     }
     componentDidMount() {
-        let url1 = `http://localhost:3005/users/getName`;
+        let url1 = `http://139.155.44.190:3005/users/getName`;
         axios(url1)
             .then((res) => {
                 this.setState({
                     name: res.data.name
                 })
             })
-        let url = `http://localhost:3005/file/list`;
+        let url = `http://139.155.44.190:3005/file/list`;
         axios(url)
             .then((res) => {
                 this.setState({
@@ -38,7 +38,7 @@ export default class MyFile extends Component {
             })
     }
     delFile = (filepath) => {
-        let url1 = `http://localhost:3005/file/deleteFile?filepath=${filepath}&name=${this.state.name}`;
+        let url1 = `http://139.155.44.190:3005/file/deleteFile?filepath=${filepath}&name=${this.state.name}`;
         axios(url1)
             .then((res) => {
             })

@@ -14,14 +14,14 @@ export default class CollegeOther extends Component {
         }
     }
     componentDidMount() {
-        let url3 = `http://localhost:3005/users/getName`;
+        let url3 = `http://139.155.44.190:3005/users/getName`;
         axios(url3)
             .then((res) => {
                 this.setState({
                     name: res.data.name
                 })
             })
-        let url2 = `http://localhost:3005/users/list`;
+        let url2 = `http://139.155.44.190:3005/users/list`;
         axios(url2)
             .then((res) => {
                 this.setState({
@@ -35,7 +35,7 @@ export default class CollegeOther extends Component {
                     }
                 })
             })
-        let url = `http://localhost:3005/colleges/list/`;
+        let url = `http://139.155.44.190:3005/colleges/list/`;
         axios(url)
             .then((res) => {
                 this.setState({

@@ -22,74 +22,83 @@ export default class MaterialSharing extends Component {
             name: ''
         };
     }
-    dataList = [
-        { url: 'cTTayShKtEIdQVEMuiWt', title: '朋友圈', },
-        { url: 'umnHwvEgSyQtXlZjNJTt', title: '微信好友' },
-        { url: 'SxpunpETIwdxNjcJamwB', title: 'QQ' },
-    ].map(obj => ({
-        icon: <img src={`https://gw.alipayobjects.com/zos/rmsportal/${obj.url}.png`} alt={obj.title} style={{ width: 36 }} />,
-        title: obj.title,
-    }));
 
-    showShareActionSheet = () => {
-        ActionSheet.showShareActionSheetWithOptions({
-            options: this.dataList,
-            message: '分享',
-        },
-            (buttonIndex) => {
-                this.setState({ clicked1: buttonIndex > -1 ? this.dataList[buttonIndex].title : 'cancel' });
-                return new Promise((resolve) => {
-                    setTimeout(resolve, 0);
-                });
-            });
-    }
     componentDidMount() {
-        let url = `http://localhost:3005/learn/list`;
-        let url2 = `http://localhost:3005/learnlike/list`;
-        let url3 = `http://localhost:3005/users/getName`;
-        let url4 = `http://localhost:3005/users/list`;
+        let url = `http://139.155.44.190:3005/learn/list`;
+        let url2 = `http://139.155.44.190:3005/learnlike/list`;
+        let url3 = `http://139.155.44.190:3005/users/getName`;
+        let url4 = `http://139.155.44.190:3005/users/list`;
         axios(url)
             .then((res) => {
                 this.setState({
                     data: res.data
                 })
-            })
-        axios(url2)
-            .then((res) => {
-                this.setState({
-                    list: res.data
-                })
-                var brr = [];
-                this.state.list.map((item) => {
-                    if (item.name == this.state.name) {
-                        brr.push(item);
-                    }
-                    this.setState({
-                        list: brr
-                    })
-                })
-                var arr = [];
-                var a = 0;
-                for (var i = 0; i < this.state.data.length; i++) {
-                    for (var j = 0; j < this.state.list.length; j++) {
-                        if (this.state.data[i].id == this.state.list[j].lid) {
-                            a = 1;
-                            break;
-                        } else {
-                            a = 0;
+                axios(url4)
+                    .then((res) => {
+                        for (var i = 0; i < res.data.length; i++) {
+                            res.data[i].pic = "http://139.155.44.190:3005" + res.data[i].pic
                         }
-                    }
-                    if (a == 1) {
-                        arr.push('red');
-                        a = 0;
-                    } else {
-                        arr.push('black');
-                    }
-                }
-                this.setState({
-                    color: arr
-                })
+                        this.setState({
+                            yonghu: res.data
+                        })
+                        var qrr = []
+                        var a = 0;
+                        for (var i = 0; i < this.state.data.length; i++) {
+                            for (var j = 0; j < this.state.yonghu.length; j++) {
+                                if (this.state.data[i].name == this.state.yonghu[j].name) {
+                                    a = this.state.yonghu[j].pic;
+                                    break;
+                                }
+                                else {
+                                    a = 0;
+                                }
+                            }
+                            if (a != 0) {
+                                qrr.push(a)
+                            }
+                        }
+                        this.setState({
+                            pic: qrr
+                        })
+                    })
+                axios(url2)
+                    .then((res) => {
+                        this.setState({
+                            list: res.data
+                        })
+                        var brr = [];
+                        this.state.list.map((item) => {
+                            if (item.name == this.state.name) {
+                                brr.push(item);
+                            }
+                            this.setState({
+                                list: brr
+                            })
+                        })
+                        var arr = [];
+                        var a = 0;
+                        for (var i = 0; i < this.state.data.length; i++) {
+                            for (var j = 0; j < this.state.list.length; j++) {
+                                if (this.state.data[i].id == this.state.list[j].lid) {
+                                    a = 1;
+                                    break;
+                                } else {
+                                    a = 0;
+                                }
+                            }
+                            if (a == 1) {
+                                arr.push('red');
+                                a = 0;
+                            } else {
+                                arr.push('black');
+                            }
+                        }
+                        this.setState({
+                            color: arr
+                        })
+                    })
             })
+
         axios(url3)
             .then((res) => {
                 this.setState({
@@ -101,34 +110,7 @@ export default class MaterialSharing extends Component {
                 arr: item.id
             })
         })
-        axios(url4)
-            .then((res) => {
-                for (var i = 0; i < res.data.length; i++) {
-                    res.data[i].pic = "http://localhost:3005" + res.data[i].pic
-                }
-                this.setState({
-                    yonghu: res.data
-                })
-                var qrr = []
-                var a = 0;
-                for (var i = 0; i < this.state.data.length; i++) {
-                    for (var j = 0; j < this.state.yonghu.length; j++) {
-                        if (this.state.data[i].name == this.state.yonghu[j].name) {
-                            a = this.state.yonghu[j].pic;
-                            break;
-                        }
-                        else {
-                            a = 0;
-                        }
-                    }
-                    if (a != 0) {
-                        qrr.push(a)
-                    }
-                }
-                this.setState({
-                    pic: qrr
-                })
-            })
+
     }
     changeSearch = (e) => {
         if (e.target.value == "") {
@@ -147,7 +129,7 @@ export default class MaterialSharing extends Component {
             this.setState({
                 color: crr
             })
-            let url9 = `http://localhost:3005/learnlike/add?lid=${this.state.data[id].id}&name=${this.state.name}`
+            let url9 = `http://139.155.44.190:3005/learnlike/add?lid=${this.state.data[id].id}&name=${this.state.name}`
             axios(url9)
                 .then((res) => {
 
@@ -159,20 +141,20 @@ export default class MaterialSharing extends Component {
             this.setState({
                 color: crr
             })
-            let url10 = `http://localhost:3005/learnlike/delete?lid=${this.state.data[id].id}&name=${this.state.name}`
+            let url10 = `http://139.155.44.190:3005/learnlike/delete?lid=${this.state.data[id].id}&name=${this.state.name}`
             axios(url10)
                 .then((res) => {
                 })
         }
     }
     clickSend = (id) => {
-        let url = `http://localhost:3005/learn/select?content=${this.state.search}`;
+        let url = `http://139.155.44.190:3005/learn/select?content=${this.state.search}`;
         axios(url)
             .then((res) => {
                 if (res.data.false) {
                 } else {
                     for (var i = 0; i < res.data.length; i++) {
-                        res.data[i].pic = "http://localhost:3005" + res.data[i].pic;
+                        res.data[i].pic = "http://139.155.44.190:3005/" + res.data[i].pic;
                     }
                     this.setState({
                         data: res.data

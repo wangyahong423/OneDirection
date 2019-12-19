@@ -13,7 +13,7 @@ export default class CommunicataDetails extends Component {
       name: '',
       content: '',
       yonghu: [],
-      pic: [],
+      pic: '',
       photo: [],
       time: new Date().toLocaleString()
     };
@@ -27,7 +27,7 @@ export default class CommunicataDetails extends Component {
     title: obj.title,
   }));
   addItem = () => {
-    let url = `http://localhost:3005/learntalk/add?lid=${this.state.lid}
+    let url = `http://139.155.44.190:3005/learntalk/add?lid=${this.state.lid}
     &name=${this.state.name}&content=${this.state.content}&time=${this.state.time}`;
     axios(url)
       .then((res) => {
@@ -41,97 +41,87 @@ export default class CommunicataDetails extends Component {
   }
   componentDidMount() {
     var id = this.props.match.params.id;
-    let url = `http://localhost:3005/learn/list/` + id;
-    let url1 = `http://localhost:3005/learntalk/list/`;
-    let url3 = `http://localhost:3005/users/getName`;
-    let url4 = `http://localhost:3005/users/list`;
+    let url = `http://139.155.44.190:3005/learn/list/` + id;
+    let url1 = `http://139.155.44.190:3005/learntalk/list/`;
+    let url3 = `http://139.155.44.190:3005/users/getName`;
+    let url4 = `http://139.155.44.190:3005/users/list`;
     axios(url3)
-      .then((res) => {
-        this.setState({
-          name: res.data.name
-        })
-      })
-    axios(url)
-      .then((res) => {
-        for (var i = 0; i < res.data.length; i++) {
-          res.data[i].pic = "http://localhost:3005" + res.data[i].pic
-        }
-        this.setState({
-          data: res.data
-        })
-        var brr = []
-        this.state.data.map((item) => {
-          if (item.id == id) {
-            brr.push(item);
-          }
-          this.setState({
-            data: brr
+      .then((re) => {
+        axios(url4)
+          .then((res) => {
+            res.data.map(item => {
+              if (item.name == re.data.name) {
+                this.setState({ pic: 'http://139.155.44.190:3005' + item.pic })
+              }
+            })
+            this.setState({
+              yonghu: res.data
+            })
+            console.log(res.data);
+            axios(url)
+              .then((res) => {
+                // for (var i = 0; i < res.data.length; i++) {
+                //   res.data[i].pic = "http://139.155.44.190:3005" + res.data[i].pic
+                // }
+                this.setState({
+                  data: res.data
+                })
+                var brr = []
+                this.state.data.map((item) => {
+                  if (item.id == id) {
+                    brr.push(item);
+                  }
+                  this.setState({
+                    data: brr
+                  })
+                })
+
+                axios(url1)
+                  .then((res) => {
+                    this.setState({
+                      todo: res.data
+                    })
+                    var arr = [];
+                    this.state.todo.map((item) => {
+                      if (item.lid == id) {
+                        arr.push(item);
+                      }
+                      this.setState({
+                        todo: arr
+                      })
+                    })
+                    var qrr = []
+                    var a = 0;
+                    for (var i = 0; i < this.state.todo.length; i++) {
+                      for (var j = 0; j < this.state.yonghu.length; j++) {
+                        if (this.state.todo[i].name == this.state.yonghu[j].name) {
+                          a = this.state.yonghu[j].pic;
+                          break;
+                        }
+                        else {
+                          a = 0;
+                        }
+                      }
+                      if (a != 0) {
+                        qrr.push(a)
+                      }
+                    }
+                    this.setState({
+                      photo: qrr
+                    })
+                    
+                  })
+
+              })
+
+
           })
-        })
       })
-    axios(url4)
-      .then((res) => {
-        for (var i = 0; i < res.data.length; i++) {
-          res.data[i].pic = "http://localhost:3005" + res.data[i].pic
-        }
-        this.setState({
-          yonghu: res.data
-        })
-        var qrr = []
-        var a = 0;
-        for (var i = 0; i < this.state.data.length; i++) {
-          for (var j = 0; j < this.state.yonghu.length; j++) {
-            if (this.state.data[i].name == this.state.yonghu[j].name) {
-              a = this.state.yonghu[j].pic;
-              break;
-            }
-            else {
-              a = 0;
-            }
-          }
-          if (a != 0) {
-            qrr.push(a)
-          }
-        }
-        this.setState({
-          pic: qrr
-        })
-      })
-    axios(url1)
-      .then((res) => {
-        this.setState({
-          todo: res.data
-        })
-        var arr = [];
-        this.state.todo.map((item) => {
-          if (item.lid == id) {
-            arr.push(item);
-          }
-          this.setState({
-            todo: arr
-          })
-        })
-        var qrr = []
-        var a = 0;
-        for (var i = 0; i < this.state.todo.length; i++) {
-          for (var j = 0; j < this.state.yonghu.length; j++) {
-            if (this.state.todo[i].name == this.state.yonghu[j].name) {
-              a = this.state.yonghu[j].pic;
-              break;
-            }
-            else {
-              a = 0;
-            }
-          }
-          if (a != 0) {
-            qrr.push(a)
-          }
-        }
-        this.setState({
-          photo: qrr
-        })
-      })
+
+
+
   }
+
   getContent = (e) => {
     this.setState({
       lid: this.props.match.params.id,
@@ -149,17 +139,17 @@ export default class CommunicataDetails extends Component {
         <NavBar
           style={{ backgroundColor: '#37376F', color: '#fff', position: 'sticky ', top: 0, zIndex: 18, textAlign: 'center', height: '7vh' }}
           leftContent={[
-            <Link to="/tiezi"><span style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span></Link>
+            <Link to="/xuexi"><span style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span></Link>
           ]}
         >
-          <span>评论</span>
+          <span>详情</span>
         </NavBar>
         <div>
           {
             this.state.data.map((item, idx) =>
               <div style={{ background: '#fff', color: 'black' }}>
                 <div style={{ float: "left" }}>
-                  <img src={this.state.pic[idx]} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
+                  <img src={this.state.pic} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
                 </div>
                 <div>
                 </div>

@@ -18,16 +18,9 @@ export default class CommunicataDetails extends Component {
       time: new Date().toLocaleString()
     };
   }
-  dataList = [
-    { url: 'cTTayShKtEIdQVEMuiWt', title: '朋友圈' },
-    { url: 'umnHwvEgSyQtXlZjNJTt', title: '微信好友' },
-    { url: 'SxpunpETIwdxNjcJamwB', title: 'QQ' },
-  ].map(obj => ({
-    icon: <img src={`https://gw.alipayobjects.com/zos/rmsportal/${obj.url}.png`} alt={obj.title} style={{ width: 36 }} />,
-    title: obj.title,
-  }));
+  
   addItem = () => {
-    let url = `http://localhost:3005/learntalk/add?lid=${this.state.lid}
+    let url = `http://139.155.44.190:3005/learntalk/add?lid=${this.state.lid}
     &name=${this.state.name}&content=${this.state.content}&time=${this.state.time}`;
     axios(url)
       .then((res) => {
@@ -41,10 +34,10 @@ export default class CommunicataDetails extends Component {
   }
   componentDidMount() {
     var id = this.props.match.params.id;
-    let url = `http://localhost:3005/learn/list/` + id;
-    let url1 = `http://localhost:3005/learntalk/list/`;
-    let url3 = `http://localhost:3005/users/getName`;
-    let url4 = `http://localhost:3005/users/list`;
+    let url = `http://139.155.44.190:3005/learn/list/` + id;
+    let url1 = `http://139.155.44.190:3005/learntalk/list/`;
+    let url3 = `http://139.155.44.190:3005/users/getName`;
+    let url4 = `http://139.155.44.190:3005/users/list`;
     axios(url3)
       .then((res) => {
         this.setState({
@@ -54,7 +47,7 @@ export default class CommunicataDetails extends Component {
     axios(url)
       .then((res) => {
         for (var i = 0; i < res.data.length; i++) {
-          res.data[i].pic = "http://localhost:3005" + res.data[i].pic
+          res.data[i].pic = "http://139.155.44.190:3005" + res.data[i].pic
         }
         this.setState({
           data: res.data
@@ -68,36 +61,34 @@ export default class CommunicataDetails extends Component {
             data: brr
           })
         })
-      })
-    axios(url4)
-      .then((res) => {
-        for (var i = 0; i < res.data.length; i++) {
-          res.data[i].pic = "http://localhost:3005" + res.data[i].pic
-        }
-        this.setState({
-          yonghu: res.data
-        })
-        var qrr = []
-        var a = 0;
-        for (var i = 0; i < this.state.data.length; i++) {
-          for (var j = 0; j < this.state.yonghu.length; j++) {
-            if (this.state.data[i].name == this.state.yonghu[j].name) {
-              a = this.state.yonghu[j].pic;
-              break;
+        axios(url4)
+          .then((res) => {
+            for (var i = 0; i < res.data.length; i++) {
+              res.data[i].pic = "http://139.155.44.190:3005" + res.data[i].pic
             }
-            else {
-              a = 0;
+            this.setState({
+              yonghu: res.data
+            })
+            var qrr = []
+            var a = 0;
+            for (var i = 0; i < this.state.data.length; i++) {
+              for (var j = 0; j < this.state.yonghu.length; j++) {
+                if (this.state.data[i].name == this.state.yonghu[j].name) {
+                  a = this.state.yonghu[j].pic;
+                  break;
+                }
+                else {
+                  a = 0;
+                }
+              }
+              if (a != 0) {
+                qrr.push(a)
+              }
             }
-          }
-          if (a != 0) {
-            qrr.push(a)
-          }
-        }
-        this.setState({
-          pic: qrr
-        })
-      })
-    axios(url1)
+            this.setState({
+              pic: qrr
+            })
+            axios(url1)
       .then((res) => {
         this.setState({
           todo: res.data
@@ -131,6 +122,10 @@ export default class CommunicataDetails extends Component {
           photo: qrr
         })
       })
+          })
+      })
+
+
   }
   getContent = (e) => {
     this.setState({

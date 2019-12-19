@@ -17,29 +17,14 @@ router.get('/add', (req, res) => {
   });
 });
 
-router.get('/add', (req, res) => {
-    var lid = req.query.lid;
-    var name = req.query.name;
-    var content = req.query.content;
-    var time = req.query.time;
-    let sql = 'insert into learntalk(lid,name,content,time) values($1,$2,$3,$4)';
-    con.query(sql, [lid, name, content,time], (err, result) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log("true");
-        }
-    });
-});
-
 router.get('/list', (req, res) => {
   let sql = 'select * from communitytalk order by id desc';
   con.query(sql, [], (err, result) => {
     if (err) {
       console.log(err);
     } else {
-      res.json({ communitytalk: result.rows });
-      console.log(result.rows);
+      res.send({ communitytalk: result.rows });
+      // res.send(result.rows);
     }
   });
 })
