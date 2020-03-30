@@ -34,7 +34,7 @@ export default class Method extends Component {
                     <Text style={{ color: '#fff', lineHeight:30*s,}}>校园新生通</Text>
                 </View>
                 {/* 轮播图 */}
-                <Swiper style={styles.wrapper} showsButtons={false}>
+                <Swiper autoplay={true} autoplayDirection={true} autoplayTimeout='1.5' style={styles.wrapper} showsButtons={false}>
                     <View>
                         <Image source={require('../../assets/gonglve/method1.jpg')} style={{height:223,width:'100%'}} />
                     </View>
@@ -89,7 +89,7 @@ let styles = StyleSheet.create({
     header: {
         width: '100%',
         height: 30 * s,
-        backgroundColor: 'blue',
+        backgroundColor: '#37376F',
         alignItems: 'center',
 
     },

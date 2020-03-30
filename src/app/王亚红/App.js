@@ -1,5 +1,5 @@
 import React from 'react';
-import {Router, Scene,Tabs} from "react-native-router-flux";
+import {Router, Scene,Tabs, Actions} from "react-native-router-flux";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {StyleSheet,View} from 'react-native';
 
@@ -8,7 +8,13 @@ import Share from './src/share/Share';
 import My from './src/my/My';
 // 攻略
 import Method from './src/method/Method';
+// 一卡通
 import Onecard from './src/method/onecard/OneCard';
+import Activate from './src/method/onecard/Activate';
+import Invest from './src/method/onecard/Invest';
+import Loss from './src/method/onecard/Loss';
+
+
 import Organization from './src/method/organization/Organization';
 import School from './src/method/school/School';
 import Study from './src/method/study/Study';
@@ -42,7 +48,13 @@ const App = () => {
             </Scene>
           </Tabs>
 
-          <Scene key='onecard' component={Onecard} />
+          {/* 一卡通 */}
+          <Scene key='onecard' title='一卡通' component={Onecard} leftButtonIconStyle={{color:'white'}} backButtonTextStyle={<View style={{marginLeft:20,color:'white'}}><Icon color='white'  size={26} name='angle-left'></Icon></View>} navigationBarStyle={{backgroundColor:'#37376F'}} titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}} />
+          <Scene key='activate' component={Activate} title='一卡通激活' titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}} />
+          <Scene key='invest' component={Invest} title='一卡通充值' titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}}/>
+          <Scene key='loss' component={Loss} title='一卡通丢失' titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}}/>
+
+
           <Scene key='organization' component={Organization} />
           <Scene key='school' component={School} />
           <Scene key='study' component={Study} />
