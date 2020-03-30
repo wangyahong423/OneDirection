@@ -20,8 +20,8 @@ export default class Method extends Component {
     study = ()=>{
         Actions.study()
     }
-    shetuan = ()=>{
-        Actions.shetuan()
+    schoolmates = ()=>{
+        Actions.schoolmates()
     }
     college = ()=>{
         Actions.college()
@@ -52,29 +52,29 @@ export default class Method extends Component {
                 <View style={styles.six}>
                     <View style={styles.sixOne}>
                         <TouchableOpacity onPress={this.onecard} style={styles.one}>
-                            <View style={{height:70*s,width:70*s,alignItems:'center',justifyContent:'center',borderRadius:35*s,backgroundColor:'blue'}}><Icon  name='vcard-o' size={36} color="white" /></View>
+                            <View style={{height:70*s,width:70*s,alignItems:'center',justifyContent:'center',borderRadius:35*s,backgroundColor:'#37376F'}}><Icon  name='vcard-o' size={36} color="white" /></View>
                             <Text style={{marginTop:10}}>一卡通</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={this.organization} style={styles.one}>
-                            <View style={{height:70*s,width:70*s,alignItems:'center',justifyContent:'center',borderRadius:35*s,backgroundColor:'blue'}}><Icon  name='resistance' size={36} color="white" /></View>
-                            <Text style={{marginTop:10}}>组织</Text>
+                            <View style={{height:70*s,width:70*s,alignItems:'center',justifyContent:'center',borderRadius:35*s,backgroundColor:'#37376F'}}><Icon  name='resistance' size={36} color="white" /></View>
+                            <Text style={{marginTop:10}}>社团组织</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={this.school} style={styles.one}>
-                            <View style={{height:70*s,width:70*s,alignItems:'center',justifyContent:'center',borderRadius:35*s,backgroundColor:'blue'}}><Icon  name='fort-awesome' size={36} color="white" /></View>
+                            <View style={{height:70*s,width:70*s,alignItems:'center',justifyContent:'center',borderRadius:35*s,backgroundColor:'#37376F'}}><Icon  name='fort-awesome' size={36} color="white" /></View>
                             <Text style={{marginTop:10}}>学校</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.sixOne}>
                         <TouchableOpacity onPress={this.study} style={styles.one}>
-                            <View style={{height:70*s,width:70*s,alignItems:'center',justifyContent:'center',borderRadius:35*s,backgroundColor:'blue'}}><Icon  name='trophy' size={36} color="white" /></View>
+                            <View style={{height:70*s,width:70*s,alignItems:'center',justifyContent:'center',borderRadius:35*s,backgroundColor:'#37376F'}}><Icon  name='trophy' size={36} color="white" /></View>
                             <Text style={{marginTop:10}}>学习</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={this.shetuan} style={styles.one}>
-                            <View style={{height:70*s,width:70*s,alignItems:'center',justifyContent:'center',borderRadius:35*s,backgroundColor:'blue'}}><Icon  name='institution' size={36} color="white" /></View>
-                            <Text style={{marginTop:10}}>社团</Text>
+                        <TouchableOpacity onPress={this.schoolmates} style={styles.one}>
+                            <View style={{height:70*s,width:70*s,alignItems:'center',justifyContent:'center',borderRadius:35*s,backgroundColor:'#37376F'}}><Icon  name='group' size={36} color="white" /></View>
+                            <Text style={{marginTop:10}}>杰出校友</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={this.college} style={styles.one}>
-                            <View style={{height:70*s,width:70*s,alignItems:'center',justifyContent:'center',borderRadius:35*s,backgroundColor:'blue'}}><Icon  name='mortar-board' size={36} color="white" /></View>
+                            <View style={{height:70*s,width:70*s,alignItems:'center',justifyContent:'center',borderRadius:35*s,backgroundColor:'#37376F'}}><Icon  name='mortar-board' size={36} color="white" /></View>
                             <Text style={{marginTop:10}}>学院</Text>
                         </TouchableOpacity>
                     </View>
