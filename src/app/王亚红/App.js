@@ -20,8 +20,15 @@ import Practice from './src/method/organization/Practice';
 import Physical from './src/method/organization/Physical';
 import Academic from './src/method/organization/Academic';
 import Art from './src/method/organization/Art';
-
+// 学校
 import School from './src/method/school/School';
+import Synopsis from './src/method/school/Synopsis';
+import Subject from './src/method/school/Subject';
+import Schoollogo from './src/method/school/Schoollogo';
+import Scenery from './src/method/school/Scenery';
+import Map from './src/method/school/Map';
+import Govern from './src/method/school/Govern';
+
 import Study from './src/method/study/Study';
 import Schoolmaths from './src/method/schoolmates/Schoolmates';
 import College from './src/method/college/College';
@@ -55,21 +62,28 @@ const App = () => {
           </Tabs> 
 
           {/* 一卡通 */}
-          <Scene key='onecard' title='一卡通' component={Onecard} leftButtonIconStyle={{color:'white'}} backButtonTextStyle={<View style={{marginLeft:20,color:'white'}}><Icon color='white'  size={26} name='angle-left'></Icon></View>} navigationBarStyle={{backgroundColor:'#37376F'}} titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}} ></Scene>
-          <Scene key='activate' component={Activate} title='一卡通激活' titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}} navigationBarStyle={{backgroundColor:'#37376F'}} ></Scene>
-          <Scene key='invest' component={Invest} title='一卡通充值' titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}} navigationBarStyle={{backgroundColor:'#37376F'}}/>
-          <Scene key='loss' component={Loss} title='一卡通丢失' titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}} navigationBarStyle={{backgroundColor:'#37376F'}}/>
+          <Scene key='onecard' title='一卡通' component={Onecard}  backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{backgroundColor:'#37376F'}} titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}} ></Scene>
+          <Scene key='activate' component={Activate} title='一卡通激活' backButtonImage={require('./assets/gonglve/left.png')} titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}} navigationBarStyle={{backgroundColor:'#37376F'}} ></Scene>
+          <Scene key='invest' component={Invest} title='一卡通充值' backButtonImage={require('./assets/gonglve/left.png')} titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}} navigationBarStyle={{backgroundColor:'#37376F'}}/>
+          <Scene key='loss' component={Loss} title='一卡通丢失' backButtonImage={require('./assets/gonglve/left.png')} titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}} navigationBarStyle={{backgroundColor:'#37376F'}}/>
 
           {/* 社团组织 */}
-          <Scene key='organization' component={Organization} title='社团组织' titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}} navigationBarStyle={{backgroundColor:'#37376F'}} />
-          <Scene key='schoolorg' component={Schoolorg} title='校级组织类' titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}} navigationBarStyle={{backgroundColor:'#37376F'}}></Scene>
-          <Scene key='practice' component={Practice} title='实践服务类' titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}} navigationBarStyle={{backgroundColor:'#37376F'}}/>
-          <Scene key='physical' component={Physical} title='体育健身类'  titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}} navigationBarStyle={{backgroundColor:'#37376F'}}/>
-          <Scene key='academic' component={Academic} title='学术研究类' titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}} navigationBarStyle={{backgroundColor:'#37376F'}}/>
+          <Scene key='organization' component={Organization} title='社团组织' backButtonImage={require('./assets/gonglve/left.png')} titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}} navigationBarStyle={{backgroundColor:'#37376F'}} />
+          <Scene key='schoolorg' component={Schoolorg} title='校级组织类' backButtonImage={require('./assets/gonglve/left.png')} titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}} navigationBarStyle={{backgroundColor:'#37376F'}}></Scene>
+          <Scene key='practice' component={Practice} title='实践服务类' backButtonImage={require('./assets/gonglve/left.png')} titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}} navigationBarStyle={{backgroundColor:'#37376F'}}/>
+          <Scene key='physical' component={Physical} title='体育健身类' backButtonImage={require('./assets/gonglve/left.png')}  titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}} navigationBarStyle={{backgroundColor:'#37376F'}}/>
+          <Scene key='academic' component={Academic} title='学术研究类' backButtonImage={require('./assets/gonglve/left.png')} titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}} navigationBarStyle={{backgroundColor:'#37376F'}}/>
           <Scene key='art' component={Art} title='文化艺术类' titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}} navigationBarStyle={{backgroundColor:'#37376F'}}/>
 
           {/* 学校 */}
-          <Scene key='school' component={School} />
+          <Scene key='school' component={School} title='学校' backButtonImage={require('./assets/gonglve/left.png')} titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}} navigationBarStyle={{backgroundColor:'#37376F'}}/>
+          <Scene key='synopsis' component={Synopsis} title='学校' backButtonImage={require('./assets/gonglve/left.png')} titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}} navigationBarStyle={{backgroundColor:'#37376F'}}/>
+          <Scene key='subject' component={Subject} title='学校' backButtonImage={require('./assets/gonglve/left.png')} titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}} navigationBarStyle={{backgroundColor:'#37376F'}}/>
+          <Scene key='schoollogo' component={Schoollogo} title='学校' backButtonImage={require('./assets/gonglve/left.png')} titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}} navigationBarStyle={{backgroundColor:'#37376F'}}/>
+          <Scene key='scenery' component={Scenery} title='学校' backButtonImage={require('./assets/gonglve/left.png')} titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}} navigationBarStyle={{backgroundColor:'#37376F'}}/>
+          <Scene key='map' component={Map} title='学校' backButtonImage={require('./assets/gonglve/left.png')} titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}} navigationBarStyle={{backgroundColor:'#37376F'}}/>
+          <Scene key='govern' component={Govern} title='学校' backButtonImage={require('./assets/gonglve/left.png')} titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}} navigationBarStyle={{backgroundColor:'#37376F'}}/>
+
           <Scene key='study' component={Study} />
           <Scene key='schoolmates' component={Schoolmaths} />
           <Scene key='college' component={College} />
