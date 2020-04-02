@@ -12,31 +12,12 @@ import {
 import Icon from 'react-native-vector-icons/EvilIcons';
 
 import { Actions } from 'react-native-router-flux';
-
-// import { Icon } from '@ant-design/react-native';
-import Swiper from 'react-native-swiper';
 const { width } = Dimensions.get('window');
 const s = width / 640;
-export default class Community extends Component {
+export default class Details extends Component {
     render() {
         return (
-            <View style={{ flex: 1, backgroundColor: '#EFEFF4' }}>
-                {/* 搜索 */}
-                <View
-
-                    style={styles.hearder}>
-                    <View
-                        style={styles.search}>
-                        <Icon
-                            style={{ fontSize: 28, marginLeft: 15 }} name='search' />
-                        <TextInput
-                            placeholder='搜索'
-                            style={{ fontSize: 17, height: '100%' }}
-                        />
-                    </View>
-                </View>
-
-                {/* 评论 */}
+            <View style={{ flex: 1 }}>
                 <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 20 * s }}>
                     <View style={styles.user}>
                         <Image style={styles.avatar} source={require('../../assets/gonglve/服务.jpg')} />
@@ -51,26 +32,14 @@ export default class Community extends Component {
                         </Text>
                     </View>
                     <View style={{ flexDirection: 'row', height: 50, paddingTop: 10 * s, justifyContent: 'space-evenly', borderTopWidth: 1, borderTopColor: "#EFEFF4" }}>
-                        <Icon  onPress={() => Actions.details()} name="comment" style={{ fontSize: 40 * s }}></Icon>
+                        <Icon name="comment" style={{ fontSize: 40 * s }}></Icon>
                         <Icon name="heart" style={{ fontSize: 40 * s }}></Icon>
                     </View>
                 </View>
-
-                {/* 添加评论 */}
-                <View style={styles.add}>
-                    <Icon
-                        style={{ fontSize: 80 * s, color: '#37376F' }}
-                        name="plus"
-                        onPress={() => Actions.add()}
-                    />
-                </View>
-
             </View>
-
         )
     }
 }
-
 const styles = StyleSheet.create({
     hearder: {
         height: 60,
