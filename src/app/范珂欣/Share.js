@@ -25,11 +25,11 @@ export default class Share extends Component {
                             <View style={{ alignItems: 'center' }}>
                                 <TouchableOpacity
                                     style={{
-                                        width: 200,
-                                        height: 130,
+                                        width: 200*s,
+                                        height: 100*s,
                                         backgroundColor: '#675858',
                                         opacity:0.8,
-                                        marginTop: 140,
+                                        marginTop: 150*s,
                                         alignItems: 'center',
                                         justifyContent: 'center'
                                     }}
@@ -39,11 +39,11 @@ export default class Share extends Component {
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                     style={{
-                                        width: 200,
-                                        height: 130,
+                                        width: 200*s,
+                                        height: 100*s,
                                         backgroundColor: '#675858',
                                         opacity:0.8,
-                                        marginTop: 100,
+                                        marginTop: 140*s,
                                         alignItems: 'center',
                                         justifyContent: 'center'
                                     }}
