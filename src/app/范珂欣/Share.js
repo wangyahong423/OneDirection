@@ -47,7 +47,7 @@ export default class Share extends Component {
                                         alignItems: 'center',
                                         justifyContent: 'center'
                                     }}
-                                    onPress={() => Actions.communicate()}>
+                                    onPress={() => Actions.learn()}>
                                     <Icon color='#fff' size={26} name='comments-o' />
                                     <Text style={{ color: '#fff',fontSize:25*s }}>学习交流</Text>
                                 </TouchableOpacity>
