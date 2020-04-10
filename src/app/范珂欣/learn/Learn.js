@@ -67,10 +67,12 @@ export default class Learn extends Component {
                         <TextInput
                             style={{
                                 height: 50 * s,
-                                width: "90%",
+                                width: "80%",
                                 padding: 0,
                                 fontSize: 15 * s
                             }}
+                            clearButtonMode="while-editing"
+                            autoFocus={true}
                             placeholderTextColor='#fff'
                             placeholder="请输入您要搜索的关键字"
                             onChangeText={this.search}
