@@ -7,11 +7,26 @@ export default class AddLearn extends Component {
         super();
         this.state = {
             content: '',
-            username: '张三'
+            username: '张三',
+            length: 0
         };
     }
     con = (e) => {
         this.setState({ content: e });
+        var length = e.length;
+        // var length = 0;
+        // for (var i = 0; i < e.length; i++) {
+        //     if (32 <= e[i].charCodeAt() && e[i].charCodeAt() <= 126) {
+        //         length++;
+        //     }
+        //     else {
+        //         length = length + 2;
+        //     }
+        // }
+        this.setState({ length: length });
+        if (length > 500) {
+            Alert.alert("文本内容超过上限！");
+        }
     }
     add = () => {
         if (this.state.content) {
@@ -50,13 +65,22 @@ export default class AddLearn extends Component {
                 >
                     <ScrollView>
                         <TextInput
-                            placeholder="请输入文本内容"
+                            placeholder="请输入文本内容，不超过500字"
                             onChangeText={this.con}
                             multiline={true}
                             autoFocus={true}
                             style={{ fontSize: 20 * s }}
                         />
                     </ScrollView>
+                    <View style={{
+                        flexDirection: 'row',
+                        position: 'absolute',
+                        right: 0,
+                        bottom:0
+                    }}>
+                        <Text style={{ fontSize: 20 * s, color: 'gray' }}>{this.state.length}</Text>
+                        <Text style={{ fontSize: 20 * s }}>/500</Text>
+                    </View>
                 </View>
                 <View>
                     <TouchableOpacity
@@ -74,9 +98,10 @@ export default class AddLearn extends Component {
                         }}
                         onPress={this.add}
                     >
-                        <Text style={{ color: '#fff',fontSize:17*s }}>发布</Text>
+                        <Text style={{ color: '#fff', fontSize: 17 * s }}>发布</Text>
                     </TouchableOpacity>
                 </View>
+
             </SafeAreaView>
         )
     }
