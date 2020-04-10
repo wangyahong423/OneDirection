@@ -17,6 +17,15 @@ export default class CollegeHistory extends Component {
                 this.setState({
                     data: res
                 })
+                var brr = []
+                this.state.data.map((item) => {
+                    if (item.college === this.state.college) {
+                        brr.push(item);
+                    }
+                    this.setState({
+                        data: brr
+                    })
+                })
             })
     }
     render() {
@@ -31,7 +40,7 @@ export default class CollegeHistory extends Component {
                             {
                                 this.state.data.map((item) => (
                                     <View>
-                                        <Text>{item.history}</Text>
+                                        <Text style={{fontSize:18}}>{item.history}</Text>
                                     </View>
                                 )
                                 )}

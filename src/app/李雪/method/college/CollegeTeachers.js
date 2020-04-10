@@ -17,6 +17,15 @@ export default class CollegeTeachers extends Component {
                 this.setState({
                     data: res
                 })
+                var brr = []
+                this.state.data.map((item) => {
+                    if (item.college === this.state.college) {
+                        brr.push(item);
+                    }
+                    this.setState({
+                        data: brr
+                    })
+                })
             })
     }
     render() {
@@ -31,10 +40,10 @@ export default class CollegeTeachers extends Component {
                             {
                                 this.state.data.map((item) => (
                                     <View>
-                                        <Text>{item.job}</Text>
-                                        <Text>{item.name}</Text>
-                                        <Text>{item.tel}</Text>
-                                        <Text>{item.email}</Text>
+                                        <Text style={{fontSize:18}}>{item.job}</Text>
+                                        <Text style={{fontSize:18}}>{item.name}</Text>
+                                        <Text style={{fontSize:18}}>{item.tel}</Text>
+                                        <Text style={{fontSize:18}}>{item.email}</Text>
                                     </View>
                                 )
                                 )}

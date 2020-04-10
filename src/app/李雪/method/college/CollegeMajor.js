@@ -6,7 +6,7 @@ export default class CollegeMajor extends Component {
         super();
         this.state = {
             data: [],
-            college:'教育学院'
+            college: '教育学院'
         }
     }
     componentDidMount() {
@@ -16,6 +16,15 @@ export default class CollegeMajor extends Component {
             .then(res => {
                 this.setState({
                     data: res
+                })
+                var brr = []
+                this.state.data.map((item) => {
+                    if (item.college === this.state.college) {
+                        brr.push(item);
+                    }
+                    this.setState({
+                        data: brr
+                    })
                 })
             })
     }
@@ -31,8 +40,8 @@ export default class CollegeMajor extends Component {
                             {
                                 this.state.data.map((item) => (
                                     <View>
-                                        <Text>{item.name}</Text>
-                                        <Text>{item.content}</Text>
+                                        <Text style={{ fontSize: 18 }}>{item.name}</Text>
+                                        <Text style={{ fontSize: 18 }}>{item.content}</Text>
                                     </View>
                                 )
                                 )}
