@@ -1,51 +1,61 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, TextInput } from 'react-native'
-
-import { Inputs } from '../community/Inputs';
-
+import { Text, View, StyleSheet, TextInput, Dimensions, TouchableOpacity } from 'react-native'
+const { width } = Dimensions.get('window');
+const s = width / 640;
 export default class Add extends Component {
-    state = {
-        height: 10,
+    constructor(props) {
+        super(props);
+        this.state = {
+            height: 30,
+            inputValue: ''
+        }
     }
-    onContentSizeChange(event) {
-        this.setState({ height: event.nativeEvent.contentSize.height });
+
+    //动态计算TextInput高度来解决TextInput文字始终垂直居中的问题
+    cauculateHeight(e) {
+        if (e.nativeEvent.contentSize.height > 30) {
+            height = e.nativeEvent.contentSize.height;
+        } else {
+            height = this.state.height;
+        }
+        this.setState({
+            height: height
+        })
+    }
+    changeText(text) {
+        this.setState({
+            inputValue: text
+        })
     }
     render() {
         return (
-            <View style={styles.container}>
-                <TextInput {...this.props}
-                    multiline={true}
-                    onChange={this.onChange}
-                    onContentSizeChange={this.onContentSizeChange.bind(this)}
-                    style={[styles.textInputStyle, { height: Math.max(35, this.state.height) }]}
-                    value={this.state.text}
-                    style={styles.textInputStyle}
-                    onChangeText={this._onChangeText}
-                />
+            <View style={{ alignItems: "center" }}>
+                <TouchableOpacity activeOpacity={1} style={styles.textInputInner} onPress={() => this.TextInput.focus()} >
+                    <TextInput
+                        {...this.prop}
+                        placeholder={'请输入文本内容'}
+                        placeholderTextColor={'#666666'}
+                        underlineColorAndroid={'transparent'}
+                        multiline//多行设置
+                        value={this.state.inputValue}
+                        ref={textInput => this.TextInput = textInput}
+                        onContentSizeChange={this.cauculateHeight.bind(this)}
+                        onChangeText={text => this.changeText(text)}
+                        style={{ height: Math.max(35, this.state.height), fontSize: 22 * s }}
+                    />
+                </TouchableOpacity>
             </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    content: {
-        height: "12%",
-        width: "90%",
-        backgroundColor: '#fff',
-        marginTop:10,
-    },
-    container: {
-        color: '#fff',
-    },
-    textInputStyle: {
-        backgroundColor: '#fff',
-    },
-    textInputStyle: {
-        alignItems: 'center',
-        flexDirection: 'row',
+    textInputInner: {
+        marginTop: 10,
+        width: "98%",
         borderWidth: 1,
         borderColor: '#ccc',
         backgroundColor: '#fff',
-        marginTop:10
+        minHeight: 200
     },
 })
