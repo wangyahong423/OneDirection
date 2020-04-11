@@ -8,6 +8,7 @@ import {
     TouchableOpacity,
     Image,
     ScrollView,
+    navigation
 } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 
@@ -63,6 +64,7 @@ export default class Community extends Component {
                         this.setState({
                             pic: qrr
                         })
+                        console.log(this.state.pic)
                     })
             })
     }
@@ -100,8 +102,8 @@ export default class Community extends Component {
                                     <View style={styles.comment}>
                                         <Text style={{ fontSize: 22 * s }}>{item.content}</Text>
                                     </View>
-                                    <View style={{ flexDirection: 'row', height: 50, paddingTop: 10 * s, justifyContent: 'space-evenly', borderTopWidth: 1, borderTopColor: "#EFEFF4" }}>
-                                        <Icon onPress={() => Actions.details()} name="comment" style={{ fontSize: 40 * s }}></Icon>
+                                    <View style={styles.bottom}>
+                                        <Icon onPress={() => { this.props.navigation.navigate('details', { id: item.id }) }} name="comment" style={{ fontSize: 40 * s }}></Icon>
                                         <Icon name="heart" style={{ fontSize: 40 * s }}></Icon>
                                     </View>
                                 </View>
@@ -158,13 +160,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 20,
         opacity: 0.6,
-        // backgroundColor: 'blue'
     },
     user: {
         flexDirection: 'row',
         height: 100 * s,
-        // backgroundColor: 'red',
-        // justifyContent:'center',
         alignItems: 'center'
     },
     avatar: {
@@ -174,7 +173,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'yellow'
     },
     comment: {
-        // backgroundColor: 'yellow',
         marginLeft: 30 * s,
         marginRight: 30 * s,
         marginTop: 10 * s,
@@ -186,7 +184,14 @@ const styles = StyleSheet.create({
         right: 40,
         height: 50,
         width: 50,
-        // backgroundColor:'red',
         justifyContent: "center",
+    },
+    bottom: {
+        flexDirection: 'row',
+        height: 50,
+        paddingTop: 10 * s,
+        justifyContent: 'space-evenly',
+        borderTopWidth: 1,
+        borderTopColor: "#EFEFF4"
     }
 })
