@@ -64,7 +64,6 @@ export default class Community extends Component {
                         this.setState({
                             pic: qrr
                         })
-                        console.log(this.state.pic)
                     })
             })
     }
@@ -100,7 +99,9 @@ export default class Community extends Component {
                                         </View>
                                     </View>
                                     <View style={styles.comment}>
-                                        <Text style={{ fontSize: 22 * s }}>{item.content}</Text>
+                                        <Text
+                                            onPress={() => { this.props.navigation.navigate('details', { id: item.id }) }}
+                                            style={{ fontSize: 22 * s }}>{item.content}</Text>
                                     </View>
                                     <View style={styles.bottom}>
                                         <Icon onPress={() => { this.props.navigation.navigate('details', { id: item.id }) }} name="comment" style={{ fontSize: 40 * s }}></Icon>

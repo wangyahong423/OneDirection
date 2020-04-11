@@ -20,7 +20,8 @@ export default class Details extends Component {
         this.state = {
             data: [],
             user: [],
-            brr: []
+            brr: [],
+            pic:[]
 
         }
     }
@@ -54,24 +55,23 @@ export default class Details extends Component {
                         }
                         var qrr=[]
                         var a=0;
-                        console.log(this.state.data.name)
-                        for (var i = 0; i < this.state.user.length; i++) {
-                            if (this.state.data.name == this.state.user[i].name) {
-                                a = this.state.user[i].pic;
-                                break;
+                        for (var i = 0; i < this.state.data.length; i++) {
+                            for (var j = 0; j < this.state.user.length; j++) {
+                                if (this.state.data[i].name == this.state.user[j].name) {
+                                    a = this.state.user[j].pic;
+                                    break;
+                                }
+                                else {
+                                    a = 0;
+                                }
                             }
-                            else {
-                                a = 0;
+                            if (a != 0) {
+                                qrr.push(a)//qrr是社区评论里面用户的头像
                             }
-                        }
-                        console.log(a)
-                        if (a != 0) {
-                            qrr.push(a)//qrr是社区评论里面用户的头像
                         }
                         this.setState({
                             pic: qrr
                         })
-                        // console.log(this.state.pic)
                     })
             })
 
@@ -83,8 +83,7 @@ export default class Details extends Component {
                     this.state.data.map((item, idx) => (
                         <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 20 * s }}>
                             <View style={styles.user}>
-                                {/* <Image style={styles.avatar} source={{ uri: this.state.pic[idx] }} /> */}
-                                <Image style={styles.avatar} source={require('../../assets/images/13.jpg')} />
+                                <Image style={styles.avatar} source={{ uri: this.state.pic[idx] }} />
                                 <View style={{ marginLeft: 30 * s }}>
                                     <Text style={{ fontSize: 22 * s }}>{item.name}</Text>
                                     <Text>{item.time}</Text>
