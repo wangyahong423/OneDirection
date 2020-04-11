@@ -37,11 +37,17 @@ export default class School extends Component {
                     <TouchableOpacity onPress={()=>{Actions.scenery()}} style={styles.box4}>
                         <Text style={{marginLeft:30*s,fontSize:18,color:'#fff'}}>校园风光</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>{Actions.map()}} style={styles.box5}>
-                        <Text style={{marginLeft:30*s,fontSize:18,color:'#fff'}}>校园地图</Text>
-                    </TouchableOpacity>
                     <TouchableOpacity onPress={()=>{Actions.govern()}} style={styles.box6}>
                         <Text style={{marginLeft:30*s,fontSize:18,color:'#fff'}}>治理架构</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{Actions.personnel()}} style={styles.box5}>
+                        <Text style={{marginLeft:30*s,fontSize:18,color:'#fff'}}>人才培养</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{Actions.science()}} style={styles.box5}>
+                        <Text style={{marginLeft:30*s,fontSize:18,color:'#fff'}}>科学研究</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{Actions.obtainemployment()}} style={styles.box5}>
+                        <Text style={{marginLeft:30*s,fontSize:18,color:'#fff'}}>就业服务</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>
@@ -55,8 +61,9 @@ let styles = StyleSheet.create({
     },
     part:{
         width:'96%',
-        marginTop:25*s,
+        marginTop:20*s,
         marginLeft:'2%',
+        marginBottom:20*s
     },
     box1:{
         height:56*s,

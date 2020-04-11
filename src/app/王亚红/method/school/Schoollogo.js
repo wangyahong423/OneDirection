@@ -33,7 +33,6 @@ export default class Schoollogo extends Component {
     render() {
         return (
             <ScrollView>
-                
                 <TouchableOpacity style={styles.name} onPress={()=>{this.show1()}}>
                     <Text style={{ fontWeight: "bold",fontSize:20 }}>校&nbsp;&nbsp;名</Text>
                 </TouchableOpacity>
