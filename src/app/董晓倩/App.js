@@ -23,35 +23,12 @@ const App = () => {
               <Scene key='method' component={Method} />
             </Scene> */}
             {/* 社区 */}
-            <Scene
-              titleStyle={{ flex: 1, textAlign: 'center', color: '#fff' }}
-              navigationBarStyle={{ backgroundColor: '#37376F' }}
-              key='communityPage' title='社区'
-              icon={({ focused }) => <Icon color={focused ? 'blue' : 'black'}
-                name='comments-o' size={26} />}>
+            <Scene titleStyle={{ flex: 1, textAlign: 'center', color: '#fff' }} navigationBarStyle={{ backgroundColor: '#37376F' }} key='communityPage' title='社区' icon={({ focused }) => <Icon color={focused ? 'blue' : 'black'} name='comments-o' size={26} />}>
               <Scene key='community' component={Community} />
-
               {/* 添加评论 */}
-              <Scene
-                title='发表状态'
-                key="add" 
-                renderRightButton={<View style={{ marginRight: 20 }}>
-                  <Text style={{ fontSize: 19, color: '#ddd' }}>发送</Text></View>}
-                titleStyle={{ flex: 1, textAlign: 'center', color: '#fff' }}//标题的文本居中
-                navBarButtonColor='#fff'
-                hideTabBar
-                component={Add}
-              />
+              <Scene title='发表状态' key="add"  renderRightButton={<View style={{ marginRight: 20 }}> <Text style={{ fontSize: 19, color: '#ddd' }}>发送</Text></View>} titleStyle={{ flex: 1, textAlign: 'center', color: '#fff' }} navBarButtonColor='#fff' hideTabBar component={Add}/>
               {/* 评论详情 */}
-              <Scene
-                title='评论'
-                key="details" 
-                renderRightButton={<View></View>}
-                titleStyle={{ flex: 1, textAlign: 'center', color: '#fff' }}//标题的文本居中
-                navBarButtonColor='#fff'
-                hideTabBar
-                component={Details}
-              />
+              <Scene title='评论' key="details"  renderRightButton={<View></View>} titleStyle={{ flex: 1, textAlign: 'center', color: '#fff' }} navBarButtonColor='#fff' hideTabBar component={Details}/>
             </Scene>
             {/* 共享 */}
             <Scene key='sharePage' title='共享' icon={({ focused }) => <Icon color={focused ? 'blue' : 'black'} name='share-alt' size={26} />} >
