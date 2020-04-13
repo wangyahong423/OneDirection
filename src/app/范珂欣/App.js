@@ -25,6 +25,7 @@ import College from './src/method/college/College';
 import Learn from './src/share/learn/Learn';
 import ShareFile from './src/share/shareFile/ShareFile';
 import AddLearn from './src/share/learn/AddLearn';
+import LearnDetails from './src/share/learn/LearnDetails';
 
 console.disableYellowBox = true;
 
@@ -71,6 +72,7 @@ const App = () => {
           <Scene key='learn' title='学习交流' component={Learn} leftButtonIconStyle={{color:'white'}} backButtonTextStyle={<View style={{marginLeft:20,color:'white'}}><Icon color='white' size={26} name='angle-left'></Icon></View>} navigationBarStyle={{backgroundColor:'#37376F'}} titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}}/>
           <Scene key='sharefile' title='资料共享' component={ShareFile} leftButtonIconStyle={{color:'white'}} backButtonTextStyle={<View style={{marginLeft:20,color:'white'}}><Icon color='white' size={26} name='angle-left'></Icon></View>} navigationBarStyle={{backgroundColor:'#37376F'}} titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}}/>
           <Scene key='addlearn' title='发布' component={AddLearn} leftButtonIconStyle={{color:'white'}} backButtonTextStyle={<View style={{marginLeft:20,color:'white'}}><Icon color='white' size={26} name='angle-left'></Icon></View>} navigationBarStyle={{backgroundColor:'#37376F'}} titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}}/>
+          <Scene key='learndetails' title='详情' component={LearnDetails} leftButtonIconStyle={{color:'white'}} backButtonTextStyle={<View style={{marginLeft:20,color:'white'}}><Icon color='white' size={26} name='angle-left'></Icon></View>} navigationBarStyle={{backgroundColor:'#37376F'}} titleStyle={{flex:1,textAlign:'center',color:'white',marginLeft:-40}}/>
         </Scene>
     </Router>
     </>
