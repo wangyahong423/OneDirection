@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, TextInput, Dimensions, StyleSheet } from 'react-native'
+import { View, Text, ScrollView, TextInput, Dimensions, StyleSheet, AsyncStorage } from 'react-native'
 import { Accordion } from '@ant-design/react-native';
 
 const { width } = Dimensions.get('window');
@@ -11,9 +11,11 @@ export default class CollegeOther extends Component {
         this.state = {
             data: [],
             activeSections: [],
-            college:'教育学院'
+            college: '教育学院',
+            username: ''
         }
     }
+
     componentDidMount() {
         let url = `http://139.155.44.190:3005/colleges/list/`;
         fetch(url)
@@ -23,7 +25,7 @@ export default class CollegeOther extends Component {
                     data: res
                 })
                 var brr = []
-                this.state.data.map((item)=>{
+                this.state.data.map((item) => {
                     if (item.college != this.state.college) {
                         brr.push(item);
                     }
@@ -32,6 +34,46 @@ export default class CollegeOther extends Component {
                     })
                 })
             })
+
+        // AsyncStorage.getItem('user')
+        //     .then((value) => {
+        //         this.setState({
+        //             username: JSON.parse(value).username
+        //         });
+        //         let url1 = `http://139.155.44.190:3005/users/list`;
+        //         let url2 = `http://139.155.44.190:3005/colleges/list`;
+        //         fetch(url1)
+        //             .then(res => res.json())
+        //             .then((res) => {
+        //                 this.setState({
+        //                     data: res
+        //                 })
+        //                 this.state.data.map((item) => {
+        //                     if (item.name === this.state.name) {
+        //                         this.setState({
+        //                             college: item.college
+        //                         })
+        //                     }
+        //                 })
+        //                 fetch(url2)
+        //                     .then(res => res.json())
+        //                     .then((res) => {
+        //                         this.setState({
+        //                             data: res
+        //                         })
+        //                         var brr = []
+        //                         this.state.data.map((item) => {
+        //                             if (item.college != this.state.college) {
+        //                                 brr.push(item);
+        //                             }
+        //                             this.setState({
+        //                                 data: brr
+        //                             })
+        //                         })
+        //                     })
+        //             })
+        //     });
+
     }
     _renderHeader = section => {
         return (
@@ -68,22 +110,22 @@ export default class CollegeOther extends Component {
     }
 }
 const styles = StyleSheet.create({
-    header:{
-        height:50*s,
-        borderBottomWidth:1*s,
+    header: {
+        height: 50 * s,
+        borderBottomWidth: 1 * s,
         backgroundColor: 'rgba(255,255,255,0.4)',
-        borderBottomColor:'#C0C0C0',
-        justifyContent:'center',
-        paddingLeft:10*s
+        borderBottomColor: '#C0C0C0',
+        justifyContent: 'center',
+        paddingLeft: 10 * s
     },
-    headerText:{
-        fontSize:20
+    headerText: {
+        fontSize: 20
     },
-    content:{
-        backgroundColor:'#ffffff',
-        padding:10*s
+    content: {
+        backgroundColor: '#ffffff',
+        padding: 10 * s
     },
-    contentText:{
-        fontSize:16
+    contentText: {
+        fontSize: 16
     }
 })
