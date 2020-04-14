@@ -9,69 +9,53 @@ export default class CollegeMajor extends Component {
         super();
         this.state = {
             data: [],
-            college: '教育学院',
+            todo:[],
+            college: '',
             username: ''
         }
     }
 
     componentDidMount() {
-        let url = `http://139.155.44.190:3005/major/list`;
-        fetch(url)
-            .then(res => res.json())
-            .then(res => {
+        AsyncStorage.getItem('username')
+            .then((value) => {
+                let name = { username: value }
                 this.setState({
-                    data: res
-                })
-                var brr = []
-                this.state.data.map((item) => {
-                    if (item.college === this.state.college) {
-                        brr.push(item);
-                    }
-                    this.setState({
-                        data: brr
+                    username: name.username
+                });
+                console.log(this.state.username);
+                let url1 = `http://139.155.44.190:3005/users/list`;
+                let url2 = `http://139.155.44.190:3005/major/list`;
+                fetch(url1)
+                    .then(res => res.json())
+                    .then((res) => {
+                        this.setState({
+                            data: res
+                        })
+                        this.state.data.map((item) => {
+                            if (item.name === this.state.username) {
+                                this.setState({
+                                    college: item.college
+                                })
+                            }
+                        })
+                        fetch(url2)
+                            .then(res => res.json())
+                            .then((res) => {
+                                this.setState({
+                                    todo: res
+                                })
+                                var brr = []
+                                this.state.todo.map((item) => {
+                                    if (item.college === this.state.college) {
+                                        brr.push(item);
+                                    }
+                                    this.setState({
+                                        todo: brr
+                                    })
+                                })
+                            })
                     })
-                })
-            })
-
-
-        // AsyncStorage.getItem('user')
-        //     .then((value) => {
-        //         this.setState({
-        //             username: JSON.parse(value).username
-        //         });
-        //         let url1 = `http://139.155.44.190:3005/users/list`;
-        //         let url2 = `http://139.155.44.190:3005/major/list`;
-        //         fetch(url1)
-        //             .then(res => res.json())
-        //             .then((res) => {
-        //                 this.setState({
-        //                     data: res
-        //                 })
-        //                 this.state.data.map((item) => {
-        //                     if (item.name === this.state.name) {
-        //                         this.setState({
-        //                             college: item.college
-        //                         })
-        //                     }
-        //                 })
-        //                 fetch(url2)
-        //                     .then(res => res.json())
-        //                     .then((res) => {
-        //                         this.setState({
-        //                             data: res
-        //                         })
-        //                         var brr = []
-        //                         this.state.data.map((item) => {
-        //                             if (item.college === this.state.college) {
-        //                                 brr.push(item);
-        //                             }
-        //                             this.setState({
-        //                                 data: brr
-        //                             })
-        //                         })
-        //                     })
-        //             })
-        //     });
+            });
     }
     render() {
         return (
@@ -83,7 +67,7 @@ export default class CollegeMajor extends Component {
                     <ScrollView>
                         <View style={styles.block}>
                             {
-                                this.state.data.map((item) => (
+                                this.state.todo.map((item) => (
                                     <View style={styles.inbox}>
                                         <Text style={{ fontSize: 18, marginTop: 10 * s, color: 'red' }}>{item.name}</Text>
                                         <Text style={{ fontSize: 18 }}>&emsp;&emsp;{item.content}</Text>

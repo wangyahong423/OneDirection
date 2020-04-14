@@ -3,16 +3,16 @@ import { Text, View, StyleSheet, TouchableOpacity, ImageBackground } from 'react
 import { Actions } from 'react-native-router-flux';
 
 export default class College extends Component {
-    collegeHistory = ()=>{
+    collegeHistory = () => {
         Actions.collegehistory()
     }
-    collegeTeachers = ()=>{
+    collegeTeachers = () => {
         Actions.collegeteachers()
     }
-    collegeMajor = ()=>{
+    collegeMajor = () => {
         Actions.collegemajor()
     }
-    collegeOther = ()=>{
+    collegeOther = () => {
         Actions.collegeother()
     }
     render() {
@@ -22,7 +22,7 @@ export default class College extends Component {
                 style={{ width: '100%', height: '100%' }}
             >
                 <View style={styles.box}>
-                    <TouchableOpacity style={[{marginTop:'30%'},styles.block]} onPress={this.collegeHistory}>
+                    <TouchableOpacity style={[{ marginTop: '30%' }, styles.block]} onPress={this.collegeHistory}>
                         <Text style={styles.word}>历史介绍</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.block} onPress={this.collegeTeachers}>
@@ -50,14 +50,14 @@ const styles = StyleSheet.create({
         height: 60,
         width: '50%',
         backgroundColor: '#9ec3eb',
-        marginBottom:'15%',
-        borderRadius:8,
-        alignItems:'center'
+        marginBottom: '15%',
+        borderRadius: 8,
+        alignItems: 'center'
     },
-    word:{
-        fontSize:20,
-        lineHeight:60,
-        color:'#343466',
-        fontWeight:'bold'
+    word: {
+        fontSize: 20,
+        lineHeight: 60,
+        color: '#343466',
+        fontWeight: 'bold'
     }
 });
