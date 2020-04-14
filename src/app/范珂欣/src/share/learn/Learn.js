@@ -13,6 +13,7 @@ export default class Learn extends Component {
             like: [],
             search: '',
             likeNum: [],
+            comNum: [],
             username: '张三'
         };
         // Actions.refresh(this.state.list);
@@ -29,6 +30,7 @@ export default class Learn extends Component {
         var url1 = `http://139.155.44.190:3005/learn/list`;
         var url2 = `http://139.155.44.190:3005/learnlike/list`;
         let url3 = `http://139.155.44.190:3005/users/list`;
+        let url4 = `http://139.155.44.190:3005/learntalk/list`;
         fetch(url3)
             .then((res) => res.json())
             .then((res) => {
@@ -44,36 +46,47 @@ export default class Learn extends Component {
                             }
                         }
                         this.setState({ like: likeList });
-                        fetch(url1)
+                        fetch(url4)
                             .then((res) => res.json())
                             .then((res) => {
-                                res.forEach(item => {
-                                    for (var i = 0; i < this.state.pic.length; i++) {
-                                        if (item.name == this.state.pic[i].name) {
-                                            item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
-                                            break;
-                                        }
-                                    }
-                                    for (var j = 0; j < this.state.like.length; j++) {
-                                        if (item.id == this.state.like[j].lid) {
-                                            item.like = true;
-                                            break;
-                                        }
-                                        else {
-                                            item.like = false;
-                                        }
-                                    }
-                                    var likeNum = 0;
-                                    for (var z = 0; z < this.state.likeNum.length; z++) {
-                                        if (item.id == this.state.likeNum[z].lid) {
-                                            likeNum++;
-                                        }
-                                    }
-                                    item.likeNum = likeNum;
-                                    // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
-                                });
-                                this.setState({ list: res });
-                                console.log(res);
+                                this.setState({ comNum: res });
+                                fetch(url1)
+                                    .then((res) => res.json())
+                                    .then((res) => {
+                                        res.forEach(item => {
+                                            for (var i = 0; i < this.state.pic.length; i++) {
+                                                if (item.name == this.state.pic[i].name) {
+                                                    item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
+                                                    break;
+                                                }
+                                            }
+                                            for (var j = 0; j < this.state.like.length; j++) {
+                                                if (item.id == this.state.like[j].lid) {
+                                                    item.like = true;
+                                                    break;
+                                                }
+                                                else {
+                                                    item.like = false;
+                                                }
+                                            }
+                                            var likeNum = 0;
+                                            for (var z = 0; z < this.state.likeNum.length; z++) {
+                                                if (item.id == this.state.likeNum[z].lid) {
+                                                    likeNum++;
+                                                }
+                                            }
+                                            item.likeNum = likeNum;
+                                            var comNum = 0;
+                                            for (var z = 0; z < this.state.comNum.length; z++) {
+                                                if (item.id == this.state.comNum[z].lid) {
+                                                    comNum++;
+                                                }
+                                            }
+                                            item.comNum = comNum;
+                                            // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
+                                        });
+                                        this.setState({ list: res });
+                                    });
                             });
                     });
             });
@@ -98,36 +111,47 @@ export default class Learn extends Component {
                                 }
                             }
                             self.setState({ like: likeList });
-                            fetch(url1)
+                            fetch(url4)
                                 .then((res) => res.json())
                                 .then((res) => {
-                                    res.forEach(item => {
-                                        for (var i = 0; i < self.state.pic.length; i++) {
-                                            if (item.name == self.state.pic[i].name) {
-                                                item.pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
-                                                break;
-                                            }
-                                        }
-                                        for (var j = 0; j < self.state.like.length; j++) {
-                                            if (item.id == self.state.like[j].lid) {
-                                                item.like = true;
-                                                break;
-                                            }
-                                            else {
-                                                item.like = false;
-                                            }
-                                        }
-                                        var likeNum = 0;
-                                        for (var z = 0; z < self.state.likeNum.length; z++) {
-                                            if (item.id == self.state.likeNum[z].lid) {
-                                                likeNum++;
-                                            }
-                                        }
-                                        item.likeNum = likeNum;
-                                        // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
-                                    });
-                                    self.setState({ list: res });
-                                    console.log(res);
+                                    this.setState({ comNum: res });
+                                    fetch(url1)
+                                        .then((res) => res.json())
+                                        .then((res) => {
+                                            res.forEach(item => {
+                                                for (var i = 0; i < self.state.pic.length; i++) {
+                                                    if (item.name == self.state.pic[i].name) {
+                                                        item.pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
+                                                        break;
+                                                    }
+                                                }
+                                                for (var j = 0; j < self.state.like.length; j++) {
+                                                    if (item.id == self.state.like[j].lid) {
+                                                        item.like = true;
+                                                        break;
+                                                    }
+                                                    else {
+                                                        item.like = false;
+                                                    }
+                                                }
+                                                var likeNum = 0;
+                                                for (var z = 0; z < self.state.likeNum.length; z++) {
+                                                    if (item.id == self.state.likeNum[z].lid) {
+                                                        likeNum++;
+                                                    }
+                                                }
+                                                item.likeNum = likeNum;
+                                                var comNum = 0;
+                                                for (var z = 0; z < self.state.comNum.length; z++) {
+                                                    if (item.id == self.state.comNum[z].lid) {
+                                                        comNum++;
+                                                    }
+                                                }
+                                                item.comNum = comNum;
+                                                // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
+                                            });
+                                            self.setState({ list: res });
+                                        });
                                 });
                         });
                 });
@@ -282,9 +306,12 @@ export default class Learn extends Component {
                                     >
                                         <Text onPress={this.details.bind(this, (idx))} style={{ fontSize: 18 * s }}>{item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content}</Text>
                                     </View>
-                                    <View style={{ flexDirection: 'row', height: 40 * s, paddingTop: 5 * s, justifyContent: 'space-evenly', borderTopWidth: 1, borderTopColor: "#EFEFF4" }}>
-                                        <Icon name="comment" style={{ fontSize: 30 * s }}></Icon>
-                                        <View style={{ flexDirection: 'row' }}>
+                                    <View style={{ flexDirection: 'row', height: 40 * s, alignItems: 'center', justifyContent: 'space-evenly', borderTopWidth: 1, borderTopColor: "#EFEFF4" }}>
+                                        <View style={{ alignItems: 'center', flexDirection: 'row' }}>
+                                            <Icon onPress={this.details.bind(this, (idx))} name="comment" style={{ fontSize: 30 * s }}></Icon>
+                                            <Text>{item.comNum}</Text>
+                                        </View>
+                                        <View style={{ alignItems: 'center', flexDirection: 'row' }}>
                                             <Icon name="heart" onPress={this.like.bind(this, (idx))} style={item.like ? { color: 'red', fontSize: 30 * s } : { fontSize: 30 * s }}></Icon>
                                             <Text>{item.likeNum}</Text>
                                         </View>

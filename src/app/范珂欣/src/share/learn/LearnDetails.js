@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, SafeAreaView, TextInput, Dimensions, ImageBackground, Image, TouchableOpacity, AsyncStorage, Alert } from 'react-native';
+import { Text, View, ScrollView, SafeAreaView, TextInput, Dimensions, ImageBackground, Image, TouchableOpacity, AsyncStorage, Alert, DeviceEventEmitter } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Actions } from 'react-native-router-flux';
 const { width, height } = Dimensions.get('window');
@@ -9,7 +9,7 @@ export default class LearnDetails extends Component {
         super();
         this.state = {
             page: '',
-            username: '李四',
+            username: '张三',
             comment: '',
             list: [],
             pic: []
@@ -46,7 +46,36 @@ export default class LearnDetails extends Component {
                                 this.setState({ list: arr });
                             })
                     })
+                var self = this;
+                this.listener = DeviceEventEmitter.addListener('pinglun', function (param) {
+                    fetch(url2)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            self.setState({ pic: res });
+                            fetch(url1)
+                                .then((res) => res.json())
+                                .then((res) => {
+                                    var arr = [];
+                                    res.forEach(item => {
+                                        if (item.lid == self.state.page.id) {
+                                            for (var i = 0; i < self.state.pic.length; i++) {
+                                                if (item.name == self.state.pic[i].name) {
+                                                    item.pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
+                                                    break;
+                                                }
+                                            }
+                                            arr.push(item);
+                                        }
+
+                                    });
+                                    self.setState({ list: arr });
+                                })
+                        })
+                });
             });
+    }
+    componentWillUnmount() {
+        this.listener.remove();
     }
     change = (e) => {
         this.setState({ comment: e });
@@ -73,10 +102,22 @@ export default class LearnDetails extends Component {
                     Alert.alert(res.msg);
                 }
             })
+        var param = { "content": this.state.comment, "name": this.state.username, "time": time };
+        DeviceEventEmitter.emit('pinglun', param);
     }
+    // backt = () => {
+    //     Actions.pop;
+    //     var param = 1;
+    //     DeviceEventEmitter.emit('refresh', param);
+    // }
     render() {
         return (
-            <SafeAreaView style={{ flex: 1 }}>
+            <SafeAreaView style={{ flex: 1 }} >
+                {/* <View
+                    
+                    style={{ paddingLeft: 20, color: 'white', height: '7%', alignItems: 'center', flexDirection: 'row', backgroundColor: '#37376F' }}>
+                    <Icon color='white' size={26} name='angle-left'></Icon>
+                </View> */}
                 <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 5 * s }}>
                     <View style={{
                         flexDirection: 'row',
@@ -87,8 +128,7 @@ export default class LearnDetails extends Component {
                             marginLeft: 20 * s,
                             height: 50 * s,
                             width: 50 * s,
-                            borderRadius: 25 * s,
-                            backgroundColor: 'yellow'
+                            borderRadius: 25 * s
                         }} source={{ uri: this.state.page.pic }} />
                         <View style={{ marginLeft: 30 * s }}>
                             <Text style={{ fontSize: 18 * s }}>{this.state.page.name}</Text>
@@ -148,13 +188,13 @@ export default class LearnDetails extends Component {
                         borderBottomWidth: 1 * s
                     }}
                 >
-                    <Text style={{paddingLeft:10*s,fontSize:20*s}}>评论</Text>
+                    <Text style={{ paddingLeft: 10 * s, fontSize: 20 * s }}>评论</Text>
                 </View>
                 <ScrollView style={{ flex: 1 }}>
                     <View>
                         {
                             this.state.list.map((item) => (
-                                <View style={{ backgroundColor: '#fff', width: '100%',borderBottomWidth:1*s,borderBottomColor:'#808080' }}>
+                                <View style={{ backgroundColor: '#fff', width: '100%', borderBottomWidth: 1 * s, borderBottomColor: '#808080' }}>
                                     <View style={{
                                         flexDirection: 'row',
                                         alignItems: 'center'
@@ -167,9 +207,9 @@ export default class LearnDetails extends Component {
                                             backgroundColor: 'yellow'
                                         }} source={{ uri: item.pic }} />
                                         <View style={{ marginLeft: 30 * s }}>
-                                            <Text style={{ fontSize: 15 * s,color:'#37376F',marginTop:5*s}}>{item.name}</Text>
+                                            <Text style={{ fontSize: 15 * s, color: '#37376F', marginTop: 5 * s }}>{item.name}</Text>
                                             <Text style={{ fontSize: 18 * s }}>{item.content}</Text>
-                                            <Text style={{fontSize:10*s,color:'#808080',marginTop:5*s,marginBottom:5*s}}>{item.time}</Text>
+                                            <Text style={{ fontSize: 10 * s, color: '#808080', marginTop: 5 * s, marginBottom: 5 * s }}>{item.time}</Text>
                                         </View>
                                     </View>
                                 </View>
@@ -179,7 +219,7 @@ export default class LearnDetails extends Component {
 
                 </ScrollView>
 
-            </SafeAreaView>
+            </SafeAreaView >
         )
     }
 }
