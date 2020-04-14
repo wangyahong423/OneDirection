@@ -14,14 +14,13 @@ export default class Share extends Component {
                     {/* 顶部 */}
                     <View style={{
                         width: '100%',
-                        height: '4%',
+                        height: 30 * s,
                         backgroundColor: '#37376F',
                         alignItems: 'center',
                     }}>
                         <Text style={{ color: '#fff', lineHeight: 30 * s, }}>共享</Text>
                     </View>
                     <ScrollView style={{ height: '96%' }}>
-
                         <View>
                             <View style={{ alignItems: 'center' }}>
                                 <TouchableOpacity
@@ -55,8 +54,7 @@ export default class Share extends Component {
                             </View>
                         </View>
                     </ScrollView>
-                </ImageBackground >
-
+                </ImageBackground>
             </View>
         )
     }

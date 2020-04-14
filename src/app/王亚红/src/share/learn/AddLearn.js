@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Alert } from 'react-native';
+import { Text, View, ScrollView, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Alert, DeviceEventEmitter } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
@@ -46,7 +46,6 @@ export default class AddLearn extends Component {
             var hour = date.getHours().toString();
             var minute = date.getMinutes().toString();
             var time = year + '年' + month + '月' + day + '日' + ' ' + hour + ':' + minute;
-            this.setState({ time: time });
             let url = `http://139.155.44.190:3005/learn/addLearn?content=${this.state.content}&name=${this.state.username}&time=${time}`;
             console.log(url);
             fetch(url)
@@ -63,6 +62,8 @@ export default class AddLearn extends Component {
         else {
             Alert.alert("未填写内容")
         }
+        var param={"content": this.state.content, "name": this.state.username, "time":time};
+        DeviceEventEmitter.emit('refresh',param);
     }
     render() {
         return (

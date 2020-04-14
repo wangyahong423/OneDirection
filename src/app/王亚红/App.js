@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Router, Overlay, Scene, Tabs, Drawer, Lightbox, Modal, Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { StyleSheet, View, Text, Image, BackHandler, ToastAndroid, AsyncStorage, Share, } from 'react-native';
+import { StyleSheet, View, Text, Image, BackHandler, ToastAndroid, AsyncStorage } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 // 登录
 import Login from './src/common/Login'
@@ -14,7 +14,7 @@ import Add from './src/community/Add';
 import Details from './src/community/Details'
 
 // 共享
-// import Share from './src/share/Share';
+import Share from './src/share/Share';
 import Learn from './src/share/learn/Learn';
 import ShareFile from './src/share/shareFile/ShareFile';
 import AddLearn from './src/share/learn/AddLearn';
@@ -29,14 +29,7 @@ import Guanyu from './src/my/Guanyu';
 import Fankui from './src/my/Fankui';
 import Tijiao from './src/my/Tijiao';
 import Shezhi from './src/my/Shezhi';
-import Zhanghao from './src/my/Zhanghao';
-import Shouji from './src/my/Shouji';
 import Mima from './src/my/Mima';
-import Xiaoxi from './src/my/Xiaoxi';
-import Hshezhi from './src/my/Hshezhi';
-import Xshezhi from './src/my/Xshezhi';
-import Yinsi from './src/my/Yinsi';
-import Fuwuyinsi from './src/my/Fuwuyinsi';
 import File from './src/my/File';
 
 // 攻略
@@ -148,15 +141,15 @@ const App = () => {
           setInstall(false);
         }
       })
-    AsyncStorage.getItem('user')
+    AsyncStorage.getItem('username')
       .then(res => {
-        let user = JSON.parse(res)
-        console.log(user)
-        if (!user) {
+        let user = {username:res}
+        console.log('user:',user)
+        if (!user.username) {
           SplashScreen.hide();
         }
-        if (user && user.token) {
-          // setLogin(true);
+        if (user.username) {
+          setLogin(true);
           SplashScreen.hide();
         }
       })
@@ -325,14 +318,7 @@ const App = () => {
           <Scene key='fankui' component={Fankui} renderTitle="用户反馈" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key='tijiao' component={Tijiao} renderTitle="反馈成功" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key="shezhi" component={Shezhi} renderTitle="设置" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }}  />
-          <Scene key="zhanghao" component={Zhanghao} renderTitle="账号与安全"  backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
-          <Scene key="shouji" component={Shouji} renderTitle="更改手机号"  backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
-          <Scene key="mima"  component={Mima} renderTitle="更改密码" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }}  />
-          <Scene key="xiaoxi"  component={Xiaoxi} renderTitle="消息与提醒" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }}  />
-          <Scene key="hshezhi"  component={Hshezhi} renderTitle="提醒设置" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }}  />
-          <Scene key="xshezhi"  component={Xshezhi} renderTitle="提醒设置" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }}  />
-          <Scene key="yinsi"  component={Yinsi} renderTitle="隐私" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }}  />
-          <Scene key="fuwuyinsi"  component={Fuwuyinsi} renderTitle="服务协议和隐私政策" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }}  />
+          <Scene key="mima"  component={Mima} renderTitle="重置密码" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }}  />
           <Scene key="file"  component={File} renderTitle="我的文件" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }}  />
         </Scene>
       </Router>

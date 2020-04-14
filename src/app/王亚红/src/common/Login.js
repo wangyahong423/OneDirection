@@ -8,9 +8,10 @@ export default class Login extends Component {
     this.state = {
       username: '',
       pwd: '',
-      isloading: false,
+      isloading: false,//true显示正在登陆中，false不显示
       unum: 0, //0：不为空；1：为空
-      pnum: 0
+      pnum: 0,
+      isnull: true,//true没有提示，false显示提示“该用户不存在”
     }
   }
   userhandle = (text) => {
@@ -24,45 +25,31 @@ export default class Login extends Component {
       this.setState({ pwd: text, pnum: 0 })
     }
   }
-  // login = () => {
-  //   if (this.state.username != '' && this.state.pwd != "") {
-  //     this.setState({
-  //       isloading: true
-  //     })
-  //     myFetch.post('/login', {
-  //       username: this.state.username,
-  //       pwd: this.state.pwd
-  //     }
-  //     ).then(res => {
-  //       console.log(this.state.username, this.state.pwd)
-  //       AsyncStorage.setItem('user', JSON.stringify(res.data))
-  //         .then(() => {
-  //           this.setState({ isloading: false })
-  //           Actions.methodPage();
-  //         })
-  //     })
-  //   }
-  //   else if (this.state.username == '') {
-  //     this.setState({
-  //       unum: 1
-  //     })
-  //   }
-  //   else if (this.state.pwd == '') {
-  //     this.setState({
-  //       pnum: 1
-  //     })
-  //   }
-  // }
 
   login = () => {
     if (this.state.username != '' && this.state.pwd != "") {
       let url = `http://139.155.44.190:3005/users/login?name=${this.state.username}&pwd=${this.state.pwd}`;
-      this.setState({isloading: true})
       fetch(url)
-      .then(res => res.json())
-      .then(res=>{
-        console.log('数据库：',res)
-      })
+        .then(res => res.json())
+        .then(res => {
+          if (res.ok) {
+            this.setState({
+              isloading: true
+            })
+            AsyncStorage.setItem('username', this.state.username);
+            AsyncStorage.setItem('password', this.state.pwd);
+            this.setState({
+              isnull: true,
+            })
+            Actions.methodPage();//登录成功跳转首页
+          }
+          else {
+            this.setState({
+              isnull: false,
+              isloading: false
+            })
+          }
+        })
     }
     else if (this.state.username == '') {
       this.setState({
@@ -151,6 +138,11 @@ export default class Login extends Component {
         {
           this.state.isloading
             ? <View style={{ position: 'absolute', top: 530, zIndex: 11, left: 190, alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: 14 }}>正在登录中...</Text></View>
+            : null
+        }
+        {
+          !this.state.isnull
+            ? <View style={{ position: 'absolute', top: 530, zIndex: 11, left: 180, alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: 14 }}>此用户不存在！</Text></View>
             : null
         }
       </View>

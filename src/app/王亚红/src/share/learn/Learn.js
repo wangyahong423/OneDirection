@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage } from 'react-native';
+import { Text, View, ScrollView, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import { Actions } from 'react-native-router-flux';
 const { width, height } = Dimensions.get('window');
@@ -13,6 +13,7 @@ export default class Learn extends Component {
             like: [],
             search: '',
             likeNum: [],
+            comNum: [],
             username: '张三'
         };
         // Actions.refresh(this.state.list);
@@ -29,6 +30,7 @@ export default class Learn extends Component {
         var url1 = `http://139.155.44.190:3005/learn/list`;
         var url2 = `http://139.155.44.190:3005/learnlike/list`;
         let url3 = `http://139.155.44.190:3005/users/list`;
+        let url4 = `http://139.155.44.190:3005/learntalk/list`;
         fetch(url3)
             .then((res) => res.json())
             .then((res) => {
@@ -44,42 +46,123 @@ export default class Learn extends Component {
                             }
                         }
                         this.setState({ like: likeList });
-                        fetch(url1)
+                        fetch(url4)
                             .then((res) => res.json())
                             .then((res) => {
-                                res.forEach(item => {
-                                    for (var i = 0; i < this.state.pic.length; i++) {
-                                        if (item.name == this.state.pic[i].name) {
-                                            item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
-                                            break;
-                                        }
-                                    }
-                                    for (var j = 0; j < this.state.like.length; j++) {
-                                        if (item.id == this.state.like[j].lid) {
-                                            item.like = true;
-                                            break;
-                                        }
-                                        else {
-                                            item.like = false;
-                                        }
-                                    }
-                                    var likeNum = 0;
-                                    for (var z = 0; z < this.state.likeNum.length; z++) {
-                                        if (item.id == this.state.likeNum[z].lid) {
-                                            likeNum++;
-                                        }
-                                    }
-                                    item.likeNum = likeNum;
-                                    item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
-                                });
-                                this.setState({ list: res });
+                                this.setState({ comNum: res });
+                                fetch(url1)
+                                    .then((res) => res.json())
+                                    .then((res) => {
+                                        res.forEach(item => {
+                                            for (var i = 0; i < this.state.pic.length; i++) {
+                                                if (item.name == this.state.pic[i].name) {
+                                                    item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
+                                                    break;
+                                                }
+                                            }
+                                            for (var j = 0; j < this.state.like.length; j++) {
+                                                if (item.id == this.state.like[j].lid) {
+                                                    item.like = true;
+                                                    break;
+                                                }
+                                                else {
+                                                    item.like = false;
+                                                }
+                                            }
+                                            var likeNum = 0;
+                                            for (var z = 0; z < this.state.likeNum.length; z++) {
+                                                if (item.id == this.state.likeNum[z].lid) {
+                                                    likeNum++;
+                                                }
+                                            }
+                                            item.likeNum = likeNum;
+                                            var comNum = 0;
+                                            for (var z = 0; z < this.state.comNum.length; z++) {
+                                                if (item.id == this.state.comNum[z].lid) {
+                                                    comNum++;
+                                                }
+                                            }
+                                            item.comNum = comNum;
+                                            // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
+                                        });
+                                        this.setState({ list: res });
+                                    });
                             });
                     });
             });
+        var self = this;
+        this.listener = DeviceEventEmitter.addListener('refresh', function (param) {
+            // var arr=self.state.list;
+            // var a = {"content": param.content, "like": false, "likeNum": 0, "name": param.name, "pic": "http://139.155.44.190:3005/images/6.jpg", "time": param.time};
+            // arr.splice(0,0,a);
+            // self.setState({list:arr});
+            fetch(url3)
+                .then((res) => res.json())
+                .then((res) => {
+                    self.setState({ pic: res });
+                    fetch(url2)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            self.setState({ likeNum: res });
+                            var likeList = [];
+                            for (var i = 0; i < res.length; i++) {
+                                if (res[i].name == self.state.username) {
+                                    likeList.push(res[i]);
+                                }
+                            }
+                            self.setState({ like: likeList });
+                            fetch(url4)
+                                .then((res) => res.json())
+                                .then((res) => {
+                                    this.setState({ comNum: res });
+                                    fetch(url1)
+                                        .then((res) => res.json())
+                                        .then((res) => {
+                                            res.forEach(item => {
+                                                for (var i = 0; i < self.state.pic.length; i++) {
+                                                    if (item.name == self.state.pic[i].name) {
+                                                        item.pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
+                                                        break;
+                                                    }
+                                                }
+                                                for (var j = 0; j < self.state.like.length; j++) {
+                                                    if (item.id == self.state.like[j].lid) {
+                                                        item.like = true;
+                                                        break;
+                                                    }
+                                                    else {
+                                                        item.like = false;
+                                                    }
+                                                }
+                                                var likeNum = 0;
+                                                for (var z = 0; z < self.state.likeNum.length; z++) {
+                                                    if (item.id == self.state.likeNum[z].lid) {
+                                                        likeNum++;
+                                                    }
+                                                }
+                                                item.likeNum = likeNum;
+                                                var comNum = 0;
+                                                for (var z = 0; z < self.state.comNum.length; z++) {
+                                                    if (item.id == self.state.comNum[z].lid) {
+                                                        comNum++;
+                                                    }
+                                                }
+                                                item.comNum = comNum;
+                                                // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
+                                            });
+                                            self.setState({ list: res });
+                                        });
+                                });
+                        });
+                });
+        });
+    }
+
+    componentWillUnmount() {
+        this.listener.remove();
     }
     details = (idx) => {
-        var value = { page: this.state.list[idx].id };
-        console.log(idx);
+        var value = { page: this.state.list[idx] };
         AsyncStorage.setItem('lPage', JSON.stringify(value));
         Actions.learndetails();
     }
@@ -153,7 +236,7 @@ export default class Learn extends Component {
 
     render() {
         return (
-            <SafeAreaView style={{ flex: 1 }}>
+            <SafeAreaView style={{ flex: 1 }} >
                 <View style={{
                     width: '100%',
                     height: 70 * s,
@@ -221,11 +304,14 @@ export default class Learn extends Component {
                                         marginBottom: 20 * s
                                     }}
                                     >
-                                        <Text onPress={this.details.bind(this, (idx))} style={{ fontSize: 18 * s }}>{item.content}</Text>
+                                        <Text onPress={this.details.bind(this, (idx))} style={{ fontSize: 18 * s }}>{item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content}</Text>
                                     </View>
-                                    <View style={{ flexDirection: 'row', height: 40 * s, paddingTop: 5 * s, justifyContent: 'space-evenly', borderTopWidth: 1, borderTopColor: "#EFEFF4" }}>
-                                        <Icon name="comment" style={{ fontSize: 30 * s }}></Icon>
-                                        <View style={{ flexDirection: 'row' }}>
+                                    <View style={{ flexDirection: 'row', height: 40 * s, alignItems: 'center', justifyContent: 'space-evenly', borderTopWidth: 1, borderTopColor: "#EFEFF4" }}>
+                                        <View style={{ alignItems: 'center', flexDirection: 'row' }}>
+                                            <Icon onPress={this.details.bind(this, (idx))} name="comment" style={{ fontSize: 30 * s }}></Icon>
+                                            <Text>{item.comNum}</Text>
+                                        </View>
+                                        <View style={{ alignItems: 'center', flexDirection: 'row' }}>
                                             <Icon name="heart" onPress={this.like.bind(this, (idx))} style={item.like ? { color: 'red', fontSize: 30 * s } : { fontSize: 30 * s }}></Icon>
                                             <Text>{item.likeNum}</Text>
                                         </View>
@@ -252,7 +338,7 @@ export default class Learn extends Component {
                 >
                     <Text style={{ color: 'white', fontSize: 30 * s }}>+</Text>
                 </TouchableOpacity>
-            </SafeAreaView>
+            </SafeAreaView >
         )
     }
 }

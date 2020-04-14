@@ -6,6 +6,7 @@ const { width } = Dimensions.get('window');
 const s = width / 460;
 export default class Shezhi extends Component {
     outlogin = () => {
+        AsyncStorage.clear();
         Actions.login();
     } 
     render() {
@@ -29,7 +30,7 @@ export default class Shezhi extends Component {
                         borderRadius: 15 * s,
                         marginLeft: '25%'
                     }}
-                    onPress={this.putlogin}>
+                    onPress={this.outlogin}>
                     <Text style={{ color: '#ffffff', fontSize: 18 }}>退出登录</Text>
                 </TouchableOpacity>
             </ScrollView>
