@@ -10,69 +10,53 @@ export default class CollegeOther extends Component {
         super();
         this.state = {
             data: [],
+            todo: [],
             activeSections: [],
-            college: '教育学院',
+            college: '',
             username: ''
         }
     }
 
     componentDidMount() {
-        let url = `http://139.155.44.190:3005/colleges/list/`;
-        fetch(url)
-            .then(res => res.json())
-            .then(res => {
+        AsyncStorage.getItem('username')
+            .then((value) => {
+                let name = { username: value }
                 this.setState({
-                    data: res
-                })
-                var brr = []
-                this.state.data.map((item) => {
-                    if (item.college != this.state.college) {
-                        brr.push(item);
-                    }
-                    this.setState({
-                        data: brr
+                    username: name.username
+                });
+                let url1 = `http://139.155.44.190:3005/users/list`;
+                let url2 = `http://139.155.44.190:3005/colleges/list`;
+                fetch(url1)
+                    .then(res => res.json())
+                    .then((res) => {
+                        this.setState({
+                            data: res
+                        })
+                        this.state.data.map((item) => {
+                            if (item.name === this.state.username) {
+                                this.setState({
+                                    college: item.college
+                                })
+                            }
+                        })
+                        fetch(url2)
+                            .then(res => res.json())
+                            .then((res) => {
+                                this.setState({
+                                    todo: res
+                                })
+                                var brr = []
+                                this.state.todo.map((item) => {
+                                    if (item.college != this.state.college) {
+                                        brr.push(item);
+                                    }
+                                    this.setState({
+                                        todo: brr
+                                    })
+                                })
+                            })
                     })
-                })
-            })
-
-        // AsyncStorage.getItem('user')
-        //     .then((value) => {
-        //         this.setState({
-        //             username: JSON.parse(value).username
-        //         });
-        //         let url1 = `http://139.155.44.190:3005/users/list`;
-        //         let url2 = `http://139.155.44.190:3005/colleges/list`;
-        //         fetch(url1)
-        //             .then(res => res.json())
-        //             .then((res) => {
-        //                 this.setState({
-        //                     data: res
-        //                 })
-        //                 this.state.data.map((item) => {
-        //                     if (item.name === this.state.name) {
-        //                         this.setState({
-        //                             college: item.college
-        //                         })
-        //                     }
-        //                 })
-        //                 fetch(url2)
-        //                     .then(res => res.json())
-        //                     .then((res) => {
-        //                         this.setState({
-        //                             data: res
-        //                         })
-        //                         var brr = []
-        //                         this.state.data.map((item) => {
-        //                             if (item.college != this.state.college) {
-        //                                 brr.push(item);
-        //                             }
-        //                             this.setState({
-        //                                 data: brr
-        //                             })
-        //                         })
-        //                     })
-        //             })
-        //     });
+            });
 
     }
     _renderHeader = section => {
@@ -99,7 +83,7 @@ export default class CollegeOther extends Component {
         return (
             <ScrollView>
                 <Accordion
-                    sections={this.state.data}
+                    sections={this.state.todo}
                     activeSections={this.state.activeSections}
                     renderHeader={this._renderHeader}
                     renderContent={this._renderContent}
