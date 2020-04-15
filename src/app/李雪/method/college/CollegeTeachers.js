@@ -65,8 +65,8 @@ export default class CollegeTeachers extends Component {
                         <View style={styles.block}>
                             {
                                 this.state.todo.map((item) => (
-                                    <View>
-                                        <Text style={{ fontSize: 18 }}>{item.job}</Text>
+                                    <View style={{paddingLeft:'10%'}}>
+                                        <Text style={{ fontSize: 22 }}>{item.job}</Text>
                                         <Text style={{ fontSize: 18 }}>{item.name}</Text>
                                         <Text style={{ fontSize: 18 }}>{item.tel}</Text>
                                         <Text style={{ fontSize: 18 }}>{item.email}</Text>
@@ -89,6 +89,6 @@ const styles = StyleSheet.create({
         width: '80%',
         margin: '10%',
         backgroundColor: 'rgba(255,255,255,0.6)',
-        alignItems: 'center'
+        // alignItems: 'center'
     }
 });
