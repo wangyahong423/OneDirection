@@ -1,20 +1,30 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, TextInput, Dimensions, TouchableOpacity, Alert } from 'react-native'
+import { Text, View, StyleSheet, ScrollView, TextInput, AsyncStorage, Dimensions, SafeAreaView, TouchableOpacity, Alert, DeviceEventEmitter } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 const s = width / 460;
 export default class Add extends Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
-            height: 30,
-            username: '李四',
-            content: ''
-        }
+            content: '',
+            username: '',
+            length: 0
+        };
+        this.getData();
     }
-
-    //动态计算TextInput高度来解决TextInput文字始终垂直居中的问题
-    cauculateHeight(e) {
+    getData = () => {
+        AsyncStorage.getItem('username')
+            .then((res) => {
+                let name = { username: res }
+                this.setState({
+                    username: name.username
+                })
+                console.log("用户名：", this.state.username)
+            });
+    }
+       //动态计算TextInput高度来解决TextInput文字始终垂直居中的问题
+       cauculateHeight(e) {
         if (e.nativeEvent.contentSize.height > 30) {
             height = e.nativeEvent.contentSize.height;
         } else {
@@ -24,10 +34,14 @@ export default class Add extends Component {
             height: height
         })
     }
-    changeText = (text) => {
-        this.setState({ content: text })
+    con = (e) => {
+        this.setState({ content: e });
+        var length = e.length;
+        this.setState({ length: length });
+        if (length > 500) {
+            Alert.alert("文本内容超过上限！");
+        }
     }
-    //发布动态：
     add = () => {
         if (this.state.content) {
             var date = new Date();
@@ -37,7 +51,6 @@ export default class Add extends Component {
             var hour = date.getHours().toString();
             var minute = date.getMinutes().toString();
             var time = year + '年' + month + '月' + day + '日' + ' ' + hour + ':' + minute;
-            this.setState({ time: time });
             let url = `http://139.155.44.190:3005/community/addCommunity?content=${this.state.content}&name=${this.state.username}&time=${time}`;
             console.log(url);
             fetch(url)
@@ -54,26 +67,33 @@ export default class Add extends Component {
         else {
             Alert.alert("未填写内容")
         }
+        var param = { "content": this.state.content, "name": this.state.username, "time": time };
+        DeviceEventEmitter.emit('refresh', param);
     }
     render() {
         return (
-            <View>
+            <SafeAreaView style={{ flex: 1 }}>
                 <View style={{ alignItems: "center" }}>
-                    <TouchableOpacity activeOpacity={1} style={styles.textInputInner} onPress={() => this.TextInput.focus()} >
+                    <ScrollView style={styles.textInputInner}>
                         <TextInput
-                            {...this.prop}
-                            placeholder={'请输入文本内容'}
-                            placeholderTextColor={'#666666'}
-                            underlineColorAndroid={'transparent'}
-                            multiline//多行设置
-                            value={this.state.content}
-                            ref={textInput => this.TextInput = textInput}
-                            onContentSizeChange={this.cauculateHeight.bind(this)}
-                            onChangeText={this.changeText}
+                            placeholder="请输入文本内容，不超过500字"
+                            placeholderTextColor='#666666'
                             style={{ height: Math.max(35, this.state.height), fontSize: 16 * s }}
-
+                            onChangeText={this.con}
+                            multiline={true}
+                            autoFocus={true}
+                            style={{ fontSize: 18 * s }}
                         />
-                    </TouchableOpacity>
+                    </ScrollView>
+                    <View style={{
+                        flexDirection: 'row',
+                        position: 'absolute',
+                        right: 10,
+                        bottom: 0
+                    }}>
+                        <Text style={{ fontSize: 16 * s, color: 'gray' }}>{this.state.length}</Text>
+                        <Text style={{ fontSize: 16 * s }}>/500</Text>
+                    </View>
                 </View>
                 <View>
                     <TouchableOpacity
@@ -84,7 +104,7 @@ export default class Add extends Component {
                             backgroundColor: '#37376F',
                             justifyContent: 'center',
                             alignItems: 'center',
-                            marginRight: 10 * s,
+                            marginRight: 5 * s,
                             position: 'absolute',
                             right: 0,
                             marginTop: 20 * s
@@ -94,11 +114,11 @@ export default class Add extends Component {
                         <Text style={{ color: '#fff', fontSize: 17 * s }}>发布</Text>
                     </TouchableOpacity>
                 </View>
-            </View>
-        );
+
+            </SafeAreaView>
+        )
     }
 }
-
 const styles = StyleSheet.create({
     textInputInner: {
         marginTop: 10,
