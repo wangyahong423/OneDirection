@@ -14,7 +14,8 @@ export default class Learn extends Component {
             search: '',
             likeNum: [],
             comNum: [],
-            username: ''
+            username: '',
+            isLoading: true
         };
         this.getData();
     }
@@ -25,10 +26,10 @@ export default class Learn extends Component {
                 this.setState({
                     username: name.username
                 })
-                console.log("用户名：", this.state.username)
             });
     }
     componentDidMount() {
+        this.setState({ isLoading: true })
         var url1 = `http://139.155.44.190:3005/learn/list`;
         var url2 = `http://139.155.44.190:3005/learnlike/list`;
         let url3 = `http://139.155.44.190:3005/users/list`;
@@ -87,6 +88,7 @@ export default class Learn extends Component {
                                             item.comNum = comNum;
                                             // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
                                         });
+                                        this.setState({ isLoading: false });
                                         this.setState({ list: res });
                                     });
                             });
@@ -158,10 +160,15 @@ export default class Learn extends Component {
                         });
                 });
         });
+        // var self1 = this;
+        // this.listener1 = DeviceEventEmitter.addListener('com', function (num){
+        //     console.log(num);
+        // })
     }
 
     componentWillUnmount() {
         this.listener.remove();
+        // this.listener1.remove();
     }
     details = (idx) => {
         var value = { page: this.state.list[idx] };
@@ -337,6 +344,24 @@ export default class Learn extends Component {
                     </View>
 
                 </ScrollView>
+                {
+                    this.state.isLoading
+                        ? <View
+                            style={{
+                                position: 'absolute',
+                                top: 80 * s,
+                                width: '100%'
+                            }}>
+                            <View style={{
+                                alignItems: 'center',
+                                flexDirection: 'row',
+                                justifyContent: 'center'
+                            }}>
+                                <Text style={{ fontSize: 20, marginTop: 10 }}>正在获取数据...</Text>
+                            </View>
+                        </View>
+                        : null
+                }
                 <TouchableOpacity style={{
                     width: 60 * s,
                     height: 60 * s,
