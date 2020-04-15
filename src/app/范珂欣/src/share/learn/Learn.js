@@ -14,16 +14,18 @@ export default class Learn extends Component {
             search: '',
             likeNum: [],
             comNum: [],
-            username: '张三'
+            username: ''
         };
-        // Actions.refresh(this.state.list);
+        this.getData();
     }
     getData = () => {
-        AsyncStorage.getItem('user')
-            .then((value) => {
+        AsyncStorage.getItem('username')
+            .then((res) => {
+                let name = { username: res }
                 this.setState({
-                    username: JSON.parse(value).username
-                });
+                    username: name.username
+                })
+                console.log("用户名：", this.state.username)
             });
     }
     componentDidMount() {
@@ -114,7 +116,7 @@ export default class Learn extends Component {
                             fetch(url4)
                                 .then((res) => res.json())
                                 .then((res) => {
-                                    this.setState({ comNum: res });
+                                    self.setState({ comNum: res });
                                     fetch(url1)
                                         .then((res) => res.json())
                                         .then((res) => {
@@ -226,7 +228,20 @@ export default class Learn extends Component {
                                 item.like = false;
                             }
                         }
-                        item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
+                        var likeNum = 0;
+                        for (var z = 0; z < this.state.likeNum.length; z++) {
+                            if (item.id == this.state.likeNum[z].lid) {
+                                likeNum++;
+                            }
+                        }
+                        item.likeNum = likeNum;
+                        var comNum = 0;
+                        for (var z = 0; z < this.state.comNum.length; z++) {
+                            if (item.id == this.state.comNum[z].lid) {
+                                comNum++;
+                            }
+                        }
+                        item.comNum = comNum;
                     });
                     this.setState({ list: res });
                 }

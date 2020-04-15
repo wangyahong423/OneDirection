@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Alert, DeviceEventEmitter } from 'react-native';
+import { Text, View, ScrollView, TextInput, AsyncStorage,Dimensions, SafeAreaView, TouchableOpacity, Alert, DeviceEventEmitter } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
@@ -8,16 +8,19 @@ export default class AddLearn extends Component {
         super();
         this.state = {
             content: '',
-            username: '李四',
+            username: '',
             length: 0
         };
+        this.getData();
     }
     getData = () => {
-        AsyncStorage.getItem('user')
-            .then((value) => {
+        AsyncStorage.getItem('username')
+            .then((res) => {
+                let name = { username: res }
                 this.setState({
-                    username: JSON.parse(value).username
-                });
+                    username: name.username
+                })
+                console.log("用户名：", this.state.username)
             });
     }
     con = (e) => {
@@ -62,8 +65,8 @@ export default class AddLearn extends Component {
         else {
             Alert.alert("未填写内容")
         }
-        var param={"content": this.state.content, "name": this.state.username, "time":time};
-        DeviceEventEmitter.emit('refresh',param);
+        var param = { "content": this.state.content, "name": this.state.username, "time": time };
+        DeviceEventEmitter.emit('refresh', param);
     }
     render() {
         return (

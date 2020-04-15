@@ -9,11 +9,22 @@ export default class LearnDetails extends Component {
         super();
         this.state = {
             page: '',
-            username: '张三',
+            username: '',
             comment: '',
             list: [],
             pic: []
         };
+        this.getData();
+    }
+    getData = () => {
+        AsyncStorage.getItem('username')
+            .then((res) => {
+                let name = { username: res }
+                this.setState({
+                    username: name.username
+                })
+                console.log("用户名：", this.state.username)
+            });
     }
     componentDidMount() {
         AsyncStorage.getItem('lPage')
@@ -97,7 +108,7 @@ export default class LearnDetails extends Component {
             .then((res) => res.json())
             .then((res) => {
                 if (res.ok) {
-                    Alert.alert(res.msg);
+                    
                 } else {
                     Alert.alert(res.msg);
                 }
