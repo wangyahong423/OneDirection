@@ -16,7 +16,7 @@ import { Actions } from 'react-native-router-flux';
 
 import Swiper from 'react-native-swiper';
 const { width } = Dimensions.get('window');
-const s = width / 640;
+const s = width / 460;
 export default class Community extends Component {
 
     constructor() {
@@ -66,6 +66,32 @@ export default class Community extends Component {
                         })
                     })
             })
+        change = () => {
+            console.log("函数")
+            // var crr = this.state.color;
+            // if (this.state.color[id] == "black") {
+            //     crr = this.state.color
+            //     crr[id] = "red";
+            //     this.setState({
+            //         color: crr
+            //     })
+            //     let url9 = `http://139.155.44.190:3005/communitylike/add?cid=${this.state.data[id].id}&name=${this.state.name}`
+            //     axios(url9)
+            //         .then((res) => {
+            //         })
+            // }
+            // else if (this.state.color[id] == "red") {
+            //     crr = this.state.color
+            //     crr[id] = "black";
+            //     this.setState({
+            //         color: crr
+            //     })
+            //     let url10 = `http://139.155.44.190:3005/communitylike/delete?cid=${this.state.data[id].id}&name=${this.state.name}`
+            //     axios(url10)
+            //         .then((res) => {
+            //         })
+            // }
+        }
     }
 
     render() {
@@ -90,40 +116,27 @@ export default class Community extends Component {
                     <View>
                         {
                             this.state.data.map((item, idx) => (
-                                <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 20 * s }}>
+                                <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 10 * s }}>
                                     <View style={styles.user}>
                                         <Image style={styles.avatar} source={{ uri: this.state.pic[idx] }} />
                                         <View style={{ marginLeft: 30 * s }}>
-                                            <Text style={{ fontSize: 22 * s }}>{item.name}</Text>
+                                            <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
                                             <Text>{item.time}</Text>
                                         </View>
                                     </View>
                                     <View style={styles.comment}>
                                         <Text
+                                            numberOfLines={2}
                                             onPress={() => { this.props.navigation.navigate('details', { id: item.id }) }}
-                                            style={{ fontSize: 22 * s }}>{item.content}</Text>
+                                            style={{ fontSize: 18 * s }}>{item.content}</Text>
                                     </View>
                                     <View style={styles.bottom}>
-                                        <Icon onPress={() => { this.props.navigation.navigate('details', { id: item.id }) }} name="comment" style={{ fontSize: 40 * s }}></Icon>
-                                        <Icon name="heart" style={{ fontSize: 40 * s }}></Icon>
+                                        <Icon onPress={() => { this.props.navigation.navigate('details', { id: item.id }) }} name="comment" style={{ fontSize: 30 * s }}></Icon>
+                                        <Icon
+                                            onPress={() => this.change()}
+                                            name="heart" style={{ fontSize: 30 * s }}>
+                                        </Icon>
                                     </View>
-                                </View>
-                            ))
-                        }
-                        {
-                            this.state.user.map((item) => (
-                                <View style={{ backgroundColor: '#ccc', width: '100%', marginBottom: 20 * s }}>
-                                    <View style={styles.user}>
-                                        <Image style={styles.avatar} source={require('../../assets/gonglve/服务.jpg')} />
-                                        <View style={{ marginLeft: 30 * s }}>
-                                            <Text style={{ fontSize: 22 * s }}>{item.name}</Text>
-                                            <Text>{item.pic}</Text>
-                                        </View>
-                                    </View>
-                                    <View style={styles.comment}>
-                                        <Text style={{ fontSize: 22 * s }}>{item.college}</Text>
-                                    </View>
-
                                 </View>
                             ))
                         }
@@ -155,7 +168,7 @@ const styles = StyleSheet.create({
     },
     search: {
         height: 40,
-        width: 530 * s,
+        width: 430 * s,
         backgroundColor: '#fff',
         flexDirection: 'row',
         alignItems: 'center',
@@ -164,27 +177,30 @@ const styles = StyleSheet.create({
     },
     user: {
         flexDirection: 'row',
-        height: 100 * s,
-        alignItems: 'center'
+        height: 90 * s,
+        alignItems: 'center',
+        // backgroundColor:'red'
     },
     avatar: {
         marginLeft: 20 * s,
-        height: 70 * s,
-        width: 70 * s,
-        backgroundColor: 'yellow'
+        height: 50 * s,
+        width: 50 * s,
+        borderRadius:25*s
     },
     comment: {
         marginLeft: 30 * s,
         marginRight: 30 * s,
-        marginTop: 10 * s,
-        marginBottom: 20 * s
+        marginBottom: 20 * s,
+        // overflow: "hidden",
+        // textOverflow: "ellipsis",
+        // whiteSpace: "nowrap"
     },
     add: {
         position: "absolute",
         bottom: 30,
-        right: 40,
-        height: 50,
-        width: 50,
+        right: 30,
+        height: 80,
+        width: 80,
         justifyContent: "center",
     },
     bottom: {
