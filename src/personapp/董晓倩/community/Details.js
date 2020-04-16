@@ -66,7 +66,7 @@ export default class Details extends Component {
                                 .then((res) => res.json())
                                 .then((res) => {
                                     var arr = [];
-                                    res.forEach(item => {
+                                    res.communitytalk.forEach(item => {
                                         if (item.cid == self.state.page.id) {
                                             for (var i = 0; i < self.state.pic.length; i++) {
                                                 if (item.name == self.state.pic[i].name) {
@@ -98,14 +98,11 @@ export default class Details extends Component {
             var hour = date.getHours().toString();
             var minute = date.getMinutes().toString();
             var time = year + '年' + month + '月' + day + '日' + ' ' + hour + ':' + minute;
-            console.log(time);
             let url = `http://139.155.44.190:3005/Communitytalk/add?cid=${this.state.page.id}
                 &name=${this.state.username}&content=${this.state.comment}&time=${time}`;
-            console.log(url);
             fetch(url)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(res)
                     if (res.ok) {
 
                     } else {

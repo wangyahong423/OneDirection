@@ -52,12 +52,10 @@ export default class Add extends Component {
             var minute = date.getMinutes().toString();
             var time = year + '年' + month + '月' + day + '日' + ' ' + hour + ':' + minute;
             let url = `http://139.155.44.190:3005/community/addCommunity?content=${this.state.content}&name=${this.state.username}&time=${time}`;
-            console.log(url);
             fetch(url)
                 .then((res) => res.json())
                 .then((res) => {
                     if (res.ok) {
-                        // Alert.alert(res.msg);
                         Actions.pop();
                     } else {
                         Alert.alert(res.msg);
