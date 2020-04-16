@@ -67,7 +67,7 @@ export default class Person extends Component {
                 <View style={{ width: '100%', height: 470, backgroundColor: '#ffffff' }}>
                     <View style={{ width: '100%', height: 80, flexDirection: 'row' }}>
                         <View style={{ width: 100, height: 100, position: "absolute", top: -50, left: 30 }}>
-                            <Image source={{uri:'http://139.155.44.190:3005/images/6.jpg'}} style={{ width: 100, height: 100, borderRadius: 50 }} />
+                            <Image source={{uri:this.state.pic}} style={{ width: 100, height: 100, borderRadius: 50 }} />
                         </View>
                         <Text style={{ position: 'absolute', left: 150, fontSize: 18, top: -3 }}>{this.state.username}</Text>
                         <Text style={{ position: 'absolute', left: 150, top: 27, fontSize: 18 }}>河北师范大学{this.state.college}</Text>
