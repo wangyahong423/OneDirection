@@ -140,12 +140,13 @@ const App = () => {
         if (res) {
           setInstall(false);
         }
-      })
+      }) 
     AsyncStorage.getItem('username')
       .then(res => {
         let user = { username: res }
         console.log('user:', user)
-        if (!user.username) {
+        if (user.username=='') {
+          setLogin(false);
           SplashScreen.hide();
         }
         if (user.username) {
@@ -210,9 +211,9 @@ const App = () => {
           <Scene key="signin" hideNavBar component={Signin} />
 
           {/* 添加评论 */}
-          <Scene title='发表状态' key="add" renderRightButton={<View style={{ marginRight: 20 }}> <Text style={{ fontSize: 19, color: '#ddd' }}>发送</Text></View>} titleStyle={{ flex: 1, textAlign: 'center', color: '#fff' }} navBarButtonColor='#fff' hideTabBar component={Add} />
+          <Scene title='发表状态' key="add" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} hideTabBar component={Add} />
           {/* 评论详情 */}
-          <Scene title='评论' key="details" renderRightButton={<View></View>} titleStyle={{ flex: 1, textAlign: 'center', color: '#fff' }} navBarButtonColor='#fff' hideTabBar component={Details} />
+          <Scene title='评论' key="details" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} hideTabBar component={Details} />
 
           {/* 一卡通 */}
           <Scene key='onecard' title='一卡通' component={Onecard} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} ></Scene>
