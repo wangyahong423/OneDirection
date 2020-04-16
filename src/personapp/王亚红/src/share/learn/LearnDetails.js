@@ -9,11 +9,22 @@ export default class LearnDetails extends Component {
         super();
         this.state = {
             page: '',
-            username: '张三',
+            username: '',
             comment: '',
             list: [],
-            pic: []
+            pic: [],
+            isLoading: true
         };
+        this.getData();
+    }
+    getData = () => {
+        AsyncStorage.getItem('username')
+            .then((res) => {
+                let name = { username: res }
+                this.setState({
+                    username: name.username
+                })
+            });
     }
     componentDidMount() {
         AsyncStorage.getItem('lPage')
@@ -21,6 +32,7 @@ export default class LearnDetails extends Component {
                 this.setState({
                     page: JSON.parse(value).page
                 });
+                this.setState({ isLoading: true })
                 let url1 = `http://139.155.44.190:3005/learntalk/list`;
                 let url2 = `http://139.155.44.190:3005/users/list`;
                 fetch(url2)
@@ -43,6 +55,7 @@ export default class LearnDetails extends Component {
                                     }
 
                                 });
+                                this.setState({ isLoading: false })
                                 this.setState({ list: arr });
                             })
                     })
@@ -79,31 +92,39 @@ export default class LearnDetails extends Component {
     }
     change = (e) => {
         this.setState({ comment: e });
-        console.log(this.state.comment);
     }
     release = () => {
-        var date = new Date();
-        var year = date.getFullYear().toString();
-        var month = (date.getMonth() + 1).toString();
-        var day = date.getDate().toString();
-        var hour = date.getHours().toString();
-        var minute = date.getMinutes().toString();
-        var time = year + '年' + month + '月' + day + '日' + ' ' + hour + ':' + minute;
-        console.log(time);
-        let url = `http://139.155.44.190:3005/learntalk/add?lid=${this.state.page.id}
+        if (this.state.comment) {
+            var date = new Date();
+            var year = date.getFullYear().toString();
+            var month = (date.getMonth() + 1).toString();
+            var day = date.getDate().toString();
+            var hour = date.getHours().toString();
+            var minute = date.getMinutes().toString();
+            var time = year + '年' + month + '月' + day + '日' + ' ' + hour + ':' + minute;
+            console.log(time);
+            let url = `http://139.155.44.190:3005/learntalk/add?lid=${this.state.page.id}
                 &name=${this.state.username}&content=${this.state.comment}&time=${time}`;
-        console.log(url);
-        fetch(url)
-            .then((res) => res.json())
-            .then((res) => {
-                if (res.ok) {
-                    Alert.alert(res.msg);
-                } else {
-                    Alert.alert(res.msg);
-                }
-            })
-        var param = { "content": this.state.comment, "name": this.state.username, "time": time };
-        DeviceEventEmitter.emit('pinglun', param);
+            console.log(url);
+            fetch(url)
+                .then((res) => res.json())
+                .then((res) => {
+                    if (res.ok) {
+
+                    } else {
+                        Alert.alert(res.msg);
+                    }
+                })
+            var param = { "content": this.state.comment, "name": this.state.username, "time": time };
+            DeviceEventEmitter.emit('pinglun', param);
+            // var num = { "id": this.state.page.id };
+            // console.log(num);
+            // DeviceEventEmitter.emit('com', num);
+        }
+        else{
+            Alert.alert("评论不能为空");
+        }
+
     }
     // backt = () => {
     //     Actions.pop;
@@ -113,11 +134,6 @@ export default class LearnDetails extends Component {
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
-                {/* <View
-                    
-                    style={{ paddingLeft: 20, color: 'white', height: '7%', alignItems: 'center', flexDirection: 'row', backgroundColor: '#37376F' }}>
-                    <Icon color='white' size={26} name='angle-left'></Icon>
-                </View> */}
                 <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 5 * s }}>
                     <View style={{
                         flexDirection: 'row',
@@ -206,7 +222,7 @@ export default class LearnDetails extends Component {
                                             borderRadius: 25 * s,
                                             backgroundColor: 'yellow'
                                         }} source={{ uri: item.pic }} />
-                                        <View style={{ marginLeft: 30 * s }}>
+                                        <View style={{ marginLeft: 30 * s,marginRight:60*s }}>
                                             <Text style={{ fontSize: 15 * s, color: '#37376F', marginTop: 5 * s }}>{item.name}</Text>
                                             <Text style={{ fontSize: 18 * s }}>{item.content}</Text>
                                             <Text style={{ fontSize: 10 * s, color: '#808080', marginTop: 5 * s, marginBottom: 5 * s }}>{item.time}</Text>
@@ -216,7 +232,17 @@ export default class LearnDetails extends Component {
                             ))
                         }
                     </View>
-
+                    {
+                        this.state.isLoading
+                            ? <View style={{
+                                alignItems: 'center',
+                                flexDirection: 'row',
+                                justifyContent: 'center'
+                            }}>
+                                <Text style={{ fontSize: 20, marginTop: 10 }}>正在获取数据...</Text>
+                            </View>
+                            : null
+                    }
                 </ScrollView>
 
             </SafeAreaView >

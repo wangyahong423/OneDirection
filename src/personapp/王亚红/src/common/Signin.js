@@ -8,44 +8,104 @@ export default class Signin extends Component {
     super();
     this.state = {
       username: '',
-      pwd: '',
-      isloading: false
+      pwd: '',//密码
+      repwd: '',//确认密码
+      tel: '',//电话号码
+      num: '',//验证码
+      isloading: false,
+      usernameNull: 0,//用户名是否为空，如果是空设置为0，弹出提示“请输入用户名”，如果不为空设置为1，不弹出提示。
+      pwdNull: 0,//密码是否为空，如果是空设置为0，弹出提示“请输入密码”，如果不为空设置为1，不弹出提示。
+      repwdNull: 0,//确认密码是否为空，如果是空设置为0，弹出提示“请再次确认密码”，如果不为空设置为1，不弹出提示。
+      telNull: 0,//手机号码格式是否正确，如果不正确设置为0，弹出提示“请正确输入手机号码的格式”，如果正确设置为1，不弹出提示。
+      numNull: 0,//验证码是否正确，如果不正确设置为0。弹出提示“验证码不正确！”，如果正确设置为1，不弹出提示。
+      timeContent: '点击获取验证码',
+      once:true,//once是true表示第一次点击，可以点击；false表示正在倒计时，不可点击
+      color:'#373700',
     }
   }
   userhandle = (text) => {
-    this.setState({ username: text })
+    if (text !== '') {
+      this.setState({ username: text, usernameNull: 0 })
+    }
+
   }
   pwdhandle = (text) => {
-    this.setState({ pwd: text })
-  }
-  login = () => {
-    // myFetch.get('/topics',{limit:4,user:'sss'})
-    //     .then(res=>console.log(res))
-    this.setState({ isloading: true })
-    myFetch.post('/signup', {
-      username: this.state.username,
-      pwd: this.state.pwd
+    if (text !== '') {
+      this.setState({ pwd: text, pwdNull: 0 })
     }
-    ).then(res => {
-      // 根据返回状态进行判断，正确时跳转首页
-      // if(res){
+  }
+  repwdhandle = (text) => {
+    if (text !== '') {
+      this.setState({ repwd: text, repwdNull: 0 })
+    }
+  }
+  telhandle = (text) => {
+    if (text !== '') {
+      this.setState({ tel: text, telNull: 0 })
+    }
+  }
+  numhandle = (text) => {
+    if (text !== '') {
+      this.setState({ num: text, numNull: 0 })
+    }
+  }
 
-      // }
-      AsyncStorage.setItem('user2', JSON.stringify(res.data))
-        .then(() => {
-          this.setState({ isloading: false })
-          Actions.login();
+  // 获取验证码
+  getNum = () => {
+    var id = 6
+    setInterval(() => {
+      if (id >= 0) {
+        this.setState({
+          once:false,
+          timeContent: id + ' 秒之后重试'
         })
-    })
+        id--;
+      }else{
+        this.setState({
+          once:true,
+          timeContent:'点击获取验证码'
+
+        })
+      }
+      
+    }, 1000)
+  }
+
+  register = () => {
+    if (this.state.username == '') {
+      this.setState({
+        usernameNull: 1
+      })
+    }
+    else if (this.state.pwd == '') {
+      this.setState({
+        pwdNull: 1
+      })
+    }
+    else if (this.state.repwd == '') {
+      this.setState({
+        repwdNull: 1
+      })
+    }
+    else if (this.state.tel == '') {
+      this.setState({
+        telNull: 1
+      })
+    }
+    else if (this.state.num == '') {
+      this.setState({
+        numNull: 1
+      })
+    }
   }
 
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center',backgroundColor:'#ffffff'}}>
+      <View style={{ flex: 1, justifyContent: 'center', backgroundColor: '#ffffff' }}>
         <View
-          style={{ alignItems: 'center',marginTop:-80}}>
-          <View style={{flexDirection:'row'}}>
-            <Icon name="user" color="red" size={30}/>
+          style={{ alignItems: 'center', marginTop: -80 }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Icon name="user" color="red" size={30} />
             <View
               style={{
                 width: '70%',
@@ -55,19 +115,18 @@ export default class Signin extends Component {
                 flexDirection: 'row',
                 alignItems: 'center',
                 paddingLeft: 20,
-                borderRadius:20,
-                marginLeft:20
+                borderRadius: 20,
+                marginLeft: 20
               }}>
 
               <TextInput
-                onChangeText={this.pwdhandle}
-                placeholder="请输入昵称"
-                secureTextEntry={true}
+                onChangeText={this.userhandle}
+                placeholder="请输入用户名"
               />
             </View>
           </View>
-          <View style={{flexDirection:'row',marginTop:20}}>
-            <Icon name="mobile" color="red" size={40}/>
+          <View style={{ flexDirection: 'row', marginTop: 25, alignItems: 'center' }}>
+            <Icon name="key" color="red" size={30} style={{ marginLeft: -4 }} />
             <View
               style={{
                 width: '70%',
@@ -77,52 +136,8 @@ export default class Signin extends Component {
                 flexDirection: 'row',
                 alignItems: 'center',
                 paddingLeft: 20,
-                borderRadius:20,
-                marginLeft:20
-              }}>
-
-              <TextInput
-                onChangeText={this.pwdhandle}
-                placeholder="请输入手机号码"
-                secureTextEntry={true}
-              />
-            </View>
-          </View>
-          <View style={{flexDirection:'row',marginTop:20}}>
-            <Icon name="stack-exchange" color="red" size={30}/>
-            <View
-              style={{
-                width: '70%',
-                marginRight: 10,
-                borderBottomColor: '#e8e8e8', borderLeftColor: '#e8e8e8',
-                borderTopColor: '#e8e8e8', borderRightColor: '#e8e8e8', borderWidth: 1,
-                flexDirection: 'row',
-                alignItems: 'center',
-                paddingLeft: 20,
-                borderRadius:20,
-                marginLeft:20
-              }}>
-
-              <TextInput
-                onChangeText={this.pwdhandle}
-                placeholder="请输入验证码"
-                secureTextEntry={true}
-              />
-            </View>
-          </View>
-          <View style={{flexDirection:'row',marginTop:20}}>
-            <Icon name="key" color="red" size={30}/>
-            <View
-              style={{
-                width: '70%',
-                marginRight: 10,
-                borderBottomColor: '#e8e8e8', borderLeftColor: '#e8e8e8',
-                borderTopColor: '#e8e8e8', borderRightColor: '#e8e8e8', borderWidth: 1,
-                flexDirection: 'row',
-                alignItems: 'center',
-                paddingLeft: 20,
-                borderRadius:20,
-                marginLeft:20
+                borderRadius: 20,
+                marginLeft: 20
               }}>
 
               <TextInput
@@ -132,8 +147,8 @@ export default class Signin extends Component {
               />
             </View>
           </View>
-          <View style={{flexDirection:'row',marginTop:20}}>
-            <Icon name="key" color="red" size={30}/>
+          <View style={{ flexDirection: 'row', marginTop: 25, alignItems: 'center' }}>
+            <Icon name="key" color="red" size={30} style={{ marginLeft: -4 }} />
             <View
               style={{
                 width: '70%',
@@ -143,17 +158,65 @@ export default class Signin extends Component {
                 flexDirection: 'row',
                 alignItems: 'center',
                 paddingLeft: 20,
-                borderRadius:20,
-                marginLeft:20
+                borderRadius: 20,
+                marginLeft: 20
               }}>
 
               <TextInput
-                onChangeText={this.pwdhandle}
+                onChangeText={this.repwdhandle}
                 placeholder="请确认密码"
                 secureTextEntry={true}
               />
             </View>
           </View>
+          <View style={{ flexDirection: 'row', marginTop: 25, alignItems: 'center' }}>
+            <Icon name="mobile" color="red" size={44} />
+            <View
+              style={{
+                width: '40%',
+                marginRight: 10,
+                borderBottomColor: '#e8e8e8', borderLeftColor: '#e8e8e8',
+                borderTopColor: '#e8e8e8', borderRightColor: '#e8e8e8', borderWidth: 1,
+                flexDirection: 'row',
+                alignItems: 'center',
+                paddingLeft: 20,
+                borderRadius: 20,
+                marginLeft: 24
+              }}>
+
+              <TextInput
+                onChangeText={this.telhandle}
+                placeholder="请输入手机号码"
+              />
+            </View>
+            {
+              this.state.once
+              ?<TouchableOpacity  onPress={this.getNum} style={{width: '30%',borderBottomColor: '#e8e8e8', borderLeftColor: '#e8e8e8',borderTopColor: '#e8e8e8', borderRightColor: '#e8e8e8', borderWidth: 1,alignItems: 'center',borderRadius: 20,backgroundColor: '#37376F'}}><Text style={{ lineHeight: 50, color: 'white', fontSize: 13 }}>{this.state.timeContent}</Text></TouchableOpacity>
+              :<View  style={{width: '30%',borderBottomColor: '#e8e8e8', borderLeftColor: '#e8e8e8',borderTopColor: '#e8e8e8', borderRightColor: '#e8e8e8', borderWidth: 1,alignItems: 'center',borderRadius: 20,backgroundColor: '#37376F'}}><Text style={{ lineHeight: 50, color: 'white', fontSize: 13 }}>{this.state.timeContent}</Text></View>
+            }
+          </View>
+          <View style={{ flexDirection: 'row', marginTop: 25, alignItems: 'center' }}>
+            <Icon name="stack-exchange" color="red" size={30} />
+            <View
+              style={{
+                width: '70%',
+                marginRight: 10,
+                borderBottomColor: '#e8e8e8', borderLeftColor: '#e8e8e8',
+                borderTopColor: '#e8e8e8', borderRightColor: '#e8e8e8', borderWidth: 1,
+                flexDirection: 'row',
+                alignItems: 'center',
+                paddingLeft: 20,
+                borderRadius: 20,
+                marginLeft: 20
+              }}>
+
+              <TextInput
+                onChangeText={this.numhandle}
+                placeholder="请输入验证码"
+              />
+            </View>
+          </View>
+
 
           <TouchableOpacity
             style={{
@@ -164,8 +227,9 @@ export default class Signin extends Component {
               alignItems: 'center',
               justifyContent: 'center',
             }}
-            onPress={this.login}>
-            <Text style={{color:'#ffffff'}}>注册</Text>
+            onPress={this.register}
+          >
+            <Text style={{ color: '#ffffff' }}>注册</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{
@@ -177,8 +241,33 @@ export default class Signin extends Component {
               justifyContent: 'center',
             }}
             onPress={() => Actions.login()}>
-            <Text style={{color:'#ffffff'}}>返回登录</Text>
+            <Text style={{ color: '#ffffff' }}>返回登录</Text>
           </TouchableOpacity>
+          {
+            this.state.usernameNull == 0
+              ? <View style={{ position: 'absolute', top: 42 }}><Text></Text></View>
+              : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 43, left: 110 }}><Text style={{ color: 'red', fontSize: 13 }}>请输入用户名！</Text></View>
+          }
+          {
+            this.state.pwdNull == 0
+              ? <View style={{ position: 'absolute', top: 119 }}><Text></Text></View>
+              : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 119, left: 110 }}><Text style={{ color: 'red', fontSize: 13 }}>请输入密码！</Text></View>
+          }
+          {
+            this.state.repwdNull == 0
+              ? <View style={{ position: 'absolute', top: 195 }}><Text></Text></View>
+              : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 195, left: 110 }}><Text style={{ color: 'red', fontSize: 13 }}>请再次确认密码！</Text></View>
+          }
+          {
+            this.state.telNull == 0
+              ? <View style={{ position: 'absolute', top: 270 }}><Text></Text></View>
+              : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 270, left: 110 }}><Text style={{ color: 'red', fontSize: 13 }}>请输入手机号码！</Text></View>
+          }
+          {
+            this.state.numNull == 0
+              ? <View style={{ position: 'absolute', top: 345 }}><Text></Text></View>
+              : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 345, left: 110 }}><Text style={{ color: 'red', fontSize: 13 }}>请输入验证码！</Text></View>
+          }
         </View>
         {
           this.state.isloading
