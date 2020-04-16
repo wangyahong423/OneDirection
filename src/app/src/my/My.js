@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { View, Text, Image, StyleSheet, AsyncStorage, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, AsyncStorage, ScrollView, TouchableOpacity,DeviceEventEmitter } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 export default class Person extends Component {
     constructor() {
         super();
-        this.state={
-            username:''
+        this.state = {
+            username: ''
         }
     }
     componentDidMount() {
@@ -16,9 +16,18 @@ export default class Person extends Component {
                 this.setState({
                     username: name.username
                 })
-                console.log("用户名：", this.state.username)
             });
     }
+    componentDidUpdate(){
+        AsyncStorage.getItem('username')
+            .then((res) => {
+                let name = { username: res }
+                this.setState({
+                    username: name.username
+                })
+            });
+    }
+
     render() {
         return (
             <ScrollView>

@@ -10,7 +10,7 @@ export default class Learn extends Component {
         this.state = {
             list: [],
             pic: [],
-            like: [],
+            like: [], 
             search: '',
             likeNum: [],
             comNum: [],
