@@ -136,7 +136,6 @@ const App = () => {
   let init = () => {
     AsyncStorage.getItem('isInstall')
       .then(res => {
-        console.log('isinstall', res)
         if (res) {
           setInstall(false);
         }
@@ -144,7 +143,6 @@ const App = () => {
     AsyncStorage.getItem('username')
       .then(res => {
         let user = { username: res }
-        console.log('user:', user)
         if (user.username=='') {
           setLogin(false);
           SplashScreen.hide();
@@ -159,7 +157,6 @@ const App = () => {
     init();
   }, [])
   let afterInstall = () => {
-    console.log('after install')
     setInstall(false)
   }
   if (isInstall) {

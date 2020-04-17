@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Image, StyleSheet, AsyncStorage, ScrollView } from 'react-native';
-import { Actions } from 'react-native-router-flux';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { View, Text,ScrollView } from 'react-native';
 export default class Guanyu extends Component {
     render() {
         return (

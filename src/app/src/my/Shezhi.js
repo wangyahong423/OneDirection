@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import { View, Text, Image, StyleSheet, AsyncStorage, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
+import { View, Text, AsyncStorage, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 export default class Shezhi extends Component {
     outlogin = () => {
-        AsyncStorage.setItem('username','');
-        AsyncStorage.setItem('password','');
-        Actions.login(); 
-    } 
+        AsyncStorage.setItem('username', '');
+        AsyncStorage.setItem('password', '');
+        Actions.login();
+    }
     render() {
         return (
             <ScrollView>

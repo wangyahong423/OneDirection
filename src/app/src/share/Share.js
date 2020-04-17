@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Text, View, ScrollView, Dimensions, ImageBackground, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Actions } from 'react-native-router-flux';
-import Button from 'react-native-button';
 
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
@@ -19,7 +18,7 @@ export default class Share extends Component {
                 }}>
                     <Text style={{ color: '#fff', lineHeight: 30 * s, }}>共享</Text>
                 </View>
-                <ScrollView>
+                {/* <ScrollView> */}
                     <ImageBackground style={{ flex: 1, width: '100%', height: height }} source={require('../../assets/share/3.jpg')}>
                         <View>
                             <View style={{ alignItems: 'center' }}>
@@ -54,7 +53,7 @@ export default class Share extends Component {
                             </View>
                         </View>
                     </ImageBackground >
-                </ScrollView>
+                {/* </ScrollView> */}
             </View>
         )
     }

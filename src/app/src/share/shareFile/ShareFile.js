@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, TextInput, Dimensions, SafeAreaView } from 'react-native';
+import {  View, ScrollView, TextInput, Dimensions, SafeAreaView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 const s = width / 460;
 export default class ShareFile extends Component {
     search=(e)=>{
-        console.log(e);
     }
     render() {
         return (

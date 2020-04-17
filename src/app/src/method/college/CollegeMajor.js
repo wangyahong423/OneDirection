@@ -22,7 +22,6 @@ export default class CollegeMajor extends Component {
                 this.setState({
                     username: name.username
                 });
-                console.log(this.state.username);
                 let url1 = `http://139.155.44.190:3005/users/list`;
                 let url2 = `http://139.155.44.190:3005/major/list`;
                 fetch(url1)

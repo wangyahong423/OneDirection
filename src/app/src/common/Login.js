@@ -38,7 +38,6 @@ export default class Login extends Component {
             })
             AsyncStorage.setItem('username', this.state.username);
             AsyncStorage.setItem('password', this.state.pwd);
-            console.log('登录时：',this.state.username)
             this.setState({
               isnull: true,
             })

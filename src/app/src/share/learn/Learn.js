@@ -10,7 +10,7 @@ export default class Learn extends Component {
         this.state = {
             list: [],
             pic: [],
-            like: [], 
+            like: [],
             search: '',
             likeNum: [],
             comNum: [],
@@ -63,7 +63,8 @@ export default class Learn extends Component {
                                                     break;
                                                 }
                                             }
-                                            for (var j = 0; j < this.state.like.length; j++) {
+                                            item.like = false;
+                                            for (var j = 0; j < this.state.like.length; j++) {   
                                                 if (item.id == this.state.like[j].lid) {
                                                     item.like = true;
                                                     break;
@@ -129,6 +130,7 @@ export default class Learn extends Component {
                                                         break;
                                                     }
                                                 }
+                                                item.like = false;
                                                 for (var j = 0; j < self.state.like.length; j++) {
                                                     if (item.id == self.state.like[j].lid) {
                                                         item.like = true;
@@ -184,12 +186,10 @@ export default class Learn extends Component {
             this.setState({
                 list: crr
             })
-            console.log(2);
             let url1 = `http://139.155.44.190:3005/learnlike/add?lid=${this.state.list[idx].id}&name=${this.state.username}`;
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url1);
                 });
         }
         else if (this.state.list[idx].like == true) {
@@ -203,7 +203,6 @@ export default class Learn extends Component {
             fetch(url2)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url2);
                 });
         }
     }

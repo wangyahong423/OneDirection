@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
-import { View, Text, Image, StyleSheet, AsyncStorage, ScrollView, TouchableOpacity,DeviceEventEmitter } from 'react-native';
+import { View, Text, Image, StyleSheet, AsyncStorage, ScrollView, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import axios from 'axios';
 export default class Person extends Component {
     constructor() {
         super();
         this.state = {
-            username: ''
+            username: '',
+            data: [],
+            todo: [],
         }
     }
     componentDidMount() {
@@ -17,8 +20,42 @@ export default class Person extends Component {
                     username: name.username
                 })
             });
+        let url = `http://139.155.44.190:3005/users/list`;
+        axios(url)
+            .then((res) => {
+                if (res.err) {
+                } else {
+                    this.setState({
+                        data: res.data
+                    })
+                    let arr = [];
+                    this.state.data.map((item) => {
+                        if (item.name === this.state.n1) {
+                            arr.push(item)
+                        }
+                        this.setState({
+                            data: arr
+                        })
+                    })
+                }
+            })
+        let url2 = `http://139.155.44.190:3005/users/list`;
+        axios(url2)
+            .then((res) => {
+                this.setState({
+                    todo: res.data
+                })
+                this.state.todo.map((item) => {
+                    if (item.name == this.state.username) {
+                        this.setState({
+                            college: item.college,
+                            pic: "http://139.155.44.190:3005" + item.pic
+                        })
+                    }
+                })
+            })
     }
-    componentDidUpdate(){
+    componentDidUpdate() {
         AsyncStorage.getItem('username')
             .then((res) => {
                 let name = { username: res }
@@ -26,6 +63,40 @@ export default class Person extends Component {
                     username: name.username
                 })
             });
+        let url = `http://139.155.44.190:3005/users/list`;
+        axios(url)
+            .then((res) => {
+                if (res.err) {
+                } else {
+                    this.setState({
+                        data: res.data
+                    })
+                    let arr = [];
+                    this.state.data.map((item) => {
+                        if (item.name === this.state.n1) {
+                            arr.push(item)
+                        }
+                        this.setState({
+                            data: arr
+                        })
+                    })
+                }
+            })
+        let url2 = `http://139.155.44.190:3005/users/list`;
+        axios(url2)
+            .then((res) => {
+                this.setState({
+                    todo: res.data
+                })
+                this.state.todo.map((item) => {
+                    if (item.name == this.state.username) {
+                        this.setState({
+                            college: item.college,
+                            pic: "http://139.155.44.190:3005" + item.pic
+                        })
+                    }
+                })
+            })
     }
 
     render() {
@@ -37,10 +108,10 @@ export default class Person extends Component {
                 <View style={{ width: '100%', height: 470, backgroundColor: '#ffffff' }}>
                     <View style={{ width: '100%', height: 80, flexDirection: 'row' }}>
                         <View style={{ width: 100, height: 100, position: "absolute", top: -50, left: 30 }}>
-                            <Image source={require('../../assets/touxiang.png')} style={{ width: 100, height: 100, borderRadius: 50 }} />
+                            <Image source={{uri:this.state.pic}} style={{ width: 100, height: 100, borderRadius: 50 }} />
                         </View>
                         <Text style={{ position: 'absolute', left: 150, fontSize: 18, top: -3 }}>{this.state.username}</Text>
-                        <Text style={{ position: 'absolute', left: 150, top: 27, fontSize: 18 }}>河北师范大学软件学院</Text>
+                        <Text style={{ position: 'absolute', left: 150, top: 27, fontSize: 18 }}>河北师范大学{this.state.college}</Text>
                     </View>
 
                     <View style={{

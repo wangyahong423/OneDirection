@@ -114,7 +114,6 @@ export default class community extends Component {
                                 .then((res) => res.json())
                                 .then((res) => {
                                     self.setState({ comNum: res.communtiytalk });
-                                    console.log("数字", self.state.comNum)
                                     fetch(url1)
                                         .then((res) => res.json())
                                         .then((res) => {
@@ -173,12 +172,10 @@ export default class community extends Component {
             this.setState({
                 list: crr
             })
-            console.log("输出list",list);
             let url1 = `http://139.155.44.190:3005/communitylike/add?cid=${this.state.list[idx].id}&name=${this.state.username}`;
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url1);
                 });
         }
         else if (this.state.list[idx].like == true) {
@@ -192,7 +189,6 @@ export default class community extends Component {
             fetch(url2)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url2);
                 });
         }
     }
