@@ -65,6 +65,7 @@ export default class community extends Component {
                                                     break;
                                                 }
                                             }
+                                            item.like=false;
                                             for (var j = 0; j < this.state.like.length; j++) {
                                                 if (item.id == this.state.like[j].cid) {
                                                     item.like = true;
@@ -126,6 +127,7 @@ export default class community extends Component {
                                                         break;
                                                     }
                                                 }
+                                                item.like=false;
                                                 for (var j = 0; j < self.state.like.length; j++) {
                                                     if (item.id == self.state.like[j].cid) {
                                                         item.like = true;
