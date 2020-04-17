@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { StyleSheet, View, Text, Image, BackHandler, ToastAndroid, AsyncStorage } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 // 登录
-import Login from './src/common/Login'
+import Login from './src/common/Login';
 import SwiperPage from './src/common/SwiperPage';
 import Signin from './src/common/Signin';
 
@@ -31,6 +31,9 @@ import Tijiao from './src/my/Tijiao';
 import Shezhi from './src/my/Shezhi';
 import Mima from './src/my/Mima';
 import File from './src/my/File';
+import Shequdongtai from './src/my/Shequdongtai'
+import Xuexidongtai from './src/my/Xuexidongtai'
+
 
 // 攻略
 import Method from './src/method/Method';
@@ -321,6 +324,9 @@ const App = () => {
           <Scene key="shezhi" component={Shezhi} renderTitle="设置" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }}  />
           <Scene key="mima"  component={Mima} renderTitle="重置密码" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }}  />
           <Scene key="file"  component={File} renderTitle="我的文件" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }}  />
+          <Scene key="xuexidongtai"  component={Xuexidongtai} renderTitle="学习动态" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }}  />
+          <Scene key="shequdongtai"  component={Shequdongtai} renderTitle="学习动态" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }}  />
+
         </Scene>
       </Router>
     </>
