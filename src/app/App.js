@@ -7,6 +7,8 @@ import SplashScreen from 'react-native-splash-screen';
 import Login from './src/common/Login';
 import SwiperPage from './src/common/SwiperPage';
 import Signin from './src/common/Signin';
+import Choosecollege from './src/common/Choosecollege';
+import Forget from './src/common/Forget';
 
 // 社区
 import Community from './src/community/Community';
@@ -211,6 +213,8 @@ const App = () => {
           {/* 登录 */}
           <Scene initial={!isLogin} hideNavBar key="login" component={Login} />
           <Scene key="signin" hideNavBar component={Signin} />
+          <Scene key="choosecollege" hideNavBar component={Choosecollege} title='选择学院' renderRightButton={<View style={{ marginRight: 20 }}><Text style={{ fontSize: 19, color: '#ddd' }}>发送</Text></View>} titleStyle={{ flex: 1, textAlign: 'center', color: '#fff' }} navBarButtonColor='#fff' />
+          <Scene key="forget" component={Forget} title='忘记密码'  backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
 
           {/* 社区 */}
           <Scene title='发表状态' key="add" renderRightButton={<View style={{ marginRight: 20 }}><Text style={{ fontSize: 19, color: '#ddd' }}>发送</Text></View>} titleStyle={{ flex: 1, textAlign: 'center', color: '#fff' }} navBarButtonColor='#fff' hideTabBar component={Add} />

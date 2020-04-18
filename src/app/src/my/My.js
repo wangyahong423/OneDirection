@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Image, StyleSheet, AsyncStorage, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, AsyncStorage, ScrollView, TouchableOpacity, DeviceEventEmitter } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 export default class Person extends Component {
@@ -55,7 +55,47 @@ export default class Person extends Component {
                     }
                 })
             })
+        var self = this;
+        this.listener = DeviceEventEmitter.addListener('refresh', function (param) {
+            let url = `http://139.155.44.190:3005/users/list`;
+            fetch(url)
+                .then(res => res.json())
+                .then((res) => {
+                    if (res.err) {
+                    } else {
+                        self.setState({
+                            data: res
+                        })
+                        let arr = [];
+                        self.state.data.map((item) => {
+                            if (item.name === self.state.username) {
+                                arr.push(item)
+                            }
+                            self.setState({
+                                data: arr
+                            })
+                        })
+                    }
+                })
+            let url2 = `http://139.155.44.190:3005/users/list`;
+            fetch(url2)
+                .then(res => res.json())
+                .then((res) => {
+                    self.setState({
+                        todo: res
+                    })
+                    self.state.todo.map((item) => {
+                        if (item.name == self.state.username) {
+                            self.setState({
+                                college: item.college,
+                                pic: "http://139.155.44.190:3005" + item.pic
+                            })
+                        }
+                    })
+                })
+        })
     }
+
     componentDidUpdate() {
         AsyncStorage.getItem('username')
             .then((res) => {
@@ -64,42 +104,6 @@ export default class Person extends Component {
                     username: name.username
                 })
             });
-        // let url = `http://139.155.44.190:3005/users/list`;
-        // fetch(url)
-        //     .then(res => res.json())
-        //     .then((res) => {
-        //         if (res.err) {
-        //         } else {
-        //             this.setState({
-        //                 data: res.data
-        //             })
-        //             let arr = [];
-        //             this.state.data.map((item) => {
-        //                 if (item.name === this.state.n1) {
-        //                     arr.push(item)
-        //                 }
-        //                 this.setState({
-        //                     data: arr
-        //                 })
-        //             })
-        //         }
-        //     })
-        // let url2 = `http://139.155.44.190:3005/users/list`;
-        // fetch(url2)
-        //     .then(res => res.json())
-        //     .then((res) => {
-        //         this.setState({
-        //             todo: res.data
-        //         })
-        //         this.state.todo.map((item) => {
-        //             if (item.name == this.state.username) {
-        //                 this.setState({
-        //                     college: item.college,
-        //                     pic: "http://139.155.44.190:3005" + item.pic
-        //                 })
-        //             }
-        //         })
-        //     })
     }
 
     outlogin = () => {
@@ -191,8 +195,8 @@ export default class Person extends Component {
                     </View>
 
                 </View>
-                <TouchableOpacity onPress={this.outlogin} style={{ height: '5%', width: '25%',marginLeft:'37.5%', marginTop: '2%', marginBottom: '3%',backgroundColor: 'red', borderRadius: 20, alignItems: 'center', justifyContent: 'center' }}>
-                    <Text style={{color:'white',marginTop:10}}>退出登录</Text>
+                <TouchableOpacity onPress={this.outlogin} style={{ height: '5%', width: '25%', marginLeft: '37.5%', marginTop: '2%', marginBottom: '3%', backgroundColor: 'red', borderRadius: 20, alignItems: 'center', justifyContent: 'center' }}>
+                    <Text style={{ color: 'white', marginTop: 10 }}>退出登录</Text>
                 </TouchableOpacity>
             </ScrollView>
         )

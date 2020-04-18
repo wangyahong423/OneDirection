@@ -1,8 +1,5 @@
-/**
- * 获取验证码
- */
 import React, { Component } from 'react';
-import { StyleSheet, Text, TextInput, View, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, AsyncStorage, DeviceEventEmitter, TextInput, View, TouchableOpacity, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Touchable from 'react-native-touchable';
 import { Actions } from 'react-native-router-flux';
@@ -32,7 +29,7 @@ export default class VerifyCode extends Component {
             repwd: '',//确认密码
             tel: '',//电话号码
             num: '',//验证码
-            college: '',
+            college: '你选择的学院为：',
             isloading: false,
             usernameNull: 0,//用户名是否为空，如果是空设置为0，弹出提示“请输入用户名”，如果不为空设置为1，不弹出提示。
             pwdNull: 0,//密码是否为空，如果是空设置为0，弹出提示“请输入密码”，如果不为空设置为1，不弹出提示。
@@ -69,13 +66,11 @@ export default class VerifyCode extends Component {
         }
     }
     numhandle = (text) => {
+        console.log(text,this.state.num)
+
         if (text !== '') {
+            console.log(text,this.state.num)
             this.setState({ num: text, numNull: 0 })
-        }
-    }
-    collegehandle = (text) => {
-        if (text !== '') {
-            this.setState({ college: text, collegeNull: 0 })
         }
     }
 
@@ -218,6 +213,7 @@ export default class VerifyCode extends Component {
                     data => {
                         if (data.ok == 1) {
                             Alert.alert('注册成功');
+                            AsyncStorage.setItem('college', '你选择的学院为：');
                             Actions.login();
                         }
                         else if (data.ok == 0) {
@@ -226,6 +222,33 @@ export default class VerifyCode extends Component {
                     }
                 )
         }
+    }
+
+    componentDidMount = () => {
+        this.setState({
+            college: '你选择的学院'
+        })
+        AsyncStorage.getItem('college')
+            .then((v) => {
+                this.setState({
+                    college: v
+                })
+            })
+        var self = this;
+        this.listener = DeviceEventEmitter.addListener('refresh', function (param) {
+            self.setState({
+                college: '你选择的学院'
+            })
+            AsyncStorage.getItem('college')
+                .then((v) => {
+                    self.setState({
+                        college: v
+                    })
+                })
+        })
+    }
+    componentWillUnmount() {
+        this.listener.remove();
     }
 
     render() {
@@ -250,9 +273,26 @@ export default class VerifyCode extends Component {
                     <TextInput onChangeText={this.repwdhandle} secureTextEntry={true} placeholder="请再次确认密码" style={{ paddingLeft: 15, height: 40, width: '70%', borderRadius: 10, backgroundColor: 'white' }} />
                 </View>
                 <View style={{ flexDirection: 'row', marginTop: 25, alignItems: 'center' }}>
-                    <Icon name="user" color="red" size={30} style={{ marginRight: 20 }} />
-                    <TextInput placeholder="请输入学院" onChangeText={this.collegehandle} style={{ paddingLeft: 15, height: 40, width: '70%', borderRadius: 10, backgroundColor: 'white' }} />
+                    <Icon name="mortar-board" color="red" size={30}  />
+                    <View
+                        style={{
+                            width: '40%',
+                            marginRight: 10,
+                            borderBottomColor: '#e8e8e8', borderLeftColor: '#e8e8e8',
+                            borderTopColor: '#e8e8e8', borderRightColor: '#e8e8e8', borderWidth: 1,
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            paddingLeft: 15,
+                            borderRadius: 10,
+                            marginLeft: 13,
+                            backgroundColor:'white',
+                            height:42
+                        }}>
+                        <Text>{this.state.college}</Text>
+                    </View>
+                    <TouchableOpacity onPress={()=>{Actions.choosecollege()}} style={{ width: '30%', borderBottomColor: '#e8e8e8', borderLeftColor: '#e8e8e8', borderTopColor: '#e8e8e8', borderRightColor: '#e8e8e8', borderWidth: 1, alignItems: 'center', borderRadius: 10, backgroundColor: '#37376F' }}><Text style={{ lineHeight: 42, color: 'white', fontSize: 13 }}>选择学院</Text></TouchableOpacity>
                 </View>
+
                 <View style={{ flexDirection: 'row', marginTop: 25, alignItems: 'center' }}>
                     <Icon name="mobile" color="red" size={34} style={{ marginRight: 24 }} />
                     <TextInput onChangeText={this.telhandle} placeholder="请输入手机号码" style={{ paddingLeft: 15, height: 40, width: '70%', borderRadius: 10, backgroundColor: 'white' }} />
@@ -263,7 +303,7 @@ export default class VerifyCode extends Component {
                         underlineColorAndroid='transparent'
                         {...props}
                         placeholder='请输入验证码'
-                        onChangeText={() => { this.numhandle }}
+                        onChangeText={this.numhandle}
                     />
                     <Touchable style={[props.touchableStyle, { width: '30%' }]} onPress={this.startCountdown}>
                         <Text style={props.touchableTextStyle}>{this.state.countdownTxt}</Text>
@@ -318,12 +358,12 @@ export default class VerifyCode extends Component {
                 {
                     this.state.telNull == 0
                         ? <View style={{ position: 'absolute', top: 270 }}><Text></Text></View>
-                        : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 317, left: 97 }}><Text style={{ color: 'red', fontSize: 13 }}>请输入正确手机号码！</Text></View>
+                        : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 328, left: 97 }}><Text style={{ color: 'red', fontSize: 13 }}>请输入正确手机号码！</Text></View>
                 }
                 {
                     this.state.numNull == 0
                         ? <View style={{ position: 'absolute', top: 345 }}><Text></Text></View>
-                        : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 382, left: 97 }}><Text style={{ color: 'red', fontSize: 13 }}>请输入验证码！</Text></View>
+                        : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 392, left: 97 }}><Text style={{ color: 'red', fontSize: 13 }}>请输入验证码！</Text></View>
                 }
             </View>
         );

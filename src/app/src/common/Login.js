@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TextInput, AsyncStorage, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TextInput, AsyncStorage, TouchableOpacity, DeviceEventEmitter } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 export default class Login extends Component {
   constructor() {
@@ -12,7 +12,9 @@ export default class Login extends Component {
       isloading: false,//true显示正在登陆中，false不显示
       unum: 0, //0：不为空；1：为空
       pnum: 0,
-      isnull: true,//true没有提示，false显示提示“该用户不存在”
+      isnull: true,//true没有提示，false显示提示“该用户不存在”,
+      college: '',
+      pic: ''
     }
   }
   userhandle = (text) => {
@@ -39,10 +41,35 @@ export default class Login extends Component {
             })
             AsyncStorage.setItem('username', this.state.username);
             AsyncStorage.setItem('password', this.state.pwd);
-            
+
             this.setState({
               isnull: true,
             })
+            let url = `http://139.155.44.190:3005/users/list`;
+            fetch(url)
+              .then(res => res.json())
+              .then((res) => {
+                if (res.err) {
+                } else {
+                  this.setState({
+                    data: res
+                  })
+                  let arr = [];
+                  res.map((item) => {
+                    if (item.name === this.state.username) {
+                      arr.push(item)
+                    }
+                  })
+                  this.setState({
+                    college: arr[0].college,
+                    pic: "http://139.155.44.190:3005" + arr[0].pic
+                  })
+                  AsyncStorage.setItem('college1', arr[0].college)
+                  AsyncStorage.setItem('pic', "http://139.155.44.190:3005" + arr[0].pic)
+                }
+              })
+            var param = { "college": this.state.college, "pic": this.state.pic }
+            DeviceEventEmitter.emit('refresh', param)
             Actions.methodPage();//登录成功跳转首页
           }
           else {
@@ -121,7 +148,7 @@ export default class Login extends Component {
             <Text style={{ color: '#ffffff' }}>登录</Text>
           </TouchableOpacity>
           <View style={{ flexDirection: 'row', marginTop: 50 }}>
-            <Text style={{ fontSize: 18, color: 'blue' }}>忘记密码</Text>
+            <Text style={{ fontSize: 18, color: 'blue' }} onPress={()=>{Actions.forget()}}>忘记密码</Text>
             <Text style={{ fontSize: 18, marginLeft: 150, color: 'blue' }} onPress={() => Actions.signin()}>没有账号？  去注册</Text>
 
           </View>
