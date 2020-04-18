@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TextInput, AsyncStorage, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { myFetch } from '../utils'
 export default class Login extends Component {
   constructor() {
     super();
     this.state = {
       username: '',
       pwd: '',
+      data: [],
+      todo: [],
       isloading: false,//true显示正在登陆中，false不显示
       unum: 0, //0：不为空；1：为空
       pnum: 0,
@@ -38,7 +39,7 @@ export default class Login extends Component {
             })
             AsyncStorage.setItem('username', this.state.username);
             AsyncStorage.setItem('password', this.state.pwd);
-            console.log('登录时：',this.state.username)
+            
             this.setState({
               isnull: true,
             })

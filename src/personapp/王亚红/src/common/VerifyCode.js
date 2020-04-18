@@ -1,0 +1,353 @@
+/**
+ * 获取验证码
+ */
+import React, { Component, PropTypes } from 'react';
+import { StyleSheet, Text, TextInput, View, TouchableOpacity,Alert } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Touchable from 'react-native-touchable';
+import { Actions } from 'react-native-router-flux';
+
+
+const Status = {
+    Normal: 1,  //正常状态
+    Start: 2,    //倒计时开始状态
+    End: 3,//倒计时结束
+}
+
+export default class VerifyCode extends Component {
+    static defaultProps = {
+        maxTime: 60,
+        normalTxt: '发送验证码',
+        endTxt: '重新发送',
+        countdownTxt: '秒后重新发送',
+        auto: false,
+    }
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            countdownTxt: props.normalTxt,
+            username: '',
+            pwd: '',//密码
+            repwd: '',//确认密码
+            tel: '',//电话号码
+            num: '',//验证码
+            college: '',
+            isloading: false,
+            usernameNull: 0,//用户名是否为空，如果是空设置为0，弹出提示“请输入用户名”，如果不为空设置为1，不弹出提示。
+            pwdNull: 0,//密码是否为空，如果是空设置为0，弹出提示“请输入密码”，如果不为空设置为1，不弹出提示。
+            repwdNull: 0,//确认密码是否为空，如果是空设置为0，弹出提示“请再次确认密码”，如果不为空设置为1，不弹出提示。
+            telNull: 0,//手机号码格式是否正确，如果不正确设置为0，弹出提示“请正确输入手机号码的格式”，如果正确设置为1，不弹出提示。
+            numNull: 0,//验证码是否正确，如果不正确设置为0。弹出提示“验证码不正确！”，如果正确设置为1，不弹出提示。
+            collegeNull: 0,
+            timeContent: '请输入验证码',
+            once: true,//once是true表示第一次点击，可以点击；false表示正在倒计时，不可点击
+            returnNum: '验证码：',
+        };
+    }
+
+    userhandle = (text) => {
+        if (text !== '') {
+            this.setState({ username: text, usernameNull: 0 })
+        }
+
+    }
+    pwdhandle = (text) => {
+        if (text !== '') {
+            this.setState({ pwd: text, pwdNull: 0 })
+        }
+    }
+    repwdhandle = (text) => {
+        if (text !== '') {
+            this.setState({ repwd: text, repwdNull: 0 })
+        }
+    }
+    telhandle = (text) => {
+        if (text !== '') {
+            var t = text.split('');
+            if (t.length == 11 && t[1] == 3 | 4 | 5 | 6 | 7 | 8 | 9 && t[0] == 1) {
+                this.setState({ tel: text, telNull: 0 })
+            }
+        }
+    }
+    numhandle = (text) => {
+        if (text !== '') {
+            this.setState({ num: text, numNull: 0 })
+        }
+    }
+    collegehandle = (text) => {
+        if (text !== '') {
+            this.setState({ college: text, collegeNull: 0 })
+        }
+    }
+
+    componentDidMount() {
+        if (this.props.auto) {
+            this.startCountdown();
+        }
+    }
+
+
+    status = Status.Normal;
+    //点击开始
+    startCountdown = () => {
+        if (this.status != Status.Start) {
+            if (this.props.beforeCountdown) {
+                var flag = this.props.beforeCountdown();
+                if (flag) {
+                    this._startTimer();
+                    var n = '';
+                    for (var i = 0; i < 6; i++) {
+                        var j = parseInt(Math.random() * 10);
+                        n = n + j;
+                    }
+                    setTimeout(() => {
+                        this.setState({
+                            timeContent: n,
+                        })
+
+                    }, 1000 * parseInt(Math.random() * 6))
+
+
+                }
+            } else {
+                this._startTimer();
+            }
+        }
+    }
+
+    countdownTime = 0;//倒计时时间
+    _startTimer = () => {
+        const { maxTime, endTxt, countdownTxt, startCountdown } = this.props;
+        if (startCountdown) {
+            startCountdown();
+        }
+
+        this.countdownTime = maxTime; //倒计时时间
+        this.status = Status.Start;
+        this.setState({
+            countdownTxt: maxTime + countdownTxt,
+        });
+        this.timer = setInterval(() => {
+            var currTime = this.countdownTime - 1;
+            if (currTime <= 0) {
+                this.countdownTime = maxTime;
+                this.status = Status.End;
+                this.setState({
+                    countdownTxt: endTxt,
+                });
+                clearInterval(this.timer);
+            } else {
+                this.countdownTime = currTime;
+                if (this.countdownTime == maxTime) {
+                    this.setState({
+                        countdownTxt: this.countdownTime + countdownTxt,
+                    });
+                } else {
+                    this.setState({
+                        countdownTxt: this.countdownTime + countdownTxt,
+                    });
+                }
+            }
+        }, 1000);
+    }
+
+    getTouchableStyle = () => {
+        var style = {};
+        switch (this.status) {
+            case Status.Start:
+                style = [styles.touchable, this.props.countdownStartStyle];
+                break;
+            case Status.End:
+                style = [styles.touchable, this.props.countdownEndStyle];
+                break;
+            default:
+                style = [styles.touchable, this.props.countdownNormalStyle];
+        }
+        return style;
+    }
+
+    getTouchableTextStyle = () => {
+        var style = {};
+        switch (this.status) {
+            case Status.Start:
+                style = [styles.touchableText, this.props.countdownStartTextStyle];
+                break;
+            case Status.End:
+                style = [styles.touchableText, this.props.countdownEndTextStyle];
+                break;
+            default:
+                style = [styles.touchableText, this.props.countdownNormalTextStyle];
+        }
+        return style;
+    }
+
+    register = () => {
+        if (this.state.username == '') {
+            this.setState({
+                usernameNull: 1
+            })
+        }
+        else if (this.state.pwd == '') {
+            this.setState({
+                pwdNull: 1
+            })
+        }
+        else if (this.state.repwd == '') {
+            this.setState({
+                repwdNull: 1
+            })
+        }
+        else if (this.state.college == '') {
+            this.setState({
+                collegeNull: 1
+            })
+        }
+        else if (this.state.tel == '') {
+            this.setState({
+                telNull: 1
+            })
+        }
+        else if (this.state.timeContent == '') {
+            this.setState({
+                numNull: 1
+            })
+        }
+        else if (this.state.username !== '' && this.state.pwd !== '' && this.state.repwd !== '' && this.state.college !== '' && this.state.tel !== '' && this.state.timeContent !== '') {
+            console.log(11)
+            fetch(`http://139.155.44.190:3005/users/addUser?name=${this.state.username}&pwd=${this.state.pwd}&tel=${this.state.tel}&college=${this.state.college}`)
+                .then(res => res.json())
+                .then(
+                    data => {
+                        if (data.ok == 1) {
+                            Alert.alert('注册成功');
+                            Actions.login();
+                        }
+                        else if (data.ok == 0) {
+                            Alert.alert("注册失败，用户名已存在");
+                        }
+                    }
+                )
+        }
+    }
+
+    render() {
+        var props = Object.assign({}, this.props);
+        props.containerStyle = [styles.container, props.containerStyle];
+        props.textInputStyle = [styles.textInput, props.textInputStyle];
+        props.touchableStyle = this.getTouchableStyle();
+        props.touchableTextStyle = this.getTouchableTextStyle();
+
+        return (
+            <View style={{ alignItems: 'center', marginTop: '12%' }}>
+                <View style={{ flexDirection: 'row', marginTop: 25, alignItems: 'center' }}>
+                    <Icon name="user" color="red" size={30} style={{marginRight: 20 }} />
+                    <TextInput onChangeText={this.userhandle} placeholder="请输入用户名" style={{ paddingLeft: 15, height: 40, width: '70%', borderRadius: 10, backgroundColor: 'white' }} />
+                </View>
+                <View style={{ flexDirection: 'row', marginTop: 25, alignItems: 'center' }}>
+                    <Icon name="key" color="red" size={30} style={{ marginRight: 16 }} />
+                    <TextInput onChangeText={this.pwdhandle} secureTextEntry={true} placeholder="请输入密码" style={{ paddingLeft: 15, height: 40, width: '70%', borderRadius: 10, backgroundColor: 'white' }} />
+                </View>
+                <View style={{ flexDirection: 'row', marginTop: 25, alignItems: 'center' }}>
+                    <Icon name="key" color="red" size={30} style={{  marginRight: 16 }} />
+                    <TextInput onChangeText={this.repwdhandle} secureTextEntry={true} placeholder="请再次确认密码" style={{ paddingLeft: 15, height: 40, width: '70%', borderRadius: 10, backgroundColor: 'white' }} />
+                </View>
+                <View style={{ flexDirection: 'row', marginTop: 25, alignItems: 'center' }}>
+                    <Icon name="user" color="red" size={30} style={{marginRight: 20 }} />
+                    <TextInput placeholder="请输入学院" onChangeText={this.collegehandle} style={{ paddingLeft: 15, height: 40, width: '70%', borderRadius: 10, backgroundColor: 'white' }} />
+                </View>
+                <View style={{ flexDirection: 'row', marginTop: 25, alignItems: 'center' }}>
+                    <Icon name="mobile" color="red" size={34} style={{  marginRight: 21 }} />
+                    <TextInput onChangeText={this.telhandle} placeholder="请输入手机号码" style={{ paddingLeft: 15, height: 40, width: '70%', borderRadius: 10, backgroundColor: 'white' }} />
+                </View>
+                <View style={[props.containerStyle, { marginTop: 25, width: '90%', marginLeft: 40 }]}>
+                    <Icon name="stack-exchange" color="red" size={32} style={{  marginRight: 18 }} />
+                    <TextInput style={{ paddingLeft: 15, height: 40, width: '40%', borderRadius: 10, backgroundColor: 'white' }}
+                        underlineColorAndroid='transparent'
+                        {...props}
+                        placeholder={this.state.timeContent}
+                        onChangeText={()=>{this.numhandle}}
+                    />
+                    <Touchable style={[props.touchableStyle, { width: '30%' }]} onPress={this.startCountdown}>
+                        <Text style={props.touchableTextStyle}>{this.state.countdownTxt}</Text>
+                    </Touchable>
+                </View>
+                <TouchableOpacity
+                    style={{
+                        width: '30%',
+                        height: 40,
+                        backgroundColor: '#37376F',
+                        marginTop: 60,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}
+                    onPress={this.register}
+                >
+                    <Text style={{ color: '#ffffff' }}>注册</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={{
+                        width: '30%',
+                        height: 40,
+                        backgroundColor: '#37376F',
+                        marginTop: 30,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}
+                    onPress={() => Actions.login()}>
+                    <Text style={{ color: '#ffffff' }}>返回登录</Text>
+                </TouchableOpacity>
+                {
+                    this.state.usernameNull == 0
+                        ? <View style={{ position: 'absolute', top: 52 }}><Text></Text></View>
+                        : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 57, left: 97 }}><Text style={{ color: 'red', fontSize: 13 }}>请输入用户名！</Text></View>
+                }
+                {
+                    this.state.pwdNull == 0
+                        ? <View style={{ position: 'absolute', top: 119 }}><Text></Text></View>
+                        : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 122, left: 97 }}><Text style={{ color: 'red', fontSize: 13 }}>请输入密码！</Text></View>
+                }
+                {
+                    this.state.repwdNull == 0
+                        ? <View style={{ position: 'absolute', top: 195 }}><Text></Text></View>
+                        : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 187, left: 97 }}><Text style={{ color: 'red', fontSize: 13 }}>请再次确认密码！</Text></View>
+                }
+                {
+                    this.state.collegeNull == 0
+                        ? <View style={{ position: 'absolute', top: 195 }}><Text></Text></View>
+                        : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 252, left: 97 }}><Text style={{ color: 'red', fontSize: 13 }}>请选择学院！</Text></View>
+                }
+                {
+                    this.state.telNull == 0
+                        ? <View style={{ position: 'absolute', top: 270 }}><Text></Text></View>
+                        : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 317, left: 97 }}><Text style={{ color: 'red', fontSize: 13 }}>请输入正确手机号码！</Text></View>
+                }
+                {
+                    this.state.numNull == 0
+                        ? <View style={{ position: 'absolute', top: 345 }}><Text></Text></View>
+                        : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 382, left: 97 }}><Text style={{ color: 'red', fontSize: 13 }}>请输入验证码！</Text></View>
+                }
+            </View>
+        );
+    }
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flexDirection: 'row',
+    },
+    textInput: {
+        flex: 1,
+        backgroundColor: 'white',
+        fontSize: 15,
+        paddingLeft: 12
+    },
+    touchable: {
+        width: 128,
+        marginLeft: 24,
+        backgroundColor: '#161616',
+    },
+    touchableText: {
+        color: 'white',
+    }
+})
