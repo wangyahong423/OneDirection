@@ -7,19 +7,20 @@ export default class Fankui extends Component {
         this.state = {
             content: '',
             tel: '',
-            time: new Date().toLocaleString(),
         }
     }
     handleRegister = () => {
-        console.log('000',this.state.content,this.state.tel,this.state.time)
-        let url = `http://139.155.44.190:3005/feedback/addFeedback?content=${this.state.content}&tel=${this.state.tel}&time=${this.state.time}`;
+        var date = new Date();
+            var year = date.getFullYear().toString();
+            var month = (date.getMonth() + 1).toString();
+            var day = date.getDate().toString();
+            var hour = date.getHours().toString();
+            var minute = date.getMinutes().toString();
+            var time = year + '年' + month + '月' + day + '日' + ' ' + hour + ':' + minute;
+        let url = `http://139.155.44.190:3005/feedback/addFeedback?content=${this.state.content}&tel=${this.state.tel}&time=${time}`;
         fetch(url)
+            .then((res) => res.json())
             .then((res) => {
-                res.json();
-                console.log(11111,res.json())
-            })
-            .then((res) => {
-                console.log('res:',res)
                 if (res.ok) {
                     Actions.tijiao();
                 } else {

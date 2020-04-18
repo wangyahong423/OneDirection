@@ -26,6 +26,7 @@ export default class community extends Component {
                 this.setState({
                     username: name.username
                 })
+                console.log("用户名：", this.state.username)
             });
     }
     componentDidMount() {
@@ -56,6 +57,7 @@ export default class community extends Component {
                                 fetch(url1)
                                     .then((res) => res.json())
                                     .then((res) => {
+                                        console.log("董晓倩",res)
                                         res.forEach(item => {
                                             for (var i = 0; i < this.state.pic.length; i++) {
                                                 if (item.name == this.state.pic[i].name) {
@@ -63,6 +65,7 @@ export default class community extends Component {
                                                     break;
                                                 }
                                             }
+                                            item.like=false;
                                             for (var j = 0; j < this.state.like.length; j++) {
                                                 if (item.id == this.state.like[j].cid) {
                                                     item.like = true;
@@ -124,6 +127,7 @@ export default class community extends Component {
                                                         break;
                                                     }
                                                 }
+                                                item.like=false;
                                                 for (var j = 0; j < self.state.like.length; j++) {
                                                     if (item.id == self.state.like[j].cid) {
                                                         item.like = true;
@@ -164,6 +168,7 @@ export default class community extends Component {
         Actions.details();
     }
     like = (idx) => {
+        console.log("输出list",this.state.list)
         var crr = '';
         if (this.state.list[idx].like == false) {
             crr = this.state.list;
@@ -177,6 +182,7 @@ export default class community extends Component {
                 .then((res) => res.json())
                 .then((res) => {
                 });
+                console.log(url1)
         }
         else if (this.state.list[idx].like == true) {
             crr = this.state.list;

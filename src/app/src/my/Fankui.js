@@ -1,26 +1,30 @@
 import React, { Component } from 'react'
-import { View, Text, Image, StyleSheet, AsyncStorage, ScrollView, TextInput } from 'react-native';
+import { View, Text, Image, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { Button } from '@ant-design/react-native';
-import axios from 'axios';
 export default class Fankui extends Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
             content: '',
             tel: '',
-            time: new Date().toLocaleString(),
         }
     }
     handleRegister = () => {
-        let url = `http://139.155.44.190:3005/feedback/addFeedback?content=${this.state.content}&tel=${this.state.tel}&time=${this.state.time}`;
-        axios(url)
+        var date = new Date();
+            var year = date.getFullYear().toString();
+            var month = (date.getMonth() + 1).toString();
+            var day = date.getDate().toString();
+            var hour = date.getHours().toString();
+            var minute = date.getMinutes().toString();
+            var time = year + '年' + month + '月' + day + '日' + ' ' + hour + ':' + minute;
+        let url = `http://139.155.44.190:3005/feedback/addFeedback?content=${this.state.content}&tel=${this.state.tel}&time=${time}`;
+        fetch(url)
+            .then((res) => res.json())
             .then((res) => {
-                if (res.data.ok) {
+                if (res.ok) {
                     Actions.tijiao();
                 } else {
-                    alert(res.data.msg);
+                    alert(res.msg);
                 }
             })
     }
@@ -28,13 +32,13 @@ export default class Fankui extends Component {
         this.setState({
             tel: text
         })
-        
+
     }
     getContent = (text) => {
         this.setState({
             content: text
         })
-        
+
     }
     render() {
         return (
@@ -57,9 +61,10 @@ export default class Fankui extends Component {
                 }}>
                     <TextInput placeholder="有什么想说的尽管说吧..." style={{ marginTop: 10 }} onChangeText={this.getContent} />
                 </View>
-                <Button style={{ width: 100, backgroundColor: '#37476F', marginLeft: 180, marginTop: 40 }} onPress={this.handleRegister}>
-                    提交
-                </Button>
+                <TouchableOpacity style={{ width: 100, backgroundColor: '#37476F', marginLeft: 180, marginTop: 40,height:40 }} onPress={this.handleRegister}>
+                    <Text style={{color:'#ffffff',textAlign:'center',fontSize:20,marginTop:5}}>提交</Text>
+                </TouchableOpacity>
+
             </ScrollView>
         )
     }

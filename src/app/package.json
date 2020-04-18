@@ -19,7 +19,9 @@
     "react-native-router-flux": "4.0.6",
     "react-native-splash-screen": "^3.2.0",
     "react-native-swiper": "^1.6.0-nightly.5",
+    "react-native-touchable": "^1.0.6",
     "react-native-vector-icons": "^6.6.0",
+    "react-native-verify-code": "^1.0.0",
     "react-native-webview": "^9.1.3",
     "react-navigation": "^4.3.1"
   },

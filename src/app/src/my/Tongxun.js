@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import {  Text,ScrollView } from 'react-native';
+import { View, Text, Image, StyleSheet, AsyncStorage, ScrollView } from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { Button } from '@ant-design/react-native';
 export default class Tongxun extends Component {
     render() {
@@ -90,3 +92,4 @@ export default class Tongxun extends Component {
         )
     }
 }
+

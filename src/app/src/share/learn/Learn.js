@@ -190,6 +190,7 @@ export default class Learn extends Component {
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
+                    console.log(url1);
                 });
         }
         else if (this.state.list[idx].like == true) {
@@ -203,6 +204,7 @@ export default class Learn extends Component {
             fetch(url2)
                 .then((res) => res.json())
                 .then((res) => {
+                    console.log(url2);
                 });
         }
     }

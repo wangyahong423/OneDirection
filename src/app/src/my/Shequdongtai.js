@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, Dimensions, SafeAreaView, Image, AsyncStorage } from 'react-native';
-const { width } = Dimensions.get('window');
+import { Text, View, ScrollView, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter } from 'react-native';
+const { width, height } = Dimensions.get('window');
 const s = width / 460;
-import axios from 'axios';
 export default class Xuexidongtai extends Component {
     constructor() {
         super();
@@ -24,15 +23,16 @@ export default class Xuexidongtai extends Component {
                     username: name.username
                 })
             });
-            let url = `http://139.155.44.190:3005/community/list`;
-            let url2 = `http://139.155.44.190:3005/communitylike/list`;
-            let url3 = `http://139.155.44.190:3005/users/getName`;
-            let url4 = `http://139.155.44.190:3005/users/list`;
+        let url = `http://139.155.44.190:3005/community/list`;
+        let url2 = `http://139.155.44.190:3005/communitylike/list`;
+        let url3 = `http://139.155.44.190:3005/users/getName`;
+        let url4 = `http://139.155.44.190:3005/users/list`;
+        fetch(url2)
+            .then(res => res.json())
 
-        axios(url2)
             .then((res) => {
                 this.setState({
-                    list: res.data
+                    list: res
                 })
                 var brr = [];
                 this.state.list.map((item) => {
@@ -67,18 +67,21 @@ export default class Xuexidongtai extends Component {
             })
 
 
-        axios(url4).then(res => {
-            res.data.map(item => {
-                if (item.name == this.state.username) {
-                    this.setState({ pic: 'http://139.155.44.190:3005' + item.pic })
-                }
+        fetch(url4)
+            .then(res => res.json())
+            .then(res => {
+                res.map(item => {
+                    if (item.name == this.state.username) {
+                        this.setState({ pic: 'http://139.155.44.190:3005' + item.pic })
+                    }
+                })
             })
-        })
 
-        axios(url)
+        fetch(url)
+            .then(res => res.json())
             .then((res) => {
                 var arr = [];
-                res.data.map((item) => {
+                res.map((item) => {
                     if (item.name == this.state.username) {
                         arr.push(item)
                     }
@@ -94,27 +97,28 @@ export default class Xuexidongtai extends Component {
             })
         })
     }
-    
+
 
     clickSend = (id) => {
         let url = `http://139.155.44.190:3005/learn/select?content=${this.state.search}`;
-        axios(url)
+        fetch(url)
+            .then(res => res.json())
             .then((res) => {
-                if (res.data.false) {
+                if (res.false) {
                 } else {
-                    for (var i = 0; i < res.data.length; i++) {
-                        res.data[i].pic = "http://139.155.44.190:3005/" + res.data[i].pic;
+                    for (var i = 0; i < res.length; i++) {
+                        res[i].pic = "http://139.155.44.190:3005/" + res[i].pic;
                     }
                     this.setState({
-                        data: res.data
+                        data: res
                     })
                 }
             })
     };
     delTie = (id) => {
-
         let url9 = `http://139.155.44.190:3005/learn/deleteLearn?id=${id}`
-        axios(url9)
+        fetch(url9)
+            .then(res => res.json())
             .then((res) => {
                 window.location.href = "http://localhost:3000/tiezi"
                 window.location.href = "http://localhost:3000/xuexi"

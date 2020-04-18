@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, AsyncStorage, ScrollView, TextInput, } from 'react-native';
+import { View,  AsyncStorage, ScrollView, TextInput, } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Button } from '@ant-design/react-native';
-import axios from 'axios';
 
 export default class Mima extends Component {
     constructor() {
@@ -33,11 +32,13 @@ export default class Mima extends Component {
         })
     }
     getRepwd = () => {
-        axios(`http://139.155.44.190:3005/users/judge?name=${this.state.name}&tel=${this.state.tel}`)
+        fetch(`http://139.155.44.190:3005/users/judge?name=${this.state.name}&tel=${this.state.tel}`)
+            .then(res => res.json())
             .then(
                 data => {
-                    if (data.data.ok == 1) {
-                        axios(`http://139.155.44.190:3005/users/alter?name=${this.state.name}&pwd=${this.state.newPwd}&tel=${this.state.tel}`)
+                    if (data.ok == 1) {
+                        fetch(`http://139.155.44.190:3005/users/alter?name=${this.state.name}&pwd=${this.state.newPwd}&tel=${this.state.tel}`)
+                            .then(res => res.json())
                             .then(
                                 data => {
                                 }

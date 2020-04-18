@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Router, Overlay, Scene, Tabs, Drawer, Lightbox, Modal, Actions } from 'react-native-router-flux';
+import { Router, Scene, Tabs, Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { StyleSheet, View, Text, Image, BackHandler, ToastAndroid, AsyncStorage } from 'react-native';
+import { View, Text, BackHandler, ToastAndroid, AsyncStorage } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 // 登录
 import Login from './src/common/Login';
 import SwiperPage from './src/common/SwiperPage';
-import Signin from './src/common/Zhuce';
-// import Signin from './src/common/Signin';
+import Signin from './src/common/Signin';
 
 // 社区
 import Community from './src/community/Community';
@@ -197,7 +196,7 @@ const App = () => {
             </Scene>
             {/* 社区 */}
             <Scene titleStyle={{ flex: 1, textAlign: 'center', color: '#fff' }} navigationBarStyle={{ backgroundColor: '#37376F' }} key='communityPage' title='社区' icon={({ focused }) => <Icon color={focused ? '#37376F' : 'black'} name='comments-o' size={26} />}>
-            <Scene key='community' component={Community} />
+              <Scene key='community' component={Community} />
 
             </Scene>
             {/* 共享 */}
