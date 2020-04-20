@@ -6,9 +6,11 @@ const { width } = Dimensions.get('window');
 const s = width / 460;
 export default class Shezhi extends Component {
     outlogin = () => {
-        AsyncStorage.removeItem('username');
-        AsyncStorage.removeItem('pwd');
-        Actions.login();
+        AsyncStorage.setItem('username','');
+        AsyncStorage.setItem('pwd','');
+        AsyncStorage.setItem('pic','');
+        AsyncStorage.setItem('college','');
+        Actions.login(); 
     } 
     render() {
         return (

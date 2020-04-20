@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { View, Text, Image, StyleSheet, AsyncStorage, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, AsyncStorage, ScrollView, TouchableOpacity, DeviceEventEmitter } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import axios from 'axios';
 export default class Person extends Component {
     constructor() {
         super();
@@ -21,16 +20,17 @@ export default class Person extends Component {
                 })
             });
         let url = `http://139.155.44.190:3005/users/list`;
-        axios(url)
+        fetch(url)
+            .then(res => res.json())
             .then((res) => {
                 if (res.err) {
                 } else {
                     this.setState({
-                        data: res.data
+                        data: res
                     })
                     let arr = [];
                     this.state.data.map((item) => {
-                        if (item.name === this.state.n1) {
+                        if (item.name === this.state.username) {
                             arr.push(item)
                         }
                         this.setState({
@@ -40,23 +40,78 @@ export default class Person extends Component {
                 }
             })
         let url2 = `http://139.155.44.190:3005/users/list`;
-        axios(url2)
+        fetch(url2)
+            .then(res => res.json())
             .then((res) => {
                 this.setState({
-                    todo: res.data
+                    todo: res
                 })
-                console.log(this.state.todo)
                 this.state.todo.map((item) => {
                     if (item.name == this.state.username) {
                         this.setState({
                             college: item.college,
-                            pic: "http://139.155.44.190:3005" +item.pic
+                            pic: "http://139.155.44.190:3005" + item.pic
                         })
                     }
                 })
-                console.log(this.state.pic)
             })
-           
+        var self = this;
+        this.listener = DeviceEventEmitter.addListener('freshone', function (param) {
+            let url = `http://139.155.44.190:3005/users/list`;
+            fetch(url)
+                .then(res => res.json())
+                .then((res) => {
+                    if (res.err) {
+                    } else {
+                        self.setState({
+                            data: res
+                        })
+                        let arr = [];
+                        self.state.data.map((item) => {
+                            if (item.name === self.state.username) {
+                                arr.push(item)
+                            }
+                            self.setState({
+                                data: arr
+                            })
+                        })
+                    }
+                })
+            let url2 = `http://139.155.44.190:3005/users/list`;
+            fetch(url2)
+                .then(res => res.json())
+                .then((res) => {
+                    self.setState({
+                        todo: res
+                    })
+                    self.state.todo.map((item) => {
+                        if (item.name == self.state.username) {
+                            self.setState({
+                                college: item.college,
+                                pic: "http://139.155.44.190:3005" + item.pic
+                            })
+                        }
+                    })
+                })
+        })
+    }
+
+    componentDidUpdate() {
+        AsyncStorage.getItem('username')
+            .then((res) => {
+                let name = { username: res }
+                this.setState({
+                    username: name.username
+                })
+            });
+    }
+    componentWillUnmount() {
+        this.listener.remove();
+    }
+    outlogin = () => {
+        AsyncStorage.setItem('username', '');
+        AsyncStorage.setItem('password', '');
+        Actions.login();
     }
     render() {
         return (
@@ -64,11 +119,11 @@ export default class Person extends Component {
                 <View style={{ height: 250, width: '100%' }}>
                     <Image source={require('../../assets/gonglve2.png')} />
                 </View>
-                <View style={{ width: '100%', height: 470, backgroundColor: '#ffffff' }}>
+                <View style={{ width: '100%', height: 430, backgroundColor: '#ffffff' }}>
                     <View style={{ width: '100%', height: 80, flexDirection: 'row' }}>
-                        <View style={{ width: 100, height: 100, position: "absolute", top: -50, left: 30 }}>
-                            <Image source={{uri:this.state.pic}} style={{ width: 100, height: 100, borderRadius: 50 }} />
-                        </View>
+                    <TouchableOpacity style={{ width: 100, height: 100, position: "absolute", top: -50, left: 30 }} onPress={() => Actions.touxiang()}>
+                            <Image source={{ uri: this.state.pic }} style={{ width: 100, height: 100, borderRadius: 50 }} />
+                        </TouchableOpacity>
                         <Text style={{ position: 'absolute', left: 150, fontSize: 18, top: -3 }}>{this.state.username}</Text>
                         <Text style={{ position: 'absolute', left: 150, top: 27, fontSize: 18 }}>河北师范大学{this.state.college}</Text>
                     </View>
@@ -142,7 +197,9 @@ export default class Person extends Component {
                     </View>
 
                 </View>
-
+                <TouchableOpacity onPress={this.outlogin} style={{ height: '5%', width: '25%', marginLeft: '37.5%', marginTop: '1%', marginBottom: '3%', backgroundColor: 'red', borderRadius: 20, alignItems: 'center', justifyContent: 'center' }}>
+                    <Text style={{ color: 'white', marginTop: 10 }}>退出登录</Text>
+                </TouchableOpacity>
             </ScrollView>
         )
     }
