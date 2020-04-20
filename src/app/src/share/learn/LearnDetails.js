@@ -223,7 +223,7 @@ export default class LearnDetails extends Component {
                                             backgroundColor: 'yellow'
                                         }} source={{ uri: item.pic }} />
                                         <View style={{ marginLeft: 30 * s,marginRight:60*s }}>
-                                            <Text style={{ fontSize: 15 * s, color: '#37376F', marginTop: 5 * s }}>{item.name}</Text>
+                                            <Text style={this.state.page.name==item.name ?{ fontSize: 15 * s, color: 'red', marginTop: 5 * s } :{ fontSize: 15 * s, color: '#37376F', marginTop: 5 * s }}>{item.name}</Text>
                                             <Text style={{ fontSize: 18 * s }}>{item.content}</Text>
                                             <Text style={{ fontSize: 10 * s, color: '#808080', marginTop: 5 * s, marginBottom: 5 * s }}>{item.time}</Text>
                                         </View>

@@ -7,7 +7,9 @@ const s = width / 460;
 export default class Shezhi extends Component {
     outlogin = () => {
         AsyncStorage.setItem('username','');
-        AsyncStorage.setItem('password','');
+        AsyncStorage.setItem('pwd','');
+        AsyncStorage.setItem('pic','');
+        AsyncStorage.setItem('college','');
         Actions.login(); 
     } 
     render() {

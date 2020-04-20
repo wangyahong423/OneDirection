@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Image, StyleSheet, AsyncStorage, ScrollView, TouchableOpacity, DeviceEventEmitter } from 'react-native';
+import { View, Text, Image, AsyncStorage, ScrollView, TouchableOpacity, DeviceEventEmitter } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 export default class Person extends Component {
@@ -56,7 +56,7 @@ export default class Person extends Component {
                 })
             })
         var self = this;
-        this.listener = DeviceEventEmitter.addListener('refresh', function (param) {
+        this.listener = DeviceEventEmitter.addListener('freshone', function (param) {
             let url = `http://139.155.44.190:3005/users/list`;
             fetch(url)
                 .then(res => res.json())
@@ -105,6 +105,9 @@ export default class Person extends Component {
                 })
             });
     }
+    componentWillUnmount() {
+        this.listener.remove();
+    }
 
     outlogin = () => {
         AsyncStorage.setItem('username', '');
@@ -119,9 +122,9 @@ export default class Person extends Component {
                 </View>
                 <View style={{ width: '100%', height: 430, backgroundColor: '#ffffff' }}>
                     <View style={{ width: '100%', height: 80, flexDirection: 'row' }}>
-                        <View style={{ width: 100, height: 100, position: "absolute", top: -50, left: 30 }}>
+                        <TouchableOpacity style={{ width: 100, height: 100, position: "absolute", top: -50, left: 30 }} onPress={() => Actions.touxiang()}>
                             <Image source={{ uri: this.state.pic }} style={{ width: 100, height: 100, borderRadius: 50 }} />
-                        </View>
+                        </TouchableOpacity>
                         <Text style={{ position: 'absolute', left: 150, fontSize: 18, top: -3 }}>{this.state.username}</Text>
                         <Text style={{ position: 'absolute', left: 150, top: 27, fontSize: 18 }}>河北师范大学{this.state.college}</Text>
                     </View>

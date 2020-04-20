@@ -64,12 +64,12 @@ export default class Login extends Component {
                     college: arr[0].college,
                     pic: "http://139.155.44.190:3005" + arr[0].pic
                   })
-                  AsyncStorage.setItem('college1', arr[0].college)
-                  AsyncStorage.setItem('pic', "http://139.155.44.190:3005" + arr[0].pic)
+                  // AsyncStorage.setItem('college1', arr[0].college)
+                  // AsyncStorage.setItem('pic', "http://139.155.44.190:3005" + arr[0].pic)
                 }
               })
             var param = { "college": this.state.college, "pic": this.state.pic }
-            DeviceEventEmitter.emit('refresh', param)
+            DeviceEventEmitter.emit('freshone', param)
             Actions.methodPage();//登录成功跳转首页
           }
           else {

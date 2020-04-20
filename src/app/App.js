@@ -35,7 +35,7 @@ import Mima from './src/my/Mima';
 import File from './src/my/File';
 import Shequdongtai from './src/my/Shequdongtai'
 import Xuexidongtai from './src/my/Xuexidongtai'
-
+import Touxiang from './src/my/Touxiang';
 
 // 攻略
 import Method from './src/method/Method';
@@ -330,6 +330,7 @@ const App = () => {
           <Scene key="file" component={File} renderTitle="我的文件" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key="xuexidongtai" component={Xuexidongtai} renderTitle="学习动态" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key="shequdongtai" component={Shequdongtai} renderTitle="社区动态" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key="touxiang" component={Touxiang} renderTitle="我的头像" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
 
         </Scene>
       </Router>
