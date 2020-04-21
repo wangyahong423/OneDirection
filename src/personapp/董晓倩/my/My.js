@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { View, Text, Image, StyleSheet, AsyncStorage, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, AsyncStorage, ScrollView, TouchableOpacity, DeviceEventEmitter } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
-// import axios from 'axios';
 export default class Person extends Component {
     constructor() {
         super();
@@ -10,6 +9,8 @@ export default class Person extends Component {
             username: '',
             data: [],
             todo: [],
+            lvlist: [],
+            islogin: false
         }
     }
     componentDidMount() {
@@ -22,17 +23,16 @@ export default class Person extends Component {
             });
         let url = `http://139.155.44.190:3005/users/list`;
         fetch(url)
-        .then(res => res.json())
-
+            .then(res => res.json())
             .then((res) => {
                 if (res.err) {
                 } else {
                     this.setState({
-                        data: res.data
+                        data: res
                     })
                     let arr = [];
                     this.state.data.map((item) => {
-                        if (item.name === this.state.n1) {
+                        if (item.name === this.state.username) {
                             arr.push(item)
                         }
                         this.setState({
@@ -43,22 +43,117 @@ export default class Person extends Component {
             })
         let url2 = `http://139.155.44.190:3005/users/list`;
         fetch(url2)
-        .then(res => res.json())
-
+            .then(res => res.json())
             .then((res) => {
                 this.setState({
-                    todo: res.data
+                    todo: res
                 })
                 this.state.todo.map((item) => {
                     if (item.name == this.state.username) {
                         this.setState({
                             college: item.college,
-                            pic: "http://139.155.44.190:3005" + item.pic
+                            pic: "http://139.155.44.190:3005" + item.pic,
+                            lvnum: item.lvnum//修改
                         })
+                        var num = Math.floor(this.state.lvnum / 15);
+                        console.log("输出num", num)
+                        let url3 = `http://139.155.44.190:3005/users/list`;
+                        fetch(url3)
+                            .then(res => res.json())
+                            .then((res) => {
+                                this.setState({
+                                    lvlist: res
+                                })
+                                this.state.lvlist.map((item) => {
+                                    if (item.name == this.state.username) {
+                                        this.setState({
+                                            level: num + 1
+                                        })
+                                        console.log("获取到的等级", this.state.level)
+                                        let url3 = `http://139.155.44.190:3005/users/changeLv?level=${this.state.level}&name=${this.state.username}`;
+                                        fetch(url3)
+                                            .then((res) => res.json())
+                                            .then((res) => {
+                                                if (res.ok) {
+                                                } else {
+                                                    Alert.alert(res.msg);
+                                                }
+                                            });
+                                    }
+                                })
+                            })
                     }
                 })
             })
+        var self = this;
+        this.listener = DeviceEventEmitter.addListener('refresh', function (param) {
+            let url = `http://139.155.44.190:3005/users/list`;
+            fetch(url)
+                .then(res => res.json())
+                .then((res) => {
+                    if (res.err) {
+                    } else {
+                        self.setState({
+                            data: res
+                        })
+                        let arr = [];
+                        self.state.data.map((item) => {
+                            if (item.name === self.state.username) {
+                                arr.push(item)
+                            }
+                            self.setState({
+                                data: arr
+                            })
+                        })
+                    }
+                })
+            let url2 = `http://139.155.44.190:3005/users/list`;
+            fetch(url2)
+                .then(res => res.json())
+                .then((res) => {
+                    self.setState({
+                        todo: res
+                    })
+                    self.state.todo.map((item) => {
+                        if (item.name == self.state.username) {
+                            self.setState({
+                                college: item.college,
+                                pic: "http://139.155.44.190:3005" + item.pic,
+                                lvnum: item.lvnum//修改
+                            })
+                            var num = Math.floor(self.state.lvnum / 15);
+                            console.log("输出num", num)
+                            let url3 = `http://139.155.44.190:3005/users/list`;
+                            fetch(url3)
+                                .then(res => res.json())
+                                .then((res) => {
+                                    self.setState({
+                                        lvlist: res
+                                    })
+                                    self.state.lvlist.map((item) => {
+                                        if (item.name == self.state.username) {
+                                            self.setState({
+                                                level: num + 1
+                                            })
+                                            console.log("获取到的等级", self.state.level)
+                                            let url3 = `http://139.155.44.190:3005/users/changeLv?level=${self.state.level}&name=${self.state.username}`;
+                                            fetch(url3)
+                                                .then((res) => res.json())
+                                                .then((res) => {
+                                                    if (res.ok) {
+                                                    } else {
+                                                        Alert.alert(res.msg);
+                                                    }
+                                                });
+                                        }
+                                    })
+                                })
+                        }
+                    })
+                })
+        })
     }
+
     componentDidUpdate() {
         AsyncStorage.getItem('username')
             .then((res) => {
@@ -67,58 +162,44 @@ export default class Person extends Component {
                     username: name.username
                 })
             });
-        let url = `http://139.155.44.190:3005/users/list`;
-        fetch(url)
-        .then(res => res.json())
-
-            .then((res) => {
-                if (res.err) {
-                } else {
-                    this.setState({
-                        data: res.data
-                    })
-                    let arr = [];
-                    this.state.data.map((item) => {
-                        if (item.name === this.state.n1) {
-                            arr.push(item)
-                        }
-                        this.setState({
-                            data: arr
-                        })
-                    })
-                }
-            })
-        let url2 = `http://139.155.44.190:3005/users/list`;
-        fetch(url2)
-        .then(res => res.json())
-
-            .then((res) => {
-                this.setState({
-                    todo: res.data
-                })
-                this.state.todo.map((item) => {
-                    if (item.name == this.state.username) {
-                        this.setState({
-                            college: item.college,
-                            pic: "http://139.155.44.190:3005" + item.pic
-                        })
-                    }
-                })
-            })
     }
 
+    outlogin = () => {
+        AsyncStorage.getItem('username')
+            .then((res) => {
+                let name = { username: res }
+                this.setState({
+                    username: name.username
+                })
+                let url1 = `http://139.155.44.190:3005/users/exitLogin?name=${this.state.username}&islogin=${this.state.islogin}`;
+                fetch(url1)
+                    .then(res => res.json())
+                    .then((res) => {
+                        if (res.err) {
+                        } else {
+                            console.log('成功')
+                        }
+                    })
+            });
+        AsyncStorage.setItem('username', '');
+        AsyncStorage.setItem('password', '');
+        Actions.login();
+    }
     render() {
         return (
             <ScrollView>
                 <View style={{ height: 250, width: '100%' }}>
                     <Image source={require('../../assets/gonglve2.png')} />
                 </View>
-                <View style={{ width: '100%', height: 470, backgroundColor: '#ffffff' }}>
+                <View style={{ width: '100%', height: 430, backgroundColor: '#ffffff' }}>
                     <View style={{ width: '100%', height: 80, flexDirection: 'row' }}>
                         <View style={{ width: 100, height: 100, position: "absolute", top: -50, left: 30 }}>
-                            <Image source={{uri:this.state.pic}} style={{ width: 100, height: 100, borderRadius: 50 }} />
+                            <Image source={{ uri: this.state.pic }} style={{ width: 100, height: 100, borderRadius: 50 }} />
                         </View>
-                        <Text style={{ position: 'absolute', left: 150, fontSize: 18, top: -3 }}>{this.state.username}</Text>
+                        <Text style={{ position: "absolute", left: 150, fontSize: 18, top: -3 }}>
+                            {this.state.username}&nbsp;&nbsp;&nbsp;
+                            <Text style={{ marginLeft: 20, fontSize: 15, color: "red" }}>Lv {this.state.level}</Text>
+                        </Text>
                         <Text style={{ position: 'absolute', left: 150, top: 27, fontSize: 18 }}>河北师范大学{this.state.college}</Text>
                     </View>
 
@@ -191,9 +272,10 @@ export default class Person extends Component {
                     </View>
 
                 </View>
-
+                <TouchableOpacity onPress={this.outlogin} style={{ height: '5%', width: '25%', marginLeft: '37.5%', marginTop: '2%', marginBottom: '3%', backgroundColor: 'red', borderRadius: 20, alignItems: 'center', justifyContent: 'center' }}>
+                    <Text style={{ color: 'white', marginTop: 10 }}>退出登录</Text>
+                </TouchableOpacity>
             </ScrollView>
         )
     }
 }
-

@@ -9,7 +9,8 @@ export default class Add extends Component {
         this.state = {
             content: '',
             username: '',
-            length: 0
+            length: 0,
+            lvlist: []
         };
         this.getData();
     }
@@ -23,8 +24,8 @@ export default class Add extends Component {
                 console.log("用户名：", this.state.username)
             });
     }
-       //动态计算TextInput高度来解决TextInput文字始终垂直居中的问题
-       cauculateHeight(e) {
+    //动态计算TextInput高度来解决TextInput文字始终垂直居中的问题
+    cauculateHeight(e) {
         if (e.nativeEvent.contentSize.height > 30) {
             height = e.nativeEvent.contentSize.height;
         } else {
@@ -51,8 +52,8 @@ export default class Add extends Component {
             var hour = date.getHours().toString();
             var minute = date.getMinutes().toString();
             var time = year + '年' + month + '月' + day + '日' + ' ' + hour + ':' + minute;
-            let url = `http://139.155.44.190:3005/community/addCommunity?content=${this.state.content}&name=${this.state.username}&time=${time}`;
-            fetch(url)
+            let url1 = `http://139.155.44.190:3005/community/addCommunity?content=${this.state.content}&name=${this.state.username}&time=${time}`;
+            fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
                     if (res.ok) {
@@ -61,6 +62,30 @@ export default class Add extends Component {
                         Alert.alert(res.msg);
                     }
                 });
+            let url2 = `http://139.155.44.190:3005/users/list`;
+            fetch(url2)
+                .then((res) => res.json())
+                .then((res) => {
+                    this.setState({
+                        lvlist: res
+                    })
+                    this.state.lvlist.map((item) => {
+                        if (item.name == this.state.username) {
+                            this.setState({
+                                lvnum: item.lvnum + 2
+                            })
+                            let url3 = `http://139.155.44.190:3005/users/changeLvnum?lvnum=${this.state.lvnum}&name=${this.state.username}`;
+                            fetch(url3)
+                                .then((res) => res.json())
+                                .then((res) => {
+                                    if (res.ok) {
+                                    } else {
+                                        Alert.alert(res.msg);
+                                    }
+                                });
+                        }
+                    })
+                })
         }
         else {
             Alert.alert("未填写内容")
