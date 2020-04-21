@@ -87,9 +87,7 @@ export default class LearnDetails extends Component {
                 });
             });
     }
-    componentWillUnmount() {
-        this.listener.remove();
-    }
+    
     change = (e) => {
         this.setState({ comment: e });
     }
@@ -105,7 +103,6 @@ export default class LearnDetails extends Component {
             console.log(time);
             let url = `http://139.155.44.190:3005/learntalk/add?lid=${this.state.page.id}
                 &name=${this.state.username}&content=${this.state.comment}&time=${time}`;
-            console.log(url);
             fetch(url)
                 .then((res) => res.json())
                 .then((res) => {
@@ -126,11 +123,35 @@ export default class LearnDetails extends Component {
         }
 
     }
+    delete = (idx) => {
+        Alert.alert('确认要删除吗', '',
+            [
+                { text: "确认", onPress: this.opntion1.bind(this, (this.state.list[idx].id)) },
+                { text: "取消", onPress: this.opntion2 }
+            ]
+        );
+    }
+    opntion1 = (id) => {
+        let url = `http://139.155.44.190:3005/learntalk/delete?id=${id}`;
+        fetch(url)
+            .then((res) => res.json())
+            .then((res) => {
+                Alert.alert(res.msg);
+                var param = 1;
+                DeviceEventEmitter.emit('pinglun', param);
+            });
+    }
+    opntion2=()=>{
+
+    }
     // backt = () => {
     //     Actions.pop;
     //     var param = 1;
     //     DeviceEventEmitter.emit('refresh', param);
     // }
+    componentWillUnmount() {
+        this.listener.remove();
+    }
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
@@ -209,7 +230,7 @@ export default class LearnDetails extends Component {
                 <ScrollView style={{ flex: 1 }}>
                     <View>
                         {
-                            this.state.list.map((item) => (
+                            this.state.list.map((item,idx) => (
                                 <View style={{ backgroundColor: '#fff', width: '100%', borderBottomWidth: 1 * s, borderBottomColor: '#808080' }}>
                                     <View style={{
                                         flexDirection: 'row',
@@ -228,6 +249,26 @@ export default class LearnDetails extends Component {
                                             <Text style={{ fontSize: 10 * s, color: '#808080', marginTop: 5 * s, marginBottom: 5 * s }}>{item.time}</Text>
                                         </View>
                                     </View>
+                                    {
+                                        this.state.username == this.state.page.name || this.state.username == item.name
+                                            ? <TouchableOpacity style={{
+                                                width: 30 * s,
+                                                height: 30 * s,
+                                                borderRadius: 15 * s,
+                                                flexDirection: 'row',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                // backgroundColor: '#37376F',
+                                                position: 'absolute',
+                                                top: 0,
+                                                right: 0
+                                            }}
+                                                onPress={this.delete.bind(this, (idx))}
+                                            >
+                                                <Text style={{ color: '#e8e8e8', fontSize: 30 * s }}>×</Text>
+                                            </TouchableOpacity>
+                                            : null
+                                    }
                                 </View>
                             ))
                         }

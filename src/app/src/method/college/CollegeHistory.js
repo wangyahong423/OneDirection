@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, ImageBackground, ScrollView, AsyncStorage } from 'react-native';
+import { Text, View, StyleSheet, ImageBackground, ScrollView, AsyncStorage, Dimensions } from 'react-native';
+
+const { width } = Dimensions.get('window');
+const s = width / 460;
 
 export default class CollegeHistory extends Component {
     constructor() {
@@ -8,11 +11,15 @@ export default class CollegeHistory extends Component {
             data: [],
             todo: [],
             college: '',
-            username: ''
+            username: '',
+            isLoading: true
         }
     }
 
     componentDidMount() {
+        this.setState({
+            isLoading: true
+        })
         AsyncStorage.getItem('username')
             .then((value) => {
                 let name = { username: value }
@@ -46,6 +53,9 @@ export default class CollegeHistory extends Component {
                                         brr.push(item);
                                     }
                                     this.setState({
+                                        isLoading: false
+                                    })
+                                    this.setState({
                                         todo: brr
                                     })
                                 })
@@ -71,6 +81,27 @@ export default class CollegeHistory extends Component {
                                 )}
                         </View>
                     </ScrollView>
+                    {
+                        this.state.isLoading
+                            ? <View
+                                style={{
+                                    position: 'absolute',
+                                    top: 80 * s,
+                                    width: '100%'
+                                }}
+                            >
+                                <View
+                                    style={{
+                                        alignItems: 'center',
+                                        flexDirection: 'row',
+                                        justifyContent: 'center'
+                                    }}
+                                >
+                                    <Text style={{ fontSize: 18 }}>正在获取数据...</Text>
+                                </View>
+                            </View>
+                            : null
+                    }
                 </View>
             </ImageBackground>
         )

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter } from 'react-native';
+import { Text, View, ScrollView, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import { Actions } from 'react-native-router-flux';
 const { width, height } = Dimensions.get('window');
@@ -64,7 +64,7 @@ export default class Learn extends Component {
                                                 }
                                             }
                                             item.like = false;
-                                            for (var j = 0; j < this.state.like.length; j++) {   
+                                            for (var j = 0; j < this.state.like.length; j++) {
                                                 if (item.id == this.state.like[j].lid) {
                                                     item.like = true;
                                                     break;
@@ -171,6 +171,27 @@ export default class Learn extends Component {
     componentWillUnmount() {
         this.listener.remove();
         // this.listener1.remove();
+    }
+    delete = (idx) => {
+        Alert.alert('确认要删除吗', '',
+            [
+                { text: "确认", onPress: this.opntion1.bind(this, (this.state.list[idx].id)) },
+                { text: "取消", onPress: this.opntion2 }
+            ]
+        );
+    }
+    opntion1 = (id) => {
+        let url = `http://139.155.44.190:3005/learn/deleteLearn?id=${id}`;
+        fetch(url)
+            .then((res) => res.json())
+            .then((res) => {
+                Alert.alert(res.msg);
+                var param = 1;
+                DeviceEventEmitter.emit('refresh', param);
+            });
+    }
+    opntion2=()=>{
+
     }
     details = (idx) => {
         var value = { page: this.state.list[idx] };
@@ -339,6 +360,26 @@ export default class Learn extends Component {
                                             <Text>{item.likeNum}</Text>
                                         </View>
                                     </View>
+                                    {
+                                        this.state.username == item.name
+                                            ? <TouchableOpacity style={{
+                                                width: 30 * s,
+                                                height: 30 * s,
+                                                borderRadius: 15 * s,
+                                                flexDirection: 'row',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                // backgroundColor: '#37376F',
+                                                position: 'absolute',
+                                                top: 5,
+                                                right: 5
+                                            }}
+                                                onPress={this.delete.bind(this, (idx))}
+                                            >
+                                                <Text style={{ color: '#e8e8e8', fontSize: 30 * s }}>×</Text>
+                                            </TouchableOpacity>
+                                            : null
+                                    }
                                 </View>
                             ))
                         }

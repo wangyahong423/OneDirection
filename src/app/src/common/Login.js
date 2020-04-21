@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TextInput, AsyncStorage, TouchableOpacity, DeviceEventEmitter } from 'react-native';
+import { View, Text, Image, TextInput, AsyncStorage, TouchableOpacity, DeviceEventEmitter, Alert } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 export default class Login extends Component {
   constructor() {
@@ -64,8 +64,6 @@ export default class Login extends Component {
                     college: arr[0].college,
                     pic: "http://139.155.44.190:3005" + arr[0].pic
                   })
-                  // AsyncStorage.setItem('college1', arr[0].college)
-                  // AsyncStorage.setItem('pic', "http://139.155.44.190:3005" + arr[0].pic)
                 }
               })
             var param = { "college": this.state.college, "pic": this.state.pic }
@@ -73,10 +71,11 @@ export default class Login extends Component {
             Actions.methodPage();//登录成功跳转首页
           }
           else {
-            this.setState({
-              isnull: false,
-              isloading: false
-            })
+            Alert.alert(res.msg)
+            // this.state({
+            //   username:'',
+            //   pwd:''
+            // })
           }
         })
     }

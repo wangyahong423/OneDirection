@@ -9,6 +9,7 @@ export default class Person extends Component {
             username: '',
             data: [],
             todo: [],
+            islogin: false
         }
     }
     componentDidMount() {
@@ -110,6 +111,22 @@ export default class Person extends Component {
     }
 
     outlogin = () => {
+        AsyncStorage.getItem('username')
+            .then((res) => {
+                let name = { username: res }
+                this.setState({
+                    username: name.username
+                })
+                let url1 = `http://139.155.44.190:3005/users/exitLogin?name=${this.state.username}&islogin=${this.state.islogin}`;
+                fetch(url1)
+                    .then(res => res.json())
+                    .then((res) => {
+                        if (res.err) {
+                        } else {
+                            console.log('成功')
+                        }
+                    })
+            });
         AsyncStorage.setItem('username', '');
         AsyncStorage.setItem('password', '');
         Actions.login();
