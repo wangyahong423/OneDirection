@@ -66,9 +66,16 @@ export default class Person extends Component {
                                 })
                                 this.state.lvlist.map((item) => {
                                     if (item.name == this.state.username) {
-                                        this.setState({
-                                            level: num + 1
-                                        })
+                                        if (num < 10) {
+                                            this.setState({
+                                                level: num + 1
+                                            })
+                                        }
+                                        else {
+                                            this.setState({
+                                                level: 10
+                                            })
+                                        }
                                         console.log("获取到的等级", this.state.level)
                                         let url3 = `http://139.155.44.190:3005/users/changeLv?level=${this.state.level}&name=${this.state.username}`;
                                         fetch(url3)
@@ -136,6 +143,7 @@ export default class Person extends Component {
                                                 level: num + 1
                                             })
                                             console.log("获取到的等级", self.state.level)
+
                                             let url3 = `http://139.155.44.190:3005/users/changeLv?level=${self.state.level}&name=${self.state.username}`;
                                             fetch(url3)
                                                 .then((res) => res.json())
