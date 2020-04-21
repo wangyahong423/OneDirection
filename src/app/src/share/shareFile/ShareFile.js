@@ -17,7 +17,7 @@ export default class ShareFile extends Component {
                     flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'center'
-                }}>
+                }}> 
                     <View style={{
                         height: 40 * s,
                         width: '60%',

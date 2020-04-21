@@ -9,6 +9,7 @@ export default class Person extends Component {
             username: '',
             data: [],
             todo: [],
+            lvlist: [],
             islogin: false
         }
     }
@@ -51,11 +52,46 @@ export default class Person extends Component {
                     if (item.name == this.state.username) {
                         this.setState({
                             college: item.college,
-                            pic: "http://139.155.44.190:3005" + item.pic
+                            pic: "http://139.155.44.190:3005" + item.pic,
+                            lvnum: item.lvnum//修改
                         })
+                        var num = Math.floor(this.state.lvnum / 15);
+                        let url3 = `http://139.155.44.190:3005/users/list`;
+                        fetch(url3)
+                            .then(res => res.json())
+                            .then((res) => {
+                                this.setState({
+                                    lvlist: res
+                                })
+                                this.state.lvlist.map((item) => {
+                                    if (item.name == this.state.username) {
+                                        if (num < 10) {
+                                            this.setState({
+                                                level: num + 1
+                                            })
+                                        }
+                                        else {
+                                            this.setState({
+                                                level: 10
+                                            })
+                                        }
+                                        console.log("获取到的等级", this.state.level)
+                                        let url3 = `http://139.155.44.190:3005/users/changeLv?level=${this.state.level}&name=${this.state.username}`;
+                                        fetch(url3)
+                                            .then((res) => res.json())
+                                            .then((res) => {
+                                                if (res.ok) {
+                                                } else {
+                                                    Alert.alert(res.msg);
+                                                }
+                                            });
+                                    }
+                                })
+                            })
                     }
                 })
             })
+
         var self = this;
         this.listener = DeviceEventEmitter.addListener('freshone', function (param) {
             let url = `http://139.155.44.190:3005/users/list`;
@@ -89,8 +125,37 @@ export default class Person extends Component {
                         if (item.name == self.state.username) {
                             self.setState({
                                 college: item.college,
-                                pic: "http://139.155.44.190:3005" + item.pic
+                                pic: "http://139.155.44.190:3005" + item.pic,
+                                lvnum: item.lvnum//修改
                             })
+                            var num = Math.floor(self.state.lvnum / 15);
+                            console.log("输出num", num)
+                            let url3 = `http://139.155.44.190:3005/users/list`;
+                            fetch(url3)
+                                .then(res => res.json())
+                                .then((res) => {
+                                    self.setState({
+                                        lvlist: res
+                                    })
+                                    self.state.lvlist.map((item) => {
+                                        if (item.name == self.state.username) {
+                                            self.setState({
+                                                level: num + 1
+                                            })
+                                            console.log("获取到的等级", self.state.level)
+
+                                            let url3 = `http://139.155.44.190:3005/users/changeLv?level=${self.state.level}&name=${self.state.username}`;
+                                            fetch(url3)
+                                                .then((res) => res.json())
+                                                .then((res) => {
+                                                    if (res.ok) {
+                                                    } else {
+                                                        Alert.alert(res.msg);
+                                                    }
+                                                });
+                                        }
+                                    })
+                                })
                         }
                     })
                 })
@@ -106,7 +171,7 @@ export default class Person extends Component {
                 })
             });
     }
-    componentWillUnmount() {
+    componentWillUnmount() { 
         this.listener.remove();
     }
 
@@ -142,7 +207,10 @@ export default class Person extends Component {
                         <TouchableOpacity style={{ width: 100, height: 100, position: "absolute", top: -50, left: 30 }} onPress={() => Actions.touxiang()}>
                             <Image source={{ uri: this.state.pic }} style={{ width: 100, height: 100, borderRadius: 50 }} />
                         </TouchableOpacity>
-                        <Text style={{ position: 'absolute', left: 150, fontSize: 18, top: -3 }}>{this.state.username}</Text>
+                        <Text style={{ position: 'absolute', left: 150, fontSize: 18, top: -3 }}>
+                            {this.state.username}&nbsp;&nbsp;&nbsp;
+                            <Text style={{ marginLeft: 20, fontSize: 15, color: "red" }}>Lv {this.state.level}</Text>
+                        </Text>
                         <Text style={{ position: 'absolute', left: 150, top: 27, fontSize: 18 }}>河北师范大学{this.state.college}</Text>
                     </View>
 

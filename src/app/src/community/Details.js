@@ -11,6 +11,7 @@ export default class Details extends Component {
             comment: '',
             list: [],
             pic: [],
+            lvlist: [],
             isLoading: true
         };
         this.getData();
@@ -36,7 +37,26 @@ export default class Details extends Component {
                 fetch(url2)
                     .then((res) => res.json())
                     .then((res) => {
-                        this.setState({ pic: res });
+                        this.setState({
+                            pic: res,
+                            lvlist: res
+                        });
+                        this.state.lvlist.map((item) => {
+                            if (item.name == this.state.username) {
+                                this.setState({
+                                    lvnum: item.lvnum + 1
+                                })
+                                let url = `http://139.155.44.190:3005/users/changeLvnum?lvnum=${this.state.lvnum}&name=${this.state.username}`;
+                                fetch(url)
+                                    .then((res) => res.json())
+                                    .then((res) => {
+                                        if (res.ok) {
+                                        } else {
+                                            Alert.alert(res.msg);
+                                        }
+                                    });
+                            }
+                        })
                         fetch(url1)
                             .then((res) => res.json())
                             .then((res) => {
@@ -61,7 +81,26 @@ export default class Details extends Component {
                     fetch(url2)
                         .then((res) => res.json())
                         .then((res) => {
-                            self.setState({ pic: res });
+                            self.setState({
+                                pic: res,
+                                lvlist:res
+                            });
+                            self.state.lvlist.map((item) => {
+                                if (item.name == self.state.username) {
+                                    self.setState({
+                                        lvnum: item.lvnum + 1
+                                    })
+                                    let url = `http://139.155.44.190:3005/users/changeLvnum?lvnum=${self.state.lvnum}&name=${self.state.username}`;
+                                    fetch(url)
+                                        .then((res) => res.json())
+                                        .then((res) => {
+                                            if (res.ok) {
+                                            } else {
+                                                Alert.alert(res.msg);
+                                            }
+                                        });
+                                }
+                            })
                             fetch(url1)
                                 .then((res) => res.json())
                                 .then((res) => {
@@ -214,7 +253,7 @@ const styles = StyleSheet.create({
         borderRadius: 25 * s,
         backgroundColor: 'yellow'
     },
-    send:{
+    send: {
         width: 80 * s,
         height: 44 * s,
         borderRadius: 5 * s,

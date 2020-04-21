@@ -6,12 +6,26 @@ const { width } = Dimensions.get('window');
 const s = width / 460;
 export default class Shezhi extends Component {
     outlogin = () => {
-        AsyncStorage.setItem('username','');
-        AsyncStorage.setItem('pwd','');
-        AsyncStorage.setItem('pic','');
-        AsyncStorage.setItem('college','');
-        Actions.login(); 
-    } 
+        AsyncStorage.getItem('username')
+            .then((res) => {
+                let name = { username: res }
+                this.setState({
+                    username: name.username
+                })
+                let url1 = `http://139.155.44.190:3005/users/exitLogin?name=${this.state.username}&islogin=${this.state.islogin}`;
+                fetch(url1)
+                    .then(res => res.json())
+                    .then((res) => {
+                        if (res.err) {
+                        } else {
+                            console.log('成功')
+                        }
+                    })
+            });
+        AsyncStorage.setItem('username', '');
+        AsyncStorage.setItem('password', '');
+        Actions.login();
+    }
     render() {
         return (
             <ScrollView>

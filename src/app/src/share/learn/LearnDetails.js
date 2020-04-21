@@ -13,6 +13,7 @@ export default class LearnDetails extends Component {
             comment: '',
             list: [],
             pic: [],
+            lvlist:[],
             isLoading: true
         };
         this.getData();
@@ -38,7 +39,26 @@ export default class LearnDetails extends Component {
                 fetch(url2)
                     .then((res) => res.json())
                     .then((res) => {
-                        this.setState({ pic: res });
+                        this.setState({ 
+                            pic: res ,
+                            lvlist:res
+                        });
+                        this.state.lvlist.map((item) => {
+                            if (item.name == this.state.username) {
+                                this.setState({
+                                    lvnum: item.lvnum + 1
+                                })
+                                let url = `http://139.155.44.190:3005/users/changeLvnum?lvnum=${this.state.lvnum}&name=${this.state.username}`;
+                                fetch(url)
+                                    .then((res) => res.json())
+                                    .then((res) => {
+                                        if (res.ok) {
+                                        } else {
+                                            Alert.alert(res.msg);
+                                        }
+                                    });
+                            }
+                        })
                         fetch(url1)
                             .then((res) => res.json())
                             .then((res) => {

@@ -61,6 +61,30 @@ export default class AddLearn extends Component {
                         Alert.alert(res.msg);
                     }
                 });
+                let url2 = `http://139.155.44.190:3005/users/list`;
+                fetch(url2)
+                    .then((res) => res.json())
+                    .then((res) => {
+                        this.setState({
+                            lvlist: res
+                        })
+                        this.state.lvlist.map((item) => {
+                            if (item.name == this.state.username) {
+                                this.setState({
+                                    lvnum: item.lvnum + 2
+                                })
+                                let url3 = `http://139.155.44.190:3005/users/changeLvnum?lvnum=${this.state.lvnum}&name=${this.state.username}`;
+                                fetch(url3)
+                                    .then((res) => res.json())
+                                    .then((res) => {
+                                        if (res.ok) {
+                                        } else {
+                                            Alert.alert(res.msg);
+                                        }
+                                    });
+                            }
+                        })
+                    })
         }
         else {
             Alert.alert("未填写内容")

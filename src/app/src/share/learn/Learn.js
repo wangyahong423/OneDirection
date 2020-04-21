@@ -11,6 +11,7 @@ export default class Learn extends Component {
             list: [],
             pic: [],
             like: [],
+            lvlist:[],
             search: '',
             likeNum: [],
             comNum: [],
@@ -37,7 +38,9 @@ export default class Learn extends Component {
         fetch(url3)
             .then((res) => res.json())
             .then((res) => {
-                this.setState({ pic: res });
+                this.setState({ 
+                    pic: res,
+                 });
                 fetch(url2)
                     .then((res) => res.json())
                     .then((res) => {
@@ -213,6 +216,26 @@ export default class Learn extends Component {
                 .then((res) => {
                     console.log(url1);
                 });
+                let url2 = `http://139.155.44.190:3005/users/list`;
+                fetch(url2)
+                    .then((res) => res.json())
+                    .then((res) => {
+                        this.setState({
+                            lvlist: res
+                        });
+                        this.state.lvlist.map((item) => {
+                            if (item.name == this.state.username) {
+                                this.setState({
+                                    lvnum: item.lvnum + 1
+                                })
+                                let url = `http://139.155.44.190:3005/users/changeLvnum?lvnum=${this.state.lvnum}&name=${this.state.username}`;
+                                fetch(url)
+                                    .then((res) => res.json())
+                                    .then((res) => {
+                                    });
+                            }
+                        })
+                    })
         }
         else if (this.state.list[idx].like == true) {
             crr = this.state.list;

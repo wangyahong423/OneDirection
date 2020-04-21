@@ -11,6 +11,7 @@ export default class community extends Component {
             list: [],
             pic: [],
             like: [],
+            lvlist: [],
             search: '',
             likeNum: [],
             comNum: [],
@@ -38,7 +39,9 @@ export default class community extends Component {
         fetch(url3)
             .then((res) => res.json())
             .then((res) => {
-                this.setState({ pic: res });//所有用户信息
+                this.setState({
+                    pic: res,
+                });//所有用户信息
                 fetch(url2)
                     .then((res) => res.json())
                     .then((res) => {
@@ -57,7 +60,6 @@ export default class community extends Component {
                                 fetch(url1)
                                     .then((res) => res.json())
                                     .then((res) => {
-                                        console.log("董晓倩",res)
                                         res.forEach(item => {
                                             for (var i = 0; i < this.state.pic.length; i++) {
                                                 if (item.name == this.state.pic[i].name) {
@@ -65,7 +67,7 @@ export default class community extends Component {
                                                     break;
                                                 }
                                             }
-                                            item.like=false;
+                                            item.like = false;
                                             for (var j = 0; j < this.state.like.length; j++) {
                                                 if (item.id == this.state.like[j].cid) {
                                                     item.like = true;
@@ -101,7 +103,9 @@ export default class community extends Component {
             fetch(url3)
                 .then((res) => res.json())
                 .then((res) => {
-                    self.setState({ pic: res });
+                    self.setState({
+                        pic: res,
+                    });
                     fetch(url2)
                         .then((res) => res.json())
                         .then((res) => {
@@ -127,7 +131,7 @@ export default class community extends Component {
                                                         break;
                                                     }
                                                 }
-                                                item.like=false;
+                                                item.like = false;
                                                 for (var j = 0; j < self.state.like.length; j++) {
                                                     if (item.id == self.state.like[j].cid) {
                                                         item.like = true;
@@ -168,7 +172,6 @@ export default class community extends Component {
         Actions.details();
     }
     like = (idx) => {
-        console.log("输出list",this.state.list)
         var crr = '';
         if (this.state.list[idx].like == false) {
             crr = this.state.list;
@@ -182,7 +185,27 @@ export default class community extends Component {
                 .then((res) => res.json())
                 .then((res) => {
                 });
-                console.log(url1)
+            console.log(url1)
+            let url2 = `http://139.155.44.190:3005/users/list`;
+            fetch(url2)
+                .then((res) => res.json())
+                .then((res) => {
+                    this.setState({
+                        lvlist: res
+                    });
+                    this.state.lvlist.map((item) => {
+                        if (item.name == this.state.username) {
+                            this.setState({
+                                lvnum: item.lvnum + 1
+                            })
+                            let url = `http://139.155.44.190:3005/users/changeLvnum?lvnum=${this.state.lvnum}&name=${this.state.username}`;
+                            fetch(url)
+                                .then((res) => res.json())
+                                .then((res) => {
+                                });
+                        }
+                    })
+                })
         }
         else if (this.state.list[idx].like == true) {
             crr = this.state.list;
