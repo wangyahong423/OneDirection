@@ -35,9 +35,9 @@ router.get('/delete', (req, res) => {
     let sql = 'delete from learntalk where id=$1';
     con.query(sql, [id], (err, result) => {
         if (err) {
-            console.log(err);
+            res.json({ ok: false, msg: '删除失败！' });
         } else {
-            console.log(result.rows);
+            res.json({ ok: true, msg: '删除成功！' });
         }
     });
 });
