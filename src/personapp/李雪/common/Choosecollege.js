@@ -47,8 +47,8 @@ export default class Choosecollege extends Component {
                     value: '初等教育系'
                 },
                 {
-                    label: '网络教育学院（软件学院）',
-                    value: '网络教育学院（软件学院）'
+                    label: '软件学院',
+                    value: '软件学院'
                 },
                 {
                     label: '教育学院',
@@ -130,7 +130,7 @@ export default class Choosecollege extends Component {
         )
         Actions.pop()
         var param = v[0];
-        DeviceEventEmitter.emit("refresh", param)
+        DeviceEventEmitter.emit("freshone", param)
     }
 
     render() {
