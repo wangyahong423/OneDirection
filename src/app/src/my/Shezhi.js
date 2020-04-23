@@ -5,6 +5,13 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 export default class Shezhi extends Component {
+    constructor(){
+        super();
+        this.state={
+            username:'',
+            islogin:false
+        }
+    }
     outlogin = () => {
         AsyncStorage.getItem('username')
             .then((res) => {
@@ -22,10 +29,12 @@ export default class Shezhi extends Component {
                         }
                     })
             });
-        AsyncStorage.setItem('username', '');
-        AsyncStorage.setItem('password', '');
-        Actions.login();
-    }
+        AsyncStorage.setItem('username','');
+        AsyncStorage.setItem('pwd','');
+        AsyncStorage.setItem('pic','');
+        AsyncStorage.setItem('college','');
+        Actions.login(); 
+    } 
     render() {
         return (
             <ScrollView>

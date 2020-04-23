@@ -67,15 +67,19 @@ export default class Login extends Component {
                 }
               })
             var param = { "college": this.state.college, "pic": this.state.pic }
-            DeviceEventEmitter.emit('freshone', param)
+            DeviceEventEmitter.emit('refresh', param)
             Actions.methodPage();//登录成功跳转首页
           }
           else {
-            Alert.alert(res.msg)
-            // this.state({
-            //   username:'',
-            //   pwd:''
+            // this.setState({
+            //   isnull: false,
+            //   isloading: false
             // })
+              Alert.alert(res.msg)
+              this.setState({
+                username:'',
+                pwd:''
+              })
           }
         })
     }

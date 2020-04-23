@@ -9,7 +9,6 @@ export default class Person extends Component {
             username: '',
             data: [],
             todo: [],
-            lvlist: [],
             islogin: false
         }
     }
@@ -56,6 +55,7 @@ export default class Person extends Component {
                             lvnum: item.lvnum//修改
                         })
                         var num = Math.floor(this.state.lvnum / 15);
+                        console.log("输出num", num)
                         let url3 = `http://139.155.44.190:3005/users/list`;
                         fetch(url3)
                             .then(res => res.json())
@@ -91,76 +91,75 @@ export default class Person extends Component {
                     }
                 })
             })
-
-        var self = this;
-        this.listener = DeviceEventEmitter.addListener('freshone', function (param) {
-            let url = `http://139.155.44.190:3005/users/list`;
-            fetch(url)
-                .then(res => res.json())
-                .then((res) => {
-                    if (res.err) {
-                    } else {
-                        self.setState({
-                            data: res
-                        })
-                        let arr = [];
-                        self.state.data.map((item) => {
-                            if (item.name === self.state.username) {
-                                arr.push(item)
-                            }
+            var self = this;
+            this.listener = DeviceEventEmitter.addListener('refresh', function (param) {
+                let url = `http://139.155.44.190:3005/users/list`;
+                fetch(url)
+                    .then(res => res.json())
+                    .then((res) => {
+                        if (res.err) {
+                        } else {
                             self.setState({
-                                data: arr
+                                data: res
                             })
-                        })
-                    }
-                })
-            let url2 = `http://139.155.44.190:3005/users/list`;
-            fetch(url2)
-                .then(res => res.json())
-                .then((res) => {
-                    self.setState({
-                        todo: res
-                    })
-                    self.state.todo.map((item) => {
-                        if (item.name == self.state.username) {
-                            self.setState({
-                                college: item.college,
-                                pic: "http://139.155.44.190:3005" + item.pic,
-                                lvnum: item.lvnum//修改
-                            })
-                            var num = Math.floor(self.state.lvnum / 15);
-                            console.log("输出num", num)
-                            let url3 = `http://139.155.44.190:3005/users/list`;
-                            fetch(url3)
-                                .then(res => res.json())
-                                .then((res) => {
-                                    self.setState({
-                                        lvlist: res
-                                    })
-                                    self.state.lvlist.map((item) => {
-                                        if (item.name == self.state.username) {
-                                            self.setState({
-                                                level: num + 1
-                                            })
-                                            console.log("获取到的等级", self.state.level)
-
-                                            let url3 = `http://139.155.44.190:3005/users/changeLv?level=${self.state.level}&name=${self.state.username}`;
-                                            fetch(url3)
-                                                .then((res) => res.json())
-                                                .then((res) => {
-                                                    if (res.ok) {
-                                                    } else {
-                                                        Alert.alert(res.msg);
-                                                    }
-                                                });
-                                        }
-                                    })
+                            let arr = [];
+                            self.state.data.map((item) => {
+                                if (item.name === self.state.username) {
+                                    arr.push(item)
+                                }
+                                self.setState({
+                                    data: arr
                                 })
+                            })
                         }
                     })
-                })
-        })
-    }
+                let url2 = `http://139.155.44.190:3005/users/list`;
+                fetch(url2)
+                    .then(res => res.json())
+                    .then((res) => {
+                        self.setState({
+                            todo: res
+                        })
+                        self.state.todo.map((item) => {
+                            if (item.name == self.state.username) {
+                                self.setState({
+                                    college: item.college,
+                                    pic: "http://139.155.44.190:3005" + item.pic,
+                                    lvnum: item.lvnum//修改
+                                })
+                                var num = Math.floor(self.state.lvnum / 15);
+                                console.log("输出num", num)
+                                let url3 = `http://139.155.44.190:3005/users/list`;
+                                fetch(url3)
+                                    .then(res => res.json())
+                                    .then((res) => {
+                                        self.setState({
+                                            lvlist: res
+                                        })
+                                        self.state.lvlist.map((item) => {
+                                            if (item.name == self.state.username) {
+                                                self.setState({
+                                                    level: num + 1
+                                                })
+                                                console.log("获取到的等级", self.state.level)
+    
+                                                let url3 = `http://139.155.44.190:3005/users/changeLv?level=${self.state.level}&name=${self.state.username}`;
+                                                fetch(url3)
+                                                    .then((res) => res.json())
+                                                    .then((res) => {
+                                                        if (res.ok) {
+                                                        } else {
+                                                            Alert.alert(res.msg);
+                                                        }
+                                                    });
+                                            }
+                                        })
+                                    })
+                            }
+                        })
+                    })
+            })
+        }
 
     componentDidUpdate() {
         AsyncStorage.getItem('username')
@@ -171,7 +170,7 @@ export default class Person extends Component {
                 })
             });
     }
-    componentWillUnmount() { 
+    componentWillUnmount() {
         this.listener.remove();
     }
 
@@ -207,7 +206,7 @@ export default class Person extends Component {
                         <TouchableOpacity style={{ width: 100, height: 100, position: "absolute", top: -50, left: 30 }} onPress={() => Actions.touxiang()}>
                             <Image source={{ uri: this.state.pic }} style={{ width: 100, height: 100, borderRadius: 50 }} />
                         </TouchableOpacity>
-                        <Text style={{ position: 'absolute', left: 150, fontSize: 18, top: -3 }}>
+                        <Text style={{ position: "absolute", left: 150, fontSize: 18, top: -3 }}>
                             {this.state.username}&nbsp;&nbsp;&nbsp;
                             <Text style={{ marginLeft: 20, fontSize: 15, color: "red" }}>Lv {this.state.level}</Text>
                         </Text>
@@ -231,16 +230,6 @@ export default class Person extends Component {
                         <Icon name="hand-o-right" size={30} color="#5f6fcd" style={{ marginLeft: 30, marginTop: 10 }} />
                         <TouchableOpacity onPress={() => Actions.tiezi()} style={{ flexDirection: 'row' }}>
                             <Text style={{ fontSize: 20, marginLeft: 39, marginTop: 11 }} onPress={() => Actions.tiezi()}>我的帖子</Text>
-                            <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 212, marginTop: 15 }} />
-                        </TouchableOpacity>
-                    </View>
-                    <View style={{
-                        height: 50, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
-                        borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1
-                    }}>
-                        <Icon name="file-o" size={28} color="#25bb22" style={{ marginLeft: 30, marginTop: 10 }} />
-                        <TouchableOpacity onPress={() => Actions.file()} style={{ flexDirection: 'row' }}>
-                            <Text style={{ fontSize: 20, marginLeft: 44, marginTop: 11 }} onPress={() => Actions.file()}>我的文件</Text>
                             <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 212, marginTop: 15 }} />
                         </TouchableOpacity>
                     </View>

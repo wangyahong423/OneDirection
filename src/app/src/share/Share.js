@@ -21,20 +21,35 @@ export default class Share extends Component {
                     </View>
 
                     <View>
-                        <View style={{ alignItems: 'center' }}>
+                    <View style={{ alignItems: 'center' }}>
                             <TouchableOpacity
                                 style={{
                                     width: 200 * s,
                                     height: 100 * s,
                                     backgroundColor: '#675858',
                                     opacity: 0.8,
-                                    marginTop: 150 * s,
+                                    marginTop: 80 * s,
                                     alignItems: 'center',
                                     justifyContent: 'center'
                                 }}
-                                onPress={() => Actions.sharefile()}>
+                                onPress={() => Actions.cet46()}>
                                 <Icon color='#fff' size={26} name='book' />
-                                <Text style={{ color: '#fff', fontSize: 25 * s }}>资料共享</Text>
+                                <Text style={{ color: '#fff', fontSize: 25 * s }}>四六级资料</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity
+                                style={{
+                                    width: 200 * s,
+                                    height: 100 * s,
+                                    backgroundColor: '#675858',
+                                    opacity: 0.8,
+                                    marginTop: 40 * s,
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}
+                                onPress={() => Actions.programme()}>
+                                <Icon color='#fff' size={26} name='book' />
+                                <Text style={{ color: '#fff', fontSize: 25 * s }}>考研</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={{
@@ -42,13 +57,27 @@ export default class Share extends Component {
                                     height: 100 * s,
                                     backgroundColor: '#675858',
                                     opacity: 0.8,
-                                    marginTop: 140 * s,
+                                    marginTop: 40 * s,
                                     alignItems: 'center',
                                     justifyContent: 'center'
                                 }}
-                                onPress={() => Actions.learn()}>
-                                <Icon color='#fff' size={26} name='comments-o' />
-                                <Text style={{ color: '#fff', fontSize: 25 * s }}>学习交流</Text>
+                                onPress={() => Actions.notes()}>
+                                <Icon color='#fff' size={26} name='book' />
+                                <Text style={{ color: '#fff', fontSize: 25 * s }}>笔记</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={{
+                                    width: 200 * s,
+                                    height: 100 * s,
+                                    backgroundColor: '#675858',
+                                    opacity: 0.8,
+                                    marginTop: 40 * s,
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}
+                                onPress={() => Actions.experience()}>
+                                <Icon color='#fff' size={26} name='book' />
+                                <Text style={{ color: '#fff', fontSize: 25 * s }}>经验分享</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

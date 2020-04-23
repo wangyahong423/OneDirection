@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, TextInput, Dimensions, StyleSheet, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter } from 'react-native';
-import Icon from 'react-native-vector-icons/AntDesign';
+import { Text, View, ScrollView, StyleSheet, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert } from 'react-native';
+import Icon from 'react-native-vector-icons/EvilIcons';
 import { Actions } from 'react-native-router-flux';
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
-export default class community extends Component {
+export default class Community extends Component {
     constructor() {
         super();
         this.state = {
@@ -27,21 +27,20 @@ export default class community extends Component {
                 this.setState({
                     username: name.username
                 })
-                console.log("用户名：", this.state.username)
             });
     }
     componentDidMount() {
         this.setState({ isLoading: true })
-        var url1 = `http://139.155.44.190:3005/community/list`;
-        var url2 = `http://139.155.44.190:3005/communitylike/list`;
+        var url1 = `http://139.155.44.190:3005/learn/list`;
+        var url2 = `http://139.155.44.190:3005/learnlike/list`;
         let url3 = `http://139.155.44.190:3005/users/list`;
-        let url4 = `http://139.155.44.190:3005/communitytalk/list`;
+        let url4 = `http://139.155.44.190:3005/learntalk/list`;
         fetch(url3)
             .then((res) => res.json())
             .then((res) => {
                 this.setState({
                     pic: res,
-                });//所有用户信息
+                });
                 fetch(url2)
                     .then((res) => res.json())
                     .then((res) => {
@@ -56,7 +55,7 @@ export default class community extends Component {
                         fetch(url4)
                             .then((res) => res.json())
                             .then((res) => {
-                                this.setState({ comNum: res.communitytalk });
+                                this.setState({ comNum: res });
                                 fetch(url1)
                                     .then((res) => res.json())
                                     .then((res) => {
@@ -69,7 +68,7 @@ export default class community extends Component {
                                             }
                                             item.like = false;
                                             for (var j = 0; j < this.state.like.length; j++) {
-                                                if (item.id == this.state.like[j].cid) {
+                                                if (item.id == this.state.like[j].lid) {
                                                     item.like = true;
                                                     break;
                                                 }
@@ -79,18 +78,19 @@ export default class community extends Component {
                                             }
                                             var likeNum = 0;
                                             for (var z = 0; z < this.state.likeNum.length; z++) {
-                                                if (item.id == this.state.likeNum[z].cid) {
+                                                if (item.id == this.state.likeNum[z].lid) {
                                                     likeNum++;
                                                 }
                                             }
                                             item.likeNum = likeNum;
                                             var comNum = 0;
                                             for (var z = 0; z < this.state.comNum.length; z++) {
-                                                if (item.id == this.state.comNum[z].cid) {
+                                                if (item.id == this.state.comNum[z].lid) {
                                                     comNum++;
                                                 }
                                             }
                                             item.comNum = comNum;
+                                            // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
                                         });
                                         this.setState({ isLoading: false });
                                         this.setState({ list: res });
@@ -100,12 +100,14 @@ export default class community extends Component {
             });
         var self = this;
         this.listener = DeviceEventEmitter.addListener('refresh', function (param) {
+            // var arr=self.state.list;
+            // var a = {"content": param.content, "like": false, "likeNum": 0, "name": param.name, "pic": "http://139.155.44.190:3005/images/6.jpg", "time": param.time};
+            // arr.splice(0,0,a);
+            // self.setState({list:arr});
             fetch(url3)
                 .then((res) => res.json())
                 .then((res) => {
-                    self.setState({
-                        pic: res,
-                    });
+                    self.setState({ pic: res });
                     fetch(url2)
                         .then((res) => res.json())
                         .then((res) => {
@@ -120,7 +122,7 @@ export default class community extends Component {
                             fetch(url4)
                                 .then((res) => res.json())
                                 .then((res) => {
-                                    self.setState({ comNum: res.communtiytalk });
+                                    self.setState({ comNum: res });
                                     fetch(url1)
                                         .then((res) => res.json())
                                         .then((res) => {
@@ -133,7 +135,7 @@ export default class community extends Component {
                                                 }
                                                 item.like = false;
                                                 for (var j = 0; j < self.state.like.length; j++) {
-                                                    if (item.id == self.state.like[j].cid) {
+                                                    if (item.id == self.state.like[j].lid) {
                                                         item.like = true;
                                                         break;
                                                     }
@@ -143,18 +145,19 @@ export default class community extends Component {
                                                 }
                                                 var likeNum = 0;
                                                 for (var z = 0; z < self.state.likeNum.length; z++) {
-                                                    if (item.id == self.state.likeNum[z].cid) {
+                                                    if (item.id == self.state.likeNum[z].lid) {
                                                         likeNum++;
                                                     }
                                                 }
                                                 item.likeNum = likeNum;
                                                 var comNum = 0;
                                                 for (var z = 0; z < self.state.comNum.length; z++) {
-                                                    if (item.id == self.state.comNum[z].cid) {
+                                                    if (item.id == self.state.comNum[z].lid) {
                                                         comNum++;
                                                     }
                                                 }
                                                 item.comNum = comNum;
+                                                // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
                                             });
                                             self.setState({ list: res });
                                         });
@@ -162,9 +165,36 @@ export default class community extends Component {
                         });
                 });
         });
+        // var self1 = this;
+        // this.listener1 = DeviceEventEmitter.addListener('com', function (num){
+        //     console.log(num);
+        // })
     }
+
     componentWillUnmount() {
         this.listener.remove();
+        // this.listener1.remove();
+    }
+    delete = (idx) => {
+        Alert.alert('确认要删除吗', '',
+            [
+                { text: "确认", onPress: this.opntion1.bind(this, (this.state.list[idx].id)) },
+                { text: "取消", onPress: this.opntion2 }
+            ]
+        );
+    }
+    opntion1 = (id) => {
+        let url = `http://139.155.44.190:3005/learn/deleteLearn?id=${id}`;
+        fetch(url)
+            .then((res) => res.json())
+            .then((res) => {
+                Alert.alert(res.msg);
+                var param = 1;
+                DeviceEventEmitter.emit('refresh', param);
+            });
+    }
+    opntion2 = () => {
+
     }
     details = (idx) => {
         var value = { page: this.state.list[idx] };
@@ -180,12 +210,12 @@ export default class community extends Component {
             this.setState({
                 list: crr
             })
-            let url1 = `http://139.155.44.190:3005/communitylike/add?cid=${this.state.list[idx].id}&name=${this.state.username}`;
+            let url1 = `http://139.155.44.190:3005/learnlike/add?lid=${this.state.list[idx].id}&name=${this.state.username}`;
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
+                    console.log(url1);
                 });
-            console.log(url1)
             let url2 = `http://139.155.44.190:3005/users/list`;
             fetch(url2)
                 .then((res) => res.json())
@@ -203,6 +233,33 @@ export default class community extends Component {
                                 .then((res) => res.json())
                                 .then((res) => {
                                 });
+                            if (this.state.lvnum == 15) {
+                                Alert.alert("恭喜你提升为二级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 30) {
+                                Alert.alert("恭喜你提升为三级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 45) {
+                                Alert.alert("恭喜你提升为四级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 60) {
+                                Alert.alert("恭喜你提升为五级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 75) {
+                                Alert.alert("恭喜你提升为六级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 90) {
+                                Alert.alert("恭喜你提升为七级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 105) {
+                                Alert.alert("恭喜你提升为八级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 120) {
+                                Alert.alert("恭喜你提升为九级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 135) {
+                                Alert.alert("恭喜你提升为十级用户，快去解锁新的头像吧！")
+                            }
                         }
                     })
                 })
@@ -214,20 +271,23 @@ export default class community extends Component {
             this.setState({
                 list: crr
             })
-            let url2 = `http://139.155.44.190:3005/communitylike/delete?cid=${this.state.list[idx].id}&name=${this.state.username}`
+            let url2 = `http://139.155.44.190:3005/learnlike/delete?lid=${this.state.list[idx].id}&name=${this.state.username}`
             fetch(url2)
                 .then((res) => res.json())
                 .then((res) => {
+                    console.log(url2);
                 });
         }
     }
     change = (e) => {
-        this.setState({
-            search: e
-        })
+        if (e !== '') {
+            this.setState({
+                search: e
+            })
+        }
     }
     search = (e) => {
-        let url = `http://139.155.44.190:3005/community/select?content=${this.state.search}`;
+        let url = `http://139.155.44.190:3005/learn/select?content=${this.state.search}`;
         fetch(url)
             .then((res) => res.json())
             .then((res) => {
@@ -241,7 +301,7 @@ export default class community extends Component {
                             }
                         }
                         for (var j = 0; j < this.state.like.length; j++) {
-                            if (item.id == this.state.like[j].cid) {
+                            if (item.id == this.state.like[j].lid) {
                                 item.like = true;
                                 break;
                             }
@@ -251,14 +311,14 @@ export default class community extends Component {
                         }
                         var likeNum = 0;
                         for (var z = 0; z < this.state.likeNum.length; z++) {
-                            if (item.id == this.state.likeNum[z].cid) {
+                            if (item.id == this.state.likeNum[z].lid) {
                                 likeNum++;
                             }
                         }
                         item.likeNum = likeNum;
                         var comNum = 0;
                         for (var z = 0; z < this.state.comNum.length; z++) {
-                            if (item.id == this.state.comNum[z].cid) {
+                            if (item.id == this.state.comNum[z].lid) {
                                 comNum++;
                             }
                         }
@@ -269,51 +329,128 @@ export default class community extends Component {
             });
     }
 
+
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
-                <View style={styles.hearder}>
-                    <View style={styles.search}>
+                <View style={{
+                    width: '100%',
+                    height: 70 * s,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}>
+                    <View style={{
+                        height: 40 * s,
+                        width: '60%',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        backgroundColor: '#D7D3D3',
+                        borderRadius: 28 * s
+
+                    }}>
                         <Icon
                             style={{
                                 marginLeft: 25 * s,
                                 marginRight: 20 * s
                             }}
                             onPress={this.search}
-                            style={{ fontSize: 23, marginLeft: 15 }} name='search1' />
+                            color='#fff' size={20} name='search' />
                         <TextInput
-                            style={{ fontSize: 17, height: '100%' }}
+                            style={{
+                                height: 50 * s,
+                                width: "80%",
+                                padding: 0,
+                                fontSize: 15 * s
+                            }}
                             clearButtonMode="while-editing"
+                            placeholderTextColor='#fff'
                             placeholder="请输入您要搜索的关键字"
                             onChangeText={this.change}
                         />
                     </View>
+                    <TouchableOpacity
+                        style={{
+                            height: 50 * s,
+                            fontSize: 15 * s,
+                            color: '#333333',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            marginLeft: 20
+                        }}
+                        onPress={this.search}
+                    >
+                        <Text>搜索</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={this.renovate}>
+                        <Icon
+                            style={styles.only}
+                            size={40}
+                            name='refresh' />
+                    </TouchableOpacity>
                 </View>
+
                 <ScrollView style={{ flex: 1 }}>
                     <View>
                         {
                             this.state.list.map((item, idx) => (
-                                <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 10 * s }}>
-                                    <View style={styles.user}>
-                                        <Image style={styles.avatar} source={{ uri: item.pic }} />
+                                <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 20 * s }}>
+                                    <View style={{
+                                        flexDirection: 'row',
+                                        height: 80 * s,
+                                        alignItems: 'center'
+                                    }}>
+                                        <Image style={{
+                                            marginLeft: 20 * s,
+                                            height: 50 * s,
+                                            width: 50 * s,
+                                            borderRadius: 25 * s,
+                                            backgroundColor: 'yellow'
+                                        }} source={{ uri: item.pic }} />
                                         <View style={{ marginLeft: 30 * s }}>
                                             <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
                                             <Text>{item.time}</Text>
                                         </View>
                                     </View>
-                                    <View style={styles.comment}>
-                                        <Text numberOfLines={2} onPress={this.details.bind(this, (idx))} style={{ fontSize: 18 * s }}>{item.content}</Text>
+                                    <View style={{
+                                        marginLeft: 30 * s,
+                                        marginRight: 30 * s,
+                                        marginTop: 10 * s,
+                                        marginBottom: 20 * s
+                                    }}
+                                    >
+                                        <Text onPress={this.details.bind(this, (idx))} style={{ fontSize: 18 * s }}>{item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content}</Text>
                                     </View>
                                     <View style={{ flexDirection: 'row', height: 40 * s, alignItems: 'center', justifyContent: 'space-evenly', borderTopWidth: 1, borderTopColor: "#EFEFF4" }}>
                                         <View style={{ alignItems: 'center', flexDirection: 'row' }}>
-                                            <Icon onPress={this.details.bind(this, (idx))} name="message1" style={{ fontSize: 20 * s, marginRight: 10 }}></Icon>
+                                            <Icon onPress={this.details.bind(this, (idx))} name="comment" style={{ fontSize: 30 * s }}></Icon>
                                             <Text>{item.comNum}</Text>
                                         </View>
-                                        <View style={styles.bottom}>
-                                            <Icon name="hearto" onPress={this.like.bind(this, (idx))} style={item.like ? { color: 'red', fontSize: 20 * s, marginRight: 10 } : { fontSize: 20 * s, marginRight: 10 }}></Icon>
+                                        <View style={{ alignItems: 'center', flexDirection: 'row' }}>
+                                            <Icon name="heart" onPress={this.like.bind(this, (idx))} style={item.like ? { color: 'red', fontSize: 30 * s } : { fontSize: 30 * s }}></Icon>
                                             <Text>{item.likeNum}</Text>
                                         </View>
                                     </View>
+                                    {
+                                        this.state.username == item.name
+                                            ? <TouchableOpacity style={{
+                                                width: 30 * s,
+                                                height: 30 * s,
+                                                borderRadius: 15 * s,
+                                                flexDirection: 'row',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                // backgroundColor: '#37376F',
+                                                position: 'absolute',
+                                                top: 5,
+                                                right: 5
+                                            }}
+                                                onPress={this.delete.bind(this, (idx))}
+                                            >
+                                                <Text style={{ color: '#e8e8e8', fontSize: 30 * s }}>×</Text>
+                                            </TouchableOpacity>
+                                            : null
+                                    }
                                 </View>
                             ))
                         }
@@ -333,7 +470,7 @@ export default class community extends Component {
                                 flexDirection: 'row',
                                 justifyContent: 'center'
                             }}>
-                                <Text style={{ fontSize: 18, marginTop: 10 }}>正在获取数据...</Text>
+                                <Text style={{ fontSize: 20, marginTop: 10 }}>正在获取数据...</Text>
                             </View>
                         </View>
                         : null
@@ -352,63 +489,17 @@ export default class community extends Component {
                 }}
                     onPress={() => Actions.add()}
                 >
-                    <Icon style={{ fontSize: 35, color: '#fff' }} name="edit" />
+                    <Icon style={{ fontSize: 50, color: '#fff' }} name="pencil" />
                 </TouchableOpacity>
             </SafeAreaView >
         )
     }
 }
 const styles = StyleSheet.create({
-    hearder: {
-        height: 60,
-        backgroundColor: '#EFEFF4',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'row',
-    },
-    search: {
-        height: 40,
-        width: 430 * s,
-        backgroundColor: '#fff',
-        flexDirection: 'row',
-        alignItems: 'center',
-        borderRadius: 20,
-        opacity: 0.6,
-    },
-    user: {
-        flexDirection: 'row',
-        height: 90 * s,
-        alignItems: 'center',
-        // backgroundColor:'red'
-    },
-    avatar: {
-        marginLeft: 20 * s,
-        height: 50 * s,
-        width: 50 * s,
-        borderRadius: 25 * s
-    },
-    comment: {
-        marginLeft: 30 * s,
-        marginRight: 30 * s,
-        marginBottom: 20 * s,
-        // overflow: "hidden",
-        // textOverflow: "ellipsis",
-        // whiteSpace: "nowrap"
-    },
-    add: {
-        position: "absolute",
-        bottom: 30,
-        right: 30,
-        height: 80,
-        width: 80,
-        justifyContent: "center",
-    },
-    bottom: {
-        flexDirection: 'row',
-        height: 50,
-        paddingTop: 10 * s,
-        justifyContent: 'space-evenly',
-        borderTopWidth: 1,
-        borderTopColor: "#EFEFF4"
+    only: {
+        marginLeft: 25 * s,
+        marginRight: 20 * s,
+        fontSize: 23,
+        marginLeft: 15,
     }
 })

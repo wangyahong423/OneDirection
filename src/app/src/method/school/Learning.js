@@ -52,7 +52,7 @@ export default class Learning extends Component {
                         <Text style={{ lineHeight: 25 * s, fontSize: 12 }}>邮政编码：050024</Text>
                         <Text style={{ lineHeight: 25 * s, fontSize: 12 }}>电子邮箱：ziranb@mail.hebtu.edu.cn</Text>
                     </View>
-                    <View style={{ marginLeft: '12%' }}>
+                    <View style={{ marginLeft: '1%' }}>
                         <TouchableOpacity onPress={() => {
                             Linking.openURL('http://xuebao.hebtu.edu.cn/andamagazine/frontArticle.do?bid=1').catch(err => console.error('An error occurred', err));
                         }}>

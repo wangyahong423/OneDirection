@@ -13,35 +13,37 @@ export default class Mima extends Component {
             pnum: 0,
             vnum: 0,
             wnum: 0,
-            name:'',
-            tel:''
+            name: '',
+            tel: '',
+            username:'',
+            islogin:false
         }
     }
     getNewPwd = (text) => {
         if (text !== '') {
             this.setState({
-                newPwd: text,unum:0
+                newPwd: text, unum: 0
             })
         }
     }
     getReNewPwd = (text) => {
         if (text !== '') {
             this.setState({
-                reNewPwd: text,pnum:0
+                reNewPwd: text, pnum: 0
             })
         }
     }
     nameChange = (text) => {
         if (text !== '') {
             this.setState({
-                name: text,vnum:0
+                name: text, vnum: 0
             })
         }
     }
     telChange = (text) => {
         if (text !== '') {
             this.setState({
-                tel: text,wnum:0
+                tel: text, wnum: 0
             })
         }
     }
@@ -50,11 +52,11 @@ export default class Mima extends Component {
             .then(res => res.json())
 
             .then(
-                
+
                 data => {
                     this.setState({
-                        name:this.state.name,
-                        tel:this.state.tel
+                        name: this.state.name,
+                        tel: this.state.tel
                     })
                     console.log(this.state.name)
                     console.log(this.state.tel)
@@ -67,6 +69,22 @@ export default class Mima extends Component {
                                     data => {
                                     }
                                 )
+                            AsyncStorage.getItem('username')
+                                .then((res) => {
+                                    let name = { username: res }
+                                    this.setState({
+                                        username: name.username
+                                    })
+                                    let url1 = `http://139.155.44.190:3005/users/exitLogin?name=${this.state.username}&islogin=${this.state.islogin}`;
+                                    fetch(url1)
+                                        .then(res => res.json())
+                                        .then((res) => {
+                                            if (res.err) {
+                                            } else {
+                                                console.log('成功')
+                                            }
+                                        })
+                                });
                             window.alert("修改成功！");
                             AsyncStorage.setItem('username', '')
                             AsyncStorage.setItem('pwd', '');
@@ -75,7 +93,7 @@ export default class Mima extends Component {
                             Actions.login();
                         }
                     }
-                   
+
                     else if (this.state.name == '') {
                         this.setState({
                             vnum: 1

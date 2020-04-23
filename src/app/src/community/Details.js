@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, SafeAreaView, StyleSheet, TextInput, Dimensions, Image, TouchableOpacity, AsyncStorage, Alert, DeviceEventEmitter } from 'react-native';
-const { width } = Dimensions.get('window');
+import { Text, View, ScrollView, SafeAreaView, TextInput, Dimensions, ImageBackground, Image, TouchableOpacity, AsyncStorage, Alert, DeviceEventEmitter } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { Actions } from 'react-native-router-flux';
+const { width, height } = Dimensions.get('window');
 const s = width / 460;
 export default class Details extends Component {
     constructor() {
@@ -32,37 +34,20 @@ export default class Details extends Component {
                     page: JSON.parse(value).page
                 });
                 this.setState({ isLoading: true })
-                let url1 = `http://139.155.44.190:3005/Communitytalk/list`;
+                let url1 = `http://139.155.44.190:3005/learntalk/list`;
                 let url2 = `http://139.155.44.190:3005/users/list`;
                 fetch(url2)
                     .then((res) => res.json())
                     .then((res) => {
                         this.setState({
                             pic: res,
-                            lvlist: res
                         });
-                        this.state.lvlist.map((item) => {
-                            if (item.name == this.state.username) {
-                                this.setState({
-                                    lvnum: item.lvnum + 1
-                                })
-                                let url = `http://139.155.44.190:3005/users/changeLvnum?lvnum=${this.state.lvnum}&name=${this.state.username}`;
-                                fetch(url)
-                                    .then((res) => res.json())
-                                    .then((res) => {
-                                        if (res.ok) {
-                                        } else {
-                                            Alert.alert(res.msg);
-                                        }
-                                    });
-                            }
-                        })
                         fetch(url1)
                             .then((res) => res.json())
                             .then((res) => {
                                 var arr = [];
-                                res.communitytalk.forEach(item => {
-                                    if (item.cid == this.state.page.id) {
+                                res.forEach(item => {
+                                    if (item.lid == this.state.page.id) {
                                         for (var i = 0; i < this.state.pic.length; i++) {
                                             if (item.name == this.state.pic[i].name) {
                                                 item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
@@ -71,42 +56,24 @@ export default class Details extends Component {
                                         }
                                         arr.push(item);
                                     }
+
                                 });
                                 this.setState({ isLoading: false })
                                 this.setState({ list: arr });
                             })
                     })
                 var self = this;
-                this.listener = DeviceEventEmitter.addListener('comments', function (param) {
+                this.listener = DeviceEventEmitter.addListener('pinglun', function (param) {
                     fetch(url2)
                         .then((res) => res.json())
                         .then((res) => {
-                            self.setState({
-                                pic: res,
-                                lvlist:res
-                            });
-                            self.state.lvlist.map((item) => {
-                                if (item.name == self.state.username) {
-                                    self.setState({
-                                        lvnum: item.lvnum + 1
-                                    })
-                                    let url = `http://139.155.44.190:3005/users/changeLvnum?lvnum=${self.state.lvnum}&name=${self.state.username}`;
-                                    fetch(url)
-                                        .then((res) => res.json())
-                                        .then((res) => {
-                                            if (res.ok) {
-                                            } else {
-                                                Alert.alert(res.msg);
-                                            }
-                                        });
-                                }
-                            })
+                            self.setState({ pic: res });
                             fetch(url1)
                                 .then((res) => res.json())
                                 .then((res) => {
                                     var arr = [];
-                                    res.communitytalk.forEach(item => {
-                                        if (item.cid == self.state.page.id) {
+                                    res.forEach(item => {
+                                        if (item.lid == self.state.page.id) {
                                             for (var i = 0; i < self.state.pic.length; i++) {
                                                 if (item.name == self.state.pic[i].name) {
                                                     item.pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
@@ -115,6 +82,7 @@ export default class Details extends Component {
                                             }
                                             arr.push(item);
                                         }
+
                                     });
                                     self.setState({ list: arr });
                                 })
@@ -122,9 +90,7 @@ export default class Details extends Component {
                 });
             });
     }
-    componentWillUnmount() {
-        this.listener.remove();
-    }
+
     change = (e) => {
         this.setState({ comment: e });
     }
@@ -137,147 +103,239 @@ export default class Details extends Component {
             var hour = date.getHours().toString();
             var minute = date.getMinutes().toString();
             var time = year + '年' + month + '月' + day + '日' + ' ' + hour + ':' + minute;
-            let url = `http://139.155.44.190:3005/Communitytalk/add?cid=${this.state.page.id}
-                &name=${this.state.username}&content=${this.state.comment}&time=${time}`;
+            console.log(time);
+            let url = `http://139.155.44.190:3005/learntalk/add?lid=${this.state.page.id}&name=${this.state.username}&content=${this.state.comment}&time=${time}`;
             fetch(url)
                 .then((res) => res.json())
                 .then((res) => {
                     if (res.ok) {
-
                     } else {
                         Alert.alert(res.msg);
                     }
                 })
             var param = { "content": this.state.comment, "name": this.state.username, "time": time };
-            DeviceEventEmitter.emit('comments', param);
-        }
+            DeviceEventEmitter.emit('pinglun', param);
+            let url2 = `http://139.155.44.190:3005/users/list`;
+            fetch(url2)
+                .then((res) => res.json())
+                .then((res) => {
+                    this.setState({
+                        lvlist: res
+                    });
+                    this.state.lvlist.map((item) => {
+                        if (item.name == this.state.username) {
+                            this.setState({
+                                lvnum: item.lvnum + 1
+                            })
+                            let url = `http://139.155.44.190:3005/users/changeLvnum?lvnum=${this.state.lvnum}&name=${this.state.username}`;
+                            fetch(url)
+                                .then((res) => res.json())
+                                .then((res) => {
+                                    if (res.ok) {
+                                    } else {
+                                        Alert.alert(res.msg);
+                                    }
+                                });
+                            if (this.state.lvnum == 15) {
+                                Alert.alert("恭喜你提升为二级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 30) {
+                                Alert.alert("恭喜你提升为三级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 45) {
+                                Alert.alert("恭喜你提升为四级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 60) {
+                                Alert.alert("恭喜你提升为五级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 75) {
+                                Alert.alert("恭喜你提升为六级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 90) {
+                                Alert.alert("恭喜你提升为七级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 105) {
+                                Alert.alert("恭喜你提升为八级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 120) {
+                                Alert.alert("恭喜你提升为九级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 135) {
+                                Alert.alert("恭喜你提升为十级用户，快去解锁新的头像吧！")
+                            }
+                        }
+                    })
+                }
+        )}
         else {
-            Alert.alert("评论不能为空");
-        }
+                        Alert.alert("评论不能为空");
+                    }
+
     }
-    render() {
-        return (
-            <SafeAreaView style={{ flex: 1 }} >
-                <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 5 * s }}>
-                    <View style={styles.user}>
-                        <Image style={styles.avatar} source={{ uri: this.state.page.pic }} />
-                        <View style={{ marginLeft: 30 * s }}>
-                            <Text style={{ fontSize: 18 * s }}>{this.state.page.name}</Text>
-                            <Text>{this.state.page.time}</Text>
+        delete = (idx) => {
+            Alert.alert('确认要删除吗', '',
+                [
+                    { text: "确认", onPress: this.opntion1.bind(this, (this.state.list[idx].id)) },
+                    { text: "取消", onPress: this.opntion2 }
+                ]
+            );
+        }
+        opntion1 = (id) => {
+            let url = `http://139.155.44.190:3005/learntalk/delete?id=${id}`;
+            fetch(url)
+                .then((res) => res.json())
+                .then((res) => {
+                    Alert.alert(res.msg);
+                    var param = 1;
+                    DeviceEventEmitter.emit('pinglun', param);
+                });
+        }
+        opntion2 = () => {
+
+        }
+        // backt = () => {
+        //     Actions.pop;
+        //     var param = 1;
+        //     DeviceEventEmitter.emit('refresh', param);
+        // }
+        componentWillUnmount() {
+            this.listener.remove();
+        }
+        render() {
+            return (
+                <SafeAreaView style={{ flex: 1 }} >
+                    <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 5 * s }}>
+                        <View style={{
+                            flexDirection: 'row',
+                            height: 80 * s,
+                            alignItems: 'center'
+                        }}>
+                            <Image style={{
+                                marginLeft: 20 * s,
+                                height: 50 * s,
+                                width: 50 * s,
+                                borderRadius: 25 * s
+                            }} source={{ uri: this.state.page.pic }} />
+                            <View style={{ marginLeft: 30 * s }}>
+                                <Text style={{ fontSize: 18 * s }}>{this.state.page.name}</Text>
+                                <Text>{this.state.page.time}</Text>
+                            </View>
+                        </View>
+                        <View style={{
+                            marginLeft: 30 * s,
+                            marginRight: 30 * s,
+                            marginTop: 10 * s,
+                            marginBottom: 20 * s
+                        }}
+                        >
+                            <Text style={{ fontSize: 18 * s }}>{this.state.page.content}</Text>
                         </View>
                     </View>
-                    <View style={styles.comment}>
-                        <Text style={{ fontSize: 18 * s }}>{this.state.page.content}</Text>
-                    </View>
-                </View>
-                <View style={{ flexDirection: 'row', marginTop: 10 * s, marginBottom: 10 * s }}>
-                    <View style={{ width: 350 * s, marginLeft: 10 * s }}>
+                    <View style={{
+                        width: '100%',
+                        height: 70 * s,
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent: 'space-evenly'
+                    }}>
                         <TextInput
-                            style={{ backgroundColor: '#fff', borderRadius: 5 * s, fontSize: 15 * s }}
+                            style={{
+                                height: 30 * s,
+                                width: "75%",
+                                padding: 0,
+                                fontSize: 15 * s,
+                                borderRadius: 15 * s,
+                                backgroundColor: '#fff',
+                                paddingLeft: 10 * s
+                            }}
                             clearButtonMode="while-editing"
+                            // autoFocus={true}
                             placeholderTextColor='#e0e0e0'
-                            placeholder="说点什么吧..."
+                            placeholder="填写评论"
                             onChangeText={this.change}
                         />
+                        <TouchableOpacity style={{
+                            width: 55 * s,
+                            height: 30 * s,
+                            borderRadius: 15 * s,
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            backgroundColor: '#37376F'
+                        }}
+                            onPress={this.release}
+                        >
+                            <Text style={{ color: 'white', fontSize: 15 * s }}>发送</Text>
+                        </TouchableOpacity>
                     </View>
-                    <TouchableOpacity style={styles.send} onPress={this.release}>
-                        <Text style={{ color: '#fff', fontSize: 15 * s }}>发送</Text>
-                    </TouchableOpacity>
-                </View>
-                <ScrollView style={{ flex: 1 }}>
-                    <View>
+                    <View
+                        style={{
+                            borderBottomColor: '#000',
+                            borderBottomWidth: 1 * s
+                        }}
+                    >
+                        <Text style={{ paddingLeft: 10 * s, fontSize: 20 * s }}>评论</Text>
+                    </View>
+                    <ScrollView style={{ flex: 1 }}>
+                        <View>
+                            {
+                                this.state.list.map((item, idx) => (
+                                    <View style={{ backgroundColor: '#fff', width: '100%', borderBottomWidth: 1 * s, borderBottomColor: '#808080' }}>
+                                        <View style={{
+                                            flexDirection: 'row',
+                                            alignItems: 'center'
+                                        }}>
+                                            <Image style={{
+                                                marginLeft: 20 * s,
+                                                height: 50 * s,
+                                                width: 50 * s,
+                                                borderRadius: 25 * s,
+                                                backgroundColor: 'yellow'
+                                            }} source={{ uri: item.pic }} />
+                                            <View style={{ marginLeft: 30 * s, marginRight: 60 * s }}>
+                                                <Text style={this.state.page.name == item.name ? { fontSize: 15 * s, color: 'red', marginTop: 5 * s } : { fontSize: 15 * s, color: '#37376F', marginTop: 5 * s }}>{item.name}</Text>
+                                                <Text style={{ fontSize: 18 * s }}>{item.content}</Text>
+                                                <Text style={{ fontSize: 10 * s, color: '#808080', marginTop: 5 * s, marginBottom: 5 * s }}>{item.time}</Text>
+                                            </View>
+                                        </View>
+                                        {
+                                            this.state.username == this.state.page.name || this.state.username == item.name
+                                                ? <TouchableOpacity style={{
+                                                    width: 30 * s,
+                                                    height: 30 * s,
+                                                    borderRadius: 15 * s,
+                                                    flexDirection: 'row',
+                                                    justifyContent: 'center',
+                                                    alignItems: 'center',
+                                                    // backgroundColor: '#37376F',
+                                                    position: 'absolute',
+                                                    top: 0,
+                                                    right: 0
+                                                }}
+                                                    onPress={this.delete.bind(this, (idx))}
+                                                >
+                                                    <Text style={{ color: '#e8e8e8', fontSize: 30 * s }}>×</Text>
+                                                </TouchableOpacity>
+                                                : null
+                                        }
+                                    </View>
+                                ))
+                            }
+                        </View>
                         {
-                            this.state.list.map((item) => (
-                                <View style={{ backgroundColor: "#fff", flexDirection: 'row', borderBottomWidth: 1, borderBottomColor: "#E9E9EF" }}>
-                                    <View style={{ width: 60 * s }}>
-                                        <Image style={styles.avatar} source={{ uri: item.pic }} />
-                                    </View>
-                                    <View style={{ marginLeft: 20 * s, marginTop: 10 * s, marginBottom: 10 * s, width: 385 * s, }} >
-                                        <Text style={{ fontSize: 15 * s, marginBottom: 5 * s }}>{item.name}</Text>
-                                        <Text style={{ fontSize: 16 * s }}>{item.content}</Text>
-                                        <Text style={{ fontSize: 14 * s, color: '#747475', marginTop: 10 * s }}>{item.time}</Text>
-                                    </View>
+                            this.state.isLoading
+                                ? <View style={{
+                                    alignItems: 'center',
+                                    flexDirection: 'row',
+                                    justifyContent: 'center'
+                                }}>
+                                    <Text style={{ fontSize: 20, marginTop: 10 }}>正在获取数据...</Text>
                                 </View>
-                            ))
+                                : null
                         }
-                    </View>
-                    {
-                        this.state.isLoading
-                            ? <View style={{
-                                alignItems: 'center',
-                                flexDirection: 'row',
-                                justifyContent: 'center'
-                            }}>
-                                <Text style={{ fontSize: 20, marginTop: 10 }}>正在获取数据...</Text>
-                            </View>
-                            : null
-                    }
-                </ScrollView>
+                    </ScrollView>
 
-            </SafeAreaView >
-        )
+                </SafeAreaView >
+            )
+        }
     }
-}
-const styles = StyleSheet.create({
-    hearder: {
-        height: 60,
-        backgroundColor: '#EFEFF4',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'row',
-    },
-    search: {
-        height: 40,
-        width: 430 * s,
-        backgroundColor: '#fff',
-        flexDirection: 'row',
-        alignItems: 'center',
-        borderRadius: 20,
-        opacity: 0.6,
-    },
-    user: {
-        flexDirection: 'row',
-        // height: 100 * s,
-        alignItems: 'center'
-    },
-    comment: {
-        marginLeft: 30 * s,
-        marginRight: 30 * s,
-        marginBottom: 20 * s
-    },
-    avatar: {
-        marginLeft: 20 * s,
-        height: 50 * s,
-        width: 50 * s,
-        marginTop: 10 * s,
-        borderRadius: 25 * s,
-        backgroundColor: 'yellow'
-    },
-    send: {
-        width: 80 * s,
-        height: 44 * s,
-        borderRadius: 5 * s,
-        backgroundColor: '#37376F',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginRight: 10 * s,
-        position: 'absolute',
-        right: 0,
-    },
-    img: {
-        marginLeft: 20 * s,
-        height: 40 * s,
-        width: 40 * s,
-        marginTop: 10 * s,
-        borderRadius: 20 * s,
-        backgroundColor: 'yellow'
-    },
-    bottom: {
-        flexDirection: 'row',
-        height: 50,
-        paddingTop: 10 * s,
-        justifyContent: 'space-evenly',
-        borderTopWidth: 1,
-        borderTopColor: "#EFEFF4"
-    }
-})
