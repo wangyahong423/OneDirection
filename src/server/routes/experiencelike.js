@@ -5,7 +5,7 @@ var con = require('./postgreSQL');
 var { checkToken } = require('../config/token');
 
 router.get('/list', (req, res) => {
-    let sql = 'select * from collect order by id desc';
+    let sql = 'select * from experiencelike order by id desc';
     con.query(sql, [], (err, result) => {
         if (err) {
             res.json({ ok: false, msg: "获取失败" });
@@ -15,10 +15,10 @@ router.get('/list', (req, res) => {
     });
 });
 
-router.get('/addCollect', (req, res) => {
+router.get('/add', (req, res) => {
     var eid = req.query.eid;
     var name = req.query.name;
-    let sql = 'insert into collect(eid,name) values($1,$2)';
+    let sql = 'insert into experiencelike(eid,name) values($1,$2)';
     con.query(sql, [eid, name], (err, result) => {
         if (err) {
             res.json({ ok: false, msg: "添加失败" });
@@ -28,9 +28,9 @@ router.get('/addCollect', (req, res) => {
     });
 });
 
-router.get('/deleteCollect', (req, res) => {
+router.get('/delete', (req, res) => {
     var id = req.query.id;
-    let sql = 'delete from collect where id=$1';
+    let sql = 'delete from experiencelike where id=$1';
     con.query(sql, [id], (err, result) => {
         if (err) {
             res.json({ ok: false, msg: "删除失败" });
