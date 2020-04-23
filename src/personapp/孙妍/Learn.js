@@ -13,15 +13,9 @@ export default class Learn extends Component {
             like: [],
             search: '',
             likeNum: [],
-            comNum: [],
-            comNum1: [],
+            comNum: [],//前
             username: '',
             isLoading: true,
-            Note: [],//把username的帖子筛选出来
-            com: [],//把帖子评论的lid存下
-            numfir: 0,//之前的评论数量(id==cid)
-            numsec: 0,//之后的评论数量(id==cid)
-            express: ''//颜色
         };
         this.getData();
     }
@@ -40,22 +34,6 @@ export default class Learn extends Component {
         var url2 = `http://139.155.44.190:3005/learnlike/list`;
         let url3 = `http://139.155.44.190:3005/users/list`;
         let url4 = `http://139.155.44.190:3005/learntalk/list`;
-        fetch(url1)
-            .then(res => res.json())
-            .then((res) => {
-                var arr = [];
-                res.map((item) => {
-                    if (item.name == this.state.username) {
-                        arr.push(item)
-                    }
-                    this.setState({
-                        Note: arr,
-                    })
-                })
-
-                console.log("用户名：", this.state.username)
-                console.log('登录名帖子', this.state.Note)
-            })
         fetch(url3)
             .then((res) => res.json())
             .then((res) => {
@@ -74,19 +52,7 @@ export default class Learn extends Component {
                         fetch(url4)
                             .then((res) => res.json())
                             .then((res) => {
-                                this.setState({ comNum: res, comNum1: res });
-                                var g = 0;
-                                for (var i = 0; i < this.state.Note.length; i++) {
-                                    for (var j = 0; j < this.state.comNum.length; j++) {
-                                        if (this.state.Note[i].id == this.state.comNum[j].lid) {
-                                            g++
-                                        }
-                                    }
-                                }
-                                this.setState({
-                                    numfir: g
-                                })
-                                console.log('评论的数量', this.state.numfir)
+                                this.setState({ comNum: res });
                                 fetch(url1)
                                     .then((res) => res.json())
                                     .then((res) => {
@@ -121,7 +87,6 @@ export default class Learn extends Component {
                                                 }
                                             }
                                             item.comNum = comNum;
-                                            // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
                                         });
                                         this.setState({ isLoading: false });
                                         this.setState({ list: res });
@@ -131,10 +96,6 @@ export default class Learn extends Component {
             });
         var self = this;
         this.listener = DeviceEventEmitter.addListener('refresh', function (param) {
-            // var arr=self.state.list;
-            // var a = {"content": param.content, "like": false, "likeNum": 0, "name": param.name, "pic": "http://139.155.44.190:3005/images/6.jpg", "time": param.time};
-            // arr.splice(0,0,a);
-            // self.setState({list:arr});
             fetch(url3)
                 .then((res) => res.json())
                 .then((res) => {
@@ -203,35 +164,7 @@ export default class Learn extends Component {
         this.listener.remove();
         // this.listener1.remove();
     }
-    componentDidUpdate() {
-        fetch('http://139.155.44.190:3005/learntalk/list')
-            .then((res) => res.json())
-            .then((res) => {
-                this.setState({ comNum1: res });
-                var g = 0;
-                for (var i = 0; i < this.state.Note.length; i++) {
-                    for (var j = 0; j < this.state.comNum1.length; j++) {
-                        if (this.state.Note[i].id == this.state.comNum1[j].lid) {
-                            g++
-                        }
-                    }
-                }
-                this.setState({
-                    numsec: g
-                })
-                if (this.state.numfir < this.state.numsec) {
-                    this.setState({
-                        express: 'red'
-                    })
-                } else {
-                    this.setState({
-                        express: ''
-                    })
-                }
-            })
 
-
-    }
     details = (idx) => {
         var value = { page: this.state.list[idx] };
         AsyncStorage.setItem('lPage', JSON.stringify(value));
@@ -325,7 +258,7 @@ export default class Learn extends Component {
             <SafeAreaView style={{ flex: 1 }} >
                 <View style={{
                     width: '100%',
-                    height: 70 * s,
+                    height: 60 * s,
                     flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'center'
@@ -335,42 +268,46 @@ export default class Learn extends Component {
                         width: '60%',
                         flexDirection: 'row',
                         alignItems: 'center',
-                        backgroundColor: '#D7D3D3',
-                        borderRadius: 28 * s
-
+                        backgroundColor: '#ffffff',
+                        borderRadius: 28 * s,
+                        marginLeft:25*s
                     }}>
                         <Icon
                             style={{
-                                marginLeft: 25 * s,
-                                marginRight: 20 * s
+                                marginLeft: 95 * s,
+                                marginRight: 20 * s,
+                                
                             }}
                             onPress={this.search}
-                            color='#fff' size={20} name='search' />
+                            color='' size={20} name='search' />
                         <TextInput
                             style={{
                                 height: 50 * s,
                                 width: "80%",
                                 padding: 0,
-                                fontSize: 15 * s
+                                fontSize: 15 * s,
+                                
                             }}
                             clearButtonMode="while-editing"
                             // autoFocus={true}
-                            placeholderTextColor='#fff'
-                            placeholder="请输入您要搜索的关键字"
+                            placeholderTextColor=''
+                            placeholder="搜索"
                             onChangeText={this.change}
                         />
                     </View>
-                    <Icon
-                        style={styles.only}
-                        onPress={this.renovate}
-                        color={this.state.express}
-                        name='bell' />
+                    <TouchableOpacity onPress={this.renovate}>
+                        <Icon
+                            style={styles.only}
+                            size={40}                            
+                            name='refresh' />
+                    </TouchableOpacity>
+
                 </View>
-                <ScrollView style={{ flex: 1 }}>
+                <ScrollView style={{ flex: 1}}>
                     <View>
                         {
                             this.state.list.map((item, idx) => (
-                                <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 20 * s }}>
+                                <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 10 * s }}>
                                     <View style={{
                                         flexDirection: 'row',
                                         height: 80 * s,
