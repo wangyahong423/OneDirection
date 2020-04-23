@@ -11,9 +11,9 @@ import Choosecollege from './src/common/Choosecollege';
 import Forget from './src/common/Forget';
 
 // 社区
-import Community from './src/community/Learn';
-import Add from './src/community/AddLearn';
-import Details from './src/community/LearnDetails'
+import Community from './src/community/Community';
+import Add from './src/community/Add';
+import Details from './src/community/Details'
 
 // 共享
 import Share from './src/share/Share';
@@ -214,7 +214,7 @@ const App = () => {
 
           {/* 社区 */}
           <Scene title='发表状态' key="add" renderRightButton={<View style={{ marginRight: 20 }}><Text style={{ fontSize: 19, color: '#ddd' }}>发送</Text></View>} titleStyle={{ flex: 1, textAlign: 'center', color: '#fff' }} navBarButtonColor='#fff' hideTabBar component={Add} />
-          <Scene title='评论' key="details" renderRightButton={<View></View>} titleStyle={{ flex: 1, textAlign: 'center', color: '#fff' }} navBarButtonColor='#fff' hideTabBar component={Details} />
+          <Scene title='评论' key="learndetails" renderRightButton={<View></View>} titleStyle={{ flex: 1, textAlign: 'center', color: '#fff' }} navBarButtonColor='#fff' hideTabBar component={Details} />
 
           {/* 一卡通 */}
           <Scene key='onecard' title='一卡通' component={Onecard} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} ></Scene>
