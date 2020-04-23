@@ -9,8 +9,11 @@ export default class Add extends Component {
         this.state = {
             content: '',
             username: '',
+            level:'',
             length: 0,
-            lvlist: []
+            lvlist1: [],
+            lvlist2: []
+
         };
         this.getData();
     }
@@ -67,12 +70,12 @@ export default class Add extends Component {
                 .then((res) => res.json())
                 .then((res) => {
                     this.setState({
-                        lvlist: res
+                        lvlist1: res
                     })
-                    this.state.lvlist.map((item) => {
+                    this.state.lvlist1.map((item) => {
                         if (item.name == this.state.username) {
                             this.setState({
-                                lvnum: item.lvnum + 2
+                                lvnum: item.lvnum + 2,
                             })
                             let url3 = `http://139.155.44.190:3005/users/changeLvnum?lvnum=${this.state.lvnum}&name=${this.state.username}`;
                             fetch(url3)
@@ -82,10 +85,38 @@ export default class Add extends Component {
                                     } else {
                                         Alert.alert(res.msg);
                                     }
+                                    let url4 = `http://139.155.44.190:3005/users/list`;
+                                    fetch(url4)
+                                        .then((res)=>res.json())
+                                        .then((res)=>{
+                                            this.setState({
+                                                lvnum:lvnum
+                                            })
+                                            console.log("弹出等级",this.state.level)
+                                        })
+
                                 });
                         }
                     })
                 })
+                // let url4 = `http://139.155.44.190:3005/users/list`;
+                // fetch(url4)
+                //     .then((res)=>res.json())
+                //     .then((res)=>{
+                //         this.setState({
+                //             lvlist2: res
+                //         })
+                //         this.state.lvlist2.map((item)=>{
+                //             if(item.name==this.state.username){
+                //                 this.setState({
+                //                     level:item.level
+                //                 })
+                //                 if(this.state.level==15||16){
+                //                     Alert.alert("恭喜你提升一级，快去解锁新的头像吧！")
+                //                 }
+                //             }
+                //         })
+                //     })
         }
         else {
             Alert.alert("未填写内容")

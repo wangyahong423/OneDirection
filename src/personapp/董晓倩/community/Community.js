@@ -27,7 +27,6 @@ export default class community extends Component {
                 this.setState({
                     username: name.username
                 })
-                console.log("用户名：", this.state.username)
             });
     }
     componentDidMount() {
@@ -40,8 +39,8 @@ export default class community extends Component {
             .then((res) => res.json())
             .then((res) => {
                 this.setState({
-                    pic: res,
-                });//所有用户信息
+                    pic: res
+                });
                 fetch(url2)
                     .then((res) => res.json())
                     .then((res) => {

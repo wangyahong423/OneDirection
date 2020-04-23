@@ -11,7 +11,6 @@ export default class Learn extends Component {
             list: [],
             pic: [],
             like: [],
-            lvlist:[],
             search: '',
             likeNum: [],
             comNum: [],
@@ -38,9 +37,7 @@ export default class Learn extends Component {
         fetch(url3)
             .then((res) => res.json())
             .then((res) => {
-                this.setState({ 
-                    pic: res,
-                 });
+                this.setState({ pic: res });
                 fetch(url2)
                     .then((res) => res.json())
                     .then((res) => {
@@ -216,53 +213,6 @@ export default class Learn extends Component {
                 .then((res) => {
                     console.log(url1);
                 });
-                let url2 = `http://139.155.44.190:3005/users/list`;
-                fetch(url2)
-                    .then((res) => res.json())
-                    .then((res) => {
-                        this.setState({
-                            lvlist: res
-                        });
-                        this.state.lvlist.map((item) => {
-                            if (item.name == this.state.username) {
-                                this.setState({
-                                    lvnum: item.lvnum + 1
-                                })
-                                let url = `http://139.155.44.190:3005/users/changeLvnum?lvnum=${this.state.lvnum}&name=${this.state.username}`;
-                                fetch(url)
-                                    .then((res) => res.json())
-                                    .then((res) => {
-                                    });
-                                    if (this.state.lvnum == 15) {
-                                        Alert.alert("恭喜你提升为二级用户，快去解锁新的头像吧！")
-                                    }
-                                    else if (this.state.lvnum == 30) {
-                                        Alert.alert("恭喜你提升为三级用户，快去解锁新的头像吧！")
-                                    }
-                                    else if (this.state.lvnum == 45) {
-                                        Alert.alert("恭喜你提升为四级用户，快去解锁新的头像吧！")
-                                    }
-                                    else if (this.state.lvnum == 60) {
-                                        Alert.alert("恭喜你提升为五级用户，快去解锁新的头像吧！")
-                                    }
-                                    else if (this.state.lvnum == 75) {
-                                        Alert.alert("恭喜你提升为六级用户，快去解锁新的头像吧！")
-                                    }
-                                    else if (this.state.lvnum == 90) {
-                                        Alert.alert("恭喜你提升为七级用户，快去解锁新的头像吧！")
-                                    }
-                                    else if (this.state.lvnum == 105) {
-                                        Alert.alert("恭喜你提升为八级用户，快去解锁新的头像吧！")
-                                    }
-                                    else if (this.state.lvnum == 120) {
-                                        Alert.alert("恭喜你提升为九级用户，快去解锁新的头像吧！")
-                                    }
-                                    else if (this.state.lvnum == 135) {
-                                        Alert.alert("恭喜你提升为十级用户，快去解锁新的头像吧！")
-                                    }
-                            }
-                        })
-                    })
         }
         else if (this.state.list[idx].like == true) {
             crr = this.state.list;
