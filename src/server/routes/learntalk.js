@@ -21,7 +21,7 @@ router.get('/add', (req, res) => {
     var content = req.query.content;
     var time = req.query.time;
     let sql = 'insert into learntalk(lid,name,content,time) values($1,$2,$3,$4)';
-    con.query(sql, [lid, name, content,time], (err, result) => {
+    con.query(sql, [lid, name, content, time], (err, result) => {
         if (err) {
             res.json({ ok: false, msg: '评论失败！' });
         } else {
@@ -35,9 +35,9 @@ router.get('/delete', (req, res) => {
     let sql = 'delete from learntalk where id=$1';
     con.query(sql, [id], (err, result) => {
         if (err) {
-            console.log(err);
+            res.json({ ok: false, msg: '删除失败！' });
         } else {
-            console.log(result.rows);
+            res.json({ ok: true, msg: '删除成功！' });
         }
     });
 });
