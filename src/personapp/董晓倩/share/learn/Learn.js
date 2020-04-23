@@ -233,6 +233,33 @@ export default class Learn extends Component {
                                     .then((res) => res.json())
                                     .then((res) => {
                                     });
+                                    if (this.state.lvnum == 15) {
+                                        Alert.alert("恭喜你提升为二级用户，快去解锁新的头像吧！")
+                                    }
+                                    else if (this.state.lvnum == 30) {
+                                        Alert.alert("恭喜你提升为三级用户，快去解锁新的头像吧！")
+                                    }
+                                    else if (this.state.lvnum == 45) {
+                                        Alert.alert("恭喜你提升为四级用户，快去解锁新的头像吧！")
+                                    }
+                                    else if (this.state.lvnum == 60) {
+                                        Alert.alert("恭喜你提升为五级用户，快去解锁新的头像吧！")
+                                    }
+                                    else if (this.state.lvnum == 75) {
+                                        Alert.alert("恭喜你提升为六级用户，快去解锁新的头像吧！")
+                                    }
+                                    else if (this.state.lvnum == 90) {
+                                        Alert.alert("恭喜你提升为七级用户，快去解锁新的头像吧！")
+                                    }
+                                    else if (this.state.lvnum == 105) {
+                                        Alert.alert("恭喜你提升为八级用户，快去解锁新的头像吧！")
+                                    }
+                                    else if (this.state.lvnum == 120) {
+                                        Alert.alert("恭喜你提升为九级用户，快去解锁新的头像吧！")
+                                    }
+                                    else if (this.state.lvnum == 135) {
+                                        Alert.alert("恭喜你提升为十级用户，快去解锁新的头像吧！")
+                                    }
                             }
                         })
                     })
