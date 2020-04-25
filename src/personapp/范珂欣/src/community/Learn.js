@@ -182,12 +182,22 @@ export default class Learn extends Component {
     }
     opntion1 = (id) => {
         let url = `http://139.155.44.190:3005/learn/deleteLearn?id=${id}`;
-        fetch(url)
+        let url1 = `http://139.155.44.190:3005/learntalk/deleteAll?lid=${id}`;
+        let url2 = `http://139.155.44.190:3005/learnlike/deleteAll?lid=${id}`;
+        fetch(url1)
             .then((res) => res.json())
             .then((res) => {
-                Alert.alert(res.msg);
-                var param = 1;
-                DeviceEventEmitter.emit('refresh', param);
+                fetch(url2)
+                    .then((res) => res.json())
+                    .then((res) => {
+                        fetch(url)
+                            .then((res) => res.json())
+                            .then((res) => {
+                                Alert.alert(res.msg);
+                                var param = 1;
+                                DeviceEventEmitter.emit('refresh', param);
+                            });
+                    });
             });
     }
     opntion2 = () => {
@@ -196,7 +206,7 @@ export default class Learn extends Component {
     details = (idx) => {
         var value = { page: this.state.list[idx] };
         AsyncStorage.setItem('lPage', JSON.stringify(value));
-        Actions.learndetails();
+        Actions.details();
     }
     like = (idx) => {
         var crr = '';
@@ -442,7 +452,7 @@ export default class Learn extends Component {
                     bottom: 0,
                     right: 0
                 }}
-                    onPress={() => Actions.addlearn()}
+                    onPress={() => Actions.add()}
                 >
                     <Text style={{ color: 'white', fontSize: 30 * s }}>+</Text>
                 </TouchableOpacity>
