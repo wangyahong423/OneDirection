@@ -5,12 +5,12 @@ var { checkToken } = require('../config/token');
 var con = require('./postgreSQL');
 
 router.get('/addNote', (req, res) => {
-    let sql = 'insert into notes(content,name,time,title) values($1,$2,$3,$4)';
-    con.query(sql, [req.query.content, req.query.name, req.query.time, req.query.title], (err, result) => {
+    let sql = 'insert into notes(content,name,time,title,show) values($1,$2,$3,$4,$5)';
+    con.query(sql, [req.query.content, req.query.name, req.query.time, req.query.title,req.query.show], (err, result) => {
         if (err) {
-            res.json({ ok: false, msg: "发布失败" });
+            res.json({ ok: false, msg: "保存失败" });
         } else {
-            res.json({ ok: true, msg: "发布成功" });
+            res.json({ ok: true, msg: "保存成功" });
         }
     });
 });
