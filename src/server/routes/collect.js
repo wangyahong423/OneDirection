@@ -29,9 +29,10 @@ router.get('/addCollect', (req, res) => {
 });
 
 router.get('/deleteCollect', (req, res) => {
-    var id = req.query.id;
-    let sql = 'delete from collect where id=$1';
-    con.query(sql, [id], (err, result) => {
+    var eid = req.query.eid;
+    var name = req.query.name;
+    let sql = 'delete from collect where eid=$1 and name=$2';
+    con.query(sql, [eid,name], (err, result) => {
         if (err) {
             res.json({ ok: false, msg: "删除失败" });
         } else {
@@ -40,4 +41,15 @@ router.get('/deleteCollect', (req, res) => {
     });
 });
 
+router.get('/deleteAll', (req, res) => {
+    var eid = req.query.eid;
+    let sql = 'delete from collect where eid=$1';
+    con.query(sql, [eid], (err, result) => {
+        if (err) {
+            res.json({ ok: false, msg: "删除失败" });
+        } else {
+            res.json({ ok: true, msg: "删除成功" });
+        }
+    });
+});
 module.exports = router;

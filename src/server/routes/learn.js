@@ -50,7 +50,7 @@ router.get('/list/:id', (req, res) => {
 router.get('/select', (req, res) => {
   var content = req.query.content;
   content = '%'+content+'%';
-  let sql = 'select * from learn where content like $1';
+  let sql = 'select * from learn where content like $1 order by id desc';
   con.query(sql, [content], (err, result) => {
     if (err) {
       res.josn({ ok: false, msg: '查找失败' });

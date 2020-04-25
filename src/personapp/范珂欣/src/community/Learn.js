@@ -182,21 +182,31 @@ export default class Learn extends Component {
     }
     opntion1 = (id) => {
         let url = `http://139.155.44.190:3005/learn/deleteLearn?id=${id}`;
-        fetch(url)
+        let url1 = `http://139.155.44.190:3005/learntalk/deleteAll?lid=${id}`;
+        let url2 = `http://139.155.44.190:3005/learnlike/deleteAll?lid=${id}`;
+        fetch(url1)
             .then((res) => res.json())
             .then((res) => {
-                Alert.alert(res.msg);
-                var param = 1;
-                DeviceEventEmitter.emit('refresh', param);
+                fetch(url2)
+                    .then((res) => res.json())
+                    .then((res) => {
+                        fetch(url)
+                            .then((res) => res.json())
+                            .then((res) => {
+                                Alert.alert(res.msg);
+                                var param = 1;
+                                DeviceEventEmitter.emit('refresh', param);
+                            });
+                    });
             });
     }
-    opntion2=()=>{
+    opntion2 = () => {
 
     }
     details = (idx) => {
         var value = { page: this.state.list[idx] };
         AsyncStorage.setItem('lPage', JSON.stringify(value));
-        Actions.learndetails();
+        Actions.details();
     }
     like = (idx) => {
         var crr = '';
@@ -236,45 +246,71 @@ export default class Learn extends Component {
     }
     search = (e) => {
         let url = `http://139.155.44.190:3005/learn/select?content=${this.state.search}`;
-        fetch(url)
+        var url2 = `http://139.155.44.190:3005/learnlike/list`;
+        let url3 = `http://139.155.44.190:3005/users/list`;
+        let url4 = `http://139.155.44.190:3005/learntalk/list`;
+        fetch(url3)
             .then((res) => res.json())
             .then((res) => {
-                if (res.false) { }
-                else {
-                    res.forEach(item => {
-                        for (var i = 0; i < this.state.pic.length; i++) {
-                            if (item.name == this.state.pic[i].name) {
-                                item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
-                                break;
+                this.setState({ pic: res });
+                fetch(url2)
+                    .then((res) => res.json())
+                    .then((res) => {
+                        this.setState({ likeNum: res });
+                        var likeList = [];
+                        for (var i = 0; i < res.length; i++) {
+                            if (res[i].name == this.state.username) {
+                                likeList.push(res[i]);
                             }
                         }
-                        for (var j = 0; j < this.state.like.length; j++) {
-                            if (item.id == this.state.like[j].lid) {
-                                item.like = true;
-                                break;
-                            }
-                            else {
-                                item.like = false;
-                            }
-                        }
-                        var likeNum = 0;
-                        for (var z = 0; z < this.state.likeNum.length; z++) {
-                            if (item.id == this.state.likeNum[z].lid) {
-                                likeNum++;
-                            }
-                        }
-                        item.likeNum = likeNum;
-                        var comNum = 0;
-                        for (var z = 0; z < this.state.comNum.length; z++) {
-                            if (item.id == this.state.comNum[z].lid) {
-                                comNum++;
-                            }
-                        }
-                        item.comNum = comNum;
+                        this.setState({ like: likeList });
+                        fetch(url4)
+                            .then((res) => res.json())
+                            .then((res) => {
+                                this.setState({ comNum: res });
+                                fetch(url)
+                                    .then((res) => res.json())
+                                    .then((res) => {
+                                        if (res.false) { }
+                                        else {
+                                            res.forEach(item => {
+                                                for (var i = 0; i < this.state.pic.length; i++) {
+                                                    if (item.name == this.state.pic[i].name) {
+                                                        item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
+                                                        break;
+                                                    }
+                                                }
+                                                for (var j = 0; j < this.state.like.length; j++) {
+                                                    if (item.id == this.state.like[j].lid) {
+                                                        item.like = true;
+                                                        break;
+                                                    }
+                                                    else {
+                                                        item.like = false;
+                                                    }
+                                                }
+                                                var likeNum = 0;
+                                                for (var z = 0; z < this.state.likeNum.length; z++) {
+                                                    if (item.id == this.state.likeNum[z].lid) {
+                                                        likeNum++;
+                                                    }
+                                                }
+                                                item.likeNum = likeNum;
+                                                var comNum = 0;
+                                                for (var z = 0; z < this.state.comNum.length; z++) {
+                                                    if (item.id == this.state.comNum[z].lid) {
+                                                        comNum++;
+                                                    }
+                                                }
+                                                item.comNum = comNum;
+                                            });
+                                            this.setState({ list: res });
+                                        }
+                                    });
+                            });
                     });
-                    this.setState({ list: res });
-                }
             });
+
     }
 
 
@@ -416,7 +452,7 @@ export default class Learn extends Component {
                     bottom: 0,
                     right: 0
                 }}
-                    onPress={() => Actions.addlearn()}
+                    onPress={() => Actions.add()}
                 >
                     <Text style={{ color: 'white', fontSize: 30 * s }}>+</Text>
                 </TouchableOpacity>

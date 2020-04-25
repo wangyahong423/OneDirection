@@ -50,7 +50,6 @@ export default class AddLearn extends Component {
             var minute = date.getMinutes().toString();
             var time = year + '年' + month + '月' + day + '日' + ' ' + hour + ':' + minute;
             let url = `http://139.155.44.190:3005/learn/addLearn?content=${this.state.content}&name=${this.state.username}&time=${time}`;
-            console.log(url);
             fetch(url)
                 .then((res) => res.json())
                 .then((res) => {

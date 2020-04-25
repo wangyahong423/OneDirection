@@ -29,9 +29,22 @@ router.get('/add', (req, res) => {
 });
 
 router.get('/delete', (req, res) => {
-    var id = req.query.id;
-    let sql = 'delete from experiencelike where id=$1';
-    con.query(sql, [id], (err, result) => {
+    var eid = req.query.eid;
+    var name = req.query.name;
+    let sql = 'delete from experiencelike where eid=$1 and name=$2';
+    con.query(sql, [eid,name], (err, result) => {
+        if (err) {
+            res.json({ ok: false, msg: "删除失败" });
+        } else {
+            res.json({ ok: true, msg: "删除成功" });
+        }
+    });
+});
+
+router.get('/deleteAll', (req, res) => {
+    var eid = req.query.eid;
+    let sql = 'delete from experiencelike where eid=$1';
+    con.query(sql, [eid], (err, result) => {
         if (err) {
             res.json({ ok: false, msg: "删除失败" });
         } else {

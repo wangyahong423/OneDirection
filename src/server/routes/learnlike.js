@@ -41,4 +41,16 @@ router.get('/delete', (req, res)=> {
           }
     });
 });
+
+router.get('/deleteAll', (req, res)=> {
+    var lid = req.query.lid;
+    let sql = 'delete from learnlike where lid=$1';
+    con.query(sql, [lid], (err, result) =>{
+        if (err) {
+            res.json({ ok: false, msg: "取消赞失败！" });
+          } else {
+            res.json({ ok: true, msg: "取消赞成功！" });
+          }
+    });
+});
 module.exports = router;
