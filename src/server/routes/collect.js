@@ -41,4 +41,15 @@ router.get('/deleteCollect', (req, res) => {
     });
 });
 
+router.get('/deleteAll', (req, res) => {
+    var eid = req.query.eid;
+    let sql = 'delete from collect where eid=$1';
+    con.query(sql, [eid], (err, result) => {
+        if (err) {
+            res.json({ ok: false, msg: "删除失败" });
+        } else {
+            res.json({ ok: true, msg: "删除成功" });
+        }
+    });
+});
 module.exports = router;

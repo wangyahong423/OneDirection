@@ -41,6 +41,16 @@ router.get('/delete', (req, res) => {
         }
     });
 });
-
+router.get('/deleteAll', (req, res) => {
+    var lid = req.query.lid;
+    let sql = 'delete from learntalk where lid=$1';
+    con.query(sql, [lid], (err, result) => {
+        if (err) {
+            res.json({ ok: false, msg: '删除失败！' });
+        } else {
+            res.json({ ok: true, msg: '删除成功！' });
+        }
+    });
+});
 
 module.exports = router;
