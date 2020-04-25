@@ -44,11 +44,7 @@ router.get('/delete', (req, res) => {
 router.get('/select', (req, res) => {
     var content = req.query.content;
     content = '%'+content+'%';
-<<<<<<< HEAD
-    let sql = 'select * from experience where content like $1';
-=======
-    let sql = 'select * from learn where experience like $1 order by id desc';
->>>>>>> 48028fefb8506284b9480419e0030614e156e506
+    let sql = 'select * from experience where content like $1 order by id desc';
     con.query(sql, [content], (err, result) => {
       if (err) {
         res.josn({ ok: false, msg: '查找失败' });
