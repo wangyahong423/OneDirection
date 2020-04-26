@@ -12,7 +12,6 @@ var communityRouter = require('./routes/community');
 var managerRouter = require('./routes/manager');
 var fileRouter = require('./routes/file');
 var learnRouter = require('./routes/learn');
-var collectRouter = require('./routes/collect');
 var learntalkRouter = require('./routes/learntalk');
 var communitytalkRouter = require('./routes/communitytalk');
 var learnlikeRouter = require('./routes/learnlike');
@@ -20,6 +19,12 @@ var communitylikeRouter = require('./routes/communitylike');
 var collegesRouter = require('./routes/colleges');
 var majorRouter = require('./routes/major');
 var leadersRouter = require('./routes/leaders');
+var experienceRouter = require('./routes/experience');
+var collectRouter = require('./routes/collect');
+var experiencelikeRouter = require('./routes/experiencelike');
+var notesRouter = require('./routes/notes');
+var cet4Router = require('./routes/cet4');
+var cet6Router = require('./routes/cet6');
 
 var app = express();
 
@@ -41,13 +46,18 @@ app.use('/manager', managerRouter);
 app.use('/file', fileRouter);
 app.use('/learn', learnRouter);
 app.use('/leaders', leadersRouter);
-app.use('/collect', collectRouter);
 app.use('/communitytalk',communitytalkRouter);
 app.use('/learnlike', learnlikeRouter);
 app.use('/communitylike',communitylikeRouter);
 app.use('/learntalk', learntalkRouter);
 app.use('/colleges',collegesRouter);
 app.use('/major', majorRouter);
+app.use('/experience', experienceRouter);
+app.use('/collect', collectRouter);
+app.use('/experiencelike', experiencelikeRouter);
+app.use('/notes',notesRouter);
+app.use('/cet4',cet4Router);
+app.use('/cet6',cet6Router);
 
 // catch 404 and forward to error handler  
 app.use(function(req, res, next) {
