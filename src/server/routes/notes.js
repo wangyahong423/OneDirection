@@ -36,6 +36,7 @@ router.get('/list', (req, res) => {
         }
     });
 });
+
 router.get('/list/:id', (req, res) => {
     let sql = 'select * from notes';
     con.query(sql, [], (err, result) => {
