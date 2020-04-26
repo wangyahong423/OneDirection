@@ -47,11 +47,11 @@ router.get('/list/:id', (req, res) => {
     });
 })
 
-router.get('/selectContent', (req, res) => {
-    var content = req.query.content;
-    content = '%' + content + '%';
-    let sql = 'select * from notes where content like $1';
-    con.query(sql, [content], (err, result) => {
+router.get('/select', (req, res) => {
+    var show = req.query.show;
+    show = '%' + show + '%';
+    let sql = 'select * from notes where show like $1 ';
+    con.query(sql, [show], (err, result) => {
         if (err) {
             res.josn({ ok: false, msg: '查找失败' });
         } else {
@@ -59,17 +59,4 @@ router.get('/selectContent', (req, res) => {
         }
     });
 });
-router.get('/selectTitle', (req, res) => {
-    var title = req.query.title;
-    title = '%' + title + '%';
-    let sql = 'select * from notes where title like $1';
-    con.query(sql, [title], (err, result) => {
-        if (err) {
-            res.josn({ ok: false, msg: '查找失败' });
-        } else {
-            res.send(result.rows);
-        }
-    });
-});
-
 module.exports = router;
