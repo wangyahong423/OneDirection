@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import { Text, View, ScrollView, StyleSheet, Dimensions } from 'react-native';
 import { Accordion } from '@ant-design/react-native';
 
 const { width } = Dimensions.get('window');

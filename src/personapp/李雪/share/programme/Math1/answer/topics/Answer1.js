@@ -5,19 +5,22 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class translate2 extends Component {
+export default class Answer1 extends Component {
     constructor() {
         super();
         this.state = {
             activeSections: [],
             todo: [{
                 header: '参考答案',
-                content1: '解析',
-                content2: '考察重点：',
-                content3: '定语从句',
-                content4: "这个句子结构简介：The gardens of the homeless which are in effect homeless garden introduce from it to an urban environment where it either didn't exist or was not discernible as such 是主句，其中which are in effect homeless garden 是定语从句修饰 The gardes of the homeless garden是定语从句 where it either didn’t exist or was not discernible as such 修饰先行词 an urban environment。",
-                content5: '参考翻译：',
-                content6: '无家可归的人的家园，事实上是无所谓家的家园，给要么是不存在的，要么是无法分辨得清的城市环境引入了一种形式。'
+                content1: '【答案】',
+                content2: 'x^3 + y^3 + 3x + 3y - 2 =0①',
+                content3: '方程①两边对x求导得：3x^2 + 3y^2*y - 3 + 3y =0②',
+                content4: '令y = 0，得3x^2 = 3,x = ±1',
+                content5: "当x=1时y=1,当x=-1时y=0",
+                content6:"方程②两边再对x求导：6x + 6y(y')^2 + 3y^2*y'' + 3y'' =0",
+                content7:"令y'=0,6x + (3y^2+1)y''=0",
+                content8:"当x=1，y=1时y''= -3/2，当x=-1，y=0时y''=6",
+                content9:'所以当x=1时函数有极大值，极大值为1，当x=-1时函数有极小值，极小值为0'
             }]
         }
     }
@@ -33,13 +36,14 @@ export default class translate2 extends Component {
         return (
             <View style={styles.content}>
                 <Text style={[{ color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content1}</Text>
-                <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
-                    <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content2}</Text>
-                    <Text style={[{ marginTop: 5 * s }, styles.contentText]}>{section.content3}</Text>
-                </View>
-                <Text style={styles.contentText}>&emsp;&emsp;{section.content4}</Text>
-                <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content5}</Text>
+                <Text style={[{ marginTop: 5 * s}, styles.contentText]}>&emsp;&emsp;{section.content2}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content3}</Text>
+                <Text style={[{ marginTop: 5 * s}, styles.contentText]}>&emsp;&emsp;{section.content4}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content5}</Text>
                 <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content6}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content7}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content8}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content9}</Text>
             </View>
         );
     };
@@ -51,10 +55,8 @@ export default class translate2 extends Component {
         return (
             <ScrollView>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                    <View style={{ width: '85%', margin: '7.5%',borderColor:'#37376F',borderWidth:1,padding:'2%' }}>
-                        <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`The gardens of the homeless which are in effect homeless garden introduce from in to an urban environment where it either didn’t exist or was not discernible as such.`}
-                        </Text>
+                    <View style={{ width: '85%', margin: '7.5%', borderColor: '#37376F', borderWidth: 1, padding: '2%' }}>
+                        <Text style={{ fontSize: 16 * s }}>{`1、已知函数y(x)由方程x^3 + y^3 - 3x + 3y -2=0确定，求y(x)的极值`}</Text>
                     </View>
                 </View>
                 <Accordion
@@ -77,7 +79,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 10 * s,
-        marginLeft:'40%'
+        marginLeft: '40%'
     },
     headerText: {
         fontSize: 16,

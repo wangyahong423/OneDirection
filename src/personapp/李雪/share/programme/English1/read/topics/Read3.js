@@ -12,12 +12,21 @@ export default class Read3 extends Component {
             activeSections: [],
             todo: [{
                 header: '参考答案',
-                content1: '解析',
-                content2: '考察重点：',
-                content3: '非谓语动词做后置定语，状语从句，插入语',
-                content4: '这个句子结构非常清晰：it strikes one that, for all their diversity of styles,these gardens speak of various other fundamental urges beyond that of decoration and creative expression 是主句，其中 for all their diversity of styles是插入语。时间状语从句yet when one looks at the photoraphs of the gardens created by the homeless,提前至主句之前，其中created by the homeless 是过去分词短语充当后置定语，用来修饰the gardens词汇的识别：句子中的动词looks at对应的宾语是the photographs of the gardens,因此翻译成“观看”。句子中created by the homeless对应的宾语是the gardens,因此翻译成“创建、建立”。句子中的动词speak of对应的宾语是various other fundamental urges，因此翻译成“透露、显示、表明”',
-                content5: '参考翻译：',
-                content6: '然而当我们观看那些由无家可归的人创建的家园的照片时，它们的那些各种各样的风格，会给人以深深的震撼。这些家园在它的装饰和创造性表示之上，透露出了其他基本的需求。'
+                content1: '1. 答案【A】 Physical beauty would be redefined',
+                content2: '解析：',
+                content3: '这是一道细节题，根据France定位到第一段第一句，主干成分为France has lost an absolute right to define physical beauty。此外第二段第二句They suggest beauty should not be define by looks…故而A physical beauty would be redefined为同义替换，即为正确答案。',
+                content4: '2. 答案【D】 doing harm to',
+                content5: '解析：',
+                content6: '此题为词义题。定位到第二段第二句They suggest beauty should not be defined by looks that end up impinging on health. 根据end up 可以看出beauty should not be defined by looks 和that end up impinging on health为顺承关系，所以“改变人们对美不仅仅是外表的定义”可以结束对健康的危害。故而可以推知doing harm to是正确答案。',
+                content7: '3. 答案【B】 New Standards are being set in Denmark',
+                content8: '解析：',
+                content9: '此题是正误判断题。根据第五段第二句话 In Denmark,…it is trying to set voluntary standards for models and fashion…可知B选项 New standards are being set in Denmark是其同义替换。',
+                content10: '4. 答案【C】 showing little concern for health factors',
+                content11: '解析：',
+                content12: '细节题。一个设计师很可能因为什么原因被CFW拒绝，根据关键词可回到文中定位至倒数第二段，首句说丹麦的时尚界就有关模特的年龄，健康及其他特性的内容达成一致意见，切一项新法案也明确规定，他们已经意识到时尚界对于人们尤其是年轻人的身体健康所带来的影响，并且该对此负责，接着下一句就说，这一法规的执行方式就是拒绝一些设计师，因为可以推断设计师很可能因为不考虑身体健康因素而被CFW拒绝。',
+                content13: '5. 答案【D】 A challenge to the Fashion Industry’s Body Ideals',
+                content14: '解析：',
+                content15: '主旨题。本文从首段就开始阐述法国的观点，即时尚界已经失去了定义女性身体之美的权利，且议会也禁止网站通过宣传过度节食来强调过度消瘦。二段继续说明美丽不能只看外表更不能以牺牲健康为代价。三段说女性不该让他人来评判自己的美丽。以及后面的段落中也一直在不断说明一点，即健康很重要，不能只看外表。所以文章最佳标题应该是D，对时尚界完美身材的质疑。',
             }]
         }
     }
@@ -33,13 +42,20 @@ export default class Read3 extends Component {
         return (
             <View style={styles.content}>
                 <Text style={[{ color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content1}</Text>
-                <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
-                    <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content2}</Text>
-                    <Text style={[{ marginTop: 5 * s }, styles.contentText]}>{section.content3}</Text>
-                </View>
-                <Text style={styles.contentText}>&emsp;&emsp;{section.content4}</Text>
+                <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content2}</Text>
+                <Text style={[{ marginTop: 5 * s, marginLeft: 30 * s, marginRight: 30 * s }, styles.contentText]}>{section.content3}</Text>
+                <Text style={[{ color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content4}</Text>
                 <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content5}</Text>
-                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content6}</Text>
+                <Text style={[{ marginTop: 5 * s, marginLeft: 30 * s, marginRight: 30 * s }, styles.contentText]}>{section.content6}</Text>
+                <Text style={[{ color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content7}</Text>
+                <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content8}</Text>
+                <Text style={[{ marginTop: 5 * s, marginLeft: 30 * s, marginRight: 30 * s }, styles.contentText]}>{section.content9}</Text>
+                <Text style={[{ color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content10}</Text>
+                <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content11}</Text>
+                <Text style={[{ marginTop: 5 * s, marginLeft: 30 * s, marginRight: 30 * s }, styles.contentText]}>{section.content12}</Text>
+                <Text style={[{ color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content13}</Text>
+                <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content14}</Text>
+                <Text style={[{ marginTop: 5 * s, marginLeft: 30 * s, marginRight: 30 * s }, styles.contentText]}>{section.content15}</Text>
             </View>
         );
     };

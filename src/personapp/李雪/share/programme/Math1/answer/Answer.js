@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { Text, View, ScrollView, Dimensions, TouchableOpacity, StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class Translate extends Component {
+export default class Answer extends Component {
     render() {
         return (
             <ScrollView>
             <View style={{ alignItems: 'center' }}>
                 <TouchableOpacity
                     style={[styles.outbox, { marginTop: '10%' }]}
-                    onPress={() => Actions.translate1()}
+                    onPress={() => Actions.answer1()}
                 >
                     <View>
                         <Icon name="rocket" size={30} color="#900" />
@@ -21,14 +21,14 @@ export default class Translate extends Component {
                     <View style={styles.inbox}>
                         <View style={{ padding: 8 * s }}>
                             {/* <Icon name="rocket" size={30} color="#900" /> */}
-                            <Text style={{ fontSize: 16 * s }}>&emsp;&emsp;{`yet when one looks at the photographs of the gardens created by the homeless, it strikes one that, for all their diversity of styles, these gardens speak of various other fundamental urges beyond... `}
+                            <Text style={{ fontSize: 16 * s }}>{`1、已知函数y(x)由方程x^3 + y^3 - 3x + 3y -2=0确定，求y(x)的极值`}
                             </Text>
                         </View>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.outbox}
-                    onPress={() => Actions.translate2()}
+                    onPress={() => Actions.answer2()}
                 >
                     <View>
                         <Icon name="rocket" size={30} color="#900" />
@@ -36,13 +36,15 @@ export default class Translate extends Component {
                     <View style={styles.inbox}>
                         <View style={{ padding: 8 * s }}>
                             {/* <Icon name="rocket" size={30} color="#900" /> */}
-                            <Text style={{ fontSize: 16 * s }}>&emsp;&emsp;{`The gardens of the homeless which are in effect homeless garden introduce from in to an urban environment where it either didn’t exist or was not discernible as such`}</Text>
+                            <Text style={{ fontSize: 16 * s }}>{`2、设函数f(x)在区间[0,1]上具有2阶导数，且f(1)>0，lim(x->0) f(x)/x <0，证明：`}</Text>
+                            <Text style={{ fontSize: 16 * s }}>{`(I)方程f(x)=0在区间(0,1)内至少存在一个实根；`}</Text>
+                            <Text style={{ fontSize: 16 * s }}>{`(II)方程f(x)f''(x) + [f'(x)]^2 = 0在区间(0,1)内至少存在两个不同实根。`}</Text>
                         </View>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.outbox}
-                    onPress={() => Actions.translate3()}
+                    onPress={() => Actions.answer3()}
                 >
                     <View>
                         <Icon name="rocket" size={30} color="#900" />
@@ -50,7 +52,8 @@ export default class Translate extends Component {
                     <View style={styles.inbox}>
                         <View style={{ padding: 8 * s }}>
                             {/* <Icon name="rocket" size={30} color="#900" /> */}
-                            <Text style={{ fontSize: 16 * s }}>&emsp;&emsp;{`Mast of us give in to a demoralization of spirit which we usually blame on some psychological conditions until one day we find ourselves in a garden and feel the oppression vanish as...`}</Text>
+                            <Text style={{ fontSize: 16 * s }}>{`证明：(1)对任意正整数n，都有1/(n+1) < ln (1+1/n) < 1/n`}</Text>
+                            <Text style={{ fontSize: 16 * s }}>{`设an=1+1/2+...+1/n-ln n(n=1,2,...)，证明数列{an}收敛`}</Text>
                         </View>
                     </View>
                 </TouchableOpacity>

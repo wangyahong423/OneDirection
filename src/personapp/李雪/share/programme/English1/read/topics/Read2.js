@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import { Text, View, ScrollView, StyleSheet, Dimensions } from 'react-native';
 import { Accordion } from '@ant-design/react-native';
 
 const { width } = Dimensions.get('window');
@@ -12,12 +12,21 @@ export default class Read2 extends Component {
             activeSections: [],
             todo: [{
                 header: '参考答案',
-                content1: '解析',
-                content2: '考察重点：',
-                content3: '非谓语动词做后置定语，状语从句，插入语',
-                content4: '这个句子结构非常清晰：it strikes one that, for all their diversity of styles,these gardens speak of various other fundamental urges beyond that of decoration and creative expression 是主句，其中 for all their diversity of styles是插入语。时间状语从句yet when one looks at the photoraphs of the gardens created by the homeless,提前至主句之前，其中created by the homeless 是过去分词短语充当后置定语，用来修饰the gardens词汇的识别：句子中的动词looks at对应的宾语是the photographs of the gardens,因此翻译成“观看”。句子中created by the homeless对应的宾语是the gardens,因此翻译成“创建、建立”。句子中的动词speak of对应的宾语是various other fundamental urges，因此翻译成“透露、显示、表明”',
-                content5: '参考翻译：',
-                content6: '然而当我们观看那些由无家可归的人创建的家园的照片时，它们的那些各种各样的风格，会给人以深深的震撼。这些家园在它的装饰和创造性表示之上，透露出了其他基本的需求。'
+                content1: '1. 答案【A】 enhance bankers’sense of responsibility',
+                content2: '解析：',
+                content3: '本题目为细节题，考察具体细节。根据题干关键词Paragraph 1和one motive in imposing the new rule定位到第一段第三句。The main purpose of this “clawback” rule is to hold bankers accountable for harmful risk-taking and to restore public trust in financial institution.这项“回扣”规则的主要目的是让银行家为有害的风险承担责任，并恢复公众对金融机构的信任。正确答案A的enhance bankers’sense of responsibility增强银行家的责任感,是原文的同义表达。干扰项B的help corporations achieve larger profits帮助公司获得更大的利润，并未提及，是常识性干扰。选项C的build a new system of financial regulation建立新的金融监管体系，原文并未提及，属于无中生有;选项D的guarantee the bonuses of top executives保证高层管理人员的奖金与原文提到的 any guaranteed bonus of top executives could be delayed 10 years 任何有保证的高管奖金都可能推迟10年，表述相反，属于正反混淆。',
+                content4: '2. 答案【D】 “short-termism” in economic activities',
+                content5: '解析：',
+                content6: '本题目为例证题，考察论据和论点的内容。根据题干关键词Alfred Marshall地位到第二段三句，但是考察论点，定位到论据的上一句，“Short-termism” or the desire for quick profits, has worsened in publicly traded companies“短期主义”或对快速获利的渴望，在公开交易的公司中变得更加严重。正确选项D short-termism” in economic activities经济活动中的短期主义，其中主语short-termism是原文的原词。干扰项A的the conditions for generating quick profits快速获利的条件，并非论点内容。选项B政府决策缺乏耐心，无关内容。选项C the solid structure of publicly traded companies上市公司稳健结构，原文并未提及。',
+                content7: '3. 答案【B】 adverse',
+                content8: '解析：',
+                content9: '本题目为细节题，考察具体细节内容。根据题干关键词the influence of transient investment on public companies定位到原文第三段第二句，. Transient investors, who demand high quarterly profits from companies, can hinder a firm’s efforts to invest in long-term research or to build up customer loyalty. 会妨碍公司投资于长期研究或建立客户忠诚度的努力，因此可知此影响是不好的，正确选项B adverse不利的，A选项 indirect，不直接的 选项C minima 极小值 D temporary 暂时的，因此只有B正确。',
+                content10: '4. 答案【C】 the approaches to promoting “long-termism”.',
+                content11: '解析：',
+                content12: '本题目为例证题，考察论点论据内容。根据题干关键词US and France examples定位到原文五六段，五段为美国的例子，六段为法国的例子，第六段首句承前启后过渡到Much more could be done to encourage “long-termism，”要鼓励“长期主义”，还有很多工作要做。正确选项C the approaches to promoting “long-termism”.促进“长期主义”的方法。为原文的同意转换',
+                content13: '5. 答案【B】 Patience as a Corporate Virtue',
+                content14: '解析：',
+                content15: '本题目为主旨题，考察全文的主旨要义。纵观全文，文章围绕西方国家的金融行业的短期主义投资和长期主义投资展开，第一段由一项限制高管津贴措施引出话题。第二段介绍英国短期主义占主流，三段短期主义的弊端，四段介绍美国现阶段的短期主义投资。五段六段举例美国，法国为促进短期主义投资的措施，尾段再次呼应首段，注意长期投资。B 选项Patience对应原文的short temisim和 long temisim, corporate原文多次出现，为本文的关键词，选项A Failure of Quarterly Capitalism 季度资本主义的失败选项C Decisiveness Required of Top Executives高管需要决断力D Frustration of Risk-taking Bankers 冒险银行家的挫败感，都不能概括全文，只有B选项正确。',
             }]
         }
     }
@@ -33,13 +42,20 @@ export default class Read2 extends Component {
         return (
             <View style={styles.content}>
                 <Text style={[{ color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content1}</Text>
-                <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
-                    <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content2}</Text>
-                    <Text style={[{ marginTop: 5 * s }, styles.contentText]}>{section.content3}</Text>
-                </View>
-                <Text style={styles.contentText}>&emsp;&emsp;{section.content4}</Text>
+                <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content2}</Text>
+                <Text style={[{ marginTop: 5 * s, marginLeft: 30 * s, marginRight: 30 * s }, styles.contentText]}>{section.content3}</Text>
+                <Text style={[{ color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content4}</Text>
                 <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content5}</Text>
-                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content6}</Text>
+                <Text style={[{ marginTop: 5 * s, marginLeft: 30 * s, marginRight: 30 * s }, styles.contentText]}>{section.content6}</Text>
+                <Text style={[{ color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content7}</Text>
+                <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content8}</Text>
+                <Text style={[{ marginTop: 5 * s, marginLeft: 30 * s, marginRight: 30 * s }, styles.contentText]}>{section.content9}</Text>
+                <Text style={[{ color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content10}</Text>
+                <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content11}</Text>
+                <Text style={[{ marginTop: 5 * s, marginLeft: 30 * s, marginRight: 30 * s }, styles.contentText]}>{section.content12}</Text>
+                <Text style={[{ color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content13}</Text>
+                <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content14}</Text>
+                <Text style={[{ marginTop: 5 * s, marginLeft: 30 * s, marginRight: 30 * s }, styles.contentText]}>{section.content15}</Text>
             </View>
         );
     };

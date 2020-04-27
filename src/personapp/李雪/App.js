@@ -146,7 +146,20 @@ import Read3 from './src/share/programme/English1/read/topics/Read3';
 import Translate1 from './src/share/programme/English1/translate/topics/Translate1';
 import Translate2 from './src/share/programme/English1/translate/topics/Translate2';
 import Translate3 from './src/share/programme/English1/translate/topics/Translate3';
+import Choose from './src/share/programme/Math1/choose/Choose'
+import Fill from './src/share/programme/Math1/fill/Fill'
+import Answer from './src/share/programme/Math1/answer/Answer'
+import Choose1 from './src/share/programme/Math1/choose/topics/Choose1'
+import Choose2 from './src/share/programme/Math1/choose/topics/Choose2'
+import Choose3 from './src/share/programme/Math1/choose/topics/Choose3'
+import Fill1 from './src/share/programme/Math1/fill/topics/Fill1'
+import Fill2 from './src/share/programme/Math1/fill/topics/Fill2'
+import Fill3 from './src/share/programme/Math1/fill/topics/Fill3'
+import Answer1 from './src/share/programme/Math1/answer/topics/Answer1'
+import Answer2 from './src/share/programme/Math1/answer/topics/Answer2'
+import Answer3 from './src/share/programme/Math1/answer/topics/Answer3'
 
+ 
 console.disableYellowBox = true;
 
 const App = () => {
@@ -350,6 +363,18 @@ const App = () => {
           <Scene key='translate1' title='翻译' component={Translate1} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key='translate2' title='翻译' component={Translate2} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key='translate3' title='翻译' component={Translate3} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='choose' title='选择题' component={Choose} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='fill' title='填空题' component={Fill} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='answer' title='解答题' component={Answer} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='choose1' title='选择题' component={Choose1} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='choose2' title='选择题' component={Choose2} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='choose3' title='选择题' component={Choose3} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='fill1' title='填空题' component={Fill1} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='fill2' title='填空题' component={Fill2} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='fill3' title='填空题' component={Fill3} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='answer1' title='解答题' component={Answer1} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='answer2' title='解答题' component={Answer2} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='answer3' title='解答题' component={Answer3} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
 
           {/* 我的 */}
           <Scene key='shoucang' component={Shoucang} title='我的收藏' backButtonImage={require('./assets/left.png')} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} navigationBarStyle={{ backgroundColor: '#37376F' }} />

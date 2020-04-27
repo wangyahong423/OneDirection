@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import { Text, View, ScrollView, StyleSheet, Dimensions } from 'react-native';
 import { Accordion } from '@ant-design/react-native';
 
 const { width } = Dimensions.get('window');
@@ -12,12 +12,21 @@ export default class Read1 extends Component {
             activeSections: [],
             todo: [{
                 header: '参考答案',
-                content1: '解析',
-                content2: '考察重点：',
-                content3: '非谓语动词做后置定语，状语从句，插入语',
-                content4: '这个句子结构非常清晰：it strikes one that, for all their diversity of styles,these gardens speak of various other fundamental urges beyond that of decoration and creative expression 是主句，其中 for all their diversity of styles是插入语。时间状语从句yet when one looks at the photoraphs of the gardens created by the homeless,提前至主句之前，其中created by the homeless 是过去分词短语充当后置定语，用来修饰the gardens词汇的识别：句子中的动词looks at对应的宾语是the photographs of the gardens,因此翻译成“观看”。句子中created by the homeless对应的宾语是the gardens,因此翻译成“创建、建立”。句子中的动词speak of对应的宾语是various other fundamental urges，因此翻译成“透露、显示、表明”',
-                content5: '参考翻译：',
-                content6: '然而当我们观看那些由无家可归的人创建的家园的照片时，它们的那些各种各样的风格，会给人以深深的震撼。这些家园在它的装饰和创造性表示之上，透露出了其他基本的需求。'
+                content1: '1. 答案【B】 lower their operational costs',
+                content2: '解析：',
+                content3: '事实细节题。根据题干，首先定位到首段。这段的大意是广告经费的一半都浪费掉了,但是通过“behavioralads”可以追踪购买者的搜索习惯和评价，使得广告更有针对性，从而降低预算成本，也就是“this fraction can be muchreduced”。A、 B和C选项文中并未提及，属于无中生有。',
+                content4:'2. 答案【D】 internet browser developers',
+                content5:'解析：',
+                content6:"词义句意题。theindustry在语篇中是指代前面的出现内容,而前面出现的Microsoft Internet Explores Apple' s Safair和Google' s Chrome都是D选项中中的“Internet browser developers 。B 和C选项文中并未提及，属于无中生有。A选项并非本段中谈论的核心。",
+                content7:'3. 答案【C】 will not benefit consumers',
+                content8:'解析：',
+                content9:'推理判断题。解题关键在于“.. consumers will be worse off if theindustry cannot collect information about their preferen2es 也就是说，当浏览器开发者不能收集消费者网上购物倾向时，消费并不能从中受益。B、C和D选项文中并未提及，属于无中生有。',
+                content10:'4. 答案【A】 DNT may not serve its intended purpose',
+                content11:'解析：',
+                content12:'推理判断题。根据题干，可以定位到第六段。解题关键在于理解本段的行文逻辑，即“unable to tell whether or whether, some may ignore”。 也就是说“由于不能辨别有些主体是真正反对行为广告,也不能辨别它们支持微软的做法，有些人甚至忽视DNT,继续先前的做法。”可此可见，B项符合题意。A、C和D选项内容在本段中均没有提及。',
+                content13:'5. 答案【D】 skepticism',
+                content14:'解析：',
+                content15:'观点态度题。根据题干，可以定位到文章最后一段倒数第二句，Brendon Lynch的博客中评论道:“ 我们认为消费者应该有更大的自主权(或掌控权)”。解题关键在于最后一句“Could it be really that simple?, 从中可明显看出作者的怀疑态度。A项是“理解”，B项是“赞成”，D选项是“纵容”的意思。'
             }]
         }
     }
@@ -33,13 +42,20 @@ export default class Read1 extends Component {
         return (
             <View style={styles.content}>
                 <Text style={[{ color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content1}</Text>
-                <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
-                    <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content2}</Text>
-                    <Text style={[{ marginTop: 5 * s }, styles.contentText]}>{section.content3}</Text>
-                </View>
-                <Text style={styles.contentText}>&emsp;&emsp;{section.content4}</Text>
+                <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content2}</Text>
+                <Text style={[{ marginTop: 5 * s, marginLeft: 30 * s, marginRight: 30 * s }, styles.contentText]}>{section.content3}</Text>
+                <Text style={[{ color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content4}</Text>
                 <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content5}</Text>
-                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content6}</Text>
+                <Text style={[{ marginTop: 5 * s, marginLeft: 30 * s, marginRight: 30 * s }, styles.contentText]}>{section.content6}</Text>
+                <Text style={[{ color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content7}</Text>
+                <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content8}</Text>
+                <Text style={[{ marginTop: 5 * s, marginLeft: 30 * s, marginRight: 30 * s }, styles.contentText]}>{section.content9}</Text>
+                <Text style={[{ color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content10}</Text>
+                <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content11}</Text>
+                <Text style={[{ marginTop: 5 * s, marginLeft: 30 * s, marginRight: 30 * s }, styles.contentText]}>{section.content12}</Text>
+                <Text style={[{ color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content13}</Text>
+                <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content14}</Text>
+                <Text style={[{ marginTop: 5 * s, marginLeft: 30 * s, marginRight: 30 * s }, styles.contentText]}>{section.content15}</Text>
             </View>
         );
     };
@@ -111,13 +127,13 @@ Mirosoft’s chief privacy officer, bloggde:”we 
 believe consumers should have more control.” 
 Could it really be that simple?`}
                         </Text>
-                        <View style={{marginTop:10*s}}>
+                        <View style={{ marginTop: 10 * s }}>
                             <Text style={{ fontSize: 16 * s }}>
                                 &emsp;&emsp;{`1. It is suggested in paragraph 1 that 
 “behavioural” ads help advertisers to:`}
                             </Text>
                             <Text style={{ fontSize: 16 * s }}>
-                                &emsp;&emsp;{`[A] ease competition among themselves`}
+                                &emsp;&emsp;{`[A]  ease competition among themselves`}
                             </Text>
                             <Text style={{ fontSize: 16 * s }}>
                                 &emsp;&emsp;{`[B] lower their operational costs`}
@@ -129,7 +145,7 @@ Could it really be that simple?`}
                                 &emsp;&emsp;{`[D] provide better online services`}
                             </Text>
                         </View>
-                        <View style={{marginTop:10*s}}>
+                        <View style={{ marginTop: 10 * s }}>
                             <Text style={{ fontSize: 16 * s }}>
                                 &emsp;&emsp;{`2. “The industry” (Line 6,Para.3) refers to:`}
                             </Text>
@@ -146,7 +162,7 @@ Could it really be that simple?`}
                                 &emsp;&emsp;{`[D] internet browser developers`}
                             </Text>
                         </View>
-                        <View style={{marginTop:10*s}}>
+                        <View style={{ marginTop: 10 * s }}>
                             <Text style={{ fontSize: 16 * s }}>
                                 &emsp;&emsp;{`3. Bob Liodice holds that setting DNT as a default`}
                             </Text>
@@ -163,7 +179,7 @@ Could it really be that simple?`}
                                 &emsp;&emsp;{`[D] goes against human nature`}
                             </Text>
                         </View>
-                        <View style={{marginTop:10*s}}>
+                        <View style={{ marginTop: 10 * s }}>
                             <Text style={{ fontSize: 16 * s }}>
                                 &emsp;&emsp;{`4. which of the following is ture according to Paragraph.6?`}
                             </Text>
@@ -180,7 +196,7 @@ Could it really be that simple?`}
                                 &emsp;&emsp;{`[D] Advertisers are obliged to offer behavioral ads`}
                             </Text>
                         </View>
-                        <View style={{marginTop:10*s}}>
+                        <View style={{ marginTop: 10 * s }}>
                             <Text style={{ fontSize: 16 * s }}>
                                 &emsp;&emsp;{`5. The author’s attitude towards what Brendon Lynch said in his blog is one of:`}
                             </Text>
