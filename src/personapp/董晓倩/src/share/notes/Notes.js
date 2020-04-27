@@ -46,9 +46,8 @@ export default class Notes extends Component {
                                 notesList.push(res[i]);
                             }
                         }
-                        this.setState({
-                            list: notesList
-                        })
+                        this.setState({list: notesList})
+                        this.setState({ isLoading: false })
                     })
             })
         var self = this;
@@ -133,6 +132,24 @@ export default class Notes extends Component {
                         ))
                     }
                 </ScrollView>
+                {
+                    this.state.isLoading
+                        ? <View
+                            style={{
+                                position: 'absolute',
+                                top: 80 * s,
+                                width: '100%'
+                            }}>
+                            <View style={{
+                                alignItems: 'center',
+                                flexDirection: 'row',
+                                justifyContent: 'center'
+                            }}>
+                                <Text style={{ fontSize: 20, marginTop: 10 }}>正在获取数据...</Text>
+                            </View>
+                        </View>
+                        : null
+                }
                 <TouchableOpacity style={{
                     width: 60 * s,
                     height: 60 * s,
@@ -153,17 +170,6 @@ export default class Notes extends Component {
         )
     }
 }
-const shadowOpt = {
-    width: Dimensions.get('window').width * 0.95,
-    height: 85,
-    color: '#F9F9FB',
-    border: 1,
-    radius: 10,
-    x: 10,
-    y: 5,
-    style: { marginVertical: 5 }
-};
-
 const styles = StyleSheet.create({
     hearder: {
         height: 60,

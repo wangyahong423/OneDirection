@@ -65,14 +65,12 @@ export default class NotesDetails extends Component {
     titleCon = (e) => {
         this.setState({ title: e });
     }
-    // componentWillUnmount() {
-    //     this.listener.remove();
-    // }
     add = () => {
         if (this.state.content == this.state.page.content && this.state.title == this.state.page.title) {//没有修改内容
             Actions.pop()
         }
-        else {//内容或者题目有修改
+        else if (this.state.content) {//内容或者题目有修改,且内容不为空
+            console.log("内容", this.state.content)
             var date = new Date();
             var year = date.getFullYear().toString();
             var month = (date.getMonth() + 1).toString();
@@ -81,8 +79,8 @@ export default class NotesDetails extends Component {
             var minute = date.getMinutes().toString();
             var time = year + '年' + month + '月' + day + '日' + ' ' + hour + ':' + minute;
             console.log(time)
-            if (this.state.content && this.state.title == this.state.page.title && this.state.content != this.state.page.content) {//如果内容修改且不为空,标题没有修改
-                let url1 = `http://139.155.44.190:3005/notes/change?content=${this.state.content}&title=${this.state.page.title}&time=${time}&show=${this.state.page.title}&id=${this.state.page.id}`;
+            if (this.state.title != this.state.page.title && this.state.title && this.state.content == this.state.page.content) {//如果标题有修改且不为空,内容没修改
+                let url1 = `http://139.155.44.190:3005/notes/change?content=${this.state.page.content}&time=${time}&title=${this.state.title}&show=${this.state.title}&id=${this.state.page.id}`;
                 fetch(url1)
                     .then((res) => res.json())
                     .then((res) => {
@@ -93,21 +91,7 @@ export default class NotesDetails extends Component {
                         }
                     });
             }
-            else if (this.state.title == this.state.page.title && !this.state.content) {//如果内容有修改为空,标题没修改
-                Alert.alert("不能保存空笔记")
-            }
-            else if (this.state.title != this.state.page.title && this.state.content == this.state.page.content && this.state.title) {//如果标题有修改且不为空,内容没修改
-                let url1 = `http://139.155.44.190:3005/notes/change?content=${this.state.page.content}&time=${time}&title=${this.state.title}&show=${this.state.show}&id=${this.state.page.id}`;
-                fetch(url1)
-                    .then((res) => res.json())
-                    .then((res) => {
-                        if (res.ok) {
-                            Actions.pop();
-                        } else {
-                            Alert.alert(res.msg);
-                        }
-                    });
-            } else if (this.state.content == this.state.page.content && !this.state.title) {//如果标题有修改为空,内容没修改
+            else if (this.state.content == this.state.page.content && !this.state.title) {//如果标题有修改为空,内容没修改
                 let url1 = `http://139.155.44.190:3005/notes/change?content=${this.state.page.content}&time=${time}&title=${this.state.title}&show=${this.state.page.content}&id=${this.state.page.id}`;
                 fetch(url1)
                     .then((res) => res.json())
@@ -119,7 +103,31 @@ export default class NotesDetails extends Component {
                         }
                     });
             }
-            else {
+            else if (this.state.content != this.state.page.content && this.state.content && this.state.title == this.state.page.title && this.state.page.show == this.state.page.title) {//如果内容修改且不为空,标题没有修改且显示标题
+                let url1 = `http://139.155.44.190:3005/notes/change?content=${this.state.content}&title=${this.state.page.title}&time=${time}&show=${this.state.page.show}&id=${this.state.page.id}`;
+                fetch(url1)
+                    .then((res) => res.json())
+                    .then((res) => {
+                        if (res.ok) {
+                            Actions.pop();
+                        } else {
+                            Alert.alert(res.msg);
+                        }
+                    });
+            }
+            else if (this.state.content != this.state.page.content && this.state.content && this.state.title == this.state.page.title && this.state.page.show == this.state.page.content) {//如果内容修改且不为空,标题没有修改且显示内容
+                let url1 = `http://139.155.44.190:3005/notes/change?content=${this.state.content}&title=${this.state.page.title}&time=${time}&show=${this.state.content}&id=${this.state.page.id}`;
+                fetch(url1)
+                    .then((res) => res.json())
+                    .then((res) => {
+                        if (res.ok) {
+                            Actions.pop();
+                        } else {
+                            Alert.alert(res.msg);
+                        }
+                    });
+            }
+            else if (this.state.title != this.state.page.title && this.state.content != this.state.page.content && this.state.title && this.state.content) {//标题和内容都有修改且都不为空
                 let url1 = `http://139.155.44.190:3005/notes/change?content=${this.state.content}&time=${time}&title=${this.state.title}&show=${this.state.title}&id=${this.state.page.id}`;
                 fetch(url1)
                     .then((res) => res.json())
@@ -131,6 +139,68 @@ export default class NotesDetails extends Component {
                         }
                     });
             }
+            else if (this.state.title != this.state.page.title && this.state.content != this.state.page.content && !this.state.title) {//标题和内容都有修改，标题为空
+                let url1 = `http://139.155.44.190:3005/notes/change?content=${this.state.content}&time=${time}&title=${this.state.title}&show=${this.state.content}&id=${this.state.page.id}`;
+                fetch(url1)
+                    .then((res) => res.json())
+                    .then((res) => {
+                        if (res.ok) {
+                            Actions.pop();
+                        } else {
+                            Alert.alert(res.msg);
+                        }
+                    });
+            }
+            let url2 = `http://139.155.44.190:3005/users/list`;
+            fetch(url2)
+                .then((res) => res.json())
+                .then((res) => {
+                    this.setState({
+                        lvlist: res
+                    });
+                    this.state.lvlist.map((item) => {
+                        if (item.name == this.state.username) {
+                            this.setState({
+                                lvnum: item.lvnum + 1
+                            })
+                            let url = `http://139.155.44.190:3005/users/changeLvnum?lvnum=${this.state.lvnum}&name=${this.state.username}`;
+                            fetch(url)
+                                .then((res) => res.json())
+                                .then((res) => {
+                                });
+                            if (this.state.lvnum == 15) {
+                                Alert.alert("恭喜你提升为二级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 30) {
+                                Alert.alert("恭喜你提升为三级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 45) {
+                                Alert.alert("恭喜你提升为四级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 60) {
+                                Alert.alert("恭喜你提升为五级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 75) {
+                                Alert.alert("恭喜你提升为六级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 90) {
+                                Alert.alert("恭喜你提升为七级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 105) {
+                                Alert.alert("恭喜你提升为八级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 120) {
+                                Alert.alert("恭喜你提升为九级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 135) {
+                                Alert.alert("恭喜你提升为十级用户，快去解锁新的头像吧！")
+                            }
+                        }
+                    })
+                })
+        }
+        else if (!this.state.content) {
+            Alert.alert("不能保存空笔记")
         }
         var param = { "content": this.state.content, "name": this.state.username, "time": time, "title": this.state.title, "show": this.state.show };
         DeviceEventEmitter.emit('refresh', param);
