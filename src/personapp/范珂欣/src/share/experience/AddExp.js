@@ -65,8 +65,8 @@ export default class AddExp extends Component {
         else {
             Alert.alert("未填写内容")
         }
-        var param = { "content": this.state.content, "name": this.state.username, "time": time };
-        DeviceEventEmitter.emit('refresh', param);
+        var param = 1;
+        DeviceEventEmitter.emit('Erefresh', param);
     }
     render() {
         return (
