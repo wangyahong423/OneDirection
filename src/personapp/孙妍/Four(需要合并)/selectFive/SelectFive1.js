@@ -22,8 +22,8 @@ export default class Appear extends Component {
                     height: 50*s, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
                     borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1,marginTop:10*s
                 }}  >
-                    <TouchableOpacity onPress={() => Actions.one()} style={{ flexDirection: 'row' }}>
-                        <Text style={{ fontSize: 20, marginLeft: 100*s, marginTop: 11*s }}>第一篇：大学专业选择 </Text>
+                    <TouchableOpacity onPress={() => Actions.first()} style={{ flexDirection: 'row' }}>
+                        <Text style={{ fontSize: 20, marginLeft: 180*s, marginTop: 11*s }}>第一篇</Text>
                     </TouchableOpacity>
                     <Icon name="edit" size={30} color="#5f6fcd" style={{ marginLeft: 40*s, marginTop: 10*s }} />
                 </View>
@@ -31,8 +31,8 @@ export default class Appear extends Component {
                     height: 50*s, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
                     borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1,marginTop:10*s
                 }}  >
-                    <TouchableOpacity onPress={() => Actions.wordone()} style={{ flexDirection: 'row' }}>
-                        <Text style={{ fontSize: 20, marginLeft: 100*s, marginTop: 11*s }}>第二篇：大学的生存</Text>
+                    <TouchableOpacity onPress={() => Actions.second1()} style={{ flexDirection: 'row' }}>
+                        <Text style={{ fontSize: 20, marginLeft: 180*s, marginTop: 11*s }}>第二篇</Text>
                     </TouchableOpacity>
                     <Icon name="edit" size={30} color="#5f6fcd" style={{ marginLeft: 40*s, marginTop: 10*s }} />
                 </View>
@@ -40,8 +40,8 @@ export default class Appear extends Component {
                     height: 50*s, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
                     borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1,marginTop:10*s
                 }}  >
-                    <TouchableOpacity onPress={() => Actions.wordone()} style={{ flexDirection: 'row' }}>
-                        <Text style={{ fontSize: 20, marginLeft: 100*s, marginTop: 11*s }}>第三篇：简化餐桌礼节</Text>
+                    <TouchableOpacity onPress={() => Actions.third()} style={{ flexDirection: 'row' }}>
+                        <Text style={{ fontSize: 20, marginLeft: 180*s, marginTop: 11*s }}>第三篇</Text>
                     </TouchableOpacity>
                     <Icon name="edit" size={30} color="#5f6fcd" style={{ marginLeft: 40*s, marginTop: 10*s }} />
                 </View>
@@ -49,8 +49,8 @@ export default class Appear extends Component {
                     height: 50*s, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
                     borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1,marginTop:10*s
                 }}  >
-                    <TouchableOpacity onPress={() => Actions.wordone()} style={{ flexDirection: 'row' }}>
-                        <Text style={{ fontSize: 20, marginLeft: 100*s, marginTop: 11*s }}>第四篇：教育有方</Text>
+                    <TouchableOpacity onPress={() => Actions.fourth()} style={{ flexDirection: 'row' }}>
+                        <Text style={{ fontSize: 20, marginLeft: 180*s, marginTop: 11*s }}>第四篇</Text>
                     </TouchableOpacity>
                     <Icon name="edit" size={30} color="#5f6fcd" style={{ marginLeft: 40*s, marginTop: 10*s }} />
                 </View>
