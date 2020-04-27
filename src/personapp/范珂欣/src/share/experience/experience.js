@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert } from 'react-native';
+import { Text, View, FlatList, ScrollView, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import { Actions } from 'react-native-router-flux';
 const { width, height } = Dimensions.get('window');
@@ -9,6 +9,7 @@ export default class Experience extends Component {
         super();
         this.state = {
             list: [],
+            all: [],
             pic: [],
             like: [],
             collect: [],
@@ -110,13 +111,13 @@ export default class Experience extends Component {
                                         });
                                         this.setState({ isLoading: false });
                                         this.setState({ list: res });
-                                        console.log(this.state.list);
+                                        this.setState({ all: res });
                                     });
                             });
                     });
             });
         var self = this;
-        this.listener = DeviceEventEmitter.addListener('refresh', function (param) {
+        this.listener = DeviceEventEmitter.addListener('Erefresh', function (param) {
             // var arr=self.state.list;
             // var a = {"content": param.content, "like": false, "likeNum": 0, "name": param.name, "pic": "http://139.155.44.190:3005/images/6.jpg", "time": param.time};
             // arr.splice(0,0,a);
@@ -154,6 +155,7 @@ export default class Experience extends Component {
                                                 for (var i = 0; i < self.state.pic.length; i++) {
                                                     if (item.name == self.state.pic[i].name) {
                                                         item.pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
+                                                        item.college = self.state.pic[i].college;
                                                         break;
                                                     }
                                                 }
@@ -195,6 +197,7 @@ export default class Experience extends Component {
                                             });
                                             self.setState({ isLoading: false });
                                             self.setState({ list: res });
+                                            self.setState({ all: res });
                                         });
                                 });
                         });
@@ -233,7 +236,7 @@ export default class Experience extends Component {
                             .then((res) => {
                                 Alert.alert(res.msg);
                                 var param = 1;
-                                DeviceEventEmitter.emit('refresh', param);
+                                DeviceEventEmitter.emit('Erefresh', param);
                             });
                     });
             });
@@ -400,8 +403,24 @@ export default class Experience extends Component {
             });
 
     }
-
-
+    classify = (data) => {
+        if (data == '全部') {
+            this.setState({ list: this.state.all });
+        }
+        else {
+            var arr = [];
+            for (var i = 0; i < this.state.all.length; i++) {
+                if (this.state.all[i].college == data) {
+                    arr.push(this.state.all[i]);
+                }
+            }
+            this.setState({ list: arr });
+        }
+    }
+    // cla = () => {
+    //     this.refs['list'].style.display='flex';
+    //     console.log(1);
+    // }
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
@@ -441,7 +460,62 @@ export default class Experience extends Component {
                             placeholder="请输入您要搜索的关键字"
                             onChangeText={this.change}
                         />
+
                     </View>
+                </View>
+                {/* <TouchableOpacity style={{ backgroundColor: 'pink' }} onPress={this.cla.bind(this)}>
+                    <Icon
+                        style={{
+                            marginLeft: 25 * s,
+                            marginRight: 20 * s
+                        }}
+
+                        color='#fff' size={20} name='search' />
+                </TouchableOpacity> */}
+                <View style={{height:30*s ,backgroundColor: '#fff',marginBottom:10*s}}>
+                <FlatList
+                    ref="list"
+                    data={[
+                        { key: '全部' },
+                        { key: '马克思主义学院' },
+                        { key: '历史文化学院' },
+                        { key: '美术与设计学院' },
+                        { key: '商学院' },
+                        { key: '法政与公共管理学院' },
+                        { key: '化学与材料科学学院' },
+                        { key: '体育学院' },
+                        { key: '国际文化交流学院' },
+                        { key: '初等教育系' },
+                        { key: '软件学院' },
+                        { key: '教育学院' },
+                        { key: '外国语学院' },
+                        { key: '新闻传播学院' },
+                        { key: '数学与信息科学学院（田家炳教育书院）' },
+                        { key: '生命科学学院' },
+                        { key: '计算机与网络空间安全学院、计算机教学部' },
+                        { key: '教师教育学院' },
+                        { key: '大学外语教学部' },
+                        { key: '汇华学院' },
+                        { key: '文学院' },
+                        { key: '音乐学院' },
+                        { key: '物理学院' },
+                        { key: '资源与环境科学学院' },
+                        { key: '职业技术学院、中燃工学院' },
+                        { key: '学前教育学院（旅游系）' },
+                        { key: '公共体育教学部' }
+                    ]}
+                    horizontal={true}
+                    // numColumns={1}
+                    // columnWrapperStyle={styles.columnStyle}
+                    renderItem={({ item }) =>
+                        <TouchableOpacity style={{ backgroundColor: '#eee', margin: 5 * s,height: 20 * s }} onPress={this.classify.bind(this, (item.key))}>
+                            <Text style={{
+                                // color: 'white',
+                                backgroundColor: 'blur'
+                            }}>{item.key}</Text>
+                        </TouchableOpacity>
+                    }
+                />
                 </View>
                 <ScrollView style={{ flex: 1 }}>
                     <View>
