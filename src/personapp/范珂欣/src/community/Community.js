@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert } from 'react-native';
+import { Text, View, ScrollView, StyleSheet, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import { Actions } from 'react-native-router-flux';
+import { Button } from '@ant-design/react-native';
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
-export default class Learn extends Component {
+export default class Community extends Component {
     constructor() {
         super();
         this.state = {
             list: [],
             pic: [],
             like: [],
+            lvlist: [],
             search: '',
             likeNum: [],
             comNum: [],
@@ -37,7 +39,9 @@ export default class Learn extends Component {
         fetch(url3)
             .then((res) => res.json())
             .then((res) => {
-                this.setState({ pic: res });
+                this.setState({
+                    pic: res,
+                });
                 fetch(url2)
                     .then((res) => res.json())
                     .then((res) => {
@@ -206,7 +210,7 @@ export default class Learn extends Component {
     details = (idx) => {
         var value = { page: this.state.list[idx] };
         AsyncStorage.setItem('lPage', JSON.stringify(value));
-        Actions.details();
+        Actions.learndetails();
     }
     like = (idx) => {
         var crr = '';
@@ -223,6 +227,53 @@ export default class Learn extends Component {
                 .then((res) => {
                     console.log(url1);
                 });
+            let url2 = `http://139.155.44.190:3005/users/list`;
+            fetch(url2)
+                .then((res) => res.json())
+                .then((res) => {
+                    this.setState({
+                        lvlist: res
+                    });
+                    this.state.lvlist.map((item) => {
+                        if (item.name == this.state.username) {
+                            this.setState({
+                                lvnum: item.lvnum + 1
+                            })
+                            let url = `http://139.155.44.190:3005/users/changeLvnum?lvnum=${this.state.lvnum}&name=${this.state.username}`;
+                            fetch(url)
+                                .then((res) => res.json())
+                                .then((res) => {
+                                });
+                            if (this.state.lvnum == 15) {
+                                Alert.alert("恭喜你提升为二级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 30) {
+                                Alert.alert("恭喜你提升为三级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 45) {
+                                Alert.alert("恭喜你提升为四级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 60) {
+                                Alert.alert("恭喜你提升为五级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 75) {
+                                Alert.alert("恭喜你提升为六级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 90) {
+                                Alert.alert("恭喜你提升为七级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 105) {
+                                Alert.alert("恭喜你提升为八级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 120) {
+                                Alert.alert("恭喜你提升为九级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 135) {
+                                Alert.alert("恭喜你提升为十级用户，快去解锁新的头像吧！")
+                            }
+                        }
+                    })
+                })
         }
         else if (this.state.list[idx].like == true) {
             crr = this.state.list;
@@ -244,7 +295,7 @@ export default class Learn extends Component {
             search: e
         })
     }
-    search = (e) => {
+    search = () => {
         let url = `http://139.155.44.190:3005/learn/select?content=${this.state.search}`;
         var url2 = `http://139.155.44.190:3005/learnlike/list`;
         let url3 = `http://139.155.44.190:3005/users/list`;
@@ -310,16 +361,19 @@ export default class Learn extends Component {
                             });
                     });
             });
-
     }
-
+    renovate = () => {
+        // var param = 1;
+        // DeviceEventEmitter.emit('refresh', param);
+        Actions.community();
+    }
 
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
                 <View style={{
                     width: '100%',
-                    height: 70 * s,
+                    height: 55 * s,
                     flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'center'
@@ -329,37 +383,60 @@ export default class Learn extends Component {
                         width: '60%',
                         flexDirection: 'row',
                         alignItems: 'center',
-                        backgroundColor: '#D7D3D3',
-                        borderRadius: 28 * s
-
+                        backgroundColor: '#ffffff',
+                        // borderRadius: 28 * s
+                        borderBottomLeftRadius: 28 * s,
+                        borderTopLeftRadius: 28 * s,
+                        marginLeft: -55 * s,
                     }}>
-                        <Icon
-                            style={{
-                                marginLeft: 25 * s,
-                                marginRight: 20 * s
-                            }}
-                            onPress={this.search}
-                            color='#fff' size={20} name='search' />
+
                         <TextInput
                             style={{
                                 height: 50 * s,
                                 width: "80%",
                                 padding: 0,
-                                fontSize: 15 * s
+                                marginLeft: 20 * s,
+                                fontSize: 15 * s,
                             }}
                             clearButtonMode="while-editing"
-                            // autoFocus={true}
-                            placeholderTextColor='#fff'
-                            placeholder="请输入您要搜索的关键字"
+                            placeholderTextColor=''
+                            placeholder="请输入搜索的关键字"
                             onChangeText={this.change}
                         />
+                        <Button style={{ borderBottomRightRadius: 28 * s, borderTopRightRadius: 28 * s, height: 42 * s, }} onPress={this.search}>
+                            搜索
+                        </Button>
+                        {/* <Icon
+                            style={{
+                                marginRight: 20 * s
+                            }}
+                            onPress={this.search}
+                            color='' size={20} name='search' /> */}
+
                     </View>
+                    {/* <Button style={{ height: 42 * s,backgroundColor:'#ffffff'}} onPress={this.search}>
+                            搜索
+                    </Button> */}
+                    <TouchableOpacity style={{
+                        position: 'absolute',
+                        top: 15 * s,
+                        right: 30 * s,
+                        marginLeft: 10 * s,
+                        width: 30,
+                        height: 30
+                    }} onPress={this.renovate}>
+                        <Icon
+                            size={30}
+                            name='refresh'
+                        />
+                    </TouchableOpacity>
                 </View>
+
                 <ScrollView style={{ flex: 1 }}>
                     <View>
                         {
                             this.state.list.map((item, idx) => (
-                                <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 20 * s }}>
+                                <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 10 * s }}>
                                     <View style={{
                                         flexDirection: 'row',
                                         height: 80 * s,
@@ -449,12 +526,12 @@ export default class Learn extends Component {
                     alignItems: 'center',
                     backgroundColor: '#37376F',
                     position: 'absolute',
-                    bottom: 0,
-                    right: 0
+                    bottom: 20 * s,
+                    right: 20 * s
                 }}
                     onPress={() => Actions.add()}
                 >
-                    <Text style={{ color: 'white', fontSize: 30 * s }}>+</Text>
+                    <Icon style={{ fontSize: 50, color: '#fff' }} name="pencil" />
                 </TouchableOpacity>
             </SafeAreaView >
         )
