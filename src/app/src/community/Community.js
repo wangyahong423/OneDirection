@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, ScrollView, StyleSheet, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import { Actions } from 'react-native-router-flux';
+import { Button } from '@ant-design/react-native';
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
 export default class Community extends Component {
@@ -185,12 +186,22 @@ export default class Community extends Component {
     }
     opntion1 = (id) => {
         let url = `http://139.155.44.190:3005/learn/deleteLearn?id=${id}`;
-        fetch(url)
+        let url1 = `http://139.155.44.190:3005/learntalk/deleteAll?lid=${id}`;
+        let url2 = `http://139.155.44.190:3005/learnlike/deleteAll?lid=${id}`;
+        fetch(url1)
             .then((res) => res.json())
             .then((res) => {
-                Alert.alert(res.msg);
-                var param = 1;
-                DeviceEventEmitter.emit('refresh', param);
+                fetch(url2)
+                    .then((res) => res.json())
+                    .then((res) => {
+                        fetch(url)
+                            .then((res) => res.json())
+                            .then((res) => {
+                                Alert.alert(res.msg);
+                                var param = 1;
+                                DeviceEventEmitter.emit('refresh', param);
+                            });
+                    });
             });
     }
     opntion2 = () => {
@@ -199,7 +210,7 @@ export default class Community extends Component {
     details = (idx) => {
         var value = { page: this.state.list[idx] };
         AsyncStorage.setItem('lPage', JSON.stringify(value));
-        Actions.details();
+        Actions.learndetails();
     }
     like = (idx) => {
         var crr = '';
@@ -288,54 +299,82 @@ export default class Community extends Component {
     }
     search = (e) => {
         let url = `http://139.155.44.190:3005/learn/select?content=${this.state.search}`;
-        fetch(url)
+        var url2 = `http://139.155.44.190:3005/learnlike/list`;
+        let url3 = `http://139.155.44.190:3005/users/list`;
+        let url4 = `http://139.155.44.190:3005/learntalk/list`;
+        fetch(url3)
             .then((res) => res.json())
             .then((res) => {
-                if (res.false) { }
-                else {
-                    res.forEach(item => {
-                        for (var i = 0; i < this.state.pic.length; i++) {
-                            if (item.name == this.state.pic[i].name) {
-                                item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
-                                break;
+                this.setState({ pic: res });
+                fetch(url2)
+                    .then((res) => res.json())
+                    .then((res) => {
+                        this.setState({ likeNum: res });
+                        var likeList = [];
+                        for (var i = 0; i < res.length; i++) {
+                            if (res[i].name == this.state.username) {
+                                likeList.push(res[i]);
                             }
                         }
-                        for (var j = 0; j < this.state.like.length; j++) {
-                            if (item.id == this.state.like[j].lid) {
-                                item.like = true;
-                                break;
-                            }
-                            else {
-                                item.like = false;
-                            }
-                        }
-                        var likeNum = 0;
-                        for (var z = 0; z < this.state.likeNum.length; z++) {
-                            if (item.id == this.state.likeNum[z].lid) {
-                                likeNum++;
-                            }
-                        }
-                        item.likeNum = likeNum;
-                        var comNum = 0;
-                        for (var z = 0; z < this.state.comNum.length; z++) {
-                            if (item.id == this.state.comNum[z].lid) {
-                                comNum++;
-                            }
-                        }
-                        item.comNum = comNum;
+                        this.setState({ like: likeList });
+                        fetch(url4)
+                            .then((res) => res.json())
+                            .then((res) => {
+                                this.setState({ comNum: res });
+                                fetch(url)
+                                    .then((res) => res.json())
+                                    .then((res) => {
+                                        if (res.false) { }
+                                        else {
+                                            res.forEach(item => {
+                                                for (var i = 0; i < this.state.pic.length; i++) {
+                                                    if (item.name == this.state.pic[i].name) {
+                                                        item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
+                                                        break;
+                                                    }
+                                                }
+                                                for (var j = 0; j < this.state.like.length; j++) {
+                                                    if (item.id == this.state.like[j].lid) {
+                                                        item.like = true;
+                                                        break;
+                                                    }
+                                                    else {
+                                                        item.like = false;
+                                                    }
+                                                }
+                                                var likeNum = 0;
+                                                for (var z = 0; z < this.state.likeNum.length; z++) {
+                                                    if (item.id == this.state.likeNum[z].lid) {
+                                                        likeNum++;
+                                                    }
+                                                }
+                                                item.likeNum = likeNum;
+                                                var comNum = 0;
+                                                for (var z = 0; z < this.state.comNum.length; z++) {
+                                                    if (item.id == this.state.comNum[z].lid) {
+                                                        comNum++;
+                                                    }
+                                                }
+                                                item.comNum = comNum;
+                                            });
+                                            this.setState({ list: res });
+                                        }
+                                    });
+                            });
                     });
-                    this.setState({ list: res });
-                }
             });
     }
-
+    renovate = () => {
+        var param = 1;
+        DeviceEventEmitter.emit('refresh', param);
+    }
 
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
                 <View style={{
                     width: '100%',
-                    height: 70 * s,
+                    height: 55 * s,
                     flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'center'
@@ -345,30 +384,40 @@ export default class Community extends Component {
                         width: '60%',
                         flexDirection: 'row',
                         alignItems: 'center',
-                        backgroundColor: '#D7D3D3',
-                        borderRadius: 28 * s
-
+                        backgroundColor: '#ffffff',
+                        // borderRadius: 28 * s
+                        borderBottomLeftRadius:28*s,
+                        borderTopLeftRadius:28*s,
+                        marginLeft:-55*s,
                     }}>
-                        <Icon
-                            style={{
-                                marginLeft: 25 * s,
-                                marginRight: 20 * s
-                            }}
-                            onPress={this.search}
-                            color='#fff' size={20} name='search' />
+                        
                         <TextInput
                             style={{
                                 height: 50 * s,
                                 width: "80%",
                                 padding: 0,
-                                fontSize: 15 * s
+                                marginLeft:20*s,
+                                fontSize: 15 * s,
                             }}
                             clearButtonMode="while-editing"
-                            placeholderTextColor='#fff'
-                            placeholder="请输入您要搜索的关键字"
+                            placeholderTextColor=''
+                            placeholder="请输入搜索的关键字"
                             onChangeText={this.change}
                         />
+                        <Button style={{borderBottomRightRadius:28*s, borderTopRightRadius:28*s,height: 42 * s,}} onPress={this.search}>
+                            搜索
+                        </Button>
+                        {/* <Icon
+                            style={{
+                                marginRight: 20 * s
+                            }}
+                            onPress={this.search}
+                            color='' size={20} name='search' /> */}
+                        
                     </View>
+                    {/* <Button style={{ height: 42 * s,backgroundColor:'#ffffff'}} onPress={this.search}>
+                            搜索
+                    </Button> */}
                     <TouchableOpacity
                         style={{
                             height: 50 * s,
@@ -380,12 +429,11 @@ export default class Community extends Component {
                         }}
                         onPress={this.search}
                     >
-                        <Text>搜索</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={this.renovate}>
                         <Icon
                             style={styles.only}
-                            size={40}
+                            size={30}
                             name='refresh' />
                     </TouchableOpacity>
                 </View>
@@ -394,7 +442,7 @@ export default class Community extends Component {
                     <View>
                         {
                             this.state.list.map((item, idx) => (
-                                <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 20 * s }}>
+                                <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 10 * s }}>
                                     <View style={{
                                         flexDirection: 'row',
                                         height: 80 * s,
@@ -497,9 +545,9 @@ export default class Community extends Component {
 }
 const styles = StyleSheet.create({
     only: {
-        marginLeft: 25 * s,
-        marginRight: 20 * s,
         fontSize: 23,
-        marginLeft: 15,
+        position:'absolute',
+        top:-10*s,
+        left:30*s
     }
 })

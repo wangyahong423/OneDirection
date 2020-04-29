@@ -29,11 +29,11 @@ export default class Method extends Component {
     render() {
         return (
             <View>
-                {/* 顶部 */}
                 <View style={styles.header}>
                     <Text style={{ color: '#fff', lineHeight: 30 * s, }}>校园新生通</Text>
                 </View>
-                <ScrollView>
+                <ScrollView style={{marginBottom:30}}>
+                    {/* 顶部 */}
 
                     {/* 轮播图 */}
                     <Swiper autoplay={true} autoplayDirection={true} autoplayTimeout='1.5' style={styles.wrapper} showsButtons={false}>
@@ -93,9 +93,9 @@ export default class Method extends Component {
                             <Text>一键直达</Text>
                         </View>
                         <View style={styles.sixOne}>
-                            <TouchableOpacity onPress={() => { Actions.sharefile() }} style={styles.yjzd}>
+                            <TouchableOpacity onPress={() => { Actions.notesks() }} style={styles.yjzd}>
                                 <View style={{ height: 70 * s, width: 70 * s, alignItems: 'center', justifyContent: 'center', borderRadius: 35 * s, backgroundColor: '#37a9c7' }}><Icon name='search' size={36} color="white" /></View>
-                                <Text style={{ marginTop: 10, color: '#37a9c7' }}>快速查找资料</Text>
+                                <Text style={{ marginTop: 10, color: '#37a9c7' }}>添加笔记</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => { Actions.obtainemployment() }} style={styles.one}>
                                 <View style={{ height: 70 * s, width: 70 * s, alignItems: 'center', justifyContent: 'center', borderRadius: 35 * s, backgroundColor: '#efcd00' }}><Icon name='hand-stop-o' size={36} color="white" /></View>
@@ -154,7 +154,7 @@ let styles = StyleSheet.create({
         marginLeft: '3%',
         alignItems: 'center',
         borderRadius: 20,
-        marginBottom: 50 * s
+        marginBottom: 10 * s
     },
     yjzd: {
         height: 100 * s,

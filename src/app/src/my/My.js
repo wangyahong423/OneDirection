@@ -218,8 +218,8 @@ export default class Person extends Component {
                         borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1
                     }}  >
                         <Icon name="star-o" size={30} color="#fed658" style={{ marginLeft: 30, marginTop: 10 }} />
-                        <TouchableOpacity onPress={() => Actions.shoucang()} style={{ flexDirection: 'row' }}>
-                            <Text style={{ fontSize: 20, marginLeft: 40, marginTop: 11 }}>我的收藏 </Text>
+                        <TouchableOpacity onPress={() => Actions.biji()} style={{ flexDirection: 'row' }}>
+                            <Text style={{ fontSize: 20, marginLeft: 40, marginTop: 11 }}>我的笔记</Text>
                             <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 210, marginTop: 15 }} />
                         </TouchableOpacity>
                     </View>
@@ -230,6 +230,16 @@ export default class Person extends Component {
                         <Icon name="hand-o-right" size={30} color="#5f6fcd" style={{ marginLeft: 30, marginTop: 10 }} />
                         <TouchableOpacity onPress={() => Actions.tiezi()} style={{ flexDirection: 'row' }}>
                             <Text style={{ fontSize: 20, marginLeft: 39, marginTop: 11 }} onPress={() => Actions.tiezi()}>我的帖子</Text>
+                            <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 212, marginTop: 15 }} />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{
+                        height: 50, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
+                        borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1
+                    }}>
+                        <Icon name="american-sign-language-interpreting" size={26} color="#5f6fcd" style={{ marginLeft: 30, marginTop: 10 }} />
+                        <TouchableOpacity onPress={() => Actions.myexperence()} style={{ flexDirection: 'row' }}>
+                            <Text style={{ fontSize: 20, marginLeft: 34, marginTop: 11 }} onPress={() => Actions.myexperence()}>我的经验</Text>
                             <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 212, marginTop: 15 }} />
                         </TouchableOpacity>
                     </View>

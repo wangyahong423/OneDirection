@@ -28,11 +28,11 @@ export default class programme extends Component {
                 </Swiper>
                 <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                     <TouchableOpacity
-                        style={[{marginTop:80*s},styles.whole]}
+                        style={[{ marginTop: 80 * s }, styles.whole]}
                         onPress={() => Actions.cet41()}
                     >
                         <View>
-                            <Text style={{ fontSize: 20 * s, fontStyle: 'italic,',marginLeft:100*s}}>四级资料</Text>
+                            <Text style={{ fontSize: 20 * s, marginLeft: 100 * s }}>四级资料</Text>
                         </View>
                         {/* <Icon name="road" style={{ marginLeft: '30%' }} size={40} color="#37376F" /> */}
                     </TouchableOpacity>
@@ -41,11 +41,11 @@ export default class programme extends Component {
                         onPress={() => Actions.cet61()}
                     >
                         <View>
-                            <Text style={{ fontSize: 20 * s, fontStyle: 'italic', marginLeft:100*s}}>六级资料</Text>
+                            <Text style={{ fontSize: 20 * s, marginLeft: 100 * s }}>六级资料</Text>
                         </View>
                         {/* <Icon name="road" style={{ marginLeft: '30%' }} size={40} color="#37376F" /> */}
                     </TouchableOpacity>
-                    
+
                 </View>
             </ScrollView>
         )

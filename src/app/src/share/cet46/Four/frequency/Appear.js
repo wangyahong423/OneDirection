@@ -30,6 +30,11 @@ export default class Appear extends Component {
     render() {
         return (
             <View style={{ backgroundColor: '#ffffff', }}>
+                <View style={{height:40*s,flexDirection:'row',}}>
+                    <Text style={{marginLeft:50*s,fontSize:20,marginTop:10*s}}>单词</Text>
+                    <Text style={{marginLeft:120*s,fontSize:20,marginTop:10*s}}>翻译</Text>
+                    <Text style={{marginLeft:130*s,fontSize:20,marginTop:10*s}}>词性</Text>
+                </View>
                 <ScrollView style={{ backgroundColor: '#ffffff' }}>
                     
                     {

@@ -22,8 +22,8 @@ export default class Yuedu extends Component {
                     height: 50*s, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
                     borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1,marginTop:10*s
                 }}  >
-                    <TouchableOpacity onPress={() => Actions.one()} style={{ flexDirection: 'row' }}>
-                        <Text style={{ fontSize: 20, marginLeft: 100*s, marginTop: 11*s }}>第一篇：大学专业选择 </Text>
+                    <TouchableOpacity onPress={() => Actions.yuedu61()} style={{ flexDirection: 'row' }}>
+                        <Text style={{ fontSize: 20, marginLeft: 100*s, marginTop: 11*s }}>第一篇：新加坡 </Text>
                     </TouchableOpacity>
                     <Icon name="edit" size={30} color="#5f6fcd" style={{ marginLeft: 40*s, marginTop: 10*s }} />
                 </View>
@@ -31,8 +31,8 @@ export default class Yuedu extends Component {
                     height: 50*s, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
                     borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1,marginTop:10*s
                 }}  >
-                    <TouchableOpacity onPress={() => Actions.wordone()} style={{ flexDirection: 'row' }}>
-                        <Text style={{ fontSize: 20, marginLeft: 100*s, marginTop: 11*s }}>第二篇：大学的生存</Text>
+                    <TouchableOpacity onPress={() => Actions.yuedu62()} style={{ flexDirection: 'row' }}>
+                        <Text style={{ fontSize: 20, marginLeft: 100*s, marginTop: 11*s }}>第二篇：基督教</Text>
                     </TouchableOpacity>
                     <Icon name="edit" size={30} color="#5f6fcd" style={{ marginLeft: 40*s, marginTop: 10*s }} />
                 </View>
@@ -40,8 +40,8 @@ export default class Yuedu extends Component {
                     height: 50*s, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
                     borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1,marginTop:10*s
                 }}  >
-                    <TouchableOpacity onPress={() => Actions.wordone()} style={{ flexDirection: 'row' }}>
-                        <Text style={{ fontSize: 20, marginLeft: 100*s, marginTop: 11*s }}>第三篇：简化餐桌礼节</Text>
+                    <TouchableOpacity onPress={() => Actions.yuedu63()} style={{ flexDirection: 'row' }}>
+                        <Text style={{ fontSize: 20, marginLeft: 100*s, marginTop: 11*s }}>第三篇：澳大利亚</Text>
                     </TouchableOpacity>
                     <Icon name="edit" size={30} color="#5f6fcd" style={{ marginLeft: 40*s, marginTop: 10*s }} />
                 </View>
@@ -49,8 +49,8 @@ export default class Yuedu extends Component {
                     height: 50*s, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
                     borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1,marginTop:10*s
                 }}  >
-                    <TouchableOpacity onPress={() => Actions.wordone()} style={{ flexDirection: 'row' }}>
-                        <Text style={{ fontSize: 20, marginLeft: 100*s, marginTop: 11*s }}>第四篇：教育有方</Text>
+                    <TouchableOpacity onPress={() => Actions.yuedu64()} style={{ flexDirection: 'row' }}>
+                        <Text style={{ fontSize: 20, marginLeft: 100*s, marginTop: 11*s }}>第四篇：埃及</Text>
                     </TouchableOpacity>
                     <Icon name="edit" size={30} color="#5f6fcd" style={{ marginLeft: 40*s, marginTop: 10*s }} />
                 </View>

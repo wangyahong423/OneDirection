@@ -27,7 +27,7 @@ export default class Details extends Component {
                 })
             });
     }
-    componentDidMount() {
+    componentDidMount() { 
         AsyncStorage.getItem('lPage')
             .then((value) => {
                 this.setState({

@@ -96,6 +96,84 @@ export default class Xuexidongtai extends Component {
                 arr: item.id
             })
         })
+
+        var self = this;
+        this.listener = DeviceEventEmitter.addListener('freshthree', function (param) {
+            let url = `http://139.155.44.190:3005/learn/list`;
+            let url2 = `http://139.155.44.190:3005/learnlike/list`;
+            let url3 = `http://139.155.44.190:3005/users/getName`;
+            let url4 = `http://139.155.44.190:3005/users/list`;
+
+            fetch(url2)
+                .then(res => res.json())
+                .then((res) => {
+                    self.setState({
+                        list: res
+                    })
+                    var brr = [];
+                    self.state.list.map((item) => {
+                        if (item.name == self.state.username) {
+                            brr.push(item);
+                        }
+                        self.setState({
+                            list: brr
+                        })
+                    })
+                    var arr = [];
+                    var a = 0;
+                    for (var i = 0; i < self.state.data.length; i++) {
+                        for (var j = 0; j < self.state.list.length; j++) {
+                            if (self.state.data[i].id == self.state.list[j].lid) {
+                                a = 1;
+                                break;
+                            } else {
+                                a = 0;
+                            }
+                        }
+                        if (a == 1) {
+                            arr.push('red');
+                            a = 0;
+                        } else {
+                            arr.push('black');
+                        }
+                    }
+                    self.setState({
+                        color: arr
+                    })
+                })
+
+
+            fetch(url4)
+                .then(res => res.json())
+                .then(res => {
+                    res.map(item => {
+                        if (item.name == self.state.username) {
+                            self.setState({ pic: 'http://139.155.44.190:3005' + item.pic })
+                        }
+                    })
+                })
+
+            fetch(url)
+                .then(res => res.json())
+                .then((res) => {
+                    var arr = [];
+                    res.map((item) => {
+                        if (item.name == self.state.username) {
+                            arr.push(item)
+                        }
+                    })
+                    self.setState({
+                        data: arr
+                    })
+                })
+
+            self.state.data.map((item) => {
+                self.setState({
+                    arr: item.id
+                })
+            })
+        })
+
     }
 
 
@@ -123,10 +201,9 @@ export default class Xuexidongtai extends Component {
             .then(res => res.json())
 
             .then((res) => {
-                window.location.href = "http://localhost:3000/tiezi"
-                window.location.href = "http://localhost:3000/xuexi"
-                window.location.reload();
             })
+        var param = 1;
+        DeviceEventEmitter.emit('freshthree', param);
     }
     render() {
         return (
@@ -161,6 +238,9 @@ export default class Xuexidongtai extends Component {
                                 }}
                                 >
                                     <Text style={{ fontSize: 18 * s }}>{item.content}</Text>
+                                </View>
+                                <View style={{ position: 'absolute', top: 10, left: 430 }}>
+                                    <Text style={{ color: 'red', fontSize: 20 }} onPress={this.delTie.bind(this, (item.id))}>×</Text>
                                 </View>
                             </View>
                         )}

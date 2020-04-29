@@ -31,6 +31,16 @@ export default class Bibei extends Component {
         return (
             <View style={{ backgroundColor: '#ffffff', }}>
                 <ScrollView style={{ backgroundColor: '#ffffff' }}>
+                    
+                    {
+                        this.state.tits.map((item) => (
+                            <View style={{ flexDirection: "row", marginTop: 10 }}>
+                                <Text numberOfLines={1} style={{ marginLeft: 30 * s, width: 120 * s, color: 'grey', fontSize: 17 }}>{item.english}</Text>
+                                <Text numberOfLines={1} style={{ marginLeft: 20 * s, width: 180 * s, color: 'grey', fontSize: 17 }}>{item.chinese}</Text>
+                                <Text numberOfLines={1} style={{ marginLeft: 40 * s, width: 180 * s, color: 'grey', fontSize: 17 }}>{item.nature}</Text>
+                            </View>
+                        ))
+                    }
                 </ScrollView>
             </View>
         )
