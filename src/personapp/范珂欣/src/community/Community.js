@@ -105,6 +105,7 @@ export default class Community extends Component {
             // var a = {"content": param.content, "like": false, "likeNum": 0, "name": param.name, "pic": "http://139.155.44.190:3005/images/6.jpg", "time": param.time};
             // arr.splice(0,0,a);
             // self.setState({list:arr});
+            // console.log(param);
             fetch(url3)
                 .then((res) => res.json())
                 .then((res) => {
@@ -363,9 +364,9 @@ export default class Community extends Component {
             });
     }
     renovate = () => {
-        // var param = 1;
-        // DeviceEventEmitter.emit('refresh', param);
-        Actions.community();
+        var param = 1;
+        DeviceEventEmitter.emit('refresh', param);
+        // Actions.community();
     }
 
     render() {
