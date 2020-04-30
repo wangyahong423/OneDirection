@@ -64,6 +64,8 @@ export default class Community extends Component {
                                             for (var i = 0; i < this.state.pic.length; i++) {
                                                 if (item.name == this.state.pic[i].name) {
                                                     item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
+                                                    item.level = this.state.pic[i].level;
+                                                    item.college = this.state.pic[i].college;
                                                     break;
                                                 }
                                             }
@@ -132,6 +134,8 @@ export default class Community extends Component {
                                                 for (var i = 0; i < self.state.pic.length; i++) {
                                                     if (item.name == self.state.pic[i].name) {
                                                         item.pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
+                                                        item.level = self.state.pic[i].level;
+                                                        item.college = self.state.pic[i].college;
                                                         break;
                                                     }
                                                 }
@@ -368,6 +372,11 @@ export default class Community extends Component {
         DeviceEventEmitter.emit('refresh', param);
         // Actions.community();
     }
+    person = (idx) => {
+        var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level,college: this.state.list[idx].college };
+        AsyncStorage.setItem('details', JSON.stringify(value));
+        Actions.person();
+    }
 
     render() {
         return (
@@ -443,15 +452,21 @@ export default class Community extends Component {
                                         height: 80 * s,
                                         alignItems: 'center'
                                     }}>
-                                        <Image style={{
-                                            marginLeft: 20 * s,
-                                            height: 50 * s,
-                                            width: 50 * s,
-                                            borderRadius: 25 * s,
-                                            backgroundColor: 'yellow'
-                                        }} source={{ uri: item.pic }} />
+                                        <TouchableOpacity onPress={this.person.bind(this, (idx))}>
+                                            <Image style={{
+                                                marginLeft: 20 * s,
+                                                height: 50 * s,
+                                                width: 50 * s,
+                                                borderRadius: 25 * s,
+                                                backgroundColor: 'yellow'
+                                            }}
+                                                source={{ uri: item.pic }} />
+                                        </TouchableOpacity>
                                         <View style={{ marginLeft: 30 * s }}>
-                                            <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
+                                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                                <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
+                                                <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: 'red' }}>Lv.{item.level}</Text>
+                                            </View>
                                             <Text>{item.time}</Text>
                                         </View>
                                     </View>

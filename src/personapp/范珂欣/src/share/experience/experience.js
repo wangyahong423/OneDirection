@@ -70,6 +70,7 @@ export default class Experience extends Component {
                                                 if (item.name == this.state.pic[i].name) {
                                                     item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
                                                     item.college = this.state.pic[i].college;
+                                                    item.level = this.state.pic[i].level;
                                                     break;
                                                 }
                                             }
@@ -156,6 +157,7 @@ export default class Experience extends Component {
                                                     if (item.name == self.state.pic[i].name) {
                                                         item.pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
                                                         item.college = self.state.pic[i].college;
+                                                        item.level = self.state.pic[i].level;
                                                         break;
                                                     }
                                                 }
@@ -245,7 +247,7 @@ export default class Experience extends Component {
 
     }
     details = (idx) => {
-        var value = { name: this.state.list[idx].name, time: this.state.list[idx].time, content: this.state.list[idx].content, pic: this.state.list[idx].pic };
+        var value = { name: this.state.list[idx].name, time: this.state.list[idx].time, content: this.state.list[idx].content, pic: this.state.list[idx].pic, level: this.state.list[idx].level };
         AsyncStorage.setItem('EPage', JSON.stringify(value));
         Actions.expdetails();
     }
@@ -523,6 +525,12 @@ export default class Experience extends Component {
     closeLeftDrawer() {
         this.drawer.closeDrawer();
     }
+
+    person = (idx) => {
+        var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college };
+        AsyncStorage.setItem('details', JSON.stringify(value));
+        Actions.person();
+    }
     render() {
         var navigationView = (
             <View style={{ backgroundColor: '#fff', marginBottom: 10 * s }}>
@@ -615,10 +623,10 @@ export default class Experience extends Component {
                     ref={(drawer) => {
                         this.drawer = drawer;
                     }}
-                    drawerWidth={350*s}
+                    drawerWidth={350 * s}
                     drawerPosition={'left'}
                     renderNavigationView={() => navigationView}>
-                    <View style={{width:50*s,height:25*s,borderRadius:10*s,backgroundColor:'#37376F',alignItems:'center',justifyContent: 'center',marginLeft:10*s}}>
+                    <View style={{ width: 50 * s, height: 25 * s, borderRadius: 10 * s, backgroundColor: '#37376F', alignItems: 'center', justifyContent: 'center', marginLeft: 10 * s }}>
                         <TouchableOpacity
                             // underlayColor="rgb(210, 230, 255)"
                             activeOpacity={0.5}
@@ -627,7 +635,7 @@ export default class Experience extends Component {
                             style={{}}
                         //onPress={this.onPenLeftDrawer.bind(this)}
                         >
-                            <Text style={{ fontSize: 16,color:'#fff'}}>分类</Text>
+                            <Text style={{ fontSize: 16, color: '#fff' }}>分类</Text>
                         </TouchableOpacity>
                     </View>
                     <ScrollView style={{ flex: 1 }}>
@@ -640,15 +648,20 @@ export default class Experience extends Component {
                                             height: 80 * s,
                                             alignItems: 'center'
                                         }}>
-                                            <Image style={{
-                                                marginLeft: 20 * s,
-                                                height: 50 * s,
-                                                width: 50 * s,
-                                                borderRadius: 25 * s,
-                                                backgroundColor: 'yellow'
-                                            }} source={{ uri: item.pic }} />
+                                            <TouchableOpacity onPress={this.person.bind(this, (idx))}>
+                                                <Image style={{
+                                                    marginLeft: 20 * s,
+                                                    height: 50 * s,
+                                                    width: 50 * s,
+                                                    borderRadius: 25 * s,
+                                                    backgroundColor: 'yellow'
+                                                }} source={{ uri: item.pic }} />
+                                            </TouchableOpacity>
                                             <View style={{ marginLeft: 30 * s }}>
-                                                <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
+                                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                                    <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
+                                                    <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: 'red' }}>Lv.{item.level}</Text>
+                                                </View>
                                                 <Text>{item.time}</Text>
                                             </View>
                                         </View>
