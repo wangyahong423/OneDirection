@@ -8,7 +8,7 @@ export default class Learn extends Component {
             data: [],
             indexList: [],
             current: 1,
-            pageSize: 16,
+            pageSize: 15,
             num: 0,
             totalPage: 0,
             display_block: 'block',
@@ -80,7 +80,7 @@ export default class Learn extends Component {
     }
     render() {
         return (
-            <div style={{ position: 'relative', width: '800px', overflow: 'hidden', height: '580px', margin: '0 auto', backgroundColor: 'rgba(136, 136, 136, 0.3)', paddingTop: '0px' }}>
+            <div style={{ position: 'relative', width: '800px', overflow: 'hidden', height: '570px', margin: '0 auto', backgroundColor: 'rgba(136, 136, 136, 0.3)', paddingTop: '0px' }}>
                 <table style={{ width: '700px', tableLayout: 'fixed', paddingLeft: '20px' }}>
                     <thead>
                         <tr style={{ height: '55px' }}>

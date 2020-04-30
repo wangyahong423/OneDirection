@@ -3,8 +3,8 @@ import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import Manager from './Manager';
 import Users from './Users';
 import Learn from './Learn';
-import File from './File';
-import Community from './Community';
+import Experence from './Experence';
+import Notes from './Notes';
 import Feedback from './Feedback';
 import '../App.css';
 import axios from 'axios';
@@ -161,17 +161,17 @@ onClick6=()=>{
         <div className='home'>
           <Link to='/'  style={{ textDecoration: 'none', height: '65px' }} ><p className='tab' style={S1} onClick={this.onClick1}>用户管理</p></Link>
           <Link to='/feedback' style={{ textDecoration: 'none', height: '65px' }}><p className='tab' style={S2} onClick={this.onClick2}>用户反馈</p></Link>
-          <Link to='/learn' style={{ textDecoration: 'none', height: '65px' }}><p className='tab' style={S3} onClick={this.onClick3}>学习交流</p></Link>
-          <Link to='/file' style={{ textDecoration: 'none', height: '65px' }}><p className='tab' style={S4} onClick={this.onClick4}>文件管理</p></Link>
-          <Link to='/community' style={{ textDecoration: 'none', height: '65px' }}><p className='tab' style={S5} onClick={this.onClick5}>社区管理</p></Link>
+          <Link to='/learn' style={{ textDecoration: 'none', height: '65px' }}><p className='tab' style={S3} onClick={this.onClick3}>社区管理</p></Link>
+          <Link to='/notes' style={{ textDecoration: 'none', height: '65px' }}><p className='tab' style={S4} onClick={this.onClick4}>笔记管理</p></Link>
+          <Link to='/experence' style={{ textDecoration: 'none', height: '65px' }}><p className='tab' style={S5} onClick={this.onClick5}>经验管理</p></Link>
           <Link to='/manager' style={{ textDecoration: 'none', height: '65px', borderBottom: '1px solid rgba(136, 136, 136, 1)' }}><p className='tab' style={S6} onClick={this.onClick6}>管理员</p></Link>
         </div>
         <div>
           <Route exact path='/' component={Users} />
           <Route path='/feedback' component={Feedback} />
           <Route path='/learn' component={Learn} />
-          <Route path='/file' component={File} />
-          <Route path='/community' component={Community} />
+          <Route path='/notes' component={Notes} />
+          <Route path='/experence' component={Experence} />
           <Route path='/manager' component={Manager} />
         </div>
       </Router>

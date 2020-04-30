@@ -4,11 +4,11 @@ import axios from 'axios'
 export default class Community extends Component {
     constructor(props) {
         super(props);
-        this.state = {
+        this.state = { 
             data: [],
             indexList: [],
             current: 1,
-            pageSize: 16,
+            pageSize: 15,
             num: 0,
             totalPage: 0,
             display_block: 'block',

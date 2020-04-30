@@ -151,9 +151,9 @@ export default class Manager extends Component {
         }
     }
 
-    render() {
+    render() { 
         return (
-            <div style={{ position: 'relative', width: '800px', overflow: 'hidden', height: '580px', margin: '0 auto', backgroundColor: 'rgba(136, 136, 136, 0.3)', paddingTop: '0px' }}>
+            <div style={{ position: 'relative', width: '800px', overflow: 'hidden', height: '570px', margin: '0 auto', backgroundColor: 'rgba(136, 136, 136, 0.3)', paddingTop: '0px' }}>
                 <div style={{ height: '40px', width: '800px' }}>
                     <input type='search' onKeyDown={(e) => this.onkeydown(e)} placeholder="回车进行搜索" style={{ opacity: '0.4', fontFamily: '楷体', height: '40px', width: '620px', fontSize: '20px', paddingLeft: '30px', border: 'none', marginTop: '0px' }} ></input>
                     <button onClick={this.del.bind(this)} style={{ opacity: '0.5', height: '41px', marginLeft: '0px', fontSize: '20px', width: '180px', fontFamily: '楷体' }}>添加管理员</button>

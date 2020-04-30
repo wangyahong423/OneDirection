@@ -84,7 +84,7 @@ export default class Feedback extends Component {
     }
     render() {
         return (
-            <div style={{ position: 'relative', width: '800px', margin: '0 auto', overflow: 'hidden', height: '580px', backgroundColor: 'rgba(136, 136, 136, 0.3)' }}>
+            <div style={{ position: 'relative', width: '800px', margin: '0 auto', overflow: 'hidden', height: '570px', backgroundColor: 'rgba(136, 136, 136, 0.3)' }}>
                 <table style={{ width: '700px', tableLayout: 'fixed', paddingLeft: '20px' }}>
                     <thead>
                         <tr style={{ height: '55px' }}>

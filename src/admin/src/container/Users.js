@@ -8,8 +8,8 @@ export default class Users extends Component {
             data: [],
             indexList: [],
             current: 1,
-            pageSize: 7,
-            num: 0,
+            pageSize: 6,
+            num: 0, 
             totalPage: 0
         }
     }
@@ -92,7 +92,7 @@ export default class Users extends Component {
       }
     render() {
         return (
-            <div style={{ position: 'relative', width: '800px', height: '580px', margin: '0 auto', backgroundColor: 'rgba(136, 136, 136, 0.3)', paddingTop: '0px' }}>
+            <div style={{ position: 'relative', width: '800px', height: '570px', margin: '0 auto', backgroundColor: 'rgba(136, 136, 136, 0.3)', paddingTop: '0px' }}>
                 <div style={{ height: '40px', width: '700px', marginTop: '1px' }}>
                     <input type='search' onChange={this.changeSearch} onKeyDown={(e) => this.onkeydown(e)} placeholder="回车进行搜索" style={{ opacity: '0.4', fontFamily: '楷体', height: '40px', width: '800px', fontSize: '20px', paddingLeft: '30px', border: 'none' }} ></input>
                 </div>
