@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, StyleSheet, Dimensions } from 'react-native';
+import { Text, View, ScrollView, Dimensions, StyleSheet } from 'react-native';
 import { Accordion } from '@ant-design/react-native';
 
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class Translate3 extends Component {
+export default class Translate5 extends Component {
     constructor() {
         super();
         this.state = {
@@ -14,10 +14,10 @@ export default class Translate3 extends Component {
                 header: '参考答案',
                 content1: '解析',
                 content2: '考察重点：',
-                content3: '时间状语从句，定语从句',
-                content4: '这个句子结构稍显复杂：Mast of us give in to a demoralization of spirit which we usually blame on some psychological conditions 是主句，其中which we usually blame on some psychological conditions 是定语从句until one day we find ourselves in a garden and feel the oppression vanish as if by magic.是时间状语从句。',
+                content3: 'but连词连接的句子。',
+                content4: '该句式在结构上相对较简单，考生只需要对but连词连接的两个句子翻译出即可;在词汇上除了 primary-school curriculum需要考生去思考相对应的汉语意思外，该句并无太对难点;',
                 content5: '参考翻译：',
-                content6: '我们当中大多数人都屈服于精神的道德败坏，我们经常把这种精神上的败坏推卸到心理环境上，直到有一天我们发现自己处于一个家园当中，并感受到这种压迫好像魔法一样消失。'
+                content6: '许多国家正在将英语引进小学课程中，但是，英国学童和学生似乎没有受到更多的鼓励去学会流利地使用其他语言。'
             }]
         }
     }
@@ -50,21 +50,21 @@ export default class Translate3 extends Component {
     render() {
         return (
             <ScrollView>
-            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                <View style={{ width: '85%', margin: '7.5%',borderColor:'#37376F',borderWidth:1,padding:'2%' }}>
-                    <Text style={{ fontSize: 16 * s }}>
-                        &emsp;&emsp;{`Mast of us give in to a demoralization of spirit which we usually blame on some psychological conditions until one day we find ourselves in a garden and feel the oppression vanish as if by magic`}
-                    </Text>
+                <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ width: '85%', margin: '7.5%', borderColor: '#37376F', borderWidth: 1, padding: '2%' }}>
+                        <Text style={{ fontSize: 16 * s }}>
+                            &emsp;&emsp;{`Many countries are introducing English into the primary-school curriculum but British schoolchildren and students do not appear to be gaining greater encouragemen to achieve fluency in other languages.`}
+                        </Text>
+                    </View>
                 </View>
-            </View>
-            <Accordion
+                <Accordion
                     sections={this.state.todo}
                     activeSections={this.state.activeSections}
                     renderHeader={this._renderHeader}
                     renderContent={this._renderContent}
                     onChange={this._updateSections}
                 />
-        </ScrollView>
+            </ScrollView>
         )
     }
 }
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 10 * s,
-        marginLeft:'40%'
+        marginLeft: '40%'
     },
     headerText: {
         fontSize: 16,

@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, StyleSheet, Dimensions } from 'react-native';
+import { Text, View, ScrollView, Dimensions, StyleSheet } from 'react-native';
 import { Accordion } from '@ant-design/react-native';
 
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class Translate3 extends Component {
+export default class Translate6 extends Component {
     constructor() {
         super();
         this.state = {
@@ -14,10 +14,10 @@ export default class Translate3 extends Component {
                 header: '参考答案',
                 content1: '解析',
                 content2: '考察重点：',
-                content3: '时间状语从句，定语从句',
-                content4: '这个句子结构稍显复杂：Mast of us give in to a demoralization of spirit which we usually blame on some psychological conditions 是主句，其中which we usually blame on some psychological conditions 是定语从句until one day we find ourselves in a garden and feel the oppression vanish as if by magic.是时间状语从句。',
+                content3: '识别过去分词作后置定语。',
+                content4: '句子主干为The changes all present clear and major challenges to ......;',
                 content5: '参考翻译：',
-                content6: '我们当中大多数人都屈服于精神的道德败坏，我们经常把这种精神上的败坏推卸到心理环境上，直到有一天我们发现自己处于一个家园当中，并感受到这种压迫好像魔法一样消失。'
+                content6: '大卫·葛拉尔多所发现的变化给教授他国人士英语的英国机构以及更广阔的教育市场带来了显而易见的巨大挑战。'
             }]
         }
     }
@@ -50,21 +50,21 @@ export default class Translate3 extends Component {
     render() {
         return (
             <ScrollView>
-            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                <View style={{ width: '85%', margin: '7.5%',borderColor:'#37376F',borderWidth:1,padding:'2%' }}>
-                    <Text style={{ fontSize: 16 * s }}>
-                        &emsp;&emsp;{`Mast of us give in to a demoralization of spirit which we usually blame on some psychological conditions until one day we find ourselves in a garden and feel the oppression vanish as if by magic`}
-                    </Text>
+                <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ width: '85%', margin: '7.5%', borderColor: '#37376F', borderWidth: 1, padding: '2%' }}>
+                        <Text style={{ fontSize: 16 * s }}>
+                            &emsp;&emsp;{`The changes identified by David Graddol all present clear and major challenges to UK's providers of English language teaching to people of other countrices and to broader education business sectors.`}
+                        </Text>
+                    </View>
                 </View>
-            </View>
-            <Accordion
+                <Accordion
                     sections={this.state.todo}
                     activeSections={this.state.activeSections}
                     renderHeader={this._renderHeader}
                     renderContent={this._renderContent}
                     onChange={this._updateSections}
                 />
-        </ScrollView>
+            </ScrollView>
         )
     }
 }
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 10 * s,
-        marginLeft:'40%'
+        marginLeft: '40%'
     },
     headerText: {
         fontSize: 16,

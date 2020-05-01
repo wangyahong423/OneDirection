@@ -5,7 +5,7 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class translate2 extends Component {
+export default class Translate2 extends Component {
     constructor() {
         super();
         this.state = {

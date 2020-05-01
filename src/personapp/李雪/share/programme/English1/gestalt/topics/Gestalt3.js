@@ -5,53 +5,53 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class question3 extends Component {
+export default class Gestalt3 extends Component {
     constructor() {
         super();
         this.state = {
             activeSections: [],
             todo: [{
                 header: '参考答案',
-                content1: '1. 【答案】A. difficulties',
-                content2: '【解析】本题测试词义搭配。本句译文：当他们试图适应这种新的媒体时他们遇到的困难是技术性的。',
-                content3: '2. 【答案】B. adapt',
-                content4: '【解析】本题测试结构型词义搭配。adapt oneself to sth.使……适应于：When you go to a foreign country, you should adapt yourself to new manners and customs. turn to 求助于：You can turn to him for help when you are in trouble. (你有困难时可以求助于他)。alter (部分的)改变，修改：Have you altered your mind? (你是否已改变主意？) modify(稍稍)修改，变更：You have to modify the plan if necessary.此外，modify还可以作“修饰”解，如：Adverbs modify verbs.(副词修饰动词)',
-                content5: '3. 【答案】A. on',
-                content6: '【解析】本题测试结构型词义搭配。adapt oneself to sth.使……适应于：When you go to a foreign country, you should adapt yourself to new manners and customs. turn to 求助于：You can turn to him for help when you are in trouble. (你有困难时可以求助于他)。alter (部分的)改变，修改：Have you altered your mind? (你是否已改变主意？) modify(稍稍)修改，变更：You have to modify the plan if necessary.此外，modify还可以作“修饰”解，如：Adverbs modify verbs.(副词修饰动词)',
-                content7: '4. 【答案】D. accustomed',
-                content8: '【解析】本题测试结构型词义搭配。adapt oneself to sth.使……适应于：When you go to a foreign country, you should adapt yourself to new manners and customs. turn to 求助于：You can turn to him for help when you are in trouble. (你有困难时可以求助于他)。alter (部分的)改变，修改：Have you altered your mind? (你是否已改变主意？) modify(稍稍)修改，变更：You have to modify the plan if necessary.此外，modify还可以作“修饰”解，如：Adverbs modify verbs.(副词修饰动词)',
-                content9: '5. 【答案】D. behalf',
-                content10: '【解析】本题测试结构型词义搭配。adapt oneself to sth.使……适应于：When you go to a foreign country, you should adapt yourself to new manners and customs. turn to 求助于：You can turn to him for help when you are in trouble. (你有困难时可以求助于他)。alter (部分的)改变，修改：Have you altered your mind? (你是否已改变主意？) modify(稍稍)修改，变更：You have to modify the plan if necessary.此外，modify还可以作“修饰”解，如：Adverbs modify verbs.(副词修饰动词)',
-                content11: '6. 【答案】C. art',
-                content12: '【解析】本题测试结构型词义搭配。adapt oneself to sth.使……适应于：When you go to a foreign country, you should adapt yourself to new manners and customs. turn to 求助于：You can turn to him for help when you are in trouble. (你有困难时可以求助于他)。alter (部分的)改变，修改：Have you altered your mind? (你是否已改变主意？) modify(稍稍)修改，变更：You have to modify the plan if necessary.此外，modify还可以作“修饰”解，如：Adverbs modify verbs.(副词修饰动词)',
-                content13: '7. 【答案】A. commentator',
-                content14: '【解析】本题测试结构型词义搭配。adapt oneself to sth.使……适应于：When you go to a foreign country, you should adapt yourself to new manners and customs. turn to 求助于：You can turn to him for help when you are in trouble. (你有困难时可以求助于他)。alter (部分的)改变，修改：Have you altered your mind? (你是否已改变主意？) modify(稍稍)修改，变更：You have to modify the plan if necessary.此外，modify还可以作“修饰”解，如：Adverbs modify verbs.(副词修饰动词)',
-                content15: '8. 【答案】C. Above',
-                content16: '【解析】本题测试结构型词义搭配。adapt oneself to sth.使……适应于：When you go to a foreign country, you should adapt yourself to new manners and customs. turn to 求助于：You can turn to him for help when you are in trouble. (你有困难时可以求助于他)。alter (部分的)改变，修改：Have you altered your mind? (你是否已改变主意？) modify(稍稍)修改，变更：You have to modify the plan if necessary.此外，modify还可以作“修饰”解，如：Adverbs modify verbs.(副词修饰动词)',
-                content17: '9. 【答案】B. create',
-                content18: '【解析】本题测试结构型词义搭配。adapt oneself to sth.使……适应于：When you go to a foreign country, you should adapt yourself to new manners and customs. turn to 求助于：You can turn to him for help when you are in trouble. (你有困难时可以求助于他)。alter (部分的)改变，修改：Have you altered your mind? (你是否已改变主意？) modify(稍稍)修改，变更：You have to modify the plan if necessary.此外，modify还可以作“修饰”解，如：Adverbs modify verbs.(副词修饰动词)',
-                content19: '10. 【答案】A. Add',
-                content20: '【解析】本题测试结构型词义搭配。adapt oneself to sth.使……适应于：When you go to a foreign country, you should adapt yourself to new manners and customs. turn to 求助于：You can turn to him for help when you are in trouble. (你有困难时可以求助于他)。alter (部分的)改变，修改：Have you altered your mind? (你是否已改变主意？) modify(稍稍)修改，变更：You have to modify the plan if necessary.此外，modify还可以作“修饰”解，如：Adverbs modify verbs.(副词修饰动词)',
-                content21: '11. 【答案】D.case',
-                content22: '【解析】本题测试结构型词义搭配。adapt oneself to sth.使……适应于：When you go to a foreign country, you should adapt yourself to new manners and customs. turn to 求助于：You can turn to him for help when you are in trouble. (你有困难时可以求助于他)。alter (部分的)改变，修改：Have you altered your mind? (你是否已改变主意？) modify(稍稍)修改，变更：You have to modify the plan if necessary.此外，modify还可以作“修饰”解，如：Adverbs modify verbs.(副词修饰动词)',
-                content23: '12. 【答案】C. everything',
-                content24: '【解析】本题测试结构型词义搭配。adapt oneself to sth.使……适应于：When you go to a foreign country, you should adapt yourself to new manners and customs. turn to 求助于：You can turn to him for help when you are in trouble. (你有困难时可以求助于他)。alter (部分的)改变，修改：Have you altered your mind? (你是否已改变主意？) modify(稍稍)修改，变更：You have to modify the plan if necessary.此外，modify还可以作“修饰”解，如：Adverbs modify verbs.(副词修饰动词)',
-                content25: '13. 【答案】B. completely',
-                content26: '【解析】本题测试结构型词义搭配。adapt oneself to sth.使……适应于：When you go to a foreign country, you should adapt yourself to new manners and customs. turn to 求助于：You can turn to him for help when you are in trouble. (你有困难时可以求助于他)。alter (部分的)改变，修改：Have you altered your mind? (你是否已改变主意？) modify(稍稍)修改，变更：You have to modify the plan if necessary.此外，modify还可以作“修饰”解，如：Adverbs modify verbs.(副词修饰动词)',
-                content27: '14. 【答案】C. sure',
-                content28: '【解析】本题测试结构型词义搭配。adapt oneself to sth.使……适应于：When you go to a foreign country, you should adapt yourself to new manners and customs. turn to 求助于：You can turn to him for help when you are in trouble. (你有困难时可以求助于他)。alter (部分的)改变，修改：Have you altered your mind? (你是否已改变主意？) modify(稍稍)修改，变更：You have to modify the plan if necessary.此外，modify还可以作“修饰”解，如：Adverbs modify verbs.(副词修饰动词)',
-                content29: '15. 【答案】D. miss',
-                content30: '【解析】本题测试结构型词义搭配。adapt oneself to sth.使……适应于：When you go to a foreign country, you should adapt yourself to new manners and customs. turn to 求助于：You can turn to him for help when you are in trouble. (你有困难时可以求助于他)。alter (部分的)改变，修改：Have you altered your mind? (你是否已改变主意？) modify(稍稍)修改，变更：You have to modify the plan if necessary.此外，modify还可以作“修饰”解，如：Adverbs modify verbs.(副词修饰动词)',
-                content31: '16. 【答案】A. focus',
-                content32: '【解析】本题测试结构型词义搭配。adapt oneself to sth.使……适应于：When you go to a foreign country, you should adapt yourself to new manners and customs. turn to 求助于：You can turn to him for help when you are in trouble. (你有困难时可以求助于他)。alter (部分的)改变，修改：Have you altered your mind? (你是否已改变主意？) modify(稍稍)修改，变更：You have to modify the plan if necessary.此外，modify还可以作“修饰”解，如：Adverbs modify verbs.(副词修饰动词)',
-                content33: '17. 【答案】D. interpret',
-                content34: '【解析】本题测试结构型词义搭配。adapt oneself to sth.使……适应于：When you go to a foreign country, you should adapt yourself to new manners and customs. turn to 求助于：You can turn to him for help when you are in trouble. (你有困难时可以求助于他)。alter (部分的)改变，修改：Have you altered your mind? (你是否已改变主意？) modify(稍稍)修改，变更：You have to modify the plan if necessary.此外，modify还可以作“修饰”解，如：Adverbs modify verbs.(副词修饰动词)',
-                content35: '18. 【答案】B. unlike',
-                content36: '【解析】本题测试结构型词义搭配。adapt oneself to sth.使……适应于：When you go to a foreign country, you should adapt yourself to new manners and customs. turn to 求助于：You can turn to him for help when you are in trouble. (你有困难时可以求助于他)。alter (部分的)改变，修改：Have you altered your mind? (你是否已改变主意？) modify(稍稍)修改，变更：You have to modify the plan if necessary.此外，modify还可以作“修饰”解，如：Adverbs modify verbs.(副词修饰动词)',
-                content37: '19. 【答案】C. value',
-                content38: '【解析】本题测试结构型词义搭配。adapt oneself to sth.使……适应于：When you go to a foreign country, you should adapt yourself to new manners and customs. turn to 求助于：You can turn to him for help when you are in trouble. (你有困难时可以求助于他)。alter (部分的)改变，修改：Have you altered your mind? (你是否已改变主意？) modify(稍稍)修改，变更：You have to modify the plan if necessary.此外，modify还可以作“修饰”解，如：Adverbs modify verbs.(副词修饰动词)',
-                content39: '20. 【答案】B. when',
-                content40: '【解析】本题测试结构型词义搭配。adapt oneself to sth.使……适应于：When you go to a foreign country, you should adapt yourself to new manners and customs. turn to 求助于：You can turn to him for help when you are in trouble. (你有困难时可以求助于他)。alter (部分的)改变，修改：Have you altered your mind? (你是否已改变主意？) modify(稍稍)修改，变更：You have to modify the plan if necessary.此外，modify还可以作“修饰”解，如：Adverbs modify verbs.(副词修饰动词)',
+                content1: '1. 【答案】B. rather than',
+                content2: '【翻译】我们有“共同法”，即由法庭而非君主或其他像立法机关这样的中央政府权利机关制定的法律。',
+                content3: '2. 【答案】D. authority',
+                content4: '【翻译】我们有“共同法”，即由法庭而非君主或其他像立法机关这样的中央政府权利机关制定的法律。',
+                content5: '3. 【答案】A. panel',
+                content6: '【翻译】陪审团由一群选来裁决案件的普通公民组成，是我们共同法系统基本的组成部分。',
+                content7: '4. 【答案】C. integral',
+                content8: '【翻译】陪审团由一群选来裁决案件的普通公民组成，是我们共同法系统基本的组成部分。',
+                content9: '5. 【答案】B. distinguishing',
+                content10: '【翻译】使用陪审团裁决案件是美国法律系统的一个显着特征。',
+                content11: '6. 【答案】D. over',
+                content12: '【翻译】在世界上很少有其他国家和美国一样使用陪审团。',
+                content13: '7. 【答案】C. than',
+                content14: '【翻译】几个世纪以来，许多人已经相信在大多数情况下陪审团比许多国家那样单独使用一位法官达成的结果更公平、公正。',
+                content15: '8. 【答案】B. alone',
+                content16: '【翻译】几个世纪以来，许多人已经相信在大多数情况下陪审团比许多国家那样单独使用一位法官达成的结果更公平、公正。',
+                content17: '9. 【答案】B. Because',
+                content18: '【翻译】因为陪审团裁决案件是在一群人“审议”或讨论后。',
+                content19: '10. 【答案】A. deliberations',
+                content20: '【翻译】因为陪审团裁决案件是在一群人“审议”或讨论后。',
+                content21: '11. 【答案】C. input',
+                content22: '【翻译】因此他们的决定可能受到不同背景的不同人的影响，这些人必须作为一个团体来决定什么是正确的。',
+                content23: '12. 【答案】C. disputes',
+                content24: '【翻译】陪审团既被用在裁决普通公民之间纠纷的民事案件中，',
+                content25: '13. 【答案】D. private',
+                content26: '【翻译】陪审团既被用在裁决普通公民之间纠纷的民事案件中，',
+                content27: '14. 【答案】B. alleging',
+                content28: '【翻译】也用在裁决政府提出讼诉声称个人犯罪的刑事案件中。',
+                content29: '15. 【答案】D. summoned',
+                content30: '【翻译】陪审团成员从美国公民中选出并被传唤。',
+                content31: '16. 【答案】A. set',
+                content32: '【翻译】由固定人数组成的陪审团在每一个需要陪审团的案件中都会被召唤。',
+                content33: '17. 【答案】D. assigned',
+                content34: '【翻译】被指派负责案件的法官监督陪审团成员的选举。',
+                content35: '18. 【答案】C. oversees',
+                content36: '【翻译】被指派负责案件的法官监督陪审团成员的选举。',
+                content37: '19. 【答案】D. prospective',
+                content38: '【翻译】在一些州，未来的陪审团成员由法官询问，',
+                content39: '20. 【答案】B. parties',
+                content40: '【翻译】而在另一些州，他们遵照州法律规定的法规接受代表各方当事人的律师的询问。',
             }]
         }
     }
@@ -230,7 +230,7 @@ state law.
                             <Text style={{ width: '50%', fontSize: 16 * s, marginTop: 10 * s }}>&emsp;&emsp;&emsp;&emsp;{`B. meditations`}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                            <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;&#32;{` C. reflections`}</Text>
+                            <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;{` C. reflections`}</Text>
                             <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;&emsp;&emsp;&emsp;{`D. speculations`}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
@@ -238,7 +238,7 @@ state law.
                             <Text style={{ width: '50%', fontSize: 16 * s, marginTop: 10 * s }}>&emsp;&emsp;&emsp;&emsp;{`B. outcome`}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                            <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;&#32;{` C. input`}</Text>
+                            <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;{` C. input`}</Text>
                             <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;&emsp;&emsp;&emsp;{`D. intake`}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
@@ -246,7 +246,7 @@ state law.
                             <Text style={{ width: '50%', fontSize: 16 * s, marginTop: 10 * s }}>&emsp;&emsp;&emsp;&emsp;{`B. controversies`}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                            <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;&#32;{` C. disputes`}</Text>
+                            <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;{` C. disputes`}</Text>
                             <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;&emsp;&emsp;&emsp;{`D. hostilities`}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
@@ -254,7 +254,7 @@ state law.
                             <Text style={{ width: '50%', fontSize: 16 * s, marginTop: 10 * s }}>&emsp;&emsp;&emsp;&emsp;{`B. individual`}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                            <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;&#32;{` C. personal`}</Text>
+                            <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;{` C. personal`}</Text>
                             <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;&emsp;&emsp;&emsp;{`D. private`}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
@@ -262,7 +262,7 @@ state law.
                             <Text style={{ width: '50%', fontSize: 16 * s, marginTop: 10 * s }}>&emsp;&emsp;&emsp;&emsp;{`B. alleging`}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                            <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;&#32;{` C. maintaining`}</Text>
+                            <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;{` C. maintaining`}</Text>
                             <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;&emsp;&emsp;&emsp;{`D. testifying`}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
@@ -270,7 +270,7 @@ state law.
                             <Text style={{ width: '50%', fontSize: 16 * s, marginTop: 10 * s }}>&emsp;&emsp;&emsp;&emsp;{`B. evoked`}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                            <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;&#32;{` C. rallied`}</Text>
+                            <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;{` C. rallied`}</Text>
                             <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;&emsp;&emsp;&emsp;{`D. summoned`}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
@@ -278,7 +278,7 @@ state law.
                             <Text style={{ width: '50%', fontSize: 16 * s, marginTop: 10 * s }}>&emsp;&emsp;&emsp;&emsp;{`B. exact`}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                            <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;&#32;{` C. given`}</Text>
+                            <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;{` C. given`}</Text>
                             <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;&emsp;&emsp;&emsp;{`D. placed`}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
@@ -286,7 +286,7 @@ state law.
                             <Text style={{ width: '50%', fontSize: 16 * s, marginTop: 10 * s }}>&emsp;&emsp;&emsp;&emsp;{`B. allotted`}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                            <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;&#32;{` C. appointed`}</Text>
+                            <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;{` C. appointed`}</Text>
                             <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;&emsp;&emsp;&emsp;{`D. assigned`}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
@@ -294,7 +294,7 @@ state law.
                             <Text style={{ width: '50%', fontSize: 16 * s, marginTop: 10 * s }}>&emsp;&emsp;&emsp;&emsp;{`B. manages`}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                            <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;&#32;{` C. oversees`}</Text>
+                            <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;{` C. oversees`}</Text>
                             <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;&emsp;&emsp;&emsp;{`D. presides`}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
@@ -302,7 +302,7 @@ state law.
                             <Text style={{ width: '50%', fontSize: 16 * s, marginTop: 10 * s }}>&emsp;&emsp;&emsp;&emsp;{`B. irrespective`}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                            <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;&#32;{` C. perspective`}</Text>
+                            <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;{` C. perspective`}</Text>
                             <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;&emsp;&emsp;&emsp;{`D. prospective`}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
@@ -310,7 +310,7 @@ state law.
                             <Text style={{ width: '50%', fontSize: 16 * s, marginTop: 10 * s }}>&emsp;&emsp;&emsp;&emsp;{`B. parties`}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                            <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;&#32;{` C. sides`}</Text>
+                            <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;{` C. sides`}</Text>
                             <Text style={{ width: '50%', fontSize: 16 * s }}>&emsp;&emsp;&emsp;&emsp;{`D. units`}</Text>
                         </View>
                     </View>

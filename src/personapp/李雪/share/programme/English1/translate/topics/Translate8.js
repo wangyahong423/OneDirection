@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, StyleSheet, Dimensions } from 'react-native';
+import { Text, View, ScrollView, Dimensions, StyleSheet } from 'react-native';
 import { Accordion } from '@ant-design/react-native';
 
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class Translate3 extends Component {
+export default class Translate8 extends Component {
     constructor() {
         super();
         this.state = {
@@ -14,10 +14,10 @@ export default class Translate3 extends Component {
                 header: '参考答案',
                 content1: '解析',
                 content2: '考察重点：',
-                content3: '时间状语从句，定语从句',
-                content4: '这个句子结构稍显复杂：Mast of us give in to a demoralization of spirit which we usually blame on some psychological conditions 是主句，其中which we usually blame on some psychological conditions 是定语从句until one day we find ourselves in a garden and feel the oppression vanish as if by magic.是时间状语从句。',
+                content3: '让步状语从句，同位语从句',
+                content4: '前半部分是由even引导的让步状语从句，后半部分则为嵌套了signs的同位语从句，用来对signs的内容进行解释说明：而同位语从句中，从句内部的主语为the global predominance of the language谓语部分为may fade。',
                 content5: '参考翻译：',
-                content6: '我们当中大多数人都屈服于精神的道德败坏，我们经常把这种精神上的败坏推卸到心理环境上，直到有一天我们发现自己处于一个家园当中，并感受到这种压迫好像魔法一样消失。'
+                content6: '但是即使当下英语使用者的人群还在进一步扩大，有迹象表明：在可预见的未来，英语可能会逐渐失去其全球主导地位。'
             }]
         }
     }
@@ -50,21 +50,21 @@ export default class Translate3 extends Component {
     render() {
         return (
             <ScrollView>
-            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                <View style={{ width: '85%', margin: '7.5%',borderColor:'#37376F',borderWidth:1,padding:'2%' }}>
-                    <Text style={{ fontSize: 16 * s }}>
-                        &emsp;&emsp;{`Mast of us give in to a demoralization of spirit which we usually blame on some psychological conditions until one day we find ourselves in a garden and feel the oppression vanish as if by magic`}
-                    </Text>
+                <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ width: '85%', margin: '7.5%', borderColor: '#37376F', borderWidth: 1, padding: '2%' }}>
+                        <Text style={{ fontSize: 16 * s }}>
+                            &emsp;&emsp;{`But even as the number of English speakers expands further there are signs that the global predominant of the language may fade within the foreseeable future.`}
+                        </Text>
+                    </View>
                 </View>
-            </View>
-            <Accordion
+                <Accordion
                     sections={this.state.todo}
                     activeSections={this.state.activeSections}
                     renderHeader={this._renderHeader}
                     renderContent={this._renderContent}
                     onChange={this._updateSections}
                 />
-        </ScrollView>
+            </ScrollView>
         )
     }
 }
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 10 * s,
-        marginLeft:'40%'
+        marginLeft: '40%'
     },
     headerText: {
         fontSize: 16,
