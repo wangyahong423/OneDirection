@@ -33,10 +33,42 @@ import Yuedu1 from './src/share/cet46/Six/src/src/Yuedu1';
 import Yuedu2 from './src/share/cet46/Six/src/src/Yuedu2';
 import Yuedu3 from './src/share/cet46/Six/src/src/Yuedu3';
 import Yuedu4 from './src/share/cet46/Six/src/src/Yuedu4';
+import Yuedu5 from './src/share/cet46/Six/src/src/Yuedu5';
+import Yuedu6 from './src/share/cet46/Six/src/src/Yuedu6';
+import Yuedu7 from './src/share/cet46/Six/src/src/Yuedu7';
+import Yuedu8 from './src/share/cet46/Six/src/src/Yuedu8';
+import Yuedu9 from './src/share/cet46/Six/src/src/Yuedu9';
+import Yuedu10 from './src/share/cet46/Six/src/src/Yuedu10';
+import Yuedu11 from './src/share/cet46/Six/src/src/Yuedu11';
+import Yuedu12 from './src/share/cet46/Six/src/src/Yuedu12';
+import Yuedu13 from './src/share/cet46/Six/src/src/Yuedu13';
+import Yuedu14 from './src/share/cet46/Six/src/src/Yuedu14';
+import Yuedu15 from './src/share/cet46/Six/src/src/Yuedu15';
+import Yuedu16 from './src/share/cet46/Six/src/src/Yuedu16';
+import Yuedu17 from './src/share/cet46/Six/src/src/Yuedu17';
+import Yuedu18 from './src/share/cet46/Six/src/src/Yuedu18';
+import Yuedu19 from './src/share/cet46/Six/src/src/Yuedu19';
+import Yuedu20 from './src/share/cet46/Six/src/src/Yuedu20';
 import Shiwu1 from './src/share/cet46/Six/src/src/Shiwu1';
 import Shiwu2 from './src/share/cet46/Six/src/src/Shiwu2';
 import Shiwu3 from './src/share/cet46/Six/src/src/Shiwu3';
 import Shiwu4 from './src/share/cet46/Six/src/src/Shiwu4';
+import Shiwu5 from './src/share/cet46/Six/src/src/Shiwu5';
+import Shiwu6 from './src/share/cet46/Six/src/src/Shiwu6';
+import Shiwu7 from './src/share/cet46/Six/src/src/Shiwu7';
+import Shiwu8 from './src/share/cet46/Six/src/src/Shiwu8';
+import Shiwu9 from './src/share/cet46/Six/src/src/Shiwu9';
+import Shiwu10 from './src/share/cet46/Six/src/src/Shiwu10';
+import Shiwu11 from './src/share/cet46/Six/src/src/Shiwu11';
+import Shiwu12 from './src/share/cet46/Six/src/src/Shiwu12';
+import Shiwu13 from './src/share/cet46/Six/src/src/Shiwu13';
+import Shiwu14 from './src/share/cet46/Six/src/src/Shiwu14';
+import Shiwu15 from './src/share/cet46/Six/src/src/Shiwu15';
+import Shiwu16 from './src/share/cet46/Six/src/src/Shiwu16';
+import Shiwu17 from './src/share/cet46/Six/src/src/Shiwu17';
+import Shiwu18 from './src/share/cet46/Six/src/src/Shiwu18';
+import Shiwu19 from './src/share/cet46/Six/src/src/Shiwu19';
+import Shiwu20 from './src/share/cet46/Six/src/src/Shiwu20';
 import Notes from './src/share/notes/notes';
 import Programme from './src/share/programme/programme';
 import Math1 from './src/share/programme/Math1/Math1';
@@ -350,10 +382,33 @@ const App = () => {
           <Scene key='shiwu2' title='六级十五选十（二）' component={Shiwu2} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key='shiwu3' title='六级十五选十（三）' component={Shiwu3} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key='shiwu4' title='六级十五选十（四）' component={Shiwu4} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='shiwu5' title='六级十五选十（五）' component={Shiwu5} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='shiwu6' title='六级十五选十（六）' component={Shiwu6} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='shiwu7' title='六级十五选十（七）' component={Shiwu7} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='shiwu8' title='六级十五选十（八）' component={Shiwu8} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='shiwu9' title='六级十五选十（九）' component={Shiwu9} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='shiwu10' title='六级十五选十（十）' component={Shiwu10} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          
           <Scene key='yuedu1' title='Singapore' component={Yuedu1} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key='yuedu2' title='Christianity' component={Yuedu2} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key='yuedu3' title='Australia' component={Yuedu3} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key='yuedu4' title='Egypt' component={Yuedu4} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='yuedu5' title='体育休闲' component={Yuedu5} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='yuedu6' title='旅游休闲' component={Yuedu6} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='yuedu7' title='发挥你的潜力' component={Yuedu7} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='yuedu8' title='社会文化' component={Yuedu8} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='yuedu9' title='休闲艺术' component={Yuedu9} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='yuedu10' title='eBay购物' component={Yuedu10} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='yuedu11' title='心理健康' component={Yuedu11} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='yuedu12' title='Campus Life' component={Yuedu12} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='yuedu13' title='手语' component={Yuedu13} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='yuedu14' title='家庭生活' component={Yuedu14} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='yuedu15' title='人文知识' component={Yuedu15} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='yuedu16' title='生活现象' component={Yuedu16} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='yuedu17' title='教育' component={Yuedu17} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='yuedu18' title='娱乐' component={Yuedu18} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='yuedu19' title='政治军事' component={Yuedu19} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='yuedu20' title='生活方式' component={Yuedu20} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key='one' title='第一篇大学专业选择' component={One} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key='math1' title='数学一' component={Math1} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key='math2' title='数学二' component={Math2} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
