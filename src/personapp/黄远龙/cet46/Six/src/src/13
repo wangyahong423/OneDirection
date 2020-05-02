@@ -1,0 +1,77 @@
+
+
+                        <Text style={{ fontSize: 19, marginTop: 5 * s, fontStyle: 'italic', color: 'green' }}>
+                            阅读自测
+                        </Text>
+                        <Text style={{ fontSize: 16 * s, marginTop: 5 * s }}>
+                            Choose correct answers to the question:
+                        </Text>
+                        <Text style={{ fontSize: 15 * s }}>
+                            1. What makes women blind to the deceptive nature of high heels?
+                        </Text>
+                        <Text style={{ fontSize: 15 * s }}>
+                            A) The multi-functional use of high heels.
+                        </Text>
+                        <Text style={{ fontSize: 15 * s }}>
+                            B) Their attempt to show off their status.
+                        </Text>
+                        <Text style={{ fontSize: 15 * s }}>
+                            C) The rich variety of high heel styles.
+                        </Text>
+                        <Text style={{ fontSize: 15 * s }}>
+                            D) Their wish to improve their appearance.
+                        </Text>
+                        <Text style={{ fontSize: 15 * s }}>
+                            2. The author's presentation of the positive side of high heels is meant__________.
+                        </Text>
+                        <Text style={{ fontSize: 15 * s }}>
+                            A) to be ironic
+                        </Text>
+                        <Text style={{ fontSize: 15 * s }}>
+                            B) to poke fun at women
+                        </Text>
+                        C) to be fair to the fashion industry
+                        <Text style={{ fontSize: 15 * s }}>
+                            D) to make his point convincing
+                        </Text>
+                        <Text style={{ fontSize: 15 * s }}>
+                            3. The author uses the expression "those babies" (Line 4. Para. 2) to ref high heels__________.
+                        </Text>
+                        A) to show their fragile characteristics
+                        <Text style={{ fontSize: 15 * s }}>
+                            B) co indicate their feminine features
+                        </Text>
+                        <Text style={{ fontSize: 15 * s }}>
+                            C) to show women’s affection for them
+                        </Text>
+                        <Text style={{ fontSize: 15 * s }}>
+                            D) to emphasize their small size
+                        </Text>
+                        4. The author's chief argument against high heels is that_____________.
+                        <Text style={{ fontSize: 15 * s }}>
+                            A) they pose a threat to lawns
+                        </Text>
+                        <Text style={{ fontSize: 15 * s }}>
+                            B) they are injurious to women’s health
+                        </Text>
+                        C) they don’t necessarily make women beautiful
+                        <Text style={{ fontSize: 15 * s }}>
+                            D) they are ineffective as a weapon of defense
+                        </Text>
+                        <Text style={{ fontSize: 15 * s }}>
+                            5. It can be inferred from the passage that women should_____________.
+                        </Text>
+                        <Text style={{ fontSize: 15 * s }}>
+                            A) see through the very nature of fashion myths
+                        </Text>
+                        B) boycott the products of the fashion industry
+                        <Text style={{ fontSize: 15 * s }}>
+                            C) go co a podiatrist regularly For advice
+                        </Text>
+                        <Text style={{ fontSize: 15 * s }}>
+                            D) avoid following fashion too closely
+                        </Text>
+                         header: '参考答案',
+                content1: '1.[D]根据文章第l段“时尚神话使女性相信穿上高跟鞋会更美丽或气质更优雅”，因此，在四个选项中，只有D与文章所陈述的观点一致;其余三项均不符合。',
+                content3: '2.[A]根据文章第2段，高跟鞋有两种积极的作用：一种是极好的草地供氧用具，不用挖土就能在草地上凿出均匀的小洞供草地吸氧;另一种是可击退来犯之敌，高跟鞋轻易就能吓退敌人，由此可知，不论从内容或语气上看，作者旨在对高跟鞋进行嘲讽。故此，在四个选项中，只有A与作者的写作意图相符;其余三项均与文章的意思相悖。',
+                content5: '3.[B] 事实细节题。第2段第3句中的malpractice和第4句中的虚拟语气说明，她认为学校没有对她的自杀企图采取足够的防范措施，故选B。选项A最具干扰性，但第3句说明学校关注过她的问题，只是关注不够，因此选项A过于绝对。选项C中的academic instructions和D中的physical disease属于与文章无关的信息。',

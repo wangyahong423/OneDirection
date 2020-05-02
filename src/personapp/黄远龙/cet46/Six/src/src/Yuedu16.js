@@ -4,7 +4,7 @@ import { Accordion } from '@ant-design/react-native';
 
 const { width } = Dimensions.get('window');
 const s = width / 460;
-export default class Yuedu16 extends Component {
+export default class Yuedu15 extends Component {
     constructor() {
         super();
         this.state = {
@@ -28,17 +28,17 @@ export default class Yuedu16 extends Component {
     _renderContent = section => {
         return (
             <View style={styles.content}>
-                <Text style={[{ color: 'red', marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content1}</Text>
+                <Text style={[{ color: 'red',marginTop:5*s }, styles.contentText]}>&emsp;&emsp;{section.content1}</Text>
                 <Text style={styles.contentText}>&emsp;&emsp;{section.content2}</Text>
-                <Text style={[{ color: 'red', marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content3}</Text>
+                <Text style={[{ color: 'red',marginTop:5*s }, styles.contentText]}>&emsp;&emsp;{section.content3}</Text>
                 <Text style={styles.contentText}>&emsp;&emsp;{section.content4}</Text>
-                <Text style={[{ color: 'red', marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content5}</Text>
+                <Text style={[{ color: 'red',marginTop:5*s }, styles.contentText]}>&emsp;&emsp;{section.content5}</Text>
                 <Text style={styles.contentText}>&emsp;&emsp;{section.content6}</Text>
-                <Text style={[{ color: 'red', marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content7}</Text>
+                <Text style={[{ color: 'red',marginTop:5*s }, styles.contentText]}>&emsp;&emsp;{section.content7}</Text>
                 <Text style={styles.contentText}>&emsp;&emsp;{section.content8}</Text>
-                <Text style={[{ color: 'red', marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content9}</Text>
+                <Text style={[{ color: 'red',marginTop:5*s }, styles.contentText]}>&emsp;&emsp;{section.content9}</Text>
                 <Text style={styles.contentText}>&emsp;&emsp;{section.content10}</Text>
-
+                
             </View>
         );
     };
@@ -60,76 +60,86 @@ export default class Yuedu16 extends Component {
                         <Text style={{ fontSize: 16 * s }}>
                             &emsp;&emsp;{`Regardless of such practical uses for heels, the fact remains that wearing high heels is harmful to one's physical health. Talk to any podiatrist (足病医生), and you will hear that the majority of their business comes from high-heel-wearing women. High heels are known to cause problems such as deformed feetand tom toenails. The ask of severe back problems and twisted or broken ankles is three times higher for a high heelwearer than for a flat shoe wearer. Wearing heels also creates che threat of getting a heel caught in a sidewalk crack or a sewer-grate (阴沟栅) and being thrown to the ground-possibly breaking a nose. back, or neck. And of course, after wearing heels for a day. any woman knows she can look forward to a night of painas she tries to comfort her swollen, aching feel.`}
                         </Text>
-                        <Text style={{ fontSize: 19, marginTop: 5 * s, fontStyle: 'italic', color: 'green' }}>
-                            阅读自测
+                        <Text style={{fontSize:19,marginTop:5*s, fontStyle: 'italic',color:'green'}}>
+                        阅读自测
                         </Text>
-                        <Text style={{ fontSize: 16 * s, marginTop: 5 * s }}>
-                            Choose correct answers to the question:
+                        <Text style={{fontSize:16 * s ,marginTop:5*s}}>
+                        Choose correct answers to the question:
                         </Text>
-                        <Text style={{ fontSize: 15 * s }}>
-                            1. What makes women blind to the deceptive nature of high heels?
+                        <Text style={{fontSize:15 * s }}>
+                        　1. What makes women blind to the deceptive nature of high heels?
                         </Text>
-                        <Text style={{ fontSize: 15 * s }}>
-                            A) The multi-functional use of high heels.
+                        <Text style={{fontSize:15 * s }}>
+                        　A) The multi-functional use of high heels.
                         </Text>
-                        <Text style={{ fontSize: 15 * s }}>
-                            B) Their attempt to show off their status.
+                        <Text style={{fontSize:15 * s }}>
+                        　B) Their attempt to show off their status.
                         </Text>
-                        <Text style={{ fontSize: 15 * s }}>
-                            C) The rich variety of high heel styles.
+                        <Text style={{fontSize:15 * s }}>
+                        　C) The rich variety of high heel styles.
                         </Text>
-                        <Text style={{ fontSize: 15 * s }}>
-                            D) Their wish to improve their appearance.
+                        <Text style={{fontSize:15 * s }}>
+                        　 D) Their wish to improve their appearance.
                         </Text>
-                        <Text style={{ fontSize: 15 * s }}>
-                            2. The author's presentation of the positive side of high heels is meant__________.
+                        <Text style={{fontSize:15 * s }}>
+                        　2. The author's presentation of the positive side of high heels is meant__________.
                         </Text>
-                        <Text style={{ fontSize: 15 * s }}>
-                            A) to be ironic
+                        <Text style={{fontSize:15 * s }}>
+                        　A) to be ironic
                         </Text>
-                        <Text style={{ fontSize: 15 * s }}>
-                            B) to poke fun at women
+                        <Text style={{fontSize:15 * s }}>
+                        　B) to poke fun at women
                         </Text>
-                        C) to be fair to the fashion industry
-                        <Text style={{ fontSize: 15 * s }}>
-                            D) to make his point convincing
+                        <Text style={{fontSize:15 * s }}>
+                        　 C) to be fair to the fashion industry
                         </Text>
-                        <Text style={{ fontSize: 15 * s }}>
-                            3. The author uses the expression "those babies" (Line 4. Para. 2) to ref high heels__________.
+                        <Text style={{fontSize:15 * s }}>
+                        　D) to make his point convincing
                         </Text>
-                        A) to show their fragile characteristics
-                        <Text style={{ fontSize: 15 * s }}>
-                            B) co indicate their feminine features
+                        <Text style={{fontSize:15 * s }}>
+                        　 3. The author uses the expression "those babies" (Line 4. Para. 2) to ref high heels__________.
                         </Text>
-                        <Text style={{ fontSize: 15 * s }}>
-                            C) to show women’s affection for them
+                        <Text style={{fontSize:15 * s }}>
+                        　A) to show their fragile characteristics
                         </Text>
-                        <Text style={{ fontSize: 15 * s }}>
-                            D) to emphasize their small size
+                        <Text style={{fontSize:15 * s }}>
+                        　B) co indicate their feminine features
                         </Text>
-                        4. The author's chief argument against high heels is that_____________.
-                        <Text style={{ fontSize: 15 * s }}>
-                            A) they pose a threat to lawns
+                        <Text style={{fontSize:15 * s }}>
+                        　C) to show women’s affection for them
                         </Text>
-                        <Text style={{ fontSize: 15 * s }}>
-                            B) they are injurious to women’s health
+                        <Text style={{fontSize:15 * s }}>
+                        　D) to emphasize their small size
                         </Text>
-                        C) they don’t necessarily make women beautiful
-                        <Text style={{ fontSize: 15 * s }}>
-                            D) they are ineffective as a weapon of defense
+                        <Text style={{fontSize:15 * s }}>
+                        　4. The author's chief argument against high heels is that_____________.
                         </Text>
-                        <Text style={{ fontSize: 15 * s }}>
-                            5. It can be inferred from the passage that women should_____________.
+                        <Text style={{fontSize:15 * s }}>
+                        　A) they pose a threat to lawns
                         </Text>
-                        <Text style={{ fontSize: 15 * s }}>
-                            A) see through the very nature of fashion myths
+                        <Text style={{fontSize:15 * s }}>
+                        　B) they are injurious to women’s health
                         </Text>
-                        B) boycott the products of the fashion industry
-                        <Text style={{ fontSize: 15 * s }}>
-                            C) go co a podiatrist regularly For advice
+                        <Text style={{fontSize:15 * s }}>
+                        　C) they don’t necessarily make women beautiful
                         </Text>
-                        <Text style={{ fontSize: 15 * s }}>
-                            D) avoid following fashion too closely
+                        <Text style={{fontSize:15 * s }}>
+                        　D) they are ineffective as a weapon of defense.
+                        </Text>
+                        <Text style={{fontSize:15 * s }}>
+                        　5. It can be inferred from the passage that women should_____________.
+                        </Text>
+                        <Text style={{fontSize:15 * s }}>
+                        　A) see through the very nature of fashion myths
+                        </Text>
+                        <Text style={{fontSize:15 * s }}>
+                        　B) boycott the products of the fashion industry
+                        </Text>
+                        <Text style={{fontSize:15 * s }}>
+                        　C) go co a podiatrist regularly For advice
+                        </Text>
+                        <Text style={{fontSize:15 * s }}>
+                        　D) avoid following fashion too closely
                         </Text>
                     </View>
                 </View>
@@ -153,8 +163,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 10 * s,
-        marginLeft: '40%',
-        marginBottom: 20 * s
+        marginLeft:'40%',
+        marginBottom:20*s
     },
     headerText: {
         fontSize: 16,
