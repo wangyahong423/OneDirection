@@ -13,8 +13,8 @@ export default class Fill1 extends Component {
             todo: [{
                 header: '参考答案',
                 content1: '【答案】xye^y',
-                content4: '【解析】',
-                content5: "df(x,y)=ye^ydx+x(1+y)e^ydy=d(xye^y),所以f(x,y)=xye^y+C,由f(0,0)=0得C=0,所以f(x,y)=xye^y"
+                content2: '【解析】',
+                content3: "df(x,y)=ye^ydx+x(1+y)e^ydy=d(xye^y), 所以f(x,y)=xye^y+C,由f(0,0)=0得C=0,所以f(x,y)=xye^y"
             }]
         }
     }

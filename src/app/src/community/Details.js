@@ -27,7 +27,7 @@ export default class Details extends Component {
                 })
             });
     }
-    componentDidMount() { 
+    componentDidMount() {
         AsyncStorage.getItem('lPage')
             .then((value) => {
                 this.setState({
@@ -51,6 +51,7 @@ export default class Details extends Component {
                                         for (var i = 0; i < this.state.pic.length; i++) {
                                             if (item.name == this.state.pic[i].name) {
                                                 item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
+                                                item.level = this.state.pic[i].level;
                                                 break;
                                             }
                                         }
@@ -77,6 +78,7 @@ export default class Details extends Component {
                                             for (var i = 0; i < self.state.pic.length; i++) {
                                                 if (item.name == self.state.pic[i].name) {
                                                     item.pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
+                                                    item.level = self.state.pic[i].level;
                                                     break;
                                                 }
                                             }
@@ -166,125 +168,135 @@ export default class Details extends Component {
                         }
                     })
                 }
-        )}
+                )
+        }
         else {
-                        Alert.alert("评论不能为空");
-                    }
+            Alert.alert("评论不能为空");
+        }
 
     }
-        delete = (idx) => {
-            Alert.alert('确认要删除吗', '',
-                [
-                    { text: "确认", onPress: this.opntion1.bind(this, (this.state.list[idx].id)) },
-                    { text: "取消", onPress: this.opntion2 }
-                ]
-            );
-        }
-        opntion1 = (id) => {
-            let url = `http://139.155.44.190:3005/learntalk/delete?id=${id}`;
-            fetch(url)
-                .then((res) => res.json())
-                .then((res) => {
-                    Alert.alert(res.msg);
-                    var param = 1;
-                    DeviceEventEmitter.emit('pinglun', param);
-                });
-        }
-        opntion2 = () => {
+    delete = (idx) => {
+        Alert.alert('确认要删除吗', '',
+            [
+                { text: "确认", onPress: this.opntion1.bind(this, (this.state.list[idx].id)) },
+                { text: "取消", onPress: this.opntion2 }
+            ]
+        );
+    }
+    opntion1 = (id) => {
+        let url = `http://139.155.44.190:3005/learntalk/delete?id=${id}`;
+        fetch(url)
+            .then((res) => res.json())
+            .then((res) => {
+                Alert.alert(res.msg);
+                var param = 1;
+                DeviceEventEmitter.emit('pinglun', param);
+            });
+    }
+    opntion2 = () => {
 
-        }
-        // backt = () => {
-        //     Actions.pop;
-        //     var param = 1;
-        //     DeviceEventEmitter.emit('refresh', param);
-        // }
-        componentWillUnmount() {
-            this.listener.remove();
-        }
-        render() {
-            return (
-                <SafeAreaView style={{ flex: 1 }} >
-                    <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 5 * s }}>
-                        <View style={{
-                            flexDirection: 'row',
-                            height: 80 * s,
-                            alignItems: 'center'
-                        }}>
-                            <Image style={{
-                                marginLeft: 20 * s,
-                                height: 50 * s,
-                                width: 50 * s,
-                                borderRadius: 25 * s
-                            }} source={{ uri: this.state.page.pic }} />
-                            <View style={{ marginLeft: 30 * s }}>
-                                <Text style={{ fontSize: 18 * s }}>{this.state.page.name}</Text>
-                                <Text>{this.state.page.time}</Text>
+    }
+    // backt = () => {
+    //     Actions.pop;
+    //     var param = 1;
+    //     DeviceEventEmitter.emit('refresh', param);
+    // }
+    componentWillUnmount() {
+        this.listener.remove();
+    }
+    person = (idx) => {
+        var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college };
+        AsyncStorage.setItem('details', JSON.stringify(value));
+        Actions.person();
+    }
+    render() {
+        return (
+            <SafeAreaView style={{ flex: 1 }} >
+                <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 5 * s }}>
+                    <View style={{
+                        flexDirection: 'row',
+                        height: 80 * s,
+                        alignItems: 'center'
+                    }}>
+                        <Image style={{
+                            marginLeft: 20 * s,
+                            height: 50 * s,
+                            width: 50 * s,
+                            borderRadius: 25 * s
+                        }} source={{ uri: this.state.page.pic }} />
+                        <View style={{ marginLeft: 30 * s }}>
+                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                <Text style={{ fontSize: 18 * s, color: '#37376F' }}>{this.state.page.name}</Text>
+                                <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: 'red' }}>Lv.{this.state.page.level}</Text>
                             </View>
-                        </View>
-                        <View style={{
-                            marginLeft: 30 * s,
-                            marginRight: 30 * s,
-                            marginTop: 10 * s,
-                            marginBottom: 20 * s
-                        }}
-                        >
-                            <Text style={{ fontSize: 18 * s }}>{this.state.page.content}</Text>
+                            <Text>{this.state.page.time}</Text>
                         </View>
                     </View>
                     <View style={{
-                        width: '100%',
-                        height: 70 * s,
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'space-evenly'
-                    }}>
-                        <TextInput
-                            style={{
-                                height: 30 * s,
-                                width: "75%",
-                                padding: 0,
-                                fontSize: 15 * s,
-                                borderRadius: 15 * s,
-                                backgroundColor: '#fff',
-                                paddingLeft: 10 * s
-                            }}
-                            clearButtonMode="while-editing"
-                            // autoFocus={true}
-                            placeholderTextColor='#e0e0e0'
-                            placeholder="填写评论"
-                            onChangeText={this.change}
-                        />
-                        <TouchableOpacity style={{
-                            width: 55 * s,
-                            height: 30 * s,
-                            borderRadius: 15 * s,
-                            flexDirection: 'row',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            backgroundColor: '#37376F'
-                        }}
-                            onPress={this.release}
-                        >
-                            <Text style={{ color: 'white', fontSize: 15 * s }}>发送</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View
-                        style={{
-                            borderBottomColor: '#000',
-                            borderBottomWidth: 1 * s
-                        }}
+                        marginLeft: 30 * s,
+                        marginRight: 30 * s,
+                        marginTop: 10 * s,
+                        marginBottom: 20 * s
+                    }}
                     >
-                        <Text style={{ paddingLeft: 10 * s, fontSize: 20 * s }}>评论</Text>
+                        <Text style={{ fontSize: 18 * s }}>{this.state.page.content}</Text>
                     </View>
-                    <ScrollView style={{ flex: 1 }}>
-                        <View>
-                            {
-                                this.state.list.map((item, idx) => (
-                                    <View style={{ backgroundColor: '#fff', width: '100%', borderBottomWidth: 1 * s, borderBottomColor: '#808080' }}>
-                                        <View style={{
-                                            flexDirection: 'row',
-                                            alignItems: 'center'
-                                        }}>
+                </View>
+                <View style={{
+                    width: '100%',
+                    height: 70 * s,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-evenly'
+                }}>
+                    <TextInput
+                        style={{
+                            height: 30 * s,
+                            width: "75%",
+                            padding: 0,
+                            fontSize: 15 * s,
+                            borderRadius: 15 * s,
+                            backgroundColor: '#fff',
+                            paddingLeft: 10 * s
+                        }}
+                        clearButtonMode="while-editing"
+                        // autoFocus={true}
+                        placeholderTextColor='#e0e0e0'
+                        placeholder="填写评论"
+                        onChangeText={this.change}
+                    />
+                    <TouchableOpacity style={{
+                        width: 55 * s,
+                        height: 30 * s,
+                        borderRadius: 15 * s,
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: '#37376F'
+                    }}
+                        onPress={this.release}
+                    >
+                        <Text style={{ color: 'white', fontSize: 15 * s }}>发送</Text>
+                    </TouchableOpacity>
+                </View>
+                <View
+                    style={{
+                        borderBottomColor: '#000',
+                        borderBottomWidth: 1 * s
+                    }}
+                >
+                    <Text style={{ paddingLeft: 10 * s, fontSize: 20 * s }}>评论</Text>
+                </View>
+                <ScrollView style={{ flex: 1 }}>
+                    <View>
+                        {
+                            this.state.list.map((item, idx) => (
+                                <View style={{ backgroundColor: '#fff', width: '100%', borderBottomWidth: 1 * s, borderBottomColor: '#808080' }}>
+                                    <View style={{
+                                        flexDirection: 'row',
+                                        alignItems: 'center'
+                                    }}>
+                                        <TouchableOpacity onPress={this.person.bind(this, (idx))}>
                                             <Image style={{
                                                 marginLeft: 20 * s,
                                                 height: 50 * s,
@@ -292,50 +304,54 @@ export default class Details extends Component {
                                                 borderRadius: 25 * s,
                                                 backgroundColor: 'yellow'
                                             }} source={{ uri: item.pic }} />
-                                            <View style={{ marginLeft: 30 * s, marginRight: 60 * s }}>
+                                        </TouchableOpacity>
+                                        <View style={{ marginLeft: 30 * s, marginRight: 60 * s }}>
+                                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                                 <Text style={this.state.page.name == item.name ? { fontSize: 15 * s, color: 'red', marginTop: 5 * s } : { fontSize: 15 * s, color: '#37376F', marginTop: 5 * s }}>{item.name}</Text>
-                                                <Text style={{ fontSize: 18 * s }}>{item.content}</Text>
-                                                <Text style={{ fontSize: 10 * s, color: '#808080', marginTop: 5 * s, marginBottom: 5 * s }}>{item.time}</Text>
+                                                <Text style={this.state.page.name == item.name ? { fontSize: 12 * s, marginLeft: 5 * s, color: 'red', marginTop: 5 * s } : { fontSize: 12 * s, marginLeft: 5 * s, color: '#37376F', marginTop: 5 * s }}>Lv.{item.level}</Text>
                                             </View>
+                                            <Text style={{ fontSize: 18 * s }}>{item.content}</Text>
+                                            <Text style={{ fontSize: 10 * s, color: '#808080', marginTop: 5 * s, marginBottom: 5 * s }}>{item.time}</Text>
                                         </View>
-                                        {
-                                            this.state.username == this.state.page.name || this.state.username == item.name
-                                                ? <TouchableOpacity style={{
-                                                    width: 30 * s,
-                                                    height: 30 * s,
-                                                    borderRadius: 15 * s,
-                                                    flexDirection: 'row',
-                                                    justifyContent: 'center',
-                                                    alignItems: 'center',
-                                                    // backgroundColor: '#37376F',
-                                                    position: 'absolute',
-                                                    top: 0,
-                                                    right: 0
-                                                }}
-                                                    onPress={this.delete.bind(this, (idx))}
-                                                >
-                                                    <Text style={{ color: '#e8e8e8', fontSize: 30 * s }}>×</Text>
-                                                </TouchableOpacity>
-                                                : null
-                                        }
                                     </View>
-                                ))
-                            }
-                        </View>
-                        {
-                            this.state.isLoading
-                                ? <View style={{
-                                    alignItems: 'center',
-                                    flexDirection: 'row',
-                                    justifyContent: 'center'
-                                }}>
-                                    <Text style={{ fontSize: 20, marginTop: 10 }}>正在获取数据...</Text>
+                                    {
+                                        this.state.username == this.state.page.name || this.state.username == item.name
+                                            ? <TouchableOpacity style={{
+                                                width: 30 * s,
+                                                height: 30 * s,
+                                                borderRadius: 15 * s,
+                                                flexDirection: 'row',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                // backgroundColor: '#37376F',
+                                                position: 'absolute',
+                                                top: 0,
+                                                right: 0
+                                            }}
+                                                onPress={this.delete.bind(this, (idx))}
+                                            >
+                                                <Text style={{ color: '#e8e8e8', fontSize: 30 * s }}>×</Text>
+                                            </TouchableOpacity>
+                                            : null
+                                    }
                                 </View>
-                                : null
+                            ))
                         }
-                    </ScrollView>
+                    </View>
+                    {
+                        this.state.isLoading
+                            ? <View style={{
+                                alignItems: 'center',
+                                flexDirection: 'row',
+                                justifyContent: 'center'
+                            }}>
+                                <Text style={{ fontSize: 20, marginTop: 10 }}>正在获取数据...</Text>
+                            </View>
+                            : null
+                    }
+                </ScrollView>
 
-                </SafeAreaView >
-            )
-        }
+            </SafeAreaView >
+        )
     }
+}

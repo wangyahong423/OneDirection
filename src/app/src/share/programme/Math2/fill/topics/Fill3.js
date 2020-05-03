@@ -14,7 +14,7 @@ export default class Fill3 extends Component {
                 header: '参考答案',
                 content1: '【答案】1',
                 content2: '【解析】',
-                content3: "当x属于[0,2]时，f(x)=|2(x-1)dx=x^2-2x+C,由f(0)=0可知C=0，即f(x)=X^2-2x;f(x)为周期为4奇函数，故f(7)=f(-1)=f(1)=1"
+                content3: "当x属于[0,2]时，f(x)=∫ 2(x-1)dx=x^2-2x+C,由f(0)=0可知C=0，即f(x)=X^2-2x;f(x)为周期为4奇函数，故f(7)=f(-1)=f(1)=1"
             }]
         }
     }

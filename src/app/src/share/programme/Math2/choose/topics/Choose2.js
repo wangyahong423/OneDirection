@@ -14,9 +14,9 @@ export default class Choose2 extends Component {
                 header: '参考答案',
                 content1: '【答案】C',
                 content2: '【考点分析】：',
-                content3: '本题考查二元函数取极值的条件，直接套用二元函数取极值的充分条件即可。',
+                content3: '本题考查的曲线的凹凸性的定义及判断方法。',
                 content4: '【解析】',
-                content5: "由z=f(x)lnf(y)Zx'=f'(x)lnf(y)，Zy'=f(x)/f(y)*f'(y)，Zxy''=f'(x)/f(y)f'(y)，Zxy''=f''(x)lnf(y)，Zxy''=f(x)*(f''(y)f(y)-(f'(y))^2)/f^2(y)，所以Zxy''|(x=0,y=0)=f'(0)/f(0)*f'(0)=0，Zxy''|(x=0,y=0)=f''(0)lnf(0)，要使得函数Z=f(x)lnf(y)在点(0,0)处取得极小值，仅需f''(0)ln f(0)>0,f''(0)ln f(0)·f''(0)>0，所以有f(0)>1,f''(0)>0。"
+                content5: "如果对曲线在区间[a,b]上凹凸得到定义比较熟悉的话，可以直接作出判断，显然g(x)=f(0)(1-x)+f(1)x就是连接(0,f(0)),(1,f(1))两点的直线方程，故当f''(x)>=0时，曲线是凹凸的，也就是f(x)<=g(x),应该选D"
             }]
         }
     }
@@ -48,9 +48,11 @@ export default class Choose2 extends Component {
             <ScrollView>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%', borderColor: '#37376F', borderWidth: 1, padding: '2%' }}>
-                        <Text style={{ fontSize: 16 * s }}>{`2、设函数f(x)具有二阶连续导数，且f(x)>0，f(0)'=0,则函数z=f(x)lnf(y)在点(0,0)处取得极小值的一个充分条件是()`}</Text>
-                        <Text style={{ fontSize: 16 * s }}>{`(A) f(0)>1,f''(0)>0`}&emsp;&emsp;{`(B) f(0)>1,f''(0)<0`}</Text>
-                        <Text style={{ fontSize: 16 * s }}>{`(A) f(0)<1,f''(0)>0`}&emsp;&emsp;{`(B) f(0)<1,f''(0)<0`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`2、设函数f(x)具有二阶导数，g(x)=f(0)(1-x)+f(1)x,则在[0,1]上 (  )`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(A) 当f'(x)>=0时，f(x)>=g(x)`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(B) 当f'(x)>=0时，f(x)<=g(x)`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(C) 当f''(x)>=0时，f(x)>=g(x)`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(D) 当f''(x)>=0时，f(x)<=g(x)`}</Text>
                     </View>
                 </View>
                 <Accordion

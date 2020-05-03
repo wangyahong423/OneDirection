@@ -25,7 +25,7 @@ export default class Shiwu extends Component {
                     <TouchableOpacity onPress={() => Actions.shiwu61()} style={{ flexDirection: 'row' }}>
                         <Text style={{ fontSize: 20, marginLeft: 100*s, marginTop: 11*s }}>六级十五选十（一） </Text>
                     </TouchableOpacity>
-                    <Icon name="edit" size={30} color="#5f6fcd" style={{ marginLeft: 36*s, marginTop: 10*s }} />
+                    <Icon name="edit" size={30} color="#5f6fcd" style={{ marginLeft: 40*s, marginTop: 10*s }} />
                 </View>
                 <View style={{
                     height: 50*s, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
@@ -54,8 +54,61 @@ export default class Shiwu extends Component {
                     </TouchableOpacity>
                     <Icon name="edit" size={30} color="#5f6fcd" style={{ marginLeft: 40*s, marginTop: 10*s }} />
                 </View>
+                <View style={{
+                    height: 50*s, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
+                    borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1,marginTop:10*s
+                }}  >
+                    <TouchableOpacity onPress={() => Actions.shiwu65()} style={{ flexDirection: 'row' }}>
+                        <Text style={{ fontSize: 20, marginLeft: 100*s, marginTop: 11*s }}>六级十五选十（五）</Text>
+                    </TouchableOpacity>
+                    <Icon name="edit" size={30} color="#5f6fcd" style={{ marginLeft: 40*s, marginTop: 10*s }} />
+                </View>
+                <View style={{
+                    height: 50*s, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
+                    borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1,marginTop:10*s
+                }}  >
+                    <TouchableOpacity onPress={() => Actions.shiwu66()} style={{ flexDirection: 'row' }}>
+                        <Text style={{ fontSize: 20, marginLeft: 100*s, marginTop: 11*s }}>六级十五选十（六）</Text>
+                    </TouchableOpacity>
+                    <Icon name="edit" size={30} color="#5f6fcd" style={{ marginLeft: 40*s, marginTop: 10*s }} />
+                </View>
+                <View style={{
+                    height: 50*s, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
+                    borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1,marginTop:10*s
+                }}  >
+                    <TouchableOpacity onPress={() => Actions.shiwu67()} style={{ flexDirection: 'row' }}>
+                        <Text style={{ fontSize: 20, marginLeft: 100*s, marginTop: 11*s }}>六级十五选十（七）</Text>
+                    </TouchableOpacity>
+                    <Icon name="edit" size={30} color="#5f6fcd" style={{ marginLeft: 40*s, marginTop: 10*s }} />
+                </View>
+                <View style={{
+                    height: 50*s, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
+                    borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1,marginTop:10*s
+                }}  >
+                    <TouchableOpacity onPress={() => Actions.shiwu68()} style={{ flexDirection: 'row' }}>
+                        <Text style={{ fontSize: 20, marginLeft: 100*s, marginTop: 11*s }}>六级十五选十（八）</Text>
+                    </TouchableOpacity>
+                    <Icon name="edit" size={30} color="#5f6fcd" style={{ marginLeft: 40*s, marginTop: 10*s }} />
+                </View>
+                <View style={{
+                    height: 50*s, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
+                    borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1,marginTop:10*s
+                }}  >
+                    <TouchableOpacity onPress={() => Actions.shiwu69()} style={{ flexDirection: 'row' }}>
+                        <Text style={{ fontSize: 20, marginLeft: 100*s, marginTop: 11*s }}>六级十五选十（九）</Text>
+                    </TouchableOpacity>
+                    <Icon name="edit" size={30} color="#5f6fcd" style={{ marginLeft: 40*s, marginTop: 10*s }} />
+                </View>
+                <View style={{
+                    height: 50*s, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
+                    borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1,marginTop:10*s
+                }}  >
+                    <TouchableOpacity onPress={() => Actions.shiwu610()} style={{ flexDirection: 'row' }}>
+                        <Text style={{ fontSize: 20, marginLeft: 100*s, marginTop: 11*s }}>六级十五选十（十）</Text>
+                    </TouchableOpacity>
+                    <Icon name="edit" size={30} color="#5f6fcd" style={{ marginLeft: 40*s, marginTop: 10*s }} />
+                </View>
             </ScrollView>
         )
     }
 }
-

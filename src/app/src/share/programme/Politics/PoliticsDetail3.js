@@ -10,7 +10,7 @@ export default class PoliticsDetail3 extends Component {
         super();
         this.state = {
             todo: ['答案'],
-            activeSections: [],
+            activeSections: [], 
             todo: [{
                 header: '参考答案',
                 content1: '一、单项选择题：',

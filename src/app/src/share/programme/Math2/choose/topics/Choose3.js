@@ -14,7 +14,7 @@ export default class Choose3 extends Component {
                 header: '参考答案',
                 content1: '【答案】A',
                 content2: '【详解】',
-                content3: "可设a=(1,0,L,0)^T，则aa^T的特征值为1,0,L,0，从而E-aa^T的特征值为0,1,L,1，因此E-aa^T不可逆。"
+                content3: "微分方程的特征方程为r^2-4r+8=0,有一对共轭的复数根r=2±2i,所以入1=2不是特征方程的根，所以对应方程y''-4y'+89=e^2x的特解应该设为y1*=Ae^2x;而入2=2+2i是方程的单根，所以对应方程y'''-4y'+89=e^2x*cos2x的特解应该设为y2*=xe^2x*(Bcos2x+Csin2x);从而微分方程y''-4y'+89=e^2x*(1+cos2x)的特解可设为y*=y1*+y2*=Ae^2x+xe^2x(Bcos2x+Csin2x),应该选C"
             }]
         }
     }
@@ -44,9 +44,11 @@ export default class Choose3 extends Component {
             <ScrollView>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%', borderColor: '#37376F', borderWidth: 1, padding: '2%' }}>
-                        <Text style={{ fontSize: 16 * s }}>{`3、设a为n维单位列向量，E为n阶单位矩阵，则()`}</Text>
-                        <Text style={{ fontSize: 16 * s }}>{`(A) E-aa^T不可逆`}&emsp;&emsp;&#8194;&#32;&#32;{`(B) E+aa^T不可逆`}</Text>
-                        <Text style={{fontSize:16*s}}>{`(C) E+2aa^T不可逆`}&emsp;&emsp;{`(D) E-2aa^T不可逆`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`3、微分方程y''-4y'+89=e^2x*(1+cos2x)的特解可设为y^*=(  )`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(A) Ae^2x + e^2x*(Bcos2x+Csin2x)`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(B) Axe^2x + xe^2x*(Bcos2x+Csin2x)`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(C) Ae^2x + xe^2x*(Bcos2x+Csin2x)`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(D) Axe^2x + e^2x*(Bcos2x+Csin2x)`}</Text>
                     </View>
                 </View>
                 <Accordion

@@ -58,7 +58,7 @@ export default class Answer3 extends Component {
             <ScrollView>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%', borderColor: '#37376F', borderWidth: 1, padding: '2%' }}>
-                    <Text style={{ fontSize: 16 * s }}>{`证明：(1)对任意正整数n，都有1/(n+1) < ln (1+1/n) < 1/n`}</Text>
+                    <Text style={{ fontSize: 16 * s }}>{`3、证明：(1)对任意正整数n，都有1/(n+1) < ln (1+1/n) < 1/n`}</Text>
                             <Text style={{ fontSize: 16 * s }}>{`(2)设an=1+1/2+...+1/n-ln n(n=1,2,...)，证明数列{an}收敛`}</Text>
                     </View>
                 </View>

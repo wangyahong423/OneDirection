@@ -64,6 +64,8 @@ export default class Community extends Component {
                                             for (var i = 0; i < this.state.pic.length; i++) {
                                                 if (item.name == this.state.pic[i].name) {
                                                     item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
+                                                    item.level = this.state.pic[i].level;
+                                                    item.college = this.state.pic[i].college;
                                                     break;
                                                 }
                                             }
@@ -105,6 +107,7 @@ export default class Community extends Component {
             // var a = {"content": param.content, "like": false, "likeNum": 0, "name": param.name, "pic": "http://139.155.44.190:3005/images/6.jpg", "time": param.time};
             // arr.splice(0,0,a);
             // self.setState({list:arr});
+            // console.log(param);
             fetch(url3)
                 .then((res) => res.json())
                 .then((res) => {
@@ -131,6 +134,8 @@ export default class Community extends Component {
                                                 for (var i = 0; i < self.state.pic.length; i++) {
                                                     if (item.name == self.state.pic[i].name) {
                                                         item.pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
+                                                        item.level = self.state.pic[i].level;
+                                                        item.college = self.state.pic[i].college;
                                                         break;
                                                     }
                                                 }
@@ -291,13 +296,11 @@ export default class Community extends Component {
         }
     }
     change = (e) => {
-        if (e !== '') {
-            this.setState({
-                search: e
-            })
-        }
+        this.setState({
+            search: e
+        })
     }
-    search = (e) => {
+    search = () => {
         let url = `http://139.155.44.190:3005/learn/select?content=${this.state.search}`;
         var url2 = `http://139.155.44.190:3005/learnlike/list`;
         let url3 = `http://139.155.44.190:3005/users/list`;
@@ -367,6 +370,12 @@ export default class Community extends Component {
     renovate = () => {
         var param = 1;
         DeviceEventEmitter.emit('refresh', param);
+        // Actions.community();
+    }
+    person = (idx) => {
+        var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level,college: this.state.list[idx].college };
+        AsyncStorage.setItem('details', JSON.stringify(value));
+        Actions.person();
     }
 
     render() {
@@ -386,17 +395,17 @@ export default class Community extends Component {
                         alignItems: 'center',
                         backgroundColor: '#ffffff',
                         // borderRadius: 28 * s
-                        borderBottomLeftRadius:28*s,
-                        borderTopLeftRadius:28*s,
-                        marginLeft:-55*s,
+                        borderBottomLeftRadius: 28 * s,
+                        borderTopLeftRadius: 28 * s,
+                        marginLeft: -55 * s,
                     }}>
-                        
+
                         <TextInput
                             style={{
                                 height: 50 * s,
                                 width: "80%",
                                 padding: 0,
-                                marginLeft:20*s,
+                                marginLeft: 20 * s,
                                 fontSize: 15 * s,
                             }}
                             clearButtonMode="while-editing"
@@ -404,7 +413,7 @@ export default class Community extends Component {
                             placeholder="请输入搜索的关键字"
                             onChangeText={this.change}
                         />
-                        <Button style={{borderBottomRightRadius:28*s, borderTopRightRadius:28*s,height: 42 * s,}} onPress={this.search}>
+                        <Button style={{ borderBottomRightRadius: 28 * s, borderTopRightRadius: 28 * s, height: 42 * s, }} onPress={this.search}>
                             搜索
                         </Button>
                         {/* <Icon
@@ -413,28 +422,23 @@ export default class Community extends Component {
                             }}
                             onPress={this.search}
                             color='' size={20} name='search' /> */}
-                        
+
                     </View>
                     {/* <Button style={{ height: 42 * s,backgroundColor:'#ffffff'}} onPress={this.search}>
                             搜索
                     </Button> */}
-                    <TouchableOpacity
-                        style={{
-                            height: 50 * s,
-                            fontSize: 15 * s,
-                            color: '#333333',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            marginLeft: 20
-                        }}
-                        onPress={this.search}
-                    >
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={this.renovate}>
+                    <TouchableOpacity style={{
+                        position: 'absolute',
+                        top: 15 * s,
+                        right: 30 * s,
+                        marginLeft: 10 * s,
+                        width: 30,
+                        height: 30
+                    }} onPress={this.renovate}>
                         <Icon
-                            style={styles.only}
                             size={30}
-                            name='refresh' />
+                            name='refresh'
+                        />
                     </TouchableOpacity>
                 </View>
 
@@ -448,15 +452,21 @@ export default class Community extends Component {
                                         height: 80 * s,
                                         alignItems: 'center'
                                     }}>
-                                        <Image style={{
-                                            marginLeft: 20 * s,
-                                            height: 50 * s,
-                                            width: 50 * s,
-                                            borderRadius: 25 * s,
-                                            backgroundColor: 'yellow'
-                                        }} source={{ uri: item.pic }} />
+                                        <TouchableOpacity onPress={this.person.bind(this, (idx))}>
+                                            <Image style={{
+                                                marginLeft: 20 * s,
+                                                height: 50 * s,
+                                                width: 50 * s,
+                                                borderRadius: 25 * s,
+                                                backgroundColor: 'yellow'
+                                            }}
+                                                source={{ uri: item.pic }} />
+                                        </TouchableOpacity>
                                         <View style={{ marginLeft: 30 * s }}>
-                                            <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
+                                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                                <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
+                                                <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: 'red' }}>Lv.{item.level}</Text>
+                                            </View>
                                             <Text>{item.time}</Text>
                                         </View>
                                     </View>
@@ -543,11 +553,3 @@ export default class Community extends Component {
         )
     }
 }
-const styles = StyleSheet.create({
-    only: {
-        fontSize: 23,
-        position:'absolute',
-        top:-10*s,
-        left:30*s
-    }
-})

@@ -5,16 +5,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
 export default class Yuedu extends Component {
-    constructor() {
-        super();
-        this.state = {
-        }
-    }
-    componentDidMount() {
-
-
-    }
-
     render() {
         return (
             <ScrollView style={{ backgroundColor: '#ffffff',}}>
