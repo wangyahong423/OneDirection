@@ -15,7 +15,7 @@ export default class Appear extends Component {
         }
     }
     componentDidMount() {
-        let url = `http://139.155.44.190:3005/cet4/list`;
+        let url = `http://139.155.44.190:3005/highcet4/list`;
         fetch(url)
             .then(res => res.json())
             .then(res => {
