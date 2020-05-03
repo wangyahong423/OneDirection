@@ -5,16 +5,16 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class Choose3 extends Component {
+export default class Choose20 extends Component {
     constructor() {
         super();
         this.state = {
             activeSections: [],
             todo: [{
                 header: '参考答案',
-                content1: '【答案】A',
-                content2: '【详解】',
-                content3: "可设a=(1,0,L,0)^T，则aa^T的特征值为1,0,L,0，从而E-aa^T的特征值为0,1,L,1，因此E-aa^T不可逆。"
+                content1: '【答案】C',
+                content2: '【解析】',
+                content3: "P(A)>=P(AB)，P(B)>=P(AB)，所以P(AB)<=[P(A)+P(B)]/2，故选择C。"
             }]
         }
     }
@@ -44,9 +44,11 @@ export default class Choose3 extends Component {
             <ScrollView>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%', borderColor: '#37376F', borderWidth: 1, padding: '2%' }}>
-                        <Text style={{ fontSize: 16 * s }}>{`3、设a为n维单位列向量，E为n阶单位矩阵，则()`}</Text>
-                        <Text style={{ fontSize: 16 * s }}>{`(A) E-aa^T不可逆`}&emsp;&emsp;&#8194;&#32;&#32;{`(B) E+aa^T不可逆`}</Text>
-                        <Text style={{fontSize:16*s}}>{`(C) E+2aa^T不可逆`}&emsp;&emsp;{`(D) E-2aa^T不可逆`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`20、若A，B为任意两个随机事件，则()`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(A) P(AB)<=P(A)P(B)`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(B) P(AB)>=P(A)P(B)`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(C) P(AB)<=[P(A)+P(B)]/2`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(D) P(AB)>=[P(A)+P(B)]/2`}</Text>
                     </View>
                 </View>
                 <Accordion

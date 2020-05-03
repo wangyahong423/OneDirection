@@ -5,16 +5,20 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class Choose3 extends Component {
+export default class Choose12 extends Component {
     constructor() {
         super();
         this.state = {
             activeSections: [],
             todo: [{
                 header: '参考答案',
-                content1: '【答案】A',
-                content2: '【详解】',
-                content3: "可设a=(1,0,L,0)^T，则aa^T的特征值为1,0,L,0，从而E-aa^T的特征值为0,1,L,1，因此E-aa^T不可逆。"
+                content1: '【答案】C',
+                content2: '【解析】：',
+                content3: '因为A与B相似，因此存在可逆矩阵P，使得(P^-1)AP=B，于是有：',
+                content4: '(P^-1AP)^T=P^TA^T(P^-1)^T=P^TA^T(P^T)^-1=B^T，即A^T~B^T，',
+                content5: "(P^-1AP)^-1=P^-1A^-1(P^-1)^-1=P^-1A^-1P=B^-1，因此 A^-1~B^-1，",
+                content6: "p^-1(A+A^-1)P=P^-1AP+P^-1A^-1P=B+B^-1，因此A+A^-1~B+B^-1，",
+                content7: "而C选项中，P^-1A^T不一定等于B^T，故C不正确，选择C"
             }]
         }
     }
@@ -32,6 +36,10 @@ export default class Choose3 extends Component {
                 <Text style={[{ color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content1}</Text>
                 <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content2}</Text>
                 <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content3}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content4}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content5}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content6}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content7}</Text>
             </View>
         );
     };
@@ -44,9 +52,11 @@ export default class Choose3 extends Component {
             <ScrollView>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%', borderColor: '#37376F', borderWidth: 1, padding: '2%' }}>
-                        <Text style={{ fontSize: 16 * s }}>{`3、设a为n维单位列向量，E为n阶单位矩阵，则()`}</Text>
-                        <Text style={{ fontSize: 16 * s }}>{`(A) E-aa^T不可逆`}&emsp;&emsp;&#8194;&#32;&#32;{`(B) E+aa^T不可逆`}</Text>
-                        <Text style={{fontSize:16*s}}>{`(C) E+2aa^T不可逆`}&emsp;&emsp;{`(D) E-2aa^T不可逆`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`12、设A^T与B^T是可逆矩阵，且A与B相似，则下列结论错误的是()`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(A) A^T与B^T相似`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(B) A^-1与B^-1相似`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(C) A+A^T与B+B^T相似`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(D) A+A^-1与B+B^-1相似`}</Text>
                     </View>
                 </View>
                 <Accordion

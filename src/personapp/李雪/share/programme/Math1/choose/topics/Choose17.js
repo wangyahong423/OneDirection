@@ -5,16 +5,16 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class Choose3 extends Component {
+export default class Choose17 extends Component {
     constructor() {
         super();
         this.state = {
             activeSections: [],
             todo: [{
                 header: '参考答案',
-                content1: '【答案】A',
-                content2: '【详解】',
-                content3: "可设a=(1,0,L,0)^T，则aa^T的特征值为1,0,L,0，从而E-aa^T的特征值为0,1,L,1，因此E-aa^T不可逆。"
+                content1: '【答案】D',
+                content2: '【解析】：',
+                content3: '因为AX=0基础解系含一个线性无关的解向量，所以r(A)=3，于是r(A*)=1，故A*X=0基础解系含3个线性无关的解向量，又A*A=|A|E=0 且 r(A)=3，所以A的列向量组中含A*X=0的基础解系，因为(1,0,1,0)^T是方程AX=0的基础解系，所以α1+α3=0，故α1，α2，α4或α2，α3，α4线性无关，显然α1，α2，α3为A*X=0的一个基础解系，选D。'
             }]
         }
     }
@@ -44,9 +44,9 @@ export default class Choose3 extends Component {
             <ScrollView>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%', borderColor: '#37376F', borderWidth: 1, padding: '2%' }}>
-                        <Text style={{ fontSize: 16 * s }}>{`3、设a为n维单位列向量，E为n阶单位矩阵，则()`}</Text>
-                        <Text style={{ fontSize: 16 * s }}>{`(A) E-aa^T不可逆`}&emsp;&emsp;&#8194;&#32;&#32;{`(B) E+aa^T不可逆`}</Text>
-                        <Text style={{fontSize:16*s}}>{`(C) E+2aa^T不可逆`}&emsp;&emsp;{`(D) E-2aa^T不可逆`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`17、设A=(a1,a2,a3,a4)是4阶矩阵，A*为A的伴随矩阵，若(1,0,1,0)^T是方程组Ax=0的一个基础解系，则A*x=0的基础解系可为()`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(A) α1，α2`}&emsp;&emsp;&emsp;&emsp;{`(B) α1，α3`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(C) α1，α2，α3`}&emsp;&emsp;{`(D) α2，α3，α4`}</Text>
                     </View>
                 </View>
                 <Accordion

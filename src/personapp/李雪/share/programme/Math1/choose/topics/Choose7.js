@@ -5,16 +5,18 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class Choose3 extends Component {
+export default class Choose7 extends Component {
     constructor() {
         super();
         this.state = {
             activeSections: [],
             todo: [{
                 header: '参考答案',
-                content1: '【答案】A',
-                content2: '【详解】',
-                content3: "可设a=(1,0,L,0)^T，则aa^T的特征值为1,0,L,0，从而E-aa^T的特征值为0,1,L,1，因此E-aa^T不可逆。"
+                content1: '【答案】C',
+                content2: '【解析】：',
+                content3: '解：P(A ￣B)=P(A)-P(AB)，P(B ￣A)=P(B)-P(AB)',
+                content4: '∵P(A)=p(B)',
+                content5: "∴P(A ￣B)=P(B ￣A)选C"
             }]
         }
     }
@@ -32,6 +34,8 @@ export default class Choose3 extends Component {
                 <Text style={[{ color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content1}</Text>
                 <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content2}</Text>
                 <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content3}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content4}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content5}</Text>
             </View>
         );
     };
@@ -44,9 +48,9 @@ export default class Choose3 extends Component {
             <ScrollView>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%', borderColor: '#37376F', borderWidth: 1, padding: '2%' }}>
-                        <Text style={{ fontSize: 16 * s }}>{`3、设a为n维单位列向量，E为n阶单位矩阵，则()`}</Text>
-                        <Text style={{ fontSize: 16 * s }}>{`(A) E-aa^T不可逆`}&emsp;&emsp;&#8194;&#32;&#32;{`(B) E+aa^T不可逆`}</Text>
-                        <Text style={{fontSize:16*s}}>{`(C) E+2aa^T不可逆`}&emsp;&emsp;{`(D) E-2aa^T不可逆`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`7、设A，B为随机事件，则P(A)=P(B)的充分必要条件是()`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(A) P(A∪B)=P(A)+P(B)`}&emsp;&emsp;{`(B) P(AB)=P(A)P(B)`}`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(C) P(A ￣B)=P(B ￣A)`}&emsp;&emsp;{`(D) P(AB)=P(￣A ￣B)`}</Text>
                     </View>
                 </View>
                 <Accordion

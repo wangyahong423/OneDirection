@@ -5,7 +5,7 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class Answer3 extends Component {
+export default class Answer4 extends Component {
     constructor() {
         super();
         this.state = {
@@ -13,15 +13,18 @@ export default class Answer3 extends Component {
             todo: [{
                 header: '参考答案',
                 content1: '【答案】',
-                content2: '(1)令1/n=x，则原不等式可化为x/(x+1)<ln(1+x)<x，x>0。',
-                content3: '先证明ln(1+x)<x，x>0:',
-                content4: "令f(x)=x-ln(1+x)。由于f'(x)=1-1/(10+x) > 0，x>0，可知f(x)在[0,+∞)上单调递增。又由于f(0)=0，因此当x>0时，f(x)>f(0)=0。也即ln(1+x)<x，x>0。",
-                content5: "在证明x/(x+1)<ln(1+x)，x>0:",
-                content6:"令g(x)=ln(1+x)。由于g(x)=1/(1+x)-1/(1+x)^2>0，x>0，可知g(x)在[0,+∞)上单调递增。由于g(0)=0，因此当x>0时，g(x)>g(0)=0。也即x/(x+1)<ln(1+x)，x>0。",
-                content7:"因此，我们证明了x/x+1<ln(1+x)<x，x>0。再令由于，即可得到所需证明的不等式。",
-                content8:"(2)a(n+1)-an=1/(n+1)-ln(1+1/n)，由不等式1/(n+1)<ln(1+1/n)可知：数列{an}单调递减。又由不等式ln(1+1/n)<1/n可知：",
-                content9:"an=1 + 1/2+...+1/n-lnn>ln(1+1）+ln(1+1/2)+...+ln(1+1/n)-ln n=ln(n+1)-ln n>0。",
-                content10:'因此数列{an}是有界的。故由单调有界收敛定理可知：数列{an}收敛。'
+                content2: "(1) 这是一个一阶线性非齐次微分方程，先求解对应的线性齐次方程y'+xy=0的通解：",
+                content3:"y=C·e^(x^2/2)，其中C为任意常数；",
+                content4:"再用常数变易法求y'+xy=e^(-x^2/2)通解，",
+                content5:"设y=C(x)e(x^2/2)为其解，代入方程，",
+                content6:"得C'(x)e(-x^2/2)=e(-x^2/2),C'(x)=1，",
+                content7:"C(x)=∫1 dx=x+C1，也就是通解为：y=(x+C1)·e(-x^2/2)",
+                content8:"把初始条件y(0)=0代入，得C1=0，从而得到y(x)=x·e(-x^2/2)。",
+                content9:"(2) y(x)=x·e(-x^2/2)，y'(x)=e(-x^2/2)·(1-x^2)，y''=(x^3-3x)·e(-x^2/2)=x(x-√3)(x+√3)·e(-x^2/2)",
+                content10:"令y''(x)=0得x1=-√3，x2=0，x3=√3。",
+                content11:"当x<-√3或0<x<√3时，y''<0，是曲线的凸区间；",
+                content12:"当-√3<x<0或x>√3时，y''>0，是曲线的凹区间。",
+                content13:"曲线的拐点有3个，分别为(-√3,-√3·e^(-3/2))，(0,0)，(-√3,√3·e^(-3/2))。"
             }]
         }
     }
@@ -39,13 +42,16 @@ export default class Answer3 extends Component {
                 <Text style={[{ color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content1}</Text>
                 <Text style={[{ marginTop: 5 * s}, styles.contentText]}>&emsp;&emsp;{section.content2}</Text>
                 <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content3}</Text>
-                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content4}</Text>
+                <Text style={[{ marginTop: 5 * s}, styles.contentText]}>&emsp;&emsp;{section.content4}</Text>
                 <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content5}</Text>
                 <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content6}</Text>
                 <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content7}</Text>
                 <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content8}</Text>
-                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content9}</Text>
+                <Text style={[{ marginTop: 10 * s }, styles.contentText]}>&emsp;&emsp;{section.content9}</Text>
                 <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content10}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content11}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content12}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content13}</Text>
             </View>
         );
     };
@@ -58,8 +64,8 @@ export default class Answer3 extends Component {
             <ScrollView>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%', borderColor: '#37376F', borderWidth: 1, padding: '2%' }}>
-                    <Text style={{ fontSize: 16 * s }}>{`3、证明：(1)对任意正整数n，都有1/(n+1) < ln (1+1/n) < 1/n`}</Text>
-                            <Text style={{ fontSize: 16 * s }}>{`(2)设an=1+1/2+...+1/n-ln n(n=1,2,...)，证明数列{an}收敛`}</Text>
+                    <Text style={{ fontSize: 16 * s }}>{`4、设函数y(x)是微分方程y'+xy=e^(-x^2/2)满足条件y(0)=0的特解。`}</Text>
+                            <Text style={{ fontSize: 16 * s }}>{`(1)求y(x)；(2)求曲线y=y(x)的凸凹区间拐点。`}</Text>
                     </View>
                 </View>
                 <Accordion

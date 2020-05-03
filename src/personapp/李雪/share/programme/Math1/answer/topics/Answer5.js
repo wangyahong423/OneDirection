@@ -5,16 +5,22 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class Choose3 extends Component {
+export default class Answer5 extends Component {
     constructor() {
         super();
         this.state = {
             activeSections: [],
             todo: [{
                 header: '参考答案',
-                content1: '【答案】A',
-                content2: '【详解】',
-                content3: "可设a=(1,0,L,0)^T，则aa^T的特征值为1,0,L,0，从而E-aa^T的特征值为0,1,L,1，因此E-aa^T不可逆。"
+                content1: '【答案】',
+                content2: '令√(e^x-1)=t，则x=ln(t^2+1)，dx=2t/(1+t^2) dt，由第二换元法和分部积分公式可得',
+                content3:"原式=∫(t^2+1)^2·arctan t·2t/(1+t^2) dt",
+                content4:"=∫2t(t^2+1)·arctan t dt",
+                content5:"1/2·∫arctan t d[(t^2+1)^2]",
+                content6:"1/2·[(t^2+1)^2]arctan t-1/2∫(t^2+1) dt",
+                content7:"1/2·[(t^2+1)^2]arctan t-1/6·t^3-1/2t+C",
+                content8:"1/2·e^(2x)·arctan√(e^x-1)-1/6·(e^x-1)^(3/2)-1/2·(e^x-1)^(1/2)",
+                content9:"+C"
             }]
         }
     }
@@ -30,8 +36,14 @@ export default class Choose3 extends Component {
         return (
             <View style={styles.content}>
                 <Text style={[{ color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content1}</Text>
-                <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content2}</Text>
-                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content3}</Text>
+                <Text style={[{ marginTop: 5 * s}, styles.contentText]}>&emsp;&emsp;{section.content2}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content3}</Text>
+                <Text style={[{ marginTop: 5 * s}, styles.contentText]}>&emsp;&emsp;{section.content4}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content5}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content6}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content7}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content8}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content9}</Text>
             </View>
         );
     };
@@ -44,9 +56,7 @@ export default class Choose3 extends Component {
             <ScrollView>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%', borderColor: '#37376F', borderWidth: 1, padding: '2%' }}>
-                        <Text style={{ fontSize: 16 * s }}>{`3、设a为n维单位列向量，E为n阶单位矩阵，则()`}</Text>
-                        <Text style={{ fontSize: 16 * s }}>{`(A) E-aa^T不可逆`}&emsp;&emsp;&#8194;&#32;&#32;{`(B) E+aa^T不可逆`}</Text>
-                        <Text style={{fontSize:16*s}}>{`(C) E+2aa^T不可逆`}&emsp;&emsp;{`(D) E-2aa^T不可逆`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`5、求不定积分∫e^(2x)·arctan√(e^x-1) dx`}</Text>
                     </View>
                 </View>
                 <Accordion

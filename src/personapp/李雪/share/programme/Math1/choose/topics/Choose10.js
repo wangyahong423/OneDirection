@@ -5,16 +5,16 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class Choose3 extends Component {
+export default class Choose10 extends Component {
     constructor() {
         super();
         this.state = {
             activeSections: [],
             todo: [{
                 header: '参考答案',
-                content1: '【答案】A',
-                content2: '【详解】',
-                content3: "可设a=(1,0,L,0)^T，则aa^T的特征值为1,0,L,0，从而E-aa^T的特征值为0,1,L,1，因此E-aa^T不可逆。"
+                content1: '【答案】B',
+                content2: '【解析】',
+                content3: "A和B的特征值为2,2,1，但是A有三个线性无关的特征向量，而B只有两个，所以依A对角化，B不可，因此选择B。"
             }]
         }
     }
@@ -44,9 +44,13 @@ export default class Choose3 extends Component {
             <ScrollView>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%', borderColor: '#37376F', borderWidth: 1, padding: '2%' }}>
-                        <Text style={{ fontSize: 16 * s }}>{`3、设a为n维单位列向量，E为n阶单位矩阵，则()`}</Text>
-                        <Text style={{ fontSize: 16 * s }}>{`(A) E-aa^T不可逆`}&emsp;&emsp;&#8194;&#32;&#32;{`(B) E+aa^T不可逆`}</Text>
-                        <Text style={{fontSize:16*s}}>{`(C) E+2aa^T不可逆`}&emsp;&emsp;{`(D) E-2aa^T不可逆`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`                                2 0 0         2 1 0         1 0 0`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`10、已知矩阵A=0 2 1，B=0 2 0，C=0 2 0，则`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`                                0 0 1         0 0 1         0 0 2`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(A) A与C相似，B与C相似`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(B) A与C相似，B与C不相似`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(C) A与C不相似，B与C相似`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(D) A与C不相似，B与C不相似`}</Text>
                     </View>
                 </View>
                 <Accordion

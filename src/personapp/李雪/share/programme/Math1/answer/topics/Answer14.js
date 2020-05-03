@@ -5,16 +5,20 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class Choose3 extends Component {
+export default class Answer14 extends Component {
     constructor() {
         super();
         this.state = {
             activeSections: [],
             todo: [{
                 header: '参考答案',
-                content1: '【答案】A',
-                content2: '【详解】',
-                content3: "可设a=(1,0,L,0)^T，则aa^T的特征值为1,0,L,0，从而E-aa^T的特征值为0,1,L,1，因此E-aa^T不可逆。"
+                content1: '【答案】',
+                content2: '(1)令F(x)=f(x)-x，F(0)=f(0)=0，F(1)=f(1)-1=0，',
+                content3:"则∃ξ∈(0,1)使得F'(ξ)=0，即f'(ξ)=1",
+                content4:"(2)令G(x)=e^x·(f'(x)-1)，则G(ξ)=0，",
+                content5:"又由于f(x)为奇函数，故f'(x)为偶函数，可知G(-ξ)=0，",
+                content6:"则∃η∈(-ξ,ξ)⊂(-1,1)使G'(ξ)=0，",
+                content7:"则e^η[f'(η)-1]+e^η·f''(η)=0，即f''(η)+f'(η)=1"
             }]
         }
     }
@@ -30,8 +34,12 @@ export default class Choose3 extends Component {
         return (
             <View style={styles.content}>
                 <Text style={[{ color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content1}</Text>
-                <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content2}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content2}</Text>
                 <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content3}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content4}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content5}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content6}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content7}</Text>
             </View>
         );
     };
@@ -44,9 +52,9 @@ export default class Choose3 extends Component {
             <ScrollView>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%', borderColor: '#37376F', borderWidth: 1, padding: '2%' }}>
-                        <Text style={{ fontSize: 16 * s }}>{`3、设a为n维单位列向量，E为n阶单位矩阵，则()`}</Text>
-                        <Text style={{ fontSize: 16 * s }}>{`(A) E-aa^T不可逆`}&emsp;&emsp;&#8194;&#32;&#32;{`(B) E+aa^T不可逆`}</Text>
-                        <Text style={{fontSize:16*s}}>{`(C) E+2aa^T不可逆`}&emsp;&emsp;{`(D) E-2aa^T不可逆`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`14、设奇函数f(x)在[-1,1]上具有2阶导数，且f(1)=1，证明：`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(1)存在ξ∈(0,1)，使得f'(ξ)=1`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(2)存在η∈(-1,1)，使得f''(η)+f'(η)=1`}</Text>
                     </View>
                 </View>
                 <Accordion

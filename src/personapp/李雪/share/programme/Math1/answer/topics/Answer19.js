@@ -5,16 +5,20 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class Choose3 extends Component {
+export default class Answer19 extends Component {
     constructor() {
         super();
         this.state = {
             activeSections: [],
             todo: [{
                 header: '参考答案',
-                content1: '【答案】A',
-                content2: '【详解】',
-                content3: "可设a=(1,0,L,0)^T，则aa^T的特征值为1,0,L,0，从而E-aa^T的特征值为0,1,L,1，因此E-aa^T不可逆。"
+                content1: '【答案】',
+                content2: "Θz/Θx=f1,1'(xy,yg(x))xy+f1,2'(xy,yg(x))yg(x)+f1'(xy,yg(x))x",
+                content3:"+f2,1'(xy,yg(x))xyg'(x)+f2,2'(xy,yg(x))yg(x)g'(x)+f2'(xy,yg(x))g'(x)",
+                content4:"由于g(x)在x=1处取得极值g(1)=1，可知g(1)=0。",
+                content5:"故Θ^2z/Θx·Θy|x=1,y=1=f1,1'(1,g(1))+f1,2'(1,g(1))g(1)+f1'(1,g(1))",
+                content6:"+f2,1'(1,g(1))g'(1)+f2,2'(1,g(1))g(1)g'(1)+f2'(1,g(1))g'(1)",
+                content7:"f1,1'(1,1)+f1,2'(1,1)"
             }]
         }
     }
@@ -30,8 +34,12 @@ export default class Choose3 extends Component {
         return (
             <View style={styles.content}>
                 <Text style={[{ color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content1}</Text>
-                <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content2}</Text>
+                <Text style={[{ marginTop: 5 * s}, styles.contentText]}>&emsp;&emsp;&#32;{section.content2}</Text>
                 <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content3}</Text>
+                <Text style={[{ marginTop: 5 * s}, styles.contentText]}>&emsp;&emsp;&#32;{section.content4}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content5}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content6}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content7}</Text>
             </View>
         );
     };
@@ -44,9 +52,7 @@ export default class Choose3 extends Component {
             <ScrollView>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%', borderColor: '#37376F', borderWidth: 1, padding: '2%' }}>
-                        <Text style={{ fontSize: 16 * s }}>{`3、设a为n维单位列向量，E为n阶单位矩阵，则()`}</Text>
-                        <Text style={{ fontSize: 16 * s }}>{`(A) E-aa^T不可逆`}&emsp;&emsp;&#8194;&#32;&#32;{`(B) E+aa^T不可逆`}</Text>
-                        <Text style={{fontSize:16*s}}>{`(C) E+2aa^T不可逆`}&emsp;&emsp;{`(D) E-2aa^T不可逆`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`19、设z=f(xy,yg(x))，其中函数f具有二阶连续偏导数，函数g(x)可导，且在x=1处取得极值g(1)=1，求Θ^2z/(Θx·Θy)|x=1,y=1`}</Text>
                     </View>
                 </View>
                 <Accordion

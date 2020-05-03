@@ -5,7 +5,7 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class Choose3 extends Component {
+export default class Choose11 extends Component {
     constructor() {
         super();
         this.state = {
@@ -13,8 +13,14 @@ export default class Choose3 extends Component {
             todo: [{
                 header: '参考答案',
                 content1: '【答案】A',
-                content2: '【详解】',
-                content3: "可设a=(1,0,L,0)^T，则aa^T的特征值为1,0,L,0，从而E-aa^T的特征值为0,1,L,1，因此E-aa^T不可逆。"
+                content2: '【解析】：',
+                content3: '将y=(1+x^2)^2-√(1+x^2)代入微分方程可得：',
+                content4: '4x(1+x^2)-x/√(1+x^2)+p(x)[(1+x^2)^2-√(1+x^2)]=q(x)',
+                content5: "而将y=(1+x^2)^2+√(1+x^2)代入微分方程可得：",
+                content6:'4x(1+x^2)+x/√(1+x^2)+p(x)[(1+x^2)^2+√(1+x^2)]=q(x)',
+                content7:'将这两个式子可得：8x(1+x^2)+2p(x)(1+x^2)^2=2q(x)',
+                content8:'两个式子相减可得：2x/√(1+x^2)+2p(x)√(1+x^2)=0',
+                content9:'因此可得q(x)=4x(1+x^2)+(-x/1+x^2)(1+x^2)^2=4x(1+x^2)-x(1+x^2)=3x(1+x^2)，故选择A'
             }]
         }
     }
@@ -32,6 +38,12 @@ export default class Choose3 extends Component {
                 <Text style={[{ color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content1}</Text>
                 <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content2}</Text>
                 <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content3}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content4}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content5}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content6}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content7}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content8}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content9}</Text>
             </View>
         );
     };
@@ -44,9 +56,9 @@ export default class Choose3 extends Component {
             <ScrollView>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%', borderColor: '#37376F', borderWidth: 1, padding: '2%' }}>
-                        <Text style={{ fontSize: 16 * s }}>{`3、设a为n维单位列向量，E为n阶单位矩阵，则()`}</Text>
-                        <Text style={{ fontSize: 16 * s }}>{`(A) E-aa^T不可逆`}&emsp;&emsp;&#8194;&#32;&#32;{`(B) E+aa^T不可逆`}</Text>
-                        <Text style={{fontSize:16*s}}>{`(C) E+2aa^T不可逆`}&emsp;&emsp;{`(D) E-2aa^T不可逆`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`11、若y=(1+x^2)^2-√(1+x^2)，y=(1+x^2)^2+√(1+x^2) 是微分方程y'+P(x)y=q(x)的两个解，则q(x)=()`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(A) 3x(1+x^2)`}&emsp;&emsp;&emsp;&emsp;{`(B) -3x(1+x^2)`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(C) x/(1+x^2) `}&emsp;&emsp;&emsp;&emsp;{`(D) -x/(1+x^2)`}</Text>
                     </View>
                 </View>
                 <Accordion

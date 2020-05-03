@@ -5,16 +5,16 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class Choose3 extends Component {
+export default class Choose5 extends Component {
     constructor() {
         super();
         this.state = {
             activeSections: [],
             todo: [{
                 header: '参考答案',
-                content1: '【答案】A',
-                content2: '【详解】',
-                content3: "可设a=(1,0,L,0)^T，则aa^T的特征值为1,0,L,0，从而E-aa^T的特征值为0,1,L,1，因此E-aa^T不可逆。"
+                content1: '【答案】C',
+                content2: '【解析】',
+                content3: "∵ x-tanx ~ -x^3/3若要x-tanx与x^b同阶无穷小，∴ k=3"
             }]
         }
     }
@@ -44,9 +44,8 @@ export default class Choose3 extends Component {
             <ScrollView>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%', borderColor: '#37376F', borderWidth: 1, padding: '2%' }}>
-                        <Text style={{ fontSize: 16 * s }}>{`3、设a为n维单位列向量，E为n阶单位矩阵，则()`}</Text>
-                        <Text style={{ fontSize: 16 * s }}>{`(A) E-aa^T不可逆`}&emsp;&emsp;&#8194;&#32;&#32;{`(B) E+aa^T不可逆`}</Text>
-                        <Text style={{fontSize:16*s}}>{`(C) E+2aa^T不可逆`}&emsp;&emsp;{`(D) E-2aa^T不可逆`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`5、当x——>0，若x=tanx与X^k是同阶无穷小，则k=()`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(A) 1`}&emsp;&emsp;&emsp;&emsp;{`(B) 2`}&emsp;&emsp;&emsp;&emsp;{`(C) 3`}&emsp;&emsp;&emsp;&emsp;{`(D) 4`}</Text>
                     </View>
                 </View>
                 <Accordion

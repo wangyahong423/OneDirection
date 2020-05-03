@@ -5,7 +5,7 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class Choose3 extends Component {
+export default class Choose8 extends Component {
     constructor() {
         super();
         this.state = {
@@ -13,8 +13,11 @@ export default class Choose3 extends Component {
             todo: [{
                 header: '参考答案',
                 content1: '【答案】A',
-                content2: '【详解】',
-                content3: "可设a=(1,0,L,0)^T，则aa^T的特征值为1,0,L,0，从而E-aa^T的特征值为0,1,L,1，因此E-aa^T不可逆。"
+                content2: '【解析】：',
+                content3: '解：因为X~N(μ,σ^2) Y~N(μ,σ^2) X与Y相互独立',
+                content4: '∴X-Y~N(0,2σ^2)',
+                content5: "∴P{|X-Y|<1}=P|(X-Y)/(√2·σ)|<1/(√2·σ)=2Φ|1/(√2·σ)|-1",
+                content6: '∴与μ无关，即与σ^2有关'
             }]
         }
     }
@@ -32,6 +35,9 @@ export default class Choose3 extends Component {
                 <Text style={[{ color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content1}</Text>
                 <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content2}</Text>
                 <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content3}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content4}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content5}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content6}</Text>
             </View>
         );
     };
@@ -44,9 +50,11 @@ export default class Choose3 extends Component {
             <ScrollView>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%', borderColor: '#37376F', borderWidth: 1, padding: '2%' }}>
-                        <Text style={{ fontSize: 16 * s }}>{`3、设a为n维单位列向量，E为n阶单位矩阵，则()`}</Text>
-                        <Text style={{ fontSize: 16 * s }}>{`(A) E-aa^T不可逆`}&emsp;&emsp;&#8194;&#32;&#32;{`(B) E+aa^T不可逆`}</Text>
-                        <Text style={{fontSize:16*s}}>{`(C) E+2aa^T不可逆`}&emsp;&emsp;{`(D) E-2aa^T不可逆`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`8、设随机变量X与Y相互独立，且都要从正态分布N(μ,σ^2)，则P|X-Y|<1()`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(A) 与μ无关，而与σ^2有关`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(B) 与μ有关，而与σ^2无关`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(C) 与μ，σ^2都有关`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(D) 与μ，σ^2都无关`}</Text>
                     </View>
                 </View>
                 <Accordion

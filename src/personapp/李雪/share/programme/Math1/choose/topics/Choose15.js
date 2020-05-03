@@ -5,7 +5,7 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class Choose3 extends Component {
+export default class Choose15 extends Component {
     constructor() {
         super();
         this.state = {
@@ -13,8 +13,9 @@ export default class Choose3 extends Component {
             todo: [{
                 header: '参考答案',
                 content1: '【答案】A',
-                content2: '【详解】',
-                content3: "可设a=(1,0,L,0)^T，则aa^T的特征值为1,0,L,0，从而E-aa^T的特征值为0,1,L,1，因此E-aa^T不可逆。"
+                content2: '【解析】',
+                content3: "(X,Y)的联合概率密度为f(x,y)={e^(-x-4y),x>=0,y>0; 0,其它",
+                content4: "则P{X,Y}=∫∫x<y f(x,y)dxdy = ∫(0,+∞) dx∫(0,y) e^(-x-4y) dx=∫(0,+∞) e^(-5y)dy=1/5"
             }]
         }
     }
@@ -32,6 +33,7 @@ export default class Choose3 extends Component {
                 <Text style={[{ color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content1}</Text>
                 <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content2}</Text>
                 <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content3}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content4}</Text>
             </View>
         );
     };
@@ -44,9 +46,8 @@ export default class Choose3 extends Component {
             <ScrollView>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%', borderColor: '#37376F', borderWidth: 1, padding: '2%' }}>
-                        <Text style={{ fontSize: 16 * s }}>{`3、设a为n维单位列向量，E为n阶单位矩阵，则()`}</Text>
-                        <Text style={{ fontSize: 16 * s }}>{`(A) E-aa^T不可逆`}&emsp;&emsp;&#8194;&#32;&#32;{`(B) E+aa^T不可逆`}</Text>
-                        <Text style={{fontSize:16*s}}>{`(C) E+2aa^T不可逆`}&emsp;&emsp;{`(D) E-2aa^T不可逆`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`15、设随机变量x与y相互独立，且分别服从参数为1与参数为4的指数分布，则P{x<y}=()`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(A) 1/5`}&emsp;&emsp;{`(B) 1/3`}&emsp;&emsp;{`(C) 2/5`}&emsp;&emsp;{`(D) 4/5`}</Text>
                     </View>
                 </View>
                 <Accordion

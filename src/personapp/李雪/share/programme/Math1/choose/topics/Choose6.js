@@ -5,16 +5,18 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class Choose3 extends Component {
+export default class Choose6 extends Component {
     constructor() {
         super();
         this.state = {
             activeSections: [],
             todo: [{
                 header: '参考答案',
-                content1: '【答案】A',
-                content2: '【详解】',
-                content3: "可设a=(1,0,L,0)^T，则aa^T的特征值为1,0,L,0，从而E-aa^T的特征值为0,1,L,1，因此E-aa^T不可逆。"
+                content1: '【答案】C',
+                content2: '【解析】：',
+                content3: "解：由A^2+A=2E得λ^2+λ=2，λ为A的特征值，λ=-2或1，",
+                content4:"又|A|=λ1λ2λ3=4，故λ1=λ2=-2，λ3=1，",
+                content5:'规范形为y1^2-y2^2-y3^2，选C'
             }]
         }
     }
@@ -32,6 +34,8 @@ export default class Choose3 extends Component {
                 <Text style={[{ color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content1}</Text>
                 <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content2}</Text>
                 <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content3}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content4}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content5}</Text>
             </View>
         );
     };
@@ -44,9 +48,9 @@ export default class Choose3 extends Component {
             <ScrollView>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%', borderColor: '#37376F', borderWidth: 1, padding: '2%' }}>
-                        <Text style={{ fontSize: 16 * s }}>{`3、设a为n维单位列向量，E为n阶单位矩阵，则()`}</Text>
-                        <Text style={{ fontSize: 16 * s }}>{`(A) E-aa^T不可逆`}&emsp;&emsp;&#8194;&#32;&#32;{`(B) E+aa^T不可逆`}</Text>
-                        <Text style={{fontSize:16*s}}>{`(C) E+2aa^T不可逆`}&emsp;&emsp;{`(D) E-2aa^T不可逆`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`6、设A是3阶实对称矩阵，E是3阶单位矩阵，若A^2 + A = 2E，且|A|=4，则二次型x^T·Ax的规范形为()`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(A) y1^2+y2^2+y^3`}&emsp;&emsp;{`(B) y1^2+y2^2-y^3`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(C) y1^2-y2^2-y^3  `}&emsp;&emsp;&#32;{`(D) -y1^2-y2^2-y^3`}</Text>
                     </View>
                 </View>
                 <Accordion

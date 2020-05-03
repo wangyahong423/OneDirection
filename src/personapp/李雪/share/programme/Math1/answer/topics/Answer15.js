@@ -5,16 +5,24 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class Choose3 extends Component {
+export default class Answer15 extends Component {
     constructor() {
         super();
         this.state = {
             activeSections: [],
             todo: [{
                 header: '参考答案',
-                content1: '【答案】A',
-                content2: '【详解】',
-                content3: "可设a=(1,0,L,0)^T，则aa^T的特征值为1,0,L,0，从而E-aa^T的特征值为0,1,L,1，因此E-aa^T不可逆。"
+                content1: '【答案】',
+                content2: '由题意可知矩阵C为2阶矩阵，故可设C=(x1 x2,x3 x4)，则由AC-CA=B可得线性方程组：',
+                content3:"{-x2+a·x3=0; -a·x1+x2+a·x4=1; x1-x3-x4=1; x2-a·x3=b  (1)",
+                content4:"(0 -1 a 0 0,-a 1 0 a 1,1 0 -1 -1 1,0 1 -a 0 b)->",
+                content5:"(1 0 -1 -1 1,-a 1 0 a 1,0 -1 a 0 0,0 1 -a 0 b)->",
+                content6:"(1 0 -1 -1 1,0 1 -a 0 1+a,0 -1 a 0 0,0 1 -a 0 b)->",
+                content7:"(1 0 -1 -1 1,0 1 -a 0 1+a,0 0 0 0 1+a,0 0 0 0 b-1-a)",
+                content8:"由于方程组(1)有解，故有1+a=0，b-1-a=0，即a=-1，b=0，从而有",
+                content9:"(0 -1 a 0 0,-a 1 0 a 1,1 0 -1 -1 1,0 1 -a 0 b)->",
+                content10:"(1 0 -1 -1 1,0 1 1 0 0,0 0 0 0 0,0 0 0 0 0)，故有{x1=k1+k2+1;x2=-k1;x3=k1;x4=k2，其中k1、k2任意。",
+                content11:"从而C=(k1+k2+1 -k1,k1 k2)"
             }]
         }
     }
@@ -30,8 +38,16 @@ export default class Choose3 extends Component {
         return (
             <View style={styles.content}>
                 <Text style={[{ color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content1}</Text>
-                <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content2}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content2}</Text>
                 <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content3}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content4}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content5}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content6}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content7}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content8}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content9}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content10}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content11}</Text>
             </View>
         );
     };
@@ -44,9 +60,7 @@ export default class Choose3 extends Component {
             <ScrollView>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%', borderColor: '#37376F', borderWidth: 1, padding: '2%' }}>
-                        <Text style={{ fontSize: 16 * s }}>{`3、设a为n维单位列向量，E为n阶单位矩阵，则()`}</Text>
-                        <Text style={{ fontSize: 16 * s }}>{`(A) E-aa^T不可逆`}&emsp;&emsp;&#8194;&#32;&#32;{`(B) E+aa^T不可逆`}</Text>
-                        <Text style={{fontSize:16*s}}>{`(C) E+2aa^T不可逆`}&emsp;&emsp;{`(D) E-2aa^T不可逆`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`15、设A=(1 a,1 0)，B=(0 1,1 b)，当b为何值时，存在矩阵C使得AC-CA=B，并求所有矩阵C。`}</Text>
                     </View>
                 </View>
                 <Accordion

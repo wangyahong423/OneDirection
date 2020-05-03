@@ -5,16 +5,16 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class Choose3 extends Component {
+export default class Choose14 extends Component {
     constructor() {
         super();
         this.state = {
             activeSections: [],
             todo: [{
                 header: '参考答案',
-                content1: '【答案】A',
-                content2: '【详解】',
-                content3: "可设a=(1,0,L,0)^T，则aa^T的特征值为1,0,L,0，从而E-aa^T的特征值为0,1,L,1，因此E-aa^T不可逆。"
+                content1: '【答案】D',
+                content2: '【解析】',
+                content3: "Ik=∫(e,k) e^(x^2) sinx dx看为以k为自变量的函数，则可知Ik'=e^(k^2)·sink>=0，k∈(0,π)，即可知Ik=∫(e,k) e^(x^2) sinx dx关于k在(0,π)上为单调递增函数，又由于1,2,3∈(0,π)，则I1<I2<I3，故选D"
             }]
         }
     }
@@ -44,9 +44,9 @@ export default class Choose3 extends Component {
             <ScrollView>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%', borderColor: '#37376F', borderWidth: 1, padding: '2%' }}>
-                        <Text style={{ fontSize: 16 * s }}>{`3、设a为n维单位列向量，E为n阶单位矩阵，则()`}</Text>
-                        <Text style={{ fontSize: 16 * s }}>{`(A) E-aa^T不可逆`}&emsp;&emsp;&#8194;&#32;&#32;{`(B) E+aa^T不可逆`}</Text>
-                        <Text style={{fontSize:16*s}}>{`(C) E+2aa^T不可逆`}&emsp;&emsp;{`(D) E-2aa^T不可逆`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`14、设Ik=∫(e,k) e^(x^2) sinx dx(k=1,2,3)，则有()`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(A) I3<I2<I1`}&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{`(B) I2<I1<I3`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(C) I1<I3<I2`}&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{`(D) I1<I2<I3`}</Text>
                     </View>
                 </View>
                 <Accordion

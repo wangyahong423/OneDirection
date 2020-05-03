@@ -5,16 +5,16 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class Choose3 extends Component {
+export default class Choose19 extends Component {
     constructor() {
         super();
         this.state = {
             activeSections: [],
             todo: [{
                 header: '参考答案',
-                content1: '【答案】A',
-                content2: '【详解】',
-                content3: "可设a=(1,0,L,0)^T，则aa^T的特征值为1,0,L,0，从而E-aa^T的特征值为0,1,L,1，因此E-aa^T不可逆。"
+                content1: '【答案】C',
+                content2: '【解析】：',
+                content3: '因为数列{an}单调减少且lim(x->∞)an=0，所以an>0(n=1,2,Λ)。由交错级数的莱布尼兹审敛法，Σ(∞,n=1)(-1)^n an收敛，因为Sn=Σ(n,k=1)ak无界，所以级数Σ(∞,n=1)an发散，故选C。'
             }]
         }
     }
@@ -44,9 +44,8 @@ export default class Choose3 extends Component {
             <ScrollView>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%', borderColor: '#37376F', borderWidth: 1, padding: '2%' }}>
-                        <Text style={{ fontSize: 16 * s }}>{`3、设a为n维单位列向量，E为n阶单位矩阵，则()`}</Text>
-                        <Text style={{ fontSize: 16 * s }}>{`(A) E-aa^T不可逆`}&emsp;&emsp;&#8194;&#32;&#32;{`(B) E+aa^T不可逆`}</Text>
-                        <Text style={{fontSize:16*s}}>{`(C) E+2aa^T不可逆`}&emsp;&emsp;{`(D) E-2aa^T不可逆`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`19、设数列{an}单调减少，lim(n->∞)an=0，Sn=Σ(n,k=1) ak(n=1,2,……)无界，则幂级函数Σ(n,k=1) an(x-1)^n的收敛域为()`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(A) (-1,1]`}&emsp;&emsp;{`(B) [-1,1)`}&emsp;&emsp;{`(C) [0,2)`}&emsp;&emsp;{`(D) (0,2]`}</Text>
                     </View>
                 </View>
                 <Accordion

@@ -5,16 +5,22 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class Choose3 extends Component {
+export default class Answer12 extends Component {
     constructor() {
         super();
         this.state = {
             activeSections: [],
             todo: [{
                 header: '参考答案',
-                content1: '【答案】A',
-                content2: '【详解】',
-                content3: "可设a=(1,0,L,0)^T，则aa^T的特征值为1,0,L,0，从而E-aa^T的特征值为0,1,L,1，因此E-aa^T不可逆。"
+                content1: '【答案】',
+                content2: '曲线L的参数方程为{x=cos θ;y=√2·sin θ;z=cos θ;，θ从π/2到-π/2',
+                content3:"I=∫L (y+z) dx+(z^2-x^2+y) dy+(x^2+y^2) dz",
+                content4:"=∫[π/2,-π/2] [-(√2sin θ+cos θ)·sin θ+√2sin θ·√2cos θ -(cos^2 θ+2sin^2 θ)·sin θ] dθ",
+                content5:"=∫[π/2,-π/2] (-√2sin^2 θ+1/2sin 2θ-sin θ-sin^3 θ) dθ",
+                content6:"=∫[π/2,-π/2] √2sin^2 θ dθ",
+                content7:"=2√2∫[0,π/2] sin^2 θ dθ",
+                content8:"=2√2·1/2·π/2",
+                content9:"=√2/2·π"
             }]
         }
     }
@@ -30,8 +36,14 @@ export default class Choose3 extends Component {
         return (
             <View style={styles.content}>
                 <Text style={[{ color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content1}</Text>
-                <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content2}</Text>
+                <Text style={[{ marginTop: 5 * s}, styles.contentText]}>&emsp;&emsp;&#32;{section.content2}</Text>
                 <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content3}</Text>
+                <Text style={[{ marginTop: 5 * s}, styles.contentText]}>&emsp;&emsp;&#32;{section.content4}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content5}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content6}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content7}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content8}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content9}</Text>
             </View>
         );
     };
@@ -44,9 +56,7 @@ export default class Choose3 extends Component {
             <ScrollView>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%', borderColor: '#37376F', borderWidth: 1, padding: '2%' }}>
-                        <Text style={{ fontSize: 16 * s }}>{`3、设a为n维单位列向量，E为n阶单位矩阵，则()`}</Text>
-                        <Text style={{ fontSize: 16 * s }}>{`(A) E-aa^T不可逆`}&emsp;&emsp;&#8194;&#32;&#32;{`(B) E+aa^T不可逆`}</Text>
-                        <Text style={{fontSize:16*s}}>{`(C) E+2aa^T不可逆`}&emsp;&emsp;{`(D) E-2aa^T不可逆`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`12、已知曲线L的方程为{z=√(2-x^2-y^2);z=x ，起点为A(0,√2,0)，终点为B(0,-√2,0)，计算曲线积分I=∫L(y+z) dx+(z^2-x^2+y) dy + (x^2+y^2) dz`}</Text>
                     </View>
                 </View>
                 <Accordion

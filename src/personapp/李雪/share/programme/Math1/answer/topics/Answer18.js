@@ -5,16 +5,21 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class Choose3 extends Component {
+export default class Answer18 extends Component {
     constructor() {
         super();
         this.state = {
             activeSections: [],
             todo: [{
                 header: '参考答案',
-                content1: '【答案】A',
-                content2: '【详解】',
-                content3: "可设a=(1,0,L,0)^T，则aa^T的特征值为1,0,L,0，从而E-aa^T的特征值为0,1,L,1，因此E-aa^T不可逆。"
+                content1: '【答案】',
+                content2: "(1)曲线L在任一处(x,y)的切线斜率为dy/dx=-sin t/f'(t)，过该点(x,y)处的切线为",
+                content3:"Y-cos t = -sin t/f'(t) (X-f(t))，令Y=0得X=f'(t)·cos t+f(t)。由于曲线L与x轴和y轴的交点到切点的距离恒为1。",
+                content4:"故有[f'(t)cot t+f(t)-f(t)]^2+cos^2 t=1，又因为f'(t)>0 (0<t<π/2)",
+                content5:"所以f'(t)=sin t/cos t，两边同时取不定积分可得f(t)=ln |sec t+tan t|=sin t+C，又由于f(0)=0，",
+                content6:"所以C=0，故函数f(t)=ln |sec t+tan t|-sin t+C，又由于f(0)=0，",
+                content7:"(2)此曲线L与x轴和y轴的所围成的无边界的区域的面积为：",
+                content8:"S=∫[0,π/2] cos t·f'(t) dt = π/4"
             }]
         }
     }
@@ -30,8 +35,13 @@ export default class Choose3 extends Component {
         return (
             <View style={styles.content}>
                 <Text style={[{ color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content1}</Text>
-                <Text style={[{ marginTop: 5 * s, color: 'red' }, styles.contentText]}>&emsp;&emsp;{section.content2}</Text>
+                <Text style={[{ marginTop: 5 * s}, styles.contentText]}>&emsp;&emsp;&#32;{section.content2}</Text>
                 <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content3}</Text>
+                <Text style={[{ marginTop: 5 * s}, styles.contentText]}>&emsp;&emsp;&#32;{section.content4}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content5}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content6}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content7}</Text>
+                <Text style={[{ marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;&#32;{section.content8}</Text>
             </View>
         );
     };
@@ -44,9 +54,7 @@ export default class Choose3 extends Component {
             <ScrollView>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%', borderColor: '#37376F', borderWidth: 1, padding: '2%' }}>
-                        <Text style={{ fontSize: 16 * s }}>{`3、设a为n维单位列向量，E为n阶单位矩阵，则()`}</Text>
-                        <Text style={{ fontSize: 16 * s }}>{`(A) E-aa^T不可逆`}&emsp;&emsp;&#8194;&#32;&#32;{`(B) E+aa^T不可逆`}</Text>
-                        <Text style={{fontSize:16*s}}>{`(C) E+2aa^T不可逆`}&emsp;&emsp;{`(D) E-2aa^T不可逆`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`18、已知曲线L:{x=f(t);y=cos t  (0<=t<π/2)，其中函数f(t)具有连续导数，且f(0)=0，f(t)>0 (0<t<π/2)，若曲线L的切线与x轴的交点到切点的距离恒为1，求函数f(t)的表达式，并求此曲线L与x轴与y轴无边界的区域的面积。`}</Text>
                     </View>
                 </View>
                 <Accordion

@@ -5,16 +5,16 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class Choose3 extends Component {
+export default class Choose18 extends Component {
     constructor() {
         super();
         this.state = {
             activeSections: [],
             todo: [{
                 header: '参考答案',
-                content1: '【答案】A',
-                content2: '【详解】',
-                content3: "可设a=(1,0,L,0)^T，则aa^T的特征值为1,0,L,0，从而E-aa^T的特征值为0,1,L,1，因此E-aa^T不可逆。"
+                content1: '【答案】D',
+                content2: '【解析】：',
+                content3: '∫(-∞,+∞) [f1(x)F2(x)+f2(x)F1(x)] dx = F1(x)F2(x)|(-∞,+∞) = 1，故选D'
             }]
         }
     }
@@ -44,9 +44,9 @@ export default class Choose3 extends Component {
             <ScrollView>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%', borderColor: '#37376F', borderWidth: 1, padding: '2%' }}>
-                        <Text style={{ fontSize: 16 * s }}>{`3、设a为n维单位列向量，E为n阶单位矩阵，则()`}</Text>
-                        <Text style={{ fontSize: 16 * s }}>{`(A) E-aa^T不可逆`}&emsp;&emsp;&#8194;&#32;&#32;{`(B) E+aa^T不可逆`}</Text>
-                        <Text style={{fontSize:16*s}}>{`(C) E+2aa^T不可逆`}&emsp;&emsp;{`(D) E-2aa^T不可逆`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`18、设F1(x)，F2(x)为两个分布函数，其对应密度f1(x)，f2(x)是连续函数，则必为概率密度的是()`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(A) f1(x)f2(x)`}&emsp;&emsp;&#32;{`(B) 2f2(x)F1(x)`}</Text>
+                        <Text style={{ fontSize: 16 * s }}>{`(C) f1(x)F2(x)`}&emsp;&emsp;{`(D) f1(x)F2(x)+f2(x)F1(x)`}</Text>
                     </View>
                 </View>
                 <Accordion

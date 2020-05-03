@@ -172,12 +172,64 @@ import Choose1 from './src/share/programme/Math1/choose/topics/Choose1'
 import Choose2 from './src/share/programme/Math1/choose/topics/Choose2'
 import Choose3 from './src/share/programme/Math1/choose/topics/Choose3'
 import Choose4 from './src/share/programme/Math1/choose/topics/Choose4'
+import Choose5 from './src/share/programme/Math1/choose/topics/Choose5'
+import Choose6 from './src/share/programme/Math1/choose/topics/Choose6'
+import Choose7 from './src/share/programme/Math1/choose/topics/Choose7'
+import Choose8 from './src/share/programme/Math1/choose/topics/Choose8'
+import Choose9 from './src/share/programme/Math1/choose/topics/Choose9'
+import Choose10 from './src/share/programme/Math1/choose/topics/Choose10'
+import Choose11 from './src/share/programme/Math1/choose/topics/Choose11'
+import Choose12 from './src/share/programme/Math1/choose/topics/Choose12'
+import Choose13 from './src/share/programme/Math1/choose/topics/Choose13'
+import Choose14 from './src/share/programme/Math1/choose/topics/Choose14'
+import Choose15 from './src/share/programme/Math1/choose/topics/Choose15'
+import Choose16 from './src/share/programme/Math1/choose/topics/Choose16'
+import Choose17 from './src/share/programme/Math1/choose/topics/Choose17'
+import Choose18 from './src/share/programme/Math1/choose/topics/Choose18'
+import Choose19 from './src/share/programme/Math1/choose/topics/Choose19'
+import Choose20 from './src/share/programme/Math1/choose/topics/Choose20'
+
 import Fill1 from './src/share/programme/Math1/fill/topics/Fill1'
 import Fill2 from './src/share/programme/Math1/fill/topics/Fill2'
 import Fill3 from './src/share/programme/Math1/fill/topics/Fill3'
+import Fill4 from './src/share/programme/Math1/fill/topics/Fill4'
+import Fill5 from './src/share/programme/Math1/fill/topics/Fill5'
+import Fill6 from './src/share/programme/Math1/fill/topics/Fill6'
+import Fill7 from './src/share/programme/Math1/fill/topics/Fill7'
+import Fill8 from './src/share/programme/Math1/fill/topics/Fill8'
+import Fill9 from './src/share/programme/Math1/fill/topics/Fill9'
+import Fill10 from './src/share/programme/Math1/fill/topics/Fill10'
+import Fill11 from './src/share/programme/Math1/fill/topics/Fill11'
+import Fill12 from './src/share/programme/Math1/fill/topics/Fill12'
+import Fill13 from './src/share/programme/Math1/fill/topics/Fill13'
+import Fill14 from './src/share/programme/Math1/fill/topics/Fill14'
+import Fill15 from './src/share/programme/Math1/fill/topics/Fill15'
+import Fill16 from './src/share/programme/Math1/fill/topics/Fill16'
+import Fill17 from './src/share/programme/Math1/fill/topics/Fill17'
+import Fill18 from './src/share/programme/Math1/fill/topics/Fill18'
+import Fill19 from './src/share/programme/Math1/fill/topics/Fill19'
+import Fill20 from './src/share/programme/Math1/fill/topics/Fill20'
+
 import Answer1 from './src/share/programme/Math1/answer/topics/Answer1'
 import Answer2 from './src/share/programme/Math1/answer/topics/Answer2'
 import Answer3 from './src/share/programme/Math1/answer/topics/Answer3'
+import Answer4 from './src/share/programme/Math1/answer/topics/Answer4'
+import Answer5 from './src/share/programme/Math1/answer/topics/Answer5'
+import Answer6 from './src/share/programme/Math1/answer/topics/Answer6'
+import Answer7 from './src/share/programme/Math1/answer/topics/Answer7'
+import Answer8 from './src/share/programme/Math1/answer/topics/Answer8'
+import Answer9 from './src/share/programme/Math1/answer/topics/Answer9'
+import Answer10 from './src/share/programme/Math1/answer/topics/Answer10'
+import Answer11 from './src/share/programme/Math1/answer/topics/Answer11'
+import Answer12 from './src/share/programme/Math1/answer/topics/Answer12'
+import Answer13 from './src/share/programme/Math1/answer/topics/Answer13'
+import Answer14 from './src/share/programme/Math1/answer/topics/Answer14'
+import Answer15 from './src/share/programme/Math1/answer/topics/Answer15'
+import Answer16 from './src/share/programme/Math1/answer/topics/Answer16'
+import Answer17 from './src/share/programme/Math1/answer/topics/Answer17'
+import Answer18 from './src/share/programme/Math1/answer/topics/Answer18'
+import Answer19 from './src/share/programme/Math1/answer/topics/Answer19'
+import Answer20 from './src/share/programme/Math1/answer/topics/Answer20'
 
 import Math2 from './src/share/programme/Math2/Math2';
 import Math2Choose2 from './src/share/programme/Math2/choose/Choose'
@@ -513,12 +565,64 @@ const App = () => {
           <Scene key='choose2' title='选择题' component={Choose2} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key='choose3' title='选择题' component={Choose3} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key='choose4' title='选择题' component={Choose4} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='choose5' title='选择题' component={Choose5} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='choose6' title='选择题' component={Choose6} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='choose7' title='选择题' component={Choose7} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='choose8' title='选择题' component={Choose8} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='choose9' title='选择题' component={Choose9} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='choose10' title='选择题' component={Choose10} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='choose11' title='选择题' component={Choose11} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='choose12' title='选择题' component={Choose12} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='choose13' title='选择题' component={Choose13} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='choose14' title='选择题' component={Choose14} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='choose15' title='选择题' component={Choose15} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='choose16' title='选择题' component={Choose16} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='choose17' title='选择题' component={Choose17} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='choose18' title='选择题' component={Choose18} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='choose19' title='选择题' component={Choose19} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='choose20' title='选择题' component={Choose20} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          
           <Scene key='fill1' title='填空题' component={Fill1} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key='fill2' title='填空题' component={Fill2} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key='fill3' title='填空题' component={Fill3} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='fill4' title='填空题' component={Fill4} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='fill5' title='填空题' component={Fill5} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='fill6' title='填空题' component={Fill6} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='fill7' title='填空题' component={Fill7} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='fill8' title='填空题' component={Fill8} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='fill9' title='填空题' component={Fill9} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='fill10' title='填空题' component={Fill10} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='fill11' title='填空题' component={Fill11} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='fill12' title='填空题' component={Fill12} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='fill13' title='填空题' component={Fill13} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='fill14' title='填空题' component={Fill14} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='fill15' title='填空题' component={Fill15} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='fill16' title='填空题' component={Fill16} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='fill17' title='填空题' component={Fill17} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='fill18' title='填空题' component={Fill18} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='fill19' title='填空题' component={Fill19} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='fill20' title='填空题' component={Fill20} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          
           <Scene key='answer1' title='解答题' component={Answer1} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key='answer2' title='解答题' component={Answer2} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key='answer3' title='解答题' component={Answer3} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='answer4' title='解答题' component={Answer4} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='answer5' title='解答题' component={Answer5} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='answer6' title='解答题' component={Answer6} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='answer7' title='解答题' component={Answer7} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='answer8' title='解答题' component={Answer8} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='answer9' title='解答题' component={Answer9} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='answer10' title='解答题' component={Answer10} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='answer11' title='解答题' component={Answer11} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='answer12' title='解答题' component={Answer12} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='answer13' title='解答题' component={Answer13} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='answer14' title='解答题' component={Answer14} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='answer15' title='解答题' component={Answer15} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='answer16' title='解答题' component={Answer16} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='answer17' title='解答题' component={Answer17} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='answer18' title='解答题' component={Answer18} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='answer19' title='解答题' component={Answer19} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='answer20' title='解答题' component={Answer20} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           
           <Scene key='math2' title='数学二' component={Math2} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key='math2choose2' title='选择题' component={Math2Choose2} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
