@@ -5,7 +5,7 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class question1 extends Component {
+export default class ReadTwelve extends Component {
     constructor() {
         super();
         this.state = {
@@ -13,15 +13,15 @@ export default class question1 extends Component {
             todo: [{
                 header: '参考答案',
                 content1: '1. 【答案】[B] ',
-                content2: '【解析】推理判断题。首先依据题目中的casual dining找到第2段中的informality。其后有两个for引导的介词短语，后一个说“对于英国精致瓷器的制造商来说，这(informality)意味着经济困难时期”;此外,第3段用数据具体指出陶瓷业裁员之严重，说明陶瓷业在萎缩，即B。A、D均属夸大事实，C与文章内容无关。',
-                content3: '2. 【答案】[B]',
-                content4: '【解析】事实细节题。根据倒数第2段第2句中指出现今休闲文化流行的背景：工作时间长，家庭生活节奏紧张,B中的 Busy schedules与文中的demanding family schedules对应，故为答案。',
-                content5: '3. 【答案】[D] ',
-                content6: '【解析】事实细节题。Royal Doulton在文章中出现过两次：第3段说它裁员，因为人们用餐越来越随意(不再讲究餐具的精致);第 4 段中“A spokesman for Royal Doulton admitted that the company...”，暗示公司的性质，可以推断它是精制器皿的生产者。',
+                content2: '【解析】事实细节题。从文章第1段末句可找到答案。选项A显然与原文意思相反，选项C和D则无原文依据。',
+                content3: '2. 【答案】[C]',
+                content4: '【解析】推理判断题。第2段第2句表明洛锡安勋爵捐赠了他的房产后，这个计划才启动起来，因此选项C正确，也由此可以否定选项A。根据第2段最后两句可知这个计划是为了保护具有历史价值的房子,而不仅仅是为了保护洛锡安勋爵的房子，因此选项D不对。',
+                content5: '3. 【答案】[B] ',
+                content6: '【解析】事实细节题。最后一段从preserving开始的部分指出了本题的答案。第3段倒数第2句所说的“no development or disturbances of any kind are permitted”可帮助排除选项A;选项C内容不完整;选项D中的限制词primarily使用不妥,无原文依据。',
                 content7: '4. 【答案】[C]',
-                content8: '【解析】事实细节题。根据题目中的the layoffs找到文章第4段首句，其中的have their roots in相当于题目中的main cause is,shifts相当于C中的change。其实本题与第1题是交叉相关的，从第1题的题目可找到本题的答案。',
+                content8: '【解析】词义推断题。由invade 所在的句子“for the millions of tourists who each year invade.。”可知这是托管会保护自然美景和历史胜地的原因所在。从而可以推断出invade强调来英国游玩的游客之多，因此选项C为正确答案。',
                 content9: '5. 【答案】[A]',
-                content10: '【解析】事实细节题。根据最后一段，特别是第2句“The fine points of etiquette... must be picked up elsewhere良好的餐桌礼仪必须在其他地方被重拾起来”，可知礼仪在某些场合还是必要的，故答案为A。',
+                content10: '【解析】主旨大意题。纵观全文可发现the National Trust和the Trust在文章开头以及文中反复出现,文章是一篇说明文，主要目的是介绍the National Trust的机构性质及其功能，因此选项A正确。文章未讨论托管会的成员问题，因此选项B不正确。最后两段虽然提到英国的自然景色很美，但这并非文章的主题思想，因此选项C不对。本题最具干扰性的是选项D，但是本文并不是一篇议论文，其目的不是让读者认同其中的观点，文章更多的是用说明性的语言来说明托管会的一些做法。',
                 
             }]
         }
@@ -61,100 +61,94 @@ export default class question1 extends Component {
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%' }}>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`When families gather for Christmas dinner, some will stick to formal traditions dating back to Grandma’s generation. Their tables will be set with the good dishes and silver, and the dress code will be Sunday-best.`}
+                            &emsp;&emsp;{`The National Trust in Britain plays an increasingly important part in the preservation for public enjoyment of the best that is left unspoiled of the British countryside. Although the Trust has received practicaland moral support from the Government, it is not rich Government department. It is a charity which dependsfor its existence on voluntary support from members of the public.`}
                         </Text>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`But in many other homes, this china--and--silver elegance has given way to stoneware (粗陶)--and--stainless informality, with dresses assuming an equally casual--Friday look. For hosts and guests, the change means greater simplicity and comfort. For makers of fine china in Britain, it spells economic hard times.`}
+                            &emsp;&emsp;{`The attention of the public was first drawn to the dangers threatening the great old houses and castles ofBritain by the death of Lord Lothian, who left his great seventeenth-century house to the Trust together with the 4, 500-acre park and estate surrounding it. This gift attracted wide publicity and started the Trust's "Country House Scheme". Under this scheme, with the help of the Government and the general public, the Trust has been able to save and open to the public about one hundred and fifty of these old houses. Lastyear about one and three quarters of a million people paid to visit these historic houses, usually at a very small charge.`}
                         </Text>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`Last week Royal Doulton, the largest employer in Stoke-onTrent, announced that it is eliminating 1,000 jobs--one-fifth of its total workforce. That brings to more than 4,000 the number of positions lost in 18 months in the pottery (陶瓷) region. Wedgwood and other pottery factories made cuts earlier.`}
+                            &emsp;&emsp;{`In addition to country houses and open spaces the Trust now owns some examples of ancient wind and water mills, nature reserves, five hundred and forty farms and nearly two thousand five hundred cottages or smallvillage houses, as well as some complete villages. In these villages no one is allowed to build, develop or disturb the old village environment in any way and all the houses are maintained in their original sixteenth-century style. Over four hundred thousand acres of coastline, woodland, and hill country are protected by the Trust and no development or disturbance of any kind are permitted. The public has free access to these areas and is only asked to respect the peace, beauty and wildlife.`}
                         </Text>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`“Although a strong pound and weak markets in Asia play a role in the downsizing, the layoffs in Stoke have their roots in earthshaking social shifts. A spokesman for Royal Doulton admitted that the company “has been somewhat slow in catching up with the trend”toward casual dining. Families eat together less often, he explained, and more people eat alone, either because they are single or they eat in front of television.”`}
-                        </Text>
-                        <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`“Even dinner parties, if they happen at all, have gone causal. In a time of long work hours and demanding family schedules, busy hosts insist, rightly, that it’s better to share a takeout pizza on paper plates inthe family room than to wait for the perfect moment or a “real” dinner party. Too often, the perfect moment never comes, Iron a fine-pattened tablecloth? Forget it. Polish the silver? Who has time?”`}
-                        </Text>
-                        <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`“Yet the loss of formality has its down side. The fine points of etiquette(礼节) that children might once have learned at the table by observation or instruction from parents and grandparents(“Chew with your mouth closed.”“keep your elbows off the table.”)must be picked up elsewhere. Some companies now offer etiquette seminars for employees who may be competent professionally but clueless socially.”`}
+                            &emsp;&emsp;{`　So it is that over the past eighty years the Trust has become a big important organization and an essential and respected part of national life, preserving all that is of great natural beauty and of historical significance not only for future generations of Britons but also for the millions of tourists who each year invade Britain in search of a great historical and cultural heritage.`}
                         </Text>
                         <Text style={{fontSize:19,marginTop:5*s, fontStyle: 'italic',color:'green'}}>
                         Choose correct answers to the question:
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        1.The trend toward casual dining has resulted in ______
+                        1.The National Trust is ______.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.bankruptcy of fine china manufacturers
+                        　A.a rich government department
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.Shrinking of the pottery industry
+                        　B.a charity supported mainly by the public
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C. restructuring of large enterprises
+                        　C.a group of areas of great natural beauty
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.Economic recession in Great Britain
+                        　D.an organization supported by public taxes
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        2.Which of the following may be the best reason for casual dining?
+                        2.The "Country House Scheme" was started _______________.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.Family members need more time to relax.
+                        　A.with the founding of the National Trust
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B. Busy schedules leave people no time for formality.
+                        　B.as the first project of the National Trust
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.People want to practice economy in times of scarcity.
+                        　C.after Lord Lothian's donation
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.Young people won’t follow the etiquette of the older generation.
+                        　D.to protect Lord Lothian's house
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        3.It can be learned from the passage that Royal Doulton is _______
+                        3.Land protected by the National Trust ______________.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A. a retailer of stainless steel tableware
+                        　A. can be developed and modernized
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.a dealer in stoneware
+                        　B. includes naturally and historically valuable sites
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.a pottery chain store
+                        　C. consists of country houses and nature reserves
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.a producer of fine china
+                        　D.is primarily for tourists to Britain
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        4.The main cause of the layoffs in the pottery industry is _______
+                        4.The word "invade" in the last paragraph is used to emphasize that _____________.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.the increased value of the pound
+                        　A.the British do not like tourists
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.the economic recession in Asia
+                        　B.tourists to Britain are unfriendly
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.the change in people’s way of life
+                        　C.tourists come to Britain in large numbers
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.the fierce competition at home and abroad
+                        　D. Britain is attacked by masses of tourists
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        5.Refined table manners, though less popular than before in current social life, _______
+                        5.The main purpose of this passage is to ______________.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.are still a must on certain occasions
+                        　A.inform the readers about the National Trust
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B. are bound to return sooner or later
+                        　B.promote the National Trust's membership
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C. are still being taught by parents at home
+                        　C.make people aware of the natural beauty of Britain
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D. Can help improve personal relationships
+                        　D.let the general public share the views of the National Trust
                         </Text>
                     </View>
                 </View>

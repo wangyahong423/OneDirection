@@ -5,23 +5,23 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class question1 extends Component {
+export default class ReadEleven extends Component {
     constructor() {
         super();
         this.state = {
             activeSections: [],
             todo: [{
                 header: '参考答案',
-                content1: '1. 【答案】[D] ',
-                content2: '【解析】事实细节题。本题考查因果关系。第2段倒数第3句中的“not because of... but because of...”指出了nature就是原因所在，characteristics是nature的近义词，故D正确。',
+                content1: '1. 【答案】[C] ',
+                content2: '【解析】事实细节题。根据文中第2段第3、4句的具体说明以及第3段末句的概括说明“我将成为一个完整的工程师：集理性的技术天才和感性的人文学者于一体。”可知C正确。',
                 content3: '2. 【答案】[A]',
-                content4: '【解析】词义理解题。通过go under所在句子中的Even with......可知，该句与上一句形成对比，这两句中的enrollment是相对应的，所以go under应该也与上文的problem相对应，由此可推断，go under就是have problem/ difficulty之义。本题最具干扰性的是C，但文中并无细节具体说明即使入学人数满额学校收人也很少的问题，因此C把problem定义得过细，不如A恰当。',
+                content4: '【解析】事实推理题。由文章第2段第4句“我想通过与非理工科的同学的相互交往来开阔我的视野”，可推断出A正确。其他均无原文依据或断章取义。',
                 content5: '3. 【答案】[B] ',
-                content6: '【解析】推理判断题，也是主旨大意题。文章一开头就指出“许多私立髙等学校都处于危险之中”，引起读者的关注，结尾句明确倡议支持公立髙等教育的人们应该同样支持私立髙等教育，由此可见,B是本文的目的。本题最具干扰性的是D，D的说法在最后一段中多次提到，但是作者提出办学多样性是为了说明私立教育的重要性，故D只是本文主题(私立教育)的支持性细节，并非本文的中心话题。',
+                content6: '【解析】事实推理题。第3段最后一句说，“我将成为一个完整的工程师：集技术天才和人文学者于一体”，B“成为视野宽阔的技术天才”与原文相符，故选B。A、C、D均无原文支持或断章取义。',
                 content7: '4. 【答案】[D]',
-                content8: '【解析】事实细节题。可用排除法找出答案。A可从第1段推断得出;B可在第2段第3句中找到;C可从最后一段中间找到。',
-                content9: '5. 【答案】[C]',
-                content10: '【解析】推理判断题。可用排除法找出答案，根据原文，第2段第3句可证明A不可行;最后一段第3句证明B不可行;第2段第2句也指出D行不通。本文的目的是为了提高公众对私立教育的关注，由此可见，只有C是拯救私立高校的可行性方法。',
+                content8: '【解析】事实推理题。根据第4段第2句“我的崇髙理想与现实发生了冲突”，以及下文对于作者在协调文理科之间的困难可知，原文的想法是不现实的，故可推断D正确。',
+                content9: '5. 【答案】[B]',
+                content10: '【解析】词义理解题。they—般指代前一句话中的复数名词,根据最后一段的第1、2句“…engineering and the liberal arts simply don’t mix as easily…together they threaten to confuse”可以推断，they指的是engineering and the liberal arts。',
                 
             }]
         }
@@ -61,92 +61,97 @@ export default class question1 extends Component {
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%' }}>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`Many private institutions of higher education around the country are in danger. Not all will be saved, andperhaps not all deserve to be saved. There are low-quality schools just as there are low-quality business.We have no obligation to save them simply because they exist.`}
+                            &emsp;&emsp;{`Engineering students are supposed to be examples of practicality and rationality， but when it comes to mycollege education I am an idealist and a fool. In high school I wanted to be an electrical engineer and, of course,any sensible student with my aims would have chosen a college with a large engineering department，famous reputation and lots of good labs and research equipment. But that‘s not what I did.`}
                         </Text>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`But many thriving institutions that deserve to continue are threatened. They are doing a fine job educationally, but they are caught in a financial squeeze, with no way to reduce rising costs or increase revenuessignificantly. Raising tuition doesn’t bring in more revenue, for each time tuition goes up, the enrollment goes down, or the amount that must be given away in student aid goes up. Schools are bad businesses, whether public or private, not usually because of mismanagement but because of the nature of the enterprise.They lose money on every customer, and they can go bankrupt either from too few students or too many students. Even a very good college is a very bad business.`}
+                            &emsp;&emsp;{`I chose to study engineering at a small liberal-arts(文科)university that doesn‘t even offer a major in electrical engineering. Obviously, this was not a practical choice; I came here for more noble reasons. I wanted a broad education that would provide me with flexibility and a value system to guide me in my career.I wanted to open my eyes and expand my vision by interacting with people who weren’t studying science orengineering. My parents, teachers and other adults praised me for such a sensible choice. They told me I was wise and mature beyond my 18 years,and I believed them.`}
                         </Text>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`It is such colleges, thriving but threatened, I worry about. Low enrollment is not their chief problem. Even with full enrollments, they may go under. Efforts to save them, and preferably to keep them private, are a national necessity. There is no basis for arguing that private schools are inherently (固有地)better than public schools. Examples to the contrary abound. Anyone can name state universities and colleges that rank as the finest in the nation and the world. It is now inevitable that public institutions will be dominant, and therefore diversity is a national necessity. Diversity in the way we support schools tends to give us a healthy diversity in the forms of education. In an imperfect society such as ours, uniformity of education throughout the nation could be dangerous. In an imperfect society, diversity is a positive good. Enthusiastic supporters of public higher education know the importance of sustaining private higher education.`}
+                            &emsp;&emsp;{`I headed off to college sure I was going to have an advantage over those students who went to big engineering “factories” where they didn‘t care if you have values or were flexible. I was going to be a complete engineer: technical genius and sensitive humanist(人文学者)all in one.`}
                         </Text>
-                       
+                        <Text style={{ fontSize: 16 * s }}>
+                            &emsp;&emsp;{`Now I‘m not so sure. Somewhere along the way my noble ideals crashed into reality, as all noble ideals eventually do. After three years of struggling to balance math, physics and engineering courses with liberal-arts courses,I have learned there are reasons why few engineering students try to reconcile(协调) engineering with liberal-arts courses in college.`}
+                        </Text>
+                        <Text style={{ fontSize: 16 * s }}>
+                            &emsp;&emsp;{`The reality that has blocked my path to become the typical successful student is that engineering and the liberal arts simply don’t mix as easily as I assumed in high school. Individually they shape a person in very different ways; together they threaten to confuse. The struggle to reconcile the two fields of study is difficult.`}
+                        </Text>
                         <Text style={{fontSize:19,marginTop:5*s, fontStyle: 'italic',color:'green'}}>
                         Choose correct answers to the question:
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        1.According to the author's opinion, schools are bad businesses because of _______.
+                        1.The author chose to study engineering at a small liberal-arts university because he ________.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.mismanagement
+                        　A. intended to be a combination of engineer and humanist
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B. too few students
+                        　B.wanted to be an example of practicality and rationality
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.financial squeeze
+                        　C.intended to be a sensible student with noble ideals
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.their characteristics
+                        　D.wanted to coordinate engineering with liberal-arts courses in college
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        2.The author used the phrase “go under" in Para. 3 to mean "_______".
+                        2.According to the author，by interacting with people who study liberal arts， engineering students can ________.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.get into difficulties
+                        　A.broaden their horizons
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B. have low enrollment
+                        　B.become noble idealists
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.have little money
+                        　C.receive guidance in their careers
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.bring in more money
+                        　D. balance engineering and the liberal arts
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        3.We can reasonably conclude from this passage that the author made an appeal to the public in order to support_____
+                        3. In the eyes of the author，a successful engineering student is expected ________.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.public institution
+                        　A. to be imaginative with a value system to guide him
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B. private schools
+                        　B.to be a technical genius with a wide vision
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.uniformity of education
+                        　C.to have an excellent academic record
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.diversity of education
+                        　D.to be wise and mature
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        4.Which of the following is NOT mentioned about private schools?
+                        4.The author‘s experience shows that he was ________.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.High-quality private schools deserve to be saved.
+                        　A.creative
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.If the tuition of the private schools is raised, the enrollment goes down.
+                        　B.irrational
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.There are many cases to show that public schools are better than private schools.
+                        　C.ambitious
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.Private schools are more profitable than public schools.
+                        　D.Unrealistic
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        5.Which of the following ways could possibly save private schools?
+                        5.The word“they”in“together they threaten to confuse.”(Line 3，Para. 5) refers to ________.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.Raising tuition.
+                        　A. practicality and rationality·
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.Full enrollment.
+                        　B.engineering and the liberal arts
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.National awareness and support.
+                        　C.reality and noble ideals
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.Reduction of rising costs.
+                        　D.flexibility and a value system
                         </Text>
                     </View>
                 </View>

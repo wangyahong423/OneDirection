@@ -5,7 +5,7 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class question1 extends Component {
+export default class ReadTen extends Component {
     constructor() {
         super();
         this.state = {
@@ -13,15 +13,15 @@ export default class question1 extends Component {
             todo: [{
                 header: '参考答案',
                 content1: '1. 【答案】[D] ',
-                content2: '【解析】事实细节题。本题考查因果关系。第2段倒数第3句中的“not because of... but because of...”指出了nature就是原因所在，characteristics是nature的近义词，故D正确。',
-                content3: '2. 【答案】[A]',
-                content4: '【解析】词义理解题。通过go under所在句子中的Even with......可知，该句与上一句形成对比，这两句中的enrollment是相对应的，所以go under应该也与上文的problem相对应，由此可推断，go under就是have problem/ difficulty之义。本题最具干扰性的是C，但文中并无细节具体说明即使入学人数满额学校收人也很少的问题，因此C把problem定义得过细，不如A恰当。',
+                content2: '【解析】 文章首句提到，如同美味的食物,我们可以从好的作品中获得乐趣和享受，D与之相符，故为答案。',
+                content3: '2. 【答案】[D]',
+                content4: '【解析】原文第2段首句提到，这种public scribe会帮你写商业文件或社会交流文章，但他们也会收费的，D与之相符A中的secretary应该是不收贵的，故排除;D中的machine与文中的remote places不相符，故也可排除。',
                 content5: '3. 【答案】[B] ',
-                content6: '【解析】推理判断题，也是主旨大意题。文章一开头就指出“许多私立髙等学校都处于危险之中”，引起读者的关注，结尾句明确倡议支持公立髙等教育的人们应该同样支持私立髙等教育，由此可见,B是本文的目的。本题最具干扰性的是D，D的说法在最后一段中多次提到，但是作者提出办学多样性是为了说明私立教育的重要性，故D只是本文主题(私立教育)的支持性细节，并非本文的中心话题。',
-                content7: '4. 【答案】[D]',
-                content8: '【解析】事实细节题。可用排除法找出答案。A可从第1段推断得出;B可在第2段第3句中找到;C可从最后一段中间找到。',
-                content9: '5. 【答案】[C]',
-                content10: '【解析】推理判断题。可用排除法找出答案，根据原文，第2段第3句可证明A不可行;最后一段第3句证明B不可行;第2段第2句也指出D行不通。本文的目的是为了提高公众对私立教育的关注，由此可见，只有C是拯救私立高校的可行性方法。',
+                content6: '【解析】文章第2段第2句提到，个别幸运的经理只需写下简便的笔记,其秘书就会写好所有的信件，因此B为答案。',
+                content7: '4. 【答案】[C]',
+                content8: '【解析】文章第3段倒数第2句的大意是：我们希望自己写的东西能被人从头到尾地读，能不被扔进“letters-to-be read” file,且根据下文的a wastepaper basket可推测这里说的是希望自己写的东西不被忽视，故本题应选C。',
+                content9: '5. 【答案】[A]',
+                content10: '【解析】由文章的结尾的this is the reason，知道作者有“解释”的目的，同时他说“我们要尽最大的努力学习和练习有趣、有效地写作的技巧”，可知有persuade(说服)的目的,故选A。',
                 
             }]
         }
@@ -61,92 +61,94 @@ export default class question1 extends Component {
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%' }}>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`Many private institutions of higher education around the country are in danger. Not all will be saved, andperhaps not all deserve to be saved. There are low-quality schools just as there are low-quality business.We have no obligation to save them simply because they exist.`}
+                            &emsp;&emsp;{`　Like fine food, good writing is something we approach with pleasure and enjoy from the first taste to the last. And good writers, like good cooks, do not suddenly appear full-blown. Quite the opposite, just as the cook has to undergo a particular training, mastering the skills of his trade, the writer must sit at hisdesk and devote long hours to achieving a style in his writing, whatever its purpose is—schoolwork, matters of business, or purely social communication.`}
                         </Text>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`But many thriving institutions that deserve to continue are threatened. They are doing a fine job educationally, but they are caught in a financial squeeze, with no way to reduce rising costs or increase revenuessignificantly. Raising tuition doesn’t bring in more revenue, for each time tuition goes up, the enrollment goes down, or the amount that must be given away in student aid goes up. Schools are bad businesses, whether public or private, not usually because of mismanagement but because of the nature of the enterprise.They lose money on every customer, and they can go bankrupt either from too few students or too many students. Even a very good college is a very bad business.`}
+                            &emsp;&emsp;{`You may be sure that the more painstaking the effort, the more effective the writing, and the more rewarding.`}
                         </Text>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`It is such colleges, thriving but threatened, I worry about. Low enrollment is not their chief problem. Even with full enrollments, they may go under. Efforts to save them, and preferably to keep them private, are a national necessity. There is no basis for arguing that private schools are inherently (固有地)better than public schools. Examples to the contrary abound. Anyone can name state universities and colleges that rank as the finest in the nation and the world. It is now inevitable that public institutions will be dominant, and therefore diversity is a national necessity. Diversity in the way we support schools tends to give us a healthy diversity in the forms of education. In an imperfect society such as ours, uniformity of education throughout the nation could be dangerous. In an imperfect society, diversity is a positive good. Enthusiastic supporters of public higher education know the importance of sustaining private higher education.`}
+                            &emsp;&emsp;{`　There are still some faraway places in the world where you might find a public scribe to do your business or social writing for you, for money. There are a few managers who are lucky enough to have the service ofthat rare kind of secretary who can take care of all sorts of letter writing with no more than a quick note to work from. But for most of us, if there is any writing to be done, we have to do it ourselves.`}
                         </Text>
-                       
+                        <Text style={{ fontSize: 16 * s }}>
+                            &emsp;&emsp;{`We have to write school papers, business papers or home papers. We are constantly called on to put words to papers. It would be difficult to count the number of such words, messages, letters, and reports put intomails or delivered by hand, but the daily figures must be extremely large. What is more, everyone who writes expects, or at least hopes whatever he writes will be read, from first word to last, not just thrown into some “letters-to-be-read” files or into a wastepaper basket. This is the reason we bend our efforts toward learning and practicing the skills of interesting, effective writing.`}
+                        </Text>
                         <Text style={{fontSize:19,marginTop:5*s, fontStyle: 'italic',color:'green'}}>
                         Choose correct answers to the question:
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        1.According to the author's opinion, schools are bad businesses because of _______.
+                        1.In this passage, good writing is compared to fine food in that _______.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.mismanagement
+                        　A. both writers and cooks have to work a long time every day
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B. too few students
+                        　B.both are essential to life
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.financial squeeze
+                        　C. both are writers and cooks can earn a good living
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.their characteristics
+                        　D. both are enjoyable
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        2.The author used the phrase “go under" in Para. 3 to mean "_______".
+                        2.A public "scribe" (Para 2, Line 1) is _____.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.get into difficulties
+                        　A.a secretary who does your business or social writing
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B. have low enrollment
+                        　B. a machine that does writing for you
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.have little money
+                        　C. a public school where writing is taught
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.bring in more money
+                        　D. a person who ears a living by writing for others
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        3.We can reasonably conclude from this passage that the author made an appeal to the public in order to support_____
+                        3.According to the passage, some managers don't have to do any letter writing because _____.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.public institution
+                        　A. they rely on quick notes
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B. private schools
+                        　B. they have excellent secretaries 
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.uniformity of education
+                        　C.they have a computer to do it
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.diversity of education
+                        　D.they prefer making phone calls
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        4.Which of the following is NOT mentioned about private schools?
+                        4. According to the author, if your letter is thrown into some "letter-to-be-read" file, ______.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.High-quality private schools deserve to be saved.
+                        　A. it will receive immediate attention
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.If the tuition of the private schools is raised, the enrollment goes down.
+                        　B. it will be dealt with by the secretary
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.There are many cases to show that public schools are better than private schools.
+                        　C.it is likely to be neglected
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.Private schools are more profitable than public schools.
+                        　D. it is meant to be delivered soon
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        5.Which of the following ways could possibly save private schools?
+                        5.The purpose of the author in writing this passage is _____.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.Raising tuition.
+                        　A. to explain and persuade
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.Full enrollment.
+                        　B.to comment and criticize
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.National awareness and support.
+                        　C. to interest and entertain
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.Reduction of rising costs.
+                        　D.to argue and demonstrate
                         </Text>
                     </View>
                 </View>

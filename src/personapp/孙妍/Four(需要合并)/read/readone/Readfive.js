@@ -5,23 +5,23 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class question1 extends Component {
+export default class Readfive extends Component {
     constructor() {
         super();
         this.state = {
             activeSections: [],
             todo: [{
                 header: '参考答案',
-                content1: '1. 【答案】[B] ',
-                content2: '【解析】事实细节题。第1段第1句中的every parent，often等词表明这种做法在父母中是非常普遍的，显然B与之相符。A说法无原文依据，且由原文可看出题干所述现象是很难避免的;C中dangerous—词在原文中本是修饰其他情绪，故C不符;D是过多地让孩子自己一个独处的后果,不是题干所述行为的后果。',
-                content3: '2. 【答案】[C]',
-                content4: '【解析】推理判断题。第1段第2句说明父母逼得太过分，应避免。最后一句则说明对小孩太放任自流同样不利。由这两点，我们可以做出如下判断：父母对孩子的“严”和“松”之间有一个恰当的“度”。C与之相符。',
+                content1: '1. 【答案】[D] ',
+                content2: '【解析】词义理解题。本句说到公司要在地球村和全球市场上竞争，多样性是imperative，由前文“没有取消引起多样性的手段”和下文提到的公司对各种各样有技能的美国人的需求可知，多样性对于企业来说应该“必需的”故D正确。',
+                content3: '2. 【答案】[B]',
+                content4: '【解析】事实细节题。第2段末句指出这种辩论主要存在于政治圈和媒体中，结合上句内容，可知其中的this debate指的就是关于多样性的辩论，故B正确。',
                 content5: '3. 【答案】[C] ',
-                content6: '【解析】事实细节题。文章第2段表明：不同的家长对孩子的管制程度不同;家长对小孩的管制不仅是为了孩子个人的幸福，也反映了父母的需要以及社区的价值观，故C与原文相符。',
-                content7: '4. 【答案】[D]',
-                content8: '【解析】词义理解题。由precept所在句可猜测precept应与example相对，且与下文的preach意思相近，故D正确。',
-                content9: '5. 【答案】[A]',
-                content10: '【解析】推理判断题。第3段提到父母应该避免讲一套做一套，结合最后一段可得出结论：关于思想道德教育问题，父母应以身作则，带头遵循，故A正确。',
+                content6: '【解析】事实细节题。由第1段第4句可知，公司高层领导人促进多样化的原因是想要在全球市场上更具竞争力，C与此相符。',
+                content7: '4. 【答案】[A]',
+                content8: '【解析】推理判断题。第2段中提到有些人认为在没有多样性的过去照样能做到不拘—格选人才，但作者马上which was never true否定此观点，故A正确。第2段只提到多样性的辩论存在于政治圈和媒体，但并不代 表在这两个圈子里不能接受或从未出现多样性，故排除B、C;D说法过于绝对,且在文中找不到依据，也可排除。',
+                content9: '5. 【答案】[D]',
+                content10: '【解析】 推理判断埋。由第1段倒数第2句可知企业expand the pool就意味着向more minorities，more women 和 more immigrants提供技能培训，而expand the pool对应的就是题干中的说的多样性的形成，D中的race 和sex分别对文中minorities和women，故正确。A泛泛而谈，没有说到点子上，不如D具体、准确;B与多样性没有关系，C是利用文中的有关职业的词拼凑而成的干扰项。',
                 
             }]
         }
@@ -61,94 +61,88 @@ export default class question1 extends Component {
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%' }}>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`In bringing up children, every parent watches eagerly the child’s acquisition (学会) of each new skill- the first spoken words, the first independent steps, or the beginning of reading and writing. It is often tempting to hurry the child beyond his natural learning rate, but this can set up dangerous feelings of failure and states of worry in the child might be encouraged to learn to read before he knows the meaning of the words he reads. On the other hand, though, if a child is left alone too much, or without any learning opportunities, he loses his natural enthusiasm for life and his desire to find out new things for himself.`}
+                            &emsp;&emsp;{`It’s very interesting to note where the debate about diversity(多样化) is taking place. It is taking place primarily in political circles. Here at the College Fund, we have a lot of contact with top corporate(公司的) leaders; none of them is talking about getting rid of those instruments that produce diversity. In fact, they say that if their companies are to compete in the global village and in the global market place,diversity. In fact, they say that if their companies are to compete in the global village and in the global market place, diversity is an imperative. They also say that the need for talented, skilled Americans means we have to expand the pool of potential employees. And in looking at where birth rates are growing andat where the population is shifting, corporate America understands that expanding the pool means promotingpolicies that help provide skills to more minorities, more women and more immigrants. Corporate leaders know that if that does not occur in our society, they will not have the engineers, the scientists, the lawyers, or the business managers they will need.`}
                         </Text>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`Parents vary greatly in their degree of strictness towards their children. Some may be especially strict in money matters. Others are sever over times of coming home at night or punctuality for meals. In general,the controls imposed represent the needs of the parents and the values of the community as much as the child’s own happiness.`}
-                        </Text>
-                        <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`As regard the development of moral standards in the growing child, consistency is very important in parental teaching. To forbid a thing one day and excuse it the next is no foundation for morality(道德). Also, parents should realize that “ example is better than precept ”. If they are not sincere and do not practice what they preach(说教), their children may grow confused and emotionally insecure when they grow old enough to think for themselves, and realize they have been to some extent fooled.`}
-                        </Text>
-                        <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`“A sudden awareness of a marked difference between their parents’ principles and their morals can be a dangerous disappointment.”`}
+                            &emsp;&emsp;{`Likewise, I don’t hear people in the academy saying.”Let’s go backward. Let’s go back to the good old days, when we had a meritocracy(不拘一格选人才)” (which was never true-we never had a meritocracy, although we’ve come closer to it in the last 30 years.) I recently visited a great little college in New York where the campus has doubled its minority population in the last six years. I talked with an African American who has been a professor there for a long time, and she remembers that when she first joined the community, there were fewer than a handful of minorities on campus. Now, all of us feel the university is betterbecause corporate board rooms or on college campuses.`}
                         </Text>
                         <Text style={{fontSize:19,marginTop:5*s, fontStyle: 'italic',color:'green'}}>
                         Choose correct answers to the question:
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        1.Eagerly watching the child’s acquisition of new skill ______
+                        1.The word”imperative”(Line5,Para.1) most probably refers to something _____
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.can be avoided
+                        　A.Superficial
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.is universal among parents
+                        　B.remarkable
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.sets up dangerous states of worry in the child
+                        　C.debatable
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.will make him lose interest in learning new things
+                        　D.essential
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        2.In the process of children’s learning new skills parents ________
+                        2.Which of the following groups of people still differ in their views on diversity?
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.should encourage them to read before they know the meaning of the words they read
+                        　A.Minorities.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.should not expect too much of them
+                        　B.Politicians.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C. should achieve a balance between pushing them too hard and leaving them on their own
+                        　C.Professors.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.should creative as many learning opportunities as possible
+                        　D.Managers.
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        3.The second paragraph mainly tells us that _________
+                        3.High corporate leaders seem to be in favor of promoting diversity so as to ______
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A. parents should be strict with their children
+                        　A.lower the rate of unemployment
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B. parental controls reflect only the needs of the parents and the values of the community.
+                        　B.win equal political rights for minorities
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C. parental restrictions vary, and are not always enforced for the benefit of the children alone.
+                        　C.be competitive in the world market
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.parental vary in their strictness towards their children according to the situation.
+                        　D.satisfy the demands of a growing population
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        4.The word “precept” (Line3, Para.3) probably means “_______”
+                        4.It can be inferred from the passage that _____
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.Idea
+                        　A.meritocracy can never be realized without diversity
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.punishment
+                        　B.American political circles will not accept diversity
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.behavior
+                        　C. it is unlikely that diversity will occur in the U.S. Media
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D. instruction
+                        　D.minorities can only enter the fields were no debate is heard about diversity
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        5.In moral matters, parents should ________
+                        5.According to the passage diversity can be achieved in American society by ____
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.observe the rules themselves
+                        　A.expanding the pool of potential employees
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.be aware of the marked difference between adults and children
+                        　B. promoting policies that provide skills to employees
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.forbid things which have no foundation in morality
+                        　C. training more engineers, scientists lawyers and business managers
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.consistently ensure the security of their children
+                        　D. providing education for all regardless of race or sex
                         </Text>
                     </View>
                 </View>

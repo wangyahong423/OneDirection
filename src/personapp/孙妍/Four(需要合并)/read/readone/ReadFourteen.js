@@ -5,23 +5,23 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class question1 extends Component {
+export default class ReadFourteen extends Component {
     constructor() {
         super();
         this.state = {
             activeSections: [],
             todo: [{
                 header: '参考答案',
-                content1: '1. 【答案】[B] ',
-                content2: '【解析】推理判断题。首先依据题目中的casual dining找到第2段中的informality。其后有两个for引导的介词短语，后一个说“对于英国精致瓷器的制造商来说，这(informality)意味着经济困难时期”;此外,第3段用数据具体指出陶瓷业裁员之严重，说明陶瓷业在萎缩，即B。A、D均属夸大事实，C与文章内容无关。',
-                content3: '2. 【答案】[B]',
-                content4: '【解析】事实细节题。根据倒数第2段第2句中指出现今休闲文化流行的背景：工作时间长，家庭生活节奏紧张,B中的 Busy schedules与文中的demanding family schedules对应，故为答案。',
-                content5: '3. 【答案】[D] ',
-                content6: '【解析】事实细节题。Royal Doulton在文章中出现过两次：第3段说它裁员，因为人们用餐越来越随意(不再讲究餐具的精致);第 4 段中“A spokesman for Royal Doulton admitted that the company...”，暗示公司的性质，可以推断它是精制器皿的生产者。',
-                content7: '4. 【答案】[C]',
-                content8: '【解析】事实细节题。根据题目中的the layoffs找到文章第4段首句，其中的have their roots in相当于题目中的main cause is,shifts相当于C中的change。其实本题与第1题是交叉相关的，从第1题的题目可找到本题的答案。',
-                content9: '5. 【答案】[A]',
-                content10: '【解析】事实细节题。根据最后一段，特别是第2句“The fine points of etiquette... must be picked up elsewhere良好的餐桌礼仪必须在其他地方被重拾起来”，可知礼仪在某些场合还是必要的，故答案为A。',
+                content1: '1. 【答案】[C] ',
+                content2: '【解析】事实细节题。原文第4段,特别是第4段的最后一句表明c为正确选项。本题稍具干扰性的是D，该选项中的live一词在第4段第2句末尾也有出现，但事实上D与该句的意思不相同。',
+                content3: '2. 【答案】[A]',
+                content4: '【解析】事实细节题。本题考查对比处。第5段第1句表明下一句就是演讲和写作的相似之处，而A就是对该句的同义替换。其他选项并未按照题目的要求对比演讲与写作，只是说明了写作必须做的，因此都不正确。',
+                content5: '3. 【答案】[A] ',
+                content6: '【解析】推理判断题。本题考查对比处。结尾段对比了演讲和写作的不同之处，第1、2句和第3、4句形成了内在的对比关系，由此可推断写作比演讲更需要经验和努力，因此可确定A正确，而C不正确。虽然在这一段可找到effort和naturally等词，但原文并没有从是否要付出同样多的努力(B)或是否自然(D)等方面对比演讲与写作，因此B和D也不正确。',
+                content7: '4. 【答案】[D]',
+                content8: '【解析】推理判断题。根据最后一句中的“在纸上说话”,可推断作者认为写作如在纸上作演讲一样，因此D正确。A中的Few students与事实不符;B中的speak with a script在文中未有提及;C中的separated by a barrier错误。',
+                content9: '5. 【答案】[D]',
+                content10: '【解析】主旨大意题。文章的开头句就是全文的主题句，作者在前四段说明如何演讲，从第5段开始，作者转向说明如何写作,文章的结尾句对开头句做出了呼应。作者之所以将演讲和写作过程做比较是为了让自己的观点更容易、更生动地被读者明白和接受，因此本文的中心内容是围绕写作，而不是演讲。其余选项虽然文中都有提及，但只是各个具体的侧面内容，不能概括全文大意。',
                 
             }]
         }
@@ -61,100 +61,100 @@ export default class question1 extends Component {
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%' }}>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`When families gather for Christmas dinner, some will stick to formal traditions dating back to Grandma’s generation. Their tables will be set with the good dishes and silver, and the dress code will be Sunday-best.`}
+                            &emsp;&emsp;{`　Learning how to write is like taking a course in public speaking. I'd ask whether anyone in class had evertaken such a course. Always a few hands would go up.`}
                         </Text>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`But in many other homes, this china--and--silver elegance has given way to stoneware (粗陶)--and--stainless informality, with dresses assuming an equally casual--Friday look. For hosts and guests, the change means greater simplicity and comfort. For makers of fine china in Britain, it spells economic hard times.`}
+                            &emsp;&emsp;{`"What did you learn in that course?" I'd ask.`}
                         </Text>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`Last week Royal Doulton, the largest employer in Stoke-onTrent, announced that it is eliminating 1,000 jobs--one-fifth of its total workforce. That brings to more than 4,000 the number of positions lost in 18 months in the pottery (陶瓷) region. Wedgwood and other pottery factories made cuts earlier.`}
+                            &emsp;&emsp;{`"Well, the main thing was learning how to face an audience: not to be inhibited (拘谨)... not to be nervous. "`}
                         </Text>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`“Although a strong pound and weak markets in Asia play a role in the downsizing, the layoffs in Stoke have their roots in earthshaking social shifts. A spokesman for Royal Doulton admitted that the company “has been somewhat slow in catching up with the trend”toward casual dining. Families eat together less often, he explained, and more people eat alone, either because they are single or they eat in front of television.”`}
+                            &emsp;&emsp;{`Exactly, when you take a course in public speaking nowadays, you don't hear much about grammar and vocabulary. Instead. you're taught how not to be afraid or embarrassed, how to speak without a prepared script. how to read out to the live audience before you. Public speaking is a matter of overcoming your long-standing nervous inhibitions.`}
                         </Text>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`“Even dinner parties, if they happen at all, have gone causal. In a time of long work hours and demanding family schedules, busy hosts insist, rightly, that it’s better to share a takeout pizza on paper plates inthe family room than to wait for the perfect moment or a “real” dinner party. Too often, the perfect moment never comes, Iron a fine-pattened tablecloth? Forget it. Polish the silver? Who has time?”`}
+                            &emsp;&emsp;{`The same is true of writing. The point of the whole thing is to overcome your nervous inhibitions, to break through the invisible barrier that separates you from the person who’ll read what you wrote. You must learn to sit in front of your typewriter of dictating machine and read out to the person at the other end of the line.`}
                         </Text>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`“Yet the loss of formality has its down side. The fine points of etiquette(礼节) that children might once have learned at the table by observation or instruction from parents and grandparents(“Chew with your mouth closed.”“keep your elbows off the table.”)must be picked up elsewhere. Some companies now offer etiquette seminars for employees who may be competent professionally but clueless socially.”`}
+                            &emsp;&emsp;{`Of course, in public speaking with the audience right in front of you, the problem is easier. You can lookat them and talk to them directly. In writing, you 're alone. It needs an effort of your experience or imagination to take hold of that other person and talk to him or her. But that effort is necessary or at least it' s necessary until you've reached the point when you quite naturally and unconsciously "talk on paper".`}
                         </Text>
                         <Text style={{fontSize:19,marginTop:5*s, fontStyle: 'italic',color:'green'}}>
                         Choose correct answers to the question:
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        1.The trend toward casual dining has resulted in ______
+                        1.The main task of a public speech course is to __________.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.bankruptcy of fine china manufacturers
+                        　A.teach grammar and vocabulary
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.Shrinking of the pottery industry
+                        　B. teach how to write a script
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C. restructuring of large enterprises
+                        　C.teach how to overcome nervousness
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.Economic recession in Great Britain
+                        　D.teach live spoken-language expressions
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        2.Which of the following may be the best reason for casual dining?
+                        2.Learning how to write is similar to learning how to speak in public in that writer should _____.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.Family members need more time to relax.
+                        　A.overcome his or her nervousness in the first place
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B. Busy schedules leave people no time for formality.
+                        　B.take hold of a reader and talk to him or her before writing
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.People want to practice economy in times of scarcity.
+                        　C.learn to use a typewriter or dictating machine
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.Young people won’t follow the etiquette of the older generation.
+                        　D. talk to himself on paper
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        3.It can be learned from the passage that Royal Doulton is _______
+                        3.what does the author compare writing and public speaking?
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A. a retailer of stainless steel tableware
+                        　A.Writhing needs more experience and imagination than public speaking
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.a dealer in stoneware
+                        　B.Both writing and public speaking require great effort
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.a pottery chain store
+                        　C.Writhing is just as imagination as public speaking
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.a producer of fine china
+                        　D.Writhing is not as natural as public speaking
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        4.The main cause of the layoffs in the pottery industry is _______
+                        4.Which of the following statements is TRUE according to the passage?
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.the increased value of the pound
+                        　A.Few students feel the need to learn public speaking
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.the economic recession in Asia
+                        　B.Training is necessary before you can speak with a script
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.the change in people’s way of life
+                        　C.In public speaking, the audience are more nervous than the speaker
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.the fierce competition at home and abroad
+                        　D.Writing is just like making a public speech on paper
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        5.Refined table manners, though less popular than before in current social life, _______
+                        5.This selection is mainly about ___________.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.are still a must on certain occasions
+                        　A.the effort involved in writing
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B. are bound to return sooner or later
+                        　B.the similarities between writing and public speaking
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C. are still being taught by parents at home
+                        　C.learning how to make a public speech
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D. Can help improve personal relationships
+                        　D.learning how to talk on paper
                         </Text>
                     </View>
                 </View>

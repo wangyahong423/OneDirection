@@ -5,23 +5,23 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class question1 extends Component {
+export default class ReadSix extends Component {
     constructor() {
         super();
         this.state = {
             activeSections: [],
             todo: [{
                 header: '参考答案',
-                content1: '1. 【答案】[B] ',
-                content2: '【解析】事实细节题。第1段第1句中的every parent，often等词表明这种做法在父母中是非常普遍的，显然B与之相符。A说法无原文依据，且由原文可看出题干所述现象是很难避免的;C中dangerous—词在原文中本是修饰其他情绪，故C不符;D是过多地让孩子自己一个独处的后果,不是题干所述行为的后果。',
-                content3: '2. 【答案】[C]',
-                content4: '【解析】推理判断题。第1段第2句说明父母逼得太过分，应避免。最后一句则说明对小孩太放任自流同样不利。由这两点，我们可以做出如下判断：父母对孩子的“严”和“松”之间有一个恰当的“度”。C与之相符。',
-                content5: '3. 【答案】[C] ',
-                content6: '【解析】事实细节题。文章第2段表明：不同的家长对孩子的管制程度不同;家长对小孩的管制不仅是为了孩子个人的幸福，也反映了父母的需要以及社区的价值观，故C与原文相符。',
-                content7: '4. 【答案】[D]',
-                content8: '【解析】词义理解题。由precept所在句可猜测precept应与example相对，且与下文的preach意思相近，故D正确。',
-                content9: '5. 【答案】[A]',
-                content10: '【解析】推理判断题。第3段提到父母应该避免讲一套做一套，结合最后一段可得出结论：关于思想道德教育问题，父母应以身作则，带头遵循，故A正确。',
+                content1: '1. 【答案】[C] ',
+                content2: '【解析】推理判断题。第2段提到未来有能力的人应该从恐惧中解脱出来，第3段则提到学习计算机则就像是“学开车”一样，只要掌握某套技能即可，故可知有能力的人只需要通过掌握技能学习计算机即可，而不必学习编程，故C正确。',
+                content3: '2. 【答案】[D]',
+                content4: '【解析】词义理解题。在第2段中，作者强调一般人只需学会使用计算机，而不必学会编程，最后指出这与“汽车修理”和“小提琴制作”一样，可见作者提到“汽车修理”(类似一般人使用计算机)和“小提琴创作”(数似于电 脑专业人员编程)还是为了说明上文的观点，故D正确',
+                content5: '3. 【答案】[B] ',
+                content6: '【解析】事实细节题。第3段首句提到学习使用计算机越来越容易的原因是计算机编程变得更user-friendly, B中的convenient to users与此相符，故正确。',
+                content7: '4. 【答案】[C]',
+                content8: '【解析】句意理解题。第4段指出教人学习使用计算机就是教人use this or that program，故C与此相符。',
+                content9: '5. 【答案】[B]',
+                content10: '【解析】主旨大意题。本文围绕学生应如何学习计算机，阐述计算机能力(computer literacy)的概念;它只是一种技能,故B正确。A、C、D均只是利用文中的片言只语拼凑而成的干扰项，不足以概括文章大意。',
                 
             }]
         }
@@ -61,94 +61,94 @@ export default class question1 extends Component {
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%' }}>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`In bringing up children, every parent watches eagerly the child’s acquisition (学会) of each new skill- the first spoken words, the first independent steps, or the beginning of reading and writing. It is often tempting to hurry the child beyond his natural learning rate, but this can set up dangerous feelings of failure and states of worry in the child might be encouraged to learn to read before he knows the meaning of the words he reads. On the other hand, though, if a child is left alone too much, or without any learning opportunities, he loses his natural enthusiasm for life and his desire to find out new things for himself.`}
+                            &emsp;&emsp;{`There is no denying that students should learn something about how computers work, just as we expect them at least to understand that the internal-combustion engine(内燃机)has something to do with burning fuel, expanding gases and pistons (活塞)being driven. For people should have some basic idea of how the things that they use do what they do. Further, students might be helped by a course that considers the computer’s impact on society. But that is not what is meant by computer literacy. For computer literacy is not a formof literacy (读写能力);it is a trade skill that should not be taught as a liberal art.`}
                         </Text>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`Parents vary greatly in their degree of strictness towards their children. Some may be especially strict in money matters. Others are sever over times of coming home at night or punctuality for meals. In general,the controls imposed represent the needs of the parents and the values of the community as much as the child’s own happiness.`}
+                            &emsp;&emsp;{`Learning how to use a computer and learning how to program one are two distinct activities. A case might be made that the competent citizens of tomorrow should free themselves from their fear of computers. But this is quite different from saying that all ought to know how to program one. Leave that to people who havechosen programming as a career. While programming can be lots of fun, and while our society needs some people who are experts at it, the same is true of auto repair and violin-making.`}
                         </Text>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`As regard the development of moral standards in the growing child, consistency is very important in parental teaching. To forbid a thing one day and excuse it the next is no foundation for morality(道德). Also, parents should realize that “ example is better than precept ”. If they are not sincere and do not practice what they preach(说教), their children may grow confused and emotionally insecure when they grow old enough to think for themselves, and realize they have been to some extent fooled.`}
+                            &emsp;&emsp;{`Learning how to use a computer is not that difficult, and it gets easier all the time as programs become more “user-friendly”. Let us assume that in the future everyone is going to have to know how to use a computer to be a competent citizen. What does the phrase learning to use a computer mean? It sounds like “learning to drive a car", that is, it sounds as if there is some set of definite skills that, once acquired,enable one to use a computer.`}
                         </Text>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`“A sudden awareness of a marked difference between their parents’ principles and their morals can be a dangerous disappointment.”`}
+                            &emsp;&emsp;{`In fact, "learning to use a computer" is much more like “learning to play a game”,but learning the rulesof one game may not help you play a second game, whose rules may not be the same. There is no such a thingas teaching someone how to use a computer. One can only teach people to use this or that program and generally that is easily accomplished.`}
                         </Text>
                         <Text style={{fontSize:19,marginTop:5*s, fontStyle: 'italic',color:'green'}}>
                         Choose correct answers to the question:
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        1.Eagerly watching the child’s acquisition of new skill ______
+                        1.To be the competent citizens of tomorrow, people should _______.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.can be avoided
+                        　A.try to lay a solid foundation in computer science
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.is universal among parents
+                        　B.be aware of how the things that they use do what they do
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.sets up dangerous states of worry in the child
+                        　C.learn to use a computer by acquiring a certain set of skills
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.will make him lose interest in learning new things
+                        　D.understand that programming a computer is more essential than repairing a car
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        2.In the process of children’s learning new skills parents ________
+                        2.In the second paragraph“auto repair”and“violin-making”are mentioned to show that _______ .
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.should encourage them to read before they know the meaning of the words they read
+                        　A.programming a computer is as interesting as making a violin
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.should not expect too much of them
+                        　B.our society needs experts in different fields
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C. should achieve a balance between pushing them too hard and leaving them on their own
+                        　C.violin making requires as much skill as computer programming
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.should creative as many learning opportunities as possible
+                        　D.people who can use a computer don't necessarily have to know computer programming
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        3.The second paragraph mainly tells us that _________
+                        3.Learning to use a computer is getting easier all the time because _______ .
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A. parents should be strict with their children
+                        　A. programs are becoming less complicated
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B. parental controls reflect only the needs of the parents and the values of the community.
+                        　B. programs are designed to be convenient to users
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C. parental restrictions vary, and are not always enforced for the benefit of the children alone.
+                        　C.programming is becoming easier and easier
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.parental vary in their strictness towards their children according to the situation.
+                        　D. programs are becoming readily available to computer users
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        4.The word “precept” (Line3, Para.3) probably means “_______”
+                        4. According to the author,the phrase“learning to use a computer”(Lines3,4,Para.3) means learning _______.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.Idea
+                        　A. a set of rules
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.punishment
+                        　B.the fundamentals of computer science
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.behavior
+                        　C.specific programs
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D. instruction
+                        　D. general principles of programming
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        5.In moral matters, parents should ________
+                        5.The author's purpose in writing this passage is _______.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.observe the rules themselves
+                        　A. to stress the impact of the computer on society
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.be aware of the marked difference between adults and children
+                        　B. to explain the concept of computer literacy
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.forbid things which have no foundation in morality
+                        　C.to illustrate the requirements for being competent citizens of tomorrow
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.consistently ensure the security of their children
+                        　D.to emphasize that computer programming is an interesting and challenging job
                         </Text>
                     </View>
                 </View>

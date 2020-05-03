@@ -5,7 +5,7 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class question1 extends Component {
+export default class ReadTwenty extends Component {
     constructor() {
         super();
         this.state = {
@@ -13,15 +13,15 @@ export default class question1 extends Component {
             todo: [{
                 header: '参考答案',
                 content1: '1. 【答案】[B] ',
-                content2: '【解析】推理判断题。首先依据题目中的casual dining找到第2段中的informality。其后有两个for引导的介词短语，后一个说“对于英国精致瓷器的制造商来说，这(informality)意味着经济困难时期”;此外,第3段用数据具体指出陶瓷业裁员之严重，说明陶瓷业在萎缩，即B。A、D均属夸大事实，C与文章内容无关。',
+                content2: '【解析】事实细节题。由第2段第2句中的pride和worry可以判断选项B是对该句的近义替换。选项A原文未提到。选项C曲解了原文第2段第1句的意思，该句中的“Fatherhood is going to have a different meaning”表示对于每个男人来说当上父亲具有不同的意义，而不是就琼斯先生而言。第2段最后一句表明只有部分人不情愿接受责任，因此在D选项men前面加上some才正确。',
                 content3: '2. 【答案】[B]',
-                content4: '【解析】事实细节题。根据倒数第2段第2句中指出现今休闲文化流行的背景：工作时间长，家庭生活节奏紧张,B中的 Busy schedules与文中的demanding family schedules对应，故为答案。',
-                content5: '3. 【答案】[D] ',
-                content6: '【解析】事实细节题。Royal Doulton在文章中出现过两次：第3段说它裁员，因为人们用餐越来越随意(不再讲究餐具的精致);第 4 段中“A spokesman for Royal Doulton admitted that the company...”，暗示公司的性质，可以推断它是精制器皿的生产者。',
+                content4: '【解析】推理判断题。根据第3段最后两句可以推断选项B正确。选项A与第3段最后一句陈述的相反。最后一段第1句虽有提及向父亲角色的转变很困难,但并未像选项C那样对比。选项D错在incomplete一词,文中并未提及与该词相关的内容。',
+                content5: '3. 【答案】[A] ',
+                content6: '【解析】推理判断题。本题可用排除法。选项B曲解了最后一段第2、3句对母亲角色的描述。选项C与原文最后一句不符。选项D原文未提及。只有选项A概括了全文关于母亲的论述，而且第2段最后一句也暗示母亲受到的关注更多。',
                 content7: '4. 【答案】[C]',
-                content8: '【解析】事实细节题。根据题目中的the layoffs找到文章第4段首句，其中的have their roots in相当于题目中的main cause is,shifts相当于C中的change。其实本题与第1题是交叉相关的，从第1题的题目可找到本题的答案。',
-                content9: '5. 【答案】[A]',
-                content10: '【解析】事实细节题。根据最后一段，特别是第2句“The fine points of etiquette... must be picked up elsewhere良好的餐桌礼仪必须在其他地方被重拾起来”，可知礼仪在某些场合还是必要的，故答案为A。',
+                content8: '【解析】 推理判断题。最后一句提到很多人仍然认为父亲应该负担家计,但从本句的用词如even though和still可以看出作者对这种看法并不认同，由此可以判断只有选项C作者可能不赞成。',
+                content9: '5. 【答案】[D]',
+                content10: '【解析】主旨大意题。原文第1、2段讲到父亲们对将为人父的不同反应;第3段指出很少有人尝试帮助父亲完成角色的转换;最后一段是一些作家对此做出的不太符合事实的解释，因此，只有选项D能概括文章的写作目的。选项A只是文中第2段中的某个细节;选项B的重点是mother,与本文的论题不符;作者并无批评父亲之意，因此选项C不正确。',
                 
             }]
         }
@@ -61,100 +61,94 @@ export default class question1 extends Component {
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%' }}>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`When families gather for Christmas dinner, some will stick to formal traditions dating back to Grandma’s generation. Their tables will be set with the good dishes and silver, and the dress code will be Sunday-best.`}
+                            &emsp;&emsp;{`Congratulations, Mr. Jones, it's a girl."`}
                         </Text>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`But in many other homes, this china--and--silver elegance has given way to stoneware (粗陶)--and--stainless informality, with dresses assuming an equally casual--Friday look. For hosts and guests, the change means greater simplicity and comfort. For makers of fine china in Britain, it spells economic hard times.`}
+                            &emsp;&emsp;{`Fatherhood is going to have a different meaning and bring forth a different response from every man who hears these words. Some feel pride when they receive the news, while others worry, wondering whether they will be good fathers. Although there are some men who like children and may have had considerable experiencewith them, others do not particularly care for children and spend little time with them. Many fathers and mothers have been planning and looking forward to children for some time. For other couples, pregnancy wasan accident that both husband and wife have accepted willingly or unwillingly.`}
                         </Text>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`Last week Royal Doulton, the largest employer in Stoke-onTrent, announced that it is eliminating 1,000 jobs--one-fifth of its total workforce. That brings to more than 4,000 the number of positions lost in 18 months in the pottery (陶瓷) region. Wedgwood and other pottery factories made cuts earlier.`}
+                            &emsp;&emsp;{`　Whatever the reaction to the birth of a child, it is obvious that the shift from the role of husband to that of father is a difficult task. Yet, unfortunately, few attempts have been made to educate fathers in this reconciliation (协调) process. Although numerous books have been written about American mothers, only recently has literature focused on the role of fathers.`}
                         </Text>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`“Although a strong pound and weak markets in Asia play a role in the downsizing, the layoffs in Stoke have their roots in earthshaking social shifts. A spokesman for Royal Doulton admitted that the company “has been somewhat slow in catching up with the trend”toward casual dining. Families eat together less often, he explained, and more people eat alone, either because they are single or they eat in front of television.”`}
-                        </Text>
-                        <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`“Even dinner parties, if they happen at all, have gone causal. In a time of long work hours and demanding family schedules, busy hosts insist, rightly, that it’s better to share a takeout pizza on paper plates inthe family room than to wait for the perfect moment or a “real” dinner party. Too often, the perfect moment never comes, Iron a fine-pattened tablecloth? Forget it. Polish the silver? Who has time?”`}
-                        </Text>
-                        <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`“Yet the loss of formality has its down side. The fine points of etiquette(礼节) that children might once have learned at the table by observation or instruction from parents and grandparents(“Chew with your mouth closed.”“keep your elbows off the table.”)must be picked up elsewhere. Some companies now offer etiquette seminars for employees who may be competent professionally but clueless socially.”`}
+                            &emsp;&emsp;{`It is argued by some writers that the change to the father's role, although difficult, is not nearly as great as the change the wife must take to the mother's role. The mother's role seems to require a complete transformation in daily routine and highly innovative(创新的) adaptation. On the other hand, the father's role is less demanding and immediate. However, even though we mentioned the fact that growing numbers of women are working outside the home, the father is still thought by many as the breadwinner in the household.`}
                         </Text>
                         <Text style={{fontSize:19,marginTop:5*s, fontStyle: 'italic',color:'green'}}>
                         Choose correct answers to the question:
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        1.The trend toward casual dining has resulted in ______
+                        1.What can we know about fatherhood from the passage?
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.bankruptcy of fine china manufacturers
+                        　A.It brings a feeling of excitement to most man
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.Shrinking of the pottery industry
+                        　B.It make some man feel proud and others uneasy
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C. restructuring of large enterprises
+                        　C.It has a different meaning for men who have daughters
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.Economic recession in Great Britain
+                        　D.It means a responsibility that men accept unwillingly
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        2.Which of the following may be the best reason for casual dining?
+                        2.What does the passage say about the shift from the role of husband to that of father?
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.Family members need more time to relax.
+                        　A.Numerous books have been written about it.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B. Busy schedules leave people no time for formality.
+                        　B.Not enough attention has been paid to it.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.People want to practice economy in times of scarcity.
+                        　C. The shift is harder for men than for women.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.Young people won’t follow the etiquette of the older generation.
+                        　D.The shift is a difficult but incomplete one.
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        3.It can be learned from the passage that Royal Doulton is _______
+                        3.What can we know about mothers from the passage?
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A. a retailer of stainless steel tableware
+                        　A.Mothers get more attention and recognition from society
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.a dealer in stoneware
+                        　B.Mothers are innovative and demanding according to some writers
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.a pottery chain store
+                        　C.Mothers generally stay at home to take care of the children
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.a producer of fine china
+                        　D.Mothers should help fathers in their reconciliation process
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        4.The main cause of the layoffs in the pottery industry is _______
+                        4.Which of the following will the author most probably disagree with?
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.the increased value of the pound
+                        　A. It's as difficult to be a father as it is to be a mother.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.the economic recession in Asia
+                        　B.More books should focus on the role of fathers.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.the change in people’s way of life
+                        　C.The father is still the breadwinner in the household.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.the fierce competition at home and abroad
+                        　D.Fathers are as important to children as mothers.
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        5.Refined table manners, though less popular than before in current social life, _______
+                        5.The author's purpose in writing this passage is to
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.are still a must on certain occasions
+                        　A. explain why there are few books on the role of fathers.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B. are bound to return sooner or later
+                        　B.praise mothers for their great contributions to the home.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C. are still being taught by parents at home
+                        　C.criticize fathers for not taking enough responsibility in bringing up the children.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D. Can help improve personal relationships
+                        　D. complain about the lack of social programs to help fathers in their role shift.
                         </Text>
                     </View>
                 </View>

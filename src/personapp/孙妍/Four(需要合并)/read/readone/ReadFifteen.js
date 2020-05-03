@@ -5,23 +5,23 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class question1 extends Component {
+export default class ReadFifteen extends Component {
     constructor() {
         super();
         this.state = {
             activeSections: [],
             todo: [{
                 header: '参考答案',
-                content1: '1. 【答案】[B] ',
-                content2: '【解析】事实细节题。第1段第1句中的every parent，often等词表明这种做法在父母中是非常普遍的，显然B与之相符。A说法无原文依据，且由原文可看出题干所述现象是很难避免的;C中dangerous—词在原文中本是修饰其他情绪，故C不符;D是过多地让孩子自己一个独处的后果,不是题干所述行为的后果。',
-                content3: '2. 【答案】[C]',
-                content4: '【解析】推理判断题。第1段第2句说明父母逼得太过分，应避免。最后一句则说明对小孩太放任自流同样不利。由这两点，我们可以做出如下判断：父母对孩子的“严”和“松”之间有一个恰当的“度”。C与之相符。',
-                content5: '3. 【答案】[C] ',
-                content6: '【解析】事实细节题。文章第2段表明：不同的家长对孩子的管制程度不同;家长对小孩的管制不仅是为了孩子个人的幸福，也反映了父母的需要以及社区的价值观，故C与原文相符。',
-                content7: '4. 【答案】[D]',
-                content8: '【解析】词义理解题。由precept所在句可猜测precept应与example相对，且与下文的preach意思相近，故D正确。',
-                content9: '5. 【答案】[A]',
-                content10: '【解析】推理判断题。第3段提到父母应该避免讲一套做一套，结合最后一段可得出结论：关于思想道德教育问题，父母应以身作则，带头遵循，故A正确。',
+                content1: '1. 【答案】[C] ',
+                content2: '【解析】 第1段第3句说的是题干内容，由第4句Soon…句中的five knives...等数字可知孩子会数数了,故可直接选出C。',
+                content3: '2. 【答案】[B]',
+                content4: '【解析】第2段第3句中they refused... to concede...中的they指children,对比题干与原文意思可知孩子们是“难以相信(理解)，故选B。',
+                content5: '3. 【答案】[B] ',
+                content6: '【解析】第2段倒数第3句。文章是以pencils为例进行说明的，题目中换成了balls,但是目的是相同的，都是为了表述儿童更愿意根据颜色的不同来数数，而不愿数总数，故B正确。A、D都没有提到;C的说法过于绝对，与文章表述也不相符。',
+                content7: '4. 【答案】[B]',
+                content8: '【解析】这道题目需要认真理解了文章的意思才能正确作答。第1段的主题是:有些数字概念是人天生就有的;第2段的主题是:有一些是后天学习获得的。B是第1段中明确给出的例子，因此这个例子应该支持该段的主题。A 错误地理解了第1段最后举的例子。C和D在第2段最后提到,都不是先天获取的数学知识。',
+                content9: '5. 【答案】[D]',
+                content10: '【解析】考査全文的观点态度。纵观全文可知，作者很客观、如实地说明事实，分两段报告了心理学家的研究结果，并未做出任何评价，故D正确。题目中的children’s numerical skills即全文的主题。',
                 
             }]
         }
@@ -61,94 +61,88 @@ export default class question1 extends Component {
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%' }}>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`In bringing up children, every parent watches eagerly the child’s acquisition (学会) of each new skill- the first spoken words, the first independent steps, or the beginning of reading and writing. It is often tempting to hurry the child beyond his natural learning rate, but this can set up dangerous feelings of failure and states of worry in the child might be encouraged to learn to read before he knows the meaning of the words he reads. On the other hand, though, if a child is left alone too much, or without any learning opportunities, he loses his natural enthusiasm for life and his desire to find out new things for himself.`}
+                            &emsp;&emsp;{`people appear to born to compute. The numerical skills of children develop so early and so inexorably(坚定地) that it is easy to imagine an internal clock of mathematical maturity guiding their growth. Not long after learning to walk and talk, they can set the table with impress accuracy---one knife, one spoon, one fork, for each of the five chairs. Soon they are capable of nothing that they have placed five knives, spoons and forks on the table and, a bit later, that this amounts to fifteen pieces of silverware. Having thusmastered addition, they move on to subtraction. It seems almost reasonable to expect that if a child were secluded on a desert island at birth and retrieved seven years later, he or she could enter a second entera second-grade mathematics class without any serious problems of intellectual adjustment.`}
                         </Text>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`Parents vary greatly in their degree of strictness towards their children. Some may be especially strict in money matters. Others are sever over times of coming home at night or punctuality for meals. In general,the controls imposed represent the needs of the parents and the values of the community as much as the child’s own happiness.`}
-                        </Text>
-                        <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`As regard the development of moral standards in the growing child, consistency is very important in parental teaching. To forbid a thing one day and excuse it the next is no foundation for morality(道德). Also, parents should realize that “ example is better than precept ”. If they are not sincere and do not practice what they preach(说教), their children may grow confused and emotionally insecure when they grow old enough to think for themselves, and realize they have been to some extent fooled.`}
-                        </Text>
-                        <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`“A sudden awareness of a marked difference between their parents’ principles and their morals can be a dangerous disappointment.”`}
+                            &emsp;&emsp;{`　Of course, the truth is not so simple. This century, the work of cognitive psychologists has illuminated the subtle forms of daily learning on which intellectual progress depends. Children were observed as they slowly grasped----or, as the case might be, bumped into---- concepts that adults take for quantity is unchanged as water pours from a short glass into a tall thin one. Psychologists have since demonstrated that young children, asked to count the pencils in a pile, readily report the number of blue or red pencils, but must be coaxed(说服) into finding the total. Such studies have suggested that the rudiments(基本原理) of mathematics are mastered gradually, and with effort. They have also suggested that the very concept of abstract numbers-----the idea of a oneness, a twoness, a twoness that applies to any class of objects and is aprerequisite(先决条件) for doing anything more mathematically demanding than setting a table----is itself far from innate.`}
                         </Text>
                         <Text style={{fontSize:19,marginTop:5*s, fontStyle: 'italic',color:'green'}}>
                         Choose correct answers to the question:
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        1.Eagerly watching the child’s acquisition of new skill ______
+                        1.After children have helped to set the table with impressive accuracy, they ______.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.can be avoided
+                        　A.are able to help parents serve dishes
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.is universal among parents
+                        　B.tend to do more complicated housework
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.sets up dangerous states of worry in the child
+                        　C.are able to figure out the total pieces
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.will make him lose interest in learning new things
+                        　D.can enter a second-grade mathematics class
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        2.In the process of children’s learning new skills parents ________
+                        2.It is _____to believe that the quality of water keeps unchanged when it is contained in two different glasses.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.should encourage them to read before they know the meaning of the words they read
+                        　A.easy to persuade children
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.should not expect too much of them
+                        　B.hard for most children
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C. should achieve a balance between pushing them too hard and leaving them on their own
+                        　C.the innate of most children
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.should creative as many learning opportunities as possible
+                        　D.difficult for both adults and children
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        3.The second paragraph mainly tells us that _________
+                        3.It can be inferred from the passage that children are likely to _____when they are asked to count all the balls of different colors
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A. parents should be strict with their children
+                        　A.give the accurate answer
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B. parental controls reflect only the needs of the parents and the values of the community.
+                        　B.count the balls of each color
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C. parental restrictions vary, and are not always enforced for the benefit of the children alone.
+                        　C.be too confused to do anything
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.parental vary in their strictness towards their children according to the situation.
+                        　D.make minor mistakes
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        4.The word “precept” (Line3, Para.3) probably means “_______”
+                        4.According to this passage,_____is mastered by birth.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.Idea
+                        　A.the ability to survive in a desert island
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.punishment
+                        　B.the way of setting tables
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.behavior
+                        　C.the basic principles of mathematics
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D. instruction
+                        　D.the concept of oneness
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        5.In moral matters, parents should ________
+                        5.What’s the author‘s attitude towards “children’s numerical skills”?
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.observe the rules themselves
+                        　A.Critical.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.be aware of the marked difference between adults and children
+                        　B.Approving.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.forbid things which have no foundation in morality
+                        　C.Questioning.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.consistently ensure the security of their children
+                        　D.Objective.
                         </Text>
                     </View>
                 </View>

@@ -5,7 +5,7 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class question1 extends Component {
+export default class ReadThirteen extends Component {
     constructor() {
         super();
         this.state = {
@@ -13,15 +13,15 @@ export default class question1 extends Component {
             todo: [{
                 header: '参考答案',
                 content1: '1. 【答案】[B] ',
-                content2: '【解析】事实细节题。第1段第1句中的every parent，often等词表明这种做法在父母中是非常普遍的，显然B与之相符。A说法无原文依据，且由原文可看出题干所述现象是很难避免的;C中dangerous—词在原文中本是修饰其他情绪，故C不符;D是过多地让孩子自己一个独处的后果,不是题干所述行为的后果。',
+                content2: '【解析】 从文章第3句“手语提供了一种新方法，用以探索大脑如何产生和理解语言，并为一个长期以来的科学争端——语言(连同语法)究竟是我们与生俱来的，还是一种我们后天学会的行为——提出了新的解释”可以看出，这是对语言的性质的传统观点的挑战，即B 。A错在learning,文章并不是在讨论语言的学习，而是语言的产生和理解;C为简单原词干扰D;中的an attempt to clarify misunderstanding是对throw new light on an old scientific controversy的曲解，因为controversy不等于misunderstanding。另外，第1段最后一句中的rebel“反叛”一词也与B中的“挑战”一致。',
                 content3: '2. 【答案】[C]',
-                content4: '【解析】推理判断题。第1段第2句说明父母逼得太过分，应避免。最后一句则说明对小孩太放任自流同样不利。由这两点，我们可以做出如下判断：父母对孩子的“严”和“松”之间有一个恰当的“度”。C与之相符。',
-                content5: '3. 【答案】[C] ',
-                content6: '【解析】事实细节题。文章第2段表明：不同的家长对孩子的管制程度不同;家长对小孩的管制不仅是为了孩子个人的幸福，也反映了父母的需要以及社区的价值观，故C与原文相符。',
+                content4: '【解析】根据第1段最后一句可知，选C。题干中的was stimulated相当于原文中的has roots in。',
+                content5: '3. 【答案】[B] ',
+                content6: '【解析】 根据第3段第2—4句以及最后一段第3句，可知B为答案。前者提出猜想(Might deaf people actually have a genuine language?)，后者含有一个同位语 his idea that signed languages are natural languages。',
                 content7: '4. 【答案】[D]',
-                content8: '【解析】词义理解题。由precept所在句可猜测precept应与example相对，且与下文的preach意思相近，故D正确。',
-                content9: '5. 【答案】[A]',
-                content10: '【解析】推理判断题。第3段提到父母应该避免讲一套做一套，结合最后一段可得出结论：关于思想道德教育问题，父母应以身作则，带头遵循，故A正确。',
+                content8: '【解析】根据最后一段第4句，可知D正确。D中的only exist in the form of speech sounds是对原文中be based on speech的同义表达。',
+                content9: '5. 【答案】[D]',
+                content10: '【解析】根据文章最后一句，可知D正确。D中的a product of the brain是对原文中brain stuff的同义表达。B中的derived from错误，因为Stokoe认为sign language就是一种natural language。',
                 
             }]
         }
@@ -61,94 +61,94 @@ export default class question1 extends Component {
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%' }}>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`In bringing up children, every parent watches eagerly the child’s acquisition (学会) of each new skill- the first spoken words, the first independent steps, or the beginning of reading and writing. It is often tempting to hurry the child beyond his natural learning rate, but this can set up dangerous feelings of failure and states of worry in the child might be encouraged to learn to read before he knows the meaning of the words he reads. On the other hand, though, if a child is left alone too much, or without any learning opportunities, he loses his natural enthusiasm for life and his desire to find out new things for himself.`}
+                            &emsp;&emsp;{`Sign has become a scientific hot button. Only in the past 20 years have specialists in language study realized that signed languages are unique—a speech of the hand. They offer a new way to probe how the brain generates and understands language, and throw new light on an old scientific controversy: whether language,complete with grammar, is something that we are born With, or whether it is a learned behavior. The current interest in sign language has roots in the pioneering work of one rebel teacher at Gallaudet University in Washington, D. C., the world’s only liberal arts university for deaf people.`}
                         </Text>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`Parents vary greatly in their degree of strictness towards their children. Some may be especially strict in money matters. Others are sever over times of coming home at night or punctuality for meals. In general,the controls imposed represent the needs of the parents and the values of the community as much as the child’s own happiness.`}
+                            &emsp;&emsp;{`When Bill Stokoe went to Gallaudet to teach English, the school enrolled him in a course in signing. But Stokoe noticed something odd: among themselves, students signed differently from his classroom teacher.`}
                         </Text>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`As regard the development of moral standards in the growing child, consistency is very important in parental teaching. To forbid a thing one day and excuse it the next is no foundation for morality(道德). Also, parents should realize that “ example is better than precept ”. If they are not sincere and do not practice what they preach(说教), their children may grow confused and emotionally insecure when they grow old enough to think for themselves, and realize they have been to some extent fooled.`}
+                            &emsp;&emsp;{`Stokoe had been taught a sort of gestural code, each movement of the hands representing a word in English.At the time, American Sign Language (ASL) was thought to be no more than a form of pidgin English (混杂英语). But Stokoe believed the “hand talk”his students used looked richer. He wondered: Might deaf people actually: have a genuine language? And could that language be unlike any other on Earth? It was 1955, wheneven deaf people dismissed their signing as“substandard”. Stokoe’s idea was academic heresy (异端邪说).`}
                         </Text>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`“A sudden awareness of a marked difference between their parents’ principles and their morals can be a dangerous disappointment.”`}
+                            &emsp;&emsp;{`It is 37 years later. Stokoe—now devoting his time to writing and editing books and journals and to producing video materials on ASL and the deaf culture—is having lunch at a cafe near the Gallaudet campus and explaining how he started a revolution. For decades educators fought his idea that signed languages are natural languages like English, French and Japanese. They assumed language must be based on speech, the modulation (调节) of sound. But sign language is based on the movement of hands, the modulation of space. “What I said,” Stokoe explains, “is that language is not mouth stuff—it’s brain stuff.”`}
                         </Text>
                         <Text style={{fontSize:19,marginTop:5*s, fontStyle: 'italic',color:'green'}}>
                         Choose correct answers to the question:
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        1.Eagerly watching the child’s acquisition of new skill ______
+                        1.The study of sign language is thought to be ________.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.can be avoided
+                        　A. a new way to look at the learning of language
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.is universal among parents
+                        　B. a challenge to traditional, views on the nature of language
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.sets up dangerous states of worry in the child
+                        　C.an approach: to simplifying the grammatical structure of a language
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.will make him lose interest in learning new things
+                        　D. an attempt to clarify misunderstanding about the origin of language
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        2.In the process of children’s learning new skills parents ________
+                        2.The present growing interest in sign language was stimulated by _______.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.should encourage them to read before they know the meaning of the words they read
+                        　A.a famous scholar in the study of the human brain
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.should not expect too much of them
+                        　B.a leading specialist in the study of liberal arts
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C. should achieve a balance between pushing them too hard and leaving them on their own
+                        　C.an English teacher in a university for the deaf
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.should creative as many learning opportunities as possible
+                        　D. some senior experts in American Sign Language
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        3.The second paragraph mainly tells us that _________
+                        3.According to Stokoe, sign language is ________.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A. parents should be strict with their children
+                        　A.a Substandard language
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B. parental controls reflect only the needs of the parents and the values of the community.
+                        　B.a genuine language
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C. parental restrictions vary, and are not always enforced for the benefit of the children alone.
+                        　C.an artificial language
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.parental vary in their strictness towards their children according to the situation.
+                        　D.an international language
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        4.The word “precept” (Line3, Para.3) probably means “_______”
+                        4.Most educators objected to Stokoe’s idea because they thought ________.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.Idea
+                        　A.sign language was not extensively used even by deaf people
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.punishment
+                        　B.sign language was too artificial to be widely accepted
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.behavior
+                        　C. a language should be easy to use and understand
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D. instruction
+                        　D. a language could only exist in the form of speech sounds
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        5.In moral matters, parents should ________
+                        5.Stokoe’s argument is based on his belief that ________.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.observe the rules themselves
+                        　A.sign language is as efficient as any other language
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.be aware of the marked difference between adults and children
+                        　B.sign language is derived from natural language
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.forbid things which have no foundation in morality
+                        　C. language is a system of meaningful codes
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.consistently ensure the security of their children
+                        　D. language is a product of the brain
                         </Text>
                     </View>
                 </View>

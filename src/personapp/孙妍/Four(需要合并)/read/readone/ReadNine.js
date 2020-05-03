@@ -5,23 +5,23 @@ import { Accordion } from '@ant-design/react-native';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 
-export default class question1 extends Component {
+export default class ReadNine extends Component {
     constructor() {
         super();
         this.state = {
             activeSections: [],
             todo: [{
                 header: '参考答案',
-                content1: '1. 【答案】[B] ',
-                content2: '【解析】事实细节题。第1段第1句中的every parent，often等词表明这种做法在父母中是非常普遍的，显然B与之相符。A说法无原文依据，且由原文可看出题干所述现象是很难避免的;C中dangerous—词在原文中本是修饰其他情绪，故C不符;D是过多地让孩子自己一个独处的后果,不是题干所述行为的后果。',
-                content3: '2. 【答案】[C]',
-                content4: '【解析】推理判断题。第1段第2句说明父母逼得太过分，应避免。最后一句则说明对小孩太放任自流同样不利。由这两点，我们可以做出如下判断：父母对孩子的“严”和“松”之间有一个恰当的“度”。C与之相符。',
+                content1: '1. 【答案】[D] ',
+                content2: '【解析】主旨大意题。本文为Walker教授的研究成果，旨在说明不同专业的毕业生有不同的经济回报，并非要传授发财心得或者比较文理科的异同。文章首句即为本题解题关键，故D正确。',
+                content3: '2. 【答案】[B]',
+                content4: '【解析】事实细节题。定位至第3段第1句。本文只有这一句与收取学费有关，后一个分句即前一个分句的理由，抓住其中隐含的因果关系就不难找到正确答案。',
                 content5: '3. 【答案】[C] ',
-                content6: '【解析】事实细节题。文章第2段表明：不同的家长对孩子的管制程度不同;家长对小孩的管制不仅是为了孩子个人的幸福，也反映了父母的需要以及社区的价值观，故C与原文相符。',
-                content7: '4. 【答案】[D]',
-                content8: '【解析】词义理解题。由precept所在句可猜测precept应与example相对，且与下文的preach意思相近，故D正确。',
-                content9: '5. 【答案】[A]',
-                content10: '【解析】推理判断题。第3段提到父母应该避免讲一套做一套，结合最后一段可得出结论：关于思想道德教育问题，父母应以身作则，带头遵循，故A正确。',
+                content6: '【解析】词义理解题。通过下文数据earnings 25% higher和get 10-15% extra可以推测lucrative大意应为“给人带来丰厚收入的”,故选C。',
+                content7: '4. 【答案】[C]',
+                content8: '【解析】事实细节题。第4段中出现了几个比较数字，考题要求找到此段首句提到的收人增加25%的参照点。第2段第1句中的Getting through university 表明这类学生收人增加25%的参照对象是没读大学的人，且从第4段第3句中的the list和第4句即可以确定这一段是在比较大学毕业与18岁毕业(即没读大学)收入的不同，因此C正确。',
+                content9: '5. 【答案】[D]',
+                content10: '【解析】推理判断题。结论往往出现在文章结尾,要想答对此题,一定要仔细体会本文末句。本文虽然重点讨论文科没有经济效益，但是作者并没有做出主观判断，故A、B、C都不正确，而作者在文章最后讲到了人文学科虽然经济效益不佳但学习过程更有趣，故D符合作者意思。',
                 
             }]
         }
@@ -61,94 +61,88 @@ export default class question1 extends Component {
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%' }}>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`In bringing up children, every parent watches eagerly the child’s acquisition (学会) of each new skill- the first spoken words, the first independent steps, or the beginning of reading and writing. It is often tempting to hurry the child beyond his natural learning rate, but this can set up dangerous feelings of failure and states of worry in the child might be encouraged to learn to read before he knows the meaning of the words he reads. On the other hand, though, if a child is left alone too much, or without any learning opportunities, he loses his natural enthusiasm for life and his desire to find out new things for himself.`}
+                            &emsp;&emsp;{`Normally a student must attend a certain number of courses in order to graduate, and each course which he attends gives him a credit which he may count towards a degree,In many American universities the total work for a degree consists of thirty-six courses each lasting for one semester. A typical course consists of three classes per week for fifteen weeks;while attending a university a student will probably attend four or five courses during each semester. Normally a student. Would expect to take four years attending two semesters each year. It is possible to spread the period of work for the degree over a longer period. It is also possible for a student to move between one university and another during his degree course,though this is not in fact done as a regular practice.`}
                         </Text>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`Parents vary greatly in their degree of strictness towards their children. Some may be especially strict in money matters. Others are sever over times of coming home at night or punctuality for meals. In general,the controls imposed represent the needs of the parents and the values of the community as much as the child’s own happiness.`}
-                        </Text>
-                        <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`As regard the development of moral standards in the growing child, consistency is very important in parental teaching. To forbid a thing one day and excuse it the next is no foundation for morality(道德). Also, parents should realize that “ example is better than precept ”. If they are not sincere and do not practice what they preach(说教), their children may grow confused and emotionally insecure when they grow old enough to think for themselves, and realize they have been to some extent fooled.`}
-                        </Text>
-                        <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`“A sudden awareness of a marked difference between their parents’ principles and their morals can be a dangerous disappointment.”`}
+                            &emsp;&emsp;{`For very course that the follows a student is given a grade,which is recorded, and the record is availablefor the student to show to prospective employers.All this imposes a constant pressure and strain of work,but in spite of this some students still find time for great activity in student affairs.Elections to positions in student organizations arouse much enthusiasm.The effective work of maintaining discipline is usually performed by students who advise the academic authorities.Any student who is thought to have broken therules,for example,by cheating his to appear before a student court.With the enormous numbers of students, the operation of the system does involve a certain amount of activity.A student who has held one of these positions of authority is much respected and it will be of benefit to him later in his career.`}
                         </Text>
                         <Text style={{fontSize:19,marginTop:5*s, fontStyle: 'italic',color:'green'}}>
                         Choose correct answers to the question:
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        1.Eagerly watching the child’s acquisition of new skill ______
+                        1.Normally a student would at least attend ______ classes each week.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.can be avoided
+                        　A.36
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.is universal among parents
+                        　B.20
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.sets up dangerous states of worry in the child
+                        　C.12
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.will make him lose interest in learning new things
+                        　D.15
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        2.In the process of children’s learning new skills parents ________
+                        2.According to the first paragraph an American student is allowed ______.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.should encourage them to read before they know the meaning of the words they read
+                        　A.to live in a different university
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.should not expect too much of them
+                        　B. to live at home and drive to classes
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C. should achieve a balance between pushing them too hard and leaving them on their own
+                        　C. to take a particular course in a different university
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.should creative as many learning opportunities as possible
+                        　D.to get two degrees from two different universities
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        3.The second paragraph mainly tells us that _________
+                        3..America university students are usually under pressure of work because__________
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A. parents should be strict with their children
+                        　A.they have to observe university discipline
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B. parental controls reflect only the needs of the parents and the values of the community.
+                        　B.they are heavily involved in student affairs
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C. parental restrictions vary, and are not always enforced for the benefit of the children alone.
+                        　C.their academic performance will affect their future careers
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.parental vary in their strictness towards their children according to the situation.
+                        　D.they want to run for positions of authority
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        4.The word “precept” (Line3, Para.3) probably means “_______”
+                        4.Some students are enthusiastic for positions in student organizations probably because______
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.Idea
+                        　A.such positions help them get better jobs
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.punishment
+                        　B.they hate the constant pressure and strain of their study
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.behavior
+                        　C.they will then be able to stay longer in the university
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D. instruction
+                        　D. such positions are usually well paid
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        5.In moral matters, parents should ________
+                        5.The student organizations seem to be effective in ___________
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.observe the rules themselves
+                        　A.ensuring that the students observe university regulations
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.be aware of the marked difference between adults and children
+                        　B.dealing with the academic affairs of the university
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.forbid things which have no foundation in morality
+                        　C.evaluating students’ performance by bringing them before a court
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.consistently ensure the security of their children
+                        　D.keeping up the students’ enthusiasm for social activities
                         </Text>
                     </View>
                 </View>
