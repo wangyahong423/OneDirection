@@ -27,6 +27,23 @@ import One from './src/share/cet46/Four/read/readone/One'
 import Two from './src/share/cet46/Four/read/readone/Two'
 import Three from './src/share/cet46/Four/read/readone/Three'
 import Four from './src/share/cet46/Four/read/readone/Four'
+import Readfive from './src/share/cet46/Four/read/readone/Readfive';
+import ReadSix from './src/share/cet46/Four/read/readone/ReadSix';
+import ReadSeven from './src/share/cet46/Four/read/readone/ReadSeven';
+import ReadEight from './src/share/cet46/Four/read/readone/ReadEight';
+import ReadNine from './src/share/cet46/Four/read/readone/ReadNine';
+import ReadTen from './src/share/cet46/Four/read/readone/ReadTen';
+import ReadEleven from './src/share/cet46/Four/read/readone/ReadEleven';
+import ReadTwelve from './src/share/cet46/Four/read/readone/ReadTwelve';
+import ReadThirteen from './src/share/cet46/Four/read/readone/ReadThirteen';
+import ReadFourteen from './src/share/cet46/Four/read/readone/ReadFourteen';
+import ReadFifteen from './src/share/cet46/Four/read/readone/ReadFifteen';
+import ReadSixteen from './src/share/cet46/Four/read/readone/ReadSixteen';
+import ReadSevevteen from './src/share/cet46/Four/read/readone/ReadSevevteen';
+import ReadEighteen from './src/share/cet46/Four/read/readone/ReadEighteen';
+import ReadNineteen from './src/share/cet46/Four/read/readone/ReadNineteen';
+import ReadTwenty from './src/share/cet46/Four/read/readone/ReadTwenty';
+
 import One1 from './src/share/cet46/Four/selectTen/selectten/One1'
 import Two2 from './src/share/cet46/Four/selectTen/selectten/Two2'
 import Three3 from './src/share/cet46/Four/selectTen/selectten/Three3'
@@ -146,6 +163,42 @@ import CollegeHistory from './src/method/college/CollegeHistory';
 import CollegeTeachers from './src/method/college/CollegeTeachers';
 import CollegeMajor from './src/method/college/CollegeMajor';
 import CollegeOther from './src/method/college/CollegeOther';
+import Xuanshi5 from './src/share/cet46/Four/selectTen/selectten/Xuanshi5';
+import Xuanshi6 from './src/share/cet46/Four/selectTen/selectten/Xuanshi6';
+import Xuanshi7 from './src/share/cet46/Four/selectTen/selectten/Xuanshi7';
+import Xuanshi8 from './src/share/cet46/Four/selectTen/selectten/Xuanshi8';
+import Xuanshi9 from './src/share/cet46/Four/selectTen/selectten/Xuanshi9';
+import Xuanshi10 from './src/share/cet46/Four/selectTen/selectten/Xuanshi10';
+import Xuanshi11 from './src/share/cet46/Four/selectTen/selectten/Xuanshi11';
+import Xuanshi12 from './src/share/cet46/Four/selectTen/selectten/Xuanshi12';
+import Xuanshi13 from './src/share/cet46/Four/selectTen/selectten/Xuanshi13';
+import Xuanshi14 from './src/share/cet46/Four/selectTen/selectten/Xuanshi14';
+import Xuanshi15 from './src/share/cet46/Four/selectTen/selectten/Xuanshi15';
+import Xuanshi16 from './src/share/cet46/Four/selectTen/selectten/Xuanshi16';
+import Xuanshi17 from './src/share/cet46/Four/selectTen/selectten/Xuanshi17';
+import Xuanshi18 from './src/share/cet46/Four/selectTen/selectten/Xuanshi18';
+import Xuanshi19 from './src/share/cet46/Four/selectTen/selectten/Xuanshi19';
+import Xuanshi20 from './src/share/cet46/Four/selectTen/selectten/Xuanshi20';
+import Xuanwu5 from './src/share/cet46/Four/selectFive/selectfive/Xuanwu5';
+import Xuanwu6 from './src/share/cet46/Four/selectFive/selectfive/Xuanwu6';
+import Xuanwu7 from './src/share/cet46/Four/selectFive/selectfive/Xuanwu7';
+import Xuanwu8 from './src/share/cet46/Four/selectFive/selectfive/Xuanwu8';
+import Xuanwu9 from './src/share/cet46/Four/selectFive/selectfive/Xuanwu9';
+import Xuanwu10 from './src/share/cet46/Four/selectFive/selectfive/Xuanwu10';
+import Xuanwu11 from './src/share/cet46/Four/selectFive/selectfive/Xuanwu11';
+import Xuanwu12 from './src/share/cet46/Four/selectFive/selectfive/Xuanwu12';
+import Xuanwu13 from './src/share/cet46/Four/selectFive/selectfive/Xuanwu13';
+import Xuanwu14 from './src/share/cet46/Four/selectFive/selectfive/Xuanwu14';
+import Xuanwu15 from './src/share/cet46/Four/selectFive/selectfive/Xuanwu15';
+import Xuanwu16 from './src/share/cet46/Four/selectFive/selectfive/Xuanwu16';
+import Xuanwu17 from './src/share/cet46/Four/selectFive/selectfive/Xuanwu17';
+import Xuanwu18 from './src/share/cet46/Four/selectFive/selectfive/Xuanwu18';
+import Xuanwu19 from './src/share/cet46/Four/selectFive/selectfive/Xuanwu19';
+import Xuanwu20 from './src/share/cet46/Four/selectFive/selectfive/Xuanwu20';
+
+
+
+
 
 console.disableYellowBox = true;
 
@@ -229,7 +282,7 @@ const App = () => {
           <Scene initial={!isLogin} hideNavBar key="login" component={Login} />
           <Scene key="signin" hideNavBar component={Signin} />
           <Scene key="choosecollege" hideNavBar component={Choosecollege} title='选择学院' renderRightButton={<View style={{ marginRight: 20 }}><Text style={{ fontSize: 19, color: '#ddd' }}>发送</Text></View>} titleStyle={{ flex: 1, textAlign: 'center', color: '#fff' }} navBarButtonColor='#fff' />
-          <Scene key="forget" component={Forget} title='忘记密码'  backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key="forget" component={Forget} title='忘记密码' backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
 
           {/* 社区 */}
           <Scene title='发表状态' key="add" renderRightButton={<View style={{ marginRight: 20 }}><Text style={{ fontSize: 19, color: '#ddd' }}>发送</Text></View>} titleStyle={{ flex: 1, textAlign: 'center', color: '#fff' }} navBarButtonColor='#fff' hideTabBar component={Add} />
@@ -342,17 +395,69 @@ const App = () => {
           <Scene key='two' title='第二篇大学的生存' component={Two} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key='three' title='第三篇简化餐桌礼节' component={Three} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key='four' title='第四篇教育有方' component={Four} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='five1' title='第五篇：多样化' component={Readfive} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='readsix' title='第六篇：学习计算机' component={ReadSix} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='readseven' title='第七篇：课余生活' component={ReadSeven} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='readeight' title='第八篇：餐桌上的蜗牛' component={ReadEight} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='readnine' title='第九篇：美国大学生活' component={ReadNine} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='readten' title='第十篇：写作' component={ReadTen} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='readeleven' title='第十一篇：工程学专业' component={ReadEleven} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='readtwelve' title='第十二篇：英国托管协会' component={ReadTwelve} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='readthirteen' title='第十三篇：手语' component={ReadThirteen} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='readfourteen' title='第十四篇：如何写作' component={ReadFourteen} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='readfifteen' title='第十五篇：数学能力' component={ReadFifteen} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='readsixteen' title='第十六篇：青少年犯罪' component={ReadSixteen} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='readseventeen' title='第十七篇：美国婚姻' component={ReadSevevteen} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='readeighteen' title='第十八篇：生活的不公正' component={ReadEighteen} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='readnineteen' title='第十九篇：美国婚姻' component={ReadNineteen} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='readtwenty' title='第二十篇：父亲形象' component={ReadTwenty} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+
+
+          
+          <Scene key='first' title='咨询信' component={First} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='second1' title='保护非遗' component={Second1} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='third' title='长假利弊' component={Third} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='fourth' title='为什么富有却不开心' component={Fourth} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanwu5' title='要不要进行太空探索' component={Xuanwu5} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanwu6' title='生命的意义与目的' component={Xuanwu6} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanwu7' title='手机用量' component={Xuanwu7} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanwu8' title='溺爱' component={Xuanwu8} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanwu9' title='帮助受灾者' component={Xuanwu9} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanwu10' title='运气与成功' component={Xuanwu10} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanwu11' title='搬去新地方' component={Xuanwu11} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanwu12' title='广告' component={Xuanwu12} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanwu13' title='社会实践' component={Xuanwu13} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanwu14' title='节俭' component={Xuanwu14} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanwu15' title='考证热' component={Xuanwu15} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanwu16' title='网络游戏' component={Xuanwu16} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanwu17' title='电力短缺' component={Xuanwu17} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanwu18' title='手机的利弊' component={Xuanwu18} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanwu19' title='电影电视的影响' component={Xuanwu19} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanwu20' title='教育不公平' component={Xuanwu20} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          
           <Scene key='one1' title='第一篇' component={One1} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key='two2' title='第二篇' component={Two2} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key='three3' title='第三篇' component={Three3} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key='four4' title='第四篇' component={Four4} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
-          <Scene key='first' title='第一篇' component={First} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
-          <Scene key='second' title='第二篇' component={Second1} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
-          <Scene key='third' title='第三篇' component={Third} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
-          <Scene key='fourth' title='第四篇' component={Fourth} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanshi5' title='第五篇' component={Xuanshi5} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanshi6' title='第六篇' component={Xuanshi6} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanshi7' title='第七篇' component={Xuanshi7} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanshi8' title='第八篇' component={Xuanshi8} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanshi9' title='第九篇' component={Xuanshi9} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanshi10' title='第十篇' component={Xuanshi10} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanshi11' title='第十一篇' component={Xuanshi11} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanshi12' title='第十二篇' component={Xuanshi12} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanshi13' title='第十三篇' component={Xuanshi13} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanshi14' title='第十四篇' component={Xuanshi14} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanshi15' title='第十五篇' component={Xuanshi15} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanshi16' title='第十六篇' component={Xuanshi16} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanshi17' title='第十七篇' component={Xuanshi17} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanshi18' title='第十八篇' component={Xuanshi18} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanshi19' title='第十九篇' component={Xuanshi19} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='xuanshi20' title='第二十篇' component={Xuanshi20} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key='selectten1' title='十五选十' component={Selectten1} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
-          <Scene key='selectfive1' title='七选五' component={SelectFive1} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
-          
+          <Scene key='selectfive1' title='四级作文' component={SelectFive1} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+
           {/* 我的 */}
           <Scene key='shoucang' component={Shoucang} title='我的收藏' backButtonImage={require('./assets/left.png')} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} navigationBarStyle={{ backgroundColor: '#37376F' }} />
           <Scene key='tiezi' component={Xuexidongtai} renderTitle="我的帖子" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
@@ -363,6 +468,11 @@ const App = () => {
           <Scene key="shezhi" component={Shezhi} renderTitle="设置" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key="mima" component={Mima} renderTitle="重置密码" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key="touxiang" component={Touxiang} renderTitle="我的头像" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+
+
+
+          {/*后续添加组件 */}
+          {/**阅读 */}
 
         </Scene>
       </Router>
