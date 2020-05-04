@@ -18,8 +18,9 @@ router.get('/list', (req, res) => {
 router.get('/add', (req, res) => {
     var eid = req.query.eid;
     var name = req.query.name;
-    let sql = 'insert into experiencelike(eid,name) values($1,$2)';
-    con.query(sql, [eid, name], (err, result) => {
+    var ename = req.query.ename;
+    let sql = 'insert into experiencelike(eid,name,ename) values($1,$2,$3)';
+    con.query(sql, [eid, name, ename], (err, result) => {
         if (err) {
             res.json({ ok: false, msg: "添加失败" });
         } else {
@@ -32,7 +33,7 @@ router.get('/delete', (req, res) => {
     var eid = req.query.eid;
     var name = req.query.name;
     let sql = 'delete from experiencelike where eid=$1 and name=$2';
-    con.query(sql, [eid,name], (err, result) => {
+    con.query(sql, [eid, name], (err, result) => {
         if (err) {
             res.json({ ok: false, msg: "删除失败" });
         } else {

@@ -18,39 +18,40 @@ router.get('/list', (req, res) => {
 router.get('/add', (req, res) => {
     var lid = req.query.lid;
     var name = req.query.name;
-    let sql = 'insert into learnlike(lid,name) values($1,$2)';
-    con.query(sql, [lid, name], (err, result) => {
+    var lname = req.query.lname;
+    let sql = 'insert into learnlike(lid,name,lname) values($1,$2,$3)';
+    con.query(sql, [lid, name, lname], (err, result) => {
         if (err) {
             res.json({ ok: false, msg: '点赞失败！' });
-          } else {
+        } else {
             res.json({ ok: true, msg: '点赞成功！' });
-          }
+        }
     });
 });
 
-router.get('/delete', (req, res)=> {
+router.get('/delete', (req, res) => {
     var lid = req.query.lid;
     var name = req.query.name;
-        
+
     let sql = 'delete from learnlike where lid=$1 and name=$2';
-    con.query(sql, [lid,name], (err, result) =>{
+    con.query(sql, [lid, name], (err, result) => {
         if (err) {
             res.json({ ok: false, msg: "取消赞失败！" });
-          } else {
+        } else {
             res.json({ ok: true, msg: "取消赞成功！" });
-          }
+        }
     });
 });
 
-router.get('/deleteAll', (req, res)=> {
+router.get('/deleteAll', (req, res) => {
     var lid = req.query.lid;
     let sql = 'delete from learnlike where lid=$1';
-    con.query(sql, [lid], (err, result) =>{
+    con.query(sql, [lid], (err, result) => {
         if (err) {
             res.json({ ok: false, msg: "取消赞失败！" });
-          } else {
+        } else {
             res.json({ ok: true, msg: "取消赞成功！" });
-          }
+        }
     });
 });
 module.exports = router;
