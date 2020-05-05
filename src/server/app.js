@@ -27,7 +27,7 @@ var cet4Router = require('./routes/cet4');
 var cet6Router = require('./routes/cet6');
 var highcet4Router = require('./routes/highcet4');
 var highcet6Router = require('./routes/highcet6');
-
+var followRouter = require('./routes/follow');
 
 var app = express();
 
@@ -63,6 +63,7 @@ app.use('/cet4',cet4Router);
 app.use('/cet6',cet6Router);
 app.use('/highcet4',highcet4Router);
 app.use('/highcet6',highcet6Router);
+app.use('/follow',followRouter);
 
 // catch 404 and forward to error handler  
 app.use(function(req, res, next) {
