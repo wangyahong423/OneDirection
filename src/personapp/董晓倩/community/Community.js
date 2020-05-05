@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, TextInput, Dimensions, StyleSheet, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter } from 'react-native';
-import Icon from 'react-native-vector-icons/AntDesign';
+import { Text, View, ScrollView, StyleSheet, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert } from 'react-native';
+import Icon from 'react-native-vector-icons/EvilIcons';
 import { Actions } from 'react-native-router-flux';
+import { Button } from '@ant-design/react-native';
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
-export default class community extends Component {
+export default class Community extends Component {
     constructor() {
         super();
         this.state = {
@@ -16,7 +17,8 @@ export default class community extends Component {
             likeNum: [],
             comNum: [],
             username: '',
-            isLoading: true
+            isLoading: true,
+            follow: [],
         };
         this.getData();
     }
@@ -31,16 +33,28 @@ export default class community extends Component {
     }
     componentDidMount() {
         this.setState({ isLoading: true })
-        var url1 = `http://139.155.44.190:3005/community/list`;
-        var url2 = `http://139.155.44.190:3005/communitylike/list`;
+        var url1 = `http://139.155.44.190:3005/learn/list`;
+        var url2 = `http://139.155.44.190:3005/learnlike/list`;
         let url3 = `http://139.155.44.190:3005/users/list`;
-        let url4 = `http://139.155.44.190:3005/communitytalk/list`;
+        let url4 = `http://139.155.44.190:3005/learntalk/list`;
+        let url5 = `http://139.155.44.190:3005/follow/list`;
         fetch(url3)
             .then((res) => res.json())
             .then((res) => {
                 this.setState({
-                    pic: res
+                    pic: res,
                 });
+                fetch(url5)
+                    .then((res) => res.json())
+                    .then((res) => {
+                        var followList = [];
+                        for (var i = 0; i < res.length; i++) {
+                            if (res[i].lname == this.state.username) {
+                                followList.push(res[i]);
+                            }
+                        }
+                        this.setState({ follow: followList })
+                    })
                 fetch(url2)
                     .then((res) => res.json())
                     .then((res) => {
@@ -55,7 +69,7 @@ export default class community extends Component {
                         fetch(url4)
                             .then((res) => res.json())
                             .then((res) => {
-                                this.setState({ comNum: res.communitytalk });
+                                this.setState({ comNum: res });
                                 fetch(url1)
                                     .then((res) => res.json())
                                     .then((res) => {
@@ -63,12 +77,14 @@ export default class community extends Component {
                                             for (var i = 0; i < this.state.pic.length; i++) {
                                                 if (item.name == this.state.pic[i].name) {
                                                     item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
+                                                    item.level = this.state.pic[i].level;
+                                                    item.college = this.state.pic[i].college;
                                                     break;
                                                 }
                                             }
                                             item.like = false;
                                             for (var j = 0; j < this.state.like.length; j++) {
-                                                if (item.id == this.state.like[j].cid) {
+                                                if (item.id == this.state.like[j].lid) {
                                                     item.like = true;
                                                     break;
                                                 }
@@ -76,16 +92,30 @@ export default class community extends Component {
                                                     item.like = false;
                                                 }
                                             }
+                                            item.follow = false;
+                                            // console.log("输出item",item)
+                                            console.log("输出",item.nname,this.state.follow)
+
+                                            for (var m = 0; m < this.state.follow.length; m++) {
+                                                if (item.name == this.state.follow[m].nname) {
+                                                    console.log("相等")
+                                                    item.follow = true;
+                                                    break;
+                                                }
+                                                else {
+                                                    item.follow = false;
+                                                }
+                                            }
                                             var likeNum = 0;
                                             for (var z = 0; z < this.state.likeNum.length; z++) {
-                                                if (item.id == this.state.likeNum[z].cid) {
+                                                if (item.id == this.state.likeNum[z].lid) {
                                                     likeNum++;
                                                 }
                                             }
                                             item.likeNum = likeNum;
                                             var comNum = 0;
                                             for (var z = 0; z < this.state.comNum.length; z++) {
-                                                if (item.id == this.state.comNum[z].cid) {
+                                                if (item.id == this.state.comNum[z].lid) {
                                                     comNum++;
                                                 }
                                             }
@@ -93,6 +123,11 @@ export default class community extends Component {
                                         });
                                         this.setState({ isLoading: false });
                                         this.setState({ list: res });
+                                        for (var i = 0; i < this.state.list.length; i++) {
+                                            if (this.state.list[i].follow) {
+                                                console.log(this.state.list[i].name)
+                                            }
+                                        }
                                     });
                             });
                     });
@@ -105,6 +140,17 @@ export default class community extends Component {
                     self.setState({
                         pic: res,
                     });
+                    fetch(url5)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            var followList = [];
+                            for (var i = 0; i < res.length; i++) {
+                                if (res[i].lname == self.state.username) {
+                                    followList.push(res[i]);
+                                }
+                            }
+                            self.setState({ follow: followList })
+                        })
                     fetch(url2)
                         .then((res) => res.json())
                         .then((res) => {
@@ -119,7 +165,7 @@ export default class community extends Component {
                             fetch(url4)
                                 .then((res) => res.json())
                                 .then((res) => {
-                                    self.setState({ comNum: res.communtiytalk });
+                                    self.setState({ comNum: res });
                                     fetch(url1)
                                         .then((res) => res.json())
                                         .then((res) => {
@@ -127,12 +173,14 @@ export default class community extends Component {
                                                 for (var i = 0; i < self.state.pic.length; i++) {
                                                     if (item.name == self.state.pic[i].name) {
                                                         item.pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
+                                                        item.level = self.state.pic[i].level;
+                                                        item.college = self.state.pic[i].college;
                                                         break;
                                                     }
                                                 }
                                                 item.like = false;
                                                 for (var j = 0; j < self.state.like.length; j++) {
-                                                    if (item.id == self.state.like[j].cid) {
+                                                    if (item.id == self.state.like[j].lid) {
                                                         item.like = true;
                                                         break;
                                                     }
@@ -140,22 +188,33 @@ export default class community extends Component {
                                                         item.like = false;
                                                     }
                                                 }
+                                                item.follow = false;
+                                                for (var m = 0; m < self.state.follow.length; m++) {
+                                                    if (item.name == self.state.follow[m].nname) {
+                                                        item.follow = true;
+                                                        break;
+                                                    }
+                                                    else {
+                                                        item.follow = false;
+                                                    }
+                                                }
                                                 var likeNum = 0;
                                                 for (var z = 0; z < self.state.likeNum.length; z++) {
-                                                    if (item.id == self.state.likeNum[z].cid) {
+                                                    if (item.id == self.state.likeNum[z].lid) {
                                                         likeNum++;
                                                     }
                                                 }
                                                 item.likeNum = likeNum;
                                                 var comNum = 0;
                                                 for (var z = 0; z < self.state.comNum.length; z++) {
-                                                    if (item.id == self.state.comNum[z].cid) {
+                                                    if (item.id == self.state.comNum[z].lid) {
                                                         comNum++;
                                                     }
                                                 }
                                                 item.comNum = comNum;
                                             });
-                                            self.setState({ list: res });
+                                            this.setState({ isLoading: false });
+                                            this.setState({ list: res });
                                         });
                                 });
                         });
@@ -165,10 +224,41 @@ export default class community extends Component {
     componentWillUnmount() {
         this.listener.remove();
     }
+    delete = (idx) => {
+        Alert.alert('确认要删除吗', '',
+            [
+                { text: "确认", onPress: this.opntion1.bind(this, (this.state.list[idx].id)) },
+                { text: "取消", onPress: this.opntion2 }
+            ]
+        );
+    }
+    opntion1 = (id) => {
+        let url = `http://139.155.44.190:3005/learn/deleteLearn?id=${id}`;
+        let url1 = `http://139.155.44.190:3005/learntalk/deleteAll?lid=${id}`;
+        let url2 = `http://139.155.44.190:3005/learnlike/deleteAll?lid=${id}`;
+        fetch(url1)
+            .then((res) => res.json())
+            .then((res) => {
+                fetch(url2)
+                    .then((res) => res.json())
+                    .then((res) => {
+                        fetch(url)
+                            .then((res) => res.json())
+                            .then((res) => {
+                                Alert.alert(res.msg);
+                                var param = 1;
+                                DeviceEventEmitter.emit('refresh', param);
+                            });
+                    });
+            });
+    }
+    opntion2 = () => {
+
+    }
     details = (idx) => {
         var value = { page: this.state.list[idx] };
         AsyncStorage.setItem('lPage', JSON.stringify(value));
-        Actions.details();
+        Actions.learndetails();
     }
     like = (idx) => {
         var crr = '';
@@ -179,12 +269,11 @@ export default class community extends Component {
             this.setState({
                 list: crr
             })
-            let url1 = `http://139.155.44.190:3005/communitylike/add?cid=${this.state.list[idx].id}&name=${this.state.username}`;
+            let url1 = `http://139.155.44.190:3005/learnlike/add?lid=${this.state.list[idx].id}&name=${this.state.username}`;
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
                 });
-            console.log(url1)
             let url2 = `http://139.155.44.190:3005/users/list`;
             fetch(url2)
                 .then((res) => res.json())
@@ -202,6 +291,33 @@ export default class community extends Component {
                                 .then((res) => res.json())
                                 .then((res) => {
                                 });
+                            if (this.state.lvnum == 15) {
+                                Alert.alert("恭喜你提升为二级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 30) {
+                                Alert.alert("恭喜你提升为三级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 45) {
+                                Alert.alert("恭喜你提升为四级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 60) {
+                                Alert.alert("恭喜你提升为五级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 75) {
+                                Alert.alert("恭喜你提升为六级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 90) {
+                                Alert.alert("恭喜你提升为七级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 105) {
+                                Alert.alert("恭喜你提升为八级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 120) {
+                                Alert.alert("恭喜你提升为九级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 135) {
+                                Alert.alert("恭喜你提升为十级用户，快去解锁新的头像吧！")
+                            }
                         }
                     })
                 })
@@ -213,7 +329,7 @@ export default class community extends Component {
             this.setState({
                 list: crr
             })
-            let url2 = `http://139.155.44.190:3005/communitylike/delete?cid=${this.state.list[idx].id}&name=${this.state.username}`
+            let url2 = `http://139.155.44.190:3005/learnlike/delete?lid=${this.state.list[idx].id}&name=${this.state.username}`
             fetch(url2)
                 .then((res) => res.json())
                 .then((res) => {
@@ -225,94 +341,241 @@ export default class community extends Component {
             search: e
         })
     }
-    search = (e) => {
-        let url = `http://139.155.44.190:3005/community/select?content=${this.state.search}`;
-        fetch(url)
+    search = () => {
+        let url = `http://139.155.44.190:3005/learn/select?content=${this.state.search}`;
+        var url2 = `http://139.155.44.190:3005/learnlike/list`;
+        let url3 = `http://139.155.44.190:3005/users/list`;
+        let url4 = `http://139.155.44.190:3005/learntalk/list`;
+        fetch(url3)
             .then((res) => res.json())
             .then((res) => {
-                if (res.false) { }
-                else {
-                    res.forEach(item => {
-                        for (var i = 0; i < this.state.pic.length; i++) {
-                            if (item.name == this.state.pic[i].name) {
-                                item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
-                                break;
+                this.setState({ pic: res });
+                fetch(url2)
+                    .then((res) => res.json())
+                    .then((res) => {
+                        this.setState({ likeNum: res });
+                        var likeList = [];
+                        for (var i = 0; i < res.length; i++) {
+                            if (res[i].name == this.state.username) {
+                                likeList.push(res[i]);
                             }
                         }
-                        for (var j = 0; j < this.state.like.length; j++) {
-                            if (item.id == this.state.like[j].cid) {
-                                item.like = true;
-                                break;
-                            }
-                            else {
-                                item.like = false;
-                            }
-                        }
-                        var likeNum = 0;
-                        for (var z = 0; z < this.state.likeNum.length; z++) {
-                            if (item.id == this.state.likeNum[z].cid) {
-                                likeNum++;
-                            }
-                        }
-                        item.likeNum = likeNum;
-                        var comNum = 0;
-                        for (var z = 0; z < this.state.comNum.length; z++) {
-                            if (item.id == this.state.comNum[z].cid) {
-                                comNum++;
-                            }
-                        }
-                        item.comNum = comNum;
+                        this.setState({ like: likeList });
+                        fetch(url4)
+                            .then((res) => res.json())
+                            .then((res) => {
+                                this.setState({ comNum: res });
+                                fetch(url)
+                                    .then((res) => res.json())
+                                    .then((res) => {
+                                        if (res.false) { }
+                                        else {
+                                            res.forEach(item => {
+                                                for (var i = 0; i < this.state.pic.length; i++) {
+                                                    if (item.name == this.state.pic[i].name) {
+                                                        item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
+                                                        break;
+                                                    }
+                                                }
+                                                for (var j = 0; j < this.state.like.length; j++) {
+                                                    if (item.id == this.state.like[j].lid) {
+                                                        item.like = true;
+                                                        break;
+                                                    }
+                                                    else {
+                                                        item.like = false;
+                                                    }
+                                                }
+                                                var likeNum = 0;
+                                                for (var z = 0; z < this.state.likeNum.length; z++) {
+                                                    if (item.id == this.state.likeNum[z].lid) {
+                                                        likeNum++;
+                                                    }
+                                                }
+                                                item.likeNum = likeNum;
+                                                var comNum = 0;
+                                                for (var z = 0; z < this.state.comNum.length; z++) {
+                                                    if (item.id == this.state.comNum[z].lid) {
+                                                        comNum++;
+                                                    }
+                                                }
+                                                item.comNum = comNum;
+                                            });
+                                            this.setState({ list: res });
+                                        }
+                                    });
+                            });
                     });
-                    this.setState({ list: res });
-                }
             });
     }
-
+    renovate = () => {
+        var param = 1;
+        DeviceEventEmitter.emit('refresh', param);
+    }
+    person = (idx) => {
+        var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college };
+        AsyncStorage.setItem('details', JSON.stringify(value));
+        Actions.person();
+    }
+    follow = (idx) => {
+        var crr = '';
+        if (this.state.list[idx].follow == false) {
+            crr = this.state.list;
+            crr[idx].follow = true;
+            this.setState({
+                list: crr
+            })
+            let url = `http://139.155.44.190:3005/follow/add?lname=${this.state.username}&nname=${this.state.list[idx].name}&lid=${this.state.list[idx].id}`;
+            fetch(url)
+                .then((res) => res.json())
+                .then((res) => {
+                    Alert.alert(res.msg);
+                })
+        }
+        else {
+            var crr = '',
+            crr = this.state.list;
+            crr[idx].follow = false;
+            this.setState({
+                list: crr
+            })
+            let url = `http://139.155.44.190:3005/follow/delete?nname=${this.state.list[idx].name}`;
+            fetch(url)
+                .then((res) => res.json())
+                .then((res) => {
+                    Alert.alert("已经取消关注")
+                })
+        }
+    }
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
-                <View style={styles.hearder}>
-                    <View style={styles.search}>
-                        <Icon
-                            style={{
-                                marginLeft: 25 * s,
-                                marginRight: 20 * s
-                            }}
-                            onPress={this.search}
-                            style={{ fontSize: 23, marginLeft: 15 }} name='search1' />
+                <View style={{
+                    width: '100%',
+                    height: 55 * s,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}>
+                    <View style={{
+                        height: 40 * s,
+                        width: '60%',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        backgroundColor: '#ffffff',
+                        borderBottomLeftRadius: 28 * s,
+                        borderTopLeftRadius: 28 * s,
+                        marginLeft: -55 * s,
+                    }}>
+
                         <TextInput
-                            style={{ fontSize: 17, height: '100%' }}
+                            style={{
+                                height: 50 * s,
+                                width: "80%",
+                                padding: 0,
+                                marginLeft: 20 * s,
+                                fontSize: 15 * s,
+                            }}
                             clearButtonMode="while-editing"
-                            placeholder="请输入您要搜索的关键字"
+                            placeholderTextColor=''
+                            placeholder="请输入搜索的关键字"
                             onChangeText={this.change}
                         />
+                        <Button style={{ borderBottomRightRadius: 28 * s, borderTopRightRadius: 28 * s, height: 42 * s, }} onPress={this.search}>
+                            搜索
+                        </Button>
                     </View>
+                    <TouchableOpacity style={{
+                        position: 'absolute',
+                        top: 15 * s,
+                        right: 30 * s,
+                        marginLeft: 10 * s,
+                        width: 30,
+                        height: 30
+                    }} onPress={this.renovate}>
+                        <Icon
+                            size={30}
+                            name='refresh'
+                        />
+                    </TouchableOpacity>
                 </View>
                 <ScrollView style={{ flex: 1 }}>
                     <View>
                         {
                             this.state.list.map((item, idx) => (
                                 <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 10 * s }}>
-                                    <View style={styles.user}>
-                                        <Image style={styles.avatar} source={{ uri: item.pic }} />
+                                    <View style={{
+                                        flexDirection: 'row',
+                                        height: 80 * s,
+                                        alignItems: 'center'
+                                    }}>
+                                        <TouchableOpacity onPress={this.person.bind(this, (idx))}>
+                                            <Image style={{
+                                                marginLeft: 20 * s,
+                                                height: 50 * s,
+                                                width: 50 * s,
+                                                borderRadius: 25 * s,
+                                                backgroundColor: 'yellow'
+                                            }}
+                                                source={{ uri: item.pic }} />
+                                        </TouchableOpacity>
                                         <View style={{ marginLeft: 30 * s }}>
-                                            <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
+                                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                                <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
+                                                <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: 'red' }}>Lv.{item.level}</Text>
+                                            </View>
                                             <Text>{item.time}</Text>
                                         </View>
                                     </View>
-                                    <View style={styles.comment}>
-                                        <Text numberOfLines={2} onPress={this.details.bind(this, (idx))} style={{ fontSize: 18 * s }}>{item.content}</Text>
+                                    <View style={{
+                                        marginLeft: 30 * s,
+                                        marginRight: 30 * s,
+                                        marginTop: 10 * s,
+                                        marginBottom: 20 * s
+                                    }}
+                                    >
+                                        <Text onPress={this.details.bind(this, (idx))} style={{ fontSize: 18 * s }}>{item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content}</Text>
                                     </View>
                                     <View style={{ flexDirection: 'row', height: 40 * s, alignItems: 'center', justifyContent: 'space-evenly', borderTopWidth: 1, borderTopColor: "#EFEFF4" }}>
                                         <View style={{ alignItems: 'center', flexDirection: 'row' }}>
-                                            <Icon onPress={this.details.bind(this, (idx))} name="message1" style={{ fontSize: 20 * s, marginRight: 10 }}></Icon>
+                                            <Icon onPress={this.details.bind(this, (idx))} name="comment" style={{ fontSize: 30 * s }}></Icon>
                                             <Text>{item.comNum}</Text>
                                         </View>
-                                        <View style={styles.bottom}>
-                                            <Icon name="hearto" onPress={this.like.bind(this, (idx))} style={item.like ? { color: 'red', fontSize: 20 * s, marginRight: 10 } : { fontSize: 20 * s, marginRight: 10 }}></Icon>
+                                        <View style={{ alignItems: 'center', flexDirection: 'row' }}>
+                                            <Icon name="heart" onPress={this.like.bind(this, (idx))} style={item.like ? { color: 'red', fontSize: 30 * s } : { fontSize: 30 * s }}></Icon>
                                             <Text>{item.likeNum}</Text>
                                         </View>
                                     </View>
+                                    {
+                                        this.state.username == item.name
+                                            ? <TouchableOpacity style={{
+                                                width: 30 * s,
+                                                height: 30 * s,
+                                                borderRadius: 15 * s,
+                                                flexDirection: 'row',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                // backgroundColor: '#37376F',
+                                                position: 'absolute',
+                                                top: 5,
+                                                right: 5
+                                            }}
+                                                onPress={this.delete.bind(this, (idx))}
+                                            >
+                                                <Text style={{ color: '#e8e8e8', fontSize: 30 * s }}>×</Text>
+                                            </TouchableOpacity>
+                                            :
+                                            <TouchableOpacity
+                                                onPress={this.follow.bind(this, (idx))}
+                                                style={item.follow ? { height: 30, width: 90, borderRadius: 5, borderWidth: 1, position: "absolute", right: 20, top: 20 }
+                                                    : { borderColor: "#F78D89", height: 30, width: 90, borderRadius: 5, borderWidth: 1, position: "absolute", right: 20, top: 20 }} >
+                                                {
+                                                    item.follow
+                                                        ? <Text style={{ justifyContent: "center", alignItems: "center", fontSize: 16 * s, marginLeft: 10 * s }}>取消关注</Text>
+                                                        : <Text style={{ color: "#F78D89", justifyContent: "center", alignItems: "center", fontSize: 16 * s, marginLeft: 25 * s }}>关注</Text>
+                                                }
+                                            </TouchableOpacity>
+                                    }
                                 </View>
                             ))
                         }
@@ -332,7 +595,7 @@ export default class community extends Component {
                                 flexDirection: 'row',
                                 justifyContent: 'center'
                             }}>
-                                <Text style={{ fontSize: 18, marginTop: 10 }}>正在获取数据...</Text>
+                                <Text style={{ fontSize: 20, marginTop: 10 }}>正在获取数据...</Text>
                             </View>
                         </View>
                         : null
@@ -351,63 +614,9 @@ export default class community extends Component {
                 }}
                     onPress={() => Actions.add()}
                 >
-                    <Icon style={{ fontSize: 35, color: '#fff' }} name="edit" />
+                    <Icon style={{ fontSize: 50, color: '#fff' }} name="pencil" />
                 </TouchableOpacity>
             </SafeAreaView >
         )
     }
 }
-const styles = StyleSheet.create({
-    hearder: {
-        height: 60,
-        backgroundColor: '#EFEFF4',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'row',
-    },
-    search: {
-        height: 40,
-        width: 430 * s,
-        backgroundColor: '#fff',
-        flexDirection: 'row',
-        alignItems: 'center',
-        borderRadius: 20,
-        opacity: 0.6,
-    },
-    user: {
-        flexDirection: 'row',
-        height: 90 * s,
-        alignItems: 'center',
-        // backgroundColor:'red'
-    },
-    avatar: {
-        marginLeft: 20 * s,
-        height: 50 * s,
-        width: 50 * s,
-        borderRadius: 25 * s
-    },
-    comment: {
-        marginLeft: 30 * s,
-        marginRight: 30 * s,
-        marginBottom: 20 * s,
-        // overflow: "hidden",
-        // textOverflow: "ellipsis",
-        // whiteSpace: "nowrap"
-    },
-    add: {
-        position: "absolute",
-        bottom: 30,
-        right: 30,
-        height: 80,
-        width: 80,
-        justifyContent: "center",
-    },
-    bottom: {
-        flexDirection: 'row',
-        height: 50,
-        paddingTop: 10 * s,
-        justifyContent: 'space-evenly',
-        borderTopWidth: 1,
-        borderTopColor: "#EFEFF4"
-    }
-})
