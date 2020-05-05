@@ -195,7 +195,7 @@ import Xuanwu17 from './src/share/cet46/Four/selectFive/selectfive/Xuanwu17';
 import Xuanwu18 from './src/share/cet46/Four/selectFive/selectfive/Xuanwu18';
 import Xuanwu19 from './src/share/cet46/Four/selectFive/selectfive/Xuanwu19';
 import Xuanwu20 from './src/share/cet46/Four/selectFive/selectfive/Xuanwu20';
-
+import Xiangqing from './src/my/Xiangqing';
 
 
 
@@ -287,6 +287,7 @@ const App = () => {
           {/* 社区 */}
           <Scene title='发表状态' key="add" renderRightButton={<View style={{ marginRight: 20 }}><Text style={{ fontSize: 19, color: '#ddd' }}>发送</Text></View>} titleStyle={{ flex: 1, textAlign: 'center', color: '#fff' }} navBarButtonColor='#fff' hideTabBar component={Add} />
           <Scene title='评论' key="details" renderRightButton={<View></View>} titleStyle={{ flex: 1, textAlign: 'center', color: '#fff' }} navBarButtonColor='#fff' hideTabBar component={Details} />
+          <Scene title='详情' key="xiangqing" renderRightButton={<View></View>} titleStyle={{ flex: 1, textAlign: 'center', color: '#fff' }} navBarButtonColor='#fff' hideTabBar component={Xiangqing} />
 
           {/* 一卡通 */}
           <Scene key='onecard' title='一卡通' component={Onecard} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} ></Scene>
