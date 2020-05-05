@@ -10,7 +10,9 @@ export default class Person extends Component {
         this.state = {
             all: '',
             learn: 0,
-            exp: 0
+            exp: 0,
+            Elike: 0,
+            Llike: 0
         };
         this.getData();
     }
@@ -32,6 +34,8 @@ export default class Person extends Component {
     componentDidMount() {
         let url1 = `http://139.155.44.190:3005/learn/list`;
         let url2 = `http://139.155.44.190:3005/experience/list`;
+        let url3 = `http://139.155.44.190:3005/experiencelike/list`;
+        let url4 = `http://139.155.44.190:3005/learnlike/list`;
         fetch(url1)
             .then((res) => res.json())
             .then((res) => {
@@ -44,20 +48,120 @@ export default class Person extends Component {
                 this.setState({
                     learn: num
                 });
+                fetch(url2)
+                    .then((res) => res.json())
+                    .then((res) => {
+                        var num = 0;
+                        res.forEach(item => {
+                            if (item.name == this.state.all.name) {
+                                num++;
+                            }
+                        });
+                        this.setState({
+                            exp: num
+                        });
+                        fetch(url3)
+                            .then((res) => res.json())
+                            .then((res) => {
+                                var num = 0;
+                                res.forEach(item => {
+                                    if (item.ename == this.state.all.name) {
+                                        num++;
+                                    }
+                                });
+                                this.setState({
+                                    Elike: num
+                                });
+                                fetch(url4)
+                                    .then((res) => res.json())
+                                    .then((res) => {
+                                        var num1 = 0;
+                                        res.forEach(item => {
+                                            if (item.lname == this.state.all.name) {
+                                                num1++;
+                                            }
+                                        });
+                                        this.setState({
+                                            Llike: num1
+                                        });
+                                    })
+                            })
+                    })
             })
-        fetch(url2)
-            .then((res) => res.json())
-            .then((res) => {
-                var num = 0;
-                res.forEach(item => {
-                    if (item.name == this.state.all.name) {
-                        num++;
-                    }
-                });
-                this.setState({
-                    exp: num
-                });
-            })
+
+        var self = this;
+        this.listener = DeviceEventEmitter.addListener('Prefresh', function (param) {
+            // var arr=self.state.list;
+            // var a = {"content": param.content, "like": false, "likeNum": 0, "name": param.name, "pic": "http://139.155.44.190:3005/images/6.jpg", "time": param.time};
+            // arr.splice(0,0,a);
+            // self.setState({list:arr});
+            fetch(url1)
+                .then((res) => res.json())
+                .then((res) => {
+                    var num = 0;
+                    res.forEach(item => {
+                        if (item.name == self.state.all.name) {
+                            num++;
+                        }
+                    });
+                    self.setState({
+                        learn: num
+                    });
+                    fetch(url2)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            var num = 0;
+                            res.forEach(item => {
+                                if (item.name == self.state.all.name) {
+                                    num++;
+                                }
+                            });
+                            self.setState({
+                                exp: num
+                            });
+                            fetch(url3)
+                                .then((res) => res.json())
+                                .then((res) => {
+                                    var num = 0;
+                                    res.forEach(item => {
+                                        if (item.ename == self.state.all.name) {
+                                            num++;
+                                        }
+                                    });
+                                    self.setState({
+                                        Elike: num
+                                    });
+                                    fetch(url4)
+                                        .then((res) => res.json())
+                                        .then((res) => {
+                                            var num1 = 0;
+                                            res.forEach(item => {
+                                                if (item.lname == self.state.all.name) {
+                                                    num1++;
+                                                }
+                                            });
+                                            self.setState({
+                                                Llike: num1
+                                            });
+                                        })
+                                })
+                        })
+                })
+        });
+    }
+    componentWillUnmount() {
+        this.listener.remove();
+        // this.listener1.remove();
+    }
+    personexp = () => {
+        var value = { name: this.state.all.name, pic: this.state.all.pic, level: this.state.all.level };
+        AsyncStorage.setItem('personname', JSON.stringify(value));
+        Actions.perexp();
+    }
+    back = () => {
+        Actions.pop();
+        var param = 1;
+        DeviceEventEmitter.emit('Erefresh', param);
     }
     render() {
         return (
@@ -100,13 +204,51 @@ export default class Person extends Component {
                         <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s }}>
                             <Text style={{ fontSize: 20 * s, color: '#000' }}>在社区中发帖子数量：</Text>
                             <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.learn}</Text>
+                            <Text style={{ fontSize: 20 * s, color: '#000', marginLeft: 10 * s }}>获赞数：</Text>
+                            <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.Llike}</Text>
                         </View>
+
                         <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s }}>
-                            <Text style={{ fontSize: 20 * s, color: '#000' }}>在经验交流中发帖子数量：</Text>
+                            <Text style={{ fontSize: 20 * s, color: '#000' }}>在经验分享中发帖子数量：</Text>
                             <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.exp}</Text>
+                            <Text style={{ fontSize: 20 * s, color: '#000', marginLeft: 10 * s }}>获赞数：</Text>
+                            <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.Elike}</Text>
+                        </View>
+                        {
+                            this.state.exp
+                                ? <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s, justifyContent: 'space-between', borderColor: '#37376F', borderWidth: 1 * s }} onPress={() => this.personexp()}>
+                                    <Text style={{ fontSize: 20 * s }}>在经验分享中发布的帖子</Text>
+                                    <Icon name="chevron-right" size={20} color="#000" />
+                                </TouchableOpacity>
+                                : null
+                        }
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s }}>
+                            <Text style={{ fontSize: 20 * s, color: '#000' }}>总获赞数：</Text>
+                            <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.Elike + this.state.Llike}</Text>
                         </View>
                     </View>
                 </ScrollView>
+                <View style={{
+                    width: '100%',
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    <TouchableOpacity style={{
+                        width: 300 * s,
+                        height: 40 * s,
+                        borderRadius: 15 * s,
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: '#37376F',
+                        marginBottom: 10 * s
+                    }}
+                        onPress={() => this.back()}
+                    >
+                        <Text style={{ color: '#fff', fontSize: 20 * s }}>返回</Text>
+                    </TouchableOpacity>
+                </View>
             </SafeAreaView >
             // </ImageBackground >
         )
