@@ -54,7 +54,7 @@ router.get('/add', (req, res) => {
         if (err) {
             res.json({ ok: false, msg: "关注失败" });
         } else {
-            res.json({ ok: true, msg: "关注成功" });
+            res.json({ ok: true, msg: "已关注" });
         }
     });
 });
