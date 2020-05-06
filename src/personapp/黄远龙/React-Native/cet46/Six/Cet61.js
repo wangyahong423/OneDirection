@@ -46,6 +46,16 @@ export default class Tiezi extends Component {
                         <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 210, marginTop: 15 }} />
                     </TouchableOpacity>
                 </View>
+                <View style={{
+                    height: 50, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
+                    borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1
+                }}  >
+                    <Icon name="hand-o-right" size={30} color="#5f6fcd" style={{ marginLeft: 30, marginTop: 10 }} />
+                    <TouchableOpacity onPress={() => Actions.zuowen()} style={{ flexDirection: 'row' }}>
+                        <Text style={{ fontSize: 20, marginLeft: 40, marginTop: 11 }}>作文</Text>
+                        <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 210, marginTop: 15 }} />
+                    </TouchableOpacity>
+                </View>
             </ScrollView>
         )
     }
