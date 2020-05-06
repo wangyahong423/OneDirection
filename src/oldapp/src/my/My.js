@@ -33,6 +33,7 @@ export default class My extends Component {
                             data: arr
                         })
                     })
+                    console.log("n1",this.state.data)
                 }
             })
         let url1 = `http://139.155.44.190:3005/users/getName`;
