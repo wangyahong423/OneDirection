@@ -139,7 +139,7 @@ export default class CommunicataDetails extends Component {
         <NavBar
           style={{ backgroundColor: '#37376F', color: '#fff', position: 'sticky ', top: 0, zIndex: 18, textAlign: 'center', height: '7vh' }}
           leftContent={[
-            <Link to="/xuexi"><span style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span></Link>
+            <Link to="/tiezi"><span style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span></Link>
           ]}
         >
           <span>详情</span>
@@ -165,7 +165,7 @@ export default class CommunicataDetails extends Component {
         <hr style={{ marginTop: -5 }}></hr>
         {
           this.state.todo.map((item, idx) => (
-            <div style={{ background: '#fff', color: 'black' }}>
+            <div style={{ background: '#fff', color: 'black',marginBottom:'1vh' }}>
               <div style={{ float: "left" }}>
                 <img src={this.state.photo[idx]} style={{ height: '5vh', width: '10vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
               </div>

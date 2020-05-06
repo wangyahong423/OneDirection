@@ -13,7 +13,7 @@ export default class Success extends Component {
                 >
                     <span>用户反馈</span>
                 </NavBar>
-                <img src={require('./img/My3.jpg')} style={{ height: "40vw", width: "40vw", borderRadius: "50%", margin: "8vh 7vw 4vh 30vw" }}></img>
+                <img src='my/My3.jpg' style={{ height: "40vw", width: "40vw", borderRadius: "50%", margin: "8vh 7vw 4vh 30vw" }}></img>
                 <div style={{ textAlign: "center" }}>
                     <p style={{ fontSize: "4vh", color: "#37376F" }}>校园新生通</p>
                     <div style={{ paddingTop: "4vh", height: "20vh", width: "80vw", backgroundColor: "#343466", margin: "9vh 0 0 10vw", color: "#fff", fontSize: "3vh" }}>

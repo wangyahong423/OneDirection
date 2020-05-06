@@ -36,7 +36,7 @@ export default class Yonghu extends Component {
   }
   render() {
     return (
-      <div>
+      <div> 
         <NavBar
           style={{ backgroundColor: '#37376F', color: '#fff', position: 'fixed ', width: "100vw", top: '0', zIndex: 10, textAlign: 'center', height: '7vh' }}
           leftContent={[
@@ -45,7 +45,7 @@ export default class Yonghu extends Component {
         >
           <span>用户反馈</span>
         </NavBar>
-        <img src={require('./img/My2.jpg')} style={{ height: "20vh", width: "50vw", margin: "10vh 7vw 0 25vw" }}></img>
+        <img src='my/My2.jpg' style={{ height: "20vh", width: "50vw", margin: "10vh 7vw 0 25vw" }}></img>
         <div style={{ textAlign: "center" }}>
           <p style={{ fontSize: "4vh", color: "#37376F" }}>校园新生通</p>
           <input onChange={this.getTel} style={{ border: "1px solid #BBBBBB", height: "6vh", width: "80vw", fontSize: "2vh", color: "#888888", paddingLeft: '2vw' }} placeholder="请在此输入您的联系方式(邮箱电话)">

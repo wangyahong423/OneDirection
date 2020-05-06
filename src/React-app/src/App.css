@@ -21,6 +21,11 @@
   color: #09d3ac;
 }
 
+.ks{
+  background: url('./images/ks.png') content-box;
+  margin: 0 auto;
+}
+
 .flex-container {
   margin: 0 15px;
 }
@@ -45,9 +50,9 @@
 }
 
 .placeholder {
-  color: #bbb;
+  color: #125dfa;
   text-align: center;
-  height: 160px;
+  height: 130px;
   line-height: 30px;
 }
 .onecardImg{
