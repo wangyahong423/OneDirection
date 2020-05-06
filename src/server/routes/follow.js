@@ -49,8 +49,8 @@ router.get('/selectn', (req, res) => {
     });
 });
 router.get('/add', (req, res) => {
-    let sql = 'insert into follow(lname,nname) values($1,$2)';
-    con.query(sql, [req.query.lname, req.query.nname], (err, result) => {
+    let sql = 'insert into follow(lname,nname,lid) values($1,$2,$3)';
+    con.query(sql, [req.query.lname, req.query.nname,req.query.lid], (err, result) => {
         if (err) {
             res.json({ ok: false, msg: "关注失败" });
         } else {
@@ -58,4 +58,16 @@ router.get('/add', (req, res) => {
         }
     });
 });
+router.get('/delete', (req, res) => {
+    var nname = req.query.nname;
+    let sql = 'delete from follow where nname=$1';
+    con.query(sql, [nname], (err, result) => {
+      if (err) {
+        res.json({ ok: false, msg: "取消关注失败！" });
+      } else {
+        res.json({ ok: true, msg: "取消关注！" });
+      }
+    });
+  })
+
 module.exports = router;

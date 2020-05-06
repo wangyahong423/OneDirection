@@ -15,6 +15,17 @@ router.get('/list', (req, res) => {
     });
 });
 
+router.get('/list/:id', (req, res) => {
+    let sql = 'select * from experience';
+    con.query(sql, [], (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(result.rows);
+        }
+    });
+})
+
 router.get('/add', (req, res) => {
     var content = req.query.content;
     var name = req.query.name;
