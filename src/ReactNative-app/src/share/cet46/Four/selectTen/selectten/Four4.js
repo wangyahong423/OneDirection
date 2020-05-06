@@ -12,16 +12,12 @@ export default class Four4 extends Component {
             activeSections: [],
             todo: [{
                 header: '参考答案',
-                content1: '1. 【答案】[D] ',
-                content2: '【解析】主旨大意题。本文为Walker教授的研究成果，旨在说明不同专业的毕业生有不同的经济回报，并非要传授发财心得或者比较文理科的异同。文章首句即为本题解题关键，故D正确。',
-                content3: '2. 【答案】[B]',
-                content4: '【解析】事实细节题。定位至第3段第1句。本文只有这一句与收取学费有关，后一个分句即前一个分句的理由，抓住其中隐含的因果关系就不难找到正确答案。',
-                content5: '3. 【答案】[C] ',
-                content6: '【解析】词义理解题。通过下文数据earnings 25% higher和get 10-15% extra可以推测lucrative大意应为“给人带来丰厚收入的”,故选C。',
-                content7: '4. 【答案】[C]',
-                content8: '【解析】事实细节题。第4段中出现了几个比较数字，考题要求找到此段首句提到的收人增加25%的参照点。第2段第1句中的Getting through university 表明这类学生收人增加25%的参照对象是没读大学的人，且从第4段第3句中的the list和第4句即可以确定这一段是在比较大学毕业与18岁毕业(即没读大学)收入的不同，因此C正确。',
-                content9: '5. 【答案】[D]',
-                content10: '【解析】推理判断题。结论往往出现在文章结尾,要想答对此题,一定要仔细体会本文末句。本文虽然重点讨论文科没有经济效益，但是作者并没有做出主观判断，故A、B、C都不正确，而作者在文章最后讲到了人文学科虽然经济效益不佳但学习过程更有趣，故D符合作者意思。',
+                content1: '1. 【答案】英格兰(36)开展了2000位成人的投票活动，以帮助政府努力控制人们的饮酒习惯。这项活动同时也指出，不健康的早餐总是(37)紧随酗酒之后，这反而更加会让人长胖。这次“了解自己的极限”的活动过去的重点是喝酒带来的如患疾病风险这类的其他(38)后果。但是为了(39)配合民众对体重的关注，卫生署进行了研究，表明每周喝5品脱或者是在一年(40)中喝250品脱的普通啤酒饮用者，吸收的卡路里和一个在12个月内吃了221个甜甜圈的人一样多。',
+                
+                content3: '2. 【答案】研究还指出，普通的葡萄酒饮用者一个月吸收2000卡路里。在一年中所吸收的热量(41)相当于吃38顿额外的烤牛肉。卫生部长菲力•侯朴说：“经常每天喝酒超过我们(42)推荐的限制会对我们的健康产生连锁打击，包括腰围增加。”“不仅仅是酒本身中的卡路里能让我们发胖，当我们一种东西吃得太多时，我们更(43)有可能吃高脂肪食品。”',
+                
+                content5: '3. 【答案】希瑟•卡斯韦尔补充说：“大多数人会在一大杯稀奶油面前踟蹰不前，但是面对几杯酒却从不会(44)犹豫。”“但是卡路里的成份是相似的，而且随着时间的推移，过量饮酒更有可能导致体重增加。”Dfinkaware信托公司的一个发言人也指出：“我们(45)必须要知道我们喝酒时都喝了些什么。” ',
+              
                 
             }]
         }
@@ -61,95 +57,44 @@ export default class Four4 extends Component {
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%' }}>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`One of the bitterest and most time-worm debates in student union bars up and down the country is resolved as academic research confirms that in financial terms at least, arts degrees are a complete waste of time.Getting through university boosts students’earnings by 25%, on a weighted average, or $220,000 over theirlifetime, according to Professor Ian Walker of Warwick University-but if they study Shakespeare or the peasants’revolt instead of anatomy of contract law, those gains are likely to be completely wiped out.`}
-                        </Text>
-                        <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`The government is about to allow universities to charge students up to $3,000 a year for their degrees, arguing that it’s a small price to pay compared with the financial rewards graduates reap later in life. But Prof. Walker’s research shows there are sharp variations in returns according to which subject a student takes.`}
-                        </Text>
-                        <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`Law, medicine and economics or business are the most lucrative choices, making their average earnings 25% higher, according to the article, published in the office for national statistics’monthly journal. Scientists get 10-15% extra. At the bottom of the list are arts subjects, which make only a “small ”differenceto earnings- a small negative one, in fact. Just ahead are degrees in education-which leave hard pressed teachers anaverage of 5% better off a year than if they had left school at 18.`}
-                        </Text>
-                        <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`“it’s hard to resist the conclusion that what students learn does matter a lot; and some subject areas givemore modest financial returns than others,” Prof. Walker said. As an economist, he was quick to point outthat students might gain non-financial returns from arts degrees:”Studying economics might be very dull, forexample, and studying post-modernism might be a lot of fun.”`}
-                        </Text>
-                        <Text style={{fontSize:19,marginTop:5*s, fontStyle: 'italic',color:'green'}}>
-                        Choose correct answers to the question:
-                        </Text>
-                        <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        1.What is the best title for the passage?
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　A.Professor Walker’s Research
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　B.How to Make Big Money.
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　C.Differences Between Science and Arts Degrees.
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　D.Studying Arts Has Negative Financial Outcome.
-                        </Text>
-                        <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        2.Universities charge students a rather high tuition mainly b
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　A.they provide the students with very prosperous subjects
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　B.they assume that their graduates can earn much more than
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　C.they don’t get financial support from the government
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　D.they need much revenue to support the educational expenses
-                        </Text>
-                        <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        3.The word “lucrative”(Line 1, Para. 4) most probably means _____
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　A.sensible
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　B.creative
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　C.profitable
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　D.reliable
-                        </Text>
-                        <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        4.Law, medical and business graduates could earn 25% more than ______
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　A.education graduates
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　B.arts graduates
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　C.those who had not studied at the university
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　D.the average income
-                        </Text>
-                        <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        5.We can safely conclude that the author ______
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　A.regards arts degrees as meaningless
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　B.finds this result disappointing and unfair
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　C.wants the students to think twice before they decide what to learn in &emsp;college
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　D.holds that arts degrees are still rewarding despite its scarce financial &emsp;returns
-                        </Text>
+                            &emsp;&emsp;{`The poll of 2,000 adults in England was(36)__________out as part of the government’s drive to curb people’s drinking habits.The campaign also stresses that a heavy drinking session is often(37)__________by an unhealthy breakfast，which again helps to pile on the pounds.The Know Your Limits campaign has in the past focused on other(38)__________0f drinking，such as di sease risk.But to(39)__________with the focus on weight，the DepaIhiient of Health carried out research showing a regular beer drinker,who downed(喝)five pints a week or 250 over the(40)__________of a year,packed away the same number of calories as someone eating 22 1 doughnuts over the space of 12 months.It also revealed the average wine drinker consumed 2,000 calories each month.over the course of a year,that is the(41)__________ofeating all extra 38 roast beefdinners.Health minister Phil Hope said，“Regularly drinking more than our(42)__________daily limits can have a knock-on effect on our health，including an expanding waistline.“It’s not only the calories in the drinks themselves that can help to pile on the pounds，we’re also more(43)__________to eat fatty foods when we’ve had one too many.” Heather Caswell，of the British Nutrition Foundation，added，“Most people would baulk(犹豫)at consuming a full glass of single cream，but wouldn’t minl(44)__________about a couple ofpints.” “But the calorie content is similar and，over time，excess alcohol intake is likely to lead to weight gain.” And a spokesman for the Drinkaware Trust added：“It’s(45)__________we are in the know when it comes to what we are drinking.”`}
+                        </Text> 
+                        <View style={{flexDirection:'row'}}>
+                        <Text style={{ fontSize: 16 * s,marginLeft:20*s }}>
+                            &emsp;&emsp;{`A.consequences
+
+　　B.carried
+
+　　C.communicate.
+
+　　D.followed
+
+　　E.equivalent
+
+　　F.held
+
+　　G.twice
+
+　　H.likely`}
+                        </Text> 
+                        <Text style={{ fontSize: 16 * s ,marginLeft:50*s}}>
+                            &emsp;&emsp;{`I.coincide
+
+　　J.necessity
+
+　　K.course
+
+　　L.related
+
+　　M.imperative
+
+　　N. over
+
+　　0.recommended`}
+                        </Text> 
+                        </View>
+                                         
+                        
                     </View>
                 </View>
                 <Accordion

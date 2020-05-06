@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Actions } from 'react-native-router-flux';
 import { Text, View, ScrollView, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter } from 'react-native';
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
@@ -205,6 +206,11 @@ export default class Xuexidongtai extends Component {
         var param = 1;
         DeviceEventEmitter.emit('freshthree', param);
     }
+    details = (idx) => {
+        var value = { page: this.state.list[idx] };
+        AsyncStorage.setItem('Pageone', JSON.stringify(value));
+        Actions.xiangqing();
+    }
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
@@ -237,7 +243,7 @@ export default class Xuexidongtai extends Component {
                                     marginBottom: 20 * s
                                 }}
                                 >
-                                    <Text style={{ fontSize: 18 * s }}>{item.content}</Text>
+                                    <Text style={{ fontSize: 18 * s }} onPress={this.details.bind(this, (idx))}>{item.content}</Text>
                                 </View>
                                 <View style={{ position: 'absolute', top: 10, left: 430 }}>
                                     <Text style={{ color: 'red', fontSize: 20 }} onPress={this.delTie.bind(this, (item.id))}>×</Text>

@@ -12,16 +12,12 @@ export default class Two2 extends Component {
             activeSections: [],
             todo: [{
                 header: '参考答案',
-                content1: '1. 【答案】[D] ',
-                content2: '【解析】主旨大意题。本文为Walker教授的研究成果，旨在说明不同专业的毕业生有不同的经济回报，并非要传授发财心得或者比较文理科的异同。文章首句即为本题解题关键，故D正确。',
-                content3: '2. 【答案】[B]',
-                content4: '【解析】事实细节题。定位至第3段第1句。本文只有这一句与收取学费有关，后一个分句即前一个分句的理由，抓住其中隐含的因果关系就不难找到正确答案。',
-                content5: '3. 【答案】[C] ',
-                content6: '【解析】词义理解题。通过下文数据earnings 25% higher和get 10-15% extra可以推测lucrative大意应为“给人带来丰厚收入的”,故选C。',
-                content7: '4. 【答案】[C]',
-                content8: '【解析】事实细节题。第4段中出现了几个比较数字，考题要求找到此段首句提到的收人增加25%的参照点。第2段第1句中的Getting through university 表明这类学生收人增加25%的参照对象是没读大学的人，且从第4段第3句中的the list和第4句即可以确定这一段是在比较大学毕业与18岁毕业(即没读大学)收入的不同，因此C正确。',
-                content9: '5. 【答案】[D]',
-                content10: '【解析】推理判断题。结论往往出现在文章结尾,要想答对此题,一定要仔细体会本文末句。本文虽然重点讨论文科没有经济效益，但是作者并没有做出主观判断，故A、B、C都不正确，而作者在文章最后讲到了人文学科虽然经济效益不佳但学习过程更有趣，故D符合作者意思。',
+                content1: '1. 【答案】　社交网站能让用户在他们的窗口中“静音(屏弊)”来自其他用户的消息，而不让他们知道，从而避免取消关注的(36)尴尬，或者是容忍你在现实生活中(37)极爱说话的朋友。推特推出了新的(38)功能，以让用户能更好地处理他们收到的洪水般泛滥的信息。用户现在可以使那些他们关注的人“静音”，从他们自己的窗口上删除这些人的微博及转发。那些被禁言的人们不会知道他(她)已(39)被静音。这是一种隐秘的方法，可以在不让某些用户知道的情况下少看一些来自他们的内容。推特在一篇博客文章中说道，一个人可以很轻易地随时被静音或者是(40)被取消静音。',
+                
+                content3: '2. 【答案】该公司指出：“静音让你能够将某个用户的内容从你推特体验的关键部分删掉，从而使你可以更好地(41)掌控你在推特上看到的内容。”虽然推特在最近几个星期里一直在对这项功能进行试验，该公司宣布静音这项功能将会(42)适用于该公司iOS系统和安卓系统的所有用户，以及Twitter.Com网站。像TweetDeck这样的其他一些推特应用程序已经拥有了静音这项功能。',
+                
+                content5: '3. 【答案】这项功能是推特公司为了使它的服务可以适用于更广大的人群推出的(43)总战略中的一部分。在首次公开发行成功之后，在最近几个月里推特公司股票大跌，原因是投资商对该社交网络吸纳新用户的(44)能力产生了怀疑。公司的CE0迪克•科斯特罗(45)郑重宣布，今年推特会针对其界面作出变动，以使其更易理解和操作。作为该努力中的一部分，公司在四月份对用户信息页面进行了彻底的改动。 ',
+              
                 
             }]
         }
@@ -61,95 +57,44 @@ export default class Two2 extends Component {
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%' }}>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`One of the bitterest and most time-worm debates in student union bars up and down the country is resolved as academic research confirms that in financial terms at least, arts degrees are a complete waste of time.Getting through university boosts students’earnings by 25%, on a weighted average, or $220,000 over theirlifetime, according to Professor Ian Walker of Warwick University-but if they study Shakespeare or the peasants’revolt instead of anatomy of contract law, those gains are likely to be completely wiped out.`}
-                        </Text>
-                        <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`The government is about to allow universities to charge students up to $3,000 a year for their degrees, arguing that it’s a small price to pay compared with the financial rewards graduates reap later in life. But Prof. Walker’s research shows there are sharp variations in returns according to which subject a student takes.`}
-                        </Text>
-                        <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`Law, medicine and economics or business are the most lucrative choices, making their average earnings 25% higher, according to the article, published in the office for national statistics’monthly journal. Scientists get 10-15% extra. At the bottom of the list are arts subjects, which make only a “small ”differenceto earnings- a small negative one, in fact. Just ahead are degrees in education-which leave hard pressed teachers anaverage of 5% better off a year than if they had left school at 18.`}
-                        </Text>
-                        <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`“it’s hard to resist the conclusion that what students learn does matter a lot; and some subject areas givemore modest financial returns than others,” Prof. Walker said. As an economist, he was quick to point outthat students might gain non-financial returns from arts degrees:”Studying economics might be very dull, forexample, and studying post-modernism might be a lot of fun.”`}
-                        </Text>
-                        <Text style={{fontSize:19,marginTop:5*s, fontStyle: 'italic',color:'green'}}>
-                        Choose correct answers to the question:
-                        </Text>
-                        <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        1.What is the best title for the passage?
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　A.Professor Walker’s Research
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　B.How to Make Big Money.
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　C.Differences Between Science and Arts Degrees.
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　D.Studying Arts Has Negative Financial Outcome.
-                        </Text>
-                        <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        2.Universities charge students a rather high tuition mainly b
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　A.they provide the students with very prosperous subjects
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　B.they assume that their graduates can earn much more than
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　C.they don’t get financial support from the government
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　D.they need much revenue to support the educational expenses
-                        </Text>
-                        <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        3.The word “lucrative”(Line 1, Para. 4) most probably means _____
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　A.sensible
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　B.creative
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　C.profitable
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　D.reliable
-                        </Text>
-                        <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        4.Law, medical and business graduates could earn 25% more than ______
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　A.education graduates
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　B.arts graduates
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　C.those who had not studied at the university
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　D.the average income
-                        </Text>
-                        <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        5.We can safely conclude that the author ______
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　A.regards arts degrees as meaningless
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　B.finds this result disappointing and unfair
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　C.wants the students to think twice before they decide what to learn in &emsp;college
-                        </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　D.holds that arts degrees are still rewarding despite its scarce financial &emsp;returns
-                        </Text>
+                            &emsp;&emsp;{`The social network will let users “mute” messages from other users on their timelines without the muted person’s knowledge，thereby avoiding the(36)__________process of having to unfollow(取消关注)，or put up with，your(37)__________talkative IRL friends.Twitter rolled out new(38)__________to let users better manage the deluge(泛滥)of tweets they receive.Users can now“mute”people they follow,removing those people’s tweets and retweets from their own timelines.The muted person won’t know that he or she has been(39)__________.It’s a stealthy way to read less content from certain users without having to unfollow them.A person can easily be muted or(40)__________at any time，Twitter said in a blog post.“Mute gives you even more(41)__________over the content you see on Twitter by letting you remove a user’s content from key parts of your Twitter experience，”the company said.Though Twitter had been experimenting with the feature in recent weeks，it announced that muting will be(42)__________to all users of the company’s iOS and Android apps，as well as 　　the Twitter.com website.Some other Twitter applications，like TweetDeck，already allowed muting.The feature is part of Twitter’s(43)__________strategy to make its service more accessible to a wider range of people.Following a successful initial public offerin9，Twitter’s stock has tumbled in recent months as investors worry about the social network’s(44)__________to attract new users.CEO Dick Costolo(45)__________that Twitter would make changes to its interface this year to make it easier to understand and manage.The company overhauled(彻底检修)user profile pages in April as part of this effort.`}
+                        </Text> 
+                        <View style={{flexDirection:'row'}}>
+                        <Text style={{ fontSize: 16 * s,marginLeft:20*s }}>
+                            &emsp;&emsp;{`A.silenced
+
+　　B.awkward
+
+　　C.unmvted
+
+　　D.feature
+
+　　E.embarrassment
+
+　　F.unfollowed
+
+　　G.control
+
+　　H.extremely`}
+                        </Text> 
+                        <Text style={{ fontSize: 16 * s ,marginLeft:50*s}}>
+                            &emsp;&emsp;{`I.overall
+
+　　J.vowed
+
+　　K.generally
+
+　　L.ability
+
+　　M.accepted
+
+　　N.available
+
+　　O.characters`}
+                        </Text> 
+                        </View>
+                                         
+                        
                     </View>
                 </View>
                 <Accordion

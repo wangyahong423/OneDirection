@@ -238,6 +238,7 @@ export default class Biji extends Component {
                                     marginBottom: 20 * s
                                 }}
                                 >
+                                    <Text style={{ fontSize: 18 * s }}>{item.title}</Text>
                                     <Text style={{ fontSize: 18 * s }}>{item.content}</Text>
                                 </View>
                                 <View style={{ position: 'absolute', top: 10, left: 430 }}>

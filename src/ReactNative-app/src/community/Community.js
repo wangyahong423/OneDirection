@@ -226,7 +226,7 @@ export default class Community extends Component {
             this.setState({
                 list: crr
             })
-            let url1 = `http://139.155.44.190:3005/learnlike/add?lid=${this.state.list[idx].id}&name=${this.state.username}`;
+            let url1 = `http://139.155.44.190:3005/learnlike/add?lid=${this.state.list[idx].id}&name=${this.state.username}&lname=${this.state.list[idx].name}`;
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {

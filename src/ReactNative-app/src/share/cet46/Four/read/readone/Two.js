@@ -13,15 +13,15 @@ export default class question1 extends Component {
             todo: [{
                 header: '参考答案',
                 content1: '1. 【答案】[D] ',
-                content2: '【解析】主旨大意题。本文为Walker教授的研究成果，旨在说明不同专业的毕业生有不同的经济回报，并非要传授发财心得或者比较文理科的异同。文章首句即为本题解题关键，故D正确。',
-                content3: '2. 【答案】[B]',
-                content4: '【解析】事实细节题。定位至第3段第1句。本文只有这一句与收取学费有关，后一个分句即前一个分句的理由，抓住其中隐含的因果关系就不难找到正确答案。',
-                content5: '3. 【答案】[C] ',
-                content6: '【解析】词义理解题。通过下文数据earnings 25% higher和get 10-15% extra可以推测lucrative大意应为“给人带来丰厚收入的”,故选C。',
-                content7: '4. 【答案】[C]',
-                content8: '【解析】事实细节题。第4段中出现了几个比较数字，考题要求找到此段首句提到的收人增加25%的参照点。第2段第1句中的Getting through university 表明这类学生收人增加25%的参照对象是没读大学的人，且从第4段第3句中的the list和第4句即可以确定这一段是在比较大学毕业与18岁毕业(即没读大学)收入的不同，因此C正确。',
-                content9: '5. 【答案】[D]',
-                content10: '【解析】推理判断题。结论往往出现在文章结尾,要想答对此题,一定要仔细体会本文末句。本文虽然重点讨论文科没有经济效益，但是作者并没有做出主观判断，故A、B、C都不正确，而作者在文章最后讲到了人文学科虽然经济效益不佳但学习过程更有趣，故D符合作者意思。',
+                content2: '【解析】事实细节题。本题考查因果关系。第2段倒数第3句中的“not because of... but because of...”指出了nature就是原因所在，characteristics是nature的近义词，故D正确。',
+                content3: '2. 【答案】[A]',
+                content4: '【解析】词义理解题。通过go under所在句子中的Even with......可知，该句与上一句形成对比，这两句中的enrollment是相对应的，所以go under应该也与上文的problem相对应，由此可推断，go under就是have problem/ difficulty之义。本题最具干扰性的是C，但文中并无细节具体说明即使入学人数满额学校收人也很少的问题，因此C把problem定义得过细，不如A恰当。',
+                content5: '3. 【答案】[B] ',
+                content6: '【解析】推理判断题，也是主旨大意题。文章一开头就指出“许多私立髙等学校都处于危险之中”，引起读者的关注，结尾句明确倡议支持公立髙等教育的人们应该同样支持私立髙等教育，由此可见,B是本文的目的。本题最具干扰性的是D，D的说法在最后一段中多次提到，但是作者提出办学多样性是为了说明私立教育的重要性，故D只是本文主题(私立教育)的支持性细节，并非本文的中心话题。',
+                content7: '4. 【答案】[D]',
+                content8: '【解析】事实细节题。可用排除法找出答案。A可从第1段推断得出;B可在第2段第3句中找到;C可从最后一段中间找到。',
+                content9: '5. 【答案】[C]',
+                content10: '【解析】推理判断题。可用排除法找出答案，根据原文，第2段第3句可证明A不可行;最后一段第3句证明B不可行;第2段第2句也指出D行不通。本文的目的是为了提高公众对私立教育的关注，由此可见，只有C是拯救私立高校的可行性方法。',
                 
             }]
         }
@@ -61,94 +61,92 @@ export default class question1 extends Component {
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%' }}>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`One of the bitterest and most time-worm debates in student union bars up and down the country is resolved as academic research confirms that in financial terms at least, arts degrees are a complete waste of time.Getting through university boosts students’earnings by 25%, on a weighted average, or $220,000 over theirlifetime, according to Professor Ian Walker of Warwick University-but if they study Shakespeare or the peasants’revolt instead of anatomy of contract law, those gains are likely to be completely wiped out.`}
+                            &emsp;&emsp;{`Many private institutions of higher education around the country are in danger. Not all will be saved, andperhaps not all deserve to be saved. There are low-quality schools just as there are low-quality business.We have no obligation to save them simply because they exist.`}
                         </Text>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`The government is about to allow universities to charge students up to $3,000 a year for their degrees, arguing that it’s a small price to pay compared with the financial rewards graduates reap later in life. But Prof. Walker’s research shows there are sharp variations in returns according to which subject a student takes.`}
+                            &emsp;&emsp;{`But many thriving institutions that deserve to continue are threatened. They are doing a fine job educationally, but they are caught in a financial squeeze, with no way to reduce rising costs or increase revenuessignificantly. Raising tuition doesn’t bring in more revenue, for each time tuition goes up, the enrollment goes down, or the amount that must be given away in student aid goes up. Schools are bad businesses, whether public or private, not usually because of mismanagement but because of the nature of the enterprise.They lose money on every customer, and they can go bankrupt either from too few students or too many students. Even a very good college is a very bad business.`}
                         </Text>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`Law, medicine and economics or business are the most lucrative choices, making their average earnings 25% higher, according to the article, published in the office for national statistics’monthly journal. Scientists get 10-15% extra. At the bottom of the list are arts subjects, which make only a “small ”differenceto earnings- a small negative one, in fact. Just ahead are degrees in education-which leave hard pressed teachers anaverage of 5% better off a year than if they had left school at 18.`}
+                            &emsp;&emsp;{`It is such colleges, thriving but threatened, I worry about. Low enrollment is not their chief problem. Even with full enrollments, they may go under. Efforts to save them, and preferably to keep them private, are a national necessity. There is no basis for arguing that private schools are inherently (固有地)better than public schools. Examples to the contrary abound. Anyone can name state universities and colleges that rank as the finest in the nation and the world. It is now inevitable that public institutions will be dominant, and therefore diversity is a national necessity. Diversity in the way we support schools tends to give us a healthy diversity in the forms of education. In an imperfect society such as ours, uniformity of education throughout the nation could be dangerous. In an imperfect society, diversity is a positive good. Enthusiastic supporters of public higher education know the importance of sustaining private higher education.`}
                         </Text>
-                        <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`“it’s hard to resist the conclusion that what students learn does matter a lot; and some subject areas givemore modest financial returns than others,” Prof. Walker said. As an economist, he was quick to point outthat students might gain non-financial returns from arts degrees:”Studying economics might be very dull, forexample, and studying post-modernism might be a lot of fun.”`}
-                        </Text>
+                       
                         <Text style={{fontSize:19,marginTop:5*s, fontStyle: 'italic',color:'green'}}>
                         Choose correct answers to the question:
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        1.What is the best title for the passage?
+                        1.According to the author's opinion, schools are bad businesses because of _______.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.Professor Walker’s Research
+                        　A.mismanagement
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.How to Make Big Money.
+                        　B. too few students
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.Differences Between Science and Arts Degrees.
+                        　C.financial squeeze
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.Studying Arts Has Negative Financial Outcome.
+                        　D.their characteristics
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        2.Universities charge students a rather high tuition mainly b
+                        2.The author used the phrase “go under" in Para. 3 to mean "_______".
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.they provide the students with very prosperous subjects
+                        　A.get into difficulties
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.they assume that their graduates can earn much more than
+                        　B. have low enrollment
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.they don’t get financial support from the government
+                        　C.have little money
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.they need much revenue to support the educational expenses
+                        　D.bring in more money
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        3.The word “lucrative”(Line 1, Para. 4) most probably means _____
+                        3.We can reasonably conclude from this passage that the author made an appeal to the public in order to support_____
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.sensible
+                        　A.public institution
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.creative
+                        　B. private schools
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.profitable
+                        　C.uniformity of education
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.reliable
+                        　D.diversity of education
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        4.Law, medical and business graduates could earn 25% more than ______
+                        4.Which of the following is NOT mentioned about private schools?
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.education graduates
+                        　A.High-quality private schools deserve to be saved.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.arts graduates
+                        　B.If the tuition of the private schools is raised, the enrollment goes down.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.those who had not studied at the university
+                        　C.There are many cases to show that public schools are better than private schools.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.the average income
+                        　D.Private schools are more profitable than public schools.
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        5.We can safely conclude that the author ______
+                        5.Which of the following ways could possibly save private schools?
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.regards arts degrees as meaningless
+                        　A.Raising tuition.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.finds this result disappointing and unfair
+                        　B.Full enrollment.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.wants the students to think twice before they decide what to learn in &emsp;college
+                        　C.National awareness and support.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.holds that arts degrees are still rewarding despite its scarce financial &emsp;returns
+                        　D.Reduction of rising costs.
                         </Text>
                     </View>
                 </View>

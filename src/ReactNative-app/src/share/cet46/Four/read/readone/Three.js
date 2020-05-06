@@ -12,16 +12,16 @@ export default class question1 extends Component {
             activeSections: [],
             todo: [{
                 header: '参考答案',
-                content1: '1. 【答案】[D] ',
-                content2: '【解析】主旨大意题。本文为Walker教授的研究成果，旨在说明不同专业的毕业生有不同的经济回报，并非要传授发财心得或者比较文理科的异同。文章首句即为本题解题关键，故D正确。',
+                content1: '1. 【答案】[B] ',
+                content2: '【解析】推理判断题。首先依据题目中的casual dining找到第2段中的informality。其后有两个for引导的介词短语，后一个说“对于英国精致瓷器的制造商来说，这(informality)意味着经济困难时期”;此外,第3段用数据具体指出陶瓷业裁员之严重，说明陶瓷业在萎缩，即B。A、D均属夸大事实，C与文章内容无关。',
                 content3: '2. 【答案】[B]',
-                content4: '【解析】事实细节题。定位至第3段第1句。本文只有这一句与收取学费有关，后一个分句即前一个分句的理由，抓住其中隐含的因果关系就不难找到正确答案。',
-                content5: '3. 【答案】[C] ',
-                content6: '【解析】词义理解题。通过下文数据earnings 25% higher和get 10-15% extra可以推测lucrative大意应为“给人带来丰厚收入的”,故选C。',
+                content4: '【解析】事实细节题。根据倒数第2段第2句中指出现今休闲文化流行的背景：工作时间长，家庭生活节奏紧张,B中的 Busy schedules与文中的demanding family schedules对应，故为答案。',
+                content5: '3. 【答案】[D] ',
+                content6: '【解析】事实细节题。Royal Doulton在文章中出现过两次：第3段说它裁员，因为人们用餐越来越随意(不再讲究餐具的精致);第 4 段中“A spokesman for Royal Doulton admitted that the company...”，暗示公司的性质，可以推断它是精制器皿的生产者。',
                 content7: '4. 【答案】[C]',
-                content8: '【解析】事实细节题。第4段中出现了几个比较数字，考题要求找到此段首句提到的收人增加25%的参照点。第2段第1句中的Getting through university 表明这类学生收人增加25%的参照对象是没读大学的人，且从第4段第3句中的the list和第4句即可以确定这一段是在比较大学毕业与18岁毕业(即没读大学)收入的不同，因此C正确。',
-                content9: '5. 【答案】[D]',
-                content10: '【解析】推理判断题。结论往往出现在文章结尾,要想答对此题,一定要仔细体会本文末句。本文虽然重点讨论文科没有经济效益，但是作者并没有做出主观判断，故A、B、C都不正确，而作者在文章最后讲到了人文学科虽然经济效益不佳但学习过程更有趣，故D符合作者意思。',
+                content8: '【解析】事实细节题。根据题目中的the layoffs找到文章第4段首句，其中的have their roots in相当于题目中的main cause is,shifts相当于C中的change。其实本题与第1题是交叉相关的，从第1题的题目可找到本题的答案。',
+                content9: '5. 【答案】[A]',
+                content10: '【解析】事实细节题。根据最后一段，特别是第2句“The fine points of etiquette... must be picked up elsewhere良好的餐桌礼仪必须在其他地方被重拾起来”，可知礼仪在某些场合还是必要的，故答案为A。',
                 
             }]
         }
@@ -61,94 +61,100 @@ export default class question1 extends Component {
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ width: '85%', margin: '7.5%' }}>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`One of the bitterest and most time-worm debates in student union bars up and down the country is resolved as academic research confirms that in financial terms at least, arts degrees are a complete waste of time.Getting through university boosts students’earnings by 25%, on a weighted average, or $220,000 over theirlifetime, according to Professor Ian Walker of Warwick University-but if they study Shakespeare or the peasants’revolt instead of anatomy of contract law, those gains are likely to be completely wiped out.`}
+                            &emsp;&emsp;{`When families gather for Christmas dinner, some will stick to formal traditions dating back to Grandma’s generation. Their tables will be set with the good dishes and silver, and the dress code will be Sunday-best.`}
                         </Text>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`The government is about to allow universities to charge students up to $3,000 a year for their degrees, arguing that it’s a small price to pay compared with the financial rewards graduates reap later in life. But Prof. Walker’s research shows there are sharp variations in returns according to which subject a student takes.`}
+                            &emsp;&emsp;{`But in many other homes, this china--and--silver elegance has given way to stoneware (粗陶)--and--stainless informality, with dresses assuming an equally casual--Friday look. For hosts and guests, the change means greater simplicity and comfort. For makers of fine china in Britain, it spells economic hard times.`}
                         </Text>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`Law, medicine and economics or business are the most lucrative choices, making their average earnings 25% higher, according to the article, published in the office for national statistics’monthly journal. Scientists get 10-15% extra. At the bottom of the list are arts subjects, which make only a “small ”differenceto earnings- a small negative one, in fact. Just ahead are degrees in education-which leave hard pressed teachers anaverage of 5% better off a year than if they had left school at 18.`}
+                            &emsp;&emsp;{`Last week Royal Doulton, the largest employer in Stoke-onTrent, announced that it is eliminating 1,000 jobs--one-fifth of its total workforce. That brings to more than 4,000 the number of positions lost in 18 months in the pottery (陶瓷) region. Wedgwood and other pottery factories made cuts earlier.`}
                         </Text>
                         <Text style={{ fontSize: 16 * s }}>
-                            &emsp;&emsp;{`“it’s hard to resist the conclusion that what students learn does matter a lot; and some subject areas givemore modest financial returns than others,” Prof. Walker said. As an economist, he was quick to point outthat students might gain non-financial returns from arts degrees:”Studying economics might be very dull, forexample, and studying post-modernism might be a lot of fun.”`}
+                            &emsp;&emsp;{`“Although a strong pound and weak markets in Asia play a role in the downsizing, the layoffs in Stoke have their roots in earthshaking social shifts. A spokesman for Royal Doulton admitted that the company “has been somewhat slow in catching up with the trend”toward casual dining. Families eat together less often, he explained, and more people eat alone, either because they are single or they eat in front of television.”`}
+                        </Text>
+                        <Text style={{ fontSize: 16 * s }}>
+                            &emsp;&emsp;{`“Even dinner parties, if they happen at all, have gone causal. In a time of long work hours and demanding family schedules, busy hosts insist, rightly, that it’s better to share a takeout pizza on paper plates inthe family room than to wait for the perfect moment or a “real” dinner party. Too often, the perfect moment never comes, Iron a fine-pattened tablecloth? Forget it. Polish the silver? Who has time?”`}
+                        </Text>
+                        <Text style={{ fontSize: 16 * s }}>
+                            &emsp;&emsp;{`“Yet the loss of formality has its down side. The fine points of etiquette(礼节) that children might once have learned at the table by observation or instruction from parents and grandparents(“Chew with your mouth closed.”“keep your elbows off the table.”)must be picked up elsewhere. Some companies now offer etiquette seminars for employees who may be competent professionally but clueless socially.”`}
                         </Text>
                         <Text style={{fontSize:19,marginTop:5*s, fontStyle: 'italic',color:'green'}}>
                         Choose correct answers to the question:
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        1.What is the best title for the passage?
+                        1.The trend toward casual dining has resulted in ______
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.Professor Walker’s Research
+                        　A.bankruptcy of fine china manufacturers
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.How to Make Big Money.
+                        　B.Shrinking of the pottery industry
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.Differences Between Science and Arts Degrees.
+                        　C. restructuring of large enterprises
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.Studying Arts Has Negative Financial Outcome.
+                        　D.Economic recession in Great Britain
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        2.Universities charge students a rather high tuition mainly b
+                        2.Which of the following may be the best reason for casual dining?
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.they provide the students with very prosperous subjects
+                        　A.Family members need more time to relax.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.they assume that their graduates can earn much more than
+                        　B. Busy schedules leave people no time for formality.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.they don’t get financial support from the government
+                        　C.People want to practice economy in times of scarcity.
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.they need much revenue to support the educational expenses
+                        　D.Young people won’t follow the etiquette of the older generation.
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        3.The word “lucrative”(Line 1, Para. 4) most probably means _____
+                        3.It can be learned from the passage that Royal Doulton is _______
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.sensible
+                        　A. a retailer of stainless steel tableware
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.creative
+                        　B.a dealer in stoneware
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.profitable
+                        　C.a pottery chain store
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.reliable
+                        　D.a producer of fine china
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        4.Law, medical and business graduates could earn 25% more than ______
+                        4.The main cause of the layoffs in the pottery industry is _______
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.education graduates
+                        　A.the increased value of the pound
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.arts graduates
+                        　B.the economic recession in Asia
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.those who had not studied at the university
+                        　C.the change in people’s way of life
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.the average income
+                        　D.the fierce competition at home and abroad
                         </Text>
                         <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        5.We can safely conclude that the author ______
+                        5.Refined table manners, though less popular than before in current social life, _______
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　A.regards arts degrees as meaningless
+                        　A.are still a must on certain occasions
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　B.finds this result disappointing and unfair
+                        　B. are bound to return sooner or later
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　C.wants the students to think twice before they decide what to learn in &emsp;college
+                        　C. are still being taught by parents at home
                         </Text>
                         <Text style={{fontSize:15 * s }}>
-                        　D.holds that arts degrees are still rewarding despite its scarce financial &emsp;returns
+                        　D. Can help improve personal relationships
                         </Text>
                     </View>
                 </View>

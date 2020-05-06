@@ -7,7 +7,7 @@ const s = width / 460;
 export default class Yuedu extends Component {
     render() {
         return (
-            <ScrollView style={{ backgroundColor: '#ffffff',}}>
+            <ScrollView style={{ backgroundColor: '#ffffff',}}> 
                 <View style={{
                     height: 50*s, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
                     borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1,marginTop:10*s
