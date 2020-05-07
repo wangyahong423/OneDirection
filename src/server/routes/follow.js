@@ -62,12 +62,12 @@ router.get('/delete', (req, res) => {
     var nname = req.query.nname;
     let sql = 'delete from follow where nname=$1';
     con.query(sql, [nname], (err, result) => {
-      if (err) {
-        res.json({ ok: false, msg: "取消关注失败！" });
-      } else {
-        res.json({ ok: true, msg: "取消关注！" });
-      }
+        if (err) {
+            res.json({ ok: false, msg: "取消关注失败！" });
+        } else {
+            res.json({ ok: true, msg: "取消关注！" });
+        }
     });
-  })
+})
 
 module.exports = router;
