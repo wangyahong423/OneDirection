@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { Actions } from 'react-native-router-flux';
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
-export default class follows extends Component {
+export default class Follows extends Component {
     constructor() {
         super();
         this.state = {
