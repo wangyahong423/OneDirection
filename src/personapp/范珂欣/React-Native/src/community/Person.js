@@ -167,6 +167,7 @@ export default class Person extends Component {
         Actions.pop();
         var param = 1;
         DeviceEventEmitter.emit('Erefresh', param);
+        DeviceEventEmitter.emit('refresh', param);
     }
     render() {
         return (
