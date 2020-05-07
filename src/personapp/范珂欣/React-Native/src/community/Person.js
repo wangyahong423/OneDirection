@@ -155,8 +155,13 @@ export default class Person extends Component {
     }
     personexp = () => {
         var value = { name: this.state.all.name, pic: this.state.all.pic, level: this.state.all.level };
-        AsyncStorage.setItem('personname', JSON.stringify(value));
+        AsyncStorage.setItem('personname1', JSON.stringify(value));
         Actions.perexp();
+    }
+    personlearn = () => {
+        var value = { name: this.state.all.name, pic: this.state.all.pic, level: this.state.all.level };
+        AsyncStorage.setItem('personname2', JSON.stringify(value));
+        Actions.perlearn();
     }
     back = () => {
         Actions.pop();
@@ -207,7 +212,14 @@ export default class Person extends Component {
                             <Text style={{ fontSize: 20 * s, color: '#000', marginLeft: 10 * s }}>获赞数：</Text>
                             <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.Llike}</Text>
                         </View>
-
+                        {
+                            this.state.learn
+                                ? <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s, justifyContent: 'space-between', borderColor: '#37376F', borderWidth: 1 * s }} onPress={() => this.personlearn()}>
+                                    <Text style={{ fontSize: 20 * s }}>在社区中发布的帖子</Text>
+                                    <Icon name="chevron-right" size={20} color="#000" />
+                                </TouchableOpacity>
+                                : null
+                        }
                         <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s }}>
                             <Text style={{ fontSize: 20 * s, color: '#000' }}>在经验分享中发帖子数量：</Text>
                             <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.exp}</Text>
