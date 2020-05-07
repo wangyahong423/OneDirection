@@ -37,24 +37,12 @@ export default class Community extends Component {
         var url2 = `http://139.155.44.190:3005/learnlike/list`;
         let url3 = `http://139.155.44.190:3005/users/list`;
         let url4 = `http://139.155.44.190:3005/learntalk/list`;
-        let url5 = `http://139.155.44.190:3005/follow/list`;
         fetch(url3)
             .then((res) => res.json())
             .then((res) => {
                 this.setState({
                     pic: res,
                 });
-                fetch(url5)
-                    .then((res) => res.json())
-                    .then((res) => {
-                        var followList = [];
-                        for (var i = 0; i < res.length; i++) {
-                            if (res[i].lname == this.state.username) {
-                                followList.push(res[i]);
-                            }
-                        }
-                        this.setState({ follow: followList })
-                    })
                 fetch(url2)
                     .then((res) => res.json())
                     .then((res) => {
@@ -92,20 +80,6 @@ export default class Community extends Component {
                                                     item.like = false;
                                                 }
                                             }
-                                            item.follow = false;
-                                            // console.log("输出item",item)
-                                            console.log("输出",item.nname,this.state.follow)
-
-                                            for (var m = 0; m < this.state.follow.length; m++) {
-                                                if (item.name == this.state.follow[m].nname) {
-                                                    console.log("相等")
-                                                    item.follow = true;
-                                                    break;
-                                                }
-                                                else {
-                                                    item.follow = false;
-                                                }
-                                            }
                                             var likeNum = 0;
                                             for (var z = 0; z < this.state.likeNum.length; z++) {
                                                 if (item.id == this.state.likeNum[z].lid) {
@@ -123,11 +97,6 @@ export default class Community extends Component {
                                         });
                                         this.setState({ isLoading: false });
                                         this.setState({ list: res });
-                                        for (var i = 0; i < this.state.list.length; i++) {
-                                            if (this.state.list[i].follow) {
-                                                console.log(this.state.list[i].name)
-                                            }
-                                        }
                                     });
                             });
                     });
@@ -135,90 +104,69 @@ export default class Community extends Component {
         var self = this;
         this.listener = DeviceEventEmitter.addListener('refresh', function (param) {
             fetch(url3)
-                .then((res) => res.json())
-                .then((res) => {
-                    self.setState({
-                        pic: res,
-                    });
-                    fetch(url5)
-                        .then((res) => res.json())
-                        .then((res) => {
-                            var followList = [];
-                            for (var i = 0; i < res.length; i++) {
-                                if (res[i].lname == self.state.username) {
-                                    followList.push(res[i]);
-                                }
-                            }
-                            self.setState({ follow: followList })
-                        })
-                    fetch(url2)
-                        .then((res) => res.json())
-                        .then((res) => {
-                            self.setState({ likeNum: res });
-                            var likeList = [];
-                            for (var i = 0; i < res.length; i++) {
-                                if (res[i].name == self.state.username) {
-                                    likeList.push(res[i]);
-                                }
-                            }
-                            self.setState({ like: likeList });
-                            fetch(url4)
-                                .then((res) => res.json())
-                                .then((res) => {
-                                    self.setState({ comNum: res });
-                                    fetch(url1)
-                                        .then((res) => res.json())
-                                        .then((res) => {
-                                            res.forEach(item => {
-                                                for (var i = 0; i < self.state.pic.length; i++) {
-                                                    if (item.name == self.state.pic[i].name) {
-                                                        item.pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
-                                                        item.level = self.state.pic[i].level;
-                                                        item.college = self.state.pic[i].college;
-                                                        break;
-                                                    }
-                                                }
-                                                item.like = false;
-                                                for (var j = 0; j < self.state.like.length; j++) {
-                                                    if (item.id == self.state.like[j].lid) {
-                                                        item.like = true;
-                                                        break;
-                                                    }
-                                                    else {
-                                                        item.like = false;
-                                                    }
-                                                }
-                                                item.follow = false;
-                                                for (var m = 0; m < self.state.follow.length; m++) {
-                                                    if (item.name == self.state.follow[m].nname) {
-                                                        item.follow = true;
-                                                        break;
-                                                    }
-                                                    else {
-                                                        item.follow = false;
-                                                    }
-                                                }
-                                                var likeNum = 0;
-                                                for (var z = 0; z < self.state.likeNum.length; z++) {
-                                                    if (item.id == self.state.likeNum[z].lid) {
-                                                        likeNum++;
-                                                    }
-                                                }
-                                                item.likeNum = likeNum;
-                                                var comNum = 0;
-                                                for (var z = 0; z < self.state.comNum.length; z++) {
-                                                    if (item.id == self.state.comNum[z].lid) {
-                                                        comNum++;
-                                                    }
-                                                }
-                                                item.comNum = comNum;
-                                            });
-                                            this.setState({ isLoading: false });
-                                            this.setState({ list: res });
-                                        });
-                                });
-                        });
+            .then((res) => res.json())
+            .then((res) => {
+                self.setState({
+                    pic: res,
                 });
+                fetch(url2)
+                    .then((res) => res.json())
+                    .then((res) => {
+                        self.setState({ likeNum: res });
+                        var likeList = [];
+                        for (var i = 0; i < res.length; i++) {
+                            if (res[i].name == self.state.username) {
+                                likeList.push(res[i]);
+                            }
+                        }
+                        self.setState({ like: likeList });
+                        fetch(url4)
+                            .then((res) => res.json())
+                            .then((res) => {
+                                self.setState({ comNum: res });
+                                fetch(url1)
+                                    .then((res) => res.json())
+                                    .then((res) => {
+                                        res.forEach(item => {
+                                            for (var i = 0; i < self.state.pic.length; i++) {
+                                                if (item.name == self.state.pic[i].name) {
+                                                    item.pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
+                                                    item.level = self.state.pic[i].level;
+                                                    item.college = self.state.pic[i].college;
+                                                    break;
+                                                }
+                                            }
+                                            item.like = false;
+                                            for (var j = 0; j < self.state.like.length; j++) {
+                                                if (item.id == self.state.like[j].lid) {
+                                                    item.like = true;
+                                                    break;
+                                                }
+                                                else {
+                                                    item.like = false;
+                                                }
+                                            }
+                                            var likeNum = 0;
+                                            for (var z = 0; z < self.state.likeNum.length; z++) {
+                                                if (item.id == self.state.likeNum[z].lid) {
+                                                    likeNum++;
+                                                }
+                                            }
+                                            item.likeNum = likeNum;
+                                            var comNum = 0;
+                                            for (var z = 0; z < self.state.comNum.length; z++) {
+                                                if (item.id == self.state.comNum[z].lid) {
+                                                    comNum++;
+                                                }
+                                            }
+                                            item.comNum = comNum;
+                                        });
+                                        self.setState({ isLoading: false });
+                                        self.setState({ list: res });
+                                    });
+                            });
+                    });
+            });
         });
     }
     componentWillUnmount() {
@@ -257,6 +205,7 @@ export default class Community extends Component {
     }
     details = (idx) => {
         var value = { page: this.state.list[idx] };
+        console.log("value",value)
         AsyncStorage.setItem('lPage', JSON.stringify(value));
         Actions.learndetails();
     }
@@ -413,39 +362,9 @@ export default class Community extends Component {
         DeviceEventEmitter.emit('refresh', param);
     }
     person = (idx) => {
-        var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college };
+        var value = {id:this.state.list[idx].id, name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college };
         AsyncStorage.setItem('details', JSON.stringify(value));
         Actions.person();
-    }
-    follow = (idx) => {
-        var crr = '';
-        if (this.state.list[idx].follow == false) {
-            crr = this.state.list;
-            crr[idx].follow = true;
-            this.setState({
-                list: crr
-            })
-            let url = `http://139.155.44.190:3005/follow/add?lname=${this.state.username}&nname=${this.state.list[idx].name}&lid=${this.state.list[idx].id}`;
-            fetch(url)
-                .then((res) => res.json())
-                .then((res) => {
-                    Alert.alert(res.msg);
-                })
-        }
-        else {
-            var crr = '',
-            crr = this.state.list;
-            crr[idx].follow = false;
-            this.setState({
-                list: crr
-            })
-            let url = `http://139.155.44.190:3005/follow/delete?nname=${this.state.list[idx].name}`;
-            fetch(url)
-                .then((res) => res.json())
-                .then((res) => {
-                    Alert.alert("已经取消关注")
-                })
-        }
     }
     render() {
         return (
@@ -565,16 +484,7 @@ export default class Community extends Component {
                                                 <Text style={{ color: '#e8e8e8', fontSize: 30 * s }}>×</Text>
                                             </TouchableOpacity>
                                             :
-                                            <TouchableOpacity
-                                                onPress={this.follow.bind(this, (idx))}
-                                                style={item.follow ? { height: 30, width: 90, borderRadius: 5, borderWidth: 1, position: "absolute", right: 20, top: 20 }
-                                                    : { borderColor: "#F78D89", height: 30, width: 90, borderRadius: 5, borderWidth: 1, position: "absolute", right: 20, top: 20 }} >
-                                                {
-                                                    item.follow
-                                                        ? <Text style={{ justifyContent: "center", alignItems: "center", fontSize: 16 * s, marginLeft: 10 * s }}>取消关注</Text>
-                                                        : <Text style={{ color: "#F78D89", justifyContent: "center", alignItems: "center", fontSize: 16 * s, marginLeft: 25 * s }}>关注</Text>
-                                                }
-                                            </TouchableOpacity>
+                                           null
                                     }
                                 </View>
                             ))
