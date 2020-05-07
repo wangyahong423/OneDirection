@@ -55,7 +55,6 @@ export default class Person extends Component {
                             lvnum: item.lvnum//修改
                         })
                         var num = Math.floor(this.state.lvnum / 15);
-                        console.log("输出num", num)
                         let url3 = `http://139.155.44.190:3005/users/list`;
                         fetch(url3)
                             .then(res => res.json())
@@ -75,7 +74,6 @@ export default class Person extends Component {
                                                 level: 10
                                             })
                                         }
-                                        console.log("获取到的等级", this.state.level)
                                         let url3 = `http://139.155.44.190:3005/users/changeLv?level=${this.state.level}&name=${this.state.username}`;
                                         fetch(url3)
                                             .then((res) => res.json())
@@ -128,7 +126,6 @@ export default class Person extends Component {
                                     lvnum: item.lvnum//修改
                                 })
                                 var num = Math.floor(self.state.lvnum / 15);
-                                console.log("输出num", num)
                                 let url3 = `http://139.155.44.190:3005/users/list`;
                                 fetch(url3)
                                     .then(res => res.json())
@@ -141,7 +138,6 @@ export default class Person extends Component {
                                                 self.setState({
                                                     level: num + 1
                                                 })
-                                                console.log("获取到的等级", self.state.level)
     
                                                 let url3 = `http://139.155.44.190:3005/users/changeLv?level=${self.state.level}&name=${self.state.username}`;
                                                 fetch(url3)
