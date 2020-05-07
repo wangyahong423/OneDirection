@@ -49,8 +49,8 @@ router.get('/selectn', (req, res) => {
     });
 });
 router.get('/add', (req, res) => {
-    let sql = 'insert into follow(lname,nname,lid) values($1,$2,$3)';
-    con.query(sql, [req.query.lname, req.query.nname,req.query.lid], (err, result) => {
+    let sql = 'insert into follow(lname,nname) values($1,$2)';
+    con.query(sql, [req.query.lname, req.query.nname], (err, result) => {
         if (err) {
             res.json({ ok: false, msg: "关注失败" });
         } else {
