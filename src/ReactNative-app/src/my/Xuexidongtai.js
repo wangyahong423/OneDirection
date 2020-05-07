@@ -10,6 +10,7 @@ export default class Xuexidongtai extends Component {
             data: [],
             list: [],
             arr: [],
+            userarr: [],
             color: [],
             yonghu: [],
             pic: '',
@@ -18,183 +19,91 @@ export default class Xuexidongtai extends Component {
     }
     componentDidMount() {
         AsyncStorage.getItem('username')
-            .then((res) => {
-                let name = { username: res }
-                this.setState({
-                    username: name.username
-                })
-            });
-        let url = `http://139.155.44.190:3005/learn/list`;
-        let url2 = `http://139.155.44.190:3005/learnlike/list`;
-        let url3 = `http://139.155.44.190:3005/users/getName`;
-        let url4 = `http://139.155.44.190:3005/users/list`;
-
-        fetch(url2)
-            .then(res => res.json())
-            .then((res) => {
-                this.setState({
-                    list: res
-                })
-                var brr = [];
-                this.state.list.map((item) => {
-                    if (item.name == this.state.username) {
-                        brr.push(item);
-                    }
-                    this.setState({
-                        list: brr
-                    })
-                })
-                var arr = [];
-                var a = 0;
-                for (var i = 0; i < this.state.data.length; i++) {
-                    for (var j = 0; j < this.state.list.length; j++) {
-                        if (this.state.data[i].id == this.state.list[j].lid) {
-                            a = 1;
-                            break;
-                        } else {
-                            a = 0;
-                        }
-                    }
-                    if (a == 1) {
-                        arr.push('red');
-                        a = 0;
-                    } else {
-                        arr.push('black');
-                    }
-                }
-                this.setState({
-                    color: arr
-                })
-            })
-
-
-        fetch(url4)
-            .then(res => res.json())
             .then(res => {
-                res.map(item => {
-                    if (item.name == this.state.username) {
-                        this.setState({ pic: 'http://139.155.44.190:3005' + item.pic })
-                    }
-                })
-            })
-
-        fetch(url)
-            .then(res => res.json())
-            .then((res) => {
-                var arr = [];
-                res.map((item) => {
-                    if (item.name == this.state.username) {
-                        arr.push(item)
-                    }
-                })
+                let user = { username: res }
                 this.setState({
-                    data: arr
+                    username: user.username
                 })
-            })
-
-        this.state.data.map((item) => {
-            this.setState({
-                arr: item.id
-            })
-        })
-
-        var self = this;
-        this.listener = DeviceEventEmitter.addListener('freshthree', function (param) {
-            let url = `http://139.155.44.190:3005/learn/list`;
-            let url2 = `http://139.155.44.190:3005/learnlike/list`;
-            let url3 = `http://139.155.44.190:3005/users/getName`;
-            let url4 = `http://139.155.44.190:3005/users/list`;
-
-            fetch(url2)
-                .then(res => res.json())
-                .then((res) => {
-                    self.setState({
-                        list: res
-                    })
-                    var brr = [];
-                    self.state.list.map((item) => {
-                        if (item.name == self.state.username) {
-                            brr.push(item);
-                        }
-                        self.setState({
-                            list: brr
+                let url = `http://139.155.44.190:3005/learn/list`;
+                let url1 = `http://139.155.44.190:3005/users/list`;
+                fetch(url)
+                    .then(res => res.json())
+                    .then((res) => {
+                        this.setState({
+                            list: res
+                        })
+                        var brr = [];
+                        this.state.list.map((item) => {
+                            if (item.name == this.state.username) {
+                                brr.push(item);
+                            }
+                            this.setState({
+                                data: brr
+                            })
                         })
                     })
-                    var arr = [];
-                    var a = 0;
-                    for (var i = 0; i < self.state.data.length; i++) {
-                        for (var j = 0; j < self.state.list.length; j++) {
-                            if (self.state.data[i].id == self.state.list[j].lid) {
-                                a = 1;
-                                break;
-                            } else {
-                                a = 0;
+                fetch(url1)
+                    .then(res => res.json())
+                    .then((res) => {
+                        this.setState({
+                            arr: res
+                        })
+                        var urr = [];
+                        this.state.arr.map((item) => {
+                            if (item.name == this.state.username) {
+                                this.setState({
+                                    pic: 'http://139.155.44.190:3005' + item.pic,
+                                })
                             }
-                        }
-                        if (a == 1) {
-                            arr.push('red');
-                            a = 0;
-                        } else {
-                            arr.push('black');
-                        }
-                    }
-                    self.setState({
-                        color: arr
+                        })
                     })
-                })
-
-
-            fetch(url4)
-                .then(res => res.json())
+            });
+        var self = this;
+        this.listener = DeviceEventEmitter.addListener('freshthree', function (param) {
+            AsyncStorage.getItem('username')
                 .then(res => {
-                    res.map(item => {
-                        if (item.name == self.state.username) {
-                            self.setState({ pic: 'http://139.155.44.190:3005' + item.pic })
-                        }
-                    })
-                })
-
-            fetch(url)
-                .then(res => res.json())
-                .then((res) => {
-                    var arr = [];
-                    res.map((item) => {
-                        if (item.name == self.state.username) {
-                            arr.push(item)
-                        }
-                    })
+                    let user = { username: res }
                     self.setState({
-                        data: arr
+                        username: user.username
                     })
+                    let url = `http://139.155.44.190:3005/learn/list`;
+                    let url1 = `http://139.155.44.190:3005/users/list`;
+                    fetch(url)
+                        .then(res => res.json())
+                        .then((res) => {
+                            self.setState({
+                                list: res
+                            })
+                            var brr = [];
+                            self.state.list.map((item) => {
+                                if (item.name == self.state.username) {
+                                    brr.push(item);
+                                }
+                                self.setState({
+                                    data: brr
+                                })
+                            })
+                        })
+                    fetch(url1)
+                        .then(res => res.json())
+                        .then((res) => {
+                            self.setState({
+                                arr: res
+                            })
+                            var urr = [];
+                            self.state.arr.map((item) => {
+                                if (item.name == self.state.username) {
+                                    self.setState({
+                                        pic: 'http://139.155.44.190:3005' + item.pic,
+                                    })
+                                }
+                            })
+                        })
                 })
-
-            self.state.data.map((item) => {
-                self.setState({
-                    arr: item.id
-                })
-            })
         })
 
     }
 
-
-    clickSend = (id) => {
-        let url = `http://139.155.44.190:3005/learn/select?content=${this.state.search}`;
-        fetch(url)
-            .then(res => res.json())
-
-            .then((res) => {
-                if (res.false) {
-                } else {
-                    for (var i = 0; i < res.length; i++) {
-                        res[i].pic = "http://139.155.44.190:3005/" + res[i].pic;
-                    }
-                    this.setState({
-                        data: res
-                    })
-                }
-            })
-    };
     delTie = (id) => {
 
         let url9 = `http://139.155.44.190:3005/learn/deleteLearn?id=${id}`
@@ -206,9 +115,13 @@ export default class Xuexidongtai extends Component {
         var param = 1;
         DeviceEventEmitter.emit('freshthree', param);
     }
+
     details = (idx) => {
-        var value = { page: this.state.list[idx] };
-        AsyncStorage.setItem('Pageone', JSON.stringify(value));
+        var value = { page: this.state.data[idx] };
+        AsyncStorage.setItem('mPage', JSON.stringify(value));
+        AsyncStorage.getItem('mPage')
+            .then((value) => {
+            })
         Actions.xiangqing();
     }
     render() {
