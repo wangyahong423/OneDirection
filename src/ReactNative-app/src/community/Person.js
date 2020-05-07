@@ -12,7 +12,9 @@ export default class Person extends Component {
             learn: 0,
             exp: 0,
             Elike: 0,
-            Llike: 0
+            Llike: 0,
+            follows: 0,
+            fans: 0
         };
         this.getData();
     }
@@ -36,6 +38,8 @@ export default class Person extends Component {
         let url2 = `http://139.155.44.190:3005/experience/list`;
         let url3 = `http://139.155.44.190:3005/experiencelike/list`;
         let url4 = `http://139.155.44.190:3005/learnlike/list`;
+        let url5 = `http://139.155.44.190:3005/follow/list`;
+        let url6 = `http://139.155.44.190:3005/follow/list`;
         fetch(url1)
             .then((res) => res.json())
             .then((res) => {
@@ -86,6 +90,34 @@ export default class Person extends Component {
                                         });
                                     })
                             })
+                    })
+                fetch(url5)//关注
+                    .then((res) => res.json())
+                    .then((res) => {
+                        var num = 0;
+                        res.forEach(item => {
+                            if (item.lname == this.state.all.name) {
+                                num++;
+                            }
+                        });
+                        this.setState({
+                            follows: num
+                        })
+                        console.log("关注人数", this.state.follows)
+                    })
+                fetch(url5)//粉丝
+                    .then((res) => res.json())
+                    .then((res) => {
+                        var num = 0;
+                        res.forEach(item => {
+                            if (item.nname == this.state.all.name) {
+                                num++;
+                            }
+                        });
+                        this.setState({
+                            fans: num
+                        })
+                        console.log("粉丝人数", this.state.fans)
                     })
             })
 
@@ -145,6 +177,34 @@ export default class Person extends Component {
                                             });
                                         })
                                 })
+                        })
+                    fetch(url5)//关注
+                        .then((res) => res.json())
+                        .then((res) => {
+                            var num = 0;
+                            res.forEach(item => {
+                                if (item.lname == this.state.all.name) {
+                                    num++;
+                                }
+                            });
+                            this.setState({
+                                follows: num
+                            })
+                            console.log("关注人数", this.state.follows)
+                        })
+                    fetch(url5)//粉丝
+                        .then((res) => res.json())
+                        .then((res) => {
+                            var num = 0;
+                            res.forEach(item => {
+                                if (item.nname == this.state.all.name) {
+                                    num++;
+                                }
+                            });
+                            this.setState({
+                                fans: num
+                            })
+                            console.log("粉丝人数", this.state.fans)
                         })
                 })
         });
@@ -225,6 +285,14 @@ export default class Person extends Component {
                         <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s }}>
                             <Text style={{ fontSize: 20 * s, color: '#000' }}>总获赞数：</Text>
                             <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.Elike + this.state.Llike}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s }}>
+                            <Text style={{ fontSize: 20 * s, color: '#000' }}>关注人量：</Text>
+                            <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.follows}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s }}>
+                            <Text style={{ fontSize: 20 * s, color: '#000' }}>粉丝人量：</Text>
+                            <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.fans}</Text>
                         </View>
                     </View>
                 </ScrollView>
