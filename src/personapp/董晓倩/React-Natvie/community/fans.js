@@ -37,8 +37,6 @@ export default class fans extends Component {
                 this.setState({
                     all: JSON.parse(res)
                 })
-            console.log("all",this.state.all)
-
             });
     }
     componentDidMount() {
@@ -63,8 +61,6 @@ export default class fans extends Component {
                 fetch(url2)
                     .then((res) => res.json())
                     .then((res) => {
-                        // res.forEach(item => {
-
                         var myfollowList = [];
                         for (var i = 0; i < res.length; i++) {
                             if (res[i].lname == this.state.username) {
@@ -73,7 +69,6 @@ export default class fans extends Component {
                         }
                         this.setState({ myFollow: myfollowList })//我关注的用户 列表
                         var myFolList = []
-                        console.log("用户列表", this.state.follow)
                         for (var i = 0; i < this.state.follow.length; i++) {
                             for (var j = 0; j < this.state.myFollow.length; j++) {
                                 if (this.state.follow[i].name == this.state.myFollow[j].nname) {//如果和我关注的人相同，显示“取消关注”
@@ -93,13 +88,11 @@ export default class fans extends Component {
                         this.setState({
                             myFol: myFolList
                         })
-                        console.log("数字", this.state.myFol)
-                        // })
                     })
             });
-            var self = this;
-            this.listener = DeviceEventEmitter.addListener('refresh', function (param) {
-                fetch(url1)
+        var self = this;
+        this.listener = DeviceEventEmitter.addListener('refresh', function (param) {
+            fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
                     var followsList = [];
@@ -117,8 +110,6 @@ export default class fans extends Component {
                     fetch(url2)
                         .then((res) => res.json())
                         .then((res) => {
-                            // res.forEach(item => {
-    
                             var myfollowList = [];
                             for (var i = 0; i < res.length; i++) {
                                 if (res[i].lname == self.state.username) {
@@ -127,7 +118,6 @@ export default class fans extends Component {
                             }
                             self.setState({ myFollow: myfollowList })//我关注的用户 列表
                             var myFolList = []
-                            console.log("用户列表", self.state.follow)
                             for (var i = 0; i < self.state.follow.length; i++) {
                                 for (var j = 0; j < self.state.myFollow.length; j++) {
                                     if (self.state.follow[i].name == self.state.myFollow[j].nname) {//如果和我关注的人相同，显示“取消关注”
@@ -147,20 +137,23 @@ export default class fans extends Component {
                             self.setState({
                                 myFol: myFolList
                             })
-                            console.log("数字", self.state.myFol)
-                            // })
                         })
                 });
-            })
-
+        })
     }
     follow = (id) => {
         if (this.state.myFol[id] == false) {
-            console.log("没有关注，点击关注")
+            var arr = []
+            for (var i = 0; i < this.state.myFol.length; i++) {
+                if (i == id) {
+                    arr.push(true)
+                } else {
+                    arr.push(this.state.myFol[i])
+                }
+            }
             this.setState({
-               myFol: true
+                myFol: arr
             })
-            console.log("状态1",this.state.myFol)
             let url = `http://139.155.44.190:3005/follow/add?lname=${this.state.username}&nname=${this.state.follow[id].name}`;
             fetch(url)
                 .then((res) => res.json())
@@ -169,12 +162,17 @@ export default class fans extends Component {
                 })
         }
         else {
-            console.log("已经关注，点击取消关注",this.state.myFol[id],id)
+            var arr = []
+            for (var i = 0; i < this.state.myFol.length; i++) {
+                if (i == id) {
+                    arr.push(false)
+                } else {
+                    arr.push(this.state.myFol[i])
+                }
+            }
             this.setState({
-                myFol: false
+                myFol: arr
             })
-            console.log("状态2",this.state.myFol)
-
             let url = `http://139.155.44.190:3005/follow/delete?nname=${this.state.follow[id].name}`;
             fetch(url)
                 .then((res) => res.json())
@@ -196,8 +194,8 @@ export default class fans extends Component {
                     {
                         this.state.follow.map((item, idx) => (
                             <TouchableOpacity
-                            onPress={this.person.bind(this, (idx))}
-                             style={{ flexDirection: 'row', height: 60 * s, width: "100%", backgroundColor: "#fff", marginTop: 10 * s, alignItems: "center" }}>
+                                onPress={this.person.bind(this, (idx))}
+                                style={{ flexDirection: 'row', height: 60 * s, width: "100%", backgroundColor: "#fff", marginTop: 10 * s, alignItems: "center" }}>
                                 <Image style={{ marginLeft: 20 * s, height: 50 * s, width: 50 * s, borderRadius: 25 * s }} source={{ uri: item.pic }} />
                                 <Text style={{ fontSize: 16 * s, marginLeft: 20 * s }}>{item.name}</Text>
                                 {
@@ -215,7 +213,6 @@ export default class fans extends Component {
                                             }
                                         </View>
                                 }
-
                             </TouchableOpacity>
                         ))
                     }

@@ -36,10 +36,7 @@ export default class Person extends Component {
                 this.setState({
                     all: JSON.parse(res)
                 })
-                console.log("个人信息all",this.state.all)
-
             });
-
     }
     componentDidMount() {
         let url1 = `http://139.155.44.190:3005/learn/list`;
@@ -151,105 +148,105 @@ export default class Person extends Component {
         var self = this;
         this.listener = DeviceEventEmitter.addListener('Prefresh', function (param) {
             fetch(url1)
-            .then((res) => res.json())
-            .then((res) => {
-                var num = 0;
-                res.forEach(item => {
-                    if (item.name == self.state.all.name) {
-                        num++;
-                    }
-                });
-                self.setState({
-                    learn: num
-                });
-                fetch(url2)
-                    .then((res) => res.json())
-                    .then((res) => {
-                        var num = 0;
-                        res.forEach(item => {
-                            if (item.name == self.state.all.name) {
-                                num++;
-                            }
-                        });
-                        self.setState({
-                            exp: num
-                        });
-                        fetch(url3)
-                            .then((res) => res.json())
-                            .then((res) => {
-                                var num = 0;
-                                res.forEach(item => {
-                                    if (item.ename == self.state.all.name) {
-                                        num++;
-                                    }
-                                });
-                                self.setState({
-                                    Elike: num
-                                });
-                                fetch(url4)
-                                    .then((res) => res.json())
-                                    .then((res) => {
-                                        var num1 = 0;
-                                        res.forEach(item => {
-                                            if (item.lname == self.state.all.name) {
-                                                num1++;
-                                            }
-                                        });
-                                        self.setState({
-                                            Llike: num1
-                                        });
-                                    })
-                            })
-                    })
-            })
-        fetch(url5)
-            .then((res) => res.json())
-            .then((res) => {
-                var followList = [];
-                for (var i = 0; i < res.length; i++) {
-                    if (res[i].lname == self.state.username) {
-                        followList.push(res[i]);
-                    }
-                }
-                self.setState({ follow: followList })
-                for (var i = 0; i < self.state.follow.length; i++) {
-                    if (self.state.all.name == self.state.follow[i].nname) {
-                        self.setState({
-                            fol: true
+                .then((res) => res.json())
+                .then((res) => {
+                    var num = 0;
+                    res.forEach(item => {
+                        if (item.name == self.state.all.name) {
+                            num++;
+                        }
+                    });
+                    self.setState({
+                        learn: num
+                    });
+                    fetch(url2)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            var num = 0;
+                            res.forEach(item => {
+                                if (item.name == self.state.all.name) {
+                                    num++;
+                                }
+                            });
+                            self.setState({
+                                exp: num
+                            });
+                            fetch(url3)
+                                .then((res) => res.json())
+                                .then((res) => {
+                                    var num = 0;
+                                    res.forEach(item => {
+                                        if (item.ename == self.state.all.name) {
+                                            num++;
+                                        }
+                                    });
+                                    self.setState({
+                                        Elike: num
+                                    });
+                                    fetch(url4)
+                                        .then((res) => res.json())
+                                        .then((res) => {
+                                            var num1 = 0;
+                                            res.forEach(item => {
+                                                if (item.lname == self.state.all.name) {
+                                                    num1++;
+                                                }
+                                            });
+                                            self.setState({
+                                                Llike: num1
+                                            });
+                                        })
+                                })
                         })
-                        break;
-                    }
-                    else {
-                        self.setState({
-                            fol: false
-                        })
-                    }
-                }
-            })
-        fetch(url5)
-            .then((res) => res.json())
-            .then((res) => {
-                var num1 = 0;
-                var num2 = 0
-                var nname = [];
-                var lname = []
-                res.forEach(item => {
-                    if (item.lname == self.state.all.name) {//关注
-                        nname.push(item.nname)//关注列表
-                        num1++;
-                    }
-                    else if (item.nname == self.state.all.name) {//粉丝
-                        lname.push(item.lname)//粉丝列表
-                        num2++;
-                    }
-                });
-                self.setState({
-                    follows: num1,
-                    fans: num2,
-                    nnameList: nname,
-                    lnameList: lname
                 })
-            })
+            fetch(url5)
+                .then((res) => res.json())
+                .then((res) => {
+                    var followList = [];
+                    for (var i = 0; i < res.length; i++) {
+                        if (res[i].lname == self.state.username) {
+                            followList.push(res[i]);
+                        }
+                    }
+                    self.setState({ follow: followList })
+                    for (var i = 0; i < self.state.follow.length; i++) {
+                        if (self.state.all.name == self.state.follow[i].nname) {
+                            self.setState({
+                                fol: true
+                            })
+                            break;
+                        }
+                        else {
+                            self.setState({
+                                fol: false
+                            })
+                        }
+                    }
+                })
+            fetch(url5)
+                .then((res) => res.json())
+                .then((res) => {
+                    var num1 = 0;
+                    var num2 = 0
+                    var nname = [];
+                    var lname = []
+                    res.forEach(item => {
+                        if (item.lname == self.state.all.name) {//关注
+                            nname.push(item.nname)//关注列表
+                            num1++;
+                        }
+                        else if (item.nname == self.state.all.name) {//粉丝
+                            lname.push(item.lname)//粉丝列表
+                            num2++;
+                        }
+                    });
+                    self.setState({
+                        follows: num1,
+                        fans: num2,
+                        nnameList: nname,
+                        lnameList: lname
+                    })
+                })
 
         });
     }
@@ -259,8 +256,6 @@ export default class Person extends Component {
     personexp = () => {
         var value = { name: this.state.all.name, pic: this.state.all.pic, level: this.state.all.level };
         AsyncStorage.setItem('personname', JSON.stringify(value));
-        console.log(this.state.all.name)
-        // Actions.perexp();
     }
     back = () => {
         Actions.pop();
@@ -270,7 +265,6 @@ export default class Person extends Component {
     followslist = () => {
         var value = { followsList: this.state.nnameList };
         AsyncStorage.setItem('followslist', JSON.stringify(value));
-        // console.log("关注",value)
         Actions.followslist();
     }
     fanslist = () => {
@@ -287,6 +281,8 @@ export default class Person extends Component {
             fetch(url)
                 .then((res) => res.json())
                 .then((res) => {
+                    var param = 1;
+                    DeviceEventEmitter.emit('Prefresh', param);
                     Alert.alert(res.msg);
                 })
         }
@@ -298,6 +294,8 @@ export default class Person extends Component {
             fetch(url)
                 .then((res) => res.json())
                 .then((res) => {
+                    var param = 1;
+                    DeviceEventEmitter.emit('Prefresh', param);
                     Alert.alert("已经取消关注")
                 })
         }

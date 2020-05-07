@@ -205,7 +205,6 @@ export default class Community extends Component {
     }
     details = (idx) => {
         var value = { page: this.state.list[idx] };
-        console.log("value",value)
         AsyncStorage.setItem('lPage', JSON.stringify(value));
         Actions.learndetails();
     }
