@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View, ScrollView, SafeAreaView, TextInput, Dimensions, ImageBackground, Image, TouchableOpacity, AsyncStorage, Alert, DeviceEventEmitter, ShadowPropTypesIOS } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { Actions } from 'react-native-router-flux';
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
@@ -309,8 +309,11 @@ export default class Person extends Component {
     }
     render() {
         return (
-            <SafeAreaView style={{ flex: 1, backgroundColor: 'rgba(67,67,157,0.4)' }} >
+            <SafeAreaView style={{ flex: 1 }} >
                 <ScrollView style={{ flex: 1 }}>
+                    <TouchableOpacity style={{height:40*s,width:40*s,justifyContent:"flex-end",alignItems:"center" }}  onPress={() => this.back()}>
+                        <Icon name="ios-arrow-back" style={{ fontSize: 30 * s, color: "#54487D" }} />
+                    </TouchableOpacity>
                     <View style={{
                         padding: 10 * s
                     }}>
