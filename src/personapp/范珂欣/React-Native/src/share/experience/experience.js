@@ -648,15 +648,26 @@ export default class Experience extends Component {
                                             height: 80 * s,
                                             alignItems: 'center'
                                         }}>
-                                            <TouchableOpacity onPress={this.person.bind(this, (idx))}>
-                                                <Image style={{
-                                                    marginLeft: 20 * s,
-                                                    height: 50 * s,
-                                                    width: 50 * s,
-                                                    borderRadius: 25 * s,
-                                                    backgroundColor: 'yellow'
-                                                }} source={{ uri: item.pic }} />
-                                            </TouchableOpacity>
+                                            {
+                                                this.state.username == item.name
+                                                    ?
+                                                    <Image style={{
+                                                        marginLeft: 20 * s,
+                                                        height: 50 * s,
+                                                        width: 50 * s,
+                                                        borderRadius: 25 * s,
+                                                        backgroundColor: 'yellow'
+                                                    }} source={{ uri: item.pic }} />
+                                                    : <TouchableOpacity onPress={this.person.bind(this, (idx))}>
+                                                        <Image style={{
+                                                            marginLeft: 20 * s,
+                                                            height: 50 * s,
+                                                            width: 50 * s,
+                                                            borderRadius: 25 * s,
+                                                            backgroundColor: 'yellow'
+                                                        }} source={{ uri: item.pic }} />
+                                                    </TouchableOpacity>
+                                            }
                                             <View style={{ marginLeft: 30 * s }}>
                                                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                                     <Text style={{ fontSize: 18 * s }}>{item.name}</Text>

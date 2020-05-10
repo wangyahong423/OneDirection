@@ -209,6 +209,12 @@ export default class Details extends Component {
         AsyncStorage.setItem('details', JSON.stringify(value));
         Actions.person();
     }
+    back = () => {
+        Actions.pop();
+        var param = 1;
+        DeviceEventEmitter.emit('ELrefresh', param);
+        DeviceEventEmitter.emit('refresh', param);
+    }
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
@@ -350,7 +356,27 @@ export default class Details extends Component {
                             : null
                     }
                 </ScrollView>
-
+                <View style={{
+                    width: '100%',
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    <TouchableOpacity style={{
+                        width: 300 * s,
+                        height: 40 * s,
+                        borderRadius: 15 * s,
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: '#37376F',
+                        marginBottom: 10 * s
+                    }}
+                        onPress={() => this.back()}
+                    >
+                        <Text style={{ color: '#fff', fontSize: 20 * s }}>返回</Text>
+                    </TouchableOpacity>
+                </View>
             </SafeAreaView >
         )
     }

@@ -12,7 +12,10 @@ export default class Person extends Component {
             learn: 0,
             exp: 0,
             Elike: 0,
-            Llike: 0
+            Llike: 0,
+            collect: 0,
+            PELike: 0,
+            PLLike: 0
         };
         this.getData();
     }
@@ -36,6 +39,7 @@ export default class Person extends Component {
         let url2 = `http://139.155.44.190:3005/experience/list`;
         let url3 = `http://139.155.44.190:3005/experiencelike/list`;
         let url4 = `http://139.155.44.190:3005/learnlike/list`;
+        let url5 = `http://139.155.44.190:3005/collect/list`;
         fetch(url1)
             .then((res) => res.json())
             .then((res) => {
@@ -72,6 +76,15 @@ export default class Person extends Component {
                                 this.setState({
                                     Elike: num
                                 });
+                                var num3 = 0;
+                                res.forEach(item => {
+                                    if (item.name == this.state.all.name) {
+                                        num3++;
+                                    }
+                                });
+                                this.setState({
+                                    PELike: num3
+                                });
                                 fetch(url4)
                                     .then((res) => res.json())
                                     .then((res) => {
@@ -84,6 +97,28 @@ export default class Person extends Component {
                                         this.setState({
                                             Llike: num1
                                         });
+                                        var num4 = 0;
+                                        res.forEach(item => {
+                                            if (item.name == this.state.all.name) {
+                                                num4++;
+                                            }
+                                        });
+                                        this.setState({
+                                            PLLike: num4
+                                        });
+                                        fetch(url5)
+                                            .then((res) => res.json())
+                                            .then((res) => {
+                                                var num2 = 0;
+                                                res.forEach(item => {
+                                                    if (item.name == this.state.all.name) {
+                                                        num2++;
+                                                    }
+                                                });
+                                                this.setState({
+                                                    collect: num2
+                                                });
+                                            })
                                     })
                             })
                     })
@@ -143,6 +178,19 @@ export default class Person extends Component {
                                             self.setState({
                                                 Llike: num1
                                             });
+                                            fetch(url5)
+                                                .then((res) => res.json())
+                                                .then((res) => {
+                                                    var num2 = 0;
+                                                    res.forEach(item => {
+                                                        if (item.name == self.state.all.name) {
+                                                            num2++;
+                                                        }
+                                                    });
+                                                    self.setState({
+                                                        collect: num2
+                                                    });
+                                                })
                                         })
                                 })
                         })
@@ -153,13 +201,13 @@ export default class Person extends Component {
         this.listener.remove();
         // this.listener1.remove();
     }
-    personexp = () => {
-        var value = { name: this.state.all.name, pic: this.state.all.pic, level: this.state.all.level };
+    personexp = (title) => {
+        var value = { name: this.state.all.name, pic: this.state.all.pic, level: this.state.all.level, title: title };
         AsyncStorage.setItem('personname1', JSON.stringify(value));
         Actions.perexp();
     }
-    personlearn = () => {
-        var value = { name: this.state.all.name, pic: this.state.all.pic, level: this.state.all.level };
+    personlearn = (title) => {
+        var value = { name: this.state.all.name, pic: this.state.all.pic, level: this.state.all.level, title: title };
         AsyncStorage.setItem('personname2', JSON.stringify(value));
         Actions.perlearn();
     }
@@ -215,7 +263,7 @@ export default class Person extends Component {
                         </View>
                         {
                             this.state.learn
-                                ? <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s, justifyContent: 'space-between', borderColor: '#37376F', borderWidth: 1 * s }} onPress={() => this.personlearn()}>
+                                ? <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s, justifyContent: 'space-between', borderColor: '#37376F', borderWidth: 1 * s }} onPress={this.personlearn.bind(this, ('issue'))}>
                                     <Text style={{ fontSize: 20 * s }}>在社区中发布的帖子</Text>
                                     <Icon name="chevron-right" size={20} color="#000" />
                                 </TouchableOpacity>
@@ -229,7 +277,7 @@ export default class Person extends Component {
                         </View>
                         {
                             this.state.exp
-                                ? <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s, justifyContent: 'space-between', borderColor: '#37376F', borderWidth: 1 * s }} onPress={() => this.personexp()}>
+                                ? <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s, justifyContent: 'space-between', borderColor: '#37376F', borderWidth: 1 * s }} onPress={this.personexp.bind(this, ('issue'))}>
                                     <Text style={{ fontSize: 20 * s }}>在经验分享中发布的帖子</Text>
                                     <Icon name="chevron-right" size={20} color="#000" />
                                 </TouchableOpacity>
@@ -239,6 +287,50 @@ export default class Person extends Component {
                             <Text style={{ fontSize: 20 * s, color: '#000' }}>总获赞数：</Text>
                             <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.Elike + this.state.Llike}</Text>
                         </View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s }}>
+                            <Text style={{ fontSize: 20 * s, color: '#000' }}>在社区中的获赞数：</Text>
+                            <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.Llike}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s }}>
+                            <Text style={{ fontSize: 20 * s, color: '#000' }}>在社区中的点赞数：</Text>
+                            <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.PLLike}</Text>
+                        </View>
+                        {
+                            this.state.PLLike
+                                ? <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s, justifyContent: 'space-between', borderColor: '#37376F', borderWidth: 1 * s }} onPress={this.personlearn.bind(this, ('like'))}>
+                                    <Text style={{ fontSize: 20 * s }}>在社区中点赞的帖子</Text>
+                                    <Icon name="chevron-right" size={20} color="#000" />
+                                </TouchableOpacity>
+                                : null
+                        }
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s }}>
+                            <Text style={{ fontSize: 20 * s, color: '#000' }}>在经验分享中的获赞数：</Text>
+                            <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.Elike}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s }}>
+                            <Text style={{ fontSize: 20 * s, color: '#000' }}>在经验分享中的点赞数：</Text>
+                            <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.PELike}</Text>
+                        </View>
+                        {
+                            this.state.PELike
+                                ? <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s, justifyContent: 'space-between', borderColor: '#37376F', borderWidth: 1 * s }} onPress={this.personexp.bind(this, ('like'))}>
+                                    <Text style={{ fontSize: 20 * s }}>在经验分享中点赞的帖子</Text>
+                                    <Icon name="chevron-right" size={20} color="#000" />
+                                </TouchableOpacity>
+                                : null
+                        }
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s }}>
+                            <Text style={{ fontSize: 20 * s, color: '#000' }}>在经验分享中收藏的帖子数：</Text>
+                            <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.collect}</Text>
+                        </View>
+                        {
+                            this.state.collect
+                                ? <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s, justifyContent: 'space-between', borderColor: '#37376F', borderWidth: 1 * s }} onPress={this.personexp.bind(this, ('collect'))}>
+                                    <Text style={{ fontSize: 20 * s }}>在经验分享中收藏的帖子</Text>
+                                    <Icon name="chevron-right" size={20} color="#000" />
+                                </TouchableOpacity>
+                                : null
+                        }
                     </View>
                 </ScrollView>
                 <View style={{
