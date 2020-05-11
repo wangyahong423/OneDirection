@@ -541,12 +541,12 @@ export default class Person extends Component {
                             </View>
                           
                         </ImageBackground>
-                        <View style={{ height: 80, width: width, backgroundColor: "#fff", flexDirection: "row", justifyContent: "space-around", alignItems: "center" }}>
-                            <TouchableOpacity onPress={this.personlearn.bind(this, ('like'))}><Text>赞在社区</Text></TouchableOpacity>
-                            <TouchableOpacity onPress={this.personexp.bind(this, ('like'))}><Text>赞在经验</Text></TouchableOpacity>
-                            <TouchableOpacity><Text>我的社区</Text></TouchableOpacity>
-                            <TouchableOpacity onPress={() => this.personexp()}><Text>我的经验</Text></TouchableOpacity>
-                            <TouchableOpacity onPress={this.personexp.bind(this, ('collect'))}><Text>我的收藏</Text></TouchableOpacity>
+                        <View style={{ height: 60, width: width, backgroundColor: "#fff", flexDirection: "row", justifyContent: "space-around", alignItems: "center" }}>
+                            <TouchableOpacity style={{width:width*0.15,height:40,justifyContent:"center",alignItems:"center",borderBottomWidth:2,borderBottomColor:"black"}} onPress={this.personlearn.bind(this, ('like'))}><Text style={{fontSize:15*s,color:"#5F6368"}}>赞在社区</Text></TouchableOpacity>
+                            <TouchableOpacity style={{width:width*0.15,height:40,justifyContent:"center",alignItems:"center",}}  onPress={this.personexp.bind(this, ('like'))}><Text style={{fontSize:15*s,color:"#5F6368"}}>赞在经验</Text></TouchableOpacity>
+                            <TouchableOpacity style={{width:width*0.15,height:40,justifyContent:"center",alignItems:"center",}} ><Text style={{fontSize:15*s,color:"#5F6368"}}>我的社区</Text></TouchableOpacity>
+                            <TouchableOpacity style={{width:width*0.15,height:40,justifyContent:"center",alignItems:"center",}} onPress={() => this.personexp()}><Text style={{fontSize:15*s,color:"#5F6368"}}>我的经验</Text ></TouchableOpacity>
+                            <TouchableOpacity style={{width:width*0.15,height:40,justifyContent:"center",alignItems:"center",}}  onPress={this.personexp.bind(this, ('collect'))}><Text style={{fontSize:15*s,color:"#5F6368"}}>我的收藏</Text></TouchableOpacity>
                         </View>
 
                         <View style={{

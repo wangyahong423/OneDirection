@@ -189,7 +189,7 @@ export default class Fans extends Component {
     }
     render() {
         return (
-            <SafeAreaView style={{ flex: 1, backgroundColor: 'rgba(67,67,157,0.4)' }}>
+            <SafeAreaView style={{ flex: 1, backgroundColor: '#EEEEEE' }}>
                 <ScrollView style={{ flex: 1 }}>
                     {
                         this.state.follow.map((item, idx) => (
