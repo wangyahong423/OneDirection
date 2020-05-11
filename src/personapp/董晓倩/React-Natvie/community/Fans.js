@@ -206,10 +206,15 @@ export default class Fans extends Component {
                                                 this.state.myFol[idx]
                                                     ? <TouchableOpacity
                                                         onPress={this.follow.bind(this, (idx))}
-                                                        style={{ position: "absolute", right: 20 * s, height: 30 * s, width: 80 * s, borderWidth: 1, borderRadius: 5, justifyContent: "center", alignItems: "center" }}><Text>取消关注</Text></TouchableOpacity>
+                                                        style={{ position: "absolute", right: 20 * s, height: 35 * s, width: 90 * s, borderWidth: 1, borderRadius: 20, justifyContent: "center", alignItems: "center" }}>
+                                                        <Text style={{ fontSize: 14 * s }}>取消关注</Text>
+                                                    </TouchableOpacity>
                                                     : <TouchableOpacity
                                                         onPress={this.follow.bind(this, (idx))}
-                                                        style={{ position: "absolute", right: 20 * s, height: 30 * s, width: 80 * s, borderWidth: 1, borderRadius: 5, borderColor: "red", justifyContent: "center", alignItems: "center" }}><Text>关注</Text></TouchableOpacity>
+                                                        style={{ flexDirection: "row", position: "absolute", right: 20 * s, height: 35 * s, width: 90 * s, borderWidth: 1, borderRadius: 20, borderColor: "red", justifyContent: "center", alignItems: "center" }}>
+                                                        <Text style={{ color: "red", fontSize: 22 * s, marginRight: 8 * s }}>+</Text>
+                                                        <Text style={{ color: "red", fontSize: 16 * s }}>关注</Text>
+                                                    </TouchableOpacity>
                                             }
                                         </View>
                                 }
