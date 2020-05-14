@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, StyleSheet, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert } from 'react-native';
+import { Text, View, ScrollView, StyleSheet, ImageBackground, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import { Actions } from 'react-native-router-flux';
 import { Button } from '@ant-design/react-native';
+
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
 export default class Community extends Component {
@@ -65,6 +66,7 @@ export default class Community extends Component {
                                                 if (item.name == this.state.pic[i].name) {
                                                     item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
                                                     item.level = this.state.pic[i].level;
+                                                    item.card = 'http://139.155.44.190:3005/card/' + this.state.pic[i].card;
                                                     item.college = this.state.pic[i].college;
                                                     break;
                                                 }
@@ -135,6 +137,7 @@ export default class Community extends Component {
                                                     if (item.name == self.state.pic[i].name) {
                                                         item.pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
                                                         item.level = self.state.pic[i].level;
+                                                        item.card = 'http://139.155.44.190:3005/card/' + self.state.pic[i].card;
                                                         item.college = self.state.pic[i].college;
                                                         break;
                                                     }
@@ -333,6 +336,7 @@ export default class Community extends Component {
                                                 for (var i = 0; i < this.state.pic.length; i++) {
                                                     if (item.name == this.state.pic[i].name) {
                                                         item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
+                                                        item.card = 'http://139.155.44.190:3005/card/' + this.state.pic[i].card;
                                                         break;
                                                     }
                                                 }
@@ -370,10 +374,9 @@ export default class Community extends Component {
     renovate = () => {
         var param = 1;
         DeviceEventEmitter.emit('refresh', param);
-        // Actions.community();
     }
     person = (idx) => {
-        var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level,college: this.state.list[idx].college };
+        var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college };
         AsyncStorage.setItem('details', JSON.stringify(value));
         Actions.person();
     }
@@ -381,6 +384,7 @@ export default class Community extends Component {
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
+
                 <View style={{
                     width: '100%',
                     height: 55 * s,
@@ -447,11 +451,13 @@ export default class Community extends Component {
                         {
                             this.state.list.map((item, idx) => (
                                 <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 10 * s }}>
+
                                     <View style={{
                                         flexDirection: 'row',
                                         height: 80 * s,
                                         alignItems: 'center'
                                     }}>
+                                        {/* <ImageBackground style={{ flex: 1, width: 80 * s, height: 80 * s }} source={{ uri: item.pic }}> */}
                                         <TouchableOpacity onPress={this.person.bind(this, (idx))}>
                                             <Image style={{
                                                 marginLeft: 20 * s,
@@ -461,6 +467,17 @@ export default class Community extends Component {
                                                 backgroundColor: 'yellow'
                                             }}
                                                 source={{ uri: item.pic }} />
+                                            {/* <Image style={{
+                                                marginLeft: 20 * s,
+                                                height: 50 * s,
+                                                width: 50 * s,
+                                                borderRadius: 25 * s,
+                                                backgroundColor: 'yellow',
+                                                position: 'absolute',
+                                                top: 5,
+                                                right: 30
+                                            }}
+                                                source={require('../../assets/community/t1.png')} /> */}
                                         </TouchableOpacity>
                                         <View style={{ marginLeft: 30 * s }}>
                                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -469,6 +486,7 @@ export default class Community extends Component {
                                             </View>
                                             <Text>{item.time}</Text>
                                         </View>
+                                        {/* </ImageBackground > */}
                                     </View>
                                     <View style={{
                                         marginLeft: 30 * s,
@@ -509,6 +527,33 @@ export default class Community extends Component {
                                             </TouchableOpacity>
                                             : null
                                     }
+                                    {/* {
+                                        this.state.username
+                                            ?  */}
+                                            <View style={{
+                                                width: 90 * s,
+                                                height: 45 * s,
+                                                flexDirection: 'row',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                // backgroundColor: '#37376F',
+                                                position: 'absolute',
+                                                top: 5,
+                                                right: 30
+                                            }}
+                                            >
+                                                <Image style={{
+                                                    // marginLeft: 20 * s,
+                                                    height: 45 * s,
+                                                    width: 90 * s,
+                                                    // borderRadius: 25 * s,
+                                                    // backgroundColor: 'yellow'
+                                                }}
+                                                    source={{ uri: item.card }} />
+                                            </View>
+                                            {/* : null
+                                    } */}
+
                                 </View>
                             ))
                         }
