@@ -12,17 +12,41 @@ export default class PerExp extends Component {
             all: [],
             pic: '',
             like: [],
+            personlike: [],
             collect: [],
+            personcollect: [],
             search: '',
             likeNum: [],
             colNum: [],
             username: '',
-            person: '',
+            person: [],
             isLoading: true
         };
-        this.getData();
+        // this.getData();
     }
-    getData = () => {
+    // getData = () => {
+    //     AsyncStorage.getItem('username')
+    //         .then((res) => {
+    //             let name = { username: res }
+    //             this.setState({
+    //                 username: name.username
+    //             })
+    //         });
+    //     AsyncStorage.getItem('personname1')
+    //         .then((res) => {
+    //             this.setState({
+    //                 person: JSON.parse(res)
+    //             })
+    //             console.log(this.state.person.title);
+    //         });
+
+    // }
+    componentDidMount() {
+        this.setState({ isLoading: true });
+        var url1 = `http://139.155.44.190:3005/experience/list`;
+        var url2 = `http://139.155.44.190:3005/experiencelike/list`;
+        let url3 = `http://139.155.44.190:3005/users/list`;
+        let url4 = `http://139.155.44.190:3005/collect/list`;
         AsyncStorage.getItem('username')
             .then((res) => {
                 let name = { username: res }
@@ -35,177 +59,577 @@ export default class PerExp extends Component {
                 this.setState({
                     person: JSON.parse(res)
                 })
-            });
-        console.log(this.state.person)
-    }
-    componentDidMount() {
-        this.setState({ isLoading: true })
-        var url1 = `http://139.155.44.190:3005/experience/list`;
-        var url2 = `http://139.155.44.190:3005/experiencelike/list`;
-        let url4 = `http://139.155.44.190:3005/collect/list`;
-        fetch(url2)
-            .then((res) => res.json())
-            .then((res) => {
-                this.setState({ likeNum: res });
-                var likeList = [];
-                for (var i = 0; i < res.length; i++) {
-                    if (res[i].name == this.state.username && res[i].ename == this.state.person.name) {
-                        likeList.push(res[i]);
-                    }
-                }
-                this.setState({ like: likeList });
-                fetch(url4)
-                    .then((res) => res.json())
-                    .then((res) => {
-                        this.setState({ colNum: res });
-                        var colList = [];
-                        for (var i = 0; i < res.length; i++) {
-                            if (res[i].name == this.state.username) {
-                                colList.push(res[i]);
-                            }
-                        }
-                        this.setState({ collect: colList });
-                        fetch(url1)
-                            .then((res) => res.json())
-                            .then((res) => {
-                                var list = [];
-                                for (var i = 0; i < res.length; i++) {
-                                    if (res[i].name == this.state.person.name) {
-                                        res[i].pic = this.state.person.pic;
-                                        res[i].college = this.state.person.college;
-                                        res[i].level = this.state.person.level;
-                                        res[i].like = false;
-                                        for (var j = 0; j < this.state.like.length; j++) {
-                                            if (res[i].id == this.state.like[j].eid) {
-                                                res[i].like = true;
-                                                break;
-                                            }
-                                            else {
-                                                res[i].like = false;
-                                            }
-                                        }
-                                        var likeNum = 0;
-                                        for (var z = 0; z < this.state.likeNum.length; z++) {
-                                            if (res[i].id == this.state.likeNum[z].eid) {
-                                                likeNum++;
-                                            }
-                                        }
-                                        res[i].likeNum = likeNum;
-                                        res[i].collect = false;
-                                        for (var j = 0; j < this.state.collect.length; j++) {
-                                            if (res[i].id == this.state.collect[j].eid) {
-                                                res[i].collect = true;
-                                                break;
-                                            }
-                                            else {
-                                                res[i].collect = false;
-                                            }
-                                        }
-                                        var colNum = 0;
-                                        for (var z = 0; z < this.state.colNum.length; z++) {
-                                            if (res[i].id == this.state.colNum[z].eid) {
-                                                colNum++;
-                                            }
-                                        }
-                                        res[i].colNum = colNum;
-                                        list.push(res[i]);
-                                    }
-                                }
-
-                                this.setState({ isLoading: false });
-                                this.setState({ list: list });
-                                this.setState({ all: list });
-                            });
-                    });
-            });
-        var self = this;
-        this.listener = DeviceEventEmitter.addListener('PErefresh', function (param) {
-            // var arr=self.state.list;
-            // var a = {"content": param.content, "like": false, "likeNum": 0, "name": param.name, "pic": "http://139.155.44.190:3005/images/6.jpg", "time": param.time};
-            // arr.splice(0,0,a);
-            // self.setState({list:arr});
-            fetch(url2)
-                .then((res) => res.json())
-                .then((res) => {
-                    self.setState({ likeNum: res });
-                    var likeList = [];
-                    for (var i = 0; i < res.length; i++) {
-                        if (res[i].name == self.state.username && res[i].ename == self.state.person.name) {
-                            likeList.push(res[i]);
-                        }
-                    }
-                    self.setState({ like: likeList });
-
-                    fetch(url4)
+                if (this.state.person.title == 'issue') {
+                    fetch(url2)
                         .then((res) => res.json())
                         .then((res) => {
-                            self.setState({ colNum: res });
-                            var colList = [];
+                            this.setState({ likeNum: res });
+                            var likeList = [];
                             for (var i = 0; i < res.length; i++) {
-                                if (res[i].name == self.state.username) {
-                                    colList.push(res[i]);
+                                if (res[i].name == this.state.username && res[i].ename == this.state.person.name) {
+                                    likeList.push(res[i]);
                                 }
                             }
-                            self.setState({ collect: colList });
-
-                            fetch(url1)
+                            this.setState({ like: likeList });
+                            fetch(url4)
                                 .then((res) => res.json())
                                 .then((res) => {
-                                    var list = [];
+                                    this.setState({ colNum: res });
+                                    var colList = [];
                                     for (var i = 0; i < res.length; i++) {
-                                        if (res[i].name == self.state.person.name) {
-                                            res[i].pic = self.state.person.pic;
-                                            res[i].college = self.state.person.college;
-                                            res[i].level = self.state.person.level;
-                                            res[i].like = false;
-                                            for (var j = 0; j < self.state.like.length; j++) {
-                                                if (res[i].id == self.state.like[j].eid) {
-                                                    res[i].like = true;
-                                                    break;
-                                                }
-                                                else {
-                                                    res[i].like = false;
-                                                }
-                                            }
-                                            var likeNum = 0;
-                                            for (var z = 0; z < self.state.likeNum.length; z++) {
-                                                if (res[i].id == self.state.likeNum[z].eid) {
-                                                    likeNum++;
-                                                }
-                                            }
-                                            res[i].likeNum = likeNum;
-                                            res[i].collect = false;
-                                            for (var j = 0; j < self.state.collect.length; j++) {
-                                                if (res[i].id == self.state.collect[j].eid) {
-                                                    res[i].collect = true;
-                                                    break;
-                                                }
-                                                else {
-                                                    res[i].collect = false;
-                                                }
-                                            }
-                                            var colNum = 0;
-                                            for (var z = 0; z < self.state.colNum.length; z++) {
-                                                if (res[i].id == self.state.colNum[z].eid) {
-                                                    colNum++;
-                                                }
-                                            }
-                                            res[i].colNum = colNum;
-                                            list.push(res[i]);
+                                        if (res[i].name == this.state.username) {
+                                            colList.push(res[i]);
                                         }
                                     }
+                                    this.setState({ collect: colList });
+                                    fetch(url1)
+                                        .then((res) => res.json())
+                                        .then((res) => {
+                                            var list = [];
+                                            for (var i = 0; i < res.length; i++) {
+                                                if (res[i].name == this.state.person.name) {
+                                                    res[i].pic = this.state.person.pic;
+                                                    res[i].college = this.state.person.college;
+                                                    res[i].level = this.state.person.level;
+                                                    res[i].like = false;
+                                                    for (var j = 0; j < this.state.like.length; j++) {
+                                                        if (res[i].id == this.state.like[j].eid) {
+                                                            res[i].like = true;
+                                                            break;
+                                                        }
+                                                        else {
+                                                            res[i].like = false;
+                                                        }
+                                                    }
+                                                    var likeNum = 0;
+                                                    for (var z = 0; z < this.state.likeNum.length; z++) {
+                                                        if (res[i].id == this.state.likeNum[z].eid) {
+                                                            likeNum++;
+                                                        }
+                                                    }
+                                                    res[i].likeNum = likeNum;
+                                                    res[i].collect = false;
+                                                    for (var j = 0; j < this.state.collect.length; j++) {
+                                                        if (res[i].id == this.state.collect[j].eid) {
+                                                            res[i].collect = true;
+                                                            break;
+                                                        }
+                                                        else {
+                                                            res[i].collect = false;
+                                                        }
+                                                    }
+                                                    var colNum = 0;
+                                                    for (var z = 0; z < this.state.colNum.length; z++) {
+                                                        if (res[i].id == this.state.colNum[z].eid) {
+                                                            colNum++;
+                                                        }
+                                                    }
+                                                    res[i].colNum = colNum;
+                                                    list.push(res[i]);
+                                                }
+                                            }
 
-                                    self.setState({ isLoading: false });
-                                    self.setState({ list: list });
-                                    self.setState({ all: list });
+                                            this.setState({ isLoading: false });
+                                            this.setState({ list: list });
+                                            this.setState({ all: list });
+                                        });
+
                                 });
                         });
-                });
-        });
+                    var self = this;
+                    this.listener = DeviceEventEmitter.addListener('PErefresh', function (param) {
+                        // var arr=self.state.list;
+                        // var a = {"content": param.content, "like": false, "likeNum": 0, "name": param.name, "pic": "http://139.155.44.190:3005/images/6.jpg", "time": param.time};
+                        // arr.splice(0,0,a);
+                        // self.setState({list:arr});
+                        fetch(url2)
+                            .then((res) => res.json())
+                            .then((res) => {
+                                self.setState({ likeNum: res });
+                                var likeList = [];
+                                for (var i = 0; i < res.length; i++) {
+                                    if (res[i].name == self.state.username && res[i].ename == self.state.person.name) {
+                                        likeList.push(res[i]);
+                                    }
+                                }
+                                self.setState({ like: likeList });
+
+                                fetch(url4)
+                                    .then((res) => res.json())
+                                    .then((res) => {
+                                        self.setState({ colNum: res });
+                                        var colList = [];
+                                        for (var i = 0; i < res.length; i++) {
+                                            if (res[i].name == self.state.username) {
+                                                colList.push(res[i]);
+                                            }
+                                        }
+                                        self.setState({ collect: colList });
+
+                                        fetch(url1)
+                                            .then((res) => res.json())
+                                            .then((res) => {
+                                                var list = [];
+                                                for (var i = 0; i < res.length; i++) {
+                                                    if (res[i].name == self.state.person.name) {
+                                                        res[i].pic = self.state.person.pic;
+                                                        res[i].college = self.state.person.college;
+                                                        res[i].level = self.state.person.level;
+                                                        res[i].like = false;
+                                                        for (var j = 0; j < self.state.like.length; j++) {
+                                                            if (res[i].id == self.state.like[j].eid) {
+                                                                res[i].like = true;
+                                                                break;
+                                                            }
+                                                            else {
+                                                                res[i].like = false;
+                                                            }
+                                                        }
+                                                        var likeNum = 0;
+                                                        for (var z = 0; z < self.state.likeNum.length; z++) {
+                                                            if (res[i].id == self.state.likeNum[z].eid) {
+                                                                likeNum++;
+                                                            }
+                                                        }
+                                                        res[i].likeNum = likeNum;
+                                                        res[i].collect = false;
+                                                        for (var j = 0; j < self.state.collect.length; j++) {
+                                                            if (res[i].id == self.state.collect[j].eid) {
+                                                                res[i].collect = true;
+                                                                break;
+                                                            }
+                                                            else {
+                                                                res[i].collect = false;
+                                                            }
+                                                        }
+                                                        var colNum = 0;
+                                                        for (var z = 0; z < self.state.colNum.length; z++) {
+                                                            if (res[i].id == self.state.colNum[z].eid) {
+                                                                colNum++;
+                                                            }
+                                                        }
+                                                        res[i].colNum = colNum;
+                                                        list.push(res[i]);
+                                                    }
+                                                }
+
+                                                self.setState({ isLoading: false });
+                                                self.setState({ list: list });
+                                                self.setState({ all: list });
+                                            });
+                                    });
+                            });
+                    });
+                } else if (this.state.person.title == 'like') {
+                    fetch(url3)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            this.setState({ pic: res });
+                            fetch(url2)
+                                .then((res) => res.json())
+                                .then((res) => {
+                                    this.setState({ likeNum: res });
+                                    var likeList = [];
+                                    for (var i = 0; i < res.length; i++) {
+                                        if (res[i].name == this.state.username) {
+                                            likeList.push(res[i]);
+                                        }
+                                    }
+                                    this.setState({ like: likeList });
+                                    var personlike = [];
+                                    for (var i = 0; i < res.length; i++) {
+                                        if (res[i].name == this.state.person.name) {
+                                            personlike.push(res[i]);
+                                        }
+                                    }
+                                    this.setState({ personlike: personlike });
+                                    fetch(url4)
+                                        .then((res) => res.json())
+                                        .then((res) => {
+                                            this.setState({ colNum: res });
+                                            var colList = [];
+                                            for (var i = 0; i < res.length; i++) {
+                                                if (res[i].name == this.state.username) {
+                                                    colList.push(res[i]);
+                                                }
+                                            }
+                                            this.setState({ collect: colList });
+                                            fetch(url1)
+                                                .then((res) => res.json())
+                                                .then((res) => {
+                                                    var list = [];
+                                                    for (var b = 0; b < this.state.personlike.length; b++) {
+                                                        for (var a = 0; a < res.length; a++) {
+                                                            if (this.state.personlike[b].eid == res[a].id) {
+                                                                for (var i = 0; i < this.state.pic.length; i++) {
+                                                                    if (res[a].name == this.state.pic[i].name) {
+                                                                        res[a].pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
+                                                                        res[a].college = this.state.pic[i].college;
+                                                                        res[a].level = this.state.pic[i].level;
+                                                                        break;
+                                                                    }
+                                                                }
+                                                                res[a].like = false;
+                                                                for (var j = 0; j < this.state.like.length; j++) {
+                                                                    if (res[a].id == this.state.like[j].eid) {
+                                                                        res[a].like = true;
+                                                                        break;
+                                                                    }
+                                                                    else {
+                                                                        res[a].like = false;
+                                                                    }
+                                                                }
+                                                                var likeNum = 0;
+                                                                for (var z = 0; z < this.state.likeNum.length; z++) {
+                                                                    if (res[a].id == this.state.likeNum[z].eid) {
+                                                                        likeNum++;
+                                                                    }
+                                                                }
+                                                                res[a].likeNum = likeNum;
+                                                                res[a].collect = false;
+                                                                for (var j = 0; j < this.state.collect.length; j++) {
+                                                                    if (res[a].id == this.state.collect[j].eid) {
+                                                                        res[a].collect = true;
+                                                                        break;
+                                                                    }
+                                                                    else {
+                                                                        res[a].collect = false;
+                                                                    }
+                                                                }
+                                                                var colNum = 0;
+                                                                for (var z = 0; z < this.state.colNum.length; z++) {
+                                                                    if (res[a].id == this.state.colNum[z].eid) {
+                                                                        colNum++;
+                                                                    }
+                                                                }
+                                                                res[a].colNum = colNum;
+                                                                list.push(res[a]);
+                                                                // console.log(res[a]);
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                    this.setState({ isLoading: false });
+                                                    this.setState({ list: list });
+                                                    this.setState({ all: list });
+                                                    // console.log(list);
+                                                });
+                                        });
+                                });
+                        });
+                    var self = this;
+                    this.listener = DeviceEventEmitter.addListener('PErefresh', function (param) {
+                        // var arr=self.state.list;
+                        // var a = {"content": param.content, "like": false, "likeNum": 0, "name": param.name, "pic": "http://139.155.44.190:3005/images/6.jpg", "time": param.time};
+                        // arr.splice(0,0,a);
+                        // self.setState({list:arr});
+                        fetch(url3)
+                            .then((res) => res.json())
+                            .then((res) => {
+                                self.setState({ pic: res });
+                                fetch(url2)
+                                    .then((res) => res.json())
+                                    .then((res) => {
+                                        self.setState({ likeNum: res });
+                                        var likeList = [];
+                                        for (var i = 0; i < res.length; i++) {
+                                            if (res[i].name == self.state.username) {
+                                                likeList.push(res[i]);
+                                            }
+                                        }
+                                        self.setState({ like: likeList });
+                                        var personlike = [];
+                                        for (var i = 0; i < res.length; i++) {
+                                            if (res[i].name == self.state.person.name) {
+                                                personlike.push(res[i]);
+                                            }
+                                        }
+                                        self.setState({ personlike: personlike });
+                                        fetch(url4)
+                                            .then((res) => res.json())
+                                            .then((res) => {
+                                                self.setState({ colNum: res });
+                                                var colList = [];
+                                                for (var i = 0; i < res.length; i++) {
+                                                    if (res[i].name == self.state.username) {
+                                                        colList.push(res[i]);
+                                                    }
+                                                }
+                                                self.setState({ collect: colList });
+                                                fetch(url1)
+                                                    .then((res) => res.json())
+                                                    .then((res) => {
+                                                        var list = [];
+                                                        for (var b = 0; b < self.state.personlike.length; b++) {
+                                                            for (var a = 0; a < res.length; a++) {
+                                                                if (self.state.personlike[b].eid == res[a].id) {
+                                                                    for (var i = 0; i < self.state.pic.length; i++) {
+                                                                        if (res[a].name == self.state.pic[i].name) {
+                                                                            res[a].pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
+                                                                            res[a].college = self.state.pic[i].college;
+                                                                            res[a].level = self.state.pic[i].level;
+                                                                            break;
+                                                                        }
+                                                                    }
+                                                                    res[a].like = false;
+                                                                    for (var j = 0; j < self.state.like.length; j++) {
+                                                                        if (res[a].id == self.state.like[j].eid) {
+                                                                            res[a].like = true;
+                                                                            break;
+                                                                        }
+                                                                        else {
+                                                                            res[a].like = false;
+                                                                        }
+                                                                    }
+                                                                    var likeNum = 0;
+                                                                    for (var z = 0; z < self.state.likeNum.length; z++) {
+                                                                        if (res[a].id == self.state.likeNum[z].eid) {
+                                                                            likeNum++;
+                                                                        }
+                                                                    }
+                                                                    res[a].likeNum = likeNum;
+                                                                    res[a].collect = false;
+                                                                    for (var j = 0; j < self.state.collect.length; j++) {
+                                                                        if (res[a].id == self.state.collect[j].eid) {
+                                                                            res[a].collect = true;
+                                                                            break;
+                                                                        }
+                                                                        else {
+                                                                            res[a].collect = false;
+                                                                        }
+                                                                    }
+                                                                    var colNum = 0;
+                                                                    for (var z = 0; z < self.state.colNum.length; z++) {
+                                                                        if (res[a].id == self.state.colNum[z].eid) {
+                                                                            colNum++;
+                                                                        }
+                                                                    }
+                                                                    res[a].colNum = colNum;
+                                                                    list.push(res[a]);
+                                                                    // console.log(res[a]);
+                                                                    break;
+                                                                }
+                                                            }
+                                                        }
+                                                        self.setState({ isLoading: false });
+                                                        self.setState({ list: list });
+                                                        self.setState({ all: list });
+                                                        // console.log(list);
+                                                    });
+                                            });
+                                    });
+                            });
+                    });
+                } else if (this.state.person.title == 'collect') {
+                    fetch(url3)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            this.setState({ pic: res });
+                            fetch(url2)
+                                .then((res) => res.json())
+                                .then((res) => {
+                                    this.setState({ likeNum: res });
+                                    var likeList = [];
+                                    for (var i = 0; i < res.length; i++) {
+                                        if (res[i].name == this.state.username) {
+                                            likeList.push(res[i]);
+                                        }
+                                    }
+                                    this.setState({ like: likeList });
+                                    fetch(url4)
+                                        .then((res) => res.json())
+                                        .then((res) => {
+                                            this.setState({ colNum: res });
+                                            var colList = [];
+                                            for (var i = 0; i < res.length; i++) {
+                                                if (res[i].name == this.state.username) {
+                                                    colList.push(res[i]);
+                                                }
+                                            }
+                                            this.setState({ collect: colList });
+                                            var personcollect = [];
+                                            for (var i = 0; i < res.length; i++) {
+                                                if (res[i].name == this.state.person.name) {
+                                                    personcollect.push(res[i]);
+                                                }
+                                            }
+                                            this.setState({ personcollect: personcollect });
+                                            fetch(url1)
+                                                .then((res) => res.json())
+                                                .then((res) => {
+                                                    var list = [];
+                                                    for (var b = 0; b < this.state.personcollect.length; b++) {
+                                                        for (var a = 0; a < res.length; a++) {
+                                                            if (this.state.personcollect[b].eid == res[a].id) {
+                                                                for (var i = 0; i < this.state.pic.length; i++) {
+                                                                    if (res[a].name == this.state.pic[i].name) {
+                                                                        res[a].pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
+                                                                        res[a].college = this.state.pic[i].college;
+                                                                        res[a].level = this.state.pic[i].level;
+                                                                        break;
+                                                                    }
+                                                                }
+                                                                res[a].like = false;
+                                                                for (var j = 0; j < this.state.like.length; j++) {
+                                                                    if (res[a].id == this.state.like[j].eid) {
+                                                                        res[a].like = true;
+                                                                        break;
+                                                                    }
+                                                                    else {
+                                                                        res[a].like = false;
+                                                                    }
+                                                                }
+                                                                var likeNum = 0;
+                                                                for (var z = 0; z < this.state.likeNum.length; z++) {
+                                                                    if (res[a].id == this.state.likeNum[z].eid) {
+                                                                        likeNum++;
+                                                                    }
+                                                                }
+                                                                res[a].likeNum = likeNum;
+                                                                res[a].collect = false;
+                                                                for (var j = 0; j < this.state.collect.length; j++) {
+                                                                    if (res[a].id == this.state.collect[j].eid) {
+                                                                        res[a].collect = true;
+                                                                        break;
+                                                                    }
+                                                                    else {
+                                                                        res[a].collect = false;
+                                                                    }
+                                                                }
+                                                                var colNum = 0;
+                                                                for (var z = 0; z < this.state.colNum.length; z++) {
+                                                                    if (res[a].id == this.state.colNum[z].eid) {
+                                                                        colNum++;
+                                                                    }
+                                                                }
+                                                                res[a].colNum = colNum;
+                                                                list.push(res[a]);
+                                                                // console.log(res[a]);
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                    this.setState({ isLoading: false });
+                                                    this.setState({ list: list });
+                                                    this.setState({ all: list });
+                                                    // console.log(list);
+                                                });
+                                        });
+                                });
+                        });
+                    var self = this;
+                    this.listener = DeviceEventEmitter.addListener('PErefresh', function (param) {
+                        // var arr=self.state.list;
+                        // var a = {"content": param.content, "like": false, "likeNum": 0, "name": param.name, "pic": "http://139.155.44.190:3005/images/6.jpg", "time": param.time};
+                        // arr.splice(0,0,a);
+                        // self.setState({list:arr});
+                        fetch(url3)
+                            .then((res) => res.json())
+                            .then((res) => {
+                                self.setState({ pic: res });
+                                fetch(url2)
+                                    .then((res) => res.json())
+                                    .then((res) => {
+                                        self.setState({ likeNum: res });
+                                        var likeList = [];
+                                        for (var i = 0; i < res.length; i++) {
+                                            if (res[i].name == self.state.username) {
+                                                likeList.push(res[i]);
+                                            }
+                                        }
+                                        self.setState({ like: likeList });
+                                        fetch(url4)
+                                            .then((res) => res.json())
+                                            .then((res) => {
+                                                self.setState({ colNum: res });
+                                                var colList = [];
+                                                for (var i = 0; i < res.length; i++) {
+                                                    if (res[i].name == self.state.username) {
+                                                        colList.push(res[i]);
+                                                    }
+                                                }
+                                                self.setState({ collect: colList });
+                                                var personcollect = [];
+                                                for (var i = 0; i < res.length; i++) {
+                                                    if (res[i].name == self.state.person.name) {
+                                                        personcollect.push(res[i]);
+                                                    }
+                                                }
+                                                self.setState({ personcollect: personcollect });
+                                                fetch(url1)
+                                                    .then((res) => res.json())
+                                                    .then((res) => {
+                                                        var list = [];
+                                                        for (var b = 0; b < self.state.personcollect.length; b++) {
+                                                            for (var a = 0; a < res.length; a++) {
+                                                                if (self.state.personcollect[b].eid == res[a].id) {
+                                                                    for (var i = 0; i < self.state.pic.length; i++) {
+                                                                        if (res[a].name == self.state.pic[i].name) {
+                                                                            res[a].pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
+                                                                            res[a].college = self.state.pic[i].college;
+                                                                            res[a].level = self.state.pic[i].level;
+                                                                            break;
+                                                                        }
+                                                                    }
+                                                                    res[a].like = false;
+                                                                    for (var j = 0; j < self.state.like.length; j++) {
+                                                                        if (res[a].id == self.state.like[j].eid) {
+                                                                            res[a].like = true;
+                                                                            break;
+                                                                        }
+                                                                        else {
+                                                                            res[a].like = false;
+                                                                        }
+                                                                    }
+                                                                    var likeNum = 0;
+                                                                    for (var z = 0; z < self.state.likeNum.length; z++) {
+                                                                        if (res[a].id == self.state.likeNum[z].eid) {
+                                                                            likeNum++;
+                                                                        }
+                                                                    }
+                                                                    res[a].likeNum = likeNum;
+                                                                    res[a].collect = false;
+                                                                    for (var j = 0; j < self.state.collect.length; j++) {
+                                                                        if (res[a].id == self.state.collect[j].eid) {
+                                                                            res[a].collect = true;
+                                                                            break;
+                                                                        }
+                                                                        else {
+                                                                            res[a].collect = false;
+                                                                        }
+                                                                    }
+                                                                    var colNum = 0;
+                                                                    for (var z = 0; z < self.state.colNum.length; z++) {
+                                                                        if (res[a].id == self.state.colNum[z].eid) {
+                                                                            colNum++;
+                                                                        }
+                                                                    }
+                                                                    res[a].colNum = colNum;
+                                                                    list.push(res[a]);
+                                                                    // console.log(res[a]);
+                                                                    break;
+                                                                }
+                                                            }
+                                                        }
+                                                        self.setState({ isLoading: false });
+                                                        self.setState({ list: list });
+                                                        self.setState({ all: list });
+                                                        // console.log(list);
+                                                    });
+                                            });
+                                    });
+                            });
+                    });
+                }
+            });
+
+
         // var self1 = this;
         // this.listener1 = DeviceEventEmitter.addListener('com', function (num){
         //     console.log(num);
         // })
+
+
     }
     componentWillUnmount() {
         this.listener.remove();
@@ -255,7 +679,6 @@ export default class PerExp extends Component {
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url1);
                 });
         }
         else if (this.state.list[idx].like == true) {
@@ -269,7 +692,6 @@ export default class PerExp extends Component {
             fetch(url2)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url2);
                 });
         }
         let url2 = `http://139.155.44.190:3005/users/list`;
@@ -333,7 +755,6 @@ export default class PerExp extends Component {
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url1);
                 });
         }
         else if (this.state.list[idx].collect == true) {
@@ -347,7 +768,6 @@ export default class PerExp extends Component {
             fetch(url2)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url2);
                 });
         }
         let url2 = `http://139.155.44.190:3005/users/list`;
@@ -428,6 +848,31 @@ export default class PerExp extends Component {
         var param = 1;
         DeviceEventEmitter.emit('Prefresh', param);
     }
+    classify = (data) => {
+        if (data == '全部') {
+            this.setState({ list: this.state.all });
+        }
+        else {
+            var arr = [];
+            for (var i = 0; i < this.state.all.length; i++) {
+                if (this.state.all[i].college == data) {
+                    arr.push(this.state.all[i]);
+                }
+            }
+            this.setState({ list: arr });
+        }
+    }
+    // cla = () => {
+    //     this.refs['list'].style.display='flex';
+    //     console.log(1);
+    // }
+    onPenLeftDrawer() {
+        this.drawer.openDrawer();
+    }
+
+    closeLeftDrawer() {
+        this.drawer.closeDrawer();
+    }
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
@@ -470,79 +915,75 @@ export default class PerExp extends Component {
                     </View>
 
                 </View>
-                <ScrollView style={{ flex: 1 }}>
-                    <View>
-                        {
-                            this.state.list.map((item, idx) => (
-                                <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 20 * s }}>
-                                    <View style={{
-                                        flexDirection: 'row',
-                                        height: 80 * s,
-                                        alignItems: 'center'
-                                    }}>
+                <View>
+                    {
+                        this.state.list.map((item, idx) => (
+                            <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 20 * s }}>
+                                <View style={{
+                                    flexDirection: 'row',
+                                    height: 80 * s,
+                                    alignItems: 'center'
+                                }}>
 
-                                        <Image style={{
-                                            marginLeft: 20 * s,
-                                            height: 50 * s,
-                                            width: 50 * s,
-                                            borderRadius: 25 * s,
-                                            backgroundColor: 'yellow'
-                                        }} source={{ uri: item.pic }} />
+                                    <Image style={{
+                                        marginLeft: 20 * s,
+                                        height: 50 * s,
+                                        width: 50 * s,
+                                        borderRadius: 25 * s,
+                                        backgroundColor: 'yellow'
+                                    }} source={{ uri: item.pic }} />
 
-                                        <View style={{ marginLeft: 30 * s }}>
-                                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                                <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
-                                                <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: 'red' }}>Lv.{item.level}</Text>
-                                            </View>
-                                            <Text>{item.time}</Text>
+                                    <View style={{ marginLeft: 30 * s }}>
+                                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                            <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
+                                            <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: 'red' }}>Lv.{item.level}</Text>
                                         </View>
+                                        <Text>{item.time}</Text>
                                     </View>
-                                    <View style={{
-                                        marginLeft: 30 * s,
-                                        marginRight: 30 * s,
-                                        marginTop: 10 * s,
-                                        marginBottom: 20 * s
-                                    }}
-                                    >
-                                        <Text style={{ fontSize: 18 * s }}>{item.content}</Text>
-                                    </View>
-                                    <View style={{ flexDirection: 'row', height: 40 * s, alignItems: 'center', justifyContent: 'space-evenly', borderTopWidth: 1, borderTopColor: "#EFEFF4" }}>
-                                        <View style={{ alignItems: 'center', flexDirection: 'row' }}>
-                                            <Icon name="star" onPress={this.collect.bind(this, (idx))} style={item.collect ? { color: 'yellow', fontSize: 30 * s } : { fontSize: 30 * s }}></Icon>
-                                            <Text>{item.colNum}</Text>
-                                        </View>
-                                        <View style={{ alignItems: 'center', flexDirection: 'row' }}>
-                                            <Icon name="heart" onPress={this.like.bind(this, (idx))} style={item.like ? { color: 'red', fontSize: 30 * s } : { fontSize: 30 * s }}></Icon>
-                                            <Text>{item.likeNum}</Text>
-                                        </View>
-                                    </View>
-                                    {
-                                        this.state.username == item.name
-                                            ? <TouchableOpacity style={{
-                                                width: 30 * s,
-                                                height: 30 * s,
-                                                borderRadius: 15 * s,
-                                                flexDirection: 'row',
-                                                justifyContent: 'center',
-                                                alignItems: 'center',
-                                                // backgroundColor: '#37376F',
-                                                position: 'absolute',
-                                                top: 5,
-                                                right: 5
-                                            }}
-                                                onPress={this.delete.bind(this, (idx))}
-                                            >
-                                                <Text style={{ color: '#e8e8e8', fontSize: 30 * s }}>×</Text>
-                                            </TouchableOpacity>
-                                            : null
-                                    }
                                 </View>
-                            ))
-                        }
-                    </View>
-
-                </ScrollView>
-
+                                <View style={{
+                                    marginLeft: 30 * s,
+                                    marginRight: 30 * s,
+                                    marginTop: 10 * s,
+                                    marginBottom: 20 * s
+                                }}
+                                >
+                                    <Text style={{ fontSize: 18 * s }}>{item.content}</Text>
+                                </View>
+                                <View style={{ flexDirection: 'row', height: 40 * s, alignItems: 'center', justifyContent: 'space-evenly', borderTopWidth: 1, borderTopColor: "#EFEFF4" }}>
+                                    <View style={{ alignItems: 'center', flexDirection: 'row' }}>
+                                        <Icon name="star" onPress={this.collect.bind(this, (idx))} style={item.collect ? { color: 'yellow', fontSize: 30 * s } : { fontSize: 30 * s }}></Icon>
+                                        <Text>{item.colNum}</Text>
+                                    </View>
+                                    <View style={{ alignItems: 'center', flexDirection: 'row' }}>
+                                        <Icon name="heart" onPress={this.like.bind(this, (idx))} style={item.like ? { color: 'red', fontSize: 30 * s } : { fontSize: 30 * s }}></Icon>
+                                        <Text>{item.likeNum}</Text>
+                                    </View>
+                                </View>
+                                {
+                                    this.state.username == item.name
+                                        ? <TouchableOpacity style={{
+                                            width: 30 * s,
+                                            height: 30 * s,
+                                            borderRadius: 15 * s,
+                                            flexDirection: 'row',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            // backgroundColor: '#37376F',
+                                            position: 'absolute',
+                                            top: 5,
+                                            right: 5
+                                        }}
+                                            onPress={this.delete.bind(this, (idx))}
+                                        >
+                                            <Text style={{ color: '#e8e8e8', fontSize: 30 * s }}>×</Text>
+                                        </TouchableOpacity>
+                                        : null
+                                }
+                            </View>
+                        ))
+                    }
+                </View>
                 {
                     this.state.isLoading
                         ? <View
@@ -561,27 +1002,6 @@ export default class PerExp extends Component {
                         </View>
                         : null
                 }
-                <View style={{
-                    width: '100%',
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
-                    <TouchableOpacity style={{
-                        width: 300 * s,
-                        height: 40 * s,
-                        borderRadius: 15 * s,
-                        flexDirection: 'row',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: '#37376F',
-                        marginBottom: 10 * s
-                    }}
-                        onPress={() => this.back()}
-                    >
-                        <Text style={{ color: '#fff', fontSize: 20 * s }}>返回</Text>
-                    </TouchableOpacity>
-                </View>
             </SafeAreaView >
 
         )

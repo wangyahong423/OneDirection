@@ -12,166 +12,356 @@ export default class PerLearn extends Component {
             list: [],
             pic: [],
             like: [],
+            personlike: [],
             lvlist: [],
             search: '',
             likeNum: [],
             comNum: [],
-            all:[],
+            all: [],
             username: '',
             isLoading: true,
             person: ''
         };
-        this.getData();
+        // this.getData();
     }
-    getData = () => {
+    // getData = () => {
+    //     AsyncStorage.getItem('username')
+    //         .then((res) => {
+    //             let name = { username: res }
+    //             this.setState({
+    //                 username: name.username
+    //             })
+    //         });
+    //     AsyncStorage.getItem('personname2')
+    //         .then((res) => {
+    //             this.setState({
+    //                 person: JSON.parse(res)
+    //             })
+    //         });
+    //     console.log(this.state.person)
+    // }
+    componentDidMount() {
+       
+
+        this.setState({ isLoading: true })
+        var url1 = `http://139.155.44.190:3005/learn/list`;
+        var url2 = `http://139.155.44.190:3005/learnlike/list`;
+        let url3 = `http://139.155.44.190:3005/users/list`;
+        let url4 = `http://139.155.44.190:3005/learntalk/list`;
         AsyncStorage.getItem('username')
             .then((res) => {
                 let name = { username: res }
                 this.setState({
                     username: name.username
                 })
+                // console.log("我的社区1",this.state.username)
             });
         AsyncStorage.getItem('personname2')
             .then((res) => {
                 this.setState({
                     person: JSON.parse(res)
                 })
-            });
-        console.log(this.state.person)
-    }
-    componentDidMount() {
-        this.setState({ isLoading: true })
-        var url1 = `http://139.155.44.190:3005/learn/list`;
-        var url2 = `http://139.155.44.190:3005/learnlike/list`;
-        let url4 = `http://139.155.44.190:3005/learntalk/list`;
-        fetch(url2)
-            .then((res) => res.json())
-            .then((res) => {
-                this.setState({ likeNum: res });
-                var likeList = [];
-                for (var i = 0; i < res.length; i++) {
-                    if (res[i].name == this.state.username && res[i].lname == this.state.person.name) {
-                        likeList.push(res[i]);
-                    }
-                }
-                this.setState({ like: likeList });
-                fetch(url4)
-                    .then((res) => res.json())
-                    .then((res) => {
-                        this.setState({ comNum: res });
-                        fetch(url1)
-                            .then((res) => res.json())
-                            .then((res) => {
-                                var list = [];
-                                for (var i = 0; i < res.length; i++) {
-                                    if (res[i].name == this.state.person.name) {
-                                        res[i].pic = this.state.person.pic;
-                                        res[i].college = this.state.person.college;
-                                        res[i].level = this.state.person.level;
-                                        res[i].like = false;
-                                        for (var j = 0; j < this.state.like.length; j++) {
-                                            if (res[i].id == this.state.like[j].lid) {
-                                                res[i].like = true;
-                                                break;
-                                            }
-                                            else {
-                                                res[i].like = false;
-                                            }
-                                        }
-                                        var likeNum = 0;
-                                        for (var z = 0; z < this.state.likeNum.length; z++) {
-                                            if (res[i].id == this.state.likeNum[z].lid) {
-                                                likeNum++;
-                                            }
-                                        }
-                                        res[i].likeNum = likeNum;
-                                        var comNum = 0;
-                                        for (var z = 0; z < this.state.comNum.length; z++) {
-                                            if (res[i].id == this.state.comNum[z].lid) {
-                                                comNum++;
-                                            }
-                                        }
-                                        res[i].comNum = comNum;
-                                        list.push(res[i]);
-                                    }
-                                }
-                                this.setState({ isLoading: false });
-                                this.setState({ list: list });
-                                this.setState({ all: list });
-                                console.log(this.state.list);
-                            });
-                    });
-            });
-
-        var self = this;
-        this.listener = DeviceEventEmitter.addListener('ELrefresh', function (param) {
-            // var arr=self.state.list;
-            // var a = {"content": param.content, "like": false, "likeNum": 0, "name": param.name, "pic": "http://139.155.44.190:3005/images/6.jpg", "time": param.time};
-            // arr.splice(0,0,a);
-            // self.setState({list:arr});
-            // console.log(param);
-            fetch(url2)
-                .then((res) => res.json())
-                .then((res) => {
-                    self.setState({ likeNum: res });
-                    var likeList = [];
-                    for (var i = 0; i < res.length; i++) {
-                        if (res[i].name == self.state.username && res[i].lname == self.state.person.name) {
-                            likeList.push(res[i]);
-                        }
-                    }
-                    self.setState({ like: likeList });
-                    fetch(url4)
+                console.log("我的社区2",this.state.person)
+                if (this.state.person.title == 'issue') {
+                    fetch(url2)
                         .then((res) => res.json())
                         .then((res) => {
-                            self.setState({ comNum: res });
-                            fetch(url1)
+                            this.setState({ likeNum: res });
+                            var likeList = [];
+                            for (var i = 0; i < res.length; i++) {
+                                if (res[i].name == this.state.username && res[i].lname == this.state.person.name) {
+                                    likeList.push(res[i]);
+                                }
+                            }
+                            this.setState({ like: likeList });
+                            fetch(url4)
                                 .then((res) => res.json())
                                 .then((res) => {
-                                    var list = [];
-                                    for (var i = 0; i < res.length; i++) {
-                                        if (res[i].name == self.state.person.name) {
-                                            res[i].pic = self.state.person.pic;
-                                            res[i].college = self.state.person.college;
-                                            res[i].level = self.state.person.level;
-                                            res[i].like = false;
-                                            for (var j = 0; j < self.state.like.length; j++) {
-                                                if (res[i].id == self.state.like[j].lid) {
-                                                    res[i].like = true;
-                                                    break;
-                                                }
-                                                else {
+                                    this.setState({ comNum: res });
+                                    fetch(url1)
+                                        .then((res) => res.json())
+                                        .then((res) => {
+                                            var list = [];
+                                            for (var i = 0; i < res.length; i++) {
+                                                if (res[i].name == this.state.person.name) {
+                                                    res[i].pic = this.state.person.pic;
+                                                    res[i].college = this.state.person.college;
+                                                    res[i].level = this.state.person.level;
                                                     res[i].like = false;
+                                                    for (var j = 0; j < this.state.like.length; j++) {
+                                                        if (res[i].id == this.state.like[j].lid) {
+                                                            res[i].like = true;
+                                                            break;
+                                                        }
+                                                        else {
+                                                            res[i].like = false;
+                                                        }
+                                                    }
+                                                    var likeNum = 0;
+                                                    for (var z = 0; z < this.state.likeNum.length; z++) {
+                                                        if (res[i].id == this.state.likeNum[z].lid) {
+                                                            likeNum++;
+                                                        }
+                                                    }
+                                                    res[i].likeNum = likeNum;
+                                                    var comNum = 0;
+                                                    for (var z = 0; z < this.state.comNum.length; z++) {
+                                                        if (res[i].id == this.state.comNum[z].lid) {
+                                                            comNum++;
+                                                        }
+                                                    }
+                                                    res[i].comNum = comNum;
+                                                    list.push(res[i]);
                                                 }
                                             }
-                                            var likeNum = 0;
-                                            for (var z = 0; z < self.state.likeNum.length; z++) {
-                                                if (res[i].id == self.state.likeNum[z].lid) {
-                                                    likeNum++;
-                                                }
-                                            }
-                                            res[i].likeNum = likeNum;
-                                            var comNum = 0;
-                                            for (var z = 0; z < self.state.comNum.length; z++) {
-                                                if (item.id == self.state.comNum[z].lid) {
-                                                    comNum++;
-                                                }
-                                            }
-                                            res[i].comNum = comNum;
-                                            list.push(res[i]);
-                                        }
-                                    }
-                                    self.setState({ isLoading: false });
-                                    self.setState({ list: list });
-                                    self.setState({ all: list });
+                                            this.setState({ isLoading: false });
+                                            this.setState({ list: list });
+                                            this.setState({ all: list });
+                                        });
                                 });
                         });
-                });
-            // var self1 = this;
-            // this.listener1 = DeviceEventEmitter.addListener('com', function (num){
-            //     console.log(num);
-            // })
-        });
+
+                    var self = this;
+                    this.listener = DeviceEventEmitter.addListener('ELrefresh', function (param) {
+                        // var arr=self.state.list;
+                        // var a = {"content": param.content, "like": false, "likeNum": 0, "name": param.name, "pic": "http://139.155.44.190:3005/images/6.jpg", "time": param.time};
+                        // arr.splice(0,0,a);
+                        // self.setState({list:arr});
+                        // console.log(param);
+                        fetch(url2)
+                            .then((res) => res.json())
+                            .then((res) => {
+                                self.setState({ likeNum: res });
+                                var likeList = [];
+                                for (var i = 0; i < res.length; i++) {
+                                    if (res[i].name == self.state.username && res[i].lname == self.state.person.name) {
+                                        likeList.push(res[i]);
+                                    }
+                                }
+                                self.setState({ like: likeList });
+                                fetch(url4)
+                                    .then((res) => res.json())
+                                    .then((res) => {
+                                        self.setState({ comNum: res });
+                                        fetch(url1)
+                                            .then((res) => res.json())
+                                            .then((res) => {
+                                                var list = [];
+                                                for (var i = 0; i < res.length; i++) {
+                                                    if (res[i].name == self.state.person.name) {
+                                                        res[i].pic = self.state.person.pic;
+                                                        res[i].college = self.state.person.college;
+                                                        res[i].level = self.state.person.level;
+                                                        res[i].like = false;
+                                                        for (var j = 0; j < self.state.like.length; j++) {
+                                                            if (res[i].id == self.state.like[j].lid) {
+                                                                res[i].like = true;
+                                                                break;
+                                                            }
+                                                            else {
+                                                                res[i].like = false;
+                                                            }
+                                                        }
+                                                        var likeNum = 0;
+                                                        for (var z = 0; z < self.state.likeNum.length; z++) {
+                                                            if (res[i].id == self.state.likeNum[z].lid) {
+                                                                likeNum++;
+                                                            }
+                                                        }
+                                                        res[i].likeNum = likeNum;
+                                                        var comNum = 0;
+                                                        for (var z = 0; z < self.state.comNum.length; z++) {
+                                                            if (res[i].id == self.state.comNum[z].lid) {
+                                                                comNum++;
+                                                            }
+                                                        }
+                                                        res[i].comNum = comNum;
+                                                        list.push(res[i]);
+                                                    }
+                                                }
+                                                self.setState({ isLoading: false });
+                                                self.setState({ list: list });
+                                                self.setState({ all: list });
+                                            });
+                                    });
+                            });
+                        // var self1 = this;
+                        // this.listener1 = DeviceEventEmitter.addListener('com', function (num){
+                        //     console.log(num);
+                        // })
+                    });
+                } else if (this.state.person.title == 'like') {
+                    fetch(url3)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            this.setState({
+                                pic: res,
+                            });
+                            fetch(url2)
+                                .then((res) => res.json())
+                                .then((res) => {
+                                    this.setState({ likeNum: res });
+                                    var likeList = [];
+                                    for (var i = 0; i < res.length; i++) {
+                                        if (res[i].name == this.state.username) {
+                                            likeList.push(res[i]);
+                                        }
+                                    }
+                                    this.setState({ like: likeList });
+                                    var personlike = [];
+                                    for (var i = 0; i < res.length; i++) {
+                                        if (res[i].name == this.state.person.name) {
+                                            personlike.push(res[i]);
+                                        }
+                                    }
+                                    this.setState({ personlike: personlike });
+                                    fetch(url4)
+                                        .then((res) => res.json())
+                                        .then((res) => {
+                                            this.setState({ comNum: res });
+                                            fetch(url1)
+                                                .then((res) => res.json())
+                                                .then((res) => {
+                                                    var list = [];
+                                                    for (var b = 0; b < this.state.personlike.length; b++) {
+                                                        for (var a = 0; a < res.length; a++) {
+                                                            if (this.state.personlike[b].lid == res[a].id) {
+                                                                for (var i = 0; i < this.state.pic.length; i++) {
+                                                                    if (res[a].name == this.state.pic[i].name) {
+                                                                        res[a].pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
+                                                                        res[a].level = this.state.pic[i].level;
+                                                                        res[a].college = this.state.pic[i].college;
+                                                                        break;
+                                                                    }
+                                                                }
+                                                                res[a].like = false;
+                                                                for (var j = 0; j < this.state.like.length; j++) {
+                                                                    if (res[a].id == this.state.like[j].lid) {
+                                                                        res[a].like = true;
+                                                                        break;
+                                                                    }
+                                                                    else {
+                                                                        res[a].like = false;
+                                                                    }
+                                                                }
+                                                                var likeNum = 0;
+                                                                for (var z = 0; z < this.state.likeNum.length; z++) {
+                                                                    if (res[a].id == this.state.likeNum[z].lid) {
+                                                                        likeNum++;
+                                                                    }
+                                                                }
+                                                                res[a].likeNum = likeNum;
+                                                                var comNum = 0;
+                                                                for (var z = 0; z < this.state.comNum.length; z++) {
+                                                                    if (res[a].id == this.state.comNum[z].lid) {
+                                                                        comNum++;
+                                                                    }
+                                                                }
+                                                                res[a].comNum = comNum;
+                                                                list.push(res[a]);
+                                                                break;
+                                                                // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
+                                                            }
+                                                        }
+                                                    }
+                                                    this.setState({ isLoading: false });
+                                                    this.setState({ list: list });
+                                                    this.setState({ all: list });
+                                                });
+                                        });
+                                });
+                        });
+                    var self = this;
+                    this.listener = DeviceEventEmitter.addListener('refresh', function (param) {
+                        // var arr=self.state.list;
+                        // var a = {"content": param.content, "like": false, "likeNum": 0, "name": param.name, "pic": "http://139.155.44.190:3005/images/6.jpg", "time": param.time};
+                        // arr.splice(0,0,a);
+                        // self.setState({list:arr});
+                        // console.log(param);
+                        fetch(url3)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            self.setState({
+                                pic: res,
+                            });
+                            fetch(url2)
+                                .then((res) => res.json())
+                                .then((res) => {
+                                    self.setState({ likeNum: res });
+                                    var likeList = [];
+                                    for (var i = 0; i < res.length; i++) {
+                                        if (res[i].name == self.state.username) {
+                                            likeList.push(res[i]);
+                                        }
+                                    }
+                                    self.setState({ like: likeList });
+                                    var personlike = [];
+                                    for (var i = 0; i < res.length; i++) {
+                                        if (res[i].name == self.state.person.name) {
+                                            personlike.push(res[i]);
+                                        }
+                                    }
+                                    self.setState({ personlike: personlike });
+                                    fetch(url4)
+                                        .then((res) => res.json())
+                                        .then((res) => {
+                                            self.setState({ comNum: res });
+                                            fetch(url1)
+                                                .then((res) => res.json())
+                                                .then((res) => {
+                                                    var list = [];
+                                                    for (var b = 0; b < self.state.personlike.length; b++) {
+                                                        for (var a = 0; a < res.length; a++) {
+                                                            if (self.state.personlike[b].lid == res[a].id) {
+                                                                for (var i = 0; i < self.state.pic.length; i++) {
+                                                                    if (res[a].name == self.state.pic[i].name) {
+                                                                        res[a].pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
+                                                                        res[a].level = self.state.pic[i].level;
+                                                                        res[a].college = self.state.pic[i].college;
+                                                                        break;
+                                                                    }
+                                                                }
+                                                                res[a].like = false;
+                                                                for (var j = 0; j < self.state.like.length; j++) {
+                                                                    if (res[a].id == self.state.like[j].lid) {
+                                                                        res[a].like = true;
+                                                                        break;
+                                                                    }
+                                                                    else {
+                                                                        res[a].like = false;
+                                                                    }
+                                                                }
+                                                                var likeNum = 0;
+                                                                for (var z = 0; z < self.state.likeNum.length; z++) {
+                                                                    if (res[a].id == self.state.likeNum[z].lid) {
+                                                                        likeNum++;
+                                                                    }
+                                                                }
+                                                                res[a].likeNum = likeNum;
+                                                                var comNum = 0;
+                                                                for (var z = 0; z < self.state.comNum.length; z++) {
+                                                                    if (res[a].id == self.state.comNum[z].lid) {
+                                                                        comNum++;
+                                                                    }
+                                                                }
+                                                                res[a].comNum = comNum;
+                                                                list.push(res[a]);
+                                                                break;
+                                                                // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
+                                                            }
+                                                        }
+                                                    }
+                                                    self.setState({ isLoading: false });
+                                                    self.setState({ list: list });
+                                                    self.setState({ all: list });
+                                                });
+                                        });
+                                });
+                        });
+                    });
+                }
+            });
+
     }
     componentWillUnmount() {
         this.listener.remove();
@@ -226,7 +416,6 @@ export default class PerLearn extends Component {
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url1);
                 });
             let url2 = `http://139.155.44.190:3005/users/list`;
             fetch(url2)
@@ -287,7 +476,6 @@ export default class PerLearn extends Component {
             fetch(url2)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url2);
                 });
         }
     }
@@ -299,23 +487,24 @@ export default class PerLearn extends Component {
     search = () => {
         let url = `http://139.155.44.190:3005/learn/select?content=${this.state.search}`;
         fetch(url)
-        .then((res) => res.json())
-        .then((res) => {
-            if (res.false) { }
-            else {
-                var list=[];
-                for(var i = 0;i<res.length;i++){
-                    for(var j =0 ;j<this.state.all.length;j++){
-                        if(res[i].id==this.state.all[j].id){
-                            list.push(this.state.all[j]);
-                            break;
+            .then((res) => res.json())
+            .then((res) => {
+                if (res.false) { }
+                else {
+                    var list = [];
+                    // console.log(res);
+                    for (var i = 0; i < res.length; i++) {
+                        for (var j = 0; j < this.state.all.length; j++) {
+                            if (res[i].id == this.state.all[j].id) {
+                                list.push(this.state.all[j]);
+                                break;
+                            }
                         }
                     }
+                    this.setState({ list: list });
                 }
-                this.setState({ list: list });
-            }
-        });
-        
+            });
+
     }
     back = () => {
         Actions.pop();
@@ -363,7 +552,7 @@ export default class PerLearn extends Component {
                     </View>
                 </View>
 
-                <ScrollView style={{ flex: 1 }}>
+                {/* <ScrollView style={{ flex: 1 }}> */}
                     <View>
                         {
                             this.state.list.map((item, idx) => (
@@ -433,7 +622,7 @@ export default class PerLearn extends Component {
                         }
                     </View>
 
-                </ScrollView>
+                {/* </ScrollView> */}
                 {
                     this.state.isLoading
                         ? <View
@@ -452,27 +641,6 @@ export default class PerLearn extends Component {
                         </View>
                         : null
                 }
-                < View style={{
-                    width: '100%',
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
-                    <TouchableOpacity style={{
-                        width: 300 * s,
-                        height: 40 * s,
-                        borderRadius: 15 * s,
-                        flexDirection: 'row',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: '#37376F',
-                        marginBottom: 10 * s
-                    }}
-                        onPress={() => this.back()}
-                    >
-                        <Text style={{ color: '#fff', fontSize: 20 * s }}>返回</Text>
-                    </TouchableOpacity>
-                </View >
             </SafeAreaView >
         )
     }

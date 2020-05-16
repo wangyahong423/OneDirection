@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, SafeAreaView, TextInput, StatusBar, Dimensions, ImageBackground, Image, TouchableOpacity, AsyncStorage, Alert, DeviceEventEmitter, ShadowPropTypesIOS } from 'react-native';
+import { Text, View, StyleSheet, FlatList, ScrollView, SafeAreaView, TextInput, StatusBar, Dimensions, ImageBackground, Image, TouchableOpacity, AsyncStorage, Alert, DeviceEventEmitter, ShadowPropTypesIOS } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Actions } from 'react-native-router-flux';
+import PerExp from './PerExp';
+import PerLearn from './PerLearn'
 import Img from './Img'
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
@@ -35,8 +37,13 @@ export default class Person extends Component {
             tabHeight: 50,
             PLLike: 0,
             PELike: 0,
-
-
+            myexp: false,
+            mylearn: true,
+            personlearn: false,
+            personexp: false,
+            mycollect: false,
+            collectIcon: false,//搜索的按钮
+            style: '我的社区'
         };
         this.getData();
     }
@@ -56,9 +63,7 @@ export default class Person extends Component {
                 this.setState({
                     all: JSON.parse(res)
                 })
-
             });
-
     }
     componentDidMount() {
         let url1 = `http://139.155.44.190:3005/learn/list`;
@@ -198,7 +203,6 @@ export default class Person extends Component {
                     lnameList: lname
                 })
             })
-
         var self = this;
         this.listener = DeviceEventEmitter.addListener('Prefresh', function (param) {
             fetch(url1)
@@ -332,26 +336,15 @@ export default class Person extends Component {
                         lnameList: lname
                     })
                 })
-
-
         });
     }
     componentWillUnmount() {
         this.listener.remove();
     }
-    personexp = (title) => {
-        var value = { name: this.state.all.name, pic: this.state.all.pic, level: this.state.all.level, title: title };
-        AsyncStorage.setItem('personname1', JSON.stringify(value));
-        Actions.perexp();
-    }
-    personlearn = (title) => {
-        var value = { name: this.state.all.name, pic: this.state.all.pic, level: this.state.all.level, title: title };
-        AsyncStorage.setItem('personname2', JSON.stringify(value));
-        Actions.perlearn();
-    }
     back = () => {
         Actions.pop();
         var param = 1;
+        DeviceEventEmitter.emit('ELrefresh', param);
         DeviceEventEmitter.emit('Erefresh', param);
         DeviceEventEmitter.emit('refresh', param);
     }
@@ -364,10 +357,8 @@ export default class Person extends Component {
         else {
             Alert.alert("还没有关注哦~")
         }
-
     }
     fanslist = () => {
-        console.log("粉丝", this.state.fans)
         if (this.state.fans) {
             var value = { fansList: this.state.lnameList };
             AsyncStorage.setItem('fanslist', JSON.stringify(value));
@@ -376,7 +367,6 @@ export default class Person extends Component {
         else {
             Alert.alert("还没有粉丝哦~")
         }
-
     }
     follow = () => {
         if (this.state.fol == false) {
@@ -406,16 +396,81 @@ export default class Person extends Component {
                 })
         }
     }
+    class = (data) => {
+        if (data == '我的社区') {
+            this.setState({
+                myexp: false,//我的经验
+                mylearn: true,//我的社区
+                personlearn: false,//赞在社区
+                personexp: false,//赞在经验
+                mycollect: false,//我的收藏
+                style: "我的社区"
+            })
+            var value = { name: this.state.all.name, pic: this.state.all.pic, level: this.state.all.level, title: "issue" };
+            AsyncStorage.setItem('personname2', JSON.stringify(value));
+        }
+        else if (data == '我的经验') {
+            this.setState({
+                myexp: true,//我的经验
+                mylearn: false,//我的社区
+                personlearn: false,//赞在社区
+                personexp: false,//赞在经验
+                mycollect: false,//我的收藏
+                style: "我的经验"
+            })
+            var value = { name: this.state.all.name, pic: this.state.all.pic, level: this.state.all.level, title: "issue" };
+            AsyncStorage.setItem('personname1', JSON.stringify(value));
+        }
+        else if (data == '我的收藏') {
+            this.setState({
+                myexp: false,//我的经验
+                mylearn: false,//我的社区
+                personlearn: false,//赞在社区
+                personexp: false,//赞在经验
+                mycollect: true,//我的收藏
+                style: "我的收藏"
+            })
+            var value = { name: this.state.all.name, pic: this.state.all.pic, level: this.state.all.level, title: "collect" };
+            AsyncStorage.setItem('personname1', JSON.stringify(value));
+        }
+        else if (data == '赞在社区') {
+            this.setState({
+                myexp: false,//我的经验
+                mylearn: false,//我的社区
+                personlearn: true,//赞在社区
+                personexp: false,//赞在经验
+                mycollect: false,//我的收藏
+                style: "赞在社区"
+            })
+            var value = { name: this.state.all.name, pic: this.state.all.pic, level: this.state.all.level, title: "like" };
+            AsyncStorage.setItem('personname2', JSON.stringify(value));
+        }
+        else if (data == '赞在经验') {
+            this.setState({
+                myexp: false,//我的经验
+                mylearn: false,//我的社区
+                personlearn: false,//赞在社区
+                personexp: true,//赞在经验
+                mycollect: false,//我的收藏
+                style: "赞在经验"
+            })
+            var value = { name: this.state.all.name, pic: this.state.all.pic, level: this.state.all.level, title: "like" };
+            AsyncStorage.setItem('personname1', JSON.stringify(value));
+        }
+    }
+    collect = () => {
+        this.setState({
+            collectIcon: true
+        })
+    }
     render() {
         return (
             <View style={{ flex: 1 }}>
-
                 <SafeAreaView style={{ flex: 1 }} >
                     <StatusBar
                         translucent={true}
                         backgroundColor={'#00000000'}
                         barStyle={this.state.tabShow ? ('dark-content') : ('light-content')}
-
                     />
                     {/* 用户名 */}
                     {this.state.tabShow ? (
@@ -439,7 +494,7 @@ export default class Person extends Component {
                         <View
                             style={{
                                 position: 'absolute',
-                                height: 80,
+                                height: 60,
                                 width: width,
                                 top: 60,
                                 left: 0,
@@ -451,12 +506,25 @@ export default class Person extends Component {
                                 justifyContent: "space-around",
                                 alignItems: "center"
                             }}>
-                           <TouchableOpacity onPress={this.personlearn.bind(this, ('like'))}><Text>赞在社区</Text></TouchableOpacity>
-                            <TouchableOpacity onPress={this.personexp.bind(this, ('like'))}><Text>赞在经验</Text></TouchableOpacity>
-                            <TouchableOpacity><Text>我的社区</Text></TouchableOpacity>
-                            <TouchableOpacity onPress={() => this.personexp()}><Text>我的经验</Text></TouchableOpacity>
-                            <TouchableOpacity onPress={this.personexp.bind(this, ('collect'))}><Text>我的收藏</Text></TouchableOpacity>
-
+                            <FlatList
+                                horizontal={true}
+                                data={[
+                                    { key: '我的社区' },
+                                    { key: '我的经验' },
+                                    { key: '我的收藏' },
+                                    { key: '赞在社区' },
+                                    { key: '赞在经验' },
+                                ]}
+                                renderItem={({ item }) =>
+                                    <TouchableOpacity onPress={this.class.bind(this, (item.key))}>
+                                        {
+                                            item.key == this.state.style
+                                                ? <View style={{ height: 45, width: width * 0.18, marginLeft:width*0.017,justifyContent:"center",alignItems:"center" ,borderBottomColor:"#007ACC",borderBottomWidth:2.5*s}}><Text style={styles.item1}>{item.key}</Text></View>
+                                                : <View style={{ height: 45, width: width * 0.18,marginLeft:width*0.017, justifyContent:"center",alignItems:"center"}}><Text style={styles.item}>{item.key}</Text></View>
+                                        }
+                                    </TouchableOpacity>
+                                }
+                            />
                         </View>
                     ) : (<View></View>)}
                     <ScrollView
@@ -486,32 +554,28 @@ export default class Person extends Component {
 
                                     <Image style={{ height: 25 * s, width: 40 * s, marginLeft: 10 * s }} source={Img['png' + this.state.all.level]} />
                                 </View>
-                                <View style={{marginTop:20*s}}>
-                                {
-                                    this.state.username == this.state.all.name
-                                        ? null
-                                        :
-                                        <TouchableOpacity
-                                            onPress={this.follow}
-                                            // style={this.state.fol ? { height: 40, width: 100, borderRadius: 5, borderWidth: 1}
-                                            //     : { borderColor: "red", height: 30, width: 100, borderRadius: 5, borderWidth: 1, }} 
-                                            >
-                                            {
-                                                this.state.fol
-                                                    ? <View style={{height: 35*s, width: 100, borderRadius: 20,borderColor:"#fff", borderWidth: 1,justifyContent:"center",alignItems:"center",flexDirection:"row"}}>
-                                                        {/* <Text style={{color:"#fff",fontSize:20*s,marginRight:10*s}}>√</Text> */}
-                                                        <Text style={{ fontSize: 16 * s ,color:"#fff"}}>已关注</Text>
-                                                    </View>
-                                                    : 
-                                                    <View style={{height: 35*s, width: 100, borderRadius: 20,borderColor:"red", borderWidth: 1,justifyContent:"center",alignItems:"center",flexDirection:"row", }}>
-                                                    <Icon style={{color:"red",fontSize:25*s,marginRight:10*s}} name="ios-add"/>
-                                                    <Text style={{ color: "red", fontSize: 16 * s}}>关注</Text>
+                                <View style={{ marginTop: 20 * s }}>
+                                    {
+                                        this.state.username == this.state.all.name
+                                            ? null
+                                            :
+                                            <TouchableOpacity
+                                                onPress={this.follow}>
+                                                {
+                                                    this.state.fol
+                                                        ? <View style={{ height: 35 * s, width: 100, borderRadius: 20, borderColor: "#fff", borderWidth: 1, justifyContent: "center", alignItems: "center", flexDirection: "row" }}>
+                                                            <Text style={{ fontSize: 16 * s, color: "#fff" }}>已关注</Text>
+                                                        </View>
+                                                        :
+                                                        <View style={{ height: 35 * s, width: 100, borderRadius: 20, borderColor: "red", borderWidth: 1, justifyContent: "center", alignItems: "center", flexDirection: "row", }}>
+                                                            <Icon style={{ color: "red", fontSize: 25 * s, marginRight: 10 * s }} name="ios-add" />
+                                                            <Text style={{ color: "red", fontSize: 16 * s }}>关注</Text>
 
-                                                    </View>
-                                            }
-                                        </TouchableOpacity>
-                                }
-                            </View>
+                                                        </View>
+                                                }
+                                            </TouchableOpacity>
+                                    }
+                                </View>
                                 <View style={{ flexDirection: "row", marginTop: 5 * s }}>
                                     <TouchableOpacity style={{ height: 50 * s, width: 80 * s, alignItems: "center" }}>
                                         <Text style={{ color: "#fff", fontSize: 16 * s }}>{this.state.Llike}</Text>
@@ -537,213 +601,122 @@ export default class Person extends Component {
                                         <Text style={{ color: "#fff", marginTop: -35 * s, fontSize: 15 * s }}>关注</Text>
                                     </TouchableOpacity>
                                 </View>
-
                             </View>
-                          
                         </ImageBackground>
                         <View style={{ height: 60, width: width, backgroundColor: "#fff", flexDirection: "row", justifyContent: "space-around", alignItems: "center" }}>
-                            <TouchableOpacity style={{width:width*0.15,height:40,justifyContent:"center",alignItems:"center",borderBottomWidth:2,borderBottomColor:"black"}} onPress={this.personlearn.bind(this, ('like'))}><Text style={{fontSize:15*s,color:"#5F6368"}}>赞在社区</Text></TouchableOpacity>
-                            <TouchableOpacity style={{width:width*0.15,height:40,justifyContent:"center",alignItems:"center",}}  onPress={this.personexp.bind(this, ('like'))}><Text style={{fontSize:15*s,color:"#5F6368"}}>赞在经验</Text></TouchableOpacity>
-                            <TouchableOpacity style={{width:width*0.15,height:40,justifyContent:"center",alignItems:"center",}} ><Text style={{fontSize:15*s,color:"#5F6368"}}>我的社区</Text></TouchableOpacity>
-                            <TouchableOpacity style={{width:width*0.15,height:40,justifyContent:"center",alignItems:"center",}} onPress={() => this.personexp()}><Text style={{fontSize:15*s,color:"#5F6368"}}>我的经验</Text ></TouchableOpacity>
-                            <TouchableOpacity style={{width:width*0.15,height:40,justifyContent:"center",alignItems:"center",}}  onPress={this.personexp.bind(this, ('collect'))}><Text style={{fontSize:15*s,color:"#5F6368"}}>我的收藏</Text></TouchableOpacity>
+                            <FlatList
+                                horizontal={true}
+                                data={[
+                                    { key: '我的社区' },
+                                    { key: '我的经验' },
+                                    { key: '我的收藏' },
+                                    { key: '赞在社区' },
+                                    { key: '赞在经验' },
+                                ]}
+                                renderItem={({ item }) =>
+                                    <TouchableOpacity onPress={this.class.bind(this, (item.key))}>
+                                        {
+                                            item.key == this.state.style
+                                                ? <View style={{ height: 45, width: width * 0.18, marginLeft:width*0.017,justifyContent:"center",alignItems:"center" ,borderBottomColor:"#007ACC",borderBottomWidth:2.5*s}}><Text style={styles.item1}>{item.key}</Text></View>
+                                                : <View style={{ height: 45, width: width * 0.18,marginLeft:width*0.017, justifyContent:"center",alignItems:"center"}}><Text style={styles.item}>{item.key}</Text></View>
+                                        }
+                                    </TouchableOpacity>
+                                }
+                            />
                         </View>
-
                         <View style={{
                             paddingTop: 10 * s
                         }}>
-                            {/* <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                <Text style={{ fontSize: 20 * s, color: '#000' }}>昵称：</Text>
-                                <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.all.name}</Text>
-                            </View> */}
-                            {/* <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                <Text style={{ fontSize: 20 * s, color: '#000' }}>头像：</Text>
-                                <View style={{
-                                    height: 54 * s,
-                                    width: 54 * s,
-                                    borderRadius: 27 * s,
-                                    backgroundColor: '#37376F'
-                                }}>
-                                    <Image style={{
-                                        marginTop: 2 * s,
-                                        marginLeft: 2 * s,
-                                        height: 50 * s,
-                                        width: 50 * s,
-                                        borderRadius: 25 * s
-                                    }} source={{ uri: this.state.all.pic }} />
-                                </View>
-                            </View> */}
-                            {/* <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                <Text style={{ fontSize: 20 * s, color: '#000' }}>等级：</Text>
-                                <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.all.level}级</Text>
-                            </View> */}
-                            {/* <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s }}>
-                                <Text style={{ fontSize: 20 * s, color: '#000' }}>学院：</Text>
-                                <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.all.college}</Text>
-                            </View> */}
+                            {
+                                this.state.mylearn
+                                    ? <PerLearn />
+                                    : null
+                            }
+                            {
+                                this.state.myexp
+                                    ? <PerExp />
+                                    : null
+                            }
+                            {
+                                this.state.mycollect
+                                    ? <PerExp />
+                                    : null
+                            }
+                            {
+                                this.state.personlearn
+                                    ? <PerLearn />
+                                    : null
+                            }
+                            {
+                                this.state.personexp
+                                    ? <PerExp />
+                                    : null
+                            }
+
                             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s }}>
                                 <Text style={{ fontSize: 20 * s, color: '#000' }}>在社区中发帖子数量：</Text>
                                 <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.learn}</Text>
-                                {/* <Text style={{ fontSize: 20 * s, color: '#000', marginLeft: 10 * s }}>获赞数：</Text>
-                                <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.Llike}</Text> */}
                             </View>
-                            {/* {
-                                this.state.learn
-                                    ? <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s, justifyContent: 'space-between', borderColor: '#37376F', borderWidth: 1 * s }} onPress={() => this.personlearn()}>
-                                        <Text style={{ fontSize: 20 * s }}>在社区中发布的帖子</Text>
-                                        <Icon name="chevron-right" size={20} color="#000" />
-                                    </TouchableOpacity>
-                                    : null
-                            } */}
+
                             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s }}>
                                 <Text style={{ fontSize: 20 * s, color: '#000' }}>在经验分享中发帖子数量：</Text>
                                 <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.exp}</Text>
-                                {/* <Text style={{ fontSize: 20 * s, color: '#000', marginLeft: 10 * s }}>获赞数：</Text>
-                                <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.Elike}</Text> */}
                             </View>
-                            {/* {
-                                this.state.exp
-                                    ? <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s, justifyContent: 'space-between', borderColor: '#37376F', borderWidth: 1 * s }} onPress={() => this.personexp()}>
-                                        <Text style={{ fontSize: 20 * s }}>在经验分享中发布的帖子</Text>
-                                        <Icon name="chevron-right" size={20} color="#000" />
-                                    </TouchableOpacity>
-                                    : null
-                            } */}
+
                             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s }}>
                                 <Text style={{ fontSize: 20 * s, color: '#000' }}>总获赞数：</Text>
                                 <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.Elike + this.state.Llike}</Text>
                             </View>
-                            {/* <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s }}>
-                                <Text style={{ fontSize: 20 * s, color: '#000' }}>在社区中的获赞数：</Text>
-                                <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.Llike}</Text>
-                            </View> */}
+
                             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s }}>
                                 <Text style={{ fontSize: 20 * s, color: '#000' }}>在社区中的点赞数：</Text>
                                 <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.PLLike}</Text>
                             </View>
-                            {/* {
-                                this.state.PLLike
-                                    ? <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s, justifyContent: 'space-between', borderColor: '#37376F', borderWidth: 1 * s }} onPress={this.personlearn.bind(this, ('like'))}>
-                                        <Text style={{ fontSize: 20 * s }}>在社区中点赞的帖子</Text>
-                                        <Icon name="chevron-right" size={20} color="#000" />
-                                    </TouchableOpacity>
-                                    : null
-                            } */}
-                            {/* <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s }}>
-                            <Text style={{ fontSize: 20 * s, color: '#000' }}>在经验分享中的获赞数：</Text>
-                            <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.Elike}</Text>
-                        </View> */}
+
                             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s }}>
                                 <Text style={{ fontSize: 20 * s, color: '#000' }}>在经验分享中的点赞数：</Text>
                                 <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.PELike}</Text>
                             </View>
-                            {/* {
-                                this.state.PELike
-                                    ? <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s, justifyContent: 'space-between', borderColor: '#37376F', borderWidth: 1 * s }} onPress={this.personexp.bind(this, ('like'))}>
-                                        <Text style={{ fontSize: 20 * s }}>在经验分享中点赞的帖子</Text>
-                                        <Icon name="chevron-right" size={20} color="#000" />
-                                    </TouchableOpacity>
-                                    : null
-                            } */}
+
                             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s }}>
                                 <Text style={{ fontSize: 20 * s, color: '#000' }}>在经验分享中收藏的帖子数：</Text>
                                 <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.collect}</Text>
                             </View>
-                            {/* {
-                                this.state.collect
-                                    ? <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s, justifyContent: 'space-between', borderColor: '#37376F', borderWidth: 1 * s }} onPress={this.personexp.bind(this, ('collect'))}>
-                                        <Text style={{ fontSize: 20 * s }}>在经验分享中收藏的帖子</Text>
-                                        <Icon name="chevron-right" size={20} color="#000" />
-                                    </TouchableOpacity>
-                                    : null
-                            } */}
-                            {/* <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s }}>
-                                <Text style={{ fontSize: 20 * s, color: '#000' }}>关注人量：</Text>
-                                <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.follows}</Text>
-                            </View>
-                            {
-                                this.state.follows
-                                    ? <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s, justifyContent: 'space-between', borderColor: '#37376F', borderWidth: 1 * s }} onPress={() => this.followslist()}>
-                                        <Text style={{ fontSize: 20 * s }}>关注列表：</Text>
-                                        <Icon name="chevron-right" size={20} color="#000" />
-                                    </TouchableOpacity>
-                                    : null
-                            } */}
-                            {/* <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s }}>
-                                <Text style={{ fontSize: 20 * s, color: '#000' }}>粉丝人量：</Text>
-                                <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.fans}</Text>
-                            </View>
-                            {
-                                this.state.fans
-                                    ? <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s, justifyContent: 'space-between', borderColor: '#37376F', borderWidth: 1 * s }} onPress={() => this.fanslist()}>
-                                        <Text style={{ fontSize: 20 * s }}>粉丝列表：</Text>
-                                        <Icon name="chevron-right" size={20} color="#000" />
-                                    </TouchableOpacity>
-                                    : null
-                            } */}
-                          
                         </View>
                     </ScrollView>
-                    <View style={{
-                        width: '100%',
-                        flexDirection: 'row',
-                        justifyContent: 'center',
-                        alignItems: 'center'
-                    }}>
-                        <TouchableOpacity style={{
-                            width: 300 * s,
-                            height: 40 * s,
-                            borderRadius: 15 * s,
-                            flexDirection: 'row',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            backgroundColor: '#37376F',
-                            marginBottom: 10 * s
-                        }}
-                            onPress={() => this.back()}
-                        >
-                            <Text style={{ color: '#fff', fontSize: 20 * s }}>返回</Text>
-                        </TouchableOpacity>
-                    </View>
                 </SafeAreaView >
                 {
                     this.state.tabShow ?
-                        <TouchableOpacity style={{ zIndex: 4, height: 40 * s, width: 40 * s, justifyContent: "flex-end", alignItems: "center", position: "absolute" }} onPress={() => this.back()}>
-                            <Icon name="ios-arrow-back" style={{ fontSize: 30 * s, color: "black" }} />
-                        </TouchableOpacity> :
-                        <TouchableOpacity style={{ zIndex: 4, height: 40 * s, width: 40 * s, justifyContent: "flex-end", alignItems: "center", position: "absolute" }} onPress={() => this.back()}>
-                            <Icon name="ios-arrow-back" style={{ fontSize: 30 * s, color: "#F8F8F8" }} />
-                        </TouchableOpacity>
+                        <View style={{ position: "absolute", flexDirection: "row", alignItems: "center", justifyContent: "space-between", height: 40, width: width, top: 15 * s }}>
+                            <TouchableOpacity style={{ zIndex: 4, height: 40 * s, width: 30 * s, alignItems: "flex-end" }} onPress={() => this.back()}>
+                                <Icon name="ios-arrow-back" style={{ fontSize: 30 * s, color: "black" }} />
+                            </TouchableOpacity>
+                            <TouchableOpacity style={{ zIndex: 4, height: 40 * s, width: 45 * s, }} onPress={() => this.collect()}>
+                                <Icon style={{ fontSize: 30 * s, color: "black" }} name="ios-search" />
+                            </TouchableOpacity>
+                        </View>
+                        :
+                        <View style={{ position: "absolute", flexDirection: "row", alignItems: "center", justifyContent: "space-between", height: 40, width: width, top: 15 * s }}>
+                            <TouchableOpacity style={{ zIndex: 4, height: 40 * s, width: 30 * s, alignItems: "flex-end" }} onPress={() => this.back()}>
+                                <Icon name="ios-arrow-back" style={{ fontSize: 30 * s, color: "#F8F8F8" }} />
+                            </TouchableOpacity>
+                            <TouchableOpacity style={{ zIndex: 4, height: 40 * s, width: 45 * s, }}>
+                                <Icon style={{ fontSize: 30 * s, color: "#F8F8F8" }} name="ios-search" />
+                            </TouchableOpacity>
+                        </View>
                 }
+
             </View>
         )
     }
     onScroll(evt) {
         let y = evt.nativeEvent.contentOffset.y;
-        // 隐藏返回按键和照相机
-        //         if(y >= width06 && y<=![back_black_white.png](https://upload-images.jianshu.io/upload_images/12082766-4ebd62e10241a735.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-        // width08){
-        //             opcityNumber = 1-(y-width06)/(width02);
-        //             this.setState({
-        //                 opcityNumber:opcityNumber,
-        //             })
-        //         }
-        // 原本以为是文字的，不过看着微信的效果太平滑了。所以我就弄成照片了。
         // 开始显示朋友圈图片。
         if (y >= width08 && y <= width09 && this.state.tabShow == false) {
             this.setState({
                 tabShow: true,
             })
         }
-        // 朋友圈图片动态效果
-        // if (y >= width08 && y <= width09) {
-        //     let tabHeight = (1 - (y - width08) / (width01)) * 10 + 40;
-        //     let tabShowOpactiy = (y - width08) / (width01);
-        //     this.setState({
-        //         tabHeight: tabHeight,
-        //         tabShowOpactiy: tabShowOpactiy,
-        //     })
-        // }
         //隐藏朋友圈照片
         if (y <= width08 && this.state.tabShow == true) {
             this.setState({
@@ -752,4 +725,12 @@ export default class Person extends Component {
         }
     }
 }
-
+const styles = StyleSheet.create({
+    item: {
+        fontSize: 18,
+    },
+    item1: {
+        fontSize: 18,
+        color: "#007ACC"
+    },
+});

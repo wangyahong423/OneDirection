@@ -17,8 +17,7 @@ export default class Community extends Component {
             likeNum: [],
             comNum: [],
             username: '',
-            isLoading: true,
-            follow: [],
+            isLoading: true
         };
         this.getData();
     }
@@ -94,6 +93,7 @@ export default class Community extends Component {
                                                 }
                                             }
                                             item.comNum = comNum;
+                                            // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
                                         });
                                         this.setState({ isLoading: false });
                                         this.setState({ list: res });
@@ -104,73 +104,73 @@ export default class Community extends Component {
         var self = this;
         this.listener = DeviceEventEmitter.addListener('refresh', function (param) {
             fetch(url3)
-            .then((res) => res.json())
-            .then((res) => {
-                self.setState({
-                    pic: res,
-                });
-                fetch(url2)
-                    .then((res) => res.json())
-                    .then((res) => {
-                        self.setState({ likeNum: res });
-                        var likeList = [];
-                        for (var i = 0; i < res.length; i++) {
-                            if (res[i].name == self.state.username) {
-                                likeList.push(res[i]);
+                .then((res) => res.json())
+                .then((res) => {
+                    self.setState({ pic: res });
+                    fetch(url2)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            self.setState({ likeNum: res });
+                            var likeList = [];
+                            for (var i = 0; i < res.length; i++) {
+                                if (res[i].name == self.state.username) {
+                                    likeList.push(res[i]);
+                                }
                             }
-                        }
-                        self.setState({ like: likeList });
-                        fetch(url4)
-                            .then((res) => res.json())
-                            .then((res) => {
-                                self.setState({ comNum: res });
-                                fetch(url1)
-                                    .then((res) => res.json())
-                                    .then((res) => {
-                                        res.forEach(item => {
-                                            for (var i = 0; i < self.state.pic.length; i++) {
-                                                if (item.name == self.state.pic[i].name) {
-                                                    item.pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
-                                                    item.level = self.state.pic[i].level;
-                                                    item.college = self.state.pic[i].college;
-                                                    break;
+                            self.setState({ like: likeList });
+                            fetch(url4)
+                                .then((res) => res.json())
+                                .then((res) => {
+                                    self.setState({ comNum: res });
+                                    fetch(url1)
+                                        .then((res) => res.json())
+                                        .then((res) => {
+                                            res.forEach(item => {
+                                                for (var i = 0; i < self.state.pic.length; i++) {
+                                                    if (item.name == self.state.pic[i].name) {
+                                                        item.pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
+                                                        item.level = self.state.pic[i].level;
+                                                        item.college = self.state.pic[i].college;
+                                                        break;
+                                                    }
                                                 }
-                                            }
-                                            item.like = false;
-                                            for (var j = 0; j < self.state.like.length; j++) {
-                                                if (item.id == self.state.like[j].lid) {
-                                                    item.like = true;
-                                                    break;
+                                                item.like = false;
+                                                for (var j = 0; j < self.state.like.length; j++) {
+                                                    if (item.id == self.state.like[j].lid) {
+                                                        item.like = true;
+                                                        break;
+                                                    }
+                                                    else {
+                                                        item.like = false;
+                                                    }
                                                 }
-                                                else {
-                                                    item.like = false;
+                                                var likeNum = 0;
+                                                for (var z = 0; z < self.state.likeNum.length; z++) {
+                                                    if (item.id == self.state.likeNum[z].lid) {
+                                                        likeNum++;
+                                                    }
                                                 }
-                                            }
-                                            var likeNum = 0;
-                                            for (var z = 0; z < self.state.likeNum.length; z++) {
-                                                if (item.id == self.state.likeNum[z].lid) {
-                                                    likeNum++;
+                                                item.likeNum = likeNum;
+                                                var comNum = 0;
+                                                for (var z = 0; z < self.state.comNum.length; z++) {
+                                                    if (item.id == self.state.comNum[z].lid) {
+                                                        comNum++;
+                                                    }
                                                 }
-                                            }
-                                            item.likeNum = likeNum;
-                                            var comNum = 0;
-                                            for (var z = 0; z < self.state.comNum.length; z++) {
-                                                if (item.id == self.state.comNum[z].lid) {
-                                                    comNum++;
-                                                }
-                                            }
-                                            item.comNum = comNum;
+                                                item.comNum = comNum;
+                                                // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
+                                            });
+                                            self.setState({ list: res });
                                         });
-                                        self.setState({ isLoading: false });
-                                        self.setState({ list: res });
-                                    });
-                            });
-                    });
-            });
+                                });
+                        });
+                });
         });
     }
+
     componentWillUnmount() {
         this.listener.remove();
+        // this.listener1.remove();
     }
     delete = (idx) => {
         Alert.alert('确认要删除吗', '',
@@ -217,7 +217,7 @@ export default class Community extends Component {
             this.setState({
                 list: crr
             })
-            let url1 = `http://139.155.44.190:3005/learnlike/add?lid=${this.state.list[idx].id}&name=${this.state.username}`;
+            let url1 = `http://139.155.44.190:3005/learnlike/add?lid=${this.state.list[idx].id}&name=${this.state.username}&lname=${this.state.list[idx].name}`;
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
@@ -359,12 +359,21 @@ export default class Community extends Component {
     renovate = () => {
         var param = 1;
         DeviceEventEmitter.emit('refresh', param);
+        // Actions.community();
     }
     person = (idx) => {
-        var value = {id:this.state.list[idx].id, name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college };
+        var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college };
         AsyncStorage.setItem('details', JSON.stringify(value));
+        var value1 = {name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level,  title: "issue" };
+        AsyncStorage.setItem('personname2', JSON.stringify(value1));
+        var param = 1;
+        DeviceEventEmitter.emit('ELrefresh', param);
+        DeviceEventEmitter.emit('Erefresh', param);
+        DeviceEventEmitter.emit('refresh', param);
         Actions.person();
+       
     }
+
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
@@ -381,6 +390,7 @@ export default class Community extends Component {
                         flexDirection: 'row',
                         alignItems: 'center',
                         backgroundColor: '#ffffff',
+                        // borderRadius: 28 * s
                         borderBottomLeftRadius: 28 * s,
                         borderTopLeftRadius: 28 * s,
                         marginLeft: -55 * s,
@@ -402,7 +412,17 @@ export default class Community extends Component {
                         <Button style={{ borderBottomRightRadius: 28 * s, borderTopRightRadius: 28 * s, height: 42 * s, }} onPress={this.search}>
                             搜索
                         </Button>
+                        {/* <Icon
+                            style={{
+                                marginRight: 20 * s
+                            }}
+                            onPress={this.search}
+                            color='' size={20} name='search' /> */}
+
                     </View>
+                    {/* <Button style={{ height: 42 * s,backgroundColor:'#ffffff'}} onPress={this.search}>
+                            搜索
+                    </Button> */}
                     <TouchableOpacity style={{
                         position: 'absolute',
                         top: 15 * s,
@@ -417,6 +437,7 @@ export default class Community extends Component {
                         />
                     </TouchableOpacity>
                 </View>
+
                 <ScrollView style={{ flex: 1 }}>
                     <View>
                         {
@@ -482,8 +503,7 @@ export default class Community extends Component {
                                             >
                                                 <Text style={{ color: '#e8e8e8', fontSize: 30 * s }}>×</Text>
                                             </TouchableOpacity>
-                                            :
-                                           null
+                                            : null
                                     }
                                 </View>
                             ))
