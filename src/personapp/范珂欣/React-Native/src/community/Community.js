@@ -66,11 +66,13 @@ export default class Community extends Component {
                                                 if (item.name == this.state.pic[i].name) {
                                                     item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
                                                     item.level = this.state.pic[i].level;
+                                                    item.head = 'http://139.155.44.190:3005/head/' + this.state.pic[i].head;
                                                     item.college = this.state.pic[i].college;
                                                     break;
                                                 }
                                             }
                                             item.card = 'http://139.155.44.190:3005/card/' + item.card;
+
                                             item.like = false;
                                             for (var j = 0; j < this.state.like.length; j++) {
                                                 if (item.id == this.state.like[j].lid) {
@@ -137,11 +139,13 @@ export default class Community extends Component {
                                                     if (item.name == self.state.pic[i].name) {
                                                         item.pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
                                                         item.level = self.state.pic[i].level;
+                                                        item.head = 'http://139.155.44.190:3005/head/' + self.state.pic[i].head;
                                                         item.college = self.state.pic[i].college;
                                                         break;
                                                     }
                                                 }
                                                 item.card = 'http://139.155.44.190:3005/card/' + item.card;
+
                                                 item.like = false;
                                                 for (var j = 0; j < self.state.like.length; j++) {
                                                     if (item.id == self.state.like[j].lid) {
@@ -169,6 +173,7 @@ export default class Community extends Component {
                                                 // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
                                             });
                                             self.setState({ list: res });
+
                                         });
                                 });
                         });
@@ -336,10 +341,13 @@ export default class Community extends Component {
                                                 for (var i = 0; i < this.state.pic.length; i++) {
                                                     if (item.name == this.state.pic[i].name) {
                                                         item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
+                                                        item.head = 'http://139.155.44.190:3005/head/' + this.state.pic[i].head;
+
                                                         break;
                                                     }
                                                 }
                                                 item.card = 'http://139.155.44.190:3005/card/' + item.card;
+
                                                 for (var j = 0; j < this.state.like.length; j++) {
                                                     if (item.id == this.state.like[j].lid) {
                                                         item.like = true;
@@ -469,17 +477,16 @@ export default class Community extends Component {
                                                 backgroundColor: 'yellow'
                                             }}
                                                 source={{ uri: item.pic }} />
-                                            {/* <Image style={{
-                                                marginLeft: 20 * s,
-                                                height: 50 * s,
-                                                width: 50 * s,
-                                                borderRadius: 25 * s,
-                                                backgroundColor: 'yellow',
+                                            <Image style={{
+                                                height: 70 * s,
+                                                width: 70 * s,
+                                                borderRadius: 35 * s,
+                                                // backgroundColor:'green',
                                                 position: 'absolute',
-                                                top: 5,
-                                                right: 30
+                                                top: -10,
+                                                right: -10
                                             }}
-                                                source={require('../../assets/community/t1.png')} /> */}
+                                                source={{ uri: item.head }} />
                                         </TouchableOpacity>
                                         <View style={{ marginLeft: 30 * s }}>
                                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>

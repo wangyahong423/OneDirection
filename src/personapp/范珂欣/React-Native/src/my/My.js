@@ -197,9 +197,9 @@ export default class Person extends Component {
         AsyncStorage.setItem('password', '');
         Actions.login();
     }
-    card=()=>{
-        Actions.card();
-    }
+    // card=()=>{
+    //     Actions.card();
+    // }
     render() {
         return (
             <ScrollView>
@@ -216,8 +216,12 @@ export default class Person extends Component {
                             <Text style={{ marginLeft: 20, fontSize: 15, color: "red" }}>Lv {this.state.level}</Text>
                         </Text>
 
-                        <TouchableOpacity onPress={() => this.card()} style={{position: "absolute", left: 270,top: 1,backgroundColor:'#37376F',borderRadius:5}}>
+                        <TouchableOpacity onPress={() => Actions.card()} style={{position: "absolute", left: 270,top: 1,backgroundColor:'#37376F',borderRadius:5}}>
                             <Text style={{color:'#fff', fontSize: 15}}>卡片背景</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity onPress={() => Actions.head()} style={{position: "absolute", left: 350,top: 1,backgroundColor:'#37376F',borderRadius:5}}>
+                            <Text style={{color:'#fff', fontSize: 15}}>头像框选择</Text>
                         </TouchableOpacity>
 
                         <Text style={{ position: 'absolute', left: 150, top: 27, fontSize: 18 }}>河北师范大学{this.state.college}</Text>
