@@ -10,7 +10,8 @@ export default class Add extends Component {
             content: '',
             username: '',
             length: 0,
-            prompt: []
+            prompt: [],
+            card: ''
         };
         this.getData();
     }
@@ -21,7 +22,14 @@ export default class Add extends Component {
                 this.setState({
                     username: name.username
                 })
-                console.log("用户名：", this.state.username)
+                // console.log("用户名：", this.state.username)
+            });
+        AsyncStorage.getItem('card')
+            .then((res) => {
+                this.setState({
+                    card: JSON.parse(res).card
+                })
+                // console.log(this.state.card)
             });
     }
     con = (e) => {
@@ -50,7 +58,7 @@ export default class Add extends Component {
             var hour = date.getHours().toString();
             var minute = date.getMinutes().toString();
             var time = year + '年' + month + '月' + day + '日' + ' ' + hour + ':' + minute;
-            let url = `http://139.155.44.190:3005/learn/addLearn?content=${this.state.content}&name=${this.state.username}&time=${time}`;
+            let url = `http://139.155.44.190:3005/learn/addLearn?content=${this.state.content}&name=${this.state.username}&time=${time}&card=${this.state.card}`;
             console.log(url);
             fetch(url)
                 .then((res) => res.json())

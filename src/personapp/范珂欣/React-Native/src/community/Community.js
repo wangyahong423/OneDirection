@@ -42,7 +42,7 @@ export default class Community extends Component {
             .then((res) => {
                 this.setState({
                     pic: res,
-                });
+                })
                 fetch(url2)
                     .then((res) => res.json())
                     .then((res) => {
@@ -66,11 +66,11 @@ export default class Community extends Component {
                                                 if (item.name == this.state.pic[i].name) {
                                                     item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
                                                     item.level = this.state.pic[i].level;
-                                                    item.card = 'http://139.155.44.190:3005/card/' + this.state.pic[i].card;
                                                     item.college = this.state.pic[i].college;
                                                     break;
                                                 }
                                             }
+                                            item.card = 'http://139.155.44.190:3005/card/' + item.card;
                                             item.like = false;
                                             for (var j = 0; j < this.state.like.length; j++) {
                                                 if (item.id == this.state.like[j].lid) {
@@ -137,11 +137,11 @@ export default class Community extends Component {
                                                     if (item.name == self.state.pic[i].name) {
                                                         item.pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
                                                         item.level = self.state.pic[i].level;
-                                                        item.card = 'http://139.155.44.190:3005/card/' + self.state.pic[i].card;
                                                         item.college = self.state.pic[i].college;
                                                         break;
                                                     }
                                                 }
+                                                item.card = 'http://139.155.44.190:3005/card/' + item.card;
                                                 item.like = false;
                                                 for (var j = 0; j < self.state.like.length; j++) {
                                                     if (item.id == self.state.like[j].lid) {
@@ -336,10 +336,10 @@ export default class Community extends Component {
                                                 for (var i = 0; i < this.state.pic.length; i++) {
                                                     if (item.name == this.state.pic[i].name) {
                                                         item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
-                                                        item.card = 'http://139.155.44.190:3005/card/' + this.state.pic[i].card;
                                                         break;
                                                     }
                                                 }
+                                                item.card = 'http://139.155.44.190:3005/card/' + item.card;
                                                 for (var j = 0; j < this.state.like.length; j++) {
                                                     if (item.id == this.state.like[j].lid) {
                                                         item.like = true;
@@ -380,7 +380,9 @@ export default class Community extends Component {
         AsyncStorage.setItem('details', JSON.stringify(value));
         Actions.person();
     }
-
+    add = () => {
+        Actions.add()
+    }
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
@@ -530,28 +532,28 @@ export default class Community extends Component {
                                     {/* {
                                         this.state.username
                                             ?  */}
-                                            <View style={{
-                                                width: 90 * s,
-                                                height: 45 * s,
-                                                flexDirection: 'row',
-                                                justifyContent: 'center',
-                                                alignItems: 'center',
-                                                // backgroundColor: '#37376F',
-                                                position: 'absolute',
-                                                top: 5,
-                                                right: 30
-                                            }}
-                                            >
-                                                <Image style={{
-                                                    // marginLeft: 20 * s,
-                                                    height: 45 * s,
-                                                    width: 90 * s,
-                                                    // borderRadius: 25 * s,
-                                                    // backgroundColor: 'yellow'
-                                                }}
-                                                    source={{ uri: item.card }} />
-                                            </View>
-                                            {/* : null
+                                    <View style={{
+                                        width: 90 * s,
+                                        height: 45 * s,
+                                        flexDirection: 'row',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        // backgroundColor: '#37376F',
+                                        position: 'absolute',
+                                        top: 5,
+                                        right: 30
+                                    }}
+                                    >
+                                        <Image style={{
+                                            // marginLeft: 20 * s,
+                                            height: 45 * s,
+                                            width: 90 * s,
+                                            // borderRadius: 25 * s,
+                                            // backgroundColor: 'yellow'
+                                        }}
+                                            source={{ uri: item.card }} />
+                                    </View>
+                                    {/* : null
                                     } */}
 
                                 </View>
@@ -590,7 +592,7 @@ export default class Community extends Component {
                     bottom: 20 * s,
                     right: 20 * s
                 }}
-                    onPress={() => Actions.add()}
+                    onPress={() => this.add()}
                 >
                     <Icon style={{ fontSize: 50, color: '#fff' }} name="pencil" />
                 </TouchableOpacity>
