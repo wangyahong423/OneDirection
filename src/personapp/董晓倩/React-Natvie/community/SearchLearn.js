@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, StyleSheet, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert } from 'react-native';
+import { Text, View,  TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import { Actions } from 'react-native-router-flux';
-import { Button } from '@ant-design/react-native';
 import Img from './Img'
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
-export default class PerLearn extends Component {
+export default class SearchLearn extends Component {
     constructor() {
         super();
         this.state = {
@@ -15,7 +14,7 @@ export default class PerLearn extends Component {
             like: [],
             personlike: [],
             lvlist: [],
-            // search: '',
+            search: '',
             likeNum: [],
             comNum: [],
             all: [],
@@ -442,32 +441,32 @@ export default class PerLearn extends Component {
                 });
         }
     }
-    // change = (e) => {
-    //     this.setState({
-    //         search: e
-    //     })
-    // }
-    // search = () => {
-    //     let url = `http://139.155.44.190:3005/learn/select?content=${this.state.search}`;
-    //     fetch(url)
-    //         .then((res) => res.json())
-    //         .then((res) => {
-    //             if (res.false) { }
-    //             else {
-    //                 var list = [];
-    //                 for (var i = 0; i < res.length; i++) {
-    //                     for (var j = 0; j < this.state.all.length; j++) {
-    //                         if (res[i].id == this.state.all[j].id) {
-    //                             list.push(this.state.all[j]);
-    //                             break;
-    //                         }
-    //                     }
-    //                 }
-    //                 this.setState({ list: list });
-    //             }
-    //         });
+    change = (e) => {
+        this.setState({
+            search: e
+        })
+    }
+    search = () => {
+        let url = `http://139.155.44.190:3005/learn/select?content=${this.state.search}`;
+        fetch(url)
+            .then((res) => res.json())
+            .then((res) => {
+                if (res.false) { }
+                else {
+                    var list = [];
+                    for (var i = 0; i < res.length; i++) {
+                        for (var j = 0; j < this.state.all.length; j++) {
+                            if (res[i].id == this.state.all[j].id) {
+                                list.push(this.state.all[j]);
+                                break;
+                            }
+                        }
+                    }
+                    this.setState({ list: list });
+                }
+            });
 
-    // }
+    }
     back = () => {
         Actions.pop();
         var param = 1;
@@ -476,48 +475,55 @@ export default class PerLearn extends Component {
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
-                {/* <View style={{
+                <View style={{
                     width: '100%',
-                    height: 55 * s,
+                    height: 60 * s,
                     flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'center'
+                    // alignItems: 'center',
+                    // justifyContent: 'center'
                 }}>
-                    <View style={{
-                        height: 40 * s,
-                        width: '60%',
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        backgroundColor: '#ffffff',
-                        borderBottomLeftRadius: 28 * s,
-                        borderTopLeftRadius: 28 * s,
-                        marginLeft: -55 * s,
-                    }}>
-                        <TextInput
-                            style={{
-                                height: 50 * s,
-                                width: "80%",
-                                padding: 0,
-                                marginLeft: 20 * s,
-                                fontSize: 15 * s,
-                            }}
-                            clearButtonMode="while-editing"
-                            placeholderTextColor=''
-                            placeholder="请输入搜索的关键字"
-                            onChangeText={this.change}
-                        />
-                        <Button style={{ borderBottomRightRadius: 28 * s, borderTopRightRadius: 28 * s, height: 42 * s, }} onPress={this.search}>
+                    <View style={{ height: 55 * s, width: width, backgroundColor: "#fff", justifyContent: "center", alignItems: "center" ,flexDirection:"row"}}>
+                        <View style={{
+                            height: 40 * s,
+                            width: '75%',
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            backgroundColor: '#E3E3E3',
+                            borderRadius: 28 * s,
+                            // borderTopLeftRadius: 28 * s,
+                            // marginLeft: -55 * s,
+                        }}>
+                            <TextInput
+                                style={{
+                                    height: 50 * s,
+                                    width: "80%",
+                                    padding: 0,
+                                    marginLeft: 20 * s,
+                                    fontSize: 15 * s,
+                                }}
+                                clearButtonMode="while-editing"
+                                placeholderTextColor='#A6A6A6'
+                                placeholder="搜索"
+                                onChangeText={this.change}
+                            />
+                            <Icon style={{fontSize:25*s,marginLeft:10*s}} name="search"  onPress={() => this.search()}/>
+                            {/* <Button style={{ borderBottomRightRadius: 28 * s, borderTopRightRadius: 28 * s, height: 42 * s, }} onPress={this.search}>
                             搜索
-                        </Button>
+                        </Button> */}
+                        </View>
+                        <TouchableOpacity style={{marginLeft:20*s,color:"#696969"}} onPress={() => this.back()}>
+                            <Text style={{fontSize:17*s,color:"#696969"}}>取消</Text>
+                        </TouchableOpacity>
                     </View>
-                </View> */}
+
+                </View>
                 <View>
                     {
                         this.state.list.map((item, idx) => (
                             <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 10 * s }}>
                                 <View style={{
                                     flexDirection: 'row',
-                                    height: 80 * s,
+                                    height: 70 * s,
                                     alignItems: 'center'
                                 }}>
                                     <Image style={{

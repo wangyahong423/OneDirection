@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
-import { Text, View, FlatList, ScrollView, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert, DrawerLayoutAndroid } from 'react-native';
+import {
+    Text,
+    View,
+    TextInput,
+    Dimensions,
+    SafeAreaView,
+    TouchableOpacity,
+    Image,
+    AsyncStorage,
+    DeviceEventEmitter,
+    Alert,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import { Actions } from 'react-native-router-flux';
 import Img from './Img'
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
-export default class PerExp extends Component {
+export default class SearchExp extends Component {
     constructor() {
         super();
         this.state = {
@@ -16,32 +27,14 @@ export default class PerExp extends Component {
             personlike: [],
             collect: [],
             personcollect: [],
-            // search: '',
+            search: '',
             likeNum: [],
             colNum: [],
             username: '',
             person: [],
             isLoading: true
         };
-        // this.getData();
     }
-    // getData = () => {
-    //     AsyncStorage.getItem('username')
-    //         .then((res) => {
-    //             let name = { username: res }
-    //             this.setState({
-    //                 username: name.username
-    //             })
-    //         });
-    //     AsyncStorage.getItem('personname1')
-    //         .then((res) => {
-    //             this.setState({
-    //                 person: JSON.parse(res)
-    //             })
-    //             console.log(this.state.person.title);
-    //         });
-
-    // }
     componentDidMount() {
         this.setState({ isLoading: true });
         var url1 = `http://139.155.44.190:3005/experience/list`;
@@ -139,10 +132,6 @@ export default class PerExp extends Component {
                         });
                     var self = this;
                     this.listener = DeviceEventEmitter.addListener('PErefresh', function (param) {
-                        // var arr=self.state.list;
-                        // var a = {"content": param.content, "like": false, "likeNum": 0, "name": param.name, "pic": "http://139.155.44.190:3005/images/6.jpg", "time": param.time};
-                        // arr.splice(0,0,a);
-                        // self.setState({list:arr});
                         fetch(url2)
                             .then((res) => res.json())
                             .then((res) => {
@@ -305,7 +294,6 @@ export default class PerExp extends Component {
                                                                 }
                                                                 res[a].colNum = colNum;
                                                                 list.push(res[a]);
-                                                                // console.log(res[a]);
                                                                 break;
                                                             }
                                                         }
@@ -313,17 +301,12 @@ export default class PerExp extends Component {
                                                     this.setState({ isLoading: false });
                                                     this.setState({ list: list });
                                                     this.setState({ all: list });
-                                                    // console.log(list);
                                                 });
                                         });
                                 });
                         });
                     var self = this;
                     this.listener = DeviceEventEmitter.addListener('PErefresh', function (param) {
-                        // var arr=self.state.list;
-                        // var a = {"content": param.content, "like": false, "likeNum": 0, "name": param.name, "pic": "http://139.155.44.190:3005/images/6.jpg", "time": param.time};
-                        // arr.splice(0,0,a);
-                        // self.setState({list:arr});
                         fetch(url3)
                             .then((res) => res.json())
                             .then((res) => {
@@ -407,7 +390,6 @@ export default class PerExp extends Component {
                                                                     }
                                                                     res[a].colNum = colNum;
                                                                     list.push(res[a]);
-                                                                    // console.log(res[a]);
                                                                     break;
                                                                 }
                                                             }
@@ -415,7 +397,6 @@ export default class PerExp extends Component {
                                                         self.setState({ isLoading: false });
                                                         self.setState({ list: list });
                                                         self.setState({ all: list });
-                                                        // console.log(list);
                                                     });
                                             });
                                     });
@@ -505,7 +486,6 @@ export default class PerExp extends Component {
                                                                 }
                                                                 res[a].colNum = colNum;
                                                                 list.push(res[a]);
-                                                                // console.log(res[a]);
                                                                 break;
                                                             }
                                                         }
@@ -513,17 +493,12 @@ export default class PerExp extends Component {
                                                     this.setState({ isLoading: false });
                                                     this.setState({ list: list });
                                                     this.setState({ all: list });
-                                                    // console.log(list);
                                                 });
                                         });
                                 });
                         });
                     var self = this;
                     this.listener = DeviceEventEmitter.addListener('PErefresh', function (param) {
-                        // var arr=self.state.list;
-                        // var a = {"content": param.content, "like": false, "likeNum": 0, "name": param.name, "pic": "http://139.155.44.190:3005/images/6.jpg", "time": param.time};
-                        // arr.splice(0,0,a);
-                        // self.setState({list:arr});
                         fetch(url3)
                             .then((res) => res.json())
                             .then((res) => {
@@ -607,7 +582,6 @@ export default class PerExp extends Component {
                                                                     }
                                                                     res[a].colNum = colNum;
                                                                     list.push(res[a]);
-                                                                    // console.log(res[a]);
                                                                     break;
                                                                 }
                                                             }
@@ -615,7 +589,6 @@ export default class PerExp extends Component {
                                                         self.setState({ isLoading: false });
                                                         self.setState({ list: list });
                                                         self.setState({ all: list });
-                                                        // console.log(list);
                                                     });
                                             });
                                     });
@@ -623,18 +596,9 @@ export default class PerExp extends Component {
                     });
                 }
             });
-
-
-        // var self1 = this;
-        // this.listener1 = DeviceEventEmitter.addListener('com', function (num){
-        //     console.log(num);
-        // })
-
-
     }
     componentWillUnmount() {
         this.listener.remove();
-        // this.listener1.remove();
     }
     delete = (idx) => {
         Alert.alert('确认要删除吗', '',
@@ -819,31 +783,31 @@ export default class PerExp extends Component {
                 })
             })
     }
-    // change = (e) => {
-    //     this.setState({
-    //         search: e
-    //     })
-    // }
-    // search = () => {
-    //     let url = `http://139.155.44.190:3005/experience/select?content=${this.state.search}`;
-    //     fetch(url)
-    //         .then((res) => res.json())
-    //         .then((res) => {
-    //             if (res.false) { }
-    //             else {
-    //                 var list = [];
-    //                 for (var i = 0; i < res.length; i++) {
-    //                     for (var j = 0; j < this.state.all.length; j++) {
-    //                         if (res[i].id == this.state.all[j].id) {
-    //                             list.push(this.state.all[j]);
-    //                             break;
-    //                         }
-    //                     }
-    //                 }
-    //                 this.setState({ list: list });
-    //             }
-    //         });
-    // }
+    change = (e) => {
+        this.setState({
+            search: e
+        })
+    }
+    search = () => {
+        let url = `http://139.155.44.190:3005/experience/select?content=${this.state.search}`;
+        fetch(url)
+            .then((res) => res.json())
+            .then((res) => {
+                if (res.false) { }
+                else {
+                    var list = [];
+                    for (var i = 0; i < res.length; i++) {
+                        for (var j = 0; j < this.state.all.length; j++) {
+                            if (res[i].id == this.state.all[j].id) {
+                                list.push(this.state.all[j]);
+                                break;
+                            }
+                        }
+                    }
+                    this.setState({ list: list });
+                }
+            });
+    }
     back = () => {
         Actions.pop();
         var param = 1;
@@ -863,10 +827,6 @@ export default class PerExp extends Component {
             this.setState({ list: arr });
         }
     }
-    // cla = () => {
-    //     this.refs['list'].style.display='flex';
-    //     console.log(1);
-    // }
     onPenLeftDrawer() {
         this.drawer.openDrawer();
     }
@@ -877,45 +837,47 @@ export default class PerExp extends Component {
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
-                {/* <View style={{
+                <View style={{
                     width: '100%',
-                    height: 70 * s,
+                    height: 60 * s,
                     flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'center'
                 }}>
                     <View style={{
-                        height: 40 * s,
-                        width: '60%',
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        backgroundColor: '#D7D3D3',
-                        borderRadius: 28 * s
-
+                        height: 55 * s,
+                        width: width,
+                        backgroundColor: "#fff",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        flexDirection: "row"
                     }}>
-                        <Icon
-                            style={{
-                                marginLeft: 25 * s,
-                                marginRight: 20 * s
-                            }}
-                            onPress={this.search}
-                            color='#fff' size={20} name='search' />
-                        <TextInput
-                            style={{
-                                height: 50 * s,
-                                width: "80%",
-                                padding: 0,
-                                fontSize: 15 * s
-                            }}
-                            clearButtonMode="while-editing"
-                            // autoFocus={true}
-                            placeholderTextColor='#fff'
-                            placeholder="请输入您要搜索的关键字"
-                            onChangeText={this.change}
-                        />
+                        <View style={{
+                            height: 40 * s,
+                            width: '75%',
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            backgroundColor: '#E3E3E3',
+                            borderRadius: 28 * s,
+                        }}>
+                            <TextInput
+                                style={{
+                                    height: 50 * s,
+                                    width: "80%",
+                                    padding: 0,
+                                    marginLeft: 20 * s,
+                                    fontSize: 15 * s,
+                                }}
+                                clearButtonMode="while-editing"
+                                placeholderTextColor='#A6A6A6'
+                                placeholder="搜索"
+                                onChangeText={this.change}
+                            />
+                            <Icon style={{ fontSize: 25 * s, marginLeft: 10 * s }} name="search" onPress={() => this.search()} />
+                        </View>
+                        <TouchableOpacity style={{ marginLeft: 20 * s, color: "#696969" }} onPress={() => this.back()}>
+                            <Text style={{ fontSize: 17 * s, color: "#696969" }}>取消</Text>
+                        </TouchableOpacity>
                     </View>
-
-                </View> */}
+                </View>
                 <View>
                     {
                         this.state.list.map((item, idx) => (
@@ -937,7 +899,6 @@ export default class PerExp extends Component {
                                     <View style={{ marginLeft: 30 * s }}>
                                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                             <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
-                                            {/* <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: 'red' }}>Lv.{item.level}</Text> */}
                                             <Image style={{ height: 20 * s, width: 35 * s, marginLeft: 10 * s }} source={Img['png' + item.level]} />
 
                                         </View>
@@ -972,7 +933,6 @@ export default class PerExp extends Component {
                                             flexDirection: 'row',
                                             justifyContent: 'center',
                                             alignItems: 'center',
-                                            // backgroundColor: '#37376F',
                                             position: 'absolute',
                                             top: 5,
                                             right: 5
@@ -1006,7 +966,6 @@ export default class PerExp extends Component {
                         : null
                 }
             </SafeAreaView >
-
         )
     }
 }

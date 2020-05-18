@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, FlatList, ScrollView, SafeAreaView, TextInput, StatusBar, Dimensions, ImageBackground, Image, TouchableOpacity, AsyncStorage, Alert, DeviceEventEmitter, ShadowPropTypesIOS } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Actions } from 'react-native-router-flux';
 import ActionButton from 'react-native-action-button';
 import PerExp from './PerExp';
@@ -8,12 +8,6 @@ import PerLearn from './PerLearn'
 import Img from './Img'
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
-const width01 = width * 0.1;
-const width02 = width * 0.2;
-const width06 = width * 0.6;
-const width08 = 200;
-const width09 = 260;
-const widthimg = 250;
 export default class Person extends Component {
     constructor(props) {
         super(props);
@@ -43,7 +37,7 @@ export default class Person extends Component {
             personlearn: false,
             personexp: false,
             mycollect: false,
-            collectIcon: false,//搜索的按钮
+            // searchIcon: false,//搜索的按钮
             style: '我的社区',
             isTop: false,
         };
@@ -460,25 +454,42 @@ export default class Person extends Component {
             AsyncStorage.setItem('personname1', JSON.stringify(value));
         }
     }
-    collect = () => {
-        this.setState({
-            collectIcon: true
-        })
+    search = () => {
+        console.log("搜索", this.state.mylearn)
+        var value = { mylearn: this.state.all.mylearn, myexp: this.state.myexp, mycollect: this.state.mycollect, personlearn: this.state.personlearn, personexp: this.state.personexp };
+        AsyncStorage.setItem('searchlearn', JSON.stringify(value));
+        if (this.state.mylearn || this.state.personlearn) {
+            Actions.searchlearn();
+
+        }
+        else if (this.state.myexp || this.state.mycollect || this.state.personexp) {
+
+            Actions.searchexp();
+
+        }
     }
-    getBackTop = (e) => {
-        let offsetY = e.nativeEvent.contentOffset.y; //滑动距离
-        console.log("距离", offsetY)
-        if (offsetY > 120) {
+    onScroll(evt) {
+        let y = evt.nativeEvent.contentOffset.y;
+        console.log("距离", y)
+        if (y >= 200 && y <= 260 && this.state.tabShow == false) {
+            this.setState({
+                tabShow: true,
+            })
+        }
+        else if (y <= 200 && this.state.tabShow == true) {
+            this.setState({
+                tabShow: false,
+            })
+        }
+        else if (y > 300) {
             this.setState({
                 isTop: true
             })
-            console.log("输出", this.state.isTop)
-
-        } else {
+        }
+        else if (y <= 300) {
             this.setState({
                 isTop: false
             })
-            console.log("输出", this.state.isTop)
         }
     }
     render() {
@@ -549,10 +560,7 @@ export default class Person extends Component {
                         showsVerticalScrollIndicator={false}
                         onScroll={(evt) => this.onScroll(evt)}
                         scrollEventThrottle={16}
-                        onScroll={this.getBackTop}
                         ref={(r) => this.scrollview = r}
-
-
                     >
                         <ImageBackground style={{ flex: 1, width: '100%', height: 260, }} source={require('../../assets/community/img2.jpg')} >
                             <View style={{ justifyContent: "center", alignItems: "center" }}>
@@ -589,7 +597,7 @@ export default class Person extends Component {
                                                         </View>
                                                         :
                                                         <View style={{ height: 35 * s, width: 100, borderRadius: 20, borderColor: "red", borderWidth: 1, justifyContent: "center", alignItems: "center", flexDirection: "row", }}>
-                                                            <Icon style={{ color: "red", fontSize: 25 * s, marginRight: 10 * s }} name="ios-add" />
+                                                            <Text style={{ color: "red", fontSize: 25 * s, marginRight: 10 * s }}  >+</Text>
                                                             <Text style={{ color: "red", fontSize: 16 * s }}>关注</Text>
 
                                                         </View>
@@ -646,69 +654,56 @@ export default class Person extends Component {
                             />
                         </View>
                         <View style={{
-                            paddingTop: 10 * s
+                            paddingTop: 10 * s,
+                            flex:1
                         }}>
                             {
                                 this.state.mylearn
-                                    ? <PerLearn />
-                                    : null
+                                    ? <View style={{flex:1}}>
+                                        <Text style={{ marginBottom: 5 * s ,marginTop:-5*s}}>全部帖子 ({this.state.learn})</Text>
+                                        <View style={{flex:1}}><PerLearn /></View>
+                                    </View>
+                                    :null
+
                             }
                             {
                                 this.state.myexp
-                                    ? <PerExp />
-                                    : null
+                                    ? <View>
+                                        <Text style={{ marginBottom: 5 * s ,marginTop:-5*s}}>全部帖子 ({this.state.exp})</Text>
+                                        <PerExp />
+                                    </View>
+                                    :null
                             }
                             {
                                 this.state.mycollect
-                                    ? <PerExp />
+                                    ? <View>
+                                        <Text style={{ marginBottom: 5 * s ,marginTop:-5*s}}>全部帖子 ({this.state.collect})</Text>
+                                        <PerExp />
+                                    </View>
                                     : null
                             }
                             {
                                 this.state.personlearn
-                                    ? <PerLearn />
+                                    ? <View>
+                                        <Text style={{ marginBottom: 5 * s ,marginTop:-5*s}}>全部帖子 ({this.state.PLLike})</Text>
+                                        <PerLearn />
+                                    </View>
                                     : null
                             }
                             {
                                 this.state.personexp
-                                    ? <PerExp />
+                                    ? <View>
+                                        <Text style={{ marginBottom: 5 * s ,marginTop:-5*s}}>全部帖子 ({this.state.PELike})</Text>
+                                        <PerExp />
+                                    </View>
                                     : null
                             }
-
-                            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s }}>
-                                <Text style={{ fontSize: 20 * s, color: '#000' }}>在社区中发帖子数量：</Text>
-                                <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.learn}</Text>
-                            </View>
-
-                            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s }}>
-                                <Text style={{ fontSize: 20 * s, color: '#000' }}>在经验分享中发帖子数量：</Text>
-                                <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.exp}</Text>
-                            </View>
-
-                            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s }}>
-                                <Text style={{ fontSize: 20 * s, color: '#000' }}>总获赞数：</Text>
-                                <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.Elike + this.state.Llike}</Text>
-                            </View>
-
-                            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s }}>
-                                <Text style={{ fontSize: 20 * s, color: '#000' }}>在社区中的点赞数：</Text>
-                                <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.PLLike}</Text>
-                            </View>
-
-                            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s }}>
-                                <Text style={{ fontSize: 20 * s, color: '#000' }}>在经验分享中的点赞数：</Text>
-                                <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.PELike}</Text>
-                            </View>
-
-                            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 * s }}>
-                                <Text style={{ fontSize: 20 * s, color: '#000' }}>在经验分享中收藏的帖子数：</Text>
-                                <Text style={{ fontSize: 20 * s, color: '#37376F' }}>{this.state.collect}</Text>
-                            </View>
                         </View>
                     </ScrollView>
                 </SafeAreaView >
                 {
                     this.state.isTop === true ? <ActionButton
-                        renderIcon={() => (<View style={{ height: 100, width: "100%", backgroundColor: "#fff" }}></View>)}
+                        renderIcon={() => (<View style={{ height: 50 * s, width: 50 * s, backgroundColor: "#F8F8F8", borderRadius: 25, justifyContent: "center", alignItems: "center", borderWidth: 1, borderColor: "#F9F9F9" }}><Icon style={{ fontSize: 35 * s, color: "#8C8C8C" }} name="publish" /></View>)}
                         buttonColor="#FFFFFF"
                         position='right'
                         verticalOrientation='up'
@@ -720,41 +715,26 @@ export default class Person extends Component {
                 {
                     this.state.tabShow ?
                         <View style={{ position: "absolute", flexDirection: "row", alignItems: "center", justifyContent: "space-between", height: 40, width: width, top: 15 * s }}>
-                            <TouchableOpacity style={{ zIndex: 4, height: 40 * s, width: 30 * s, alignItems: "flex-end" }} onPress={() => this.back()}>
-                                <Icon name="ios-arrow-back" style={{ fontSize: 30 * s, color: "black" }} />
+                            <TouchableOpacity style={{ zIndex: 4, height: 40 * s, width: 40 * s, alignItems: "flex-end" }} onPress={() => this.back()}>
+                                <Icon name="chevron-left" style={{ fontSize: 40 * s, color: "black" }} />
                             </TouchableOpacity>
-                            <TouchableOpacity style={{ zIndex: 4, height: 40 * s, width: 45 * s, }} onPress={() => this.collect()}>
-                                <Icon style={{ fontSize: 30 * s, color: "black" }} name="ios-search" />
+                            <TouchableOpacity style={{ zIndex: 4, height: 40 * s, width: 55 * s, }} onPress={() => this.search()}>
+                                <Icon style={{ fontSize: 30 * s, color: "black" }} name="magnify" />
                             </TouchableOpacity>
                         </View>
                         :
                         <View style={{ position: "absolute", flexDirection: "row", alignItems: "center", justifyContent: "space-between", height: 40, width: width, top: 15 * s }}>
-                            <TouchableOpacity style={{ zIndex: 4, height: 40 * s, width: 30 * s, alignItems: "flex-end" }} onPress={() => this.back()}>
-                                <Icon name="ios-arrow-back" style={{ fontSize: 30 * s, color: "#F8F8F8" }} />
+                            <TouchableOpacity style={{ zIndex: 4, height: 40 * s, width: 30 * s, alignItems: "flex-end", }} onPress={() => this.back()}>
+                                <Icon name="chevron-left" style={{ fontSize: 40 * s, color: "#F8F8F8" }} />
                             </TouchableOpacity>
-                            <TouchableOpacity style={{ zIndex: 4, height: 40 * s, width: 45 * s, }}>
-                                <Icon style={{ fontSize: 30 * s, color: "#F8F8F8" }} name="ios-search" />
+                            <TouchableOpacity style={{ zIndex: 4, height: 40 * s, width: 55 * s }} onPress={() => this.search()}>
+                                <Icon style={{ fontSize: 30 * s, color: "#F8F8F8", marginLeft: 10 * s }} name="magnify" />
                             </TouchableOpacity>
                         </View>
                 }
 
             </View>
         )
-    }
-    onScroll(evt) {
-        let y = evt.nativeEvent.contentOffset.y;
-        // 开始显示朋友圈图片。
-        if (y >= width08 && y <= width09 && this.state.tabShow == false) {
-            this.setState({
-                tabShow: true,
-            })
-        }
-        //隐藏朋友圈照片
-        if (y <= width08 && this.state.tabShow == true) {
-            this.setState({
-                tabShow: false,
-            })
-        }
     }
 }
 const styles = StyleSheet.create({
