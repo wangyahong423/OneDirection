@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, FlatList, ScrollView, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert, DrawerLayoutAndroid } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import { Actions } from 'react-native-router-flux';
+import Img from './Img'
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
 export default class PerExp extends Component {
@@ -936,7 +937,9 @@ export default class PerExp extends Component {
                                     <View style={{ marginLeft: 30 * s }}>
                                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                             <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
-                                            <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: 'red' }}>Lv.{item.level}</Text>
+                                            {/* <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: 'red' }}>Lv.{item.level}</Text> */}
+                                            <Image style={{ height: 20 * s, width: 35 * s, marginLeft: 10 * s }} source={Img['png' + item.level]} />
+
                                         </View>
                                         <Text>{item.time}</Text>
                                     </View>

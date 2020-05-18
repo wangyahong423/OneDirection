@@ -3,6 +3,7 @@ import { Text, View, ScrollView, StyleSheet, TextInput, Dimensions, SafeAreaView
 import Icon from 'react-native-vector-icons/EvilIcons';
 import { Actions } from 'react-native-router-flux';
 import { Button } from '@ant-design/react-native';
+import Img from './Img'
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
 export default class PerLearn extends Component {
@@ -41,8 +42,6 @@ export default class PerLearn extends Component {
     //     console.log(this.state.person)
     // }
     componentDidMount() {
-       
-
         this.setState({ isLoading: true })
         var url1 = `http://139.155.44.190:3005/learn/list`;
         var url2 = `http://139.155.44.190:3005/learnlike/list`;
@@ -54,14 +53,13 @@ export default class PerLearn extends Component {
                 this.setState({
                     username: name.username
                 })
-                // console.log("我的社区1",this.state.username)
             });
         AsyncStorage.getItem('personname2')
             .then((res) => {
                 this.setState({
                     person: JSON.parse(res)
                 })
-                console.log("我的社区2",this.state.person)
+                console.log("我的社区2", this.state.person)
                 if (this.state.person.title == 'issue') {
                     fetch(url2)
                         .then((res) => res.json())
@@ -123,11 +121,6 @@ export default class PerLearn extends Component {
 
                     var self = this;
                     this.listener = DeviceEventEmitter.addListener('ELrefresh', function (param) {
-                        // var arr=self.state.list;
-                        // var a = {"content": param.content, "like": false, "likeNum": 0, "name": param.name, "pic": "http://139.155.44.190:3005/images/6.jpg", "time": param.time};
-                        // arr.splice(0,0,a);
-                        // self.setState({list:arr});
-                        // console.log(param);
                         fetch(url2)
                             .then((res) => res.json())
                             .then((res) => {
@@ -185,10 +178,6 @@ export default class PerLearn extends Component {
                                             });
                                     });
                             });
-                        // var self1 = this;
-                        // this.listener1 = DeviceEventEmitter.addListener('com', function (num){
-                        //     console.log(num);
-                        // })
                     });
                 } else if (this.state.person.title == 'like') {
                     fetch(url3)
@@ -260,7 +249,6 @@ export default class PerLearn extends Component {
                                                                 res[a].comNum = comNum;
                                                                 list.push(res[a]);
                                                                 break;
-                                                                // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
                                                             }
                                                         }
                                                     }
@@ -273,91 +261,85 @@ export default class PerLearn extends Component {
                         });
                     var self = this;
                     this.listener = DeviceEventEmitter.addListener('refresh', function (param) {
-                        // var arr=self.state.list;
-                        // var a = {"content": param.content, "like": false, "likeNum": 0, "name": param.name, "pic": "http://139.155.44.190:3005/images/6.jpg", "time": param.time};
-                        // arr.splice(0,0,a);
-                        // self.setState({list:arr});
-                        // console.log(param);
                         fetch(url3)
-                        .then((res) => res.json())
-                        .then((res) => {
-                            self.setState({
-                                pic: res,
-                            });
-                            fetch(url2)
-                                .then((res) => res.json())
-                                .then((res) => {
-                                    self.setState({ likeNum: res });
-                                    var likeList = [];
-                                    for (var i = 0; i < res.length; i++) {
-                                        if (res[i].name == self.state.username) {
-                                            likeList.push(res[i]);
+                            .then((res) => res.json())
+                            .then((res) => {
+                                self.setState({
+                                    pic: res,
+                                });
+                                fetch(url2)
+                                    .then((res) => res.json())
+                                    .then((res) => {
+                                        self.setState({ likeNum: res });
+                                        var likeList = [];
+                                        for (var i = 0; i < res.length; i++) {
+                                            if (res[i].name == self.state.username) {
+                                                likeList.push(res[i]);
+                                            }
                                         }
-                                    }
-                                    self.setState({ like: likeList });
-                                    var personlike = [];
-                                    for (var i = 0; i < res.length; i++) {
-                                        if (res[i].name == self.state.person.name) {
-                                            personlike.push(res[i]);
+                                        self.setState({ like: likeList });
+                                        var personlike = [];
+                                        for (var i = 0; i < res.length; i++) {
+                                            if (res[i].name == self.state.person.name) {
+                                                personlike.push(res[i]);
+                                            }
                                         }
-                                    }
-                                    self.setState({ personlike: personlike });
-                                    fetch(url4)
-                                        .then((res) => res.json())
-                                        .then((res) => {
-                                            self.setState({ comNum: res });
-                                            fetch(url1)
-                                                .then((res) => res.json())
-                                                .then((res) => {
-                                                    var list = [];
-                                                    for (var b = 0; b < self.state.personlike.length; b++) {
-                                                        for (var a = 0; a < res.length; a++) {
-                                                            if (self.state.personlike[b].lid == res[a].id) {
-                                                                for (var i = 0; i < self.state.pic.length; i++) {
-                                                                    if (res[a].name == self.state.pic[i].name) {
-                                                                        res[a].pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
-                                                                        res[a].level = self.state.pic[i].level;
-                                                                        res[a].college = self.state.pic[i].college;
-                                                                        break;
+                                        self.setState({ personlike: personlike });
+                                        fetch(url4)
+                                            .then((res) => res.json())
+                                            .then((res) => {
+                                                self.setState({ comNum: res });
+                                                fetch(url1)
+                                                    .then((res) => res.json())
+                                                    .then((res) => {
+                                                        var list = [];
+                                                        for (var b = 0; b < self.state.personlike.length; b++) {
+                                                            for (var a = 0; a < res.length; a++) {
+                                                                if (self.state.personlike[b].lid == res[a].id) {
+                                                                    for (var i = 0; i < self.state.pic.length; i++) {
+                                                                        if (res[a].name == self.state.pic[i].name) {
+                                                                            res[a].pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
+                                                                            res[a].level = self.state.pic[i].level;
+                                                                            res[a].college = self.state.pic[i].college;
+                                                                            break;
+                                                                        }
                                                                     }
+                                                                    res[a].like = false;
+                                                                    for (var j = 0; j < self.state.like.length; j++) {
+                                                                        if (res[a].id == self.state.like[j].lid) {
+                                                                            res[a].like = true;
+                                                                            break;
+                                                                        }
+                                                                        else {
+                                                                            res[a].like = false;
+                                                                        }
+                                                                    }
+                                                                    var likeNum = 0;
+                                                                    for (var z = 0; z < self.state.likeNum.length; z++) {
+                                                                        if (res[a].id == self.state.likeNum[z].lid) {
+                                                                            likeNum++;
+                                                                        }
+                                                                    }
+                                                                    res[a].likeNum = likeNum;
+                                                                    var comNum = 0;
+                                                                    for (var z = 0; z < self.state.comNum.length; z++) {
+                                                                        if (res[a].id == self.state.comNum[z].lid) {
+                                                                            comNum++;
+                                                                        }
+                                                                    }
+                                                                    res[a].comNum = comNum;
+                                                                    list.push(res[a]);
+                                                                    break;
                                                                 }
-                                                                res[a].like = false;
-                                                                for (var j = 0; j < self.state.like.length; j++) {
-                                                                    if (res[a].id == self.state.like[j].lid) {
-                                                                        res[a].like = true;
-                                                                        break;
-                                                                    }
-                                                                    else {
-                                                                        res[a].like = false;
-                                                                    }
-                                                                }
-                                                                var likeNum = 0;
-                                                                for (var z = 0; z < self.state.likeNum.length; z++) {
-                                                                    if (res[a].id == self.state.likeNum[z].lid) {
-                                                                        likeNum++;
-                                                                    }
-                                                                }
-                                                                res[a].likeNum = likeNum;
-                                                                var comNum = 0;
-                                                                for (var z = 0; z < self.state.comNum.length; z++) {
-                                                                    if (res[a].id == self.state.comNum[z].lid) {
-                                                                        comNum++;
-                                                                    }
-                                                                }
-                                                                res[a].comNum = comNum;
-                                                                list.push(res[a]);
-                                                                break;
-                                                                // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
                                                             }
                                                         }
-                                                    }
-                                                    self.setState({ isLoading: false });
-                                                    self.setState({ list: list });
-                                                    self.setState({ all: list });
-                                                });
-                                        });
-                                });
-                        });
+                                                        self.setState({ isLoading: false });
+                                                        self.setState({ list: list });
+                                                        self.setState({ all: list });
+                                                    });
+                                            });
+                                    });
+                            });
                     });
                 }
             });
@@ -365,7 +347,6 @@ export default class PerLearn extends Component {
     }
     componentWillUnmount() {
         this.listener.remove();
-        // this.listener1.remove();
     }
     delete = (idx) => {
         Alert.alert('确认要删除吗', '',
@@ -396,7 +377,6 @@ export default class PerLearn extends Component {
             });
     }
     opntion2 = () => {
-
     }
     details = (idx) => {
         var value = { page: this.state.list[idx] };
@@ -492,7 +472,6 @@ export default class PerLearn extends Component {
                 if (res.false) { }
                 else {
                     var list = [];
-                    // console.log(res);
                     for (var i = 0; i < res.length; i++) {
                         for (var j = 0; j < this.state.all.length; j++) {
                             if (res[i].id == this.state.all[j].id) {
@@ -527,12 +506,10 @@ export default class PerLearn extends Component {
                         flexDirection: 'row',
                         alignItems: 'center',
                         backgroundColor: '#ffffff',
-                        // borderRadius: 28 * s
                         borderBottomLeftRadius: 28 * s,
                         borderTopLeftRadius: 28 * s,
                         marginLeft: -55 * s,
                     }}>
-
                         <TextInput
                             style={{
                                 height: 50 * s,
@@ -551,78 +528,74 @@ export default class PerLearn extends Component {
                         </Button>
                     </View>
                 </View>
-
-                {/* <ScrollView style={{ flex: 1 }}> */}
-                    <View>
-                        {
-                            this.state.list.map((item, idx) => (
-                                <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 10 * s }}>
-                                    <View style={{
-                                        flexDirection: 'row',
-                                        height: 80 * s,
-                                        alignItems: 'center'
-                                    }}>
-                                        <Image style={{
-                                            marginLeft: 20 * s,
-                                            height: 50 * s,
-                                            width: 50 * s,
-                                            borderRadius: 25 * s,
-                                            backgroundColor: 'yellow'
-                                        }}
-                                            source={{ uri: item.pic }} />
-                                        <View style={{ marginLeft: 30 * s }}>
-                                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                                <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
-                                                <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: 'red' }}>Lv.{item.level}</Text>
-                                            </View>
-                                            <Text>{item.time}</Text>
-                                        </View>
-                                    </View>
-                                    <View style={{
-                                        marginLeft: 30 * s,
-                                        marginRight: 30 * s,
-                                        marginTop: 10 * s,
-                                        marginBottom: 20 * s
+                <View>
+                    {
+                        this.state.list.map((item, idx) => (
+                            <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 10 * s }}>
+                                <View style={{
+                                    flexDirection: 'row',
+                                    height: 80 * s,
+                                    alignItems: 'center'
+                                }}>
+                                    <Image style={{
+                                        marginLeft: 20 * s,
+                                        height: 50 * s,
+                                        width: 50 * s,
+                                        borderRadius: 25 * s,
+                                        backgroundColor: 'yellow'
                                     }}
-                                    >
-                                        <Text onPress={this.details.bind(this, (idx))} style={{ fontSize: 18 * s }}>{item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content}</Text>
-                                    </View>
-                                    <View style={{ flexDirection: 'row', height: 40 * s, alignItems: 'center', justifyContent: 'space-evenly', borderTopWidth: 1, borderTopColor: "#EFEFF4" }}>
-                                        <View style={{ alignItems: 'center', flexDirection: 'row' }}>
-                                            <Icon onPress={this.details.bind(this, (idx))} name="comment" style={{ fontSize: 30 * s }}></Icon>
-                                            <Text>{item.comNum}</Text>
-                                        </View>
-                                        <View style={{ alignItems: 'center', flexDirection: 'row' }}>
-                                            <Icon name="heart" onPress={this.like.bind(this, (idx))} style={item.like ? { color: 'red', fontSize: 30 * s } : { fontSize: 30 * s }}></Icon>
-                                            <Text>{item.likeNum}</Text>
-                                        </View>
-                                    </View>
-                                    {
-                                        this.state.username == item.name
-                                            ? <TouchableOpacity style={{
-                                                width: 30 * s,
-                                                height: 30 * s,
-                                                borderRadius: 15 * s,
-                                                flexDirection: 'row',
-                                                justifyContent: 'center',
-                                                alignItems: 'center',
-                                                // backgroundColor: '#37376F',
-                                                position: 'absolute',
-                                                top: 5,
-                                                right: 5
-                                            }}
-                                                onPress={this.delete.bind(this, (idx))}
-                                            >
-                                                <Text style={{ color: '#e8e8e8', fontSize: 30 * s }}>×</Text>
-                                            </TouchableOpacity>
-                                            : null
-                                    }
-                                </View>
-                            ))
-                        }
-                    </View>
+                                        source={{ uri: item.pic }} />
 
-                {/* </ScrollView> */}
+                                    <View style={{ marginLeft: 30 * s }}>
+                                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                            <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
+                                            <Image style={{ height: 20 * s, width: 35 * s, marginLeft: 10 * s }} source={Img['png' + item.level]} />
+                                        </View>
+                                        <Text>{item.time}</Text>
+                                    </View>
+                                </View>
+                                <View style={{
+                                    marginLeft: 30 * s,
+                                    marginRight: 30 * s,
+                                    marginTop: 10 * s,
+                                    marginBottom: 20 * s
+                                }}
+                                >
+                                    <Text onPress={this.details.bind(this, (idx))} style={{ fontSize: 18 * s }}>{item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content}</Text>
+                                </View>
+                                <View style={{ flexDirection: 'row', height: 40 * s, alignItems: 'center', justifyContent: 'space-evenly', borderTopWidth: 1, borderTopColor: "#EFEFF4" }}>
+                                    <View style={{ alignItems: 'center', flexDirection: 'row' }}>
+                                        <Icon onPress={this.details.bind(this, (idx))} name="comment" style={{ fontSize: 30 * s }}></Icon>
+                                        <Text>{item.comNum}</Text>
+                                    </View>
+                                    <View style={{ alignItems: 'center', flexDirection: 'row' }}>
+                                        <Icon name="heart" onPress={this.like.bind(this, (idx))} style={item.like ? { color: 'red', fontSize: 30 * s } : { fontSize: 30 * s }}></Icon>
+                                        <Text>{item.likeNum}</Text>
+                                    </View>
+                                </View>
+                                {
+                                    this.state.username == item.name
+                                        ? <TouchableOpacity style={{
+                                            width: 30 * s,
+                                            height: 30 * s,
+                                            borderRadius: 15 * s,
+                                            flexDirection: 'row',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            position: 'absolute',
+                                            top: 5,
+                                            right: 5
+                                        }}
+                                            onPress={this.delete.bind(this, (idx))}
+                                        >
+                                            <Text style={{ color: '#e8e8e8', fontSize: 30 * s }}>×</Text>
+                                        </TouchableOpacity>
+                                        : null
+                                }
+                            </View>
+                        ))
+                    }
+                </View>
                 {
                     this.state.isLoading
                         ? <View

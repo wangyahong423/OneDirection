@@ -3,6 +3,7 @@ import { Text, View, ScrollView, StyleSheet, TextInput, Dimensions, SafeAreaView
 import Icon from 'react-native-vector-icons/EvilIcons';
 import { Actions } from 'react-native-router-flux';
 import { Button } from '@ant-design/react-native';
+import Img from './Img'
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
 export default class Community extends Component {
@@ -364,14 +365,14 @@ export default class Community extends Component {
     person = (idx) => {
         var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college };
         AsyncStorage.setItem('details', JSON.stringify(value));
-        var value1 = {name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level,  title: "issue" };
+        var value1 = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, title: "issue" };
         AsyncStorage.setItem('personname2', JSON.stringify(value1));
         var param = 1;
         DeviceEventEmitter.emit('ELrefresh', param);
         DeviceEventEmitter.emit('Erefresh', param);
         DeviceEventEmitter.emit('refresh', param);
         Actions.person();
-       
+
     }
 
     render() {
@@ -461,7 +462,8 @@ export default class Community extends Component {
                                         <View style={{ marginLeft: 30 * s }}>
                                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                                 <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
-                                                <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: 'red' }}>Lv.{item.level}</Text>
+                                                <Image style={{ height: 21 * s, width: 36 * s, marginLeft: 10 * s }} source={Img['png' + item.level]} />
+                                                {/* <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: 'red' }}>Lv.{item.level}</Text> */}
                                             </View>
                                             <Text>{item.time}</Text>
                                         </View>

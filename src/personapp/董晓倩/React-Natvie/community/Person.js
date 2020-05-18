@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, StyleSheet, FlatList, ScrollView, SafeAreaView, TextInput, StatusBar, Dimensions, ImageBackground, Image, TouchableOpacity, AsyncStorage, Alert, DeviceEventEmitter, ShadowPropTypesIOS } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Actions } from 'react-native-router-flux';
+import ActionButton from 'react-native-action-button';
 import PerExp from './PerExp';
 import PerLearn from './PerLearn'
 import Img from './Img'
@@ -43,7 +44,8 @@ export default class Person extends Component {
             personexp: false,
             mycollect: false,
             collectIcon: false,//搜索的按钮
-            style: '我的社区'
+            style: '我的社区',
+            isTop: false,
         };
         this.getData();
     }
@@ -463,6 +465,22 @@ export default class Person extends Component {
             collectIcon: true
         })
     }
+    getBackTop = (e) => {
+        let offsetY = e.nativeEvent.contentOffset.y; //滑动距离
+        console.log("距离", offsetY)
+        if (offsetY > 120) {
+            this.setState({
+                isTop: true
+            })
+            console.log("输出", this.state.isTop)
+
+        } else {
+            this.setState({
+                isTop: false
+            })
+            console.log("输出", this.state.isTop)
+        }
+    }
     render() {
         return (
             <View style={{ flex: 1 }}>
@@ -519,8 +537,8 @@ export default class Person extends Component {
                                     <TouchableOpacity onPress={this.class.bind(this, (item.key))}>
                                         {
                                             item.key == this.state.style
-                                                ? <View style={{ height: 45, width: width * 0.18, marginLeft:width*0.017,justifyContent:"center",alignItems:"center" ,borderBottomColor:"#007ACC",borderBottomWidth:2.5*s}}><Text style={styles.item1}>{item.key}</Text></View>
-                                                : <View style={{ height: 45, width: width * 0.18,marginLeft:width*0.017, justifyContent:"center",alignItems:"center"}}><Text style={styles.item}>{item.key}</Text></View>
+                                                ? <View style={{ height: 45, width: width * 0.18, marginLeft: width * 0.017, justifyContent: "center", alignItems: "center", borderBottomColor: "#007ACC", borderBottomWidth: 2.5 * s }}><Text style={styles.item1}>{item.key}</Text></View>
+                                                : <View style={{ height: 45, width: width * 0.18, marginLeft: width * 0.017, justifyContent: "center", alignItems: "center" }}><Text style={styles.item}>{item.key}</Text></View>
                                         }
                                     </TouchableOpacity>
                                 }
@@ -531,6 +549,10 @@ export default class Person extends Component {
                         showsVerticalScrollIndicator={false}
                         onScroll={(evt) => this.onScroll(evt)}
                         scrollEventThrottle={16}
+                        onScroll={this.getBackTop}
+                        ref={(r) => this.scrollview = r}
+
+
                     >
                         <ImageBackground style={{ flex: 1, width: '100%', height: 260, }} source={require('../../assets/community/img2.jpg')} >
                             <View style={{ justifyContent: "center", alignItems: "center" }}>
@@ -551,7 +573,6 @@ export default class Person extends Component {
                                 </View>
                                 <View style={{ marginTop: 15 * s, flexDirection: "row", marginLeft: 50 * s }}>
                                     <Text style={{ fontSize: 18 * s, color: "#fff" }}>{this.state.all.name}</Text>
-
                                     <Image style={{ height: 25 * s, width: 40 * s, marginLeft: 10 * s }} source={Img['png' + this.state.all.level]} />
                                 </View>
                                 <View style={{ marginTop: 20 * s }}>
@@ -617,8 +638,8 @@ export default class Person extends Component {
                                     <TouchableOpacity onPress={this.class.bind(this, (item.key))}>
                                         {
                                             item.key == this.state.style
-                                                ? <View style={{ height: 45, width: width * 0.18, marginLeft:width*0.017,justifyContent:"center",alignItems:"center" ,borderBottomColor:"#007ACC",borderBottomWidth:2.5*s}}><Text style={styles.item1}>{item.key}</Text></View>
-                                                : <View style={{ height: 45, width: width * 0.18,marginLeft:width*0.017, justifyContent:"center",alignItems:"center"}}><Text style={styles.item}>{item.key}</Text></View>
+                                                ? <View style={{ height: 45, width: width * 0.18, marginLeft: width * 0.017, justifyContent: "center", alignItems: "center", borderBottomColor: "#007ACC", borderBottomWidth: 2.5 * s }}><Text style={styles.item1}>{item.key}</Text></View>
+                                                : <View style={{ height: 45, width: width * 0.18, marginLeft: width * 0.017, justifyContent: "center", alignItems: "center" }}><Text style={styles.item}>{item.key}</Text></View>
                                         }
                                     </TouchableOpacity>
                                 }
@@ -685,6 +706,17 @@ export default class Person extends Component {
                         </View>
                     </ScrollView>
                 </SafeAreaView >
+                {
+                    this.state.isTop === true ? <ActionButton
+                        renderIcon={() => (<View style={{ height: 100, width: "100%", backgroundColor: "#fff" }}></View>)}
+                        buttonColor="#FFFFFF"
+                        position='right'
+                        verticalOrientation='up'
+                        size={34}
+                        border='#1DA57A'
+                        onPress={() => this.scrollview.scrollTo({ x: 0, y: 0, animated: true })}
+                    /> : <View />
+                }
                 {
                     this.state.tabShow ?
                         <View style={{ position: "absolute", flexDirection: "row", alignItems: "center", justifyContent: "space-between", height: 40, width: width, top: 15 * s }}>
