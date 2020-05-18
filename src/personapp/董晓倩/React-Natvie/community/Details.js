@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, ScrollView, SafeAreaView, TextInput, Dimensions, ImageBackground, Image, TouchableOpacity, AsyncStorage, Alert, DeviceEventEmitter } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Actions } from 'react-native-router-flux';
+import Img from "./Img"
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
 export default class Details extends Component {
@@ -14,7 +15,8 @@ export default class Details extends Component {
             list: [],
             pic: [],
             lvlist: [],
-            isLoading: true
+            isLoading: true,
+            height:0
         };
         this.getData();
     }
@@ -196,11 +198,6 @@ export default class Details extends Component {
     opntion2 = () => {
 
     }
-    // backt = () => {
-    //     Actions.pop;
-    //     var param = 1;
-    //     DeviceEventEmitter.emit('refresh', param);
-    // }
     componentWillUnmount() {
         this.listener.remove();
     }
@@ -212,11 +209,11 @@ export default class Details extends Component {
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
-                <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 5 * s }}>
+                <View style={{ backgroundColor: '#fff', width: '100%',marginBottom:10*s}}>
                     <View style={{
                         flexDirection: 'row',
                         height: 80 * s,
-                        alignItems: 'center'
+                        alignItems: 'center',
                     }}>
                         <Image style={{
                             marginLeft: 20 * s,
@@ -227,7 +224,7 @@ export default class Details extends Component {
                         <View style={{ marginLeft: 30 * s }}>
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                 <Text style={{ fontSize: 18 * s, color: '#37376F' }}>{this.state.page.name}</Text>
-                                <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: 'red' }}>Lv.{this.state.page.level}</Text>
+                                <Image style={{ height: 25 * s, width: 40 * s, marginLeft: 10 * s }} source={Img['png' + this.state.page.level]} />
                             </View>
                             <Text>{this.state.page.time}</Text>
                         </View>
@@ -235,7 +232,6 @@ export default class Details extends Component {
                     <View style={{
                         marginLeft: 30 * s,
                         marginRight: 30 * s,
-                        marginTop: 10 * s,
                         marginBottom: 20 * s
                     }}
                     >
@@ -244,31 +240,37 @@ export default class Details extends Component {
                 </View>
                 <View style={{
                     width: '100%',
-                    height: 70 * s,
+                    // height: 70 * s,
+                    height:Math.max(70*s,this.state.height),
                     flexDirection: 'row',
                     alignItems: 'center',
-                    justifyContent: 'space-evenly'
+                    justifyContent: 'space-evenly',
+                    marginBottom:5*s
                 }}>
                     <TextInput
                         style={{
-                            height: 30 * s,
-                            width: "75%",
+                            // height: 100 * s,
+                            height:Math.max(40*s,this.state.height),
+                            width: "80%",
                             padding: 0,
                             fontSize: 15 * s,
-                            borderRadius: 15 * s,
+                            borderRadius: 10 * s,
                             backgroundColor: '#fff',
-                            paddingLeft: 10 * s
+                            paddingLeft: 10 * s,
                         }}
                         clearButtonMode="while-editing"
-                        // autoFocus={true}
                         placeholderTextColor='#e0e0e0'
                         placeholder="填写评论"
                         onChangeText={this.change}
+                        multiline = {true}
+                        onContentSizeChange={(event) => {
+                            this.setState({height: event.nativeEvent.contentSize.height});
+                          }}
                     />
                     <TouchableOpacity style={{
-                        width: 55 * s,
-                        height: 30 * s,
-                        borderRadius: 15 * s,
+                        width: 60 * s,
+                        height: 35 * s,
+                        borderRadius: 10 * s,
                         flexDirection: 'row',
                         justifyContent: 'center',
                         alignItems: 'center',
@@ -279,19 +281,14 @@ export default class Details extends Component {
                         <Text style={{ color: 'white', fontSize: 15 * s }}>发送</Text>
                     </TouchableOpacity>
                 </View>
-                <View
-                    style={{
-                        borderBottomColor: '#000',
-                        borderBottomWidth: 1 * s
-                    }}
-                >
-                    <Text style={{ paddingLeft: 10 * s, fontSize: 20 * s }}>评论</Text>
+                <View>
+                    <Text style={{ paddingLeft: 10 * s, fontSize: 16 * s ,marginBottom:5*s}}>评论</Text>
                 </View>
                 <ScrollView style={{ flex: 1 }}>
                     <View>
                         {
                             this.state.list.map((item, idx) => (
-                                <View style={{ backgroundColor: '#fff', width: '100%', borderBottomWidth: 1 * s, borderBottomColor: '#808080' }}>
+                                <View style={{ backgroundColor: '#fff', width: '100%', borderBottomWidth: 1 * s, borderBottomColor: '#EEEEEE' }}>
                                     <View style={{
                                         flexDirection: 'row',
                                         alignItems: 'center'
@@ -308,9 +305,9 @@ export default class Details extends Component {
                                         <View style={{ marginLeft: 30 * s, marginRight: 60 * s }}>
                                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                                 <Text style={this.state.page.name == item.name ? { fontSize: 15 * s, color: 'red', marginTop: 5 * s } : { fontSize: 15 * s, color: '#37376F', marginTop: 5 * s }}>{item.name}</Text>
-                                                <Text style={this.state.page.name == item.name ? { fontSize: 12 * s, marginLeft: 5 * s, color: 'red', marginTop: 5 * s } : { fontSize: 12 * s, marginLeft: 5 * s, color: '#37376F', marginTop: 5 * s }}>Lv.{item.level}</Text>
+                                                <Image style={{ height: 20 * s, width: 35 * s, marginLeft: 10 * s ,marginTop:5*s}} source={Img['png' + item.level]} />
                                             </View>
-                                            <Text style={{ fontSize: 18 * s }}>{item.content}</Text>
+                                            <Text style={{ fontSize: 18 * s,marginRight:30*s }}>{item.content}</Text>
                                             <Text style={{ fontSize: 10 * s, color: '#808080', marginTop: 5 * s, marginBottom: 5 * s }}>{item.time}</Text>
                                         </View>
                                     </View>
