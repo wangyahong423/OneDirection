@@ -75,5 +75,47 @@ router.get('/select', (req, res) => {
   });
 });
 
+router.get('/deleteManager', (req, res) => {
+  var name = req.query.name;
+  let sql = 'delete from manager where name=$1';
+  con.query(sql, [name], (err, result) => {
+    if (err) {
+      res.json({ ok: false, msg: "删除失败！" });
+    } else {
+      res.json({ ok: true, msg: "删除成功！" });
+    }
+  });
+})
 
+router.get('/judge', (req, res) => {
+  let sql = 'select tel from manager WHERE name=$1';
+  con.query(sql, [req.query.name], (err, result) => {
+    if (err) {
+      res.json({ ok: false, msg: "此管理员不存在" });
+      console.log(err);
+    } else {
+      var message = JSON.parse(JSON.stringify(result.rows));
+      if (message.length == 0) {
+        res.json({ ok: false, msg: "此管理员不存在" });
+      }
+      else if (message[0].tel == req.query.tel) {
+        res.json({ ok: true, msg: "成功" });
+      } else {
+        res.json({ ok: false, msg: "失败" });
+      }
+    }
+  });
+})
+router.get('/alter', (req, res) => {
+  var name = req.query.name;
+  var pwd = req.query.pwd;
+  let sql = 'update manager set pwd=$1 where name=$2';
+  con.query(sql, [pwd, name], (err, result) => {
+    if (err) {
+      res.json({ ok: false, msg: '修改失败！' });
+    } else {
+      res.json({ ok: true, msg: '修改成功！' });
+    }
+  });
+});
 module.exports = router;
