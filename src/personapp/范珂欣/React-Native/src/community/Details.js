@@ -33,7 +33,7 @@ export default class Details extends Component {
                 this.setState({
                     page: JSON.parse(value).page
                 });
-                
+
                 this.setState({ isLoading: true })
                 let url1 = `http://139.155.44.190:3005/learntalk/list`;
                 let url2 = `http://139.155.44.190:3005/users/list`;
@@ -47,7 +47,7 @@ export default class Details extends Component {
                             .then((res) => res.json())
                             .then((res) => {
                                 var arr = [];
-                                console.log("aaa:"+this.state.page.head)
+                                console.log("aaa:" + this.state.page.head)
                                 res.forEach(item => {
                                     if (item.lid == this.state.page.id) {
                                         for (var i = 0; i < this.state.pic.length; i++) {
@@ -59,7 +59,7 @@ export default class Details extends Component {
                                             }
                                         }
                                         arr.push(item);
-                                        
+
                                     }
 
                                 });
@@ -112,6 +112,7 @@ export default class Details extends Component {
             var time = year + '年' + month + '月' + day + '日' + ' ' + hour + ':' + minute;
             console.log(time);
             let url = `http://139.155.44.190:3005/learntalk/add?lid=${this.state.page.id}&name=${this.state.username}&content=${this.state.comment}&time=${time}`;
+            let url11 = `http://139.155.44.190:3005/learn/change?newl=${true}&lid=${this.state.page.id}`;
             fetch(url)
                 .then((res) => res.json())
                 .then((res) => {
@@ -119,6 +120,11 @@ export default class Details extends Component {
                     } else {
                         Alert.alert(res.msg);
                     }
+                    fetch(url11)
+                        .then((res) => res.json())
+                        .then((res) => {
+                             console.log(res);
+                        })
                 })
             var param = { "content": this.state.comment, "name": this.state.username, "time": time };
             DeviceEventEmitter.emit('pinglun', param);
@@ -385,7 +391,8 @@ export default class Details extends Component {
                     width: '100%',
                     flexDirection: 'row',
                     justifyContent: 'center',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    marginTop: 10 * s
                 }}>
                     <TouchableOpacity style={{
                         width: 300 * s,

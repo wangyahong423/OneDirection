@@ -15,7 +15,9 @@ export default class Person extends Component {
             college: '',
             // pic: '',
             lvnum: '',
-            // head: ''
+            // head: '',
+            newl: false,
+            new: []
         }
     }
     componentDidMount() {
@@ -27,6 +29,27 @@ export default class Person extends Component {
                 })
             });
         let url2 = `http://139.155.44.190:3005/users/list`;
+        let url11 = `http://139.155.44.190:3005/learn/list`;
+        fetch(url11)
+            .then((res) => res.json())
+            .then((res) => {
+                var arr = [];
+                for (var i = 0; i < res.length; i++) {
+                    if (res[i].name == this.state.username) {
+                        if (res[i].newl == true) {
+                            this.setState({
+                                newl: true
+                            });
+                            arr.push(res[i].id);
+                        }
+                    }
+                }
+                // console.log(arr);
+                this.setState({
+                    new: arr
+                });
+                // console.log(this.state.new);
+            });
         fetch(url2)
             .then(res => res.json())
             .then((res) => {
@@ -81,6 +104,26 @@ export default class Person extends Component {
         var self = this;
         this.listener = DeviceEventEmitter.addListener('refresh', function (param) {
             let url2 = `http://139.155.44.190:3005/users/list`;
+            let url11 = `http://139.155.44.190:3005/learn/list`;
+            fetch(url11)
+                .then((res) => res.json())
+                .then((res) => {
+                    var arr = [];
+                    for (var i = 0; i < res.length; i++) {
+                        if (res[i].name == self.state.username) {
+                            
+                            if (res[i].newl == true) {
+                                self.setState({
+                                    newl: true
+                                });
+                                arr.push(res[i].id);
+                            }
+                        }
+                    }
+                    self.setState({
+                        new: arr
+                    });
+                });
             fetch(url2)
                 .then(res => res.json())
                 .then((res) => {
@@ -163,9 +206,23 @@ export default class Person extends Component {
         AsyncStorage.setItem('password', '');
         Actions.login();
     }
-    // card=()=>{
-    //     Actions.card();
-    // }
+    tiezi = () => {
+        for(var i = 0;i<this.state.new.length;i++){
+            var url11 = `http://139.155.44.190:3005/learn/change?newl=${false}&lid=${this.state.new[i]}`;
+            console.log(url11);
+            fetch(url11)
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(res);
+                this.setState({
+                    newl: false
+                });
+            })
+        }
+        
+        
+        Actions.tiezi();
+    }
     render() {
         return (
             <ScrollView>
@@ -213,16 +270,33 @@ export default class Person extends Component {
                             <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 210, marginTop: 15 }} />
                         </TouchableOpacity>
                     </View>
-                    <View style={{
-                        height: 50, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
-                        borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1
-                    }}>
-                        <Icon name="hand-o-right" size={30} color="#5f6fcd" style={{ marginLeft: 30, marginTop: 10 }} />
-                        <TouchableOpacity onPress={() => Actions.tiezi()} style={{ flexDirection: 'row' }}>
-                            <Text style={{ fontSize: 20, marginLeft: 39, marginTop: 11 }} onPress={() => Actions.tiezi()}>我的帖子</Text>
-                            <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 212, marginTop: 15 }} />
-                        </TouchableOpacity>
-                    </View>
+
+                    {
+                        this.state.newl
+                            ? <View style={{
+                                height: 50, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
+                                borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1
+                            }}>
+                                <Icon name="hand-o-right" size={30} color="#5f6fcd" style={{ marginLeft: 30, marginTop: 10 }} />
+                                <TouchableOpacity onPress={() => this.tiezi()} style={{ flexDirection: 'row' }}>
+                                    <Text style={{ fontSize: 20, marginLeft: 39, marginTop: 11 }} onPress={() => Actions.tiezi()}>我的帖子</Text>
+                                    <View style={{ marginTop: 20, marginLeft: 170, width: 10, height: 10, borderRadius: 5, borderColor: '#000', backgroundColor: 'red' }}></View>
+                                    <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 30, marginTop: 15 }} />
+                                </TouchableOpacity>
+                            </View>
+                            : <View style={{
+                                height: 50, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
+                                borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1
+                            }}>
+                                <Icon name="hand-o-right" size={30} color="#5f6fcd" style={{ marginLeft: 30, marginTop: 10 }} />
+                                <TouchableOpacity onPress={() => Actions.tiezi()} style={{ flexDirection: 'row' }}>
+                                    <Text style={{ fontSize: 20, marginLeft: 39, marginTop: 11 }} onPress={() => Actions.tiezi()}>我的帖子</Text>
+                                    <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 212, marginTop: 15 }} />
+                                </TouchableOpacity>
+                            </View>
+                    }
+
+
                     <View style={{
                         height: 50, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
                         borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1
