@@ -10,8 +10,7 @@ export default class Add extends Component {
             content: '',
             username: '',
             length: 0,
-            prompt: [],
-            card: ''
+            prompt: []
         };
         this.getData();
     }
@@ -23,13 +22,6 @@ export default class Add extends Component {
                     username: name.username
                 })
                 // console.log("用户名：", this.state.username)
-            });
-        AsyncStorage.getItem('card')
-            .then((res) => {
-                this.setState({
-                    card: JSON.parse(res).card
-                })
-                // console.log(this.state.card)
             });
     }
     con = (e) => {
@@ -58,17 +50,30 @@ export default class Add extends Component {
             var hour = date.getHours().toString();
             var minute = date.getMinutes().toString();
             var time = year + '年' + month + '月' + day + '日' + ' ' + hour + ':' + minute;
-            let url = `http://139.155.44.190:3005/learn/addLearn?content=${this.state.content}&name=${this.state.username}&time=${time}&card=${this.state.card}`;
-            console.log(url);
-            fetch(url)
+            let url1 = `http://139.155.44.190:3005/users/list`;
+            var card = '';
+            fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
-                    if (res.ok) {
-                        Actions.pop();
-                    } else {
-                        Alert.alert(res.msg);
+                    for (var i = 0; i < res.length; i++) {
+                        if (res[i].name == this.state.username) {
+                            card = res[i].card;
+                            break;
+                        }
                     }
+                    let url = `http://139.155.44.190:3005/learn/addLearn?content=${this.state.content}&name=${this.state.username}&time=${time}&card=${card}`;
+                    console.log(url);
+                    fetch(url)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            if (res.ok) {
+                                Actions.pop();
+                            } else {
+                                Alert.alert(res.msg);
+                            }
+                        });
                 });
+
             let url2 = `http://139.155.44.190:3005/users/list`;
             fetch(url2)
                 .then((res) => res.json())

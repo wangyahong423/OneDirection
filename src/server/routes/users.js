@@ -55,6 +55,19 @@ router.get('/changeCard', (req, res) => {
   });
 });
 
+router.get('/changeHead', (req, res) => {
+  var head = req.query.head;
+  var name = req.query.name;
+  let sql = 'update users set head=$1 where name=$2';
+  con.query(sql, [head, name], (err, result) => {
+    if (err) {
+      res.json({ ok: false, msg: '修改失败！' });
+    } else {
+      res.json({ ok: true, msg: '修改成功！' });
+    }
+  });
+});
+
 router.get('/list', (req, res) => {
   let sql = 'select * from users order by name desc';
   con.query(sql, [], (err, result) => {

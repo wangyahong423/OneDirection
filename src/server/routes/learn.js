@@ -5,8 +5,8 @@ var { checkToken } = require('../config/token');
 var con = require('./postgreSQL');
 
 router.get('/addLearn', (req, res)=> {
-  let sql = 'insert into learn(content,name,time) values($1,$2,$3)';
-  con.query(sql, [req.query.content, req.query.name, req.query.time], (err, result) =>{
+  let sql = 'insert into learn(content,name,time,card) values($1,$2,$3,$4)';
+  con.query(sql, [req.query.content, req.query.name, req.query.time,req.query.card], (err, result) =>{
     if (err) {
       res.json({ ok: false, msg: "发布失败" });
     } else {
@@ -60,4 +60,16 @@ router.get('/select', (req, res) => {
   });
 });
 
+router.get('/change', (req, res) => {
+  var id = req.query.lid;
+  var newl = req.query.newl;
+  let sql = 'update learn set newl=$1 where id=$2';
+  con.query(sql, [newl, id], (err, result) => {
+    if (err) {
+      res.json({ ok: false, msg: '修改失败！' });
+    } else {
+      res.json({ ok: true, msg: '修改成功！' });
+    }
+  });
+});
 module.exports = router;

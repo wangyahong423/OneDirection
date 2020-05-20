@@ -12,7 +12,7 @@ export default class Gaopin extends Component {
         }
     }
     componentDidMount() {
-        let url = `http://139.155.44.190:3005/cet6/list`;
+        let url = `http://139.155.44.190:3005/highcet6/list`;
         fetch(url)
             .then(res => res.json())
             .then(res => {

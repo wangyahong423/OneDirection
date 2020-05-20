@@ -33,6 +33,7 @@ export default class Details extends Component {
                 this.setState({
                     page: JSON.parse(value).page
                 });
+
                 this.setState({ isLoading: true })
                 let url1 = `http://139.155.44.190:3005/learntalk/list`;
                 let url2 = `http://139.155.44.190:3005/users/list`;
@@ -46,16 +47,19 @@ export default class Details extends Component {
                             .then((res) => res.json())
                             .then((res) => {
                                 var arr = [];
+                                console.log("aaa:" + this.state.page.head)
                                 res.forEach(item => {
                                     if (item.lid == this.state.page.id) {
                                         for (var i = 0; i < this.state.pic.length; i++) {
                                             if (item.name == this.state.pic[i].name) {
                                                 item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
+                                                item.head = 'http://139.155.44.190:3005/head/' + this.state.pic[i].head;
                                                 item.level = this.state.pic[i].level;
                                                 break;
                                             }
                                         }
                                         arr.push(item);
+
                                     }
 
                                 });
@@ -78,6 +82,7 @@ export default class Details extends Component {
                                             for (var i = 0; i < self.state.pic.length; i++) {
                                                 if (item.name == self.state.pic[i].name) {
                                                     item.pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
+                                                    item.head = 'http://139.155.44.190:3005/head/' + self.state.pic[i].head;
                                                     item.level = self.state.pic[i].level;
                                                     break;
                                                 }
@@ -107,6 +112,7 @@ export default class Details extends Component {
             var time = year + '年' + month + '月' + day + '日' + ' ' + hour + ':' + minute;
             console.log(time);
             let url = `http://139.155.44.190:3005/learntalk/add?lid=${this.state.page.id}&name=${this.state.username}&content=${this.state.comment}&time=${time}`;
+            let url11 = `http://139.155.44.190:3005/learn/change?newl=${true}&lid=${this.state.page.id}`;
             fetch(url)
                 .then((res) => res.json())
                 .then((res) => {
@@ -114,6 +120,11 @@ export default class Details extends Component {
                     } else {
                         Alert.alert(res.msg);
                     }
+                    fetch(url11)
+                        .then((res) => res.json())
+                        .then((res) => {
+                             console.log(res);
+                        })
                 })
             var param = { "content": this.state.comment, "name": this.state.username, "time": time };
             DeviceEventEmitter.emit('pinglun', param);
@@ -230,6 +241,16 @@ export default class Details extends Component {
                             width: 50 * s,
                             borderRadius: 25 * s
                         }} source={{ uri: this.state.page.pic }} />
+                        <Image style={{
+                            height: 70 * s,
+                            width: 70 * s,
+                            borderRadius: 35 * s,
+                            // backgroundColor:'green',
+                            position: 'absolute',
+                            top: 5,
+                            left: 10
+                        }}
+                            source={{ uri: this.state.page.head }} />
                         <View style={{ marginLeft: 30 * s }}>
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                 <Text style={{ fontSize: 18 * s, color: '#37376F' }}>{this.state.page.name}</Text>
@@ -310,6 +331,16 @@ export default class Details extends Component {
                                                 borderRadius: 25 * s,
                                                 backgroundColor: 'yellow'
                                             }} source={{ uri: item.pic }} />
+                                            <Image style={{
+                                                height: 70 * s,
+                                                width: 70 * s,
+                                                borderRadius: 35 * s,
+                                                // backgroundColor:'green',
+                                                position: 'absolute',
+                                                top: -10,
+                                                right: -10
+                                            }}
+                                                source={{ uri: item.head }} />
                                         </TouchableOpacity>
                                         <View style={{ marginLeft: 30 * s, marginRight: 60 * s }}>
                                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -360,7 +391,8 @@ export default class Details extends Component {
                     width: '100%',
                     flexDirection: 'row',
                     justifyContent: 'center',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    marginTop: 10 * s
                 }}>
                     <TouchableOpacity style={{
                         width: 300 * s,
