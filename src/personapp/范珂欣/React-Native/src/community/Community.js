@@ -384,7 +384,7 @@ export default class Community extends Component {
         DeviceEventEmitter.emit('refresh', param);
     }
     person = (idx) => {
-        var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college };
+        var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college ,head: this.state.list[idx].head};
         AsyncStorage.setItem('details', JSON.stringify(value));
         Actions.person();
     }
@@ -467,27 +467,49 @@ export default class Community extends Component {
                                         height: 80 * s,
                                         alignItems: 'center'
                                     }}>
-                                        {/* <ImageBackground style={{ flex: 1, width: 80 * s, height: 80 * s }} source={{ uri: item.pic }}> */}
-                                        <TouchableOpacity onPress={this.person.bind(this, (idx))}>
-                                            <Image style={{
-                                                marginLeft: 20 * s,
-                                                height: 50 * s,
-                                                width: 50 * s,
-                                                borderRadius: 25 * s,
-                                                backgroundColor: 'yellow'
-                                            }}
-                                                source={{ uri: item.pic }} />
-                                            <Image style={{
-                                                height: 70 * s,
-                                                width: 70 * s,
-                                                borderRadius: 35 * s,
-                                                // backgroundColor:'green',
-                                                position: 'absolute',
-                                                top: -10,
-                                                right: -10
-                                            }}
-                                                source={{ uri: item.head }} />
-                                        </TouchableOpacity>
+                                        {
+                                            this.state.username == item.name
+                                                ?
+                                                <View>
+                                                    <Image style={{
+                                                        marginLeft: 20 * s,
+                                                        height: 50 * s,
+                                                        width: 50 * s,
+                                                        borderRadius: 25 * s,
+                                                        backgroundColor: 'yellow'
+                                                    }} source={{ uri: item.pic }} />
+                                                    <Image style={{
+                                                        height: 70 * s,
+                                                        width: 70 * s,
+                                                        borderRadius: 35 * s,
+                                                        // backgroundColor:'green',
+                                                        position: 'absolute',
+                                                        top: -10,
+                                                        right: -10
+                                                    }}
+                                                        source={{ uri: item.head }} />
+                                                </View>
+                                                : <TouchableOpacity onPress={this.person.bind(this, (idx))}>
+                                                    <Image style={{
+                                                        marginLeft: 20 * s,
+                                                        height: 50 * s,
+                                                        width: 50 * s,
+                                                        borderRadius: 25 * s,
+                                                        backgroundColor: 'yellow'
+                                                    }} source={{ uri: item.pic }} />
+                                                    <Image style={{
+                                                        height: 70 * s,
+                                                        width: 70 * s,
+                                                        borderRadius: 35 * s,
+                                                        // backgroundColor:'green',
+                                                        position: 'absolute',
+                                                        top: -10,
+                                                        right: -10
+                                                    }}
+                                                        source={{ uri: item.head }} />
+                                                </TouchableOpacity>
+                                        }
+
                                         <View style={{ marginLeft: 30 * s }}>
                                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                                 <Text style={{ fontSize: 18 * s }}>{item.name}</Text>

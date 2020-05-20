@@ -11,7 +11,11 @@ export default class Person extends Component {
             username: '',
             data: [],
             todo: [],
-            islogin: false
+            islogin: false,
+            college: '',
+            // pic: '',
+            lvnum: '',
+            // head: ''
         }
     }
     componentDidMount() {
@@ -22,26 +26,6 @@ export default class Person extends Component {
                     username: name.username
                 })
             });
-        let url = `http://139.155.44.190:3005/users/list`;
-        fetch(url)
-            .then(res => res.json())
-            .then((res) => {
-                if (res.err) {
-                } else {
-                    this.setState({
-                        data: res
-                    })
-                    let arr = [];
-                    this.state.data.map((item) => {
-                        if (item.name === this.state.username) {
-                            arr.push(item)
-                        }
-                        this.setState({
-                            data: arr
-                        })
-                    })
-                }
-            })
         let url2 = `http://139.155.44.190:3005/users/list`;
         fetch(url2)
             .then(res => res.json())
@@ -54,10 +38,11 @@ export default class Person extends Component {
                         this.setState({
                             college: item.college,
                             pic: "http://139.155.44.190:3005" + item.pic,
-                            lvnum: item.lvnum//修改
+                            lvnum: item.lvnum,//修改
+                            head: "http://139.155.44.190:3005/head/" + item.head
                         })
                         var num = Math.floor(this.state.lvnum / 15);
-                        console.log("输出num", num)
+                        // console.log("输出num", num)
                         let url3 = `http://139.155.44.190:3005/users/list`;
                         fetch(url3)
                             .then(res => res.json())
@@ -95,26 +80,6 @@ export default class Person extends Component {
             })
         var self = this;
         this.listener = DeviceEventEmitter.addListener('refresh', function (param) {
-            let url = `http://139.155.44.190:3005/users/list`;
-            fetch(url)
-                .then(res => res.json())
-                .then((res) => {
-                    if (res.err) {
-                    } else {
-                        self.setState({
-                            data: res
-                        })
-                        let arr = [];
-                        self.state.data.map((item) => {
-                            if (item.name === self.state.username) {
-                                arr.push(item)
-                            }
-                            self.setState({
-                                data: arr
-                            })
-                        })
-                    }
-                })
             let url2 = `http://139.155.44.190:3005/users/list`;
             fetch(url2)
                 .then(res => res.json())
@@ -127,7 +92,8 @@ export default class Person extends Component {
                             self.setState({
                                 college: item.college,
                                 pic: "http://139.155.44.190:3005" + item.pic,
-                                lvnum: item.lvnum//修改
+                                lvnum: item.lvnum,//修改
+                                head: "http://139.155.44.190:3005/head/" + item.head
                             })
                             var num = Math.floor(self.state.lvnum / 15);
                             console.log("输出num", num)
@@ -210,19 +176,29 @@ export default class Person extends Component {
                     <View style={{ width: '100%', height: 80, flexDirection: 'row' }}>
                         <TouchableOpacity style={{ width: 100, height: 100, position: "absolute", top: -50, left: 30 }} onPress={() => Actions.touxiang()}>
                             <Image source={{ uri: this.state.pic }} style={{ width: 100, height: 100, borderRadius: 50 }} />
+                            <Image style={{
+                                height: 134 * s,
+                                width: 134 * s,
+                                borderRadius: 67 * s,
+                                // backgroundColor:'green',
+                                position: 'absolute',
+                                top: -15,
+                                right: -15
+                            }}
+                                source={{ uri: this.state.head }} />
                         </TouchableOpacity>
                         <Text style={{ position: "absolute", left: 150, fontSize: 18, top: -3 }}>
                             {this.state.username}&nbsp;&nbsp;&nbsp;
                             <Text style={{ marginLeft: 20, fontSize: 15, color: "red" }}>Lv {this.state.level}</Text>
                         </Text>
 
-                        <TouchableOpacity onPress={() => Actions.card()} style={{position: "absolute", left: 270,top: 1,backgroundColor:'#37376F',borderRadius:5}}>
-                            <Text style={{color:'#fff', fontSize: 15}}>卡片背景</Text>
+                        {/* <TouchableOpacity onPress={() => Actions.card()} style={{ position: "absolute", left: 270, top: 1, backgroundColor: '#37376F', borderRadius: 5 }}>
+                            <Text style={{ color: '#fff', fontSize: 15 }}>卡片背景</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => Actions.head()} style={{position: "absolute", left: 350,top: 1,backgroundColor:'#37376F',borderRadius:5}}>
-                            <Text style={{color:'#fff', fontSize: 15}}>头像框选择</Text>
-                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => Actions.head()} style={{ position: "absolute", left: 350, top: 1, backgroundColor: '#37376F', borderRadius: 5 }}>
+                            <Text style={{ color: '#fff', fontSize: 15 }}>头像框选择</Text>
+                        </TouchableOpacity> */}
 
                         <Text style={{ position: 'absolute', left: 150, top: 27, fontSize: 18 }}>河北师范大学{this.state.college}</Text>
                     </View>

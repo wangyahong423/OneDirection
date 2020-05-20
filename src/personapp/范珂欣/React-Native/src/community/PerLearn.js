@@ -81,6 +81,7 @@ export default class PerLearn extends Component {
                                             for (var i = 0; i < res.length; i++) {
                                                 if (res[i].name == this.state.person.name) {
                                                     res[i].pic = this.state.person.pic;
+                                                    res[i].head = this.state.person.head;
                                                     res[i].college = this.state.person.college;
                                                     res[i].level = this.state.person.level;
                                                     res[i].like = false;
@@ -113,7 +114,7 @@ export default class PerLearn extends Component {
                                             this.setState({ isLoading: false });
                                             this.setState({ list: list });
                                             this.setState({ all: list });
-                                            console.log(this.state.list);
+                                            // console.log(this.state.list);
                                         });
                                 });
                         });
@@ -149,6 +150,7 @@ export default class PerLearn extends Component {
                                                         res[i].pic = self.state.person.pic;
                                                         res[i].college = self.state.person.college;
                                                         res[i].level = self.state.person.level;
+                                                        res[i].head = self.state.person.head;
                                                         res[i].like = false;
                                                         for (var j = 0; j < self.state.like.length; j++) {
                                                             if (res[i].id == self.state.like[j].lid) {
@@ -228,6 +230,8 @@ export default class PerLearn extends Component {
                                                                         res[a].pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
                                                                         res[a].level = this.state.pic[i].level;
                                                                         res[a].college = this.state.pic[i].college;
+                                                                        res[a].head = 'http://139.155.44.190:3005/head/' + this.state.pic[i].head;
+
                                                                         break;
                                                                     }
                                                                 }
@@ -264,6 +268,7 @@ export default class PerLearn extends Component {
                                                     this.setState({ isLoading: false });
                                                     this.setState({ list: list });
                                                     this.setState({ all: list });
+                                                    console.log(this.state.list);
                                                 });
                                         });
                                 });
@@ -276,85 +281,87 @@ export default class PerLearn extends Component {
                         // self.setState({list:arr});
                         // console.log(param);
                         fetch(url3)
-                        .then((res) => res.json())
-                        .then((res) => {
-                            self.setState({
-                                pic: res,
-                            });
-                            fetch(url2)
-                                .then((res) => res.json())
-                                .then((res) => {
-                                    self.setState({ likeNum: res });
-                                    var likeList = [];
-                                    for (var i = 0; i < res.length; i++) {
-                                        if (res[i].name == self.state.username) {
-                                            likeList.push(res[i]);
+                            .then((res) => res.json())
+                            .then((res) => {
+                                self.setState({
+                                    pic: res,
+                                });
+                                fetch(url2)
+                                    .then((res) => res.json())
+                                    .then((res) => {
+                                        self.setState({ likeNum: res });
+                                        var likeList = [];
+                                        for (var i = 0; i < res.length; i++) {
+                                            if (res[i].name == self.state.username) {
+                                                likeList.push(res[i]);
+                                            }
                                         }
-                                    }
-                                    self.setState({ like: likeList });
-                                    var personlike = [];
-                                    for (var i = 0; i < res.length; i++) {
-                                        if (res[i].name == self.state.person.name) {
-                                            personlike.push(res[i]);
+                                        self.setState({ like: likeList });
+                                        var personlike = [];
+                                        for (var i = 0; i < res.length; i++) {
+                                            if (res[i].name == self.state.person.name) {
+                                                personlike.push(res[i]);
+                                            }
                                         }
-                                    }
-                                    self.setState({ personlike: personlike });
-                                    fetch(url4)
-                                        .then((res) => res.json())
-                                        .then((res) => {
-                                            self.setState({ comNum: res });
-                                            fetch(url1)
-                                                .then((res) => res.json())
-                                                .then((res) => {
-                                                    var list = [];
-                                                    for (var b = 0; b < self.state.personlike.length; b++) {
-                                                        for (var a = 0; a < res.length; a++) {
-                                                            if (self.state.personlike[b].lid == res[a].id) {
-                                                                for (var i = 0; i < self.state.pic.length; i++) {
-                                                                    if (res[a].name == self.state.pic[i].name) {
-                                                                        res[a].pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
-                                                                        res[a].level = self.state.pic[i].level;
-                                                                        res[a].college = self.state.pic[i].college;
-                                                                        break;
+                                        self.setState({ personlike: personlike });
+                                        fetch(url4)
+                                            .then((res) => res.json())
+                                            .then((res) => {
+                                                self.setState({ comNum: res });
+                                                fetch(url1)
+                                                    .then((res) => res.json())
+                                                    .then((res) => {
+                                                        var list = [];
+                                                        for (var b = 0; b < self.state.personlike.length; b++) {
+                                                            for (var a = 0; a < res.length; a++) {
+                                                                if (self.state.personlike[b].lid == res[a].id) {
+                                                                    for (var i = 0; i < self.state.pic.length; i++) {
+                                                                        if (res[a].name == self.state.pic[i].name) {
+                                                                            res[a].pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
+                                                                            res[a].level = self.state.pic[i].level;
+                                                                            res[a].college = self.state.pic[i].college;
+                                                                            res[a].head = 'http://139.155.44.190:3005/head/' + self.state.pic[i].head;
+
+                                                                            break;
+                                                                        }
                                                                     }
+                                                                    res[a].like = false;
+                                                                    for (var j = 0; j < self.state.like.length; j++) {
+                                                                        if (res[a].id == self.state.like[j].lid) {
+                                                                            res[a].like = true;
+                                                                            break;
+                                                                        }
+                                                                        else {
+                                                                            res[a].like = false;
+                                                                        }
+                                                                    }
+                                                                    var likeNum = 0;
+                                                                    for (var z = 0; z < self.state.likeNum.length; z++) {
+                                                                        if (res[a].id == self.state.likeNum[z].lid) {
+                                                                            likeNum++;
+                                                                        }
+                                                                    }
+                                                                    res[a].likeNum = likeNum;
+                                                                    var comNum = 0;
+                                                                    for (var z = 0; z < self.state.comNum.length; z++) {
+                                                                        if (res[a].id == self.state.comNum[z].lid) {
+                                                                            comNum++;
+                                                                        }
+                                                                    }
+                                                                    res[a].comNum = comNum;
+                                                                    list.push(res[a]);
+                                                                    break;
+                                                                    // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
                                                                 }
-                                                                res[a].like = false;
-                                                                for (var j = 0; j < self.state.like.length; j++) {
-                                                                    if (res[a].id == self.state.like[j].lid) {
-                                                                        res[a].like = true;
-                                                                        break;
-                                                                    }
-                                                                    else {
-                                                                        res[a].like = false;
-                                                                    }
-                                                                }
-                                                                var likeNum = 0;
-                                                                for (var z = 0; z < self.state.likeNum.length; z++) {
-                                                                    if (res[a].id == self.state.likeNum[z].lid) {
-                                                                        likeNum++;
-                                                                    }
-                                                                }
-                                                                res[a].likeNum = likeNum;
-                                                                var comNum = 0;
-                                                                for (var z = 0; z < self.state.comNum.length; z++) {
-                                                                    if (res[a].id == self.state.comNum[z].lid) {
-                                                                        comNum++;
-                                                                    }
-                                                                }
-                                                                res[a].comNum = comNum;
-                                                                list.push(res[a]);
-                                                                break;
-                                                                // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
                                                             }
                                                         }
-                                                    }
-                                                    self.setState({ isLoading: false });
-                                                    self.setState({ list: list });
-                                                    self.setState({ all: list });
-                                                });
-                                        });
-                                });
-                        });
+                                                        self.setState({ isLoading: false });
+                                                        self.setState({ list: list });
+                                                        self.setState({ all: list });
+                                                    });
+                                            });
+                                    });
+                            });
                     });
                 }
             });
@@ -396,6 +403,9 @@ export default class PerLearn extends Component {
 
     }
     details = (idx) => {
+        // var arr = this.state.list[idx];
+
+        // console.log(arr);
         var value = { page: this.state.list[idx] };
         AsyncStorage.setItem('lPage', JSON.stringify(value));
         Actions.learndetails();
@@ -569,6 +579,16 @@ export default class PerLearn extends Component {
                                             backgroundColor: 'yellow'
                                         }}
                                             source={{ uri: item.pic }} />
+                                        <Image style={{
+                                            height: 70 * s,
+                                            width: 70 * s,
+                                            borderRadius: 35 * s,
+                                            // backgroundColor:'green',
+                                            position: 'absolute',
+                                            top: 5,
+                                            left: 10
+                                        }}
+                                            source={{ uri: item.head }} />
                                         <View style={{ marginLeft: 30 * s }}>
                                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                                 <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
@@ -642,7 +662,7 @@ export default class PerLearn extends Component {
                 }
                 < View style={{
                     width: '100%',
-                    marginTop:10*s,
+                    marginTop: 10 * s,
                     flexDirection: 'row',
                     justifyContent: 'center',
                     alignItems: 'center'

@@ -202,12 +202,12 @@ export default class Person extends Component {
         // this.listener1.remove();
     }
     personexp = (title) => {
-        var value = { name: this.state.all.name, pic: this.state.all.pic, level: this.state.all.level, title: title };
+        var value = { name: this.state.all.name, pic: this.state.all.pic, level: this.state.all.level, title: title ,head: this.state.all.head};
         AsyncStorage.setItem('personname1', JSON.stringify(value));
         Actions.perexp();
     }
     personlearn = (title) => {
-        var value = { name: this.state.all.name, pic: this.state.all.pic, level: this.state.all.level, title: title };
+        var value = { name: this.state.all.name, pic: this.state.all.pic, level: this.state.all.level, title: title ,head: this.state.all.head};
         AsyncStorage.setItem('personname2', JSON.stringify(value));
         Actions.perlearn();
     }
@@ -235,7 +235,7 @@ export default class Person extends Component {
                                 height: 54 * s,
                                 width: 54 * s,
                                 borderRadius: 27 * s,
-                                backgroundColor: '#37376F'
+                                // backgroundColor: '#37376F'
                             }}>
 
                                 <Image style={{
@@ -245,6 +245,16 @@ export default class Person extends Component {
                                     width: 50 * s,
                                     borderRadius: 25 * s
                                 }} source={{ uri: this.state.all.pic }} />
+                                <Image style={{
+                                    height: 70 * s,
+                                    width: 70 * s,
+                                    borderRadius: 35 * s,
+                                    // backgroundColor:'green',
+                                    position: 'absolute',
+                                    top: -8,
+                                    right: -7
+                                }}
+                                    source={{ uri: this.state.all.head }} />
                             </View>
                         </View>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>

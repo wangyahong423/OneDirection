@@ -5,11 +5,11 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 export default class Shezhi extends Component {
-    constructor(){
+    constructor() {
         super();
-        this.state={
-            username:'',
-            islogin:false
+        this.state = {
+            username: '',
+            islogin: false
         }
     }
     outlogin = () => {
@@ -29,22 +29,45 @@ export default class Shezhi extends Component {
                         }
                     })
             });
-        AsyncStorage.setItem('username','');
-        AsyncStorage.setItem('pwd','');
-        AsyncStorage.setItem('pic','');
-        AsyncStorage.setItem('college','');
-        Actions.login(); 
-    } 
+        AsyncStorage.setItem('username', '');
+        AsyncStorage.setItem('pwd', '');
+        AsyncStorage.setItem('pic', '');
+        AsyncStorage.setItem('college', '');
+        Actions.login();
+    }
     render() {
         return (
             <ScrollView>
-                <View style={{
+                <TouchableOpacity style={{
                     height: 60 * s, width: '100%', flexDirection: 'row', borderBottomColor: '#dedede', borderWidth: 1, borderTopColor: '#dedede',
-                    borderLeftColor: 'white', borderRightColor: 'white', backgroundColor: "white"
-                }}>
-                    <Text style={{ fontSize: 18, lineHeight: 60 * s, marginLeft: 30 * s }} onPress={() => Actions.mima()}>密码重置</Text>
-                    <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 300, marginTop: 19 }} />
-                </View>
+                    borderLeftColor: 'white', borderRightColor: 'white', backgroundColor: "white",
+                    flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'
+                }}
+                    onPress={() => Actions.mima()}
+                >
+                    <Text style={{ fontSize: 18, lineHeight: 60 * s, marginLeft: 30 * s }} >密码重置</Text>
+                    <Icon name="chevron-right" style={{ marginRight: 30 * s }} size={20} color="#aaa" />
+                </TouchableOpacity>
+                <TouchableOpacity style={{
+                    height: 60 * s, width: '100%', flexDirection: 'row', borderBottomColor: '#dedede', borderWidth: 1, borderTopColor: '#dedede',
+                    borderLeftColor: 'white', borderRightColor: 'white', backgroundColor: "white",
+                    flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'
+                }}
+                    onPress={() => Actions.head()}
+                >
+                    <Text style={{ fontSize: 18, lineHeight: 60 * s, marginLeft: 30 * s }} >头像框选择</Text>
+                    <Icon name="chevron-right" style={{ marginRight: 30 * s }} size={20} color="#aaa" />
+                </TouchableOpacity>
+                <TouchableOpacity style={{
+                    height: 60 * s, width: '100%', flexDirection: 'row', borderBottomColor: '#dedede', borderWidth: 1, borderTopColor: '#dedede',
+                    borderLeftColor: 'white', borderRightColor: 'white', backgroundColor: "white",
+                    flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'
+                }}
+                    onPress={() => Actions.card()}
+                >
+                    <Text style={{ fontSize: 18, lineHeight: 60 * s, marginLeft: 30 * s }} >卡片背景</Text>
+                    <Icon name="chevron-right" style={{ marginRight: 30 * s }} size={20} color="#aaa" />
+                </TouchableOpacity>
                 <TouchableOpacity
                     style={{
                         width: '50%',

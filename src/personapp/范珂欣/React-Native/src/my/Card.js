@@ -42,10 +42,6 @@ export default class Card extends Component {
         fetch(url)
             .then(res => res.json())
             .then((res) => {
-
-                var value = { card: this.state.card };
-                AsyncStorage.setItem('card', JSON.stringify(value));
-
                 Actions.pop();
             })
     }
