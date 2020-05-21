@@ -38,42 +38,115 @@
 }
 
 body{
-  background: url('./img/bg.jpg');
-  background-size: cover;
+  background: url('./img/back.jpg') no-repeat center center fixed;
+  /* background-size:'cover'; */
   font-family: '楷体';
 }
 .loginBackground{
-    background-color: rgba(0,0,0, 0.4);
-    opacity: 0.4;
-    text-align: center;
-    height: 400px;
-    width:400px;
-    margin: 0 auto;
+  background-color: rgba(0,0,0, 0.4);
 }
-
-.home{
-  position: fixed;
-  top:125px;
-}
-.logo{
-  width: 100%;
-  height: 70px;
-  line-height: 20px;
-  background-color: rgba(136, 136, 136, 0.3);
-  border-bottom: 1px solid grey;
-  text-align: center;
+.title{
+  width: 100vw;
+  height: 11vh;
+  line-height: 11vh;
+  background-color: 	RoyalBlue;
+  /* border-bottom: 1px solid rgba(231, 15, 8, 0.8); */
   position: fixed;
   top:0;
 }
+.hometit{
+  height: 83vh;
+  width: 15vw;
+  background-color: rgba(68, 182, 211, 1);
+}
 .tab{
-  height: 65px;
-  width:140px;
-  line-height: 65px;
+  height: 9vh;
+  width:15vw;
+  line-height: 9vh;
   text-align: center;
-  font-size: 24px;
-  background-color: rgba(136, 136, 136, 0.3);
-  border-top:1px solid rgba(136, 136, 136, 1);
-  border-right:1px solid rgba(136, 136, 136, 1);
+  font-size: 1.7vw;
   color: white;
-  margin-bottom: -24px;
+}
+/* 用户管理 */
+.user-rectangle{
+  height: 2vh;
+  width: 2vh;
+  background-color: white;
+  transform:rotate(45deg);
+  -ms-transform:rotate(45deg); /* Internet Explorer */
+  -moz-transform:rotate(45deg); /* Firefox */
+  -webkit-transform:rotate(45deg); /* Safari 和 Chrome */
+  -o-transform:rotate(45deg);
+  float: right;
+  margin-right: 0.15vw;
+}
+.user-content{
+  height: 73vh;
+  width: 61vw;
+  margin: 1vh auto;
+  /* overflow: hidden; */
+  /* background-color: yellowgreen; */
+}
+.search-input{
+  height: 5vh;
+  width: 61vw;
+  text-align: center;
+}
+.search-input > input{
+  font-size: 1.2vw;
+  padding-left: 2vw;
+  width: 40vw;
+  height: 5vh;
+  font-family: '楷体';
+}
+.search{
+  font-size: 1vw;
+  padding-left: 1.5vw;
+  width: 20vw;
+  height: 4vh;
+  float: right;
+  margin-top: 1.5vh;
+  margin-right: 2vw;
+  border-radius: 2vw;
+  border: unset;
+  font-family: '楷体';
+}
+.search:focus{
+  outline-width: 0;
+}
+
+.ant-modal p {
+  margin: 0;
+}
+.addmanager{
+  width: 16vw;
+  height: 4vh;
+  border-radius: 2vh;
+  padding-left: 1.2vw;
+  font-size: 1vw;
+  border:unset;
+  font-family: '楷体';
+  margin-bottom: 3vh;
+}
+.addmanager:focus{
+  outline-width: 0;
+}
+.footerstyle:focus{
+  outline-width: 0;
+}
+.footerstyle:focus{
+  outline-width: 0;
+}
+.altermanager{
+  width: 16vw;
+  height: 4vh;
+  border-radius: 2vh;
+  padding-left: 1.2vw;
+  font-size: 1vw;
+  border:unset;
+  font-family: '楷体';
+  margin-bottom: 3vh;
+}
+.altermanager:focus{
+  outline-width: 0;
 }
