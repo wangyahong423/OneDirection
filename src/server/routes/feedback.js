@@ -18,29 +18,41 @@ router.get('/addFeedback', (req, res) => {
 });
 
 router.get('/list', (req, res) => {
-    let sql = 'select * from feedback order by tel,time desc';
-    con.query(sql, [],(err,result)=>{
-      if(err){
-        console.log(err);
-      }else{
-        res.send(result.rows);
-      }
-    });
+  let sql = 'select * from feedback order by tel,time desc';
+  con.query(sql, [], (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result.rows);
+    }
+  });
 })
 
-router.get('/deleteFeedback',(req, res) => {
+router.get('/deleteFeedback', (req, res) => {
   var tel = req.query.tel;
   var time = req.query.time;
   var reg = /%20/;
   time = time.replace(reg, ' ');
   let sql = 'delete from feedback where tel=$1 and time=$2';
-  con.query(sql, [tel,time],(err,result)=>{
-    if(err){
+  con.query(sql, [tel, time], (err, result) => {
+    if (err) {
       res.json({ ok: false, msg: "删除失败！" });
-    }else{
-  res.json({ ok: true, msg: "删除成功！" });
+    } else {
+      res.json({ ok: true, msg: "删除成功！" });
     }
   });
 });
 
+router.get('/select', (req, res) => {
+  var content = req.query.content;
+  content = '%' + content + '%';
+  let sql = 'select * from feedback where content like $1 order by id desc';
+  con.query(sql, [content], (err, result) => {
+    if (err) {
+      res.josn({ ok: false, msg: '查找失败' });
+    } else {
+      res.send(result.rows);
+    }
+  });
+});
 module.exports = router;
