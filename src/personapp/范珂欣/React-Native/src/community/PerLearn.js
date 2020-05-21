@@ -3,6 +3,7 @@ import { Text, View, ScrollView, StyleSheet, TextInput, Dimensions, SafeAreaView
 import Icon from 'react-native-vector-icons/EvilIcons';
 import { Actions } from 'react-native-router-flux';
 import { Button } from '@ant-design/react-native';
+import Img from './Img'
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
 export default class PerLearn extends Component {
@@ -14,7 +15,7 @@ export default class PerLearn extends Component {
             like: [],
             personlike: [],
             lvlist: [],
-            search: '',
+            // search: '',
             likeNum: [],
             comNum: [],
             all: [],
@@ -22,24 +23,7 @@ export default class PerLearn extends Component {
             isLoading: true,
             person: ''
         };
-        // this.getData();
     }
-    // getData = () => {
-    //     AsyncStorage.getItem('username')
-    //         .then((res) => {
-    //             let name = { username: res }
-    //             this.setState({
-    //                 username: name.username
-    //             })
-    //         });
-    //     AsyncStorage.getItem('personname2')
-    //         .then((res) => {
-    //             this.setState({
-    //                 person: JSON.parse(res)
-    //             })
-    //         });
-    //     console.log(this.state.person)
-    // }
     componentDidMount() {
         this.setState({ isLoading: true })
         var url1 = `http://139.155.44.190:3005/learn/list`;
@@ -58,6 +42,7 @@ export default class PerLearn extends Component {
                 this.setState({
                     person: JSON.parse(res)
                 })
+                console.log("我的社区2", this.state.person)
                 if (this.state.person.title == 'issue') {
                     fetch(url2)
                         .then((res) => res.json())
@@ -81,7 +66,6 @@ export default class PerLearn extends Component {
                                             for (var i = 0; i < res.length; i++) {
                                                 if (res[i].name == this.state.person.name) {
                                                     res[i].pic = this.state.person.pic;
-                                                    res[i].head = this.state.person.head;
                                                     res[i].college = this.state.person.college;
                                                     res[i].level = this.state.person.level;
                                                     res[i].like = false;
@@ -114,18 +98,12 @@ export default class PerLearn extends Component {
                                             this.setState({ isLoading: false });
                                             this.setState({ list: list });
                                             this.setState({ all: list });
-                                            // console.log(this.state.list);
                                         });
                                 });
                         });
 
                     var self = this;
                     this.listener = DeviceEventEmitter.addListener('ELrefresh', function (param) {
-                        // var arr=self.state.list;
-                        // var a = {"content": param.content, "like": false, "likeNum": 0, "name": param.name, "pic": "http://139.155.44.190:3005/images/6.jpg", "time": param.time};
-                        // arr.splice(0,0,a);
-                        // self.setState({list:arr});
-                        // console.log(param);
                         fetch(url2)
                             .then((res) => res.json())
                             .then((res) => {
@@ -150,7 +128,6 @@ export default class PerLearn extends Component {
                                                         res[i].pic = self.state.person.pic;
                                                         res[i].college = self.state.person.college;
                                                         res[i].level = self.state.person.level;
-                                                        res[i].head = self.state.person.head;
                                                         res[i].like = false;
                                                         for (var j = 0; j < self.state.like.length; j++) {
                                                             if (res[i].id == self.state.like[j].lid) {
@@ -184,10 +161,6 @@ export default class PerLearn extends Component {
                                             });
                                     });
                             });
-                        // var self1 = this;
-                        // this.listener1 = DeviceEventEmitter.addListener('com', function (num){
-                        //     console.log(num);
-                        // })
                     });
                 } else if (this.state.person.title == 'like') {
                     fetch(url3)
@@ -230,8 +203,6 @@ export default class PerLearn extends Component {
                                                                         res[a].pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
                                                                         res[a].level = this.state.pic[i].level;
                                                                         res[a].college = this.state.pic[i].college;
-                                                                        res[a].head = 'http://139.155.44.190:3005/head/' + this.state.pic[i].head;
-
                                                                         break;
                                                                     }
                                                                 }
@@ -261,25 +232,18 @@ export default class PerLearn extends Component {
                                                                 res[a].comNum = comNum;
                                                                 list.push(res[a]);
                                                                 break;
-                                                                // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
                                                             }
                                                         }
                                                     }
                                                     this.setState({ isLoading: false });
                                                     this.setState({ list: list });
                                                     this.setState({ all: list });
-                                                    console.log(this.state.list);
                                                 });
                                         });
                                 });
                         });
                     var self = this;
                     this.listener = DeviceEventEmitter.addListener('refresh', function (param) {
-                        // var arr=self.state.list;
-                        // var a = {"content": param.content, "like": false, "likeNum": 0, "name": param.name, "pic": "http://139.155.44.190:3005/images/6.jpg", "time": param.time};
-                        // arr.splice(0,0,a);
-                        // self.setState({list:arr});
-                        // console.log(param);
                         fetch(url3)
                             .then((res) => res.json())
                             .then((res) => {
@@ -320,8 +284,6 @@ export default class PerLearn extends Component {
                                                                             res[a].pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
                                                                             res[a].level = self.state.pic[i].level;
                                                                             res[a].college = self.state.pic[i].college;
-                                                                            res[a].head = 'http://139.155.44.190:3005/head/' + self.state.pic[i].head;
-
                                                                             break;
                                                                         }
                                                                     }
@@ -351,7 +313,6 @@ export default class PerLearn extends Component {
                                                                     res[a].comNum = comNum;
                                                                     list.push(res[a]);
                                                                     break;
-                                                                    // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
                                                                 }
                                                             }
                                                         }
@@ -369,7 +330,6 @@ export default class PerLearn extends Component {
     }
     componentWillUnmount() {
         this.listener.remove();
-        // this.listener1.remove();
     }
     delete = (idx) => {
         Alert.alert('确认要删除吗', '',
@@ -400,12 +360,8 @@ export default class PerLearn extends Component {
             });
     }
     opntion2 = () => {
-
     }
     details = (idx) => {
-        // var arr = this.state.list[idx];
-
-        // console.log(arr);
         var value = { page: this.state.list[idx] };
         AsyncStorage.setItem('lPage', JSON.stringify(value));
         Actions.learndetails();
@@ -423,7 +379,6 @@ export default class PerLearn extends Component {
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url1);
                 });
             let url2 = `http://139.155.44.190:3005/users/list`;
             fetch(url2)
@@ -484,37 +439,35 @@ export default class PerLearn extends Component {
             fetch(url2)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url2);
                 });
         }
     }
-    change = (e) => {
-        this.setState({
-            search: e
-        })
-    }
-    search = () => {
-        let url = `http://139.155.44.190:3005/learn/select?content=${this.state.search}`;
-        fetch(url)
-            .then((res) => res.json())
-            .then((res) => {
-                if (res.false) { }
-                else {
-                    var list = [];
-                    // console.log(res);
-                    for (var i = 0; i < res.length; i++) {
-                        for (var j = 0; j < this.state.all.length; j++) {
-                            if (res[i].id == this.state.all[j].id) {
-                                list.push(this.state.all[j]);
-                                break;
-                            }
-                        }
-                    }
-                    this.setState({ list: list });
-                }
-            });
+    // change = (e) => {
+    //     this.setState({
+    //         search: e
+    //     })
+    // }
+    // search = () => {
+    //     let url = `http://139.155.44.190:3005/learn/select?content=${this.state.search}`;
+    //     fetch(url)
+    //         .then((res) => res.json())
+    //         .then((res) => {
+    //             if (res.false) { }
+    //             else {
+    //                 var list = [];
+    //                 for (var i = 0; i < res.length; i++) {
+    //                     for (var j = 0; j < this.state.all.length; j++) {
+    //                         if (res[i].id == this.state.all[j].id) {
+    //                             list.push(this.state.all[j]);
+    //                             break;
+    //                         }
+    //                     }
+    //                 }
+    //                 this.setState({ list: list });
+    //             }
+    //         });
 
-    }
+    // }
     back = () => {
         Actions.pop();
         var param = 1;
@@ -523,7 +476,7 @@ export default class PerLearn extends Component {
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
-                <View style={{
+                {/* <View style={{
                     width: '100%',
                     height: 55 * s,
                     flexDirection: 'row',
@@ -536,12 +489,10 @@ export default class PerLearn extends Component {
                         flexDirection: 'row',
                         alignItems: 'center',
                         backgroundColor: '#ffffff',
-                        // borderRadius: 28 * s
                         borderBottomLeftRadius: 28 * s,
                         borderTopLeftRadius: 28 * s,
                         marginLeft: -55 * s,
                     }}>
-
                         <TextInput
                             style={{
                                 height: 50 * s,
@@ -559,89 +510,75 @@ export default class PerLearn extends Component {
                             搜索
                         </Button>
                     </View>
-                </View>
+                </View> */}
+                <View>
+                    {
+                        this.state.list.map((item, idx) => (
+                            <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 10 * s }}>
+                                <View style={{
+                                    flexDirection: 'row',
+                                    height: 80 * s,
+                                    alignItems: 'center'
+                                }}>
+                                    <Image style={{
+                                        marginLeft: 20 * s,
+                                        height: 50 * s,
+                                        width: 50 * s,
+                                        borderRadius: 25 * s,
+                                        backgroundColor: 'yellow'
+                                    }}
+                                        source={{ uri: item.pic }} />
 
-                <ScrollView style={{ flex: 1 }}>
-                    <View>
-                        {
-                            this.state.list.map((item, idx) => (
-                                <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 10 * s }}>
-                                    <View style={{
-                                        flexDirection: 'row',
-                                        height: 80 * s,
-                                        alignItems: 'center'
-                                    }}>
-                                        <Image style={{
-                                            marginLeft: 20 * s,
-                                            height: 50 * s,
-                                            width: 50 * s,
-                                            borderRadius: 25 * s,
-                                            backgroundColor: 'yellow'
-                                        }}
-                                            source={{ uri: item.pic }} />
-                                        <Image style={{
-                                            height: 70 * s,
-                                            width: 70 * s,
-                                            borderRadius: 35 * s,
-                                            // backgroundColor:'green',
+                                    <View style={{ marginLeft: 30 * s }}>
+                                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                            <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
+                                            <Image style={{ height: 20 * s, width: 35 * s, marginLeft: 10 * s }} source={Img['png' + item.level]} />
+                                        </View>
+                                        <Text>{item.time}</Text>
+                                    </View>
+                                </View>
+                                <View style={{
+                                    marginLeft: 30 * s,
+                                    marginRight: 30 * s,
+                                    marginTop: 10 * s,
+                                    marginBottom: 20 * s
+                                }}
+                                >
+                                    <Text onPress={this.details.bind(this, (idx))} style={{ fontSize: 18 * s }}>{item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content}</Text>
+                                </View>
+                                <View style={{ flexDirection: 'row', height: 40 * s, alignItems: 'center', justifyContent: 'space-evenly', borderTopWidth: 1, borderTopColor: "#EFEFF4" }}>
+                                    <View style={{ alignItems: 'center', flexDirection: 'row' }}>
+                                        <Icon onPress={this.details.bind(this, (idx))} name="comment" style={{ fontSize: 30 * s }}></Icon>
+                                        <Text>{item.comNum}</Text>
+                                    </View>
+                                    <View style={{ alignItems: 'center', flexDirection: 'row' }}>
+                                        <Icon name="heart" onPress={this.like.bind(this, (idx))} style={item.like ? { color: 'red', fontSize: 30 * s } : { fontSize: 30 * s }}></Icon>
+                                        <Text>{item.likeNum}</Text>
+                                    </View>
+                                </View>
+                                {
+                                    this.state.username == item.name
+                                        ? <TouchableOpacity style={{
+                                            width: 30 * s,
+                                            height: 30 * s,
+                                            borderRadius: 15 * s,
+                                            flexDirection: 'row',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
                                             position: 'absolute',
                                             top: 5,
-                                            left: 10
+                                            right: 5
                                         }}
-                                            source={{ uri: item.head }} />
-                                        <View style={{ marginLeft: 30 * s }}>
-                                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                                <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
-                                                <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: 'red' }}>Lv.{item.level}</Text>
-                                            </View>
-                                            <Text>{item.time}</Text>
-                                        </View>
-                                    </View>
-                                    <View style={{
-                                        marginLeft: 30 * s,
-                                        marginRight: 30 * s,
-                                        marginTop: 10 * s,
-                                        marginBottom: 20 * s
-                                    }}
-                                    >
-                                        <Text onPress={this.details.bind(this, (idx))} style={{ fontSize: 18 * s }}>{item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content}</Text>
-                                    </View>
-                                    <View style={{ flexDirection: 'row', height: 40 * s, alignItems: 'center', justifyContent: 'space-evenly', borderTopWidth: 1, borderTopColor: "#EFEFF4" }}>
-                                        <View style={{ alignItems: 'center', flexDirection: 'row' }}>
-                                            <Icon onPress={this.details.bind(this, (idx))} name="comment" style={{ fontSize: 30 * s }}></Icon>
-                                            <Text>{item.comNum}</Text>
-                                        </View>
-                                        <View style={{ alignItems: 'center', flexDirection: 'row' }}>
-                                            <Icon name="heart" onPress={this.like.bind(this, (idx))} style={item.like ? { color: 'red', fontSize: 30 * s } : { fontSize: 30 * s }}></Icon>
-                                            <Text>{item.likeNum}</Text>
-                                        </View>
-                                    </View>
-                                    {
-                                        this.state.username == item.name
-                                            ? <TouchableOpacity style={{
-                                                width: 30 * s,
-                                                height: 30 * s,
-                                                borderRadius: 15 * s,
-                                                flexDirection: 'row',
-                                                justifyContent: 'center',
-                                                alignItems: 'center',
-                                                // backgroundColor: '#37376F',
-                                                position: 'absolute',
-                                                top: 5,
-                                                right: 5
-                                            }}
-                                                onPress={this.delete.bind(this, (idx))}
-                                            >
-                                                <Text style={{ color: '#e8e8e8', fontSize: 30 * s }}>×</Text>
-                                            </TouchableOpacity>
-                                            : null
-                                    }
-                                </View>
-                            ))
-                        }
-                    </View>
-
-                </ScrollView>
+                                            onPress={this.delete.bind(this, (idx))}
+                                        >
+                                            <Text style={{ color: '#e8e8e8', fontSize: 30 * s }}>×</Text>
+                                        </TouchableOpacity>
+                                        : null
+                                }
+                            </View>
+                        ))
+                    }
+                </View>
                 {
                     this.state.isLoading
                         ? <View
@@ -660,28 +597,6 @@ export default class PerLearn extends Component {
                         </View>
                         : null
                 }
-                < View style={{
-                    width: '100%',
-                    marginTop: 10 * s,
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
-                    <TouchableOpacity style={{
-                        width: 300 * s,
-                        height: 40 * s,
-                        borderRadius: 15 * s,
-                        flexDirection: 'row',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: '#37376F',
-                        marginBottom: 10 * s
-                    }}
-                        onPress={() => this.back()}
-                    >
-                        <Text style={{ color: '#fff', fontSize: 20 * s }}>返回</Text>
-                    </TouchableOpacity>
-                </View >
             </SafeAreaView >
         )
     }

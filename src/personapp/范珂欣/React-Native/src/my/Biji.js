@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, Dimensions, SafeAreaView, Image, AsyncStorage, DeviceEventEmitter } from 'react-native';
+import {
+    Text,
+    View,
+    ScrollView,
+    Dimensions,
+    SafeAreaView,
+    Image,
+    AsyncStorage,
+    DeviceEventEmitter
+} from 'react-native';
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
 

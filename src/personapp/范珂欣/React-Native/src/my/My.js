@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, Image, AsyncStorage, ScrollView, TouchableOpacity, DeviceEventEmitter, Dimensions } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Img from '../community/Img'
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
 export default class Person extends Component {
@@ -246,7 +247,8 @@ export default class Person extends Component {
                         </TouchableOpacity>
                         <Text style={{ position: "absolute", left: 150, fontSize: 18, top: -3 }}>
                             {this.state.username}&nbsp;&nbsp;&nbsp;
-                            <Text style={{ marginLeft: 20, fontSize: 15, color: "red" }}>Lv {this.state.level}</Text>
+                            <Image style={{ height: 25 * s, width: 40 * s, marginLeft: 10 * s }} source={Img['png' + this.state.level]} />
+                            {/* <Text style={{ marginLeft: 20, fontSize: 15, color: "red" }}>Lv {this.state.level}</Text> */}
                         </Text>
 
                         {/* <TouchableOpacity onPress={() => Actions.card()} style={{ position: "absolute", left: 270, top: 1, backgroundColor: '#37376F', borderRadius: 5 }}>

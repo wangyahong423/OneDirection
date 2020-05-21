@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Text, View, ScrollView, SafeAreaView, TextInput, Dimensions, ImageBackground, Image, TouchableOpacity, AsyncStorage, Alert, DeviceEventEmitter } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Actions } from 'react-native-router-flux';
+import Img from './Img'
+
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
 export default class Details extends Component {
@@ -123,7 +125,7 @@ export default class Details extends Component {
                     fetch(url11)
                         .then((res) => res.json())
                         .then((res) => {
-                             console.log(res);
+                            console.log(res);
                         })
                 })
             var param = { "content": this.state.comment, "name": this.state.username, "time": time };
@@ -254,7 +256,8 @@ export default class Details extends Component {
                         <View style={{ marginLeft: 30 * s }}>
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                 <Text style={{ fontSize: 18 * s, color: '#37376F' }}>{this.state.page.name}</Text>
-                                <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: 'red' }}>Lv.{this.state.page.level}</Text>
+                                {/* <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: 'red' }}>Lv.{this.state.page.level}</Text> */}
+                                <Image style={{ height: 21 * s, width: 36 * s, marginLeft: 10 * s }} source={Img['png' + this.state.page.level]} />
                             </View>
                             <Text>{this.state.page.time}</Text>
                         </View>
@@ -345,7 +348,8 @@ export default class Details extends Component {
                                         <View style={{ marginLeft: 30 * s, marginRight: 60 * s }}>
                                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                                 <Text style={this.state.page.name == item.name ? { fontSize: 15 * s, color: 'red', marginTop: 5 * s } : { fontSize: 15 * s, color: '#37376F', marginTop: 5 * s }}>{item.name}</Text>
-                                                <Text style={this.state.page.name == item.name ? { fontSize: 12 * s, marginLeft: 5 * s, color: 'red', marginTop: 5 * s } : { fontSize: 12 * s, marginLeft: 5 * s, color: '#37376F', marginTop: 5 * s }}>Lv.{item.level}</Text>
+                                                {/* <Text style={this.state.page.name == item.name ? { fontSize: 12 * s, marginLeft: 5 * s, color: 'red', marginTop: 5 * s } : { fontSize: 12 * s, marginLeft: 5 * s, color: '#37376F', marginTop: 5 * s }}>Lv.{item.level}</Text> */}
+                                                <Image style={{ height: 14 * s, width: 24 * s, marginLeft: 5 * s ,marginTop:3*s}} source={Img['png' + item.level]} />
                                             </View>
                                             <Text style={{ fontSize: 18 * s }}>{item.content}</Text>
                                             <Text style={{ fontSize: 10 * s, color: '#808080', marginTop: 5 * s, marginBottom: 5 * s }}>{item.time}</Text>

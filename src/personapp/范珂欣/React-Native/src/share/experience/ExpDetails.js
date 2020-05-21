@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Text, View, ScrollView, SafeAreaView, TextInput, Dimensions, ImageBackground, Image, TouchableOpacity, AsyncStorage, Alert, DeviceEventEmitter } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Actions } from 'react-native-router-flux';
+import Img from '../../community/Img'
+
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
 export default class ExpDetails extends Component {
@@ -68,7 +70,8 @@ export default class ExpDetails extends Component {
                                 <View style={{ marginLeft: 30 * s }}>
                                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                         <Text style={{ fontSize: 18 * s, color: '#37376F' }}>{this.state.all.name}</Text>
-                                        <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: '#37376F' }}>Lv.{this.state.all.level}</Text>
+                                        {/* <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: '#37376F' }}>Lv.{this.state.all.level}</Text> */}
+                                        <Image style={{ height: 21 * s, width: 36 * s, marginLeft: 10 * s }} source={Img['png' + this.state.all.level]} />
                                     </View>
                                     <Text style={{ fontSize: 15 * s, color: '#37376F' }}>{this.state.all.time}</Text>
 

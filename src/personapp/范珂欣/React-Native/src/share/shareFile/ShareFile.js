@@ -1,11 +1,34 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, TextInput, Dimensions, SafeAreaView } from 'react-native';
+import { Text, View, ScrollView, TextInput, Dimensions, SafeAreaView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { Actions } from 'react-native-router-flux';
+import RNFileSelector from 'react-native-file-selector';
 
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
+
 export default class ShareFile extends Component {
-    search=(e)=>{
+    constructor() {
+        super();
+        this.state = {
+            visible: false
+        }
+    }
+    addFile = () => {
+        RNFileSelector.Show(
+            {
+                title: 'Select File',
+                onDone: (path) => {
+                    console.log('file selected: ' + path)
+                },
+                onCancel: () => {
+                    console.log('cancelled')
+                }
+            }
+        )        
+    }
+
+    search = (e) => {
         console.log(e);
     }
     render() {
@@ -13,7 +36,7 @@ export default class ShareFile extends Component {
             <SafeAreaView style={{ flex: 1 }}>
                 <View style={{
                     width: '100%',
-                    height:70*s,
+                    height: 70 * s,
                     flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'center'
@@ -48,6 +71,32 @@ export default class ShareFile extends Component {
                 </View>
                 <ScrollView style={{ flex: 1 }}>
                 </ScrollView>
+                <TouchableOpacity style={{
+                    width: 60 * s,
+                    height: 60 * s,
+                    borderRadius: 30 * s,
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: '#37376F',
+                    position: 'absolute',
+                    bottom: 0,
+                    right: 0
+                }}
+                    onPress={this.addFile}
+                >
+                    <Text style={{ color: 'white', fontSize: 30 * s }}>+</Text>
+                </TouchableOpacity>
+                <RNFileSelector
+                    title={"Select File"}
+                    visible={this.state.visible}
+                    onDone={() => {
+                        console.log("file selected: " + path);
+                    }}
+                    onCancel={() => {
+                        console.log("cancelled");
+                    }}
+                />
             </SafeAreaView>
         )
     }

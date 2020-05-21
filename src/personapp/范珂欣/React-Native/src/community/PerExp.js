@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, FlatList, ScrollView, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert, DrawerLayoutAndroid } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import { Actions } from 'react-native-router-flux';
+import Img from './Img'
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
 export default class PerExp extends Component {
@@ -15,7 +16,7 @@ export default class PerExp extends Component {
             personlike: [],
             collect: [],
             personcollect: [],
-            search: '',
+            // search: '',
             likeNum: [],
             colNum: [],
             username: '',
@@ -59,7 +60,6 @@ export default class PerExp extends Component {
                 this.setState({
                     person: JSON.parse(res)
                 })
-                console.log(this.state.person.title);
                 if (this.state.person.title == 'issue') {
                     fetch(url2)
                         .then((res) => res.json())
@@ -92,7 +92,6 @@ export default class PerExp extends Component {
                                                     res[i].pic = this.state.person.pic;
                                                     res[i].college = this.state.person.college;
                                                     res[i].level = this.state.person.level;
-                                                    res[i].head = this.state.person.head;
                                                     res[i].like = false;
                                                     for (var j = 0; j < this.state.like.length; j++) {
                                                         if (res[i].id == this.state.like[j].eid) {
@@ -135,6 +134,7 @@ export default class PerExp extends Component {
                                             this.setState({ list: list });
                                             this.setState({ all: list });
                                         });
+
                                 });
                         });
                     var self = this;
@@ -176,7 +176,6 @@ export default class PerExp extends Component {
                                                         res[i].pic = self.state.person.pic;
                                                         res[i].college = self.state.person.college;
                                                         res[i].level = self.state.person.level;
-                                                        res[i].head = this.state.person.head;
                                                         res[i].like = false;
                                                         for (var j = 0; j < self.state.like.length; j++) {
                                                             if (res[i].id == self.state.like[j].eid) {
@@ -266,7 +265,6 @@ export default class PerExp extends Component {
                                                                 for (var i = 0; i < this.state.pic.length; i++) {
                                                                     if (res[a].name == this.state.pic[i].name) {
                                                                         res[a].pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
-                                                                        res[a].head = 'http://139.155.44.190:3005/head/' + this.state.pic[i].head;
                                                                         res[a].college = this.state.pic[i].college;
                                                                         res[a].level = this.state.pic[i].level;
                                                                         break;
@@ -369,7 +367,6 @@ export default class PerExp extends Component {
                                                                     for (var i = 0; i < self.state.pic.length; i++) {
                                                                         if (res[a].name == self.state.pic[i].name) {
                                                                             res[a].pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
-                                                                            res[a].head = 'http://139.155.44.190:3005/head/' + self.state.pic[i].head;
                                                                             res[a].college = self.state.pic[i].college;
                                                                             res[a].level = self.state.pic[i].level;
                                                                             break;
@@ -458,7 +455,6 @@ export default class PerExp extends Component {
                                                 }
                                             }
                                             this.setState({ personcollect: personcollect });
-                                            console.log(this.state.personcollect);
                                             fetch(url1)
                                                 .then((res) => res.json())
                                                 .then((res) => {
@@ -470,7 +466,6 @@ export default class PerExp extends Component {
                                                                     if (res[a].name == this.state.pic[i].name) {
                                                                         res[a].pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
                                                                         res[a].college = this.state.pic[i].college;
-                                                                        res[a].head = 'http://139.155.44.190:3005/head/' + this.state.pic[i].head;
                                                                         res[a].level = this.state.pic[i].level;
                                                                         break;
                                                                     }
@@ -562,7 +557,6 @@ export default class PerExp extends Component {
                                                     }
                                                 }
                                                 self.setState({ personcollect: personcollect });
-                                                console.log(self.state.personcollect);
                                                 fetch(url1)
                                                     .then((res) => res.json())
                                                     .then((res) => {
@@ -574,7 +568,6 @@ export default class PerExp extends Component {
                                                                         if (res[a].name == self.state.pic[i].name) {
                                                                             res[a].pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
                                                                             res[a].college = self.state.pic[i].college;
-                                                                            res[a].head = 'http://139.155.44.190:3005/head/' + self.state.pic[i].head;
                                                                             res[a].level = self.state.pic[i].level;
                                                                             break;
                                                                         }
@@ -637,6 +630,7 @@ export default class PerExp extends Component {
         //     console.log(num);
         // })
 
+
     }
     componentWillUnmount() {
         this.listener.remove();
@@ -686,7 +680,6 @@ export default class PerExp extends Component {
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url1);
                 });
         }
         else if (this.state.list[idx].like == true) {
@@ -700,7 +693,6 @@ export default class PerExp extends Component {
             fetch(url2)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url2);
                 });
         }
         let url2 = `http://139.155.44.190:3005/users/list`;
@@ -764,7 +756,6 @@ export default class PerExp extends Component {
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url1);
                 });
         }
         else if (this.state.list[idx].collect == true) {
@@ -778,7 +769,6 @@ export default class PerExp extends Component {
             fetch(url2)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url2);
                 });
         }
         let url2 = `http://139.155.44.190:3005/users/list`;
@@ -829,31 +819,31 @@ export default class PerExp extends Component {
                 })
             })
     }
-    change = (e) => {
-        this.setState({
-            search: e
-        })
-    }
-    search = () => {
-        let url = `http://139.155.44.190:3005/experience/select?content=${this.state.search}`;
-        fetch(url)
-            .then((res) => res.json())
-            .then((res) => {
-                if (res.false) { }
-                else {
-                    var list = [];
-                    for (var i = 0; i < res.length; i++) {
-                        for (var j = 0; j < this.state.all.length; j++) {
-                            if (res[i].id == this.state.all[j].id) {
-                                list.push(this.state.all[j]);
-                                break;
-                            }
-                        }
-                    }
-                    this.setState({ list: list });
-                }
-            });
-    }
+    // change = (e) => {
+    //     this.setState({
+    //         search: e
+    //     })
+    // }
+    // search = () => {
+    //     let url = `http://139.155.44.190:3005/experience/select?content=${this.state.search}`;
+    //     fetch(url)
+    //         .then((res) => res.json())
+    //         .then((res) => {
+    //             if (res.false) { }
+    //             else {
+    //                 var list = [];
+    //                 for (var i = 0; i < res.length; i++) {
+    //                     for (var j = 0; j < this.state.all.length; j++) {
+    //                         if (res[i].id == this.state.all[j].id) {
+    //                             list.push(this.state.all[j]);
+    //                             break;
+    //                         }
+    //                     }
+    //                 }
+    //                 this.setState({ list: list });
+    //             }
+    //         });
+    // }
     back = () => {
         Actions.pop();
         var param = 1;
@@ -885,55 +875,9 @@ export default class PerExp extends Component {
         this.drawer.closeDrawer();
     }
     render() {
-        var navigationView = (
-            <View style={{ backgroundColor: '#fff', marginBottom: 10 * s }}>
-                <FlatList
-                    data={[
-                        { key: '全部' },
-                        { key: '马克思主义学院' },
-                        { key: '历史文化学院' },
-                        { key: '美术与设计学院' },
-                        { key: '商学院' },
-                        { key: '法政与公共管理学院' },
-                        { key: '化学与材料科学学院' },
-                        { key: '体育学院' },
-                        { key: '国际文化交流学院' },
-                        { key: '初等教育系' },
-                        { key: '软件学院' },
-                        { key: '教育学院' },
-                        { key: '外国语学院' },
-                        { key: '新闻传播学院' },
-                        { key: '数学与信息科学学院（田家炳教育书院）' },
-                        { key: '生命科学学院' },
-                        { key: '计算机与网络空间安全学院、计算机教学部' },
-                        { key: '教师教育学院' },
-                        { key: '大学外语教学部' },
-                        { key: '汇华学院' },
-                        { key: '文学院' },
-                        { key: '音乐学院' },
-                        { key: '物理学院' },
-                        { key: '资源与环境科学学院' },
-                        { key: '职业技术学院、中燃工学院' },
-                        { key: '学前教育学院（旅游系）' },
-                        { key: '公共体育教学部' }
-                    ]}
-                    horizontal={false}
-                    numColumns={1}
-                    // columnWrapperStyle={styles.columnStyle}
-                    renderItem={({ item }) =>
-                        <TouchableOpacity style={{ backgroundColor: '#eee', margin: 5 * s, height: 20 * s }} onPress={this.classify.bind(this, (item.key))}>
-                            <Text style={{
-                                // color: 'white',
-                                backgroundColor: 'blur'
-                            }}>{item.key}</Text>
-                        </TouchableOpacity>
-                    }
-                />
-            </View >
-        );
         return (
             <SafeAreaView style={{ flex: 1 }} >
-                <View style={{
+                {/* <View style={{
                     width: '100%',
                     height: 70 * s,
                     flexDirection: 'row',
@@ -971,149 +915,96 @@ export default class PerExp extends Component {
                         />
                     </View>
 
-                </View>
-                <DrawerLayoutAndroid
-                    ref={(drawer) => {
-                        this.drawer = drawer;
-                    }}
-                    drawerWidth={350 * s}
-                    drawerPosition={'left'}
-                    renderNavigationView={() => navigationView}>
-                    <View style={{ width: 50 * s, height: 25 * s, borderRadius: 10 * s, backgroundColor: '#37376F', alignItems: 'center', justifyContent: 'center', marginLeft: 10 * s }}>
-                        <TouchableOpacity
-                            // underlayColor="rgb(210, 230, 255)"
-                            activeOpacity={0.5}
-                            // style={styles.touchable}
-                            onPress={() => this.onPenLeftDrawer()}
-                            style={{}}
-                        //onPress={this.onPenLeftDrawer.bind(this)}
-                        >
-                            <Text style={{ fontSize: 16, color: '#fff' }}>分类</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <ScrollView style={{ flex: 1 }}>
-                        <View>
-                            {
-                                this.state.list.map((item, idx) => (
-                                    <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 20 * s }}>
-                                        <View style={{
-                                            flexDirection: 'row',
-                                            height: 80 * s,
-                                            alignItems: 'center'
-                                        }}>
-
-                                            <Image style={{
-                                                marginLeft: 20 * s,
-                                                height: 50 * s,
-                                                width: 50 * s,
-                                                borderRadius: 25 * s,
-                                                backgroundColor: 'yellow'
-                                            }} source={{ uri: item.pic }} />
-                                            <Image style={{
-                                                height: 70 * s,
-                                                width: 70 * s,
-                                                borderRadius: 35 * s,
-                                                // backgroundColor:'green',
-                                                position: 'absolute',
-                                                top: 5,
-                                                left: 10
-                                            }}
-                                                source={{ uri: item.head }} />
-                                            <View style={{ marginLeft: 30 * s }}>
-                                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                                    <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
-                                                    <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: 'red' }}>Lv.{item.level}</Text>
-                                                </View>
-                                                <Text>{item.time}</Text>
-                                            </View>
-                                        </View>
-                                        <View style={{
-                                            marginLeft: 30 * s,
-                                            marginRight: 30 * s,
-                                            marginTop: 10 * s,
-                                            marginBottom: 20 * s
-                                        }}
-                                        >
-                                            <Text style={{ fontSize: 18 * s }}>{item.content}</Text>
-                                        </View>
-                                        <View style={{ flexDirection: 'row', height: 40 * s, alignItems: 'center', justifyContent: 'space-evenly', borderTopWidth: 1, borderTopColor: "#EFEFF4" }}>
-                                            <View style={{ alignItems: 'center', flexDirection: 'row' }}>
-                                                <Icon name="star" onPress={this.collect.bind(this, (idx))} style={item.collect ? { color: 'yellow', fontSize: 30 * s } : { fontSize: 30 * s }}></Icon>
-                                                <Text>{item.colNum}</Text>
-                                            </View>
-                                            <View style={{ alignItems: 'center', flexDirection: 'row' }}>
-                                                <Icon name="heart" onPress={this.like.bind(this, (idx))} style={item.like ? { color: 'red', fontSize: 30 * s } : { fontSize: 30 * s }}></Icon>
-                                                <Text>{item.likeNum}</Text>
-                                            </View>
-                                        </View>
-                                        {
-                                            this.state.username == item.name
-                                                ? <TouchableOpacity style={{
-                                                    width: 30 * s,
-                                                    height: 30 * s,
-                                                    borderRadius: 15 * s,
-                                                    flexDirection: 'row',
-                                                    justifyContent: 'center',
-                                                    alignItems: 'center',
-                                                    // backgroundColor: '#37376F',
-                                                    position: 'absolute',
-                                                    top: 5,
-                                                    right: 5
-                                                }}
-                                                    onPress={this.delete.bind(this, (idx))}
-                                                >
-                                                    <Text style={{ color: '#e8e8e8', fontSize: 30 * s }}>×</Text>
-                                                </TouchableOpacity>
-                                                : null
-                                        }
-                                    </View>
-                                ))
-                            }
-                        </View>
-
-                    </ScrollView>
-
+                </View> */}
+                <View>
                     {
-                        this.state.isLoading
-                            ? <View
-                                style={{
-                                    position: 'absolute',
-                                    top: 100 * s,
-                                    width: '100%'
-                                }}>
+                        this.state.list.map((item, idx) => (
+                            <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 20 * s }}>
                                 <View style={{
-                                    alignItems: 'center',
                                     flexDirection: 'row',
-                                    justifyContent: 'center'
+                                    height: 80 * s,
+                                    alignItems: 'center'
                                 }}>
-                                    <Text style={{ fontSize: 20, marginTop: 10 }}>正在获取数据...</Text>
+
+                                    <Image style={{
+                                        marginLeft: 20 * s,
+                                        height: 50 * s,
+                                        width: 50 * s,
+                                        borderRadius: 25 * s,
+                                        backgroundColor: 'yellow'
+                                    }} source={{ uri: item.pic }} />
+
+                                    <View style={{ marginLeft: 30 * s }}>
+                                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                            <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
+                                            {/* <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: 'red' }}>Lv.{item.level}</Text> */}
+                                            <Image style={{ height: 20 * s, width: 35 * s, marginLeft: 10 * s }} source={Img['png' + item.level]} />
+
+                                        </View>
+                                        <Text>{item.time}</Text>
+                                    </View>
                                 </View>
+                                <View style={{
+                                    marginLeft: 30 * s,
+                                    marginRight: 30 * s,
+                                    marginTop: 10 * s,
+                                    marginBottom: 20 * s
+                                }}
+                                >
+                                    <Text style={{ fontSize: 18 * s }}>{item.content}</Text>
+                                </View>
+                                <View style={{ flexDirection: 'row', height: 40 * s, alignItems: 'center', justifyContent: 'space-evenly', borderTopWidth: 1, borderTopColor: "#EFEFF4" }}>
+                                    <View style={{ alignItems: 'center', flexDirection: 'row' }}>
+                                        <Icon name="star" onPress={this.collect.bind(this, (idx))} style={item.collect ? { color: 'yellow', fontSize: 30 * s } : { fontSize: 30 * s }}></Icon>
+                                        <Text>{item.colNum}</Text>
+                                    </View>
+                                    <View style={{ alignItems: 'center', flexDirection: 'row' }}>
+                                        <Icon name="heart" onPress={this.like.bind(this, (idx))} style={item.like ? { color: 'red', fontSize: 30 * s } : { fontSize: 30 * s }}></Icon>
+                                        <Text>{item.likeNum}</Text>
+                                    </View>
+                                </View>
+                                {
+                                    this.state.username == item.name
+                                        ? <TouchableOpacity style={{
+                                            width: 30 * s,
+                                            height: 30 * s,
+                                            borderRadius: 15 * s,
+                                            flexDirection: 'row',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            // backgroundColor: '#37376F',
+                                            position: 'absolute',
+                                            top: 5,
+                                            right: 5
+                                        }}
+                                            onPress={this.delete.bind(this, (idx))}
+                                        >
+                                            <Text style={{ color: '#e8e8e8', fontSize: 30 * s }}>×</Text>
+                                        </TouchableOpacity>
+                                        : null
+                                }
                             </View>
-                            : null
+                        ))
                     }
-                    <View style={{
-                        width: '100%',
-                        marginTop: 10 * s,
-                        flexDirection: 'row',
-                        justifyContent: 'center',
-                        alignItems: 'center'
-                    }}>
-                        <TouchableOpacity style={{
-                            width: 300 * s,
-                            height: 40 * s,
-                            borderRadius: 15 * s,
-                            flexDirection: 'row',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            backgroundColor: '#37376F',
-                            marginBottom: 10 * s
-                        }}
-                            onPress={() => this.back()}
-                        >
-                            <Text style={{ color: '#fff', fontSize: 20 * s }}>返回</Text>
-                        </TouchableOpacity>
-                    </View>
-                </DrawerLayoutAndroid>
+                </View>
+                {
+                    this.state.isLoading
+                        ? <View
+                            style={{
+                                position: 'absolute',
+                                top: 100 * s,
+                                width: '100%'
+                            }}>
+                            <View style={{
+                                alignItems: 'center',
+                                flexDirection: 'row',
+                                justifyContent: 'center'
+                            }}>
+                                <Text style={{ fontSize: 20, marginTop: 10 }}>正在获取数据...</Text>
+                            </View>
+                        </View>
+                        : null
+                }
             </SafeAreaView >
 
         )
