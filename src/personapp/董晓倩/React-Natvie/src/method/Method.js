@@ -29,9 +29,9 @@ export default class Method extends Component {
     render() {
         return (
             <View>
-                <View style={styles.header}>
+                {/* <View style={styles.header}>
                     <Text style={{ color: '#fff', lineHeight: 30 * s, }}>校园新生通</Text>
-                </View>
+                </View> */}
                 <ScrollView style={{marginBottom:30}}>
                     {/* 顶部 */}
 

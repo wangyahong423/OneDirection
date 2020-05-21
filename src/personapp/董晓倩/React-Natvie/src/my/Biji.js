@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter } from 'react-native';
-import Icon from 'react-native-vector-icons/EvilIcons';
-import { Actions } from 'react-native-router-flux';
+import {
+    Text,
+    View,
+    ScrollView,
+    Dimensions,
+    SafeAreaView,
+    Image,
+    AsyncStorage,
+    DeviceEventEmitter
+} from 'react-native';
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
-// import axios from 'axios';
-export default class Xuexidongtai extends Component {
+
+export default class Biji extends Component {
     constructor() {
         super();
         this.state = {
@@ -26,17 +33,16 @@ export default class Xuexidongtai extends Component {
                     username: name.username
                 })
             });
-            let url = `http://139.155.44.190:3005/community/list`;
-            let url2 = `http://139.155.44.190:3005/communitylike/list`;
-            let url3 = `http://139.155.44.190:3005/users/getName`;
-            let url4 = `http://139.155.44.190:3005/users/list`;
+        let url = `http://139.155.44.190:3005/notes/list`;
+        let url2 = `http://139.155.44.190:3005/learnlike/list`;
+        let url3 = `http://139.155.44.190:3005/users/getName`;
+        let url4 = `http://139.155.44.190:3005/users/list`;
 
         fetch(url2)
-        .then(res => res.json())
-
+            .then(res => res.json())
             .then((res) => {
                 this.setState({
-                    list: res.data
+                    list: res
                 })
                 var brr = [];
                 this.state.list.map((item) => {
@@ -72,22 +78,20 @@ export default class Xuexidongtai extends Component {
 
 
         fetch(url4)
-        .then(res => res.json())
-        
-        .then(res => {
-            res.data.map(item => {
-                if (item.name == this.state.username) {
-                    this.setState({ pic: 'http://139.155.44.190:3005' + item.pic })
-                }
+            .then(res => res.json())
+            .then(res => {
+                res.map(item => {
+                    if (item.name == this.state.username) {
+                        this.setState({ pic: 'http://139.155.44.190:3005' + item.pic })
+                    }
+                })
             })
-        })
 
         fetch(url)
-        .then(res => res.json())
-
+            .then(res => res.json())
             .then((res) => {
                 var arr = [];
-                res.data.map((item) => {
+                res.map((item) => {
                     if (item.name == this.state.username) {
                         arr.push(item)
                     }
@@ -102,37 +106,114 @@ export default class Xuexidongtai extends Component {
                 arr: item.id
             })
         })
+
+        var self = this;
+        this.listener = DeviceEventEmitter.addListener('freshthree', function (param) {
+            let url = `http://139.155.44.190:3005/notes/list`;
+            let url2 = `http://139.155.44.190:3005/learnlike/list`;
+            let url3 = `http://139.155.44.190:3005/users/getName`;
+            let url4 = `http://139.155.44.190:3005/users/list`;
+
+            fetch(url2)
+                .then(res => res.json())
+                .then((res) => {
+                    self.setState({
+                        list: res
+                    })
+                    var brr = [];
+                    self.state.list.map((item) => {
+                        if (item.name == self.state.username) {
+                            brr.push(item);
+                        }
+                        self.setState({
+                            list: brr
+                        })
+                    })
+                    var arr = [];
+                    var a = 0;
+                    for (var i = 0; i < self.state.data.length; i++) {
+                        for (var j = 0; j < self.state.list.length; j++) {
+                            if (self.state.data[i].id == self.state.list[j].lid) {
+                                a = 1;
+                                break;
+                            } else {
+                                a = 0;
+                            }
+                        }
+                        if (a == 1) {
+                            arr.push('red');
+                            a = 0;
+                        } else {
+                            arr.push('black');
+                        }
+                    }
+                    self.setState({
+                        color: arr
+                    })
+                })
+
+
+            fetch(url4)
+                .then(res => res.json())
+                .then(res => {
+                    res.map(item => {
+                        if (item.name == self.state.username) {
+                            self.setState({ pic: 'http://139.155.44.190:3005' + item.pic })
+                        }
+                    })
+                })
+
+            fetch(url)
+                .then(res => res.json())
+                .then((res) => {
+                    var arr = [];
+                    res.map((item) => {
+                        if (item.name == self.state.username) {
+                            arr.push(item)
+                        }
+                    })
+                    self.setState({
+                        data: arr
+                    })
+                })
+
+            self.state.data.map((item) => {
+                self.setState({
+                    arr: item.id
+                })
+            })
+        })
+
     }
-    
+
 
     clickSend = (id) => {
-        let url = `http://139.155.44.190:3005/learn/select?content=${this.state.search}`;
+        let url = `http://139.155.44.190:3005/notes/select?content=${this.state.search}`;
         fetch(url)
-        .then(res => res.json())
+            .then(res => res.json())
 
             .then((res) => {
-                if (res.data.false) {
+                if (res.false) {
                 } else {
-                    for (var i = 0; i < res.data.length; i++) {
-                        res.data[i].pic = "http://139.155.44.190:3005/" + res.data[i].pic;
+                    for (var i = 0; i < res.length; i++) {
+                        res[i].pic = "http://139.155.44.190:3005/" + res[i].pic;
                     }
                     this.setState({
-                        data: res.data
+                        data: res
                     })
                 }
             })
     };
     delTie = (id) => {
 
-        let url9 = `http://139.155.44.190:3005/learn/deleteLearn?id=${id}`
+        let url9 = `http://139.155.44.190:3005/notes/deleteNote?id=${id}`
         fetch(url9)
-        .then(res => res.json())
+            .then(res => res.json())
 
             .then((res) => {
-                window.location.href = "http://localhost:3000/tiezi"
-                window.location.href = "http://localhost:3000/xuexi"
-                window.location.reload();
             })
+        var param = 1;
+        DeviceEventEmitter.emit('freshthree', param);
     }
     render() {
         return (
@@ -166,7 +247,11 @@ export default class Xuexidongtai extends Component {
                                     marginBottom: 20 * s
                                 }}
                                 >
+                                    <Text style={{ fontSize: 18 * s }}>{item.title}</Text>
                                     <Text style={{ fontSize: 18 * s }}>{item.content}</Text>
+                                </View>
+                                <View style={{ position: 'absolute', top: 10, left: 430 }}>
+                                    <Text style={{ color: 'red', fontSize: 20 }} onPress={this.delTie.bind(this, (item.id))}>×</Text>
                                 </View>
                             </View>
                         )}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, FlatList, ScrollView, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert, DrawerLayoutAndroid } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import { Actions } from 'react-native-router-flux';
+import Img from '../../community/Img'
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
 export default class Experience extends Component {
@@ -71,6 +72,7 @@ export default class Experience extends Component {
                                                     item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
                                                     item.college = this.state.pic[i].college;
                                                     item.level = this.state.pic[i].level;
+                                                    item.head = 'http://139.155.44.190:3005/head/' + this.state.pic[i].head;
                                                     break;
                                                 }
                                             }
@@ -158,6 +160,7 @@ export default class Experience extends Component {
                                                         item.pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
                                                         item.college = self.state.pic[i].college;
                                                         item.level = self.state.pic[i].level;
+                                                        item.head = 'http://139.155.44.190:3005/head/' + self.state.pic[i].head;
                                                         break;
                                                     }
                                                 }
@@ -247,7 +250,7 @@ export default class Experience extends Component {
 
     }
     details = (idx) => {
-        var value = { name: this.state.list[idx].name, time: this.state.list[idx].time, content: this.state.list[idx].content, pic: this.state.list[idx].pic, level: this.state.list[idx].level };
+        var value = { name: this.state.list[idx].name, time: this.state.list[idx].time, content: this.state.list[idx].content, pic: this.state.list[idx].pic, level: this.state.list[idx].level,head: this.state.list[idx].head };
         AsyncStorage.setItem('EPage', JSON.stringify(value));
         Actions.expdetails();
     }
@@ -454,6 +457,8 @@ export default class Experience extends Component {
                                                 for (var i = 0; i < this.state.pic.length; i++) {
                                                     if (item.name == this.state.pic[i].name) {
                                                         item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
+                                                        item.head = 'http://139.155.44.190:3005/head/' + this.state.pic[i].head;
+
                                                         break;
                                                     }
                                                 }
@@ -527,7 +532,7 @@ export default class Experience extends Component {
     }
 
     person = (idx) => {
-        var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college };
+        var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college,head: this.state.list[idx].head };
         AsyncStorage.setItem('details', JSON.stringify(value));
         Actions.person();
     }
@@ -648,19 +653,53 @@ export default class Experience extends Component {
                                             height: 80 * s,
                                             alignItems: 'center'
                                         }}>
-                                            <TouchableOpacity onPress={this.person.bind(this, (idx))}>
-                                                <Image style={{
-                                                    marginLeft: 20 * s,
-                                                    height: 50 * s,
-                                                    width: 50 * s,
-                                                    borderRadius: 25 * s,
-                                                    backgroundColor: 'yellow'
-                                                }} source={{ uri: item.pic }} />
-                                            </TouchableOpacity>
+                                            {
+                                                this.state.username == item.name
+                                                    ?
+                                                    <View>
+                                                        <Image style={{
+                                                            marginLeft: 20 * s,
+                                                            height: 50 * s,
+                                                            width: 50 * s,
+                                                            borderRadius: 25 * s,
+                                                            backgroundColor: 'yellow'
+                                                        }} source={{ uri: item.pic }} />
+                                                        <Image style={{
+                                                            height: 70 * s,
+                                                            width: 70 * s,
+                                                            borderRadius: 35 * s,
+                                                            // backgroundColor:'green',
+                                                            position: 'absolute',
+                                                            top: -10,
+                                                            right: -10
+                                                        }}
+                                                            source={{ uri: item.head }} />
+                                                    </View>
+                                                    : <TouchableOpacity onPress={this.person.bind(this, (idx))}>
+                                                        <Image style={{
+                                                            marginLeft: 20 * s,
+                                                            height: 50 * s,
+                                                            width: 50 * s,
+                                                            borderRadius: 25 * s,
+                                                            backgroundColor: 'yellow'
+                                                        }} source={{ uri: item.pic }} />
+                                                        <Image style={{
+                                                            height: 70 * s,
+                                                            width: 70 * s,
+                                                            borderRadius: 35 * s,
+                                                            // backgroundColor:'green',
+                                                            position: 'absolute',
+                                                            top: -10,
+                                                            right: -10
+                                                        }}
+                                                            source={{ uri: item.head }} />
+                                                    </TouchableOpacity>
+                                            }
                                             <View style={{ marginLeft: 30 * s }}>
                                                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                                     <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
-                                                    <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: 'red' }}>Lv.{item.level}</Text>
+                                                    <Image style={{ height: 21 * s, width: 36 * s, marginLeft: 10 * s }} source={Img['png' + item.level]} />
+                                                    {/* <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: 'red' }}>Lv.{item.level}</Text> */}
                                                 </View>
                                                 <Text>{item.time}</Text>
                                             </View>

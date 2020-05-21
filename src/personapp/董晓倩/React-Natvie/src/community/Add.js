@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Text, View, ScrollView, TextInput, AsyncStorage, Dimensions, SafeAreaView, TouchableOpacity, Alert, DeviceEventEmitter } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
-export default class AddLearn extends Component {
+export default class Add extends Component {
     constructor() {
         super();
         this.state = {
@@ -27,15 +28,6 @@ export default class AddLearn extends Component {
     con = (e) => {
         this.setState({ content: e });
         var length = e.length;
-        // var length = 0;
-        // for (var i = 0; i < e.length; i++) {
-        //     if (32 <= e[i].charCodeAt() && e[i].charCodeAt() <= 126) {
-        //         length++;
-        //     }
-        //     else {
-        //         length = length + 2;
-        //     }
-        // }
         this.setState({ length: length });
         if (length > 500) {
             Alert.alert("文本内容超过上限！");
@@ -146,22 +138,51 @@ export default class AddLearn extends Component {
         var param = { "content": this.state.content, "name": this.state.username, "time": time };
         DeviceEventEmitter.emit('refresh', param);
     }
+    back = () => {
+        Actions.pop();
+        var param = 1;
+        DeviceEventEmitter.emit('ELrefresh', param);
+        DeviceEventEmitter.emit('Erefresh', param);
+        DeviceEventEmitter.emit('refresh', param);
+    }
     render() {
         return (
-            <SafeAreaView style={{ flex: 1 }}>
+            <SafeAreaView style={{ flex: 1, backgroundColor: "#F1F2F4" }}>
                 <View style={{
                     height: 300 * s,
-                    borderBottomColor: '#37376F',
+                    borderBottomColor: '#F6F6F6',
                     borderBottomWidth: 1 * s
                 }}
                 >
-                    <ScrollView>
+                    <View style={{ width: width, height: 55 * s, backgroundColor: "#37376F", flexDirection: "row", alignItems: "center" }}>
+                        <TouchableOpacity onPress={() => this.back()}>
+                            <Icon style={{ color: "#fff", fontSize: 40 * s }} name="chevron-left" />
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={{
+                                width: 80 * s,
+                                height: 40 * s,
+                                borderRadius: 20 * s,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                marginRight: 5 * s,
+                                position: 'absolute',
+                                right: 0,
+                                marginTop: 20 * s
+                            }}
+                            onPress={this.add}
+                        >
+                            <Text style={{ color: '#fff', fontSize: 18 * s }}>发布</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <ScrollView style={{backgroundColor:"#fff"}}>
                         <TextInput
                             placeholder="请输入文本内容，不超过500字"
                             onChangeText={this.con}
                             multiline={true}
                             autoFocus={true}
                             style={{ fontSize: 20 * s }}
+                            placeholderTextColor="#AEAFAB"
                         />
                     </ScrollView>
                     <View style={{
@@ -174,7 +195,7 @@ export default class AddLearn extends Component {
                         <Text style={{ fontSize: 20 * s }}>/500</Text>
                     </View>
                 </View>
-                <View>
+                {/* <View>
                     <TouchableOpacity
                         style={{
                             width: 80 * s,
@@ -192,7 +213,7 @@ export default class AddLearn extends Component {
                     >
                         <Text style={{ color: '#fff', fontSize: 17 * s }}>发布</Text>
                     </TouchableOpacity>
-                </View>
+                </View> */}
 
             </SafeAreaView>
         )
