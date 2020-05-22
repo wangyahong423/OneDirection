@@ -208,6 +208,9 @@ export default class Person extends Component {
         Actions.login();
     }
     tiezi = () => {
+        var value = { id: this.state.new};
+        AsyncStorage.setItem('new', JSON.stringify(value));
+        console.log(value)
         for(var i = 0;i<this.state.new.length;i++){
             var url11 = `http://139.155.44.190:3005/learn/change?newl=${false}&lid=${this.state.new[i]}`;
             console.log(url11);
@@ -220,8 +223,6 @@ export default class Person extends Component {
                 });
             })
         }
-        
-        
         Actions.tiezi();
     }
     render() {
@@ -235,12 +236,12 @@ export default class Person extends Component {
                         <TouchableOpacity style={{ width: 100, height: 100, position: "absolute", top: -50, left: 30 }} onPress={() => Actions.touxiang()}>
                             <Image source={{ uri: this.state.pic }} style={{ width: 100, height: 100, borderRadius: 50 }} />
                             <Image style={{
-                                height: 134 * s,
-                                width: 134 * s,
-                                borderRadius: 67 * s,
+                                height: 136 * s,
+                                width: 136 * s,
+                                borderRadius: 68 * s,
                                 // backgroundColor:'green',
                                 position: 'absolute',
-                                top: -15,
+                                top: -18,
                                 right: -15
                             }}
                                 source={{ uri: this.state.head }} />
