@@ -67,7 +67,7 @@ export default class CollegeMajor extends Component {
     render() {
         return (
             <ImageBackground
-                source={require('../../../assets/gonglve/20151221111650209.jpg')}
+                source={require('../../../assets/gonglve/20151221111650209.png')}
                 style={{ width: '100%', height: '100%' }}
             >
                 <View style={styles.box}>

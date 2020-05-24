@@ -8,12 +8,12 @@ export default class Dengyingchao extends Component {
     render() {
         return (
             <ImageBackground
-                source={require('../../../assets/gonglve/schoolmatebg.jpg')}
+                source={require('../../../assets/gonglve/schoolmatebg.png')}
                 style={{ width: '100%', height: '100%' }}
                 resizeMode='stretch'
             >
                 <View style={styles.box}>
-                    <Image source={require('../../../assets/gonglve/邓颖超.jpg')} style={styles.img} />
+                    <Image source={require('../../../assets/gonglve/邓颖超.png')} style={styles.img} />
                     <Text style={styles.name}>【邓/颖/超】</Text>
                     <Image source={require('../../../assets/gonglve/line.png')} style={{ width: '90%' }} resizeMode='stretch' />
                     <Text style={styles.introduction}>

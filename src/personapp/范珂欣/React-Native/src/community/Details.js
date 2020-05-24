@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, ScrollView, SafeAreaView, TextInput, Dimensions, ImageBackground, Image, TouchableOpacity, AsyncStorage, Alert, DeviceEventEmitter } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Actions } from 'react-native-router-flux';
-import Img from './Img'
-
+import Img from "./Img"
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
 export default class Details extends Component {
@@ -16,7 +15,8 @@ export default class Details extends Component {
             list: [],
             pic: [],
             lvlist: [],
-            isLoading: true
+            isLoading: true,
+            height:0
         };
         this.getData();
     }
@@ -35,7 +35,6 @@ export default class Details extends Component {
                 this.setState({
                     page: JSON.parse(value).page
                 });
-
                 this.setState({ isLoading: true })
                 let url1 = `http://139.155.44.190:3005/learntalk/list`;
                 let url2 = `http://139.155.44.190:3005/users/list`;
@@ -49,19 +48,16 @@ export default class Details extends Component {
                             .then((res) => res.json())
                             .then((res) => {
                                 var arr = [];
-                                console.log("aaa:" + this.state.page.head)
                                 res.forEach(item => {
                                     if (item.lid == this.state.page.id) {
                                         for (var i = 0; i < this.state.pic.length; i++) {
                                             if (item.name == this.state.pic[i].name) {
                                                 item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
-                                                item.head = 'http://139.155.44.190:3005/head/' + this.state.pic[i].head;
                                                 item.level = this.state.pic[i].level;
                                                 break;
                                             }
                                         }
                                         arr.push(item);
-
                                     }
 
                                 });
@@ -84,7 +80,6 @@ export default class Details extends Component {
                                             for (var i = 0; i < self.state.pic.length; i++) {
                                                 if (item.name == self.state.pic[i].name) {
                                                     item.pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
-                                                    item.head = 'http://139.155.44.190:3005/head/' + self.state.pic[i].head;
                                                     item.level = self.state.pic[i].level;
                                                     break;
                                                 }
@@ -114,7 +109,6 @@ export default class Details extends Component {
             var time = year + '年' + month + '月' + day + '日' + ' ' + hour + ':' + minute;
             console.log(time);
             let url = `http://139.155.44.190:3005/learntalk/add?lid=${this.state.page.id}&name=${this.state.username}&content=${this.state.comment}&time=${time}`;
-            let url11 = `http://139.155.44.190:3005/learn/change?newl=${true}&lid=${this.state.page.id}`;
             fetch(url)
                 .then((res) => res.json())
                 .then((res) => {
@@ -122,11 +116,6 @@ export default class Details extends Component {
                     } else {
                         Alert.alert(res.msg);
                     }
-                    fetch(url11)
-                        .then((res) => res.json())
-                        .then((res) => {
-                            console.log(res);
-                        })
                 })
             var param = { "content": this.state.comment, "name": this.state.username, "time": time };
             DeviceEventEmitter.emit('pinglun', param);
@@ -209,11 +198,6 @@ export default class Details extends Component {
     opntion2 = () => {
 
     }
-    // backt = () => {
-    //     Actions.pop;
-    //     var param = 1;
-    //     DeviceEventEmitter.emit('refresh', param);
-    // }
     componentWillUnmount() {
         this.listener.remove();
     }
@@ -222,20 +206,14 @@ export default class Details extends Component {
         AsyncStorage.setItem('details', JSON.stringify(value));
         Actions.person();
     }
-    back = () => {
-        Actions.pop();
-        var param = 1;
-        DeviceEventEmitter.emit('ELrefresh', param);
-        DeviceEventEmitter.emit('refresh', param);
-    }
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
-                <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 5 * s }}>
+                <View style={{ backgroundColor: '#fff', width: '100%',marginBottom:10*s}}>
                     <View style={{
                         flexDirection: 'row',
                         height: 80 * s,
-                        alignItems: 'center'
+                        alignItems: 'center',
                     }}>
                         <Image style={{
                             marginLeft: 20 * s,
@@ -243,21 +221,10 @@ export default class Details extends Component {
                             width: 50 * s,
                             borderRadius: 25 * s
                         }} source={{ uri: this.state.page.pic }} />
-                        <Image style={{
-                            height: 70 * s,
-                            width: 70 * s,
-                            borderRadius: 35 * s,
-                            // backgroundColor:'green',
-                            position: 'absolute',
-                            top: 5,
-                            left: 10
-                        }}
-                            source={{ uri: this.state.page.head }} />
                         <View style={{ marginLeft: 30 * s }}>
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                 <Text style={{ fontSize: 18 * s, color: '#37376F' }}>{this.state.page.name}</Text>
-                                {/* <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: 'red' }}>Lv.{this.state.page.level}</Text> */}
-                                <Image style={{ height: 21 * s, width: 36 * s, marginLeft: 10 * s }} source={Img['png' + this.state.page.level]} />
+                                <Image style={{ height: 25 * s, width: 40 * s, marginLeft: 10 * s }} source={Img['png' + this.state.page.level]} />
                             </View>
                             <Text>{this.state.page.time}</Text>
                         </View>
@@ -265,7 +232,6 @@ export default class Details extends Component {
                     <View style={{
                         marginLeft: 30 * s,
                         marginRight: 30 * s,
-                        marginTop: 10 * s,
                         marginBottom: 20 * s
                     }}
                     >
@@ -274,31 +240,37 @@ export default class Details extends Component {
                 </View>
                 <View style={{
                     width: '100%',
-                    height: 70 * s,
+                    // height: 70 * s,
+                    height:Math.max(70*s,this.state.height),
                     flexDirection: 'row',
                     alignItems: 'center',
-                    justifyContent: 'space-evenly'
+                    justifyContent: 'space-evenly',
+                    marginBottom:5*s
                 }}>
                     <TextInput
                         style={{
-                            height: 30 * s,
-                            width: "75%",
+                            // height: 100 * s,
+                            height:Math.max(40*s,this.state.height),
+                            width: "80%",
                             padding: 0,
                             fontSize: 15 * s,
-                            borderRadius: 15 * s,
+                            borderRadius: 10 * s,
                             backgroundColor: '#fff',
-                            paddingLeft: 10 * s
+                            paddingLeft: 10 * s,
                         }}
                         clearButtonMode="while-editing"
-                        // autoFocus={true}
                         placeholderTextColor='#e0e0e0'
                         placeholder="填写评论"
                         onChangeText={this.change}
+                        multiline = {true}
+                        onContentSizeChange={(event) => {
+                            this.setState({height: event.nativeEvent.contentSize.height});
+                          }}
                     />
                     <TouchableOpacity style={{
-                        width: 55 * s,
-                        height: 30 * s,
-                        borderRadius: 15 * s,
+                        width: 60 * s,
+                        height: 35 * s,
+                        borderRadius: 10 * s,
                         flexDirection: 'row',
                         justifyContent: 'center',
                         alignItems: 'center',
@@ -309,19 +281,14 @@ export default class Details extends Component {
                         <Text style={{ color: 'white', fontSize: 15 * s }}>发送</Text>
                     </TouchableOpacity>
                 </View>
-                <View
-                    style={{
-                        borderBottomColor: '#000',
-                        borderBottomWidth: 1 * s
-                    }}
-                >
-                    <Text style={{ paddingLeft: 10 * s, fontSize: 20 * s }}>评论</Text>
+                <View>
+                    <Text style={{ paddingLeft: 10 * s, fontSize: 16 * s ,marginBottom:5*s}}>评论</Text>
                 </View>
                 <ScrollView style={{ flex: 1 }}>
                     <View>
                         {
                             this.state.list.map((item, idx) => (
-                                <View style={{ backgroundColor: '#fff', width: '100%', borderBottomWidth: 1 * s, borderBottomColor: '#808080' }}>
+                                <View style={{ backgroundColor: '#fff', width: '100%', borderBottomWidth: 1 * s, borderBottomColor: '#EEEEEE' }}>
                                     <View style={{
                                         flexDirection: 'row',
                                         alignItems: 'center'
@@ -334,24 +301,13 @@ export default class Details extends Component {
                                                 borderRadius: 25 * s,
                                                 backgroundColor: 'yellow'
                                             }} source={{ uri: item.pic }} />
-                                            <Image style={{
-                                                height: 70 * s,
-                                                width: 70 * s,
-                                                borderRadius: 35 * s,
-                                                // backgroundColor:'green',
-                                                position: 'absolute',
-                                                top: -10,
-                                                right: -10
-                                            }}
-                                                source={{ uri: item.head }} />
                                         </TouchableOpacity>
                                         <View style={{ marginLeft: 30 * s, marginRight: 60 * s }}>
                                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                                 <Text style={this.state.page.name == item.name ? { fontSize: 15 * s, color: 'red', marginTop: 5 * s } : { fontSize: 15 * s, color: '#37376F', marginTop: 5 * s }}>{item.name}</Text>
-                                                {/* <Text style={this.state.page.name == item.name ? { fontSize: 12 * s, marginLeft: 5 * s, color: 'red', marginTop: 5 * s } : { fontSize: 12 * s, marginLeft: 5 * s, color: '#37376F', marginTop: 5 * s }}>Lv.{item.level}</Text> */}
-                                                <Image style={{ height: 14 * s, width: 24 * s, marginLeft: 5 * s ,marginTop:3*s}} source={Img['png' + item.level]} />
+                                                <Image style={{ height: 20 * s, width: 35 * s, marginLeft: 10 * s ,marginTop:5*s}} source={Img['png' + item.level]} />
                                             </View>
-                                            <Text style={{ fontSize: 18 * s }}>{item.content}</Text>
+                                            <Text style={{ fontSize: 18 * s,marginRight:30*s }}>{item.content}</Text>
                                             <Text style={{ fontSize: 10 * s, color: '#808080', marginTop: 5 * s, marginBottom: 5 * s }}>{item.time}</Text>
                                         </View>
                                     </View>
@@ -391,28 +347,7 @@ export default class Details extends Component {
                             : null
                     }
                 </ScrollView>
-                <View style={{
-                    width: '100%',
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    marginTop: 10 * s
-                }}>
-                    <TouchableOpacity style={{
-                        width: 300 * s,
-                        height: 40 * s,
-                        borderRadius: 15 * s,
-                        flexDirection: 'row',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: '#37376F',
-                        marginBottom: 10 * s
-                    }}
-                        onPress={() => this.back()}
-                    >
-                        <Text style={{ color: '#fff', fontSize: 20 * s }}>返回</Text>
-                    </TouchableOpacity>
-                </View>
+
             </SafeAreaView >
         )
     }

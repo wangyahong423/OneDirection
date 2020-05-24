@@ -208,7 +208,7 @@ export default class NotesDetails extends Component {
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
-                <ImageBackground style={{ flex: 1, width: '100%', height: height }} source={require('../../../assets/share/notes.jpg')}>
+                <ImageBackground style={{ flex: 1, width: '100%', height: height }} source={require('../../../assets/share/notes.png')}>
                     <ScrollView style={{ width: '100%', height: "100%" }}>
                         <View style={{ flexDirection: "row" }}>
                             <Text style={{ marginLeft: 10 * s, marginTop: 10 * s }} onPress={() => Actions.pop()}>
