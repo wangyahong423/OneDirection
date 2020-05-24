@@ -10,7 +10,7 @@ router.get('/getName', (req, res) => {
 });
 
 router.get('/addUser', (req, res) => {
-  var pic = "/images/1.jpg";
+  var pic = "/images/1.png";
   var level = 1;
   var lvnum = 0;
   var name = req.query.name;
