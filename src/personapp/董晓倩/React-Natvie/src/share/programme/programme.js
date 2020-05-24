@@ -14,16 +14,16 @@ export default class programme extends Component {
                 {/* 轮播图 */}
                 <Swiper autoplay={true} autoplayDirection={true} autoplayTimeout='1.5' style={styles.wrapper} showsButtons={false}>
                     <View>
-                        <Image source={require('../../../assets/gonglve/kaoyan1.jpg')} style={{ height: 223, width: '100%' }} />
+                        <Image source={require('../../../assets/gonglve/kaoyan1.png')} style={{ height: 223, width: '100%' }} />
                     </View>
                     <View>
-                        <Image source={require('../../../assets/gonglve/kaoyan2.jpg')} style={{ height: 223, width: '100%' }} />
+                        <Image source={require('../../../assets/gonglve/kaoyan2.png')} style={{ height: 223, width: '100%' }} />
                     </View>
                     <View>
-                        <Image source={require('../../../assets/gonglve/kaoyan5.jpg')} style={{ height: 223, width: '100%' }} />
+                        <Image source={require('../../../assets/gonglve/kaoyan5.png')} style={{ height: 223, width: '100%' }} />
                     </View>
                     <View>
-                        <Image source={require('../../../assets/gonglve/kaoyan7.jpg')} style={{ height: 223, width: '100%' }} />
+                        <Image source={require('../../../assets/gonglve/kaoyan7.png')} style={{ height: 223, width: '100%' }} />
                     </View>
                 </Swiper>
                 <View style={{ justifyContent: 'center', alignItems: 'center' }}>

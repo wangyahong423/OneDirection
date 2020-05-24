@@ -14,16 +14,16 @@ export default class programme extends Component {
                 {/* 轮播图 */}
                 <Swiper autoplay={true} autoplayDirection={true} autoplayTimeout='2' style={styles.wrapper} showsButtons={false}>
                     <View>
-                        <Image source={require('../../../assets/gonglve/four1.jpg')} style={{ height: 223, width: '100%' }} />
+                        <Image source={require('../../../assets/gonglve/four1.png')} style={{ height: 223, width: '100%' }} />
                     </View>
                     <View>
-                        <Image source={require('../../../assets/gonglve/four2.jpg')} style={{ height: 223, width: '100%' }} />
+                        <Image source={require('../../../assets/gonglve/four2.png')} style={{ height: 223, width: '100%' }} />
                     </View>
                     <View>
-                        <Image source={require('../../../assets/gonglve/four3.jpg')} style={{ height: 223, width: '100%' }} />
+                        <Image source={require('../../../assets/gonglve/four3.png')} style={{ height: 223, width: '100%' }} />
                     </View>
                     <View>
-                        <Image source={require('../../../assets/gonglve/four4.jpg')} style={{ height: 223, width: '100%' }} />
+                        <Image source={require('../../../assets/gonglve/four4.png')} style={{ height: 223, width: '100%' }} />
                     </View>
                 </Swiper>
                 <View style={{ justifyContent: 'center', alignItems: 'center' }}>

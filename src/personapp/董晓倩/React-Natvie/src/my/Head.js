@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Image, AsyncStorage, SafeAreaView, Dimensions, ScrollView, TouchableOpacity, DeviceEventEmitter } from 'react-native';
+import { View, Text, Image, AsyncStorage, SafeAreaView, Dimensions, ScrollView, TouchableOpacity, DeviceEventEmitter, ImageView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
@@ -52,17 +52,21 @@ export default class Head extends Component {
                 // AsyncStorage.setItem('card', JSON.stringify(value));
 
                 Actions.pop();
+                var param = 1;
+
+                DeviceEventEmitter.emit('refresh', param);
+
             })
     }
     render() {
         return (
-            <SafeAreaView style={{ backgroundColor: '#fff',flex:1 }}>
-                <ScrollView  style={{ flex: 1 }}>
+            <SafeAreaView style={{ backgroundColor: '#fff', flex: 1 }}>
+                <ScrollView style={{ flex: 1 }}>
                     {
                         this.state.list.map((item, idx) => (
                             <TouchableOpacity onPress={this.selected.bind(this, (idx))} style={{ alignItems: 'center', flexDirection: 'row', justifyContent: 'space-evenly' }} >
                                 <Image
-                                    style={{ width: 100, height: 100,borderRadius: 50}}
+                                    style={{ width: 100, height: 100,borderRadius: 50,fontSize:50*s}}
                                     source={{ uri: item.path }}
                                 />
                                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>

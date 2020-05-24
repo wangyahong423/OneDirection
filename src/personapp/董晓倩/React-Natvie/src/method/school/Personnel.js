@@ -9,12 +9,12 @@ export default class Personnel extends Component {
         return (
             <View style={{ width: '100%' }}>
                 <TouchableOpacity onPress={() => { Actions.shiziduiwu() }} style={{ width: '100%',marginBottom:15*s, height: 65 * s, backgroundColor: '#fff', marginTop: 15*s, paddingLeft: 15 * s, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', borderTopWidth: 1, borderTopColor: 'rgb(230,230,230)' }}>
-                    <Image style={{ height: 50 * s, width: 50 * s,borderRadius:25*s }} source={require('../../../assets/gonglve/shiziduiwu.jpg')} />
+                    <Image style={{ height: 50 * s, width: 50 * s,borderRadius:25*s }} source={require('../../../assets/gonglve/shiziduiwu.png')} />
                     <Text style={{ marginLeft: 25 * s }}>师资队伍</Text>
                     <Icon style={{ marginLeft: 260 * s }} name='angle-right' size={18} color='#000' />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => { Actions.undergradute() }} style={{ width: '100%',marginBottom:15*s, height: 65 * s, backgroundColor: '#fff', paddingLeft: 15 * s, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', borderTopWidth: 1, borderTopColor: 'rgb(230,230,230)' }}>
-                    <Image style={{ height: 50 * s, width: 50 * s ,borderRadius:25*s}} source={require('../../../assets/gonglve/benkesheng.jpeg')} />
+                    <Image style={{ height: 50 * s, width: 50 * s ,borderRadius:25*s}} source={require('../../../assets/gonglve/benkesheng.png')} />
                     <Text style={{ marginLeft: 25 * s }}>本科生教育</Text>
                     <Icon style={{ marginLeft: 260 * s }} name='angle-right' size={18} color='#000' />
                 </TouchableOpacity>
@@ -24,17 +24,17 @@ export default class Personnel extends Component {
                     <Icon style={{ marginLeft: 260 * s }} name='angle-right' size={18} color='#000' />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => { Actions.continus() }} style={{ width: '100%',marginBottom:15*s, height: 65 * s, backgroundColor: '#fff', paddingLeft: 15 * s, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', borderTopWidth: 1, borderTopColor: 'rgb(230,230,230)' }}>
-                    <Image style={{ height: 50 * s, width: 50 * s ,borderRadius:25*s}} source={require('../../../assets/gonglve/jixujiaoyu.jpg')} />
+                    <Image style={{ height: 50 * s, width: 50 * s ,borderRadius:25*s}} source={require('../../../assets/gonglve/jixujiaoyu.png')} />
                     <Text style={{ marginLeft: 25 * s }}>继续教育</Text>
                     <Icon style={{ marginLeft: 260 * s }} name='angle-right' size={18} color='#000' />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => { Actions.overseas() }} style={{ width: '100%',marginBottom:15*s, height: 65 * s, backgroundColor: '#fff', paddingLeft: 15 * s, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', borderTopWidth: 1, borderTopColor: 'rgb(230,230,230)' }}>
-                    <Image style={{ height: 50 * s, width: 50 * s ,borderRadius:25*s}} source={require('../../../assets/gonglve/liuxuejiaoyu.jpg')} />
+                    <Image style={{ height: 50 * s, width: 50 * s ,borderRadius:25*s}} source={require('../../../assets/gonglve/liuxuejiaoyu.png')} />
                     <Text style={{ marginLeft: 25 * s }}>留学生教育</Text>
                     <Icon style={{ marginLeft: 260 * s }} name='angle-right' size={18} color='#000' />
                 </TouchableOpacity>
                 <TouchableOpacity  style={{ width: '100%', height: 65 * s, backgroundColor: '#fff', paddingLeft: 15 * s, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', borderTopWidth: 1, borderTopColor: 'rgb(230,230,230)' }}>
-                    <Image style={{ height: 50 * s, width: 50 * s ,borderRadius:25*s}} source={require('../../../assets/gonglve/zhongwaihezuo.jpg')} />
+                    <Image style={{ height: 50 * s, width: 50 * s ,borderRadius:25*s}} source={require('../../../assets/gonglve/zhongwaihezuo.png')} />
                     <Text style={{ marginLeft: 25 * s }}>中外合作办学</Text>
                     <Icon style={{ marginLeft: 260 * s }} name='angle-right' size={18} color='#000' />
                 </TouchableOpacity>

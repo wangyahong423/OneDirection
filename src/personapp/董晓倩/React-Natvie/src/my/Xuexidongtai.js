@@ -14,10 +14,19 @@ export default class Xuexidongtai extends Component {
             color: [],
             yonghu: [],
             pic: '',
-            username: ''
+            username: '',
+            head: '',
+            new: []
         };
     }
     componentDidMount() {
+        AsyncStorage.getItem('new')
+            .then((res) => {
+                this.setState({
+                    new: JSON.parse(res)
+                })
+                console.log(this.state.new.id);
+            });
         AsyncStorage.getItem('username')
             .then(res => {
                 let user = { username: res }
@@ -37,9 +46,19 @@ export default class Xuexidongtai extends Component {
                             if (item.name == this.state.username) {
                                 brr.push(item);
                             }
-                            this.setState({
-                                data: brr
-                            })
+                        })
+                        for (var i = 0; i < brr.length; i++) {
+                            for (var j = 0; j < this.state.new.id.length; j++) {
+                                brr[i].new = false;
+                                if (brr[i].id == this.state.new.id[j]) {
+                                    brr[i].new = true;
+                                    break;
+                                }
+                            }
+                        }
+                        console.log(brr)
+                        this.setState({
+                            data: brr
                         })
                     })
                 fetch(url1)
@@ -53,6 +72,7 @@ export default class Xuexidongtai extends Component {
                             if (item.name == this.state.username) {
                                 this.setState({
                                     pic: 'http://139.155.44.190:3005' + item.pic,
+                                    head: 'http://139.155.44.190:3005/head/' + item.head
                                 })
                             }
                         })
@@ -79,6 +99,15 @@ export default class Xuexidongtai extends Component {
                                 if (item.name == self.state.username) {
                                     brr.push(item);
                                 }
+                                for (var i = 0; i < brr.length; i++) {
+                                    brr[i].new = false;
+                                    for (var j = 0; j < self.state.new.length; j++) {
+                                        if (brr[i].id == self.state.length[j]) {
+                                            brr[i].new = true;
+                                            break;
+                                        }
+                                    }
+                                }
                                 self.setState({
                                     data: brr
                                 })
@@ -95,6 +124,7 @@ export default class Xuexidongtai extends Component {
                                 if (item.name == self.state.username) {
                                     self.setState({
                                         pic: 'http://139.155.44.190:3005' + item.pic,
+                                        head: 'http://139.155.44.190:3005/head/' + item.head
                                     })
                                 }
                             })
@@ -118,6 +148,12 @@ export default class Xuexidongtai extends Component {
 
     details = (idx) => {
         var value = { page: this.state.data[idx] };
+        console.log(value);
+        var arr = this.state.data;
+        arr[idx].new=false;
+        this.setState({
+            data:arr
+        })
         AsyncStorage.setItem('mPage', JSON.stringify(value));
         AsyncStorage.getItem('mPage')
             .then((value) => {
@@ -144,8 +180,27 @@ export default class Xuexidongtai extends Component {
                                         borderRadius: 25 * s,
                                         backgroundColor: 'yellow'
                                     }} source={{ uri: this.state.pic }} />
+                                    <Image style={{
+                                        height: 70 * s,
+                                        width: 70 * s,
+                                        borderRadius: 35 * s,
+                                        // backgroundColor:'green',
+                                        position: 'absolute',
+                                        top: 5,
+                                        left: 8
+                                    }}
+                                        source={{ uri: this.state.head }} />
                                     <View style={{ marginLeft: 30 * s }}>
-                                        <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
+                                        <View
+                                            style={{
+                                                flexDirection: 'row',
+                                                alignItems: 'center'
+                                            }}>
+                                            <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
+                                            <View style={item.new ?
+                                                { marginTop: 0, marginLeft: 10, width: 10, height: 10, borderRadius: 5, borderColor: '#000', backgroundColor: 'red' }
+                                                : { marginTop: 0, marginLeft: 10, width: 10, height: 10, borderRadius: 5, borderColor: '#000', backgroundColor: '#fff' }}></View>       
+                                            </View>
                                         <Text>{item.time}</Text>
                                     </View>
                                 </View>

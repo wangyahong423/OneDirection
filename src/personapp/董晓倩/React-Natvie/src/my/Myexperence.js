@@ -13,7 +13,8 @@ export default class Myexperence extends Component {
             color: [],
             yonghu: [],
             pic: '',
-            username: ''
+            username: '',
+            head: ''
         };
     }
     componentDidMount() {
@@ -28,7 +29,7 @@ export default class Myexperence extends Component {
         let url2 = `http://139.155.44.190:3005/experiencelike/list`;
         let url3 = `http://139.155.44.190:3005/users/getName`;
         let url4 = `http://139.155.44.190:3005/users/list`;
- 
+
         fetch(url2)
             .then(res => res.json())
             .then((res) => {
@@ -73,7 +74,10 @@ export default class Myexperence extends Component {
             .then(res => {
                 res.map(item => {
                     if (item.name == this.state.username) {
-                        this.setState({ pic: 'http://139.155.44.190:3005' + item.pic })
+                        this.setState({
+                            pic: 'http://139.155.44.190:3005' + item.pic,
+                            head: 'http://139.155.44.190:3005/head/' + item.head
+                        })
                     }
                 })
             })
@@ -149,7 +153,10 @@ export default class Myexperence extends Component {
                 .then(res => {
                     res.map(item => {
                         if (item.name == self.state.username) {
-                            self.setState({ pic: 'http://139.155.44.190:3005' + item.pic })
+                            self.setState({
+                                pic: 'http://139.155.44.190:3005' + item.pic,
+                                head: 'http://139.155.44.190:3005/head/' + item.head
+                            })
                         }
                     })
                 })
@@ -226,6 +233,16 @@ export default class Myexperence extends Component {
                                         borderRadius: 25 * s,
                                         backgroundColor: 'yellow'
                                     }} source={{ uri: this.state.pic }} />
+                                    <Image style={{
+                                        height: 70 * s,
+                                        width: 70 * s,
+                                        borderRadius: 35 * s,
+                                        // backgroundColor:'green',
+                                        position: 'absolute',
+                                        top: 5,
+                                        left: 8
+                                    }}
+                                        source={{ uri: this.state.head }} />
                                     <View style={{ marginLeft: 30 * s }}>
                                         <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
                                         <Text>{item.time}</Text>

@@ -122,7 +122,7 @@ export default class Experience extends Component {
         var self = this;
         this.listener = DeviceEventEmitter.addListener('Erefresh', function (param) {
             // var arr=self.state.list;
-            // var a = {"content": param.content, "like": false, "likeNum": 0, "name": param.name, "pic": "http://139.155.44.190:3005/images/6.jpg", "time": param.time};
+            // var a = {"content": param.content, "like": false, "likeNum": 0, "name": param.name, "pic": "http://139.155.44.190:3005/images/6.png", "time": param.time};
             // arr.splice(0,0,a);
             // self.setState({list:arr});
             fetch(url3)

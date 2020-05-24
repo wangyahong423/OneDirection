@@ -65,6 +65,7 @@ export default class Person extends Component {
                             lvnum: item.lvnum,//修改
                             head: "http://139.155.44.190:3005/head/" + item.head
                         })
+                        console.log("点击头像",this.state.pic)
                         var num = Math.floor(this.state.lvnum / 15);
                         // console.log("输出num", num)
                         let url3 = `http://139.155.44.190:3005/users/list`;
@@ -208,6 +209,9 @@ export default class Person extends Component {
         Actions.login();
     }
     tiezi = () => {
+        var value = { id: this.state.new};
+        AsyncStorage.setItem('new', JSON.stringify(value));
+        console.log(value)
         for(var i = 0;i<this.state.new.length;i++){
             var url11 = `http://139.155.44.190:3005/learn/change?newl=${false}&lid=${this.state.new[i]}`;
             console.log(url11);
@@ -220,8 +224,6 @@ export default class Person extends Component {
                 });
             })
         }
-        
-        
         Actions.tiezi();
     }
     render() {
@@ -233,15 +235,15 @@ export default class Person extends Component {
                 <View style={{ width: '100%', height: 430, backgroundColor: '#ffffff' }}>
                     <View style={{ width: '100%', height: 80, flexDirection: 'row' }}>
                         <TouchableOpacity style={{ width: 100, height: 100, position: "absolute", top: -50, left: 30 }} onPress={() => Actions.touxiang()}>
-                            <Image source={{ uri: this.state.pic }} style={{ width: 100, height: 100, borderRadius: 50 }} />
+                            <Image source={{ uri: this.state.pic }} style={{ width: 100*s, height: 100*s, borderRadius: 50*s}} />
                             <Image style={{
-                                height: 134 * s,
-                                width: 134 * s,
-                                borderRadius: 67 * s,
+                                height: 120 * s,
+                                width: 120 * s,
+                                borderRadius: 60 * s,
                                 // backgroundColor:'green',
                                 position: 'absolute',
-                                top: -15,
-                                right: -15
+                                top: -13*s,
+                                right: -15*s
                             }}
                                 source={{ uri: this.state.head }} />
                         </TouchableOpacity>

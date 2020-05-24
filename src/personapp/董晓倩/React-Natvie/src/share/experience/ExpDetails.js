@@ -30,7 +30,7 @@ export default class ExpDetails extends Component {
 
     render() {
         return (
-            // <ImageBackground style={{ flex: 1, width: '100%', height: height }} source={require('../../../assets/share/3-6.jpg')}>
+            // <ImageBackground style={{ flex: 1, width: '100%', height: height }} source={require('../../../assets/share/3-6.png')}>
             <SafeAreaView style={{ flex: 1, backgroundColor: 'rgba(67,67,157,0.4)' }} >
                 <ScrollView style={{ flex: 1 }}>
                     <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center' }}>

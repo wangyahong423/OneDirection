@@ -562,7 +562,7 @@ export default class Person extends Component {
                         scrollEventThrottle={16}
                         ref={(r) => this.scrollview = r}
                     >
-                        <ImageBackground style={{ flex: 1, width: '100%', height: 260, }} source={require('../../assets/community/img2.jpg')} >
+                        <ImageBackground style={{ flex: 1, width: '100%', height: 260, }} source={require('../../assets/community/img2.png')} >
                             <View style={{ justifyContent: "center", alignItems: "center" }}>
                                 <View style={{
                                     height: 68 * s,
