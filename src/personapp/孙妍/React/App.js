@@ -390,6 +390,12 @@ import Zhengzhi7 from './share/programme/Zhengzhi/Zhengzhi/Zhengzhi7';
 import Zhengzhi8 from './share/programme/Zhengzhi/Zhengzhi/Zhengzhi8';
 import Zhengzhi9 from './share/programme/Zhengzhi/Zhengzhi/Zhengzhi9';
 import Zhengzhi10 from './share/programme/Zhengzhi/Zhengzhi/Zhengzhi10';
+import Choose from './share/programme/Math1/choose/Choose';
+import Xz from './share/programme/Math2/XZ/Xz';
+import Fill from './share/programme/Math1/fill/Fill';
+import Tk from './share/programme/Math2/Tk/Tk';
+import Answer from './share/programme/Math1/answer/Answer';
+import Jd from './share/programme/Math2/JD/Jd';
 export default class App extends Component {
     render() {
         return (
@@ -642,8 +648,15 @@ export default class App extends Component {
 
                     {/**数学一 */}
                     <Route path="/math1" component={Math1}/>
+                    <Route path="/choose" component={Choose}/>
+                    <Route path="/fill" component={Fill}/>
+                    <Route path="/answer" component={Answer}/>
+                    
                     {/**数学二 */}
                     <Route path="/math2" component={Math2}/>
+                    <Route path="/xz" component={Xz}/>
+                    <Route path="/tk" component={Tk}/>
+                    <Route path="/jd" component={Jd}/>
                     {/**英语一 */}
 
                     <Route path="/english1" component={English1}/>
