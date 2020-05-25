@@ -172,7 +172,7 @@ export default class Home extends Component {
         }
         const S2 = {
             backgroundColor: this.state.click2 ? "RoyalBlue" : "DodgerBlue"
-        }
+        } 
         const S3 = {
             backgroundColor: this.state.click3 ? "RoyalBlue" : "DodgerBlue"
         }

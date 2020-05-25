@@ -219,7 +219,14 @@ export default class Community extends Component {
                                         <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center' }}>{item.name}</td>
                                         <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center' }}>{item.time}</td>
                                         <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '12vw' }}>{item.content}</td>
-                                        <td style={{ textAlign: 'center' }}><img style={{ height: '5vh', width: '8vw', borderRadius: '2.5vh' }} src={item.card} ></img></td>
+                                        <td style={{ textAlign: 'center' }}>
+                                            {
+                                                item.card == "http://139.155.44.190:3005/card/null" || null
+                                                ? <span style={{color:'white'}}>null</span>
+                                                : <img style={{ height: '5vh', width: '8vw', borderRadius: '2.5vh' }} src={item.card} ></img>
+                                            }
+                                            
+                                        </td>
                                         <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center' }}>
                                             <span onClick={this.handleRegister.bind(this, (item.id))} style={{ height: '3vh', width: '5vw', fontFamily: '楷体', fontSize: '1.2vw', cursor: 'pointer' }}>删除</span>
                                             <span onClick={this.showModal.bind(this, (item.pic),(item.name),(item.time),(item.content))} style={{ height: '3vh', width: '5vw', fontFamily: '楷体', fontSize: '1.2vw', marginLeft: '10px', cursor: 'pointer' }}>查看</span>

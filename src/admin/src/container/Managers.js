@@ -361,7 +361,7 @@ export default class Managers extends Component {
                             <tr style={{ lineHeight: '5.9vh', backgroundColor: 'rgba(68, 182, 211, 1)' }}>
                                 <th style={{ width: '5vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>姓名</th>
                                 <th style={{ width: '8vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>电话</th>
-                                <th style={{ width: '4vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>密码</th>
+                                <th style={{ width: '6vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>密码</th>
                                 <th style={{ width: '8vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>操作</th>
                             </tr>
                         </thead>

@@ -173,7 +173,8 @@ export default class Experience extends Component {
         axios(url)
             .then((res) => {
                 if (res.data.ok) {
-                    window.location.reload();
+                    // window.location.href=
+                    window.location.reload('http://localhost:3000/home#/experience');
                 } else {
                 }
             })
