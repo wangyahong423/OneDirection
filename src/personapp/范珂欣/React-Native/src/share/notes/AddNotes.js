@@ -153,7 +153,7 @@ export default class AddNotes extends Component {
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }}>
-                <ImageBackground style={{ flex: 1, width: '100%', height: height }} source={require('../../../assets/share/notes.jpg')}>
+                <ImageBackground style={{ flex: 1, width: '100%', height: height }} source={require('../../../assets/share/notes.png')}>
                     <View style={{ alignItems: "center" }}>
                         <ScrollView style={styles.textInputInner}>
                             <View style={{ flexDirection: "row" }}>

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TextInput, AsyncStorage, TouchableOpacity, DeviceEventEmitter, Alert } from 'react-native';
+import { View, Text, Image, TextInput, AsyncStorage, TouchableOpacity, DeviceEventEmitter, Alert,Dimensions ,ImageBackground,SafeAreaView} from 'react-native';
 import { Actions } from 'react-native-router-flux';
+const { width, height } = Dimensions.get('window');
+const s = width / 460;
 export default class Login extends Component {
   constructor() {
     super();
@@ -21,14 +23,12 @@ export default class Login extends Component {
     if (text !== '') {
       this.setState({ username: text, unum: 0 })
     }
-
   }
   pwdhandle = (text) => {
     if (text !== '') {
       this.setState({ pwd: text, pnum: 0 })
     }
   }
-
   login = () => {
     if (this.state.username != '' && this.state.pwd != "") {
       let url = `http://139.155.44.190:3005/users/login?name=${this.state.username}&pwd=${this.state.pwd}`;
@@ -71,10 +71,6 @@ export default class Login extends Component {
             Actions.methodPage();//登录成功跳转首页
           }
           else {
-            // this.setState({
-            //   isnull: false,
-            //   isloading: false
-            // })
               Alert.alert(res.msg)
               this.setState({
                 username:'',
@@ -97,10 +93,11 @@ export default class Login extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', backgroundColor: 'white' }}>
+      <SafeAreaView style={{ flex: 1, justifyContent: 'center', backgroundColor: 'white' }}>
+        <ImageBackground style={{ flex: 1, width: '100%', height: "100%" }} source={require('../../assets/login/login3.png')}>
         <View
           style={{ alignItems: 'center' }}>
-          <Image source={require('../../assets/my3.png')} style={{ width: 180, height: 180, marginTop: -100, borderRadius: 100 }} />
+          <Image source={require('../../assets/my3.png')} style={{ width: 100*s, height: 100*s,  borderRadius: 50*s }} />
           <View
             style={{
               width: '70%',
@@ -177,7 +174,8 @@ export default class Login extends Component {
             ? <View style={{ position: 'absolute', top: 530, zIndex: 11, left: 180, alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: 14 }}>此用户不存在！</Text></View>
             : null
         }
-      </View>
+        </ImageBackground>
+      </SafeAreaView>
     );
   }
 }

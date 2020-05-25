@@ -51,7 +51,7 @@ export default class Head extends Component {
                 // var value = { card: this.state.card };
                 // AsyncStorage.setItem('card', JSON.stringify(value));
 
-                Actions.pop();
+                Actions.myPage();
                 var param = 1;
 
                 DeviceEventEmitter.emit('refresh', param);
@@ -66,7 +66,7 @@ export default class Head extends Component {
                         this.state.list.map((item, idx) => (
                             <TouchableOpacity onPress={this.selected.bind(this, (idx))} style={{ alignItems: 'center', flexDirection: 'row', justifyContent: 'space-evenly' }} >
                                 <Image
-                                    style={{ width: 100, height: 100,borderRadius: 50,fontSize:50*s}}
+                                    style={{ width: 100, height: 100,borderRadius: 50,fontSize:50*s,backgroundColor:"red"}}
                                     source={{ uri: item.path }}
                                 />
                                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>

@@ -18,7 +18,7 @@ export default class College extends Component {
     render() {
         return (
             <ImageBackground
-                source={require('../../../assets/gonglve/fengguang31.jpg')}
+                source={require('../../../assets/gonglve/fengguang31.png')}
                 style={{ width: '100%', height: '100%' }}
             >
                 <View style={styles.box}>

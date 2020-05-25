@@ -2,11 +2,17 @@ import React, { Component } from 'react';
 import {
     StyleSheet,
     View,
+    Text,
     Alert,
+    ImageBackground,
+    Dimensions,
 } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
+import Icon from 'react-native-vector-icons/Ionicons';
 import VerifyCode from './VerifyCode'
-
+const { width, height } = Dimensions.get('window');
+const s = width / 460;
 export default class VerifyCodeDemo extends Component {
 
     beforeCountdown = () => {
@@ -24,47 +30,59 @@ export default class VerifyCodeDemo extends Component {
 
     render() {
         return (
-            <View style={{ flex: 1, paddingTop: 30, paddingRight: 20, paddingLeft: 20 }}>
-                <VerifyCode
-                    countdownNormalStyle={styles.countdownNormalStyle}
-                    countdownStartStyle={styles.countdownStartStyle}
-                    countdownEndStyle={styles.countdownEndStyle}
-                    countdownNormalTextStyle={styles.countdownNormalTextStyle}
-                    countdownStartTextStyle={styles.countdownStartTextStyle}
-                    countdownEndTextStyle={styles.countdownEndTextStyle}
-                    maxTime={6}
-                    normalTxt='获取验证码'
-                    countdownTxt=' 秒后发送'
-                    endTxt='获取验证码'
-                    auto={false}
-                    beforeCountdown={this.beforeCountdown}
-                    startCountdown={this.startCountdown}
-                    onValueChange={this.onValueChange} />
-            </View>
+            <ImageBackground style={{ flex: 1, width: '100%', height: "100%" }} source={require('../../assets/login/login8.png')}>
+                <Icon onPress={() => Actions.login()} style={{ color: "#fff", fontSize: 40 * s, marginTop: 15 * s, marginLeft: width * 0.9 }} name="ios-close" />
+                <View style={{ width: width, height: 50 * s, alignItems: "center", marginTop: 25 * s ,marginBottom:-10*s}}>
+                    <Text style={{ color: "#fff", fontSize: 40 * s }}>Sigin In</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <VerifyCode
+                        countdownNormalStyle={styles.countdownNormalStyle}
+                        countdownStartStyle={styles.countdownStartStyle}
+                        countdownEndStyle={styles.countdownEndStyle}
+                        countdownNormalTextStyle={styles.countdownNormalTextStyle}
+                        countdownStartTextStyle={styles.countdownStartTextStyle}
+                        countdownEndTextStyle={styles.countdownEndTextStyle}
+                        maxTime={6}
+                        normalTxt='获取验证码'
+                        countdownTxt=' 秒后发送'
+                        endTxt='获取验证码'
+                        auto={false}
+                        beforeCountdown={this.beforeCountdown}
+                        startCountdown={this.startCountdown}
+                        onValueChange={this.onValueChange} />
+                </View>
+            </ImageBackground>
         );
     }
 }
 const styles = StyleSheet.create({
     countdownNormalStyle: {
-        backgroundColor: '#37376F',
-        borderRadius: 10
+        backgroundColor: 'rgba(255,255,255,0.5)',
+        borderRadius: 10,
+        borderColor: "#fff",
+        borderWidth: 1
     },
     countdownStartStyle: {
-        backgroundColor: 'grey',
-        borderRadius: 10
-
+        // backgroundColor: '#fff',
+        backgroundColor: 'rgba(255,255,255,0)',
+        borderRadius: 10,
+        borderColor: "#fff",
+        borderWidth: 1
     },
     countdownEndStyle: {
         borderRadius: 10,
-        backgroundColor: '#37376F',
+        backgroundColor: 'rgba(255,255,255,0.5)',
+        borderColor: "#fff",
+        borderWidth: 1
     },
     countdownNormalTextStyle: {
-        color: 'white',
+        color: 'black',
     },
     countdownStartTextStyle: {
-        color: '#37376F',
+        color: 'black',
     },
     countdownEndTextStyle: {
-        color: 'white',
+        color: 'black',
     },
 })

@@ -8,7 +8,7 @@ export default class Haobolin extends Component {
     render() {
         return (
             <ImageBackground
-                source={require('../../../assets/gonglve/schoolmatebg.jpg')}
+                source={require('../../../assets/gonglve/schoolmatebg.png')}
                 style={{ width: '100%', height: '100%' }}
                 resizeMode='stretch'
             >
