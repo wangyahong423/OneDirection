@@ -15,7 +15,7 @@ export default class Math2 extends Component {
                     <span>数学二</span>
                 </NavBar>
                 <img src={`share/fight.png`} style={{ width: '100%', height: '30vh' }} />
-                <Link to="">
+                <Link to="/xz">
                     <Item
                         arrow="horizontal"
                         onClick={() => { }}
@@ -23,7 +23,7 @@ export default class Math2 extends Component {
                         style={{ paddingLeft: '20px', borderBottom: '1px solid grey', height: '60px', color: 'black' }}
                     ><span style={{ marginLeft: '40px', fontSize: '20px' }}>选择题</span></Item>
                 </Link>
-                <Link to="">
+                <Link to="/tk">
                     <Item
                         arrow="horizontal"
                         onClick={() => { }}
@@ -31,7 +31,7 @@ export default class Math2 extends Component {
                         style={{ paddingLeft: '20px', borderBottom: '1px solid grey', height: '60px', color: 'black' }}
                     ><span style={{ marginLeft: '40px', fontSize: '20px' }}>填空题</span></Item>
                 </Link>
-                <Link to="">
+                <Link to="/jd">
                     <Item
                         arrow="horizontal"
                         onClick={() => { }}
