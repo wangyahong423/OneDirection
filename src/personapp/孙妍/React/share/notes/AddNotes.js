@@ -36,8 +36,8 @@ class AddNotes extends Component {
 
         })
       })
-    
-    
+
+
   }
   handleRegister = () => {
     if (this.state.content && this.state.title) {
@@ -47,50 +47,23 @@ class AddNotes extends Component {
         .then((res) => {
           if (res.data.ok) {
             let url2 = `http://139.155.44.190:3005/users/list`;
-        axios(url2)
-          .then((res)=>{
-            this.setState({
-              data:res.data
-            })
-            this.state.data.map((item)=>{
-              if(item.name == this.state.name){
+            axios(url2)
+              .then((res) => {
                 this.setState({
-                  lvnum:item.lvnum+2
+                  data: res.data
                 })
-                let url4 = `http://139.155.44.190:3005/users/changeLvnum?lvnum=${this.state.lvnum}&name=${this.state.name}`;
-                axios(url4)
-                  .then((res)=>{
-                    if(res.data.ok){
-
-                    }
-                    else{
-                      alert(res.data.msg);
-                    }
-                  })
-                if(this.state.lvnum == 15){
-                  alert("恭喜你提升为二级用户，快去解锁新的头像吧！");
-                }
-              }
-            })
-          })
-          } else {
-            alert(res.data.msg);
+              })
+          }
+          else {
+            alert("未填写内容");
           }
         })
-        
-
-
     }
-    else {
-      alert("未填写内容")
-    }
-
-
   }
   render() {
     const { getFieldProps } = this.props.form;
     return (
-      <div style={{ position: 'relative' }}>
+      <div style={{ position: 'relative' }} >
         <NavBar
           style={{ backgroundColor: '#37376F', color: '#fff', position: 'sticky ', top: '20', zIndex: 10, textAlign: 'center', height: '7vh' }}
           rightContent={[
@@ -113,7 +86,7 @@ class AddNotes extends Component {
           />
         </List>
 
-      </div>
+      </div >
     );
   }
 }

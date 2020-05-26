@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { NavBar, ActionSheet } from 'antd-mobile';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import axios from 'axios'
+import axios from 'axios';
+import notes1 from '../../share/notes.jpg';
 
 export default class ExpDetails extends Component {
     constructor() {
@@ -79,7 +80,7 @@ export default class ExpDetails extends Component {
                 >
                     <span>经验详情</span>
                 </NavBar>
-                <div>
+                <div style={{backgroundImage:`url(${notes1})` }}>
                     {
                         this.state.data.map((item, idx) =>
                             <div style={{ background: '#fff', color: 'black' }}>

@@ -13,157 +13,390 @@ export default class Experience extends Component {
     constructor() {
         super();
         this.state = {
-            data: [],
             list: [],
-            arr: [],
-            color: [],
-            yonghu: [],
+            all: [],
             pic: [],
-            name: ''
+            like: [],
+            photo: [],
+            collect: [],
+            search: '',
+            likeNum: [],
+            colNum: [],
+            username: '',
+
         };
+
     }
 
     componentDidMount() {
 
-        let url = `http://139.155.44.190:3005/experience/list`;
-        let url2 = `http://139.155.44.190:3005/experiencelike/list`;
-        let url3 = `http://139.155.44.190:3005/users/getName`;
-        let url4 = `http://139.155.44.190:3005/users/list`;
-        axios(url)
+        var url1 = `http://139.155.44.190:3005/experience/list`;
+        var url2 = `http://139.155.44.190:3005/experiencelike/list`;
+        let url3 = `http://139.155.44.190:3005/users/list`;
+        let url4 = `http://139.155.44.190:3005/collect/list`;
+        let url5 = `http://139.155.44.190:3005/users/getName`;
+        axios(url5)
             .then((res) => {
                 this.setState({
-                    data: res.data
+                    username: res.data.name
                 })
-
-                axios(url4)
-                    .then((res) => {
-                        for (var i = 0; i < res.data.length; i++) {
-                            res.data[i].pic = "http://139.155.44.190:3005" + res.data[i].pic
-                        }
-                        this.setState({
-                            yonghu: res.data
-                        })
-                        var qrr = []
-                        var a = 0;
-                        for (var i = 0; i < this.state.data.length; i++) {
-                            for (var j = 0; j < this.state.yonghu.length; j++) {
-                                if (this.state.data[i].name == this.state.yonghu[j].name) {
-                                    a = this.state.yonghu[j].pic;
-                                    break;
-                                }
-                                else {
-                                    a = 0;
-                                }
-                            }
-                            if (a != 0) {
-                                qrr.push(a)
-                            }
-                        }
-                        this.setState({
-                            pic: qrr
-                        })
-                    })
-                axios(url2)
-                    .then((res) => {
-                        this.setState({
-                            list: res.data
-                        })
-                        var brr = [];
-                        this.state.list.map((item) => {
-                            if (item.name == this.state.name) {
-                                brr.push(item);
-                            }
-                            this.setState({
-                                list: brr
-                            })
-                        })
-                        var arr = [];
-                        var a = 0;
-                        for (var i = 0; i < this.state.data.length; i++) {
-                            for (var j = 0; j < this.state.list.length; j++) {
-                                if (this.state.data[i].id == this.state.list[j].cid) {
-                                    a = 1;
-                                    break;
-                                } else {
-                                    a = 0;
-                                }
-                            }
-                            if (a == 1) {
-                                arr.push('red');
-                                a = 0;
-                            } else {
-                                arr.push('black');
-                            }
-                        }
-                        this.setState({
-                            color: arr
-                        })
-                    })
-
             })
-
         axios(url3)
+
             .then((res) => {
-                this.setState({
-                    name: res.data.name
-                })
-            })
-        this.state.data.map((item) => {
-            this.setState({
-                arr: item.id
-            })
-        })
+
+                this.setState({ pic: res });
+                
+
+                
+                fetch(url2)
+                    .then((res) => res.json())
+                    .then((res) => {
+                        this.setState({ likeNum: res });
+                        var likeList = [];
+                        for (var i = 0; i < res.length; i++) {
+                            if (res[i].name == this.state.username) {
+                                likeList.push(res[i]);
+                            }
+                        }
+                        this.setState({ like: likeList });
+                        fetch(url4)
+                            .then((res) => res.json())
+                            .then((res) => {
+                                this.setState({ colNum: res });
+                                var colList = [];
+                                for (var i = 0; i < res.length; i++) {
+                                    if (res[i].name == this.state.username) {
+                                        colList.push(res[i]);
+                                    }
+                                }
+                                this.setState({ collect: colList });
+                                fetch(url1)
+                                    .then((res) => res.json())
+                                    .then((res) => {
+                                        res.forEach(item => {
+                                            for (var i = 0; i < this.state.pic.data.length; i++) {
+                                                
+                                                
+                                                if (item.name == this.state.pic.data[i].name) {
+                                                    item.pic = 'http://139.155.44.190:3005' + this.state.pic.data[i].pic;
+                                                    item.college = this.state.pic.data[i].college;
+                                                    item.level = this.state.pic.data[i].level;
+                                                    break;
+                                                }
+                                            }
+                                            
+                                            item.like = false;
+                                            for (var j = 0; j < this.state.like.length; j++) {
+                                                if (item.id == this.state.like[j].eid) {
+                                                    item.like = true;
+                                                    break;
+                                                }
+                                                else {
+                                                    item.like = false;
+                                                }
+                                            }
+                                            var likeNum = 0;
+                                            for (var z = 0; z < this.state.likeNum.length; z++) {
+                                                if (item.id == this.state.likeNum[z].eid) {
+                                                    likeNum++;
+                                                }
+                                            }
+                                            item.likeNum = likeNum;
+                                            item.collect = false;
+                                            for (var j = 0; j < this.state.collect.length; j++) {
+                                                if (item.id == this.state.collect[j].eid) {
+                                                    item.collect = true;
+                                                    break;
+                                                }
+                                                else {
+                                                    item.collect = false;
+                                                }
+                                            }
+                                            var colNum = 0;
+                                            for (var z = 0; z < this.state.colNum.length; z++) {
+                                                if (item.id == this.state.colNum[z].eid) {
+                                                    colNum++;
+                                                }
+                                            }
+                                            item.colNum = colNum;
+                                           
+                                        });
+
+                                        this.setState({ list: res });
+                                        this.setState({ all: res });
+                                       
+                                        
+                                    });
+                                    
+                                   
+                            });
+                    });
+                   
+                    
+            });
+
+
 
     }
-    changeSearch = (e) => {
-        if (e.target.value == "") {
-            window.location.href = "http://localhost:3000/experience";
-        } else {
+    like = (idx) => {
+        var crr = '';
+        if (this.state.list[idx].like == false) {
+            crr = this.state.list;
+            crr[idx].like = true;
+            crr[idx].likeNum++;
+            this.setState({
+                list: crr
+            })
+            let url1 = `http://139.155.44.190:3005/experiencelike/add?eid=${this.state.list[idx].id}&name=${this.state.username}&ename=${this.state.list[idx].name}`;
+            fetch(url1)
+                .then((res) => res.json())
+                .then((res) => {
+                    
+                });
+        }
+        else if (this.state.list[idx].like == true) {
+            crr = this.state.list;
+            crr[idx].like = false;
+            crr[idx].likeNum--;
+            this.setState({
+                list: crr
+            })
+            let url2 = `http://139.155.44.190:3005/experiencelike/delete?eid=${this.state.list[idx].id}&name=${this.state.username}`
+            fetch(url2)
+                .then((res) => res.json())
+                .then((res) => {
+                    
+                });
+        }
+        let url2 = `http://139.155.44.190:3005/users/list`;
+        fetch(url2)
+            .then((res) => res.json())
+            .then((res) => {
+                this.setState({
+                    lvlist: res
+                });
+                this.state.lvlist.map((item) => {
+                    if (item.name == this.state.username) {
+                        this.setState({
+                            lvnum: item.lvnum + 1
+                        })
+                        let url = `http://139.155.44.190:3005/users/changeLvnum?lvnum=${this.state.lvnum}&name=${this.state.username}`;
+                        fetch(url)
+                            .then((res) => res.json())
+                            .then((res) => {
+                            });
+                        if (this.state.lvnum == 15) {
+                            alert("恭喜你提升为二级用户，快去解锁新的头像吧！")
+                        }
+                        else if (this.state.lvnum == 30) {
+                            alert("恭喜你提升为三级用户，快去解锁新的头像吧！")
+                        }
+                        else if (this.state.lvnum == 45) {
+                            alert("恭喜你提升为四级用户，快去解锁新的头像吧！")
+                        }
+                        else if (this.state.lvnum == 60) {
+                            alert("恭喜你提升为五级用户，快去解锁新的头像吧！")
+                        }
+                        else if (this.state.lvnum == 75) {
+                            alert("恭喜你提升为六级用户，快去解锁新的头像吧！")
+                        }
+                        else if (this.state.lvnum == 90) {
+                            alert("恭喜你提升为七级用户，快去解锁新的头像吧！")
+                        }
+                        else if (this.state.lvnum == 105) {
+                            alert("恭喜你提升为八级用户，快去解锁新的头像吧！")
+                        }
+                        else if (this.state.lvnum == 120) {
+                            alert("恭喜你提升为九级用户，快去解锁新的头像吧！")
+                        }
+                        else if (this.state.lvnum == 135) {
+                            alert("恭喜你提升为十级用户，快去解锁新的头像吧！")
+                        }
+                    }
+                })
+            })
+        
+    }
+    collect = (idx) => {
+        var crr = '';
+        if (this.state.list[idx].collect == false) {
+            crr = this.state.list;
+            crr[idx].collect = true;
+            crr[idx].colNum++;
+            this.setState({
+                list: crr
+            })
+            let url1 = `http://139.155.44.190:3005/collect/addCollect?eid=${this.state.list[idx].id}&name=${this.state.username}`;
+            fetch(url1)
+                .then((res) => res.json())
+                .then((res) => {
+                    
+                });
+        }
+        else if (this.state.list[idx].collect == true) {
+            crr = this.state.list;
+            crr[idx].collect = false;
+            crr[idx].colNum--;
+            this.setState({
+                list: crr
+            })
+            let url2 = `http://139.155.44.190:3005/collect/deleteCollect?eid=${this.state.list[idx].id}&name=${this.state.username}`;
+            fetch(url2)
+                .then((res) => res.json())
+                .then((res) => {
+                    
+                });
+        }
+        let url2 = `http://139.155.44.190:3005/users/list`;
+        fetch(url2)
+            .then((res) => res.json())
+            .then((res) => {
+                this.setState({
+                    lvlist: res
+                });
+                this.state.lvlist.map((item) => {
+                    if (item.name == this.state.username) {
+                        this.setState({
+                            lvnum: item.lvnum + 1
+                        })
+                        let url = `http://139.155.44.190:3005/users/changeLvnum?lvnum=${this.state.lvnum}&name=${this.state.username}`;
+                        fetch(url)
+                            .then((res) => res.json())
+                            .then((res) => {
+                            });
+                        if (this.state.lvnum == 15) {
+                            alert("恭喜你提升为二级用户，快去解锁新的头像吧！")
+                        }
+                        else if (this.state.lvnum == 30) {
+                            alert("恭喜你提升为三级用户，快去解锁新的头像吧！")
+                        }
+                        else if (this.state.lvnum == 45) {
+                            alert("恭喜你提升为四级用户，快去解锁新的头像吧！")
+                        }
+                        else if (this.state.lvnum == 60) {
+                            alert("恭喜你提升为五级用户，快去解锁新的头像吧！")
+                        }
+                        else if (this.state.lvnum == 75) {
+                            alert("恭喜你提升为六级用户，快去解锁新的头像吧！")
+                        }
+                        else if (this.state.lvnum == 90) {
+                            alert("恭喜你提升为七级用户，快去解锁新的头像吧！")
+                        }
+                        else if (this.state.lvnum == 105) {
+                            alert("恭喜你提升为八级用户，快去解锁新的头像吧！")
+                        }
+                        else if (this.state.lvnum == 120) {
+                            alert("恭喜你提升为九级用户，快去解锁新的头像吧！")
+                        }
+                        else if (this.state.lvnum == 135) {
+                            alert("恭喜你提升为十级用户，快去解锁新的头像吧！")
+                        }
+                    }
+                })
+            })
+        
+    }
+    change = (e) => {
+        if(e.target.value == ''){
+            window.location.href = "http://localhost:3000/experience"
+        }
+        else{
             this.setState({
                 search: e.target.value
             })
         }
+        
+       
     }
-    change = (id) => {
-        var crr = this.state.color;
-        if (this.state.color[id] == "black") {
-            crr = this.state.color
-            crr[id] = "red";
-            this.setState({
-                color: crr
-            })
-            let url9 = `http://139.155.44.190:3005/experiencelike/add?cid=${this.state.data[id].id}&name=${this.state.name}`
-            axios(url9)
-                .then((res) => {
-                })
-        }
-        else if (this.state.color[id] == "red") {
-            crr = this.state.color
-            crr[id] = "black";
-            this.setState({
-                color: crr
-            })
-            let url10 = `http://139.155.44.190:3005/experiencelike/delete?cid=${this.state.data[id].id}&name=${this.state.name}`
-            axios(url10)
-                .then((res) => {
-                })
-        }
-    }
-    clickSend = (id) => {
+    search = () => {
+        
         let url = `http://139.155.44.190:3005/experience/select?content=${this.state.search}`;
-        axios(url)
+        var url2 = `http://139.155.44.190:3005/experiencelike/list`;
+        let url3 = `http://139.155.44.190:3005/users/list`;
+        let url4 = `http://139.155.44.190:3005/collect/list`;
+        fetch(url3)
+            .then((res) => res.json())
             .then((res) => {
-                if (res.data.false) {
-                } else {
-                    for (var i = 0; i < res.data.length; i++) {
-                        res.data[i].pic = "http://139.155.44.190:3005/" + res.data[i].pic;
-                    }
-                    this.setState({
-                        data: res.data
-                    })
-                }
-            })
-    };
+                this.setState({ pic: res });
+                fetch(url2)
+                    .then((res) => res.json())
+                    .then((res) => {
+                        this.setState({ likeNum: res });
+                        var likeList = [];
+                        for (var i = 0; i < res.length; i++) {
+                            if (res[i].name == this.state.username) {
+                                likeList.push(res[i]);
+                            }
+                        }
+                        this.setState({ like: likeList });
+                        fetch(url4)
+                            .then((res) => res.json())
+                            .then((res) => {
+                                this.setState({ colNum: res });
+                                var colList = [];
+                                for (var i = 0; i < res.length; i++) {
+                                    if (res[i].name == this.state.username) {
+                                        colList.push(res[i]);
+                                    }
+                                }
+                                this.setState({ collect: colList });
+                                fetch(url)
+                                    .then((res) => res.json())
+                                    .then((res) => {
+                                        if (res.false) {
+                                        }
+                                        else {
+                                            res.forEach(item => {
+                                                for (var i = 0; i < this.state.pic.length; i++) {
+                                                    if (item.name == this.state.pic[i].name) {
+                                                        item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
+                                                        break;
+                                                    }
+                                                }
+                                                item.like = false;
+                                                for (var j = 0; j < this.state.like.length; j++) {
+                                                    if (item.id == this.state.like[j].eid) {
+                                                        item.like = true;
+                                                        break;
+                                                    }
+                                                    else {
+                                                        item.like = false;
+                                                    }
+                                                }
+                                                var likeNum = 0;
+                                                for (var z = 0; z < this.state.likeNum.length; z++) {
+                                                    if (item.id == this.state.likeNum[z].eid) {
+                                                        likeNum++;
+                                                    }
+                                                }
+                                                item.likeNum = likeNum;
+                                                item.collect = false;
+                                                for (var j = 0; j < this.state.collect.length; j++) {
+                                                    if (item.id == this.state.collect[j].eid) {
+                                                        item.collect = true;
+                                                        break;
+                                                    }
+                                                    else {
+                                                        item.collect = false;
+                                                    }
+                                                }
+                                                var colNum = 0;
+                                                for (var z = 0; z < this.state.colNum.length; z++) {
+                                                    if (item.id == this.state.colNum[z].eid) {
+                                                        colNum++;
+                                                    }
+                                                }
+                                                item.colNum = colNum;
+                                            });
+                                            this.setState({ list: res });
+                                        }
+                                    });
+                            });
+                    });
+            });
+
+    }
     render() {
         return (
             <div>
@@ -173,8 +406,8 @@ export default class Experience extends Component {
                     ]}>
                     我的经验</NavBar>
                 <div style={{ position: "fixed", top: '7vh', width: "100vw", height: '6vh', backgroundColor: '#EFEFF4' }}>
-                    <input placeholder='搜索' onChange={this.changeSearch} style={{ height: '5vh', borderRadius: '20px', border: 'none', marginTop: '0.5vh', textAlign: 'center', fontSize: '4vw', width: '85vw', float: 'left', borderRight: "none" }}></input>
-                    <div onClick={this.clickSend} style={{ width: '15vw', float: 'left', height: '6vh', textAlign: 'center', lineHeight: '6vh', fontSize: '4vw' }}>搜索</div>
+                    <input placeholder='搜索' onChange={this.change} style={{ height: '5vh', borderRadius: '20px', border: 'none', marginTop: '0.5vh', textAlign: 'center', fontSize: '4vw', width: '85vw', float: 'left', borderRight: "none" }}></input>
+                    <div onClick={this.search} style={{ width: '15vw', float: 'left', height: '6vh', textAlign: 'center', lineHeight: '6vh', fontSize: '4vw' }}>搜索</div>
                 </div>
                 <div style={{ width: '100vw', backgroundColor: '#EFEFF4' }}>
                     <Link to='/addexp'>
@@ -184,21 +417,23 @@ export default class Experience extends Component {
                     </Link>
                     <div style={{ marginTop: '6vh' }}>
                         {
-                            this.state.data.map((item, idx) =>
+                            this.state.list.map((item, idx) =>
                                 <div style={{ background: '#fff', color: 'black' }}>
                                     <div style={{ float: "left" }}>
-                                        <img src={this.state.pic[idx]} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
+                                        <img src={item.pic} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
                                     </div>
-                                    <p style={{ marginLeft: 75, fontSize: '2.5vh', lineHeight: 2.5, marginTop: 6 }}>{item.name}</p>
+                                    <p style={{ marginLeft: 75, fontSize: '2.5vh', lineHeight: 2.5, marginTop: 6 }}>{item.name}Lv.{item.level}</p>
+                                    
                                     <div style={{ marginLeft: 75, color: 'gray', fontSize: '2vw', marginTop: "-5vw" }}>{item.time}</div>
                                     <Link to={`/expdetails/${item.id}`}>
                                         <p style={{ marginLeft: 25, color: 'black', marginTop: 20, fontSize: '17px', width: '87vw', overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{item.content}</p>
                                     </Link>
                                     <div style={{ marginTop: 20 }}>
-                                        <Link >
-                                            <sapn className="iconfont icon-collection" style={{ marginLeft: '27%', fontSize: '24px', color: 'black' }}></sapn>
-                                        </Link>
-                                        <sapn className="iconfont icon-dianzan" onClick={this.change.bind(this, (idx))} style={{ fontSize: '24px', marginLeft: '26%', color: this.state.color[idx] }}></sapn>
+
+                                        <sapn className="iconfont icon-collection" style={item.collect ? { color: 'yellow', fontSize: '24px', marginLeft: '26%' } : { fontSize: 30,fontSize: '24px', marginLeft: '26%'  }}  onClick={this.collect.bind(this, (idx))}></sapn>
+                                        <span>{item.colNum}</span>
+                                        <sapn className="iconfont icon-dianzan" style={item.like ? { color: 'yellow', fontSize: '24px', marginLeft: '26%' } : { fontSize: 30,fontSize: '24px', marginLeft: '26%'  }}  onClick={this.like.bind(this, (idx))}></sapn>
+                                        <span style={{ marginLeft: '-11%' }}>{item.likeNum}</span>
                                     </div>
                                     <div style={{ width: '100%', height: '2vh', backgroundColor: 'white' }}>
                                     </div>

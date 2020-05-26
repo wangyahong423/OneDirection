@@ -53,17 +53,22 @@ export default class Notes extends Component {
         }
     }
     clickSend = (id) => {
-        let url = `http://139.155.44.190:3005/notes/select?content=${this.state.search}`;
+        let url = `http://139.155.44.190:3005/notes/select?show=${this.state.search}`;
         axios(url)
             .then((res) => {
                 if (res.data.false) {
-                } else {
-                    for (var i = 0; i < res.data.length; i++) {
-                        res.data[i].pic = "http://139.155.44.190:3005/" + res.data[i].pic;
-                    }
-                    this.setState({
-                        data: res.data
+                } 
+                else {
+                   var brr = [];
+                   res.data.map((item)=>{
+                       if(item.name == this.state.username){
+                        brr.push(item);
+                       }
+                       this.setState({
+                        list:brr
                     })
+                   })
+                   
                 }
             })
     };

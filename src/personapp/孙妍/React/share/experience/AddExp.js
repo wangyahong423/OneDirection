@@ -5,35 +5,44 @@ import { createForm } from 'rc-form';
 import axios from "axios";
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 class AddExp extends Component {
-  constructor(){
+  constructor() {
     super();
-    this.state={
-      name:'',//名字
-      content:'',//内容
+    this.state = {
+      username: '',//名字
+      content: '',//内容
       time: new Date().toLocaleString(),
-      lvlist:''
+      lvlist:[],
     }
   }
-  //标题
-
   //内容
   noteCon = (e) => {
     this.setState({ content: e.target.value });
-    
+
   }
-  componentDidMount(){
-    let url3 = `http://139.155.44.190:3005/users/getName`;
-    axios(url3)
+  componentDidMount() {
+    let url9 = `http://139.155.44.190:3005/users/getName`;
+    let url2 = `http://139.155.44.190:3005/users/list`;
+    axios(url9)
       .then((res) => {
         this.setState({
-          name: res.data.name
+          username: res.data.name
         })
+        console.log(this.state.username)
       })
+    axios(url2)
+      .then((res) => {
+        this.setState({
+          lvlist: res.data
+        })
+        console.log(this.state.lvlist)
+      })
+    
+    
   }
   handleRegister = () => {
     if (this.state.content) {
-      let url = `http://139.155.44.190:3005/experience/add?content=${this.state.content}&name=${this.state.name}&time=${this.state.time}`;
-      let url2 = `http://139.155.44.190:3005/users/list`;
+      let url = `http://139.155.44.190:3005/experience/add?content=${this.state.content}&name=${this.state.username}&time=${this.state.time}`;
+
       axios(url)
         .then((res) => {
           if (res.data.ok) {
@@ -42,16 +51,15 @@ class AddExp extends Component {
             alert(res.data.msg);
           }
         })
-      
-
-      
+        
     }
     else {
       alert("未填写内容")
     }
-    
- 
+
+
   }
+
   render() {
     const { getFieldProps } = this.props.form;
     return (
@@ -67,7 +75,7 @@ class AddExp extends Component {
         >
           <span>发布经验</span>
         </NavBar>
-        
+
         <List renderHeader={() => ' '} onChange={this.noteCon}>
           <TextareaItem
             {...getFieldProps(' ', {

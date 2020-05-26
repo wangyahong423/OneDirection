@@ -1,16 +1,9 @@
-// import React, { Component, AsyncStorage, DeviceEventEmitter } from 'react'
-// import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-// import { NavBar, Icon, Tabs, Carousel } from 'antd-mobile';
-// import axios from 'axios'
-// export default class NotesDetaile extends Component {
 
-
-// }
 import React, { Component } from 'react';
 import { NavBar, ActionSheet } from 'antd-mobile';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import axios from 'axios'
-
+import '../../App.css'
 export default class NotesDetails extends Component {
     constructor() {
         super();
@@ -81,28 +74,29 @@ export default class NotesDetails extends Component {
             <div>
                 <NavBar
                     style={{ width: '100%', backgroundColor: '#37376f', color: '#fff', position: 'fixed ', top: '0', zIndex: 1, height: '7vh' }}
-                    rightContent={[
-                        <Link to="/notes"><span style={{ fontSize: '15px', color: 'white' }} onClick={this.handleRegister}>修改</span></Link>
-                    ]}
+                    
                     leftContent={[
-                        <Link to="/notes"><span style={{ fontSize: '15px', color: 'white' }}>取消</span></Link>
+                        <Link to="/notes"><span style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span></Link>
                     ]}
                 >
                     <span>笔记详情</span>
                 </NavBar>
 
 
-                <div style={{ marginTop: '9vh' }}>
+                <div style={{ marginTop: '5vh' }} >
+                    <div className="collegeImg1">
+
+                    
                     {
                         this.state.data.map((item, idx) =>
-                            <div style={{ background: '#fff', color: 'black' }}>
-                                <div style={{ backgroundColor: '#ffffff', width: '90%', height: '10vh', marginLeft: '2vh', borderRadius: 10, }}>
+                            <div style={{  color: 'black' }}>
+                                <div style={{  width: '90%', height: '10vh', marginLeft: '2vh', borderRadius: 10, marginTop:'5vh'}}>
                                     <p>&nbsp;</p>
                                     <span style={{ marginTop: '-1vh', marginLeft: '2vh', fontSize: '17px' }}>标题:</span>
                                     <span style={{ marginTop: '-1vh', marginLeft: '2vh', fontSize: '15px' }}>{item.title}</span>
 
                                 </div>
-                                <div style={{ backgroundColor: '#ffffff', width: '90%', height: '80vh', marginLeft: '2vh', borderRadius: 10, }}>
+                                <div style={{  width: '90%', height: '80vh', marginLeft: '2vh', borderRadius: 10, }}>
                                     <p>&nbsp;</p>
                                     <span style={{ marginTop: '-1vh', marginLeft: '2vh', fontSize: '17px' }}>内容:</span>
                                     <span style={{ marginTop: '-1vh', marginLeft: '2vh', fontSize: '15px' }}>{item.content}</span>
@@ -110,6 +104,7 @@ export default class NotesDetails extends Component {
                                 </div>
                             </div>)
                     }
+                    </div>
                 </div>
             </div>
         )
