@@ -20,21 +20,11 @@ export default class AddExp extends Component {
                 this.setState({
                     username: name.username
                 })
-                console.log("用户名：", this.state.username)
             });
     }
     con = (e) => {
         this.setState({ content: e });
         var length = e.length;
-        // var length = 0;
-        // for (var i = 0; i < e.length; i++) {
-        //     if (32 <= e[i].charCodeAt() && e[i].charCodeAt() <= 126) {
-        //         length++;
-        //     }
-        //     else {
-        //         length = length + 2;
-        //     }
-        // }
         this.setState({ length: length });
         if (length > 500) {
             Alert.alert("文本内容超过上限！");
@@ -50,12 +40,10 @@ export default class AddExp extends Component {
             var minute = date.getMinutes().toString();
             var time = year + '年' + month + '月' + day + '日' + ' ' + hour + ':' + minute;
             let url = `http://139.155.44.190:3005/experience/add?content=${this.state.content}&name=${this.state.username}&time=${time}`;
-            console.log(url);
             fetch(url)
                 .then((res) => res.json())
                 .then((res) => {
                     if (res.ok) {
-                        // Alert.alert(res.msg);
                         Actions.pop();
                     } else {
                         Alert.alert(res.msg);

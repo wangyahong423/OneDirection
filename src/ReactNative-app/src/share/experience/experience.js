@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, FlatList, ScrollView, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert, DrawerLayoutAndroid } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import { Actions } from 'react-native-router-flux';
+import Img from '../../community/Img'
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
 export default class Experience extends Component {
@@ -71,6 +72,7 @@ export default class Experience extends Component {
                                                     item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
                                                     item.college = this.state.pic[i].college;
                                                     item.level = this.state.pic[i].level;
+                                                    item.head = 'http://139.155.44.190:3005/head/' + this.state.pic[i].head;
                                                     break;
                                                 }
                                             }
@@ -120,7 +122,7 @@ export default class Experience extends Component {
         var self = this;
         this.listener = DeviceEventEmitter.addListener('Erefresh', function (param) {
             // var arr=self.state.list;
-            // var a = {"content": param.content, "like": false, "likeNum": 0, "name": param.name, "pic": "http://139.155.44.190:3005/images/6.jpg", "time": param.time};
+            // var a = {"content": param.content, "like": false, "likeNum": 0, "name": param.name, "pic": "http://139.155.44.190:3005/images/6.png", "time": param.time};
             // arr.splice(0,0,a);
             // self.setState({list:arr});
             fetch(url3)
@@ -158,6 +160,7 @@ export default class Experience extends Component {
                                                         item.pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
                                                         item.college = self.state.pic[i].college;
                                                         item.level = self.state.pic[i].level;
+                                                        item.head = 'http://139.155.44.190:3005/head/' + self.state.pic[i].head;
                                                         break;
                                                     }
                                                 }
@@ -205,15 +208,10 @@ export default class Experience extends Component {
                         });
                 });
         });
-        // var self1 = this;
-        // this.listener1 = DeviceEventEmitter.addListener('com', function (num){
-        //     console.log(num);
-        // })
     }
 
     componentWillUnmount() {
         this.listener.remove();
-        // this.listener1.remove();
     }
     delete = (idx) => {
         Alert.alert('确认要删除吗', '',
@@ -247,7 +245,7 @@ export default class Experience extends Component {
 
     }
     details = (idx) => {
-        var value = { name: this.state.list[idx].name, time: this.state.list[idx].time, content: this.state.list[idx].content, pic: this.state.list[idx].pic, level: this.state.list[idx].level };
+        var value = { name: this.state.list[idx].name, time: this.state.list[idx].time, content: this.state.list[idx].content, pic: this.state.list[idx].pic, level: this.state.list[idx].level,head: this.state.list[idx].head };
         AsyncStorage.setItem('EPage', JSON.stringify(value));
         Actions.expdetails();
     }
@@ -264,7 +262,6 @@ export default class Experience extends Component {
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url1);
                 });
         }
         else if (this.state.list[idx].like == true) {
@@ -278,7 +275,6 @@ export default class Experience extends Component {
             fetch(url2)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url2);
                 });
         }
         let url2 = `http://139.155.44.190:3005/users/list`;
@@ -342,7 +338,6 @@ export default class Experience extends Component {
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url1);
                 });
         }
         else if (this.state.list[idx].collect == true) {
@@ -356,7 +351,6 @@ export default class Experience extends Component {
             fetch(url2)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url2);
                 });
         }
         let url2 = `http://139.155.44.190:3005/users/list`;
@@ -413,7 +407,6 @@ export default class Experience extends Component {
         })
     }
     search = () => {
-        console.log(this.state.search);
         let url = `http://139.155.44.190:3005/experience/select?content=${this.state.search}`;
         var url2 = `http://139.155.44.190:3005/experiencelike/list`;
         let url3 = `http://139.155.44.190:3005/users/list`;
@@ -454,6 +447,8 @@ export default class Experience extends Component {
                                                 for (var i = 0; i < this.state.pic.length; i++) {
                                                     if (item.name == this.state.pic[i].name) {
                                                         item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
+                                                        item.head = 'http://139.155.44.190:3005/head/' + this.state.pic[i].head;
+
                                                         break;
                                                     }
                                                 }
@@ -514,10 +509,6 @@ export default class Experience extends Component {
             this.setState({ list: arr });
         }
     }
-    // cla = () => {
-    //     this.refs['list'].style.display='flex';
-    //     console.log(1);
-    // }
     onPenLeftDrawer() {
         this.drawer.openDrawer();
     }
@@ -527,7 +518,7 @@ export default class Experience extends Component {
     }
 
     person = (idx) => {
-        var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college };
+        var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college,head: this.state.list[idx].head };
         AsyncStorage.setItem('details', JSON.stringify(value));
         Actions.person();
     }
@@ -566,11 +557,9 @@ export default class Experience extends Component {
                     ]}
                     horizontal={false}
                     numColumns={1}
-                    // columnWrapperStyle={styles.columnStyle}
                     renderItem={({ item }) =>
                         <TouchableOpacity style={{ backgroundColor: '#eee', margin: 5 * s, height: 20 * s }} onPress={this.classify.bind(this, (item.key))}>
                             <Text style={{
-                                // color: 'white',
                                 backgroundColor: 'blur'
                             }}>{item.key}</Text>
                         </TouchableOpacity>
@@ -611,7 +600,6 @@ export default class Experience extends Component {
                                 fontSize: 15 * s
                             }}
                             clearButtonMode="while-editing"
-                            // autoFocus={true}
                             placeholderTextColor='#fff'
                             placeholder="请输入您要搜索的关键字"
                             onChangeText={this.change}
@@ -628,12 +616,9 @@ export default class Experience extends Component {
                     renderNavigationView={() => navigationView}>
                     <View style={{ width: 50 * s, height: 25 * s, borderRadius: 10 * s, backgroundColor: '#37376F', alignItems: 'center', justifyContent: 'center', marginLeft: 10 * s }}>
                         <TouchableOpacity
-                            // underlayColor="rgb(210, 230, 255)"
                             activeOpacity={0.5}
-                            // style={styles.touchable}
                             onPress={() => this.onPenLeftDrawer()}
                             style={{}}
-                        //onPress={this.onPenLeftDrawer.bind(this)}
                         >
                             <Text style={{ fontSize: 16, color: '#fff' }}>分类</Text>
                         </TouchableOpacity>
@@ -648,19 +633,50 @@ export default class Experience extends Component {
                                             height: 80 * s,
                                             alignItems: 'center'
                                         }}>
-                                            <TouchableOpacity onPress={this.person.bind(this, (idx))}>
-                                                <Image style={{
-                                                    marginLeft: 20 * s,
-                                                    height: 50 * s,
-                                                    width: 50 * s,
-                                                    borderRadius: 25 * s,
-                                                    backgroundColor: 'yellow'
-                                                }} source={{ uri: item.pic }} />
-                                            </TouchableOpacity>
+                                            {
+                                                this.state.username == item.name
+                                                    ?
+                                                    <View>
+                                                        <Image style={{
+                                                            marginLeft: 20 * s,
+                                                            height: 50 * s,
+                                                            width: 50 * s,
+                                                            borderRadius: 25 * s,
+                                                            backgroundColor: 'yellow'
+                                                        }} source={{ uri: item.pic }} />
+                                                        <Image style={{
+                                                            height: 70 * s,
+                                                            width: 70 * s,
+                                                            borderRadius: 35 * s,
+                                                            position: 'absolute',
+                                                            top: -10,
+                                                            right: -10
+                                                        }}
+                                                            source={{ uri: item.head }} />
+                                                    </View>
+                                                    : <TouchableOpacity onPress={this.person.bind(this, (idx))}>
+                                                        <Image style={{
+                                                            marginLeft: 20 * s,
+                                                            height: 50 * s,
+                                                            width: 50 * s,
+                                                            borderRadius: 25 * s,
+                                                            backgroundColor: 'yellow'
+                                                        }} source={{ uri: item.pic }} />
+                                                        <Image style={{
+                                                            height: 70 * s,
+                                                            width: 70 * s,
+                                                            borderRadius: 35 * s,
+                                                            position: 'absolute',
+                                                            top: -10,
+                                                            right: -10
+                                                        }}
+                                                            source={{ uri: item.head }} />
+                                                    </TouchableOpacity>
+                                            }
                                             <View style={{ marginLeft: 30 * s }}>
                                                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                                     <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
-                                                    <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: 'red' }}>Lv.{item.level}</Text>
+                                                    <Image style={{ height: 21 * s, width: 36 * s, marginLeft: 10 * s }} source={Img['png' + item.level]} />
                                                 </View>
                                                 <Text>{item.time}</Text>
                                             </View>
@@ -693,7 +709,6 @@ export default class Experience extends Component {
                                                     flexDirection: 'row',
                                                     justifyContent: 'center',
                                                     alignItems: 'center',
-                                                    // backgroundColor: '#37376F',
                                                     position: 'absolute',
                                                     top: 5,
                                                     right: 5

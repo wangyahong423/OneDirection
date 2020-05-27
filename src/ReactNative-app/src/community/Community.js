@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, StyleSheet, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert } from 'react-native';
+import { Text, View, ScrollView, StyleSheet, ImageBackground, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import { Actions } from 'react-native-router-flux';
 import { Button } from '@ant-design/react-native';
+import Img from './Img'
+
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
 export default class Community extends Component {
@@ -41,7 +43,7 @@ export default class Community extends Component {
             .then((res) => {
                 this.setState({
                     pic: res,
-                });
+                })
                 fetch(url2)
                     .then((res) => res.json())
                     .then((res) => {
@@ -65,10 +67,13 @@ export default class Community extends Component {
                                                 if (item.name == this.state.pic[i].name) {
                                                     item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
                                                     item.level = this.state.pic[i].level;
+                                                    item.head = 'http://139.155.44.190:3005/head/' + this.state.pic[i].head;
                                                     item.college = this.state.pic[i].college;
                                                     break;
                                                 }
                                             }
+                                            item.card = 'http://139.155.44.190:3005/card/' + item.card;
+
                                             item.like = false;
                                             for (var j = 0; j < this.state.like.length; j++) {
                                                 if (item.id == this.state.like[j].lid) {
@@ -130,10 +135,13 @@ export default class Community extends Component {
                                                     if (item.name == self.state.pic[i].name) {
                                                         item.pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
                                                         item.level = self.state.pic[i].level;
+                                                        item.head = 'http://139.155.44.190:3005/head/' + self.state.pic[i].head;
                                                         item.college = self.state.pic[i].college;
                                                         break;
                                                     }
                                                 }
+                                                item.card = 'http://139.155.44.190:3005/card/' + item.card;
+
                                                 item.like = false;
                                                 for (var j = 0; j < self.state.like.length; j++) {
                                                     if (item.id == self.state.like[j].lid) {
@@ -161,6 +169,7 @@ export default class Community extends Component {
                                                 // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
                                             });
                                             self.setState({ list: res });
+
                                         });
                                 });
                         });
@@ -170,7 +179,6 @@ export default class Community extends Component {
 
     componentWillUnmount() {
         this.listener.remove();
-        // this.listener1.remove();
     }
     delete = (idx) => {
         Alert.alert('确认要删除吗', '',
@@ -322,9 +330,13 @@ export default class Community extends Component {
                                                 for (var i = 0; i < this.state.pic.length; i++) {
                                                     if (item.name == this.state.pic[i].name) {
                                                         item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
+                                                        item.head = 'http://139.155.44.190:3005/head/' + this.state.pic[i].head;
+
                                                         break;
                                                     }
                                                 }
+                                                item.card = 'http://139.155.44.190:3005/card/' + item.card;
+
                                                 for (var j = 0; j < this.state.like.length; j++) {
                                                     if (item.id == this.state.like[j].lid) {
                                                         item.like = true;
@@ -359,9 +371,10 @@ export default class Community extends Component {
     renovate = () => {
         var param = 1;
         DeviceEventEmitter.emit('refresh', param);
-        // Actions.community();
     }
     person = (idx) => {
+        // var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college ,head: this.state.list[idx].head};
+        // AsyncStorage.setItem('details', JSON.stringify(value));
         var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college };
         AsyncStorage.setItem('details', JSON.stringify(value));
         var value1 = {name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level,  title: "issue" };
@@ -371,12 +384,14 @@ export default class Community extends Component {
         DeviceEventEmitter.emit('Erefresh', param);
         DeviceEventEmitter.emit('refresh', param);
         Actions.person();
-       
     }
-
+    add = () => {
+        Actions.add()
+    }
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
+
                 <View style={{
                     width: '100%',
                     height: 55 * s,
@@ -412,17 +427,7 @@ export default class Community extends Component {
                         <Button style={{ borderBottomRightRadius: 28 * s, borderTopRightRadius: 28 * s, height: 42 * s, }} onPress={this.search}>
                             搜索
                         </Button>
-                        {/* <Icon
-                            style={{
-                                marginRight: 20 * s
-                            }}
-                            onPress={this.search}
-                            color='' size={20} name='search' /> */}
-
                     </View>
-                    {/* <Button style={{ height: 42 * s,backgroundColor:'#ffffff'}} onPress={this.search}>
-                            搜索
-                    </Button> */}
                     <TouchableOpacity style={{
                         position: 'absolute',
                         top: 15 * s,
@@ -443,28 +448,64 @@ export default class Community extends Component {
                         {
                             this.state.list.map((item, idx) => (
                                 <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 10 * s }}>
+
                                     <View style={{
                                         flexDirection: 'row',
                                         height: 80 * s,
                                         alignItems: 'center'
                                     }}>
-                                        <TouchableOpacity onPress={this.person.bind(this, (idx))}>
-                                            <Image style={{
-                                                marginLeft: 20 * s,
-                                                height: 50 * s,
-                                                width: 50 * s,
-                                                borderRadius: 25 * s,
-                                                backgroundColor: 'yellow'
-                                            }}
-                                                source={{ uri: item.pic }} />
-                                        </TouchableOpacity>
+                                        {
+                                            this.state.username == item.name
+                                                ?
+                                                <View>
+                                                    <Image style={{
+                                                        marginLeft: 20 * s,
+                                                        height: 50 * s,
+                                                        width: 50 * s,
+                                                        borderRadius: 25 * s,
+                                                        backgroundColor: 'yellow'
+                                                    }} source={{ uri: item.pic }} />
+                                                    <Image style={{
+                                                        height: 70 * s,
+                                                        width: 70 * s,
+                                                        borderRadius: 35 * s,
+                                                        // backgroundColor:'green',
+                                                        position: 'absolute',
+                                                        top: -10,
+                                                        right: -10
+                                                    }}
+                                                        source={{ uri: item.head }} />
+                                                </View>
+                                                : <TouchableOpacity onPress={this.person.bind(this, (idx))}>
+                                                    <Image style={{
+                                                        marginLeft: 20 * s,
+                                                        height: 50 * s,
+                                                        width: 50 * s,
+                                                        borderRadius: 25 * s,
+                                                        backgroundColor: 'yellow'
+                                                    }} source={{ uri: item.pic }} />
+                                                    <Image style={{
+                                                        height: 70 * s,
+                                                        width: 70 * s,
+                                                        borderRadius: 35 * s,
+                                                        // backgroundColor:'green',
+                                                        position: 'absolute',
+                                                        top: -10,
+                                                        right: -10
+                                                    }}
+                                                        source={{ uri: item.head }} />
+                                                </TouchableOpacity>
+                                        }
+
                                         <View style={{ marginLeft: 30 * s }}>
                                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                                 <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
-                                                <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: 'red' }}>Lv.{item.level}</Text>
+                                                <Image style={{ height: 21 * s, width: 36 * s, marginLeft: 10 * s }} source={Img['png' + item.level]} />
+                                                {/* <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: 'red' }}>Lv.{item.level}</Text> */}
                                             </View>
                                             <Text>{item.time}</Text>
                                         </View>
+                                        {/* </ImageBackground > */}
                                     </View>
                                     <View style={{
                                         marginLeft: 30 * s,
@@ -505,6 +546,33 @@ export default class Community extends Component {
                                             </TouchableOpacity>
                                             : null
                                     }
+                                    {/* {
+                                        this.state.username
+                                            ?  */}
+                                    <View style={{
+                                        width: 90 * s,
+                                        height: 45 * s,
+                                        flexDirection: 'row',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        // backgroundColor: '#37376F',
+                                        position: 'absolute',
+                                        top: 5,
+                                        right: 30
+                                    }}
+                                    >
+                                        <Image style={{
+                                            // marginLeft: 20 * s,
+                                            height: 45 * s,
+                                            width: 90 * s,
+                                            // borderRadius: 25 * s,
+                                            // backgroundColor: 'yellow'
+                                        }}
+                                            source={{ uri: item.card }} />
+                                    </View>
+                                    {/* : null
+                                    } */}
+
                                 </View>
                             ))
                         }
@@ -541,7 +609,7 @@ export default class Community extends Component {
                     bottom: 20 * s,
                     right: 20 * s
                 }}
-                    onPress={() => Actions.add()}
+                    onPress={() => this.add()}
                 >
                     <Icon style={{ fontSize: 50, color: '#fff' }} name="pencil" />
                 </TouchableOpacity>

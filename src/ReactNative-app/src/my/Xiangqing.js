@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, ScrollView, SafeAreaView, Dimensions, Image, TouchableOpacity, AsyncStorage, Alert, DeviceEventEmitter } from 'react-native';
+import Img from '../community/Img'
+
 const { width } = Dimensions.get('window');
 const s = width / 460;
 export default class Xiangqing extends Component {
@@ -12,7 +14,8 @@ export default class Xiangqing extends Component {
             list: [],
             pic: [],
             lvlist: [],
-            isLoading: true
+            isLoading: true,
+            head: ''
         };
         this.getData();
     }
@@ -40,10 +43,10 @@ export default class Xiangqing extends Component {
                         this.setState({
                             pic: res,
                         });
-                        this.state.pic.map((item)=>{
-                            if(this.state.username == item.name){
-                                console.log(45,this.state.username,item.name)
-                                this.state.page.pic='http://139.155.44.190:3005' + item.pic;
+                        this.state.pic.map((item) => {
+                            if (this.state.username == item.name) {
+                                this.state.page.pic = 'http://139.155.44.190:3005' + item.pic;
+                                this.state.page.head = 'http://139.155.44.190:3005/head/' + item.head;
                             }
                         })
                         fetch(url1)
@@ -55,6 +58,7 @@ export default class Xiangqing extends Component {
                                         for (var i = 0; i < this.state.pic.length; i++) {
                                             if (item.name == this.state.pic[i].name) {
                                                 item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
+                                                item.head = 'http://139.155.44.190:3005/head/' + this.state.pic[i].head;
                                                 item.level = this.state.pic[i].level;
                                                 break;
                                             }
@@ -82,6 +86,7 @@ export default class Xiangqing extends Component {
                                             for (var i = 0; i < self.state.pic.length; i++) {
                                                 if (item.name == self.state.pic[i].name) {
                                                     item.pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
+                                                    item.head = 'http://139.155.44.190:3005/head/' + self.state.pic[i].head;
                                                     item.level = self.state.pic[i].level;
                                                     break;
                                                 }
@@ -141,8 +146,22 @@ export default class Xiangqing extends Component {
                             width: 50 * s,
                             borderRadius: 25 * s
                         }} source={{ uri: this.state.page.pic }} />
+                        <Image style={{
+                            height: 66 * s,
+                            width: 66 * s,
+                            borderRadius: 33 * s,
+                            // backgroundColor:'green',
+                            position: 'absolute',
+                            top: 7,
+                            left: 10
+                        }}
+                            source={{ uri: this.state.page.head }} />
                         <View style={{ marginLeft: 30 * s }}>
-                            <Text style={{ fontSize: 18 * s }}>{this.state.page.name}</Text>
+                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                <Text style={{ fontSize: 18 * s }}>{this.state.page.name}</Text>
+                                <Image style={{ height: 25 * s, width: 40 * s, marginLeft: 10 * s }} source={Img['png' + this.state.page.level]} />
+
+                            </View>
                             <Text>{this.state.page.time}</Text>
                         </View>
                     </View>
@@ -174,15 +193,32 @@ export default class Xiangqing extends Component {
                                         flexDirection: 'row',
                                         alignItems: 'center'
                                     }}>
-                                        <Image style={{
-                                            marginLeft: 20 * s,
-                                            height: 50 * s,
-                                            width: 50 * s,
-                                            borderRadius: 25 * s,
-                                            backgroundColor: 'yellow'
-                                        }} source={{ uri: item.pic }} />
+                                        <View>
+                                            <Image style={{
+                                                marginLeft: 20 * s,
+                                                height: 50 * s,
+                                                width: 50 * s,
+                                                borderRadius: 25 * s,
+                                                backgroundColor: 'yellow'
+                                            }} source={{ uri: item.pic }} />
+                                            <Image style={{
+                                                height: 70 * s,
+                                                width: 70 * s,
+                                                borderRadius: 35 * s,
+                                                // backgroundColor:'green',
+                                                position: 'absolute',
+                                                top: -10,
+                                                left: 10
+                                            }}
+                                                source={{ uri: item.head }} />
+                                        </View>
                                         <View style={{ marginLeft: 30 * s, marginRight: 60 * s }}>
-                                            <Text style={this.state.page.name == item.name ? { fontSize: 15 * s, color: 'red', marginTop: 5 * s } : { fontSize: 15 * s, color: '#37376F', marginTop: 5 * s }}>{item.name}</Text>
+                                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                                <Text style={this.state.page.name == item.name ? { fontSize: 15 * s, color: 'red', marginTop: 5 * s } : { fontSize: 15 * s, color: '#37376F', marginTop: 5 * s }}>{item.name}</Text>
+                                                <Image style={{ height: 20 * s, width: 35 * s, marginLeft: 10 * s ,marginTop:5*s}} source={Img['png' + item.level]} />
+
+                                            </View>
+
                                             <Text style={{ fontSize: 18 * s }}>{item.content}</Text>
                                             <Text style={{ fontSize: 10 * s, color: '#808080', marginTop: 5 * s, marginBottom: 5 * s }}>{item.time}</Text>
                                         </View>

@@ -70,7 +70,6 @@ export default class NotesDetails extends Component {
             Actions.pop()
         }
         else if (this.state.content) {//内容或者题目有修改,且内容不为空
-            console.log("内容", this.state.content)
             var date = new Date();
             var year = date.getFullYear().toString();
             var month = (date.getMonth() + 1).toString();
@@ -78,7 +77,6 @@ export default class NotesDetails extends Component {
             var hour = date.getHours().toString();
             var minute = date.getMinutes().toString();
             var time = year + '年' + month + '月' + day + '日' + ' ' + hour + ':' + minute;
-            console.log(time)
             if (this.state.title != this.state.page.title && this.state.title && this.state.content == this.state.page.content) {//如果标题有修改且不为空,内容没修改
                 let url1 = `http://139.155.44.190:3005/notes/change?content=${this.state.page.content}&time=${time}&title=${this.state.title}&show=${this.state.title}&id=${this.state.page.id}`;
                 fetch(url1)
@@ -208,7 +206,7 @@ export default class NotesDetails extends Component {
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
-                <ImageBackground style={{ flex: 1, width: '100%', height: height }} source={require('../../../assets/share/notes.jpg')}>
+                <ImageBackground style={{ flex: 1, width: '100%', height: height }} source={require('../../../assets/share/notes.png')}>
                     <ScrollView style={{ width: '100%', height: "100%" }}>
                         <View style={{ flexDirection: "row" }}>
                             <Text style={{ marginLeft: 10 * s, marginTop: 10 * s }} onPress={() => Actions.pop()}>

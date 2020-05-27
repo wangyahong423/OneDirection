@@ -8,12 +8,12 @@ export default class Zhangyanping extends Component {
     render() {
         return (
             <ImageBackground
-                source={require('../../../assets/gonglve/schoolmatebg.jpg')}
+                source={require('../../../assets/gonglve/schoolmatebg.png')}
                 style={{ width: '100%', height: '100%' }}
                 resizeMode='stretch'
             >
                 <View style={styles.box}>
-                    <Image source={require('../../../assets/gonglve/张砚平.jpg')} style={styles.img} />
+                    <Image source={require('../../../assets/gonglve/张砚平.png')} style={styles.img} />
                     <Text style={styles.name}>【张/砚/平】</Text>
                     <Image source={require('../../../assets/gonglve/line.png')} style={{ width: '90%' }} resizeMode='stretch' />
                     <Text style={styles.introduction}>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, AsyncStorage, DeviceEventEmitter, TextInput, View, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, AsyncStorage, DeviceEventEmitter, TextInput, View, TouchableOpacity, Alert, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Touchable from 'react-native-touchable';
 import { Actions } from 'react-native-router-flux';
@@ -10,7 +10,8 @@ const Status = {
     Start: 2,    //倒计时开始状态
     End: 3,//倒计时结束
 }
-
+const { width, height } = Dimensions.get('window');
+const s = width / 460;
 export default class VerifyCode extends Component {
     static defaultProps = {
         maxTime: 60,
@@ -29,7 +30,7 @@ export default class VerifyCode extends Component {
             repwd: '',//确认密码
             tel: '',//电话号码
             num: '',//验证码
-            college: '你选择的学院为：',
+            college: '你选择的学院为',
             isloading: false,
             usernameNull: 0,//用户名是否为空，如果是空设置为0，弹出提示“请输入用户名”，如果不为空设置为1，不弹出提示。
             pwdNull: 0,//密码是否为空，如果是空设置为0，弹出提示“请输入密码”，如果不为空设置为1，不弹出提示。
@@ -66,10 +67,7 @@ export default class VerifyCode extends Component {
         }
     }
     numhandle = (text) => {
-        console.log(text,this.state.num)
-
         if (text !== '') {
-            console.log(text,this.state.num)
             this.setState({ num: text, numNull: 0 })
         }
     }
@@ -213,7 +211,7 @@ export default class VerifyCode extends Component {
                     data => {
                         if (data.ok == 1) {
                             Alert.alert('注册成功');
-                            AsyncStorage.setItem('college', '你选择的学院为：');
+                            AsyncStorage.setItem('college', '你选择的学院为');
                             Actions.login();
                         }
                         else if (data.ok == 0) {
@@ -260,70 +258,93 @@ export default class VerifyCode extends Component {
 
         return (
             <View style={{ alignItems: 'center', marginTop: '12%' }}>
-                <View style={{ flexDirection: 'row', marginTop: 25, alignItems: 'center' }}>
-                    <Icon name="user" color="red" size={30} style={{ marginRight: 20 }} />
-                    <TextInput onChangeText={this.userhandle} placeholder="请输入用户名" style={{ paddingLeft: 15, height: 40, width: '70%', borderRadius: 10, backgroundColor: 'white' }} />
+                <View style={{ flexDirection: 'row', marginTop: 25, height: 40 * s, width: '80%', borderBottomWidth: 1, borderBottomColor: "#fff", alignItems: "center" }}>
+                    <Icon name="user-o" color="#fff" size={25 * s} style={{ marginLeft: 15 * s }} />
+                    <TextInput onChangeText={this.userhandle} placeholder="请输入用户名" placeholderTextColor="#fff" style={{ color: "#fff" }} />
                 </View>
-                <View style={{ flexDirection: 'row', marginTop: 25, alignItems: 'center' }}>
-                    <Icon name="key" color="red" size={30} style={{ marginRight: 16 }} />
-                    <TextInput onChangeText={this.pwdhandle} secureTextEntry={true} placeholder="请输入密码" style={{ paddingLeft: 15, height: 40, width: '70%', borderRadius: 10, backgroundColor: 'white' }} />
+                <View style={{ flexDirection: 'row', marginTop: 25, height: 40 * s, width: '80%', borderBottomWidth: 1, borderBottomColor: "#fff", alignItems: "center" }}>
+                    <Icon name="lock" color="#fff" size={30 * s} style={{ marginLeft: 15 * s }} />
+                    <TextInput onChangeText={this.pwdhandle} secureTextEntry={true} placeholder="请输入密码" placeholderTextColor="#fff" style={{ color: "#fff" }} />
                 </View>
-                <View style={{ flexDirection: 'row', marginTop: 25, alignItems: 'center' }}>
-                    <Icon name="key" color="red" size={30} style={{ marginRight: 16 }} />
-                    <TextInput onChangeText={this.repwdhandle} secureTextEntry={true} placeholder="请再次确认密码" style={{ paddingLeft: 15, height: 40, width: '70%', borderRadius: 10, backgroundColor: 'white' }} />
+                <View style={{ flexDirection: 'row', marginTop: 25, height: 40 * s, width: '80%', borderBottomWidth: 1, borderBottomColor: "#fff", alignItems: "center" }}>
+                    <Icon name="lock" color="#fff" size={30 * s} style={{ marginLeft: 15 * s }} />
+                    <TextInput onChangeText={this.repwdhandle} secureTextEntry={true} placeholder="请再次确认密码" placeholderTextColor="#fff" style={{ color: "#fff" }} />
                 </View>
-                <View style={{ flexDirection: 'row', marginTop: 25, alignItems: 'center' }}>
-                    <Icon name="mortar-board" color="red" size={30}  />
-                    <View
-                        style={{
-                            width: '40%',
-                            marginRight: 10,
-                            borderBottomColor: '#e8e8e8', borderLeftColor: '#e8e8e8',
-                            borderTopColor: '#e8e8e8', borderRightColor: '#e8e8e8', borderWidth: 1,
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            paddingLeft: 15,
-                            borderRadius: 10,
-                            marginLeft: 13,
-                            backgroundColor:'white',
-                            height:42
-                        }}>
-                        <Text>{this.state.college}</Text>
+                <View style={{ flexDirection: 'row', marginTop: 25, height: 40 * s, width: '80%', borderBottomWidth: 1, borderBottomColor: "#fff", alignItems: "center" }}>
+                    <Icon name="mobile-phone" color="#fff" size={34 * s} style={{ marginLeft: 15 * s }} />
+                    <TextInput onChangeText={this.telhandle} placeholder="请输入手机号码" placeholderTextColor="#fff" style={{ color: "#fff" }} />
+                </View>
+                <View style={{ flexDirection: "row" }}>
+                    <View style={{ flexDirection: 'row', marginTop: 25, height: 40 * s, width: '53%', borderBottomWidth: 1, borderBottomColor: "#fff", alignItems: "center" }}>
+                        <Icon name="mortar-board" color="#fff" size={25 * s} style={{ marginLeft: 15 * s }} />
+                        <View
+                            style={{
+                                width: "80%",
+                                // marginRight: 15*s,
+                                // borderBottomColor: '#e8e8e8', borderLeftColor: '#e8e8e8',
+                                // borderTopColor: '#e8e8e8', borderRightColor: '#e8e8e8', borderWidth: 1,
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                paddingLeft: 10 * s,
+                                // borderRadius: 10,
+                                // marginLeft: 13,
+                                // backgroundColor:'white',
+                                height: 42*s,
+                                // backgroundColor:"yellow"
+                            }}>
+                            <Text style={{ color: "#fff" }}>{this.state.college}</Text>
+                        </View>
                     </View>
-                    <TouchableOpacity onPress={()=>{Actions.choosecollege()}} style={{ width: '30%', borderBottomColor: '#e8e8e8', borderLeftColor: '#e8e8e8', borderTopColor: '#e8e8e8', borderRightColor: '#e8e8e8', borderWidth: 1, alignItems: 'center', borderRadius: 10, backgroundColor: '#37376F' }}><Text style={{ lineHeight: 42, color: 'white', fontSize: 13 }}>选择学院</Text></TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => { Actions.choosecollege() }}
+                        // style={{ width: '30%', borderBottomColor: '#e8e8e8', borderLeftColor: '#e8e8e8', borderTopColor: '#e8e8e8', borderRightColor: '#e8e8e8', borderWidth: 1, alignItems: 'center', borderRadius: 10, backgroundColor: '#37376F' }}
+                        style={{
+                            width: '22%',
+                            height: 40*s,
+                            backgroundColor: 'rgba(255,255,255,0.5)',
+                            marginTop: 20*s,
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            borderRadius:10*s,
+                            marginLeft:18*s,
+                            borderWidth:1,
+                            borderColor:"#FFF"
+                        }}
+                    >
+                        <Text style={{ lineHeight: 42,  fontSize: 13 }}>选择学院</Text>
+                    </TouchableOpacity>
                 </View>
+                <View style={{ flexDirection: "row" }}>
+                    <View style={[props.containerStyle, { marginTop: 25, height: 40 * s, width: '53%', borderBottomWidth: 1, borderBottomColor: "#fff" }]}>
+                        <Icon name="edit" color="#fff" size={30 * s} style={{ marginLeft: 15 * s }} />
+                        <TextInput placeholderTextColor="#fff" style={{ color: "#fff" }}
+                            underlineColorAndroid='transparent'
+                            {...props}
+                            placeholder='请输入验证码'
+                            onChangeText={this.numhandle}
+                        />
 
-                <View style={{ flexDirection: 'row', marginTop: 25, alignItems: 'center' }}>
-                    <Icon name="mobile" color="red" size={34} style={{ marginRight: 24 }} />
-                    <TextInput onChangeText={this.telhandle} placeholder="请输入手机号码" style={{ paddingLeft: 15, height: 40, width: '70%', borderRadius: 10, backgroundColor: 'white' }} />
-                </View>
-                <View style={[props.containerStyle, { marginTop: 25, width: '90%', marginLeft: 40 }]}>
-                    <Icon name="stack-exchange" color="red" size={32} style={{ marginRight: 18 }} />
-                    <TextInput style={{ paddingLeft: 15, height: 40, width: '40%', borderRadius: 10, backgroundColor: 'white' }}
-                        underlineColorAndroid='transparent'
-                        {...props}
-                        placeholder='请输入验证码'
-                        onChangeText={this.numhandle}
-                    />
-                    <Touchable style={[props.touchableStyle, { width: '30%' }]} onPress={this.startCountdown}>
+                    </View>
+                    <Touchable style={[props.touchableStyle, { width: width * 0.2, height: 40 * s, marginTop: 25 * s, marginLeft: 20 * s }]} onPress={this.startCountdown}>
                         <Text style={props.touchableTextStyle}>{this.state.countdownTxt}</Text>
                     </Touchable>
                 </View>
-                <Text style={{ color: 'grey', marginTop: 22, marginBottom: -20, width: '70%', marginLeft: 76 }}>{this.state.timeContent}</Text>
+                <Text style={{ color: 'black', marginTop: 22, marginBottom: -20, width: '70%', marginLeft: 76 }}>{this.state.timeContent}</Text>
                 <TouchableOpacity
                     style={{
-                        width: '30%',
-                        height: 40,
-                        backgroundColor: '#37376F',
-                        marginTop: 60,
+                        width: width*0.5,
+                        height: 46*s,
+                        backgroundColor: '#4874E1',
+                        marginTop: 40*s,
                         alignItems: 'center',
                         justifyContent: 'center',
+                        borderRadius:23*s
                     }}
                     onPress={this.register}
                 >
                     <Text style={{ color: '#ffffff' }}>注册</Text>
                 </TouchableOpacity>
-                <TouchableOpacity
+                {/* <TouchableOpacity
                     style={{
                         width: '30%',
                         height: 40,
@@ -334,7 +355,7 @@ export default class VerifyCode extends Component {
                     }}
                     onPress={() => Actions.login()}>
                     <Text style={{ color: '#ffffff' }}>返回登录</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 {
                     this.state.usernameNull == 0
                         ? <View style={{ position: 'absolute', top: 52 }}><Text></Text></View>

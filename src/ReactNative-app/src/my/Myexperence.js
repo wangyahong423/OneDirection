@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Img from '../community/Img'
 import { Text, View, ScrollView, Dimensions, SafeAreaView, Image, AsyncStorage, DeviceEventEmitter } from 'react-native';
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
@@ -13,10 +14,13 @@ export default class Myexperence extends Component {
             color: [],
             yonghu: [],
             pic: '',
-            username: ''
+            username: '',
+            head: '',
+            isLoading:true
         };
     }
     componentDidMount() {
+        this.setState({isLoading:true})
         AsyncStorage.getItem('username')
             .then((res) => {
                 let name = { username: res }
@@ -28,7 +32,7 @@ export default class Myexperence extends Component {
         let url2 = `http://139.155.44.190:3005/experiencelike/list`;
         let url3 = `http://139.155.44.190:3005/users/getName`;
         let url4 = `http://139.155.44.190:3005/users/list`;
- 
+
         fetch(url2)
             .then(res => res.json())
             .then((res) => {
@@ -73,7 +77,11 @@ export default class Myexperence extends Component {
             .then(res => {
                 res.map(item => {
                     if (item.name == this.state.username) {
-                        this.setState({ pic: 'http://139.155.44.190:3005' + item.pic })
+                        this.setState({
+                            pic: 'http://139.155.44.190:3005' + item.pic,
+                            head: 'http://139.155.44.190:3005/head/' + item.head,
+                            level: item.level
+                        })
                     }
                 })
             })
@@ -90,6 +98,7 @@ export default class Myexperence extends Component {
                 this.setState({
                     data: arr
                 })
+                this.setState({isLoading:false})
             })
 
         this.state.data.map((item) => {
@@ -149,7 +158,10 @@ export default class Myexperence extends Component {
                 .then(res => {
                     res.map(item => {
                         if (item.name == self.state.username) {
-                            self.setState({ pic: 'http://139.155.44.190:3005' + item.pic })
+                            self.setState({
+                                pic: 'http://139.155.44.190:3005' + item.pic,
+                                head: 'http://139.155.44.190:3005/head/' + item.head
+                            })
                         }
                     })
                 })
@@ -177,26 +189,7 @@ export default class Myexperence extends Component {
 
     }
 
-
-    clickSend = (id) => {
-        let url = `http://139.155.44.190:3005/experience/select?content=${this.state.search}`;
-        fetch(url)
-            .then(res => res.json())
-
-            .then((res) => {
-                if (res.false) {
-                } else {
-                    for (var i = 0; i < res.length; i++) {
-                        res[i].pic = "http://139.155.44.190:3005/" + res[i].pic;
-                    }
-                    this.setState({
-                        data: res
-                    })
-                }
-            })
-    };
     delTie = (id) => {
-
         let url9 = `http://139.155.44.190:3005/experience/delete?id=${id}`
         fetch(url9)
             .then(res => res.json())
@@ -226,8 +219,20 @@ export default class Myexperence extends Component {
                                         borderRadius: 25 * s,
                                         backgroundColor: 'yellow'
                                     }} source={{ uri: this.state.pic }} />
+                                    <Image style={{
+                                        height: 70 * s,
+                                        width: 70 * s,
+                                        borderRadius: 35 * s,
+                                        position: 'absolute',
+                                        top: 5,
+                                        left: 8
+                                    }}
+                                        source={{ uri: this.state.head }} />
                                     <View style={{ marginLeft: 30 * s }}>
-                                        <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
+                                        <View style={{flexDirection:'row'}}>
+                                            <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
+                                            <Image style={{ height: 25 * s, width: 40 * s, marginLeft: 10 * s }} source={Img['png' + this.state.level]} />
+                                        </View>
                                         <Text>{item.time}</Text>
                                     </View>
                                 </View>
@@ -249,6 +254,24 @@ export default class Myexperence extends Component {
                     </View>
 
                 </ScrollView>
+                {
+                    this.state.isLoading
+                        ? <View
+                            style={{
+                                position: 'absolute',
+                                top: 80 * s,
+                                width: '100%'
+                            }}>
+                            <View style={{
+                                alignItems: 'center',
+                                flexDirection: 'row',
+                                justifyContent: 'center'
+                            }}>
+                                <Text style={{ fontSize: 20, marginTop: 10 }}>正在获取数据...</Text>
+                            </View>
+                        </View>
+                        : null
+                }
             </SafeAreaView >
         )
     }

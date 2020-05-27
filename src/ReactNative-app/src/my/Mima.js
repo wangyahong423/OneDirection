@@ -58,8 +58,6 @@ export default class Mima extends Component {
                         name: this.state.name,
                         tel: this.state.tel
                     })
-                    console.log(this.state.name)
-                    console.log(this.state.tel)
                     if (this.state.name !== '' && this.state.tel !== '' && this.state.newPwd !== '' && this.state.reNewPwd !== '') {
                         if (data.ok == 1) {
                             fetch(`http://139.155.44.190:3005/users/alter?name=${this.state.name}&pwd=${this.state.newPwd}&tel=${this.state.tel}`)

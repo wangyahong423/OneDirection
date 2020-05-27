@@ -19,7 +19,7 @@ export default class Study extends Component {
     render() {
         return (
             <ImageBackground
-                source={require('../../../assets/gonglve/study.jpg')}
+                source={require('../../../assets/gonglve/study.png')}
                 style={{ width: '100%', height: '100%' }}
             >
                 <View style={styles.box}>
