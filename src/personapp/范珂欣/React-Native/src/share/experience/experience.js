@@ -532,8 +532,18 @@ export default class Experience extends Component {
     }
 
     person = (idx) => {
+        // var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college,head: this.state.list[idx].head };
+        // AsyncStorage.setItem('details', JSON.stringify(value));
+        // Actions.person();
+
         var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college,head: this.state.list[idx].head };
         AsyncStorage.setItem('details', JSON.stringify(value));
+        var value1 = {name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level,  title: "issue" ,head: this.state.list[idx].head};
+        AsyncStorage.setItem('personname2', JSON.stringify(value1));
+        var param = 1;
+        DeviceEventEmitter.emit('ELrefresh', param);
+        DeviceEventEmitter.emit('Erefresh', param);
+        DeviceEventEmitter.emit('refresh', param);
         Actions.person();
     }
     render() {
