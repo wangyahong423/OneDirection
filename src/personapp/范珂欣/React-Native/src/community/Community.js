@@ -302,6 +302,7 @@ export default class Community extends Component {
                 .then((res) => {
                     console.log(url2);
                 });
+                console.log('aaa'+this.state.list[idx].likenum)//null
         }
     }
     change = (e) => {

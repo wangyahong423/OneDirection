@@ -72,4 +72,17 @@ router.get('/change', (req, res) => {
     }
   });
 });
+
+router.get('/changeLike', (req, res) => {
+  var id = req.query.lid;
+  var likenum = req.query.likenum;
+  let sql = 'update learn set likenum=$1 where id=$2';
+  con.query(sql, [likenum, id], (err, result) => {
+    if (err) {
+      res.json({ ok: false, msg: '修改失败！' });
+    } else {
+      res.json({ ok: true, msg: '修改成功！' });
+    }
+  });
+});
 module.exports = router;
