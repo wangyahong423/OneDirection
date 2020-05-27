@@ -329,7 +329,10 @@ export default class PerLearn extends Component {
 
     }
     componentWillUnmount() {
-        this.listener.remove();
+        if(this.listener){
+            this.listener.remove();
+
+        }
     }
     delete = (idx) => {
         Alert.alert('确认要删除吗', '',

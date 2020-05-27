@@ -385,8 +385,17 @@ export default class Community extends Component {
         DeviceEventEmitter.emit('refresh', param);
     }
     person = (idx) => {
-        var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college ,head: this.state.list[idx].head};
+        // var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college ,head: this.state.list[idx].head};
+        // AsyncStorage.setItem('details', JSON.stringify(value));
+        // console.log("详情values",value)
+        var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college };
         AsyncStorage.setItem('details', JSON.stringify(value));
+        var value1 = {name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level,  title: "issue" };
+        AsyncStorage.setItem('personname2', JSON.stringify(value1));
+        var param = 1;
+        DeviceEventEmitter.emit('ELrefresh', param);
+        DeviceEventEmitter.emit('Erefresh', param);
+        DeviceEventEmitter.emit('refresh', param);
         Actions.person();
     }
     add = () => {

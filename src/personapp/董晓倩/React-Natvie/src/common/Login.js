@@ -108,20 +108,13 @@ export default class Login extends Component {
     }
     return (
       <SafeAreaView style={{ flex: 1 }}>
-        {/* <BoxShadow setting={shadowOpt}> */}
         <ImageBackground style={{ flex: 1, width: '100%', height: "100%" }} source={require('../../assets/login/login8.png')}>
           <View style={{ alignItems: "center", height: height, width: width, justifyContent: "center" }}>
-            {/* <View style={{ height: 50 * s, width: width, justifyContent: "center", alignItems: "center", marginBottom: 20 * s,marginTop:50*s }}>
-              <Text style={{ fontSize: 25 * s, color: "#fff" }}>LOGIN</Text>
-            </View> */}
             <View style={{ marginTop: -90 * s }}>
               <Text style={{ color: "#fff", fontSize: 40 * s }}>Welcome</Text>
-
             </View>
             <View
               style={{ alignItems: 'center', height: height * 0.5, width: width * 0.8, borderRadius: 10 * s, justifyContent: "center", }}>
-              {/* <Image source={require('../../assets/my3.png')} style={{ width: 110 * s, height: 110 * s, borderRadius: 55 * s}} /> */}
-
               <View
                 style={{
                   width: '90%',
@@ -129,10 +122,6 @@ export default class Login extends Component {
                   flexDirection: 'row',
                   alignItems: 'center',
                   marginTop: 20 * s,
-                  // borderRadius: 25 * s,
-                  // borderColor: "#fff",
-                  // borderWidth: 1,
-                  // backgroundColor:"rgba(255,255,255,0.6)",
                   borderBottomColor: "#fff",
                   borderBottomWidth: 1 * s,
                 }}>
@@ -150,11 +139,6 @@ export default class Login extends Component {
                   flexDirection: 'row',
                   alignItems: 'center',
                   marginTop: 30 * s,
-                  // borderRadius: 25 * s,
-                  // borderColor: "#fff",
-                  // borderWidth: 1
-                  // borderRadius:5*s,
-                  // backgroundColor:"rgba(255,255,255,0.6)",
                   borderBottomColor: "#fff",
                   borderBottomWidth: 1 * s,
                 }}>
@@ -169,20 +153,15 @@ export default class Login extends Component {
 
                 />
               </View>
-
               <View style={{ flexDirection: 'row', marginTop: 30 * s, width: "90%", justifyContent: "space-around" }}>
                 <Text style={{ fontSize: 14 * s, color: '#fff' }} onPress={() => { Actions.forget() }}>忘记密码</Text>
                 <Text style={{ fontSize: 14 * s, color: '#fff' }} onPress={() => Actions.signin()}>没有账号？  去注册</Text>
-
               </View>
               <TouchableOpacity
                 style={{
                   width: '90%',
                   height: 50 * s,
                   backgroundColor: "#4874E1",
-                  // backgroundColor: 'rgba(255,255,255,0.5)',
-                  // borderColor:"#4589C6",
-                  // borderWidth:2,
                   marginTop: 50*s,
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -194,20 +173,18 @@ export default class Login extends Component {
               {
                 this.state.unum == 0
                   ? <View style={{ position: 'absolute', top: 290 }}><Text></Text></View>
-                  : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 175, left: 65 }}><Text style={{ color: 'red', fontSize: 13 }}>请输入用户名！</Text></View>
+                  : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 110*s, left: 65 }}><Text style={{ color: 'red', fontSize: 13 }}>请输入用户名！</Text></View>
               }
               {
                 this.state.pnum == 0
                   ? <View style={{ position: 'absolute', top: 290 }}><Text></Text></View>
-                  : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 255, left: 65 }}><Text style={{ color: 'red', fontSize: 13 }}>请输入正确的密码！</Text></View>
+                  : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 190*s, left: 65 }}><Text style={{ color: 'red', fontSize: 13 }}>请输入正确的密码！</Text></View>
               }
-
             </View>
-
           </View>
           {
             this.state.isloading
-              ? <View style={{ position: 'absolute', top: 530, zIndex: 11, left: 190, alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: 14 }}>正在登录中...</Text></View>
+              ? <View style={{ position: 'absolute', top: 650*s, zIndex: 11, left: 190, alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: 14,color:"#fff" }}>正在登录中...</Text></View>
               : null
           }
           {
@@ -216,8 +193,6 @@ export default class Login extends Component {
               : null
           }
         </ImageBackground>
-        {/* </BoxShadow> */}
-
       </SafeAreaView>
     );
   }

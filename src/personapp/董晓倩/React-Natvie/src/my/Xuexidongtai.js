@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { Text, View, ScrollView, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter } from 'react-native';
+import Img from '../community/Img'
+
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
 export default class Xuexidongtai extends Component {
@@ -16,6 +18,7 @@ export default class Xuexidongtai extends Component {
             pic: '',
             username: '',
             head: '',
+            lv: '',
             new: []
         };
     }
@@ -35,32 +38,7 @@ export default class Xuexidongtai extends Component {
                 })
                 let url = `http://139.155.44.190:3005/learn/list`;
                 let url1 = `http://139.155.44.190:3005/users/list`;
-                fetch(url)
-                    .then(res => res.json())
-                    .then((res) => {
-                        this.setState({
-                            list: res
-                        })
-                        var brr = [];
-                        this.state.list.map((item) => {
-                            if (item.name == this.state.username) {
-                                brr.push(item);
-                            }
-                        })
-                        for (var i = 0; i < brr.length; i++) {
-                            for (var j = 0; j < this.state.new.id.length; j++) {
-                                brr[i].new = false;
-                                if (brr[i].id == this.state.new.id[j]) {
-                                    brr[i].new = true;
-                                    break;
-                                }
-                            }
-                        }
-                        console.log(brr)
-                        this.setState({
-                            data: brr
-                        })
-                    })
+
                 fetch(url1)
                     .then(res => res.json())
                     .then((res) => {
@@ -72,10 +50,38 @@ export default class Xuexidongtai extends Component {
                             if (item.name == this.state.username) {
                                 this.setState({
                                     pic: 'http://139.155.44.190:3005' + item.pic,
-                                    head: 'http://139.155.44.190:3005/head/' + item.head
+                                    head: 'http://139.155.44.190:3005/head/' + item.head,
+                                    lv: item.level
                                 })
                             }
                         })
+                        fetch(url)
+                            .then(res => res.json())
+                            .then((res) => {
+                                this.setState({
+                                    list: res
+                                })
+                                var brr = [];
+                                this.state.list.map((item) => {
+                                    if (item.name == this.state.username) {
+                                        brr.push(item);
+                                    }
+                                })
+                                for (var i = 0; i < brr.length; i++) {
+                                    brr[i].level=this.state.lv;
+                                    for (var j = 0; j < this.state.new.id.length; j++) {
+                                        brr[i].new = false;
+                                        if (brr[i].id == this.state.new.id[j]) {
+                                            brr[i].new = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                                console.log(brr)
+                                this.setState({
+                                    data: brr
+                                })
+                            })
                     })
             });
         var self = this;
@@ -124,7 +130,8 @@ export default class Xuexidongtai extends Component {
                                 if (item.name == self.state.username) {
                                     self.setState({
                                         pic: 'http://139.155.44.190:3005' + item.pic,
-                                        head: 'http://139.155.44.190:3005/head/' + item.head
+                                        head: 'http://139.155.44.190:3005/head/' + item.head,
+                                        lv: item.level
                                     })
                                 }
                             })
@@ -148,16 +155,19 @@ export default class Xuexidongtai extends Component {
 
     details = (idx) => {
         var value = { page: this.state.data[idx] };
-        console.log(value);
+        console.log('sss' + this.state.data[idx].level);
         var arr = this.state.data;
-        arr[idx].new=false;
+        arr[idx].new = false;
         this.setState({
-            data:arr
+            data: arr
         })
         AsyncStorage.setItem('mPage', JSON.stringify(value));
-        AsyncStorage.getItem('mPage')
-            .then((value) => {
-            })
+        // var value2={lv:this.state.lv}
+        // AsyncStorage.setItem('lv', JSON.stringify(value2));
+
+        // AsyncStorage.getItem('mPage')
+        //     .then((value) => {
+        //     })
         Actions.xiangqing();
     }
     render() {
@@ -196,11 +206,16 @@ export default class Xuexidongtai extends Component {
                                                 flexDirection: 'row',
                                                 alignItems: 'center'
                                             }}>
-                                            <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
+                                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                                <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
+                                                <Image style={{ height: 25 * s, width: 40 * s, marginLeft: 10 * s }} source={Img['png' + this.state.lv]} />
+
+                                            </View>
+
                                             <View style={item.new ?
                                                 { marginTop: 0, marginLeft: 10, width: 10, height: 10, borderRadius: 5, borderColor: '#000', backgroundColor: 'red' }
-                                                : { marginTop: 0, marginLeft: 10, width: 10, height: 10, borderRadius: 5, borderColor: '#000', backgroundColor: '#fff' }}></View>       
-                                            </View>
+                                                : { marginTop: 0, marginLeft: 10, width: 10, height: 10, borderRadius: 5, borderColor: '#000', backgroundColor: '#fff' }}></View>
+                                        </View>
                                         <Text>{item.time}</Text>
                                     </View>
                                 </View>

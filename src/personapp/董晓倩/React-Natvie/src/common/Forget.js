@@ -24,6 +24,8 @@ export default class Mima extends Component {
             reNewPwd: text
         })
     }
+
+    
     nameChange = (text) => {
         this.setState({
             name: text

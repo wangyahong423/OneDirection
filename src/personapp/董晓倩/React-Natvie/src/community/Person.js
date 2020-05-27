@@ -37,7 +37,6 @@ export default class Person extends Component {
             personlearn: false,
             personexp: false,
             mycollect: false,
-            // searchIcon: false,//搜索的按钮
             style: '我的社区',
             isTop: false,
         };
@@ -59,6 +58,7 @@ export default class Person extends Component {
                 this.setState({
                     all: JSON.parse(res)
                 })
+                console.log("详情",this.state.all)
             });
     }
     componentDidMount() {
@@ -335,7 +335,10 @@ export default class Person extends Component {
         });
     }
     componentWillUnmount() {
-        this.listener.remove();
+        if(this.listener){
+            this.listener.remove();
+
+        }
     }
     back = () => {
         Actions.pop();
@@ -352,6 +355,7 @@ export default class Person extends Component {
         }
         else {
             Alert.alert("还没有关注哦~")
+            
         }
     }
     fanslist = () => {

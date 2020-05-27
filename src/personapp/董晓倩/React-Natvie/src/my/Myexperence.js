@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Img from '../community/Img'
 import { Text, View, ScrollView, Dimensions, SafeAreaView, Image, AsyncStorage, DeviceEventEmitter } from 'react-native';
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
@@ -76,7 +77,8 @@ export default class Myexperence extends Component {
                     if (item.name == this.state.username) {
                         this.setState({
                             pic: 'http://139.155.44.190:3005' + item.pic,
-                            head: 'http://139.155.44.190:3005/head/' + item.head
+                            head: 'http://139.155.44.190:3005/head/' + item.head,
+                            level: item.level
                         })
                     }
                 })
@@ -184,26 +186,7 @@ export default class Myexperence extends Component {
 
     }
 
-
-    clickSend = (id) => {
-        let url = `http://139.155.44.190:3005/experience/select?content=${this.state.search}`;
-        fetch(url)
-            .then(res => res.json())
-
-            .then((res) => {
-                if (res.false) {
-                } else {
-                    for (var i = 0; i < res.length; i++) {
-                        res[i].pic = "http://139.155.44.190:3005/" + res[i].pic;
-                    }
-                    this.setState({
-                        data: res
-                    })
-                }
-            })
-    };
     delTie = (id) => {
-
         let url9 = `http://139.155.44.190:3005/experience/delete?id=${id}`
         fetch(url9)
             .then(res => res.json())
@@ -237,14 +220,16 @@ export default class Myexperence extends Component {
                                         height: 70 * s,
                                         width: 70 * s,
                                         borderRadius: 35 * s,
-                                        // backgroundColor:'green',
                                         position: 'absolute',
                                         top: 5,
                                         left: 8
                                     }}
                                         source={{ uri: this.state.head }} />
                                     <View style={{ marginLeft: 30 * s }}>
-                                        <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
+                                        <View style={{flexDirection:'row'}}>
+                                            <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
+                                            <Image style={{ height: 25 * s, width: 40 * s, marginLeft: 10 * s }} source={Img['png' + this.state.level]} />
+                                        </View>
                                         <Text>{item.time}</Text>
                                     </View>
                                 </View>
