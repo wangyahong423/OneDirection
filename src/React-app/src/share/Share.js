@@ -6,18 +6,31 @@ export default class Share extends Component {
         return (
             <div className='communicateImg'>
                 <NavBar style={{ backgroundColor: '#37376F', color: '#fff', position: 'sticky ', top: '0', zIndex: 10, textAlign: 'center', height: '7vh' }}>
-                    学习交流</NavBar>
+                    学习交流
+                </NavBar>
                 <div>
-                    <Link to="/MaterialSharing">
+                    <Link to="/cet46">
                         <div className="resourceShare">
                             <span className="iconfont icon-shuji"></span>
-                            <p style={{ fontSize: "22px", margin: "27% auto", textAlign: "center" }}>资源共享</p>
+                            <p style={{ fontSize: "22px", margin: "20% auto", textAlign: "center" }}>四六级资料</p>
                         </div>
                     </Link>
-                    <Link to="/StudyCommunicate">
+                    <Link to="/programme">
                         <div className="StudyCommunicate">
-                            <span className="iconfont icon-changyongtubiao-xianxingdaochu-zhuanqu-"></span>
-                            <p style={{ fontSize: "22px", margin: "27% auto", textAlign: "center" }}>学习交流</p>
+                            <span className="iconfont icon-shuji"></span>
+                            <p style={{ fontSize: "22px", margin: "20% auto", textAlign: "center" }}>考研</p>
+                        </div>
+                    </Link>
+                    <Link to="/notes">
+                        <div className="StudyCommunicate2">
+                            <span className="iconfont icon-shuji"></span>
+                            <p style={{ fontSize: "22px", margin: "20% auto", textAlign: "center" }}>笔记</p>
+                        </div>
+                    </Link>
+                     <Link to="/experience">
+                        <div className="StudyCommunicate3">
+                            <span className="iconfont icon-shuji"></span>
+                            <p style={{ fontSize: "22px", margin: "20% auto", textAlign: "center" }}>经验分享</p>
                         </div>
                     </Link>
                 </div>

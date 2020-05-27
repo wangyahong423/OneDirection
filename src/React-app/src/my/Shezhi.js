@@ -57,6 +57,20 @@ export default class Shezhi extends Component {
               style={{ paddingLeft: '20px', borderBottom: '1px solid grey', height: '60px' }}
             ><span style={{ marginLeft: '10px', fontSize: '20px' }}>密码重置</span></Item>
           </Link>
+          <Link to="/head">
+            <Item
+              arrow="horizontal"
+              onClick={() => { }}
+              style={{ paddingLeft: '20px', borderBottom: '1px solid grey', height: '60px' }}
+            ><span style={{ marginLeft: '10px', fontSize: '20px' }}>头像框选择</span></Item>
+          </Link>
+          <Link to="/card">
+            <Item
+              arrow="horizontal"
+              onClick={() => { }}
+              style={{ paddingLeft: '20px', borderBottom: '1px solid grey', height: '60px' }}
+            ><span style={{ marginLeft: '10px', fontSize: '20px' }}>卡片背景</span></Item>
+          </Link>
           {/* <Link to="/"> */}
             <Item
               onClick={()=>{this.outlogin()}}

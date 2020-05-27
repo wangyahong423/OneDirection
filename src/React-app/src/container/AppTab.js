@@ -15,12 +15,12 @@ export default class AppTab extends React.Component {
   render() {
     return (
       <div style={{ position: 'fixed', height: '100%', width: '100%', top: 0 }}>
-        <TabBar unselectedTintColor="#949494" tintColor="#37376F" barTintColor="white">
+        <TabBar unselectedTintColor="#949494" tintColor="#343466" barTintColor="white">
           <TabBar.Item
-            title="攻略" 
+            title="攻略"
             key="Method"
             icon={<i className='iconfont icon-gonglve' style={{ fontSize: 22, lineHeight: '22px' }}></i>}
-            selectedIcon={<i style={{ fontSize: 22, lineHeight: '22px', color: '#37376F' }} className='iconfont icon-gonglve'></i>
+            selectedIcon={<i style={{ fontSize: 22, lineHeight: '22px', color: '#3fcccb' }} className='iconfont icon-gonglve'></i>
             }
             selected={this.state.selectedTab === 'method'}
             onPress={() => {
@@ -52,7 +52,7 @@ export default class AppTab extends React.Component {
           </TabBar.Item>
           <TabBar.Item
             icon={<i className='iconfont icon-fenxiang' style={{ fontSize: 22, lineHeight: '22px' }}></i>}
-            selectedIcon={<i style={{ fontSize: 22, lineHeight: '22px', color: '#37376F' }} className='iconfont icon-fenxiang'></i>
+            selectedIcon={<i style={{ fontSize: 22, lineHeight: '22px', color: '#3fcccb' }} className='iconfont icon-fenxiang'></i>
             }
             title="共享"
             key="Share"
@@ -69,7 +69,7 @@ export default class AppTab extends React.Component {
           </TabBar.Item>
           <TabBar.Item
             icon={<i className='iconfont icon-wode' style={{ fontSize: 22, lineHeight: '22px' }}></i>}
-            selectedIcon={<i style={{ fontSize: 22, lineHeight: '22px', color: '#37376F' }} className='iconfont icon-wode'></i>
+            selectedIcon={<i style={{ fontSize: 22, lineHeight: '22px', color: '#3fcccb' }} className='iconfont icon-wode'></i>
             }
             title="我的"
             key="My"

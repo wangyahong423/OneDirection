@@ -1,0 +1,1 @@
+在正确路径下输入指令：npm install react-confirm-alert

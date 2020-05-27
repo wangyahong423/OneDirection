@@ -13,36 +13,38 @@ export default class My extends Component {
             data: [],
             todo: [],
             username: '',
+            head: '',
             islogin: false
         }
     }
     componentDidMount() {
-        let url = `http://139.155.44.190:3005/users/list`;
-        axios(url)
-            .then((res) => {
-                if (res.err) {
-                } else {
-                    this.setState({
-                        data: res.data
-                    })
-                    let arr = [];
-                    this.state.data.map((item) => {
-                        if (item.name === this.state.n1) {
-                            arr.push(item)
-                        }
-                        this.setState({
-                            data: arr
-                        })
-                    })
-                }
-            })
-        let url1 = `http://139.155.44.190:3005/users/getName`;
-        axios(url1)
+        let url11 = `http://139.155.44.190:3005/users/getName`;
+        axios(url11)
             .then((res) => {
                 this.setState({
                     username: res.data.name
                 })
             })
+        // let url = `http://139.155.44.190:3005/users/list`;
+        // axios(url)
+        //     .then((res) => {
+        //         if (res.err) {
+        //         } else {
+        //             this.setState({
+        //                 data: res.data
+        //             })
+        //             let arr = [];
+        //             this.state.data.map((item) => {
+        //                 if (item.name === this.state.username) {
+        //                     arr.push(item)
+        //                 }
+        //                 this.setState({
+        //                     data: arr
+        //                 })
+        //             })
+        //             console.log('data:', arr);
+        //         }
+        //     })
         let url2 = `http://139.155.44.190:3005/users/list`;
         axios(url2)
             .then((res) => {
@@ -54,6 +56,7 @@ export default class My extends Component {
                         this.setState({
                             college: item.college,
                             pic: "http://139.155.44.190:3005" + item.pic,
+                            head: "http://139.155.44.190:3005/head/" + item.head,
                             lvnum: item.lvnum
                         })
                     }
@@ -115,20 +118,30 @@ export default class My extends Component {
                 <NavBar style={{ width: '100%', backgroundColor: '#37376f', color: '#fff', position: 'fixed ', top: '0', zIndex: 1, height: '7vh' }}>我的</NavBar>
                 <div className="one"></div>
                 <Link to="/changeImg">
-                    <div style={{ height: '100px', width: '100px', borderRadius: '50%', opacity: '1', zIndex: "10", marginTop: '-45px', overflow: 'hidden', marginLeft: '20px' }} >
-                        <div>
-                            <img src={this.state.pic} style={{ height: '100px', width: '100px', opacity: '1' }} />
+                    <div style={{ height: '150px', width: '150px', borderRadius: '50%', opacity: '1', zIndex: "10", marginTop: '-70px', overflow: 'hidden', marginLeft: '20px' }} >
+                        <div style={{position:'relative'}}>
+                            <img src={this.state.pic} style={{ height: '100px', width: '100px', opacity: '1',marginTop:25,marginLeft:25, borderRadius: '50%'}} />
+                            {
+                                this.state.head != 'http://139.155.44.190:3005/head/null'
+                                    ? <img src={this.state.head} style={{ height: '120px', width: '120px', borderRadius: '50%', position: 'absolute', left: 12, top: 14 }} />
+                                    : null
+                            }
                         </div>
                     </div>
                 </Link>
-                <div style={{ marginTop: '-7vh', marginLeft: '40vw' }}>
+                <div style={{ marginTop: '-10vh', marginLeft: '35vw' }}>
                     <div>
                         <span>{this.state.username}&emsp;</span>
                         <span style={{ color: 'red' }}>Lv{this.state.level}</span>
                         <p>河北师范大学{this.state.college}</p>
                     </div>
                 </div>
-                <div>
+                {/* {
+                    this.state.head != 'http://139.155.44.190:3005/head/null'
+                        ? <img src={this.state.head} style={{ height: '150px', width: '150px', borderRadius: '50%', position:'absolute',top:190,left:-10,zIndex:1 }} />
+                        : null
+                } */}
+                <div style={{zIndex:999}}>
                     <List style={{ marginTop: '18px', marginBottom: '15px' }}>
                         <Link to="/mynotes">
                             <Item
@@ -155,7 +168,7 @@ export default class My extends Component {
                             ><span style={{ marginLeft: '40px', fontSize: '20px' }}>我的经验</span></Item>
                         </Link>
                     </List>
-                    <List style={{marginBottom:'15px'}}>
+                    <List style={{ marginBottom: '15px' }}>
                         <Link to="/tongxunlvone">
                             <Item
                                 arrow="horizontal"
@@ -169,7 +182,7 @@ export default class My extends Component {
                                 arrow="horizontal"
                                 onClick={() => { }}
                                 className='iconfont icon-tuandui'
-                                style={{ paddingLeft: '20px',  height: '60px', color: 'black' }}
+                                style={{ paddingLeft: '20px', height: '60px', color: 'black' }}
                             ><span style={{ marginLeft: '40px', fontSize: '20px' }}>关于我们</span></Item>
                         </Link>
                     </List>
@@ -195,11 +208,11 @@ export default class My extends Component {
                                 arrow="horizontal"
                                 onClick={() => { }}
                                 className='iconfont icon-shezhi1'
-                                style={{ paddingLeft: '20px',  height: '60px', color: 'black' }}
+                                style={{ paddingLeft: '20px', height: '60px', color: 'black' }}
                             ><span style={{ marginLeft: '40px', fontSize: '20px' }}>设置</span></Item>
                         </Link>
                     </List>
-                    <span onClick={() => { this.outlogin() }} style={{ color: 'grey', fontSize: 14,lineHeight:'30px',marginLeft:'42%' }}>退出登录</span>
+                    <span onClick={() => { this.outlogin() }} style={{ color: 'grey', fontSize: 14, lineHeight: '30px', marginLeft: '42%' }}>退出登录</span>
                 </div>
             </div>
         )

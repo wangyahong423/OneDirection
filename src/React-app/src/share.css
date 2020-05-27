@@ -88,7 +88,7 @@
     width:50vw;
     background-color:#675858;
     position:absolute;
-    top:30vh;
+    top:15%;
     margin-left:25vw;
     opacity:0.7;
     font-size:25px;
@@ -106,7 +106,29 @@
     width:50vw;
     background-color:#675858;
     position:absolute;
-    top:60%;
+    top:35%;
+    margin-left:25%;
+    opacity:0.7;
+    font-size:25px;
+    color:#fff;
+}
+.StudyCommunicate2{
+    height:15vh;
+    width:50vw;
+    background-color:#675858;
+    position:absolute;
+    top:55%;
+    margin-left:25%;
+    opacity:0.7;
+    font-size:25px;
+    color:#fff;
+}
+.StudyCommunicate3{
+    height:15vh;
+    width:50vw;
+    background-color:#675858;
+    position:absolute;
+    top:75%;
     margin-left:25%;
     opacity:0.7;
     font-size:25px;

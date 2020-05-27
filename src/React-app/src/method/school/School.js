@@ -61,6 +61,21 @@ export default class School extends Component {
                             <p style={{ color: '#fff', lineHeight: '6vh', marginLeft: '4vw' }}>治理架构</p>
                         </div>
                     </Link>
+                    <Link to='/rcpy'>
+                        <div className='schoolbox2'>
+                            <p style={{ color: '#fff', lineHeight: '6vh', marginLeft: '4vw' }}>人才培养</p>
+                        </div>
+                    </Link>
+                    <Link to='/kxyj'>
+                        <div className='schoolbox2'>
+                            <p style={{ color: '#fff', lineHeight: '6vh', marginLeft: '4vw' }}>科学研究</p>
+                        </div>
+                    </Link>
+                    <Link to='/jyfw'>
+                        <div className='schoolbox2'>
+                            <p style={{ color: '#fff', lineHeight: '6vh', marginLeft: '4vw' }}>就业服务</p>
+                        </div>
+                    </Link>
                 </div>
             </div>
         )
