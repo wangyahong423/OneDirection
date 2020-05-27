@@ -145,7 +145,10 @@ export default class Follows extends Component {
         })
     }
     componentWillUnmount() {
-        this.listener.remove();
+        if(this.listener){
+            this.listener.remove();
+        }
+        
     }
     follow = (id) => {
         if (this.state.myFol[id] == false) {

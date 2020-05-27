@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View,  TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert } from 'react-native';
+import { Text, View, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import { Actions } from 'react-native-router-flux';
 import Img from './Img'
@@ -65,6 +65,7 @@ export default class SearchLearn extends Component {
                                             for (var i = 0; i < res.length; i++) {
                                                 if (res[i].name == this.state.person.name) {
                                                     res[i].pic = this.state.person.pic;
+                                                    res[i].head = this.state.person.head;
                                                     res[i].college = this.state.person.college;
                                                     res[i].level = this.state.person.level;
                                                     res[i].like = false;
@@ -127,6 +128,7 @@ export default class SearchLearn extends Component {
                                                         res[i].pic = self.state.person.pic;
                                                         res[i].college = self.state.person.college;
                                                         res[i].level = self.state.person.level;
+                                                        res[i].head = self.state.person.head;
                                                         res[i].like = false;
                                                         for (var j = 0; j < self.state.like.length; j++) {
                                                             if (res[i].id == self.state.like[j].lid) {
@@ -200,6 +202,7 @@ export default class SearchLearn extends Component {
                                                                 for (var i = 0; i < this.state.pic.length; i++) {
                                                                     if (res[a].name == this.state.pic[i].name) {
                                                                         res[a].pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
+                                                                        res[a].head = 'http://139.155.44.190:3005/head/' + this.state.pic[i].head;
                                                                         res[a].level = this.state.pic[i].level;
                                                                         res[a].college = this.state.pic[i].college;
                                                                         break;
@@ -282,6 +285,7 @@ export default class SearchLearn extends Component {
                                                                         if (res[a].name == self.state.pic[i].name) {
                                                                             res[a].pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
                                                                             res[a].level = self.state.pic[i].level;
+                                                                            res[a].head = 'http://139.155.44.190:3005/head/' + self.state.pic[i].head;
                                                                             res[a].college = self.state.pic[i].college;
                                                                             break;
                                                                         }
@@ -328,7 +332,10 @@ export default class SearchLearn extends Component {
 
     }
     componentWillUnmount() {
-        this.listener.remove();
+        if (this.listener) {
+            this.listener.remove();
+        }
+
     }
     delete = (idx) => {
         Alert.alert('确认要删除吗', '',
@@ -482,7 +489,7 @@ export default class SearchLearn extends Component {
                     // alignItems: 'center',
                     // justifyContent: 'center'
                 }}>
-                    <View style={{ height: 55 * s, width: width, backgroundColor: "#fff", justifyContent: "center", alignItems: "center" ,flexDirection:"row"}}>
+                    <View style={{ height: 55 * s, width: width, backgroundColor: "#fff", justifyContent: "center", alignItems: "center", flexDirection: "row" }}>
                         <View style={{
                             height: 40 * s,
                             width: '75%',
@@ -506,13 +513,13 @@ export default class SearchLearn extends Component {
                                 placeholder="搜索"
                                 onChangeText={this.change}
                             />
-                            <Icon style={{fontSize:25*s,marginLeft:10*s}} name="search"  onPress={() => this.search()}/>
+                            <Icon style={{ fontSize: 25 * s, marginLeft: 10 * s }} name="search" onPress={() => this.search()} />
                             {/* <Button style={{ borderBottomRightRadius: 28 * s, borderTopRightRadius: 28 * s, height: 42 * s, }} onPress={this.search}>
                             搜索
                         </Button> */}
                         </View>
-                        <TouchableOpacity style={{marginLeft:20*s,color:"#696969"}} onPress={() => this.back()}>
-                            <Text style={{fontSize:17*s,color:"#696969"}}>取消</Text>
+                        <TouchableOpacity style={{ marginLeft: 20 * s, color: "#696969" }} onPress={() => this.back()}>
+                            <Text style={{ fontSize: 17 * s, color: "#696969" }}>取消</Text>
                         </TouchableOpacity>
                     </View>
 
@@ -534,7 +541,16 @@ export default class SearchLearn extends Component {
                                         backgroundColor: 'yellow'
                                     }}
                                         source={{ uri: item.pic }} />
-
+                                    <Image style={{
+                                        height: 66 * s,
+                                        width: 66 * s,
+                                        borderRadius: 33 * s,
+                                        // backgroundColor:'green',
+                                        position: 'absolute',
+                                        top: 3,
+                                        left: 12
+                                    }}
+                                        source={{ uri: item.head }} />
                                     <View style={{ marginLeft: 30 * s }}>
                                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                             <Text style={{ fontSize: 18 * s }}>{item.name}</Text>

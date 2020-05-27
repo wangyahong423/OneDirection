@@ -25,6 +25,7 @@ export default class ExpDetails extends Component {
                 this.setState({
                     all: JSON.parse(res)
                 })
+                console.log("all",this.state.all.head)
             });
     }
 
@@ -55,6 +56,16 @@ export default class ExpDetails extends Component {
                                         borderRadius: 25 * s
                                     }} source={{ uri: this.state.all.pic }} />
                                 </View>
+                                <Image style={{
+                                        height: 70 * s,
+                                        width: 70 * s,
+                                        borderRadius: 35 * s,
+                                        // backgroundColor:'green',
+                                        position: 'absolute',
+                                        top: 4*s,
+                                        left:13*s
+                                    }}
+                                        source={{ uri: this.state.all.head }} />
                                 <View style={{ marginLeft: 30 * s }}>
                                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                         <Text style={{ fontSize: 18 * s, color: '#37376F' }}>{this.state.all.name}</Text>

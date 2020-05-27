@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, ScrollView, SafeAreaView, Dimensions, Image, TouchableOpacity, AsyncStorage, Alert, DeviceEventEmitter } from 'react-native';
+import Img from '../community/Img'
+
 const { width } = Dimensions.get('window');
 const s = width / 460;
 export default class Xiangqing extends Component {
@@ -32,6 +34,7 @@ export default class Xiangqing extends Component {
                 this.setState({
                     page: JSON.parse(value).page
                 });
+                console.log('ddd' + this.state.page.level)
                 this.setState({ isLoading: true })
                 let url1 = `http://139.155.44.190:3005/learntalk/list`;
                 let url2 = `http://139.155.44.190:3005/users/list`;
@@ -157,7 +160,11 @@ export default class Xiangqing extends Component {
                         }}
                             source={{ uri: this.state.page.head }} />
                         <View style={{ marginLeft: 30 * s }}>
-                            <Text style={{ fontSize: 18 * s }}>{this.state.page.name}</Text>
+                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                <Text style={{ fontSize: 18 * s }}>{this.state.page.name}</Text>
+                                <Image style={{ height: 25 * s, width: 40 * s, marginLeft: 10 * s }} source={Img['png' + this.state.page.level]} />
+
+                            </View>
                             <Text>{this.state.page.time}</Text>
                         </View>
                     </View>
@@ -209,7 +216,12 @@ export default class Xiangqing extends Component {
                                                 source={{ uri: item.head }} />
                                         </View>
                                         <View style={{ marginLeft: 30 * s, marginRight: 60 * s }}>
-                                            <Text style={this.state.page.name == item.name ? { fontSize: 15 * s, color: 'red', marginTop: 5 * s } : { fontSize: 15 * s, color: '#37376F', marginTop: 5 * s }}>{item.name}</Text>
+                                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                                <Text style={this.state.page.name == item.name ? { fontSize: 15 * s, color: 'red', marginTop: 5 * s } : { fontSize: 15 * s, color: '#37376F', marginTop: 5 * s }}>{item.name}</Text>
+                                                <Image style={{ height: 20 * s, width: 35 * s, marginLeft: 10 * s ,marginTop:5*s}} source={Img['png' + item.level]} />
+
+                                            </View>
+
                                             <Text style={{ fontSize: 18 * s }}>{item.content}</Text>
                                             <Text style={{ fontSize: 10 * s, color: '#808080', marginTop: 5 * s, marginBottom: 5 * s }}>{item.time}</Text>
                                         </View>

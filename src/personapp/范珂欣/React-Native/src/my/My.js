@@ -45,7 +45,7 @@ export default class Person extends Component {
                         }
                     }
                 }
-                // console.log(arr);
+                // console.log("arr:"+arr);
                 this.setState({
                     new: arr
                 });
@@ -211,7 +211,11 @@ export default class Person extends Component {
     tiezi = () => {
         var value = { id: this.state.new};
         AsyncStorage.setItem('new', JSON.stringify(value));
-        console.log(value)
+        console.log('aaa'+value);
+        if(!this.state.newl){
+            var value={id:''}
+            AsyncStorage.setItem('new', JSON.stringify(value));
+        }
         for(var i = 0;i<this.state.new.length;i++){
             var url11 = `http://139.155.44.190:3005/learn/change?newl=${false}&lid=${this.state.new[i]}`;
             console.log(url11);
@@ -220,7 +224,8 @@ export default class Person extends Component {
             .then((res) => {
                 console.log(res);
                 this.setState({
-                    newl: false
+                    newl: false,
+                    // new:[]
                 });
             })
         }
@@ -235,15 +240,15 @@ export default class Person extends Component {
                 <View style={{ width: '100%', height: 430, backgroundColor: '#ffffff' }}>
                     <View style={{ width: '100%', height: 80, flexDirection: 'row' }}>
                         <TouchableOpacity style={{ width: 100, height: 100, position: "absolute", top: -50, left: 30 }} onPress={() => Actions.touxiang()}>
-                            <Image source={{ uri: this.state.pic }} style={{ width: 100*s, height: 100*s, borderRadius: 50*s}} />
+                            <Image source={{ uri: this.state.pic }} style={{ width: 90*s, height: 90*s, borderRadius: 45*s}} />
                             <Image style={{
-                                height: 120 * s,
-                                width: 120 * s,
-                                borderRadius: 60 * s,
+                                height: 100 * s,
+                                width: 100 * s,
+                                borderRadius: 50 * s,
                                 // backgroundColor:'green',
                                 position: 'absolute',
-                                top: -13*s,
-                                right: -15*s
+                                top: -4*s,
+                                right: 7*s
                             }}
                                 source={{ uri: this.state.head }} />
                         </TouchableOpacity>
@@ -293,7 +298,7 @@ export default class Person extends Component {
                                 borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1
                             }}>
                                 <Icon name="hand-o-right" size={30} color="#5f6fcd" style={{ marginLeft: 30, marginTop: 10 }} />
-                                <TouchableOpacity onPress={() => Actions.tiezi()} style={{ flexDirection: 'row' }}>
+                                <TouchableOpacity onPress={() => this.tiezi()} style={{ flexDirection: 'row' }}>
                                     <Text style={{ fontSize: 20, marginLeft: 39, marginTop: 11 }} onPress={() => Actions.tiezi()}>我的帖子</Text>
                                     <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 212, marginTop: 15 }} />
                                 </TouchableOpacity>
