@@ -21,8 +21,8 @@ export default class Person extends Component {
             new: [],
             fans: 0,
             follows: 0,
-
-
+            likenum: 0,
+            like:[]
         }
     }
     componentDidMount() {
@@ -39,8 +39,12 @@ export default class Person extends Component {
             .then((res) => res.json())
             .then((res) => {
                 var arr = [];
+                var likenum = 0;
+                var like=[];
                 for (var i = 0; i < res.length; i++) {
                     if (res[i].name == this.state.username) {
+                        likenum = likenum + res[i].likenum;
+                        like.push(res[i].likenum);
                         if (res[i].newl == true) {
                             this.setState({
                                 newl: true
@@ -51,9 +55,11 @@ export default class Person extends Component {
                 }
                 // console.log("arr:"+arr);
                 this.setState({
-                    new: arr
+                    new: arr,
+                    likenum: likenum,
+                    like:like
                 });
-                // console.log(this.state.new);
+                // console.log(this.state.likenum);
             });
         fetch(url2)
             .then(res => res.json())
@@ -91,6 +97,7 @@ export default class Person extends Component {
                                                 level: 10
                                             })
                                         }
+                                        console.log("level" + this.state.level)
                                         // console.log("获取到的等级", this.state.level)
                                         let url3 = `http://139.155.44.190:3005/users/changeLv?level=${this.state.level}&name=${this.state.username}`;
                                         fetch(url3)
@@ -351,7 +358,7 @@ export default class Person extends Component {
                         <Icon name="star-o" size={30} color="#fed658" style={{ marginLeft: 30, marginTop: 10 }} />
                         <TouchableOpacity onPress={() => this.fanslist()} style={{ flexDirection: 'row' }}>
                             <Text style={{ fontSize: 20, marginLeft: 40, marginTop: 11 }}>我的粉丝</Text>
-                            <Text style={{marginTop:13}}>{this.state.fans}</Text>
+                            <Text style={{ marginTop: 13 }}>{this.state.fans}</Text>
                             <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 210, marginTop: 15 }} />
                         </TouchableOpacity>
                     </View>
@@ -362,7 +369,7 @@ export default class Person extends Component {
                         <Icon name="star-o" size={30} color="#fed658" style={{ marginLeft: 30, marginTop: 10 }} />
                         <TouchableOpacity onPress={() => this.followslist()} style={{ flexDirection: 'row' }}>
                             <Text style={{ fontSize: 20, marginLeft: 40, marginTop: 11 }}>我的关注</Text>
-                            <Text style={{marginTop:13}}>{this.state.follows}</Text>
+                            <Text style={{ marginTop: 13 }}>{this.state.follows}</Text>
 
                             <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 210, marginTop: 15 }} />
                         </TouchableOpacity>
@@ -380,14 +387,27 @@ export default class Person extends Component {
 
                     {
                         this.state.newl
-                            ? <View style={{
+                            ?
+                            <View style={{
                                 height: 50, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
                                 borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1
                             }}>
                                 <Icon name="hand-o-right" size={30} color="#5f6fcd" style={{ marginLeft: 30, marginTop: 10 }} />
                                 <TouchableOpacity onPress={() => this.tiezi()} style={{ flexDirection: 'row' }}>
-                                    <Text style={{ fontSize: 20, marginLeft: 39, marginTop: 11 }} onPress={() => Actions.tiezi()}>我的帖子</Text>
-                                    <View style={{ marginTop: 20, marginLeft: 170, width: 10, height: 10, borderRadius: 5, borderColor: '#000', backgroundColor: 'red' }}></View>
+                                    {
+                                        this.state.likenum
+                                            ?
+                                            <View style={{ flexDirection: 'row', marginRight: 138 }}>
+                                                <Text style={{ fontSize: 20, marginLeft: 39, marginTop: 11 }} onPress={() => Actions.tiezi()}>我的帖子</Text>
+                                                <View style={{ marginTop: 15, marginLeft: 10, width: 20, height: 20, borderRadius: 10, borderColor: '#000', backgroundColor: 'red', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                                                    <Text style={{ fontSize: 15, color: '#fff' }}>{this.state.likenum}</Text>
+                                                </View>
+                                            </View>
+                                            : <Text style={{ fontSize: 20, marginLeft: 39, marginRight: 170, marginTop: 11 }} onPress={() => Actions.tiezi()}>我的帖子</Text>
+
+                                    }
+
+                                    <View style={{ marginTop: 20, width: 10, height: 10, borderRadius: 5, borderColor: '#000', backgroundColor: 'red' }}></View>
                                     <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 30, marginTop: 15 }} />
                                 </TouchableOpacity>
                             </View>
@@ -397,19 +417,29 @@ export default class Person extends Component {
                             }}>
                                 <Icon name="hand-o-right" size={30} color="#5f6fcd" style={{ marginLeft: 30, marginTop: 10 }} />
                                 <TouchableOpacity onPress={() => this.tiezi()} style={{ flexDirection: 'row' }}>
-                                    <Text style={{ fontSize: 20, marginLeft: 39, marginTop: 11 }} onPress={() => Actions.tiezi()}>我的帖子</Text>
+                                    {
+                                        this.state.likenum
+                                            ?
+                                            <View style={{ flexDirection: 'row', marginRight: -33 }}>
+                                                <Text style={{ fontSize: 20, marginLeft: 39, marginTop: 11 }} onPress={() => Actions.tiezi()}>我的帖子</Text>
+                                                <View style={{ marginTop: 15, marginLeft: 10, width: 20, height: 20, borderRadius: 10, borderColor: '#000', backgroundColor: 'red', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                                                    <Text style={{ fontSize: 15, color: '#fff' }}>{this.state.likenum}</Text>
+                                                </View>
+                                            </View>
+                                            : <Text style={{ fontSize: 20, marginLeft: 39, marginRight: 170, marginTop: 11 }} onPress={() => Actions.tiezi()}>我的帖子</Text>
+
+                                    }
                                     <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 212, marginTop: 15 }} />
                                 </TouchableOpacity>
                             </View>
                     }
 
-
                     <View style={{
                         height: 50, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
                         borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1
                     }}>
-                        <Icon name="american-sign-language-interpreting" size={26} color="#5f6fcd" style={{ marginLeft: 30, marginTop: 10 }} />
                         <TouchableOpacity onPress={() => Actions.myexperence()} style={{ flexDirection: 'row' }}>
+                            <Icon name="american-sign-language-interpreting" size={26} color="#5f6fcd" style={{ marginLeft: 30, marginTop: 10 }} />
                             <Text style={{ fontSize: 20, marginLeft: 34, marginTop: 11 }} onPress={() => Actions.myexperence()}>我的经验</Text>
                             <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 212, marginTop: 15 }} />
                         </TouchableOpacity>

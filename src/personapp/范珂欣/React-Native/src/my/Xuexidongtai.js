@@ -113,6 +113,15 @@ export default class Xuexidongtai extends Component {
                                                         // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
                                                     }
                                                 });
+                                                for (var i = 0; i < brr.length; i++) {
+                                                    for (var j = 0; j < this.state.new.id.length; j++) {
+                                                        brr[i].new = false;
+                                                        if (brr[i].id == this.state.new.id[j]) {
+                                                            brr[i].new = true;
+                                                            break;
+                                                        }
+                                                    }
+                                                }
                                                 this.setState({ isLoading: false });
                                                 this.setState({ data: brr });
                                             });
@@ -197,6 +206,15 @@ export default class Xuexidongtai extends Component {
                                                             // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
                                                         }
                                                     });
+                                                    for (var i = 0; i < brr.length; i++) {
+                                                        for (var j = 0; j < self.state.new.id.length; j++) {
+                                                            brr[i].new = false;
+                                                            if (brr[i].id == self.state.new.id[j]) {
+                                                                brr[i].new = true;
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
                                                     self.setState({ data: brr });
                                                 });
                                         });
@@ -389,7 +407,7 @@ export default class Xuexidongtai extends Component {
                                     </View>
                                     <View style={{ alignItems: 'center', flexDirection: 'row' }}>
                                         <Icon name="heart" onPress={this.like.bind(this, (idx))} style={item.like ? { color: 'red', fontSize: 30 * s } : { fontSize: 30 * s }}></Icon>
-                                        <Text>{item.likeNum}</Text>
+                                        <Text>{item.likeNum}+{item.likenum}</Text>
                                     </View>
                                 </View>
                                 <View style={{ position: 'absolute', top: 10, left: 430 }}>

@@ -115,6 +115,7 @@ export default class Experience extends Component {
                                         this.setState({ isLoading: false });
                                         this.setState({ list: res });
                                         this.setState({ all: res });
+                                        // console.log(this.state.all);
                                     });
                             });
                     });
