@@ -69,9 +69,9 @@ export default class Person extends Component {
                             lvnum: item.lvnum,//修改
                             head: "http://139.155.44.190:3005/head/" + item.head
                         })
-                        console.log("点击头像", this.state.pic)
+                        // console.log("点击头像", this.state.pic)
                         var num = Math.floor(this.state.lvnum / 15);
-                        // console.log("输出num", num)
+                        console.log("输出num", num)
                         let url3 = `http://139.155.44.190:3005/users/list`;
                         fetch(url3)
                             .then(res => res.json())
@@ -85,13 +85,15 @@ export default class Person extends Component {
                                             this.setState({
                                                 level: num + 1
                                             })
+                                            console.log("获取到的等级9", this.state.level)
                                         }
                                         else {
                                             this.setState({
                                                 level: 10
                                             })
+                                            console.log("获取到的等级10", this.state.level)
+
                                         }
-                                        // console.log("获取到的等级", this.state.level)
                                         let url3 = `http://139.155.44.190:3005/users/changeLv?level=${this.state.level}&name=${this.state.username}`;
                                         fetch(url3)
                                             .then((res) => res.json())
@@ -143,7 +145,6 @@ export default class Person extends Component {
                     var arr = [];
                     for (var i = 0; i < res.length; i++) {
                         if (res[i].name == self.state.username) {
-
                             if (res[i].newl == true) {
                                 self.setState({
                                     newl: true
@@ -152,9 +153,11 @@ export default class Person extends Component {
                             }
                         }
                     }
+                    // console.log("arr:"+arr);
                     self.setState({
                         new: arr
                     });
+                    // console.log(self.state.new);
                 });
             fetch(url2)
                 .then(res => res.json())
@@ -170,6 +173,7 @@ export default class Person extends Component {
                                 lvnum: item.lvnum,//修改
                                 head: "http://139.155.44.190:3005/head/" + item.head
                             })
+                            // console.log("点击头像", self.state.pic)
                             var num = Math.floor(self.state.lvnum / 15);
                             console.log("输出num", num)
                             let url3 = `http://139.155.44.190:3005/users/list`;
@@ -181,11 +185,19 @@ export default class Person extends Component {
                                     })
                                     self.state.lvlist.map((item) => {
                                         if (item.name == self.state.username) {
-                                            self.setState({
-                                                level: num + 1
-                                            })
-                                            // console.log("获取到的等级", self.state.level)
+                                            if (num < 10) {
+                                                self.setState({
+                                                    level: num + 1
+                                                })
+                                                console.log("获取到的等级9", self.state.level)
+                                            }
+                                            else {
+                                                self.setState({
+                                                    level: 10
+                                                })
+                                                console.log("获取到的等级10", self.state.level)
 
+                                            }
                                             let url3 = `http://139.155.44.190:3005/users/changeLv?level=${self.state.level}&name=${self.state.username}`;
                                             fetch(url3)
                                                 .then((res) => res.json())
@@ -351,7 +363,7 @@ export default class Person extends Component {
                         <Icon name="star-o" size={30} color="#fed658" style={{ marginLeft: 30, marginTop: 10 }} />
                         <TouchableOpacity onPress={() => this.fanslist()} style={{ flexDirection: 'row' }}>
                             <Text style={{ fontSize: 20, marginLeft: 40, marginTop: 11 }}>我的粉丝</Text>
-                            <Text style={{marginTop:13}}>{this.state.fans}</Text>
+                            <Text style={{ marginTop: 13 }}>{this.state.fans}</Text>
                             <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 210, marginTop: 15 }} />
                         </TouchableOpacity>
                     </View>
@@ -362,7 +374,7 @@ export default class Person extends Component {
                         <Icon name="star-o" size={30} color="#fed658" style={{ marginLeft: 30, marginTop: 10 }} />
                         <TouchableOpacity onPress={() => this.followslist()} style={{ flexDirection: 'row' }}>
                             <Text style={{ fontSize: 20, marginLeft: 40, marginTop: 11 }}>我的关注</Text>
-                            <Text style={{marginTop:13}}>{this.state.follows}</Text>
+                            <Text style={{ marginTop: 13 }}>{this.state.follows}</Text>
 
                             <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 210, marginTop: 15 }} />
                         </TouchableOpacity>

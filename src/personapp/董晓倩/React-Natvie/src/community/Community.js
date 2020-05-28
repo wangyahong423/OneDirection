@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Text, View, ScrollView, StyleSheet, ImageBackground, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
+// import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Actions } from 'react-native-router-flux';
 import { Button } from '@ant-design/react-native';
+import ActionButton from 'react-native-action-button';
 import Img from './Img'
 
 const { width, height } = Dimensions.get('window');
@@ -19,7 +21,9 @@ export default class Community extends Component {
             likeNum: [],
             comNum: [],
             username: '',
-            isLoading: true
+            isLoading: true,
+            isTop: false,
+
         };
         this.getData();
     }
@@ -302,6 +306,7 @@ export default class Community extends Component {
                 .then((res) => {
                     console.log(url2);
                 });
+            console.log('aaa' + this.state.list[idx].likenum)//null
         }
     }
     change = (e) => {
@@ -388,9 +393,9 @@ export default class Community extends Component {
         // var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college ,head: this.state.list[idx].head};
         // AsyncStorage.setItem('details', JSON.stringify(value));
         // console.log("详情values",value)
-        var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college };
+        var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college, head: this.state.list[idx].head };
         AsyncStorage.setItem('details', JSON.stringify(value));
-        var value1 = {name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level,  title: "issue" };
+        var value1 = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, title: "issue", head: this.state.list[idx].head };
         AsyncStorage.setItem('personname2', JSON.stringify(value1));
         var param = 1;
         DeviceEventEmitter.emit('ELrefresh', param);
@@ -401,10 +406,44 @@ export default class Community extends Component {
     add = () => {
         Actions.add()
     }
+    onScroll(evt) {
+        let y = evt.nativeEvent.contentOffset.y;
+        console.log("距离", y)
+        if (y >= 200 && y <= 260 && this.state.tabShow == false) {
+            this.setState({
+                tabShow: true,
+            })
+        }
+        else if (y <= 200 && this.state.tabShow == true) {
+            this.setState({
+                tabShow: false,
+            })
+        }
+        else if (y > 300) {
+            this.setState({
+                isTop: true
+            })
+        }
+        else if (y <= 300) {
+            this.setState({
+                isTop: false
+            })
+        }
+    }
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
-
+                <View style={{
+                    width: '100%',
+                    height: 55 * s,
+                    backgroundColor: '#37376F',
+                    alignItems: 'center',
+                    flexDirection: "row",
+                    justifyContent: "center"
+                }}>
+                    <Text style={{ color: '#fff', lineHeight: 55 * s, fontSize: 18 * s }}>社区</Text>
+                    <Text onPress={() => this.add()} style={{ color: "#fff", fontSize: 30 * s, marginLeft: 20 * s }}>+</Text>
+                </View>
                 <View style={{
                     width: '100%',
                     height: 55 * s,
@@ -466,7 +505,12 @@ export default class Community extends Component {
                     </TouchableOpacity>
                 </View>
 
-                <ScrollView style={{ flex: 1 }}>
+                <ScrollView
+                    showsVerticalScrollIndicator={false}
+                    onScroll={(evt) => this.onScroll(evt)}
+                    scrollEventThrottle={16}
+                    ref={(r) => this.scrollview = r}
+                    style={{ flex: 1 }}>
                     <View>
                         {
                             this.state.list.map((item, idx) => (
@@ -620,7 +664,24 @@ export default class Community extends Component {
                         </View>
                         : null
                 }
-                <TouchableOpacity style={{
+                {
+                    this.state.istop ?
+                        <View style={{ height100, width: width, backgroundColor: "red" }}></View>
+                        : <View />
+                }
+                {
+                    // <Image source={require('../../assets/community/icon.png')}/>
+                    this.state.isTop === true ? <ActionButton
+                        renderIcon={() => ( <View style={{height:50*s,width:50*s,backgroundColor:"#F8F8F8",borderRadius:25*s,justifyContent:"center",alignItems:"center"}}><Image style={{height:35*s,width:35*s}} source={require('../../assets/community/icon.png')}/></View>)}
+                        buttonColor="#FFFFFF"
+                        position='right'
+                        verticalOrientation='up'
+                        size={34}
+                        border='#1DA57A'
+                        onPress={() => this.scrollview.scrollTo({ x: 0, y: 0, animated: true })}
+                    /> : <View />
+                }
+                {/* <TouchableOpacity style={{
                     width: 60 * s,
                     height: 60 * s,
                     borderRadius: 30 * s,
@@ -635,7 +696,7 @@ export default class Community extends Component {
                     onPress={() => this.add()}
                 >
                     <Icon style={{ fontSize: 50, color: '#fff' }} name="pencil" />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </SafeAreaView >
         )
     }
