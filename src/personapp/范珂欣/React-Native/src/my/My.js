@@ -18,7 +18,11 @@ export default class Person extends Component {
             lvnum: '',
             // head: '',
             newl: false,
-            new: []
+            new: [],
+            fans: 0,
+            follows: 0,
+
+
         }
     }
     componentDidMount() {
@@ -65,7 +69,7 @@ export default class Person extends Component {
                             lvnum: item.lvnum,//修改
                             head: "http://139.155.44.190:3005/head/" + item.head
                         })
-                        console.log("点击头像",this.state.pic)
+                        console.log("点击头像", this.state.pic)
                         var num = Math.floor(this.state.lvnum / 15);
                         // console.log("输出num", num)
                         let url3 = `http://139.155.44.190:3005/users/list`;
@@ -103,6 +107,32 @@ export default class Person extends Component {
                     }
                 })
             })
+        let url5 = `http://139.155.44.190:3005/follow/list`;
+
+        fetch(url5)
+            .then((res) => res.json())
+            .then((res) => {
+                var num1 = 0;
+                var num2 = 0
+                var nname = [];
+                var lname = []
+                res.forEach(item => {
+                    if (item.lname == this.state.username) {//关注
+                        nname.push(item.nname)//关注列表
+                        num1++;
+                    }
+                    else if (item.nname == this.state.username) {//粉丝
+                        lname.push(item.lname)//粉丝列表
+                        num2++;
+                    }
+                });
+                this.setState({
+                    follows: num1,
+                    fans: num2,
+                    nnameList: nname,
+                    lnameList: lname
+                })
+            })
         var self = this;
         this.listener = DeviceEventEmitter.addListener('refresh', function (param) {
             let url2 = `http://139.155.44.190:3005/users/list`;
@@ -113,7 +143,7 @@ export default class Person extends Component {
                     var arr = [];
                     for (var i = 0; i < res.length; i++) {
                         if (res[i].name == self.state.username) {
-                            
+
                             if (res[i].newl == true) {
                                 self.setState({
                                     newl: true
@@ -171,6 +201,32 @@ export default class Person extends Component {
                         }
                     })
                 })
+            let url5 = `http://139.155.44.190:3005/follow/list`;
+
+            fetch(url5)
+                .then((res) => res.json())
+                .then((res) => {
+                    var num1 = 0;
+                    var num2 = 0
+                    var nname = [];
+                    var lname = []
+                    res.forEach(item => {
+                        if (item.lname == self.state.username) {//关注
+                            nname.push(item.nname)//关注列表
+                            num1++;
+                        }
+                        else if (item.nname == self.state.username) {//粉丝
+                            lname.push(item.lname)//粉丝列表
+                            num2++;
+                        }
+                    });
+                    self.setState({
+                        follows: num1,
+                        fans: num2,
+                        nnameList: nname,
+                        lnameList: lname
+                    })
+                })
         })
     }
 
@@ -186,7 +242,26 @@ export default class Person extends Component {
     componentWillUnmount() {
         this.listener.remove();
     }
-
+    fanslist = () => {
+        if (this.state.fans) {
+            var value = { fansList: this.state.lnameList };
+            AsyncStorage.setItem('fanslist', JSON.stringify(value));
+            Actions.fanslist();
+        }
+        else {
+            Alert.alert("还没有粉丝哦~")
+        }
+    }
+    followslist = () => {
+        if (this.state.follows) {
+            var value = { followsList: this.state.nnameList };
+            AsyncStorage.setItem('followslist', JSON.stringify(value));
+            Actions.followslist();
+        }
+        else {
+            Alert.alert("还没有关注哦~")
+        }
+    }
     outlogin = () => {
         AsyncStorage.getItem('username')
             .then((res) => {
@@ -209,25 +284,25 @@ export default class Person extends Component {
         Actions.login();
     }
     tiezi = () => {
-        var value = { id: this.state.new};
+        var value = { id: this.state.new };
         AsyncStorage.setItem('new', JSON.stringify(value));
-        console.log('aaa'+value);
-        if(!this.state.newl){
-            var value={id:''}
+        console.log('aaa' + value);
+        if (!this.state.newl) {
+            var value = { id: '' }
             AsyncStorage.setItem('new', JSON.stringify(value));
         }
-        for(var i = 0;i<this.state.new.length;i++){
+        for (var i = 0; i < this.state.new.length; i++) {
             var url11 = `http://139.155.44.190:3005/learn/change?newl=${false}&lid=${this.state.new[i]}`;
             console.log(url11);
             fetch(url11)
-            .then((res) => res.json())
-            .then((res) => {
-                console.log(res);
-                this.setState({
-                    newl: false,
-                    // new:[]
-                });
-            })
+                .then((res) => res.json())
+                .then((res) => {
+                    console.log(res);
+                    this.setState({
+                        newl: false,
+                        // new:[]
+                    });
+                })
         }
         Actions.tiezi();
     }
@@ -237,18 +312,18 @@ export default class Person extends Component {
                 <View style={{ height: 250, width: '100%' }}>
                     <Image source={require('../../assets/gonglve2.png')} />
                 </View>
-                <View style={{ width: '100%', height: 430, backgroundColor: '#ffffff' }}>
+                <View style={{ width: '100%', height: 600, backgroundColor: '#ffffff' }}>
                     <View style={{ width: '100%', height: 80, flexDirection: 'row' }}>
                         <TouchableOpacity style={{ width: 100, height: 100, position: "absolute", top: -50, left: 30 }} onPress={() => Actions.touxiang()}>
-                            <Image source={{ uri: this.state.pic }} style={{ width: 90*s, height: 90*s, borderRadius: 45*s}} />
+                            <Image source={{ uri: this.state.pic }} style={{ width: 90 * s, height: 90 * s, borderRadius: 45 * s }} />
                             <Image style={{
                                 height: 100 * s,
                                 width: 100 * s,
                                 borderRadius: 50 * s,
                                 // backgroundColor:'green',
                                 position: 'absolute',
-                                top: -4*s,
-                                right: 7*s
+                                top: -4 * s,
+                                right: 7 * s
                             }}
                                 source={{ uri: this.state.head }} />
                         </TouchableOpacity>
@@ -269,6 +344,29 @@ export default class Person extends Component {
                         <Text style={{ position: 'absolute', left: 150, top: 27, fontSize: 18 }}>河北师范大学{this.state.college}</Text>
                     </View>
 
+                    <View style={{
+                        height: 50, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
+                        borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1
+                    }}  >
+                        <Icon name="star-o" size={30} color="#fed658" style={{ marginLeft: 30, marginTop: 10 }} />
+                        <TouchableOpacity onPress={() => this.fanslist()} style={{ flexDirection: 'row' }}>
+                            <Text style={{ fontSize: 20, marginLeft: 40, marginTop: 11 }}>我的粉丝</Text>
+                            <Text style={{marginTop:13}}>{this.state.fans}</Text>
+                            <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 210, marginTop: 15 }} />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{
+                        height: 50, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
+                        borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1
+                    }}  >
+                        <Icon name="star-o" size={30} color="#fed658" style={{ marginLeft: 30, marginTop: 10 }} />
+                        <TouchableOpacity onPress={() => this.followslist()} style={{ flexDirection: 'row' }}>
+                            <Text style={{ fontSize: 20, marginLeft: 40, marginTop: 11 }}>我的关注</Text>
+                            <Text style={{marginTop:13}}>{this.state.follows}</Text>
+
+                            <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 210, marginTop: 15 }} />
+                        </TouchableOpacity>
+                    </View>
                     <View style={{
                         height: 50, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
                         borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1
