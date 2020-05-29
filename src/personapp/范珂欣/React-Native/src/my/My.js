@@ -22,7 +22,7 @@ export default class Person extends Component {
             fans: 0,
             follows: 0,
             likenum: 0,
-            like:[]
+            like: []
         }
     }
     componentDidMount() {
@@ -40,11 +40,13 @@ export default class Person extends Component {
             .then((res) => {
                 var arr = [];
                 var likenum = 0;
-                var like=[];
+                var like = [];
                 for (var i = 0; i < res.length; i++) {
                     if (res[i].name == this.state.username) {
                         likenum = likenum + res[i].likenum;
-                        like.push(res[i].likenum);
+                        if (res[i].likenum) {
+                            like.push(res[i].id);
+                        }
                         if (res[i].newl == true) {
                             this.setState({
                                 newl: true
@@ -57,7 +59,7 @@ export default class Person extends Component {
                 this.setState({
                     new: arr,
                     likenum: likenum,
-                    like:like
+                    like: like
                 });
                 // console.log(this.state.likenum);
             });
@@ -141,16 +143,21 @@ export default class Person extends Component {
                 })
             })
         var self = this;
-        this.listener = DeviceEventEmitter.addListener('refresh', function (param) {
+        this.listener = DeviceEventEmitter.addListener('Mrefresh', function (param) {
             let url2 = `http://139.155.44.190:3005/users/list`;
             let url11 = `http://139.155.44.190:3005/learn/list`;
             fetch(url11)
                 .then((res) => res.json())
                 .then((res) => {
                     var arr = [];
+                    var likenum = 0;
+                    var like = [];
                     for (var i = 0; i < res.length; i++) {
                         if (res[i].name == self.state.username) {
-
+                            likenum = likenum + res[i].likenum;
+                            if (res[i].likenum) {
+                                like.push(res[i].id);
+                            }
                             if (res[i].newl == true) {
                                 self.setState({
                                     newl: true
@@ -159,9 +166,13 @@ export default class Person extends Component {
                             }
                         }
                     }
+                    // console.log("arr:"+arr);
                     self.setState({
-                        new: arr
+                        new: arr,
+                        likenum: likenum,
+                        like: like
                     });
+                    // console.log(self.state.likenum);
                 });
             fetch(url2)
                 .then(res => res.json())
@@ -177,8 +188,9 @@ export default class Person extends Component {
                                 lvnum: item.lvnum,//修改
                                 head: "http://139.155.44.190:3005/head/" + item.head
                             })
+                            console.log("点击头像", self.state.pic)
                             var num = Math.floor(self.state.lvnum / 15);
-                            console.log("输出num", num)
+                            // console.log("输出num", num)
                             let url3 = `http://139.155.44.190:3005/users/list`;
                             fetch(url3)
                                 .then(res => res.json())
@@ -188,11 +200,18 @@ export default class Person extends Component {
                                     })
                                     self.state.lvlist.map((item) => {
                                         if (item.name == self.state.username) {
-                                            self.setState({
-                                                level: num + 1
-                                            })
+                                            if (num < 10) {
+                                                self.setState({
+                                                    level: num + 1
+                                                })
+                                            }
+                                            else {
+                                                self.setState({
+                                                    level: 10
+                                                })
+                                            }
+                                            console.log("level" + self.state.level)
                                             // console.log("获取到的等级", self.state.level)
-
                                             let url3 = `http://139.155.44.190:3005/users/changeLv?level=${self.state.level}&name=${self.state.username}`;
                                             fetch(url3)
                                                 .then((res) => res.json())
@@ -298,6 +317,19 @@ export default class Person extends Component {
             var value = { id: '' }
             AsyncStorage.setItem('new', JSON.stringify(value));
         }
+        console.log(this.state.like)
+        // for (var j = 0; j < this.state.like.length; j++) {
+        //     let url = `http://139.155.44.190:3005/learn/changeLike?lid=${this.state.like[j]}&likenum=0`;
+        //     fetch(url)
+        //         .then((res) => res.json())
+        //         .then((res) => {
+        //             console.log(res);
+        //             this.setState({
+        //                 like: [],
+        //                 likenum: null
+        //             });
+        //         })
+        // }
         for (var i = 0; i < this.state.new.length; i++) {
             var url11 = `http://139.155.44.190:3005/learn/change?newl=${false}&lid=${this.state.new[i]}`;
             console.log(url11);
@@ -307,7 +339,8 @@ export default class Person extends Component {
                     console.log(res);
                     this.setState({
                         newl: false,
-                        // new:[]
+                        // like: [],
+                        // likenum: null
                     });
                 })
         }
@@ -420,16 +453,16 @@ export default class Person extends Component {
                                     {
                                         this.state.likenum
                                             ?
-                                            <View style={{ flexDirection: 'row', marginRight: -33 }}>
+                                            <View style={{ flexDirection: 'row', marginRight: 150 }}>
                                                 <Text style={{ fontSize: 20, marginLeft: 39, marginTop: 11 }} onPress={() => Actions.tiezi()}>我的帖子</Text>
                                                 <View style={{ marginTop: 15, marginLeft: 10, width: 20, height: 20, borderRadius: 10, borderColor: '#000', backgroundColor: 'red', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                                                     <Text style={{ fontSize: 15, color: '#fff' }}>{this.state.likenum}</Text>
                                                 </View>
                                             </View>
-                                            : <Text style={{ fontSize: 20, marginLeft: 39, marginRight: 170, marginTop: 11 }} onPress={() => Actions.tiezi()}>我的帖子</Text>
+                                            : <Text style={{ fontSize: 20, marginLeft: 39, marginRight: 180, marginTop: 11 }} onPress={() => Actions.tiezi()}>我的帖子</Text>
 
                                     }
-                                    <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 212, marginTop: 15 }} />
+                                    <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 30, marginTop: 15 }} />
                                 </TouchableOpacity>
                             </View>
                     }

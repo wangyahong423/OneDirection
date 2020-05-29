@@ -254,6 +254,8 @@ export default class Community extends Component {
                         .then((res) => res.json())
                         .then((res) => {
                             console.log(url11);
+                            var param = 1;
+                            DeviceEventEmitter.emit('Mrefresh', param);
                         });
                 });
             let url2 = `http://139.155.44.190:3005/users/list`;

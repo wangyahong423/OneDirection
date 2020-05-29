@@ -220,6 +220,7 @@ export default class Details extends Component {
         Actions.pop();
         var param = 1;
         DeviceEventEmitter.emit('refresh', param);
+        DeviceEventEmitter.emit('Mrefresh', param);
     }
     render() {
         return (

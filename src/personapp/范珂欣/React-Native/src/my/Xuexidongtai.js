@@ -342,6 +342,31 @@ export default class Xuexidongtai extends Component {
                 });
         }
     }
+    likenum = (idx) => {
+        let url1 = `http://139.155.44.190:3005/learn/changeLike?lid=${this.state.data[idx].id}&likenum=0`;
+        fetch(url1)
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(url1);
+            });
+        var arr = this.state.data;
+        arr[idx].likenum = 0;
+        this.setState({
+            data: arr
+        })
+    }
+    back = () => {
+        for (var j = 0; j < this.state.data.length; j++) {
+            let url = `http://139.155.44.190:3005/learn/changeLike?lid=${this.state.data[j].id}&likenum=0`;
+            fetch(url)
+                .then((res) => res.json())
+                .then((res) => {
+                })
+        }
+        Actions.pop()
+        var param = 1;
+        DeviceEventEmitter.emit('Mrefresh', param);
+    }
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
@@ -407,7 +432,14 @@ export default class Xuexidongtai extends Component {
                                     </View>
                                     <View style={{ alignItems: 'center', flexDirection: 'row' }}>
                                         <Icon name="heart" onPress={this.like.bind(this, (idx))} style={item.like ? { color: 'red', fontSize: 30 * s } : { fontSize: 30 * s }}></Icon>
-                                        <Text>{item.likeNum}+{item.likenum}</Text>
+                                        <Text>{item.likeNum}</Text>
+                                        {
+                                            item.likenum == null || item.likenum == 0
+                                                ? null
+                                                : <TouchableOpacity onPress={this.likenum.bind(this, (idx))} style={{ marginTop: 0, marginLeft: 10, width: 20, height: 20, borderRadius: 10, borderColor: '#000', backgroundColor: 'red', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                                                    <Text style={{ fontSize: 10, color: '#fff' }}>+{item.likenum}</Text>
+                                                </TouchableOpacity>
+                                        }
                                     </View>
                                 </View>
                                 <View style={{ position: 'absolute', top: 10, left: 430 }}>
@@ -437,6 +469,25 @@ export default class Xuexidongtai extends Component {
                         </View>
                         : null
                 }
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                    <TouchableOpacity style={{
+                        width: 300 * s,
+                        height: 40 * s,
+                        borderRadius: 15 * s,
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: '#37376F',
+                        margin: 10 * s
+                        // position: 'absolute',
+                        // top: 0,
+                        // right: 0
+                    }}
+                        onPress={() => this.back()}
+                    >
+                        <Text style={{ color: '#e8e8e8', fontSize: 20 * s }}>返回</Text>
+                    </TouchableOpacity>
+                </View>
             </SafeAreaView >
         )
     }
