@@ -17,7 +17,7 @@ export default class Person extends Component {
             // pic: '',
             lvnum: '',
             // head: '',
-            newl: false,
+            cnum: 0,
             new: [],
             fans: 0,
             follows: 0,
@@ -39,18 +39,17 @@ export default class Person extends Component {
             .then((res) => res.json())
             .then((res) => {
                 var arr = [];
+                var cnum = 0;
                 var likenum = 0;
                 var like = [];
                 for (var i = 0; i < res.length; i++) {
                     if (res[i].name == this.state.username) {
                         likenum = likenum + res[i].likenum;
+                        cnum = cnum + res[i].cnum;
                         if (res[i].likenum) {
                             like.push(res[i].id);
                         }
-                        if (res[i].newl == true) {
-                            this.setState({
-                                newl: true
-                            });
+                        if (res[i].cnum) {
                             arr.push(res[i].id);
                         }
                     }
@@ -58,6 +57,7 @@ export default class Person extends Component {
                 // console.log("arr:"+arr);
                 this.setState({
                     new: arr,
+                    cnum: cnum,
                     likenum: likenum,
                     like: like
                 });
@@ -150,18 +150,17 @@ export default class Person extends Component {
                 .then((res) => res.json())
                 .then((res) => {
                     var arr = [];
+                    var cnum = 0;
                     var likenum = 0;
                     var like = [];
                     for (var i = 0; i < res.length; i++) {
                         if (res[i].name == self.state.username) {
                             likenum = likenum + res[i].likenum;
+                            cnum = cnum + res[i].cnum;
                             if (res[i].likenum) {
                                 like.push(res[i].id);
                             }
-                            if (res[i].newl == true) {
-                                self.setState({
-                                    newl: true
-                                });
+                            if (res[i].cnum) {
                                 arr.push(res[i].id);
                             }
                         }
@@ -169,10 +168,11 @@ export default class Person extends Component {
                     // console.log("arr:"+arr);
                     self.setState({
                         new: arr,
+                        cnum: cnum,
                         likenum: likenum,
                         like: like
                     });
-                    // console.log(self.state.likenum);
+                    // console.log(this.state.likenum);
                 });
             fetch(url2)
                 .then(res => res.json())
@@ -310,40 +310,28 @@ export default class Person extends Component {
         Actions.login();
     }
     tiezi = () => {
-        var value = { id: this.state.new };
-        AsyncStorage.setItem('new', JSON.stringify(value));
-        console.log('aaa' + value);
-        if (!this.state.newl) {
-            var value = { id: '' }
-            AsyncStorage.setItem('new', JSON.stringify(value));
-        }
-        console.log(this.state.like)
-        // for (var j = 0; j < this.state.like.length; j++) {
-        //     let url = `http://139.155.44.190:3005/learn/changeLike?lid=${this.state.like[j]}&likenum=0`;
-        //     fetch(url)
+        // var value = { id: this.state.new };
+        // AsyncStorage.setItem('new', JSON.stringify(value));
+        // console.log('aaa' + value);
+        // if (!this.state.newl) {
+        //     var value = { id: '' }
+        //     AsyncStorage.setItem('new', JSON.stringify(value));
+        // }
+        // console.log(this.state.like)
+        // for (var i = 0; i < this.state.new.length; i++) {
+        //     var url11 = `http://139.155.44.190:3005/learn/change?newl=${false}&lid=${this.state.new[i]}`;
+        //     console.log(url11);
+        //     fetch(url11)
         //         .then((res) => res.json())
         //         .then((res) => {
         //             console.log(res);
         //             this.setState({
-        //                 like: [],
-        //                 likenum: null
+        //                 newl: false,
+        //                 // like: [],
+        //                 // likenum: null
         //             });
         //         })
         // }
-        for (var i = 0; i < this.state.new.length; i++) {
-            var url11 = `http://139.155.44.190:3005/learn/change?newl=${false}&lid=${this.state.new[i]}`;
-            console.log(url11);
-            fetch(url11)
-                .then((res) => res.json())
-                .then((res) => {
-                    console.log(res);
-                    this.setState({
-                        newl: false,
-                        // like: [],
-                        // likenum: null
-                    });
-                })
-        }
         Actions.tiezi();
     }
     render() {
@@ -362,8 +350,8 @@ export default class Person extends Component {
                                 borderRadius: 50 * s,
                                 // backgroundColor:'green',
                                 position: 'absolute',
-                                top: -4 * s,
-                                right: 7 * s
+                                top: -5 * s,
+                                right: 8 * s
                             }}
                                 source={{ uri: this.state.head }} />
                         </TouchableOpacity>
@@ -372,15 +360,6 @@ export default class Person extends Component {
                             <Image style={{ height: 25 * s, width: 40 * s, marginLeft: 10 * s }} source={Img['png' + this.state.level]} />
                             {/* <Text style={{ marginLeft: 20, fontSize: 15, color: "red" }}>Lv {this.state.level}</Text> */}
                         </Text>
-
-                        {/* <TouchableOpacity onPress={() => Actions.card()} style={{ position: "absolute", left: 270, top: 1, backgroundColor: '#37376F', borderRadius: 5 }}>
-                            <Text style={{ color: '#fff', fontSize: 15 }}>卡片背景</Text>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity onPress={() => Actions.head()} style={{ position: "absolute", left: 350, top: 1, backgroundColor: '#37376F', borderRadius: 5 }}>
-                            <Text style={{ color: '#fff', fontSize: 15 }}>头像框选择</Text>
-                        </TouchableOpacity> */}
-
                         <Text style={{ position: 'absolute', left: 150, top: 27, fontSize: 18 }}>河北师范大学{this.state.college}</Text>
                     </View>
 
@@ -419,7 +398,7 @@ export default class Person extends Component {
                     </View>
 
                     {
-                        this.state.newl
+                        this.state.cnum + this.state.likenum
                             ?
                             <View style={{
                                 height: 50, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
@@ -427,20 +406,12 @@ export default class Person extends Component {
                             }}>
                                 <Icon name="hand-o-right" size={30} color="#5f6fcd" style={{ marginLeft: 30, marginTop: 10 }} />
                                 <TouchableOpacity onPress={() => this.tiezi()} style={{ flexDirection: 'row' }}>
-                                    {
-                                        this.state.likenum
-                                            ?
-                                            <View style={{ flexDirection: 'row', marginRight: 138 }}>
-                                                <Text style={{ fontSize: 20, marginLeft: 39, marginTop: 11 }} onPress={() => Actions.tiezi()}>我的帖子</Text>
-                                                <View style={{ marginTop: 15, marginLeft: 10, width: 20, height: 20, borderRadius: 10, borderColor: '#000', backgroundColor: 'red', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                                                    <Text style={{ fontSize: 15, color: '#fff' }}>{this.state.likenum}</Text>
-                                                </View>
-                                            </View>
-                                            : <Text style={{ fontSize: 20, marginLeft: 39, marginRight: 170, marginTop: 11 }} onPress={() => Actions.tiezi()}>我的帖子</Text>
-
-                                    }
-
-                                    <View style={{ marginTop: 20, width: 10, height: 10, borderRadius: 5, borderColor: '#000', backgroundColor: 'red' }}></View>
+                                    <View style={{ flexDirection: 'row', marginRight: 149 }}>
+                                        <Text style={{ fontSize: 20, marginLeft: 39, marginTop: 11 }}>我的帖子</Text>
+                                        <View style={{ marginTop: 15, marginLeft: 10, width: 20, height: 20, borderRadius: 10, borderColor: '#000', backgroundColor: 'red', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                                            <Text style={{ fontSize: 15, color: '#fff' }}>{this.state.likenum + this.state.cnum}</Text>
+                                        </View>
+                                    </View>
                                     <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 30, marginTop: 15 }} />
                                 </TouchableOpacity>
                             </View>
@@ -450,18 +421,9 @@ export default class Person extends Component {
                             }}>
                                 <Icon name="hand-o-right" size={30} color="#5f6fcd" style={{ marginLeft: 30, marginTop: 10 }} />
                                 <TouchableOpacity onPress={() => this.tiezi()} style={{ flexDirection: 'row' }}>
-                                    {
-                                        this.state.likenum
-                                            ?
-                                            <View style={{ flexDirection: 'row', marginRight: 150 }}>
-                                                <Text style={{ fontSize: 20, marginLeft: 39, marginTop: 11 }} onPress={() => Actions.tiezi()}>我的帖子</Text>
-                                                <View style={{ marginTop: 15, marginLeft: 10, width: 20, height: 20, borderRadius: 10, borderColor: '#000', backgroundColor: 'red', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                                                    <Text style={{ fontSize: 15, color: '#fff' }}>{this.state.likenum}</Text>
-                                                </View>
-                                            </View>
-                                            : <Text style={{ fontSize: 20, marginLeft: 39, marginRight: 180, marginTop: 11 }} onPress={() => Actions.tiezi()}>我的帖子</Text>
-
-                                    }
+                                    <View style={{ flexDirection: 'row', marginRight: 180 }}>
+                                        <Text style={{ fontSize: 20, marginLeft: 39, marginTop: 11 }} onPress={() => Actions.tiezi()}>我的帖子</Text>
+                                    </View>
                                     <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 30, marginTop: 15 }} />
                                 </TouchableOpacity>
                             </View>

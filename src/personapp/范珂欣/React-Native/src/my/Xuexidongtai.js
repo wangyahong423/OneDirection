@@ -30,14 +30,6 @@ export default class Xuexidongtai extends Component {
     }
     componentDidMount() {
         this.setState({ isLoading: true })
-
-        AsyncStorage.getItem('new')
-            .then((res) => {
-                this.setState({
-                    new: JSON.parse(res)
-                })
-                console.log(this.state.new.id);
-            });
         AsyncStorage.getItem('username')
             .then(res => {
                 let user = { username: res }
@@ -113,15 +105,6 @@ export default class Xuexidongtai extends Component {
                                                         // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
                                                     }
                                                 });
-                                                for (var i = 0; i < brr.length; i++) {
-                                                    for (var j = 0; j < this.state.new.id.length; j++) {
-                                                        brr[i].new = false;
-                                                        if (brr[i].id == this.state.new.id[j]) {
-                                                            brr[i].new = true;
-                                                            break;
-                                                        }
-                                                    }
-                                                }
                                                 this.setState({ isLoading: false });
                                                 this.setState({ data: brr });
                                             });
@@ -206,15 +189,6 @@ export default class Xuexidongtai extends Component {
                                                             // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
                                                         }
                                                     });
-                                                    for (var i = 0; i < brr.length; i++) {
-                                                        for (var j = 0; j < self.state.new.id.length; j++) {
-                                                            brr[i].new = false;
-                                                            if (brr[i].id == self.state.new.id[j]) {
-                                                                brr[i].new = true;
-                                                                break;
-                                                            }
-                                                        }
-                                                    }
                                                     self.setState({ data: brr });
                                                 });
                                         });
@@ -355,10 +329,28 @@ export default class Xuexidongtai extends Component {
             data: arr
         })
     }
+    cnum = (idx) => {
+        let url1 = `http://139.155.44.190:3005/learn/change?lid=${this.state.data[idx].id}&cnum=0`;
+        fetch(url1)
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(url1);
+            });
+        var arr = this.state.data;
+        arr[idx].cnum = 0;
+        this.setState({
+            data: arr
+        })
+    }
     back = () => {
         for (var j = 0; j < this.state.data.length; j++) {
             let url = `http://139.155.44.190:3005/learn/changeLike?lid=${this.state.data[j].id}&likenum=0`;
             fetch(url)
+                .then((res) => res.json())
+                .then((res) => {
+                })
+            let url1 = `http://139.155.44.190:3005/learn/change?lid=${this.state.data[j].id}&cnum=0`;
+            fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
                 })
@@ -408,10 +400,6 @@ export default class Xuexidongtai extends Component {
                                                 <Image style={{ height: 25 * s, width: 40 * s, marginLeft: 10 * s }} source={Img['png' + this.state.lv]} />
 
                                             </View>
-
-                                            <View style={item.new ?
-                                                { marginTop: 0, marginLeft: 10, width: 10, height: 10, borderRadius: 5, borderColor: '#000', backgroundColor: 'red' }
-                                                : { marginTop: 0, marginLeft: 10, width: 10, height: 10, borderRadius: 5, borderColor: '#000', backgroundColor: '#fff' }}></View>
                                         </View>
                                         <Text>{item.time}</Text>
                                     </View>
@@ -429,6 +417,13 @@ export default class Xuexidongtai extends Component {
                                     <View style={{ alignItems: 'center', flexDirection: 'row' }}>
                                         <Icon onPress={this.details.bind(this, (idx))} name="comment" style={{ fontSize: 30 * s }}></Icon>
                                         <Text>{item.comNum}</Text>
+                                        {
+                                            item.cnum == null || item.cnum == 0
+                                                ? null
+                                                : <TouchableOpacity onPress={this.cnum.bind(this, (idx))} style={{ marginTop: 0, marginLeft: 10, width: 20, height: 20, borderRadius: 10, borderColor: '#000', backgroundColor: 'red', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                                                    <Text style={{ fontSize: 10, color: '#fff' }}>+{item.cnum}</Text>
+                                                </TouchableOpacity>
+                                        }
                                     </View>
                                     <View style={{ alignItems: 'center', flexDirection: 'row' }}>
                                         <Icon name="heart" onPress={this.like.bind(this, (idx))} style={item.like ? { color: 'red', fontSize: 30 * s } : { fontSize: 30 * s }}></Icon>

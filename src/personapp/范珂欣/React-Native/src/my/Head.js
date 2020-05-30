@@ -54,7 +54,7 @@ export default class Head extends Component {
                 Actions.myPage();
                 var param = 1;
 
-                DeviceEventEmitter.emit('refresh', param);
+                DeviceEventEmitter.emit('Mrefresh', param);
 
             })
     }

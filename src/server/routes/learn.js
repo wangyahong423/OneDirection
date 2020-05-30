@@ -62,9 +62,9 @@ router.get('/select', (req, res) => {
 
 router.get('/change', (req, res) => {
   var id = req.query.lid;
-  var newl = req.query.newl;
-  let sql = 'update learn set newl=$1 where id=$2';
-  con.query(sql, [newl, id], (err, result) => {
+  var cnum = req.query.cnum;
+  let sql = 'update learn set cnum=$1 where id=$2';
+  con.query(sql, [cnum, id], (err, result) => {
     if (err) {
       res.json({ ok: false, msg: '修改失败！' });
     } else {
