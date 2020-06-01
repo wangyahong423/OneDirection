@@ -53,9 +53,9 @@ export default class Shezhi extends Component {
                     borderLeftColor: 'white', borderRightColor: 'white', backgroundColor: "white",
                     flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'
                 }}
-                    onPress={() => Actions.head()}
+                onPress={() => Actions.guanyu()}
                 >
-                    <Text style={{ fontSize: 18, lineHeight: 60 * s, marginLeft: 30 * s }} >头像框选择</Text>
+                    <Text style={{ fontSize: 18, lineHeight: 60 * s, marginLeft: 30 * s }} >关于我们</Text>
                     <Icon name="chevron-right" style={{ marginRight: 30 * s }} size={20} color="#aaa" />
                 </TouchableOpacity>
                 <TouchableOpacity style={{
@@ -63,9 +63,9 @@ export default class Shezhi extends Component {
                     borderLeftColor: 'white', borderRightColor: 'white', backgroundColor: "white",
                     flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'
                 }}
-                    onPress={() => Actions.card()}
+                onPress={() => Actions.fankui()}
                 >
-                    <Text style={{ fontSize: 18, lineHeight: 60 * s, marginLeft: 30 * s }} >卡片背景</Text>
+                    <Text style={{ fontSize: 18, lineHeight: 60 * s, marginLeft: 30 * s }} >用户反馈</Text>
                     <Icon name="chevron-right" style={{ marginRight: 30 * s }} size={20} color="#aaa" />
                 </TouchableOpacity>
                 <TouchableOpacity

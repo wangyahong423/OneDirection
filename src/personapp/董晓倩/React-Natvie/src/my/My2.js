@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { View, Text, Image, AsyncStorage, ScrollView, TouchableOpacity, DeviceEventEmitter, Dimensions, ImageBackground } from 'react-native';
+import { View, Text, Image, AsyncStorage, ScrollView, TouchableOpacity, DeviceEventEmitter, Dimensions } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Img from '../community/Img'
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
@@ -17,13 +17,12 @@ export default class Person extends Component {
             // pic: '',
             lvnum: '',
             // head: '',
-            // newl: false,
+            cnum: 0,
             new: [],
             fans: 0,
             follows: 0,
             likenum: 0,
             like: []
-
         }
     }
     componentDidMount() {
@@ -318,6 +317,7 @@ export default class Person extends Component {
         //     var value = { id: '' }
         //     AsyncStorage.setItem('new', JSON.stringify(value));
         // }
+        // console.log(this.state.like)
         // for (var i = 0; i < this.state.new.length; i++) {
         //     var url11 = `http://139.155.44.190:3005/learn/change?newl=${false}&lid=${this.state.new[i]}`;
         //     console.log(url11);
@@ -327,7 +327,8 @@ export default class Person extends Component {
         //             console.log(res);
         //             this.setState({
         //                 newl: false,
-        //                 // new:[]
+        //                 // like: [],
+        //                 // likenum: null
         //             });
         //         })
         // }
@@ -335,179 +336,151 @@ export default class Person extends Component {
     }
     render() {
         return (
-            <ScrollView style={{ backgroundColor: "#fff" }}>
-                <ImageBackground style={{ height: 300, width: '100%', alignItems: "center" }} source={require('../../assets/community/img13.png')} >
-                    <View style={{ height: 50 * s, width: width, flexDirection: "row", justifyContent: "space-between", paddingTop: 10, paddingLeft: 10, paddingRight: 10 }}>
-                        <TouchableOpacity onPress={() => Actions.shezhi()} style={{ height: 50 * s, width: 50 * s, justifyContent: "center", alignItems: "center", }}>
-                            <Icon style={{ color: "#fff", fontSize: 25 * s, }} name="settings-outline" />
+            <ScrollView>
+                <View style={{ height: 250, width: '100%' }}>
+                    <Image source={require('../../assets/gonglve2.png')} />
+                </View>
+                <View style={{ width: '100%', height: 600, backgroundColor: '#ffffff' }}>
+                    <View style={{ width: '100%', height: 80, flexDirection: 'row' }}>
+                        <TouchableOpacity style={{ width: 100, height: 100, position: "absolute", top: -50, left: 30 }} onPress={() => Actions.touxiang()}>
+                            <Image source={{ uri: this.state.pic }} style={{ width: 90 * s, height: 90 * s, borderRadius: 45 * s }} />
+                            <Image style={{
+                                height: 100 * s,
+                                width: 100 * s,
+                                borderRadius: 50 * s,
+                                // backgroundColor:'green',
+                                position: 'absolute',
+                                top: -5 * s,
+                                right: 8 * s
+                            }}
+                                source={{ uri: this.state.head }} />
                         </TouchableOpacity>
-                        <TouchableOpacity style={{ height: 50 * s, width: 50 * s, justifyContent: "center", alignItems: "center" }}>
-                            <Icon style={{ color: "#fff", fontSize: 25 * s, }} name="bell-outline" />
-                            {
-                                this.state.cnum + this.state.likenum ?
-                                    <View style={{ position: "absolute", top: 10, left: 30, width: 20, height: 20, borderRadius: 10, borderColor: '#000', backgroundColor: 'red', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                                        <Text style={{ fontSize: 15, color: '#fff' }}>{this.state.likenum + this.state.cnum}</Text>
-                                    </View>
-                                    :null
-                            }
-                        </TouchableOpacity>
-                    </View>
-                    <TouchableOpacity style={{ width: 100, height: 100 }} onPress={() => Actions.touxiang()}>
-                        <Image source={{ uri: this.state.pic }} style={{ width: 90 * s, height: 90 * s, borderRadius: 45 * s }} />
-                        <Image style={{
-                            height: 100 * s,
-                            width: 100 * s,
-                            borderRadius: 50 * s,
-                            position: 'absolute',
-                            top: -4 * s,
-                            right: 1 * s
-                        }}
-                            source={{ uri: this.state.head }} />
-                    </TouchableOpacity>
-                    <Text style={{ fontSize: 15 * s, color: "#fff", marginTop: 10 * s }}>
-                        {this.state.username}&nbsp;&nbsp;&nbsp;
+                        <Text style={{ position: "absolute", left: 150, fontSize: 18, top: -3 }}>
+                            {this.state.username}&nbsp;&nbsp;&nbsp;
                             <Image style={{ height: 25 * s, width: 40 * s, marginLeft: 10 * s }} source={Img['png' + this.state.level]} />
-                    </Text>
-                    <Text style={{ fontSize: 15 * s, color: "#fff", marginTop: 5 * s }}>河北师范大学{this.state.college}</Text>
-                    <View style={{ flexDirection: 'row', height: 50 * s, width: width * 0.4, marginTop: 10 * s, justifyContent: "space-around", alignItems: "center" }}>
-                        <TouchableOpacity onPress={() => this.fanslist()} style={{ height: 50 * s, width: 50 * s, justifyContent: "center", alignItems: "center" }}>
-                            <Text style={{ color: "#fff" }}>关注</Text>
-                            <Text style={{ color: "#fff" }}>{this.state.follows}</Text>
+                            {/* <Text style={{ marginLeft: 20, fontSize: 15, color: "red" }}>Lv {this.state.level}</Text> */}
+                        </Text>
+                        <Text style={{ position: 'absolute', left: 150, top: 27, fontSize: 18 }}>河北师范大学{this.state.college}</Text>
+                    </View>
 
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => this.fanslist()} style={{ height: 50 * s, width: 50 * s, justifyContent: "center", alignItems: "center" }}>
-                            <Text style={{ color: "#fff" }}>粉丝</Text>
-                            <Text style={{ color: "#fff" }}>{this.state.fans}</Text>
+                    <View style={{
+                        height: 50, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
+                        borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1
+                    }}  >
+                        <Icon name="star-o" size={30} color="#fed658" style={{ marginLeft: 30, marginTop: 10 }} />
+                        <TouchableOpacity onPress={() => this.fanslist()} style={{ flexDirection: 'row' }}>
+                            <Text style={{ fontSize: 20, marginLeft: 40, marginTop: 11 }}>我的粉丝</Text>
+                            <Text style={{ marginTop: 13 }}>{this.state.fans}</Text>
+                            <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 210, marginTop: 15 }} />
                         </TouchableOpacity>
                     </View>
-                </ImageBackground>
-                <View >
                     <View style={{
-                        height: 70, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
-                        borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1,
+                        height: 50, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
+                        borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1
                     }}  >
-                        <TouchableOpacity onPress={() => Actions.biji()} style={{ flexDirection: 'row', alignItems: "center" }}>
+                        <Icon name="star-o" size={30} color="#fed658" style={{ marginLeft: 30, marginTop: 10 }} />
+                        <TouchableOpacity onPress={() => this.followslist()} style={{ flexDirection: 'row' }}>
+                            <Text style={{ fontSize: 20, marginLeft: 40, marginTop: 11 }}>我的关注</Text>
+                            <Text style={{ marginTop: 13 }}>{this.state.follows}</Text>
 
-                            <View style={{ height: 50, width: 80, justifyContent: "center", alignItems: "center" }}>
-                                <Icon name="feather" size={30} color="#fed658" />
-                            </View>
-                            <View style={{ height: 50, width: width * 0.7, }}>
-                                <Text style={{ fontSize: 20, marginTop: 11 }}>我的笔记</Text>
-                            </View>
-                            <Icon name="chevron-right" size={25} color="#aaa" />
+                            <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 210, marginTop: 15 }} />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{
+                        height: 50, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
+                        borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1
+                    }}  >
+                        <Icon name="star-o" size={30} color="#fed658" style={{ marginLeft: 30, marginTop: 10 }} />
+                        <TouchableOpacity onPress={() => Actions.biji()} style={{ flexDirection: 'row' }}>
+                            <Text style={{ fontSize: 20, marginLeft: 40, marginTop: 11 }}>我的笔记</Text>
+                            <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 210, marginTop: 15 }} />
                         </TouchableOpacity>
                     </View>
 
                     {
-                        this.state.newl
-                            ? <View style={{
-                                height: 60, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
+                        this.state.cnum + this.state.likenum
+                            ?
+                            <View style={{
+                                height: 50, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
                                 borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1
                             }}>
-                                <TouchableOpacity onPress={() => this.tiezi()} style={{ flexDirection: 'row', alignItems: "center" }}>
-
-                                    <View style={{ height: 50, width: 80, justifyContent: "center", alignItems: "center" }}>
-                                        <Icon name="file-document-edit-outline" size={30} color="#5f6fcd" />
-                                    </View>
-                                    <View style={{ height: 50, width: width * 0.7 }}>
-                                        <Text style={{ fontSize: 20, marginTop: 11 }} onPress={() => Actions.tiezi()}>我的帖子</Text>
-
+                                <Icon name="hand-o-right" size={30} color="#5f6fcd" style={{ marginLeft: 30, marginTop: 10 }} />
+                                <TouchableOpacity onPress={() => this.tiezi()} style={{ flexDirection: 'row' }}>
+                                    <View style={{ flexDirection: 'row', marginRight: 149 }}>
+                                        <Text style={{ fontSize: 20, marginLeft: 39, marginTop: 11 }}>我的帖子</Text>
+                                        <View style={{ marginTop: 15, marginLeft: 10, width: 20, height: 20, borderRadius: 10, borderColor: '#000', backgroundColor: 'red', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                                            <Text style={{ fontSize: 15, color: '#fff' }}>{this.state.likenum + this.state.cnum}</Text>
+                                        </View>
                                     </View>
                                     <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 30, marginTop: 15 }} />
                                 </TouchableOpacity>
                             </View>
                             : <View style={{
-                                height: 60, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
+                                height: 50, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
                                 borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1
                             }}>
-                                <TouchableOpacity onPress={() => this.tiezi()} style={{ flexDirection: 'row', alignItems: "center" }}>
-
-                                    <View style={{ height: 50, width: 80, justifyContent: "center", alignItems: "center" }}>
-                                        <Icon name="file-document-edit-outline" size={30} color="#FF999A" />
+                                <Icon name="hand-o-right" size={30} color="#5f6fcd" style={{ marginLeft: 30, marginTop: 10 }} />
+                                <TouchableOpacity onPress={() => this.tiezi()} style={{ flexDirection: 'row' }}>
+                                    <View style={{ flexDirection: 'row', marginRight: 180 }}>
+                                        <Text style={{ fontSize: 20, marginLeft: 39, marginTop: 11 }} onPress={() => Actions.tiezi()}>我的帖子</Text>
                                     </View>
-                                    <View style={{ height: 50, width: width * 0.7, }}>
-                                        <Text style={{ fontSize: 20, marginTop: 11 }} onPress={() => Actions.tiezi()}>我的帖子</Text>
-
-                                    </View>
-                                    <Icon name="chevron-right" size={20} color="#aaa" />
+                                    <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 30, marginTop: 15 }} />
                                 </TouchableOpacity>
                             </View>
                     }
 
-
                     <View style={{
-                        height: 60, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
+                        height: 50, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
                         borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1
                     }}>
-                        <TouchableOpacity onPress={() => Actions.myexperence()} style={{ flexDirection: 'row', alignItems: "center" }}>
-
-                            <View style={{ height: 50, width: 80, justifyContent: "center", alignItems: "center" }}>
-                                <Icon name="lightbulb-on-outline" size={26} color="#5f6fcd" />
-                            </View>
-                            <View style={{ height: 50, width: width * 0.7 }}>
-                                <Text style={{ fontSize: 20, marginTop: 11 }}>我的经验</Text>
-
-                            </View>
-                            <Icon name="chevron-right" size={20} color="#aaa" />
+                        <TouchableOpacity onPress={() => Actions.myexperence()} style={{ flexDirection: 'row' }}>
+                            <Icon name="american-sign-language-interpreting" size={26} color="#5f6fcd" style={{ marginLeft: 30, marginTop: 10 }} />
+                            <Text style={{ fontSize: 20, marginLeft: 34, marginTop: 11 }} onPress={() => Actions.myexperence()}>我的经验</Text>
+                            <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 212, marginTop: 15 }} />
                         </TouchableOpacity>
                     </View>
                     <View style={{
-                        height: 60, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
+                        height: 50, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
                         borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1
                     }}>
-                        <TouchableOpacity onPress={() => Actions.tongxun()} style={{ flexDirection: 'row', alignItems: "center" }}>
-
-                            <View style={{ height: 50, width: 80, justifyContent: "center", alignItems: "center" }}>
-                                <Icon name="phone-in-talk" size={25} color="#dd1402" />
-
-                            </View>
-                            <View style={{ height: 50, width: width * 0.7 }}>
-                                <Text style={{ fontSize: 20, marginTop: 11 }} >通讯录</Text>
-
-                            </View>
-                            <Icon name="chevron-right" size={20} color="#aaa" />
-                        </TouchableOpacity>
-                    </View>
-
-                    <View style={{
-                        height: 60, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
-                        borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1
-                    }}>
-                        <TouchableOpacity onPress={() => Actions.head()} style={{ flexDirection: 'row', alignItems: "center" }}>
-
-                            <View style={{ height: 50, width: 80, justifyContent: "center", alignItems: "center" }}>
-                                <Icon name="hexagram-outline" size={30} color="#ca00dd" />
-
-                            </View>
-                            <View style={{ height: 50, width: width * 0.7 }}>
-                                <Text style={{ fontSize: 20, marginTop: 11 }} >头像框</Text>
-
-                            </View>
-                            <Icon name="chevron-right" size={20} color="#aaa" />
+                        <Icon name="group" size={25} color="#dd1402" style={{ marginLeft: 30, marginTop: 10 }} />
+                        <TouchableOpacity onPress={() => Actions.tongxun()} style={{ flexDirection: 'row' }}>
+                            <Text style={{ fontSize: 20, marginLeft: 40, marginTop: 11 }} onPress={() => Actions.tongxun()}>通讯录</Text>
+                            <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 235, marginTop: 15 }} />
                         </TouchableOpacity>
                     </View>
                     <View style={{
-                        height: 60, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
+                        height: 50, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
                         borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1
                     }}>
-                        <TouchableOpacity onPress={() => Actions.card()} style={{ flexDirection: 'row', alignItems: "center" }}>
-
-                            <View style={{ height: 50, width: 80, justifyContent: "center", alignItems: "center" }}>
-                                <Icon name="image" size={30} color="#9ACC99" />
-
-                            </View>
-                            <View style={{ height: 50, width: width * 0.7 }}>
-                                <Text style={{ fontSize: 20, marginTop: 11 }} onPress={() => Actions.card()}>卡片</Text>
-
-                            </View>
-                            <Icon name="chevron-right" size={20} color="#aaa" />
+                        <Icon name="smile-o" size={30} color="#256ade" style={{ marginLeft: 30, marginTop: 10 }} />
+                        <TouchableOpacity onPress={() => Actions.guanyu()} style={{ flexDirection: 'row' }}>
+                            <Text style={{ fontSize: 20, marginLeft: 40, marginTop: 11 }} >关于我们</Text>
+                            <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 215, marginTop: 15 }} />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{
+                        height: 50, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
+                        borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1
+                    }}>
+                        <Icon name="user-o" size={30} color="#ca00dd" style={{ marginLeft: 30, marginTop: 10 }} />
+                        <TouchableOpacity onPress={() => Actions.fankui()} style={{ flexDirection: 'row' }}>
+                            <Text style={{ fontSize: 20, marginLeft: 40, marginTop: 11 }} onPress={() => Actions.fankui()}>用户反馈</Text>
+                            <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 215, marginTop: 15 }} />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{ height: 50, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderBottomWidth: 1 }} >
+                        <Icon name="cog" size={30} color="#6d6d6d" style={{ marginLeft: 30, marginTop: 10 }} />
+                        <TouchableOpacity onPress={() => Actions.shezhi()} style={{ flexDirection: 'row' }}>
+                            <Text style={{ fontSize: 20, marginLeft: 40, marginTop: 11 }} onPress={() => Actions.shezhi()}>设置</Text>
+                            <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 255, marginTop: 15 }} />
                         </TouchableOpacity>
                     </View>
 
                 </View>
-                {/* <TouchableOpacity onPress={this.outlogin} style={{ height: '5%', width: '25%', marginLeft: '37.5%', marginTop: '2%', marginBottom: '3%', backgroundColor: 'red', borderRadius: 20, alignItems: 'center', justifyContent: 'center' }}>
+                <TouchableOpacity onPress={this.outlogin} style={{ height: '5%', width: '25%', marginLeft: '37.5%', marginTop: '2%', marginBottom: '3%', backgroundColor: 'red', borderRadius: 20, alignItems: 'center', justifyContent: 'center' }}>
                     <Text style={{ color: 'white', marginTop: 10 }}>退出登录</Text>
-                </TouchableOpacity> */}
+                </TouchableOpacity>
             </ScrollView>
         )
     }

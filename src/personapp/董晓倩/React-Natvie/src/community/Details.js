@@ -65,6 +65,7 @@ export default class Details extends Component {
                                 });
                                 this.setState({ isLoading: false })
                                 this.setState({ list: arr });
+                                console.log(this.state.list);
                             })
                     })
                 var self = this;
@@ -82,7 +83,7 @@ export default class Details extends Component {
                                             for (var i = 0; i < self.state.pic.length; i++) {
                                                 if (item.name == self.state.pic[i].name) {
                                                     item.pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
-                                                    item.head = 'http://139.155.44.190:3005/head/' + this.state.pic[i].head;
+                                                    item.head = 'http://139.155.44.190:3005/head/' + self.state.pic[i].head;
                                                     item.level = self.state.pic[i].level;
                                                     break;
                                                 }
@@ -111,8 +112,14 @@ export default class Details extends Component {
             var minute = date.getMinutes().toString();
             var time = year + '年' + month + '月' + day + '日' + ' ' + hour + ':' + minute;
             console.log(time);
+            var num = this.state.page.cnum;
+            if (num == null || num == 0) {
+                num = 1;
+            } else {
+                num = num + 1;
+            }
             let url = `http://139.155.44.190:3005/learntalk/add?lid=${this.state.page.id}&name=${this.state.username}&content=${this.state.comment}&time=${time}`;
-            let url11 = `http://139.155.44.190:3005/learn/change?newl=${true}&lid=${this.state.page.id}`;
+            let url11 = `http://139.155.44.190:3005/learn/change?cnum=${num}&lid=${this.state.page.id}`;
             fetch(url)
                 .then((res) => res.json())
                 .then((res) => {
@@ -219,6 +226,7 @@ export default class Details extends Component {
         Actions.pop();
         var param = 1;
         DeviceEventEmitter.emit('refresh', param);
+        DeviceEventEmitter.emit('Mrefresh', param);
     }
     render() {
         return (

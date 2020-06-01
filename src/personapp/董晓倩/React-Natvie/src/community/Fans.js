@@ -50,7 +50,8 @@ export default class Fans extends Component {
                 for (var i = 0; i < this.state.all.fansList.length; i++) {
                     for (var j = 0; j < res.length; j++) {
                         if (res[j].name == this.state.all.fansList[i]) {
-                            res[j].pic = 'http://139.155.44.190:3005' + res[j].pic
+                            res[j].pic = 'http://139.155.44.190:3005' + res[j].pic;
+                            res[j].head = 'http://139.155.44.190:3005/head/' + res[j].head;
                             followsList.push(res[j])
                         }
                     }
@@ -99,7 +100,8 @@ export default class Fans extends Component {
                     for (var i = 0; i < self.state.all.fansList.length; i++) {
                         for (var j = 0; j < res.length; j++) {
                             if (res[j].name == self.state.all.fansList[i]) {
-                                res[j].pic = 'http://139.155.44.190:3005' + res[j].pic
+                                res[j].pic = 'http://139.155.44.190:3005' + res[j].pic;
+                                res[j].head = 'http://139.155.44.190:3005/head/' + res[j].head;
                                 followsList.push(res[j])
                             }
                         }
@@ -197,6 +199,16 @@ export default class Fans extends Component {
                                 onPress={this.person.bind(this, (idx))}
                                 style={{ flexDirection: 'row', height: 60 * s, width: "100%", backgroundColor: "#fff", marginTop: 10 * s, alignItems: "center" }}>
                                 <Image style={{ marginLeft: 20 * s, height: 50 * s, width: 50 * s, borderRadius: 25 * s }} source={{ uri: item.pic }} />
+                                <Image style={{
+                                    height: 60 * s,
+                                    width: 60 * s,
+                                    borderRadius: 30 * s,
+                                    // backgroundColor:'green',
+                                    position: 'absolute',
+                                    top: 0,
+                                    left: 15
+                                }}
+                                    source={{ uri: item.head }} />
                                 <Text style={{ fontSize: 16 * s, marginLeft: 20 * s }}>{item.name}</Text>
                                 {
                                     item.name == this.state.username

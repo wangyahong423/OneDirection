@@ -239,11 +239,24 @@ export default class Community extends Component {
             this.setState({
                 list: crr
             })
+            var num = this.state.list[idx].likenum;
+            if (num == null || num == 0) {
+                num = 1;
+            } else {
+                num = num + 1;
+            }
             let url1 = `http://139.155.44.190:3005/learnlike/add?lid=${this.state.list[idx].id}&name=${this.state.username}&lname=${this.state.list[idx].name}`;
+            let url11 = `http://139.155.44.190:3005/learn/changeLike?lid=${this.state.list[idx].id}&likenum=${num}`;
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url1);
+                    fetch(url11)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            console.log(url11);
+                            var param = 1;
+                            DeviceEventEmitter.emit('Mrefresh', param);
+                        });
                 });
             let url2 = `http://139.155.44.190:3005/users/list`;
             fetch(url2)
@@ -672,7 +685,7 @@ export default class Community extends Component {
                 {
                     // <Image source={require('../../assets/community/icon.png')}/>
                     this.state.isTop === true ? <ActionButton
-                        renderIcon={() => ( <View style={{height:50*s,width:50*s,backgroundColor:"#F8F8F8",borderRadius:25*s,justifyContent:"center",alignItems:"center"}}><Image style={{height:35*s,width:35*s}} source={require('../../assets/community/icon.png')}/></View>)}
+                        renderIcon={() => (<View style={{ height: 50 * s, width: 50 * s, backgroundColor: "#F8F8F8", borderRadius: 25 * s, justifyContent: "center", alignItems: "center" }}><Image style={{ height: 35 * s, width: 35 * s }} source={require('../../assets/community/icon.png')} /></View>)}
                         buttonColor="#FFFFFF"
                         position='right'
                         verticalOrientation='up'
