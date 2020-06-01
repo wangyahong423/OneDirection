@@ -446,7 +446,7 @@ export default class Community extends Component {
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
-                <View style={{
+                {/* <View style={{
                     width: '100%',
                     height: 55 * s,
                     backgroundColor: '#37376F',
@@ -456,26 +456,23 @@ export default class Community extends Component {
                 }}>
                     <Text style={{ color: '#fff', lineHeight: 55 * s, fontSize: 18 * s }}>社区</Text>
                     <Text onPress={() => this.add()} style={{ color: "#fff", fontSize: 30 * s, marginLeft: 20 * s }}>+</Text>
-                </View>
+                </View> */}
                 <View style={{
-                    width: '100%',
                     height: 55 * s,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'center'
+                    width: width,
+                    backgroundColor: "#37376F",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flexDirection: "row"
                 }}>
                     <View style={{
                         height: 40 * s,
-                        width: '60%',
+                        width: '75%',
                         flexDirection: 'row',
                         alignItems: 'center',
-                        backgroundColor: '#ffffff',
-                        // borderRadius: 28 * s
-                        borderBottomLeftRadius: 28 * s,
-                        borderTopLeftRadius: 28 * s,
-                        marginLeft: -55 * s,
+                        backgroundColor: '#E3E3E3',
+                        borderRadius: 28 * s,
                     }}>
-
                         <TextInput
                             style={{
                                 height: 50 * s,
@@ -485,39 +482,16 @@ export default class Community extends Component {
                                 fontSize: 15 * s,
                             }}
                             clearButtonMode="while-editing"
-                            placeholderTextColor=''
-                            placeholder="请输入搜索的关键字"
+                            placeholderTextColor='#A6A6A6'
+                            placeholder="搜索"
                             onChangeText={this.change}
                         />
-                        <Button style={{ borderBottomRightRadius: 28 * s, borderTopRightRadius: 28 * s, height: 42 * s, }} onPress={this.search}>
-                            搜索
-                        </Button>
-                        {/* <Icon
-                            style={{
-                                marginRight: 20 * s
-                            }}
-                            onPress={this.search}
-                            color='' size={20} name='search' /> */}
-
+                        <Icon style={{ fontSize: 25 * s, marginLeft: 10 * s }} name="search" onPress={() => this.search()} />
                     </View>
-                    {/* <Button style={{ height: 42 * s,backgroundColor:'#ffffff'}} onPress={this.search}>
-                            搜索
-                    </Button> */}
-                    <TouchableOpacity style={{
-                        position: 'absolute',
-                        top: 15 * s,
-                        right: 30 * s,
-                        marginLeft: 10 * s,
-                        width: 30,
-                        height: 30
-                    }} onPress={this.renovate}>
-                        <Icon
-                            size={30}
-                            name='refresh'
-                        />
+                    <TouchableOpacity style={{ marginLeft: 20 * s, color: "#696969" }} onPress={() => this.back()}>
+                        <Text onPress={() => this.add()} style={{ color: "#fff", fontSize: 30 * s, marginLeft: 10 * s }}>+</Text>
                     </TouchableOpacity>
                 </View>
-
                 <ScrollView
                     showsVerticalScrollIndicator={false}
                     onScroll={(evt) => this.onScroll(evt)}
@@ -527,7 +501,7 @@ export default class Community extends Component {
                     <View>
                         {
                             this.state.list.map((item, idx) => (
-                                <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 10 * s }}>
+                                <View style={{ backgroundColor: '#fff', width: '100%', marginTop: 10 * s }}>
 
                                     <View style={{
                                         flexDirection: 'row',
@@ -615,7 +589,6 @@ export default class Community extends Component {
                                                 flexDirection: 'row',
                                                 justifyContent: 'center',
                                                 alignItems: 'center',
-                                                // backgroundColor: '#37376F',
                                                 position: 'absolute',
                                                 top: 5,
                                                 right: 5
@@ -626,38 +599,27 @@ export default class Community extends Component {
                                             </TouchableOpacity>
                                             : null
                                     }
-                                    {/* {
-                                        this.state.username
-                                            ?  */}
                                     <View style={{
                                         width: 90 * s,
                                         height: 45 * s,
                                         flexDirection: 'row',
                                         justifyContent: 'center',
                                         alignItems: 'center',
-                                        // backgroundColor: '#37376F',
                                         position: 'absolute',
                                         top: 5,
                                         right: 30
                                     }}
                                     >
                                         <Image style={{
-                                            // marginLeft: 20 * s,
                                             height: 45 * s,
                                             width: 90 * s,
-                                            // borderRadius: 25 * s,
-                                            // backgroundColor: 'yellow'
                                         }}
                                             source={{ uri: item.card }} />
                                     </View>
-                                    {/* : null
-                                    } */}
-
                                 </View>
                             ))
                         }
                     </View>
-
                 </ScrollView>
                 {
                     this.state.isLoading
@@ -683,7 +645,6 @@ export default class Community extends Component {
                         : <View />
                 }
                 {
-                    // <Image source={require('../../assets/community/icon.png')}/>
                     this.state.isTop === true ? <ActionButton
                         renderIcon={() => (<View style={{ height: 50 * s, width: 50 * s, backgroundColor: "#F8F8F8", borderRadius: 25 * s, justifyContent: "center", alignItems: "center" }}><Image style={{ height: 35 * s, width: 35 * s }} source={require('../../assets/community/icon.png')} /></View>)}
                         buttonColor="#FFFFFF"
@@ -694,22 +655,6 @@ export default class Community extends Component {
                         onPress={() => this.scrollview.scrollTo({ x: 0, y: 0, animated: true })}
                     /> : <View />
                 }
-                {/* <TouchableOpacity style={{
-                    width: 60 * s,
-                    height: 60 * s,
-                    borderRadius: 30 * s,
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    backgroundColor: '#37376F',
-                    position: 'absolute',
-                    bottom: 20 * s,
-                    right: 20 * s
-                }}
-                    onPress={() => this.add()}
-                >
-                    <Icon style={{ fontSize: 50, color: '#fff' }} name="pencil" />
-                </TouchableOpacity> */}
             </SafeAreaView >
         )
     }

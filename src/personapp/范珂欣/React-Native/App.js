@@ -593,7 +593,7 @@ const App = () => {
               <Scene key='method' component={Method} />
             </Scene>
             {/* 社区 */}
-            <Scene key='communityPage' title='社区' titleStyle={{ flex: 1, textAlign: 'center', color: '#fff' }} navigationBarStyle={{ backgroundColor: '#37376F' }} icon={({ focused }) => <Icon color={focused ? '#37376F' : 'black'} name='comments-o' size={26} />}>
+            <Scene key='communityPage' hideNavBar title='社区' titleStyle={{ flex: 1, textAlign: 'center', color: '#fff' }} navigationBarStyle={{ backgroundColor: '#37376F' }} icon={({ focused }) => <Icon color={focused ? '#37376F' : 'black'} name='comments-o' size={26} />}>
               <Scene key='community' component={Community} />
             </Scene>
             {/* 共享 */}
@@ -601,7 +601,7 @@ const App = () => {
               <Scene key='share' component={Share} />
             </Scene>
             {/* 我的 */}
-            <Scene key='myPage' title='我的' titleStyle={{ flex: 1, textAlign: 'center', color: '#fff' }} navigationBarStyle={{ backgroundColor: '#37376F' }} icon={({ focused }) => <Icon color={focused ? '#37376F' : 'black'} name='user-o' size={26} />}>
+            <Scene key='myPage' hideNavBar title='我的' titleStyle={{ flex: 1, textAlign: 'center', color: '#fff' }} navigationBarStyle={{ backgroundColor: '#37376F' }} icon={({ focused }) => <Icon color={focused ? '#37376F' : 'black'} name='user-o' size={26} />}>
               <Scene key='my' component={My} />
             </Scene>
           </Tabs>
@@ -612,7 +612,7 @@ const App = () => {
           <Scene key="forget" component={Forget} title='忘记密码' backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
 
           {/* 社区 */}
-          <Scene title='评论' key="learndetails" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} component={Details} />
+          <Scene title='评论' hideNavBar key="learndetails" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} component={Details} />
           <Scene key='notesks' title='添加笔记' component={Notes} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} ></Scene>
           <Scene key="person" hideNavBar component={Person} />
           <Scene title='在经验分享中发布的帖子' hideNavBar key="perexp" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} component={PerExp} />

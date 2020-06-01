@@ -65,7 +65,6 @@ export default class Details extends Component {
                                 });
                                 this.setState({ isLoading: false })
                                 this.setState({ list: arr });
-                                console.log(this.state.list);
                             })
                     })
                 var self = this;
