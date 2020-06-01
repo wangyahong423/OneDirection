@@ -446,17 +446,6 @@ export default class Community extends Component {
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
-                {/* <View style={{
-                    width: '100%',
-                    height: 55 * s,
-                    backgroundColor: '#37376F',
-                    alignItems: 'center',
-                    flexDirection: "row",
-                    justifyContent: "center"
-                }}>
-                    <Text style={{ color: '#fff', lineHeight: 55 * s, fontSize: 18 * s }}>社区</Text>
-                    <Text onPress={() => this.add()} style={{ color: "#fff", fontSize: 30 * s, marginLeft: 20 * s }}>+</Text>
-                </View> */}
                 <View style={{
                     height: 55 * s,
                     width: width,
@@ -488,8 +477,8 @@ export default class Community extends Component {
                         />
                         <Icon style={{ fontSize: 25 * s, marginLeft: 10 * s }} name="search" onPress={() => this.search()} />
                     </View>
-                    <TouchableOpacity style={{ marginLeft: 20 * s, color: "#696969" }} onPress={() => this.back()}>
-                        <Text onPress={() => this.add()} style={{ color: "#fff", fontSize: 30 * s, marginLeft: 10 * s }}>+</Text>
+                    <TouchableOpacity style={{ marginLeft: 20 * s, color: "#696969" }} onPress={() => this.add()}>
+                        <Text  style={{ color: "#fff", fontSize: 30 * s, marginLeft: 10 * s }}>+</Text>
                     </TouchableOpacity>
                 </View>
                 <ScrollView
@@ -639,11 +628,11 @@ export default class Community extends Component {
                         </View>
                         : null
                 }
-                {
+                {/* {
                     this.state.istop ?
                         <View style={{ height100, width: width, backgroundColor: "red" }}></View>
                         : <View />
-                }
+                } */}
                 {
                     this.state.isTop === true ? <ActionButton
                         renderIcon={() => (<View style={{ height: 50 * s, width: 50 * s, backgroundColor: "#F8F8F8", borderRadius: 25 * s, justifyContent: "center", alignItems: "center" }}><Image style={{ height: 35 * s, width: 35 * s }} source={require('../../assets/community/icon.png')} /></View>)}

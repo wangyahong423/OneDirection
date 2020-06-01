@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Text, View, ScrollView, SafeAreaView, TextInput, Dimensions, ImageBackground, Image, TouchableOpacity, AsyncStorage, Alert, DeviceEventEmitter } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Actions } from 'react-native-router-flux';
+import Img from "../../community/Img"
+
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
 export default class ExpDetails extends Component {
@@ -32,9 +34,8 @@ export default class ExpDetails extends Component {
     render() {
         return (
             // <ImageBackground style={{ flex: 1, width: '100%', height: height }} source={require('../../../assets/share/3-6.png')}>
-            <SafeAreaView style={{ flex: 1, backgroundColor: 'rgba(67,67,157,0.4)' }} >
-                <ScrollView style={{ flex: 1 }}>
-                    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center' }}>
+            <SafeAreaView style={{ flex: 1,  }} >
+                    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center',backgroundColor:"#fff" }}>
                         <View style={{ width: '90%', marginBottom: 5 * s, opacity: 1.0 }}>
                             <View style={{
                                 flexDirection: 'row',
@@ -69,9 +70,10 @@ export default class ExpDetails extends Component {
                                 <View style={{ marginLeft: 30 * s }}>
                                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                         <Text style={{ fontSize: 18 * s, color: '#37376F' }}>{this.state.all.name}</Text>
-                                        <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: '#37376F' }}>Lv.{this.state.all.level}</Text>
+                                <Image style={{ height: 25 * s, width: 40 * s, marginLeft: 10 * s }} source={Img['png' + this.state.all.level]} />
+
                                     </View>
-                                    <Text style={{ fontSize: 15 * s, color: '#37376F' }}>{this.state.all.time}</Text>
+                                    <Text style={{ fontSize: 14 * s,}}>{this.state.all.time}</Text>
 
                                 </View>
                             </View>
@@ -82,11 +84,10 @@ export default class ExpDetails extends Component {
                                 marginBottom: 20 * s
                             }}
                             >
-                                <Text style={{ fontSize: 18 * s, backgroundColor: '#37376F', color: '#fff' }}>        {this.state.all.content}</Text>
+                                <Text style={{ fontSize: 18 * s,  }}>{this.state.all.content}</Text>
                             </View>
                         </View>
                     </View>
-                </ScrollView>
             </SafeAreaView >
             // </ImageBackground >
         )

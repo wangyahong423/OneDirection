@@ -23,10 +23,14 @@ export default class Biji extends Component {
             color: [],
             yonghu: [],
             pic: '',
-            username: ''
+            username: '',
+            isLoading: true,
+
         };
     }
     componentDidMount() {
+        this.setState({ isLoading: true })
+
         AsyncStorage.getItem('username')
             .then((res) => {
                 let name = { username: res }
@@ -120,6 +124,8 @@ export default class Biji extends Component {
             this.setState({
                 arr: item.id
             })
+            this.setState({ isLoading: false });
+
         })
 
         var self = this;
@@ -286,6 +292,24 @@ export default class Biji extends Component {
                     </View>
 
                 </ScrollView>
+                {
+                    this.state.isLoading
+                        ? <View
+                            style={{
+                                position: 'absolute',
+                                top: 80 * s,
+                                width: '100%'
+                            }}>
+                            <View style={{
+                                alignItems: 'center',
+                                flexDirection: 'row',
+                                justifyContent: 'center'
+                            }}>
+                                <Text style={{ fontSize: 20, marginTop: 10 }}>正在获取数据...</Text>
+                            </View>
+                        </View>
+                        : null
+                }
             </SafeAreaView >
         )
     }

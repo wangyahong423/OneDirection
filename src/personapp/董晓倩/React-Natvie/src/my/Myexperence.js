@@ -203,7 +203,7 @@ export default class Myexperence extends Component {
                 <ScrollView style={{ flex: 1 }}>
                     <View>
                         {this.state.data.map((item, idx) =>
-                            <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 20 * s }}>
+                            <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 10 * s }}>
                                 <View style={{
                                     flexDirection: 'row',
                                     height: 80 * s,

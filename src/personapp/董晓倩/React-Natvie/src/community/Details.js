@@ -231,6 +231,23 @@ export default class Details extends Component {
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
+                <View style={{
+                    width: '100%',
+                    height: 55 * s,
+                    backgroundColor: '#37376F',
+                    alignItems: 'center',
+                    justifyContent: "center",
+                    flexDirection: "row"
+                }}>
+                    <TouchableOpacity
+                        onPress={() => this.back()}
+                        style={{position: "absolute", left: 10 * s}}
+                       >
+                    <Image style={{ height: 20 * s, width: 20 * s,   }} source={require('../../assets/gonglve/left.png')} />
+
+                    </TouchableOpacity>
+                    <Text style={{ color: '#fff', lineHeight: 55 * s, fontSize: 18 * s }}>评论</Text>
+                </View>
                 <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 10 * s }}>
                     <View style={{
                         flexDirection: 'row',
@@ -389,7 +406,7 @@ export default class Details extends Component {
                             : null
                     }
                 </ScrollView>
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                {/* <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                     <TouchableOpacity style={{
                         width: 300 * s,
                         height: 40 * s,
@@ -407,7 +424,7 @@ export default class Details extends Component {
                     >
                         <Text style={{ color: '#e8e8e8', fontSize: 20 * s }}>返回</Text>
                     </TouchableOpacity>
-                </View>
+                </View> */}
             </SafeAreaView >
         )
     }

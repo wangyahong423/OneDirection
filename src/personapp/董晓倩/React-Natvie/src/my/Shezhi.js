@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, Image, StyleSheet, AsyncStorage, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const { width } = Dimensions.get('window');
 const s = width / 460;
 export default class Shezhi extends Component {
@@ -46,7 +46,7 @@ export default class Shezhi extends Component {
                     onPress={() => Actions.mima()}
                 >
                     <Text style={{ fontSize: 18, lineHeight: 60 * s, marginLeft: 30 * s }} >密码重置</Text>
-                    <Icon name="chevron-right" style={{ marginRight: 30 * s }} size={20} color="#aaa" />
+                    <Icon name="chevron-right" style={{ marginRight: 20 * s }} size={20} color="#aaa" />
                 </TouchableOpacity>
                 <TouchableOpacity style={{
                     height: 60 * s, width: '100%', flexDirection: 'row', borderBottomColor: '#dedede', borderWidth: 1, borderTopColor: '#dedede',
@@ -56,7 +56,7 @@ export default class Shezhi extends Component {
                 onPress={() => Actions.guanyu()}
                 >
                     <Text style={{ fontSize: 18, lineHeight: 60 * s, marginLeft: 30 * s }} >关于我们</Text>
-                    <Icon name="chevron-right" style={{ marginRight: 30 * s }} size={20} color="#aaa" />
+                    <Icon name="chevron-right" style={{ marginRight: 20 * s }} size={20} color="#aaa" />
                 </TouchableOpacity>
                 <TouchableOpacity style={{
                     height: 60 * s, width: '100%', flexDirection: 'row', borderBottomColor: '#dedede', borderWidth: 1, borderTopColor: '#dedede',
@@ -66,12 +66,12 @@ export default class Shezhi extends Component {
                 onPress={() => Actions.fankui()}
                 >
                     <Text style={{ fontSize: 18, lineHeight: 60 * s, marginLeft: 30 * s }} >用户反馈</Text>
-                    <Icon name="chevron-right" style={{ marginRight: 30 * s }} size={20} color="#aaa" />
+                    <Icon name="chevron-right" style={{ marginRight: 20 * s }} size={20} color="#aaa" />
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={{
                         width: '50%',
-                        height: 60 * s,
+                        height: 50 * s,
                         backgroundColor: '#37376F',
                         marginTop: 30,
                         alignItems: 'center',
@@ -80,7 +80,7 @@ export default class Shezhi extends Component {
                         marginLeft: '25%'
                     }}
                     onPress={this.outlogin}>
-                    <Text style={{ color: '#ffffff', fontSize: 18 }}>退出登录</Text>
+                    <Text style={{ color: '#ffffff', fontSize: 18*s }}>退出登录</Text>
                 </TouchableOpacity>
             </ScrollView>
         )
