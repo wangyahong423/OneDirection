@@ -567,23 +567,25 @@ const App = () => {
       <SwiperPage afterInstall={afterInstall} />
     </View>
   }
+  
   return (
     <>
       <Router
         backAndroidHandler={() => {
-          if (Actions.currentScene != 'methodPage') {
+          if(Actions.currentScene == 'login' || Actions.currentScene == 'method' || Actions.currentScene == 'share' || Actions.currentScene == 'my' || Actions.currentScene == 'community'){
+              if (new Date().getTime() - now < 2000) {
+                BackHandler.exitApp();
+              }
+              else {
+                ToastAndroid.show('再按一次退出应用', 100);
+                now = new Date().getTime();
+                return true;
+              }
+          }
+          else{
             Actions.pop();
             return true;
-          } else {
-            if (new Date().getTime() - now < 2000) {
-              BackHandler.exitApp();
-            } else {
-              ToastAndroid.show('确定要退出吗', 100);
-              now = new Date().getTime();
-              return true;
-            }
           }
-
         }}
       >
         <Scene key='root'>
@@ -1120,7 +1122,7 @@ const App = () => {
           <Scene key="touxiang" component={Touxiang} renderTitle="我的头像" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key="myexperence" component={Myexperence} renderTitle="我的经验" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key="card" component={Card} renderTitle="卡片背景选择" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
-          <Scene key="head" component={Head} renderTitle="头像框选择" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key="head" hideNavBar component={Head} renderTitle="头像框选择" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key="xiangqing" component={Xiangqing} renderTitle="详情" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
         </Scene>
       </Router>

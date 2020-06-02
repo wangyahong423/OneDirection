@@ -78,6 +78,7 @@ export default class Xuexidongtai extends Component {
                                                 res.forEach(item => {
                                                     if (item.name == this.state.username) {
                                                         item.like = false;
+                                                        item.level=this.state.lv;
                                                         for (var j = 0; j < this.state.like.length; j++) {
                                                             if (item.id == this.state.like[j].lid) {
                                                                 item.like = true;
@@ -222,7 +223,7 @@ export default class Xuexidongtai extends Component {
 
     details = (idx) => {
         var value = { page: this.state.data[idx] };
-        console.log('sss' + this.state.data[idx].level);
+        // console.log('sss' + this.state.data[idx].lv);
         var arr = this.state.data;
         arr[idx].new = false;
         this.setState({
