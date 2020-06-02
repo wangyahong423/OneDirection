@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { Modal, Button } from 'antd';
 import { Link } from 'react-router-dom'
+import Base64 from 'crypto-js/enc-base64'
+import Utf8 from 'crypto-js/enc-utf8'
 import { withRouter } from "react-router";
 import PropTypes from "prop-types";
 export default class Users extends Component {
@@ -21,8 +24,43 @@ export default class Users extends Component {
             pathname: '用户管理',
             date: new Date(),
             name: '',
+            visible2:false
         }
     }
+
+    showPwd = (name,e)=>{
+        this.setState({
+            visible2:true
+        })
+        let url = `http://139.155.44.190:3005/users/list`;
+        axios(url)
+            .then((res) => {
+                if (res.data.false) {
+                } else {
+                    console.log(res.data)
+                    for(var i=0;i<res.data.length;i++){
+                        if(res.data[i].name == name){
+                            this.setState({
+                                jiemiName:name+'的密码是：',
+                                jiemiPwd:res.data[i].pwd
+                            })
+                        }
+                    }
+                    console.log(this.state.jiemiPwd)
+                }
+            })
+    }
+    handleOk2 = e => {
+        this.setState({
+            visible2: false,
+        });
+    };
+
+    handleCancel2 = e => {
+        this.setState({
+            visible2: false,
+        });
+    };
 
     setNext = () => {
         if (this.state.current < this.state.totalPage) {
@@ -79,6 +117,7 @@ export default class Users extends Component {
         axios(url)
             .then((res) => {
                 for (var i = 0; i < res.data.length; i++) {
+                    res.data[i].pwd = Base64.stringify(Utf8.parse(res.data[i].pwd));
                     res.data[i].pic = "http://139.155.44.190:3005" + res.data[i].pic;
                 }
                 this.setState({
@@ -163,12 +202,8 @@ export default class Users extends Component {
                 <div style={{ height: '7vh', width: '65vw', backgroundColor: 'rgba(87, 196, 223, 1)', lineHeight: '7vh' }}>
                     <div style={{ height: '2.18vh', width: '1.09vh', overflow: 'hidden', position: 'fixed', top: '16vh', left: '25vw' }}><div className='user-rectangle'></div></div>
                     <span style={{ color: 'white', fontSize: '1.1vw', marginLeft: '2vw' }}>您所在的位置是：首页 > {this.state.pathname}</span>
-                    {/* <span style={{ color: 'white', fontSize: '1.1vw', float: 'right', marginRight: '2vw' }}><i className='iconfont icon-hi' style={{ fontSize: '1.5vw' }}></i>&nbsp;{this.state.name},{ifnoon}</span> */}
                     <input className='search' type='search' onChange={this.changeSearch} onKeyDown={(e) => this.onkeydown(e)} placeholder="回车进行搜索" ></input>
                 </div>
-                {/* <div className='search-input'>
-                    <input type='search'  onChange={this.changeSearch} onKeyDown={(e) => this.onkeydown(e)} placeholder="回车进行搜索" ></input>
-                </div> */}
                 <div className='user-content'>
                     <table style={{ width: '61vw', tableLayout: 'fixed', border: 'none' }}>
                         <thead style={{ height: '5vh', lineHeight: '5vh' }}>
@@ -177,9 +212,10 @@ export default class Users extends Component {
                                 <th style={{ width: '5vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>名字</th>
                                 <th style={{ width: '3vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>等级</th>
                                 <th style={{ width: '3vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>积分</th>
-                                <th style={{ width: '8vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>电话</th>
+                                <th style={{ width: '6vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>电话</th>
                                 <th style={{ width: '8vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>学院</th>
-                                <th style={{ width: '8vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>密码</th>
+                                <th style={{ width: '6vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>密码</th>
+                                <th style={{ width: '8vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>操作</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -187,16 +223,34 @@ export default class Users extends Component {
                                 this.state.indexList.map(
                                     (item, idx) => <tr key={idx} style={{ height: '4vh', lineHeight: '3vh', backgroundColor: 'SkyBlue' }}>
                                         <td style={{ textAlign: 'center' }}><img style={{ height: '5vh', width: '5vh', borderRadius: '2.5vh' }} src={item.pic} ></img></td>
-                                        <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center' }}>{item.name}</td>
+                                        <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '5vw' }}>{item.name}</td>
                                         <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center' }}>{item.level}</td>
                                         <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center' }}>{item.lvnum}</td>
-                                        <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center' }}>{item.tel}</td>
-                                        <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '270px' }}>{item.college}</td>
-                                        <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '130px' }}>{item.pwd}</td>
+                                        <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center' , whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '6vw'}}>{item.tel}</td>
+                                        <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '8vw' }}>{item.college}</td>
+                                        <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '6vw' }}>{item.pwd}</td>
+                                        <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center' }}>
+                                            <span onClick={this.showPwd.bind(this,(item.name))} style={{ height: '3vh', width: '5vw', fontFamily: '楷体', fontSize: '1.2vw', marginLeft: '10px', cursor: 'pointer' }}>查看密码</span>
+                                        </td>
                                     </tr>
                                 )
                             }
                         </tbody>
+                        <Modal
+                            style={{ height: '15vh', backgroundColor: 'rgb(68,182,211)', position: 'fixed', left: '35vw', top: '30vh', paddingBottom: '9vh' }}
+                            visible={this.state.visible2}
+                            onOk={this.handleOk2}
+                            onCancel={this.handleCancel2}
+                            closable={false}
+                            footer={[
+                                <Button key="back" onClick={this.handleCancel2} className='footerstyle' style={{ color: 'rgb(68,182,211)', position: 'absolute', backgroundColor: 'white', left: '30%', bottom: '4vh', width: '6vw', height: '4.2vh', borderRadius: '2vh', border: 'unset', cursor: 'pointer' }}>确认</Button>,
+                                <Button key="cancel" onClick={this.handleOk2} className='footerstyle' style={{ color: 'rgb(68,182,211)', position: 'absolute', backgroundColor: 'white', left: '52%', bottom: '4vh', width: '6vw', height: '4.2vh', borderRadius: '2vh', border: 'unset', cursor: 'pointer' }}>取消</Button>,
+                            ]}
+                        >
+                            <div style={{ marginTop: '5vh', textAlign: 'center' }}>
+                                <span style={{color:'white',fontSize:'1.5vw'}}>{this.state.jiemiName}{this.state.jiemiPwd}</span>
+                            </div>
+                        </Modal>
                     </table>
                     <div style={{ position: 'fixed', height: '7vh', width: '20vw', left: '50vw', top: '88vh' }}>
                         <a style={{ textDecoration: 'none', marginRight: '2vw' }}>

@@ -1,19 +1,21 @@
 {
-  "name": "student",
+  "name": "managersystem",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-    "antd": "^3.26.2",
-    "antd-mobile": "^2.3.1",
-    "axios": "^0.19.0",
-    "react": "^16.12.0",
-    "react-component-modal": "0.0.1",
-    "react-dom": "^16.12.0",
+    "antd": "^4.2.4",
+    "axios": "^0.19.2",
+    "crypto-js": "^4.0.0",
+    "jsencrypt": "^3.0.0-rc.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.0"
+    "react-scripts": "3.4.1",
+    "rsuite": "^4.6.0",
+    "rsuite-table": "^3.13.0"
   },
   "scripts": {
     "start": "react-scripts start",

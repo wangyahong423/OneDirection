@@ -208,8 +208,8 @@ export default class Experience extends Component {
                                     (item, idx) => <tr key={idx} style={{ height: '4vh', lineHeight: '4vh', backgroundColor: 'SkyBlue' }}>
                                         <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center' }}>{item.id}</td>
                                         <td style={{ textAlign: 'center' }}><img style={{ height: '5vh', width: '5vh', borderRadius: '2.5vh' }} src={item.pic} ></img></td>
-                                        <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center' }}>{item.name}</td>
-                                        <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center' }}>{item.time}</td>
+                                        <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '8vw' }}>{item.name}</td>
+                                        <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '13.5vw' }}>{item.time}</td>
                                         <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '12vw' }}>{item.content}</td>
                                         <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center' }}>
                                             <span onClick={this.handleRegister.bind(this, (item.id))} style={{ height: '3vh', width: '5vw', fontFamily: '楷体', fontSize: '1.2vw', cursor: 'pointer' }}>删除</span>

@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Modal, Button } from 'antd';
+import Base64 from 'crypto-js/enc-base64'
+import Utf8 from 'crypto-js/enc-utf8'
+
 import PropTypes from "prop-types";
 import '../App.css';
+
 export default class Managers extends Component {
     static propTypes = {
         match: PropTypes.object.isRequired,
@@ -26,15 +30,16 @@ export default class Managers extends Component {
             tels: '',//添加管理员电话
             visible: false,
             visible1: false,
+            visible2: false,
             nname: '',//修改密码
             npwd: '',//修改密码
             ntel: '',//修改密码
             rnpwd: '',//修改密码
-            an:1,
-            at:1,
-            ap:1,
-            xp:1,
-            xrp:1
+            an: 1,
+            at: 1,
+            ap: 1,
+            xp: 1,
+            xrp: 1
         }
     }
     showModal = () => {
@@ -46,29 +51,29 @@ export default class Managers extends Component {
     handleOk = e => {
         this.setState({
             visible: false,
-            an:1,
-            at:1,
-            ap:1
+            an: 1,
+            at: 1,
+            ap: 1
         });
     };
 
     handleCancel = e => {
         if (this.state.names == '') {
             this.setState({
-                an:0,
-                visible:true
+                an: 0,
+                visible: true
             })
         }
         else if (this.state.pwds == '') {
             this.setState({
-                ap:0,
-                visible:true
+                ap: 0,
+                visible: true
             })
         }
         else if (this.state.tels == '') {
             this.setState({
-                at:0,
-                visible:true
+                at: 0,
+                visible: true
             })
         }
         else {
@@ -94,33 +99,67 @@ export default class Managers extends Component {
 
     };
 
-    showModal1 = (name,tel,e) => {
+    showModal1 = (name, tel, e) => {
         this.setState({
             visible1: true,
-            nname:name,
-            ntel:tel
+            nname: name,
+            ntel: tel
+        });
+    };
+
+    showPwd = (name,e)=>{
+        this.setState({
+            visible2:true
+        })
+        let url = `http://139.155.44.190:3005/manager/list`;
+        axios(url)
+            .then((res) => {
+                if (res.data.false) {
+                } else {
+                    console.log(res.data)
+                    for(var i=0;i<res.data.length;i++){
+                        if(res.data[i].name == name){
+                            this.setState({
+                                jiemiName:name+'的密码是：',
+                                jiemiPwd:res.data[i].pwd
+                            })
+                        }
+                    }
+                    console.log(this.state.jiemiPwd)
+                }
+            })
+    }
+    handleOk2 = e => {
+        this.setState({
+            visible2: false,
+        });
+    };
+
+    handleCancel2 = e => {
+        this.setState({
+            visible2: false,
         });
     };
 
     handleOk1 = e => {
         this.setState({
             visible1: false,
-            xp:1,
-            xrp:1,
+            xp: 1,
+            xrp: 1,
         });
     };
 
     handleCancel1 = e => {
         if (this.state.npwd == '') {
             this.setState({
-                xp:0,
-                visible1:true
+                xp: 0,
+                visible1: true
             })
         }
         else if (this.state.rnpwd == '') {
             this.setState({
-                xrp:0,
-                visible1:true
+                xrp: 0,
+                visible1: true
             })
         }
         else {
@@ -140,7 +179,7 @@ export default class Managers extends Component {
                         }
                     )
             }
-            else{
+            else {
                 alert('密码不一致！');
             }
 
@@ -173,6 +212,9 @@ export default class Managers extends Component {
         }
     }
     componentDidMount() {
+        let key2 = Base64.stringify(Utf8.parse("123"))
+        console.log(key2)
+
         const { location } = this.props;
         if (location.pathname == '/') {
             this.setState({
@@ -206,8 +248,10 @@ export default class Managers extends Component {
                 axios(url1)
                     .then((r) => {
                         for (var i = 0; i < res.data.length; i++) {
+                            res.data[i].pwd = Base64.stringify(Utf8.parse(res.data[i].pwd))
                             for (var j = 0; j < r.data.length; j++) {
                                 if (res.data[i].name == r.data[j].name) {
+                                    
                                     res.data[i].pic = "http://139.155.44.190:3005" + r.data[j].pic;
                                     res.data[i].card = "http://139.155.44.190:3005" + r.data[j].card;
                                 }
@@ -273,6 +317,8 @@ export default class Managers extends Component {
                 ap: 0,
             })
         }
+
+        
     }
 
     getNewPwd = (e) => {
@@ -316,7 +362,7 @@ export default class Managers extends Component {
                     })
 
                 }
- 
+
             })
     }
     onkeydown = (e) => {
@@ -344,6 +390,8 @@ export default class Managers extends Component {
             })
         }
     }
+
+    
     render() {
         let t = this.state.date;
         let ifnoon = ' ' + ((t.getHours() < 12) ? "上午好" : "下午好") + ' ';
@@ -361,8 +409,8 @@ export default class Managers extends Component {
                             <tr style={{ lineHeight: '5.9vh', backgroundColor: 'rgba(68, 182, 211, 1)' }}>
                                 <th style={{ width: '5vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>姓名</th>
                                 <th style={{ width: '8vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>电话</th>
-                                <th style={{ width: '6vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>密码</th>
-                                <th style={{ width: '8vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>操作</th>
+                                <th style={{ width: '8vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>密码</th>
+                                <th style={{ width: '12vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>操作</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -371,10 +419,11 @@ export default class Managers extends Component {
                                     (item, idx) => <tr key={idx} style={{ height: '4vh', lineHeight: '4vh', backgroundColor: 'SkyBlue' }}>
                                         <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center' }}>{item.name}</td>
                                         <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center' }}>{item.tel}</td>
-                                        <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center' }}>{item.pwd}</td>
+                                        <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '8vw' }}>{item.pwd}</td>
                                         <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center' }}>
                                             <span onClick={this.handleRegister.bind(this, (item.name))} style={{ height: '3vh', width: '5vw', fontFamily: '楷体', fontSize: '1.2vw', cursor: 'pointer' }}>删除</span>
-                                            <span onClick={this.showModal1.bind(this,(item.name),(item.tel))} style={{ height: '3vh', width: '5vw', fontFamily: '楷体', fontSize: '1.2vw', marginLeft: '10px', cursor: 'pointer' }}>修改密码</span>
+                                            <span onClick={this.showPwd.bind(this,(item.name))} style={{ height: '3vh', width: '5vw', fontFamily: '楷体', fontSize: '1.2vw', marginLeft: '10px', cursor: 'pointer' }}>查看密码</span>
+                                            <span onClick={this.showModal1.bind(this, (item.name), (item.tel))} style={{ height: '3vh', width: '5vw', fontFamily: '楷体', fontSize: '1.2vw', marginLeft: '10px', cursor: 'pointer' }}>修改密码</span>
                                         </td>
                                     </tr>
                                 )
@@ -395,22 +444,22 @@ export default class Managers extends Component {
                                 <span style={{ color: 'white' }}></span><input className='addmanager' onChange={this.getName} type='text' placeholder='请输入用户名'></input>
                                 {
                                     this.state.an == 0
-                                    ? <p style={{position:'absolute',top:'9.7vh',left:'9.7vw',color:'red',fontSize:'0.8vw'}}>用户名不能为空！</p>
-                                    : <p style={{position:'absolute',top:'10vh',left:'5vw',color:'red',fontSize:'1vw'}}></p>
+                                        ? <p style={{ position: 'absolute', top: '9.7vh', left: '9.7vw', color: 'red', fontSize: '0.8vw' }}>用户名不能为空！</p>
+                                        : <p style={{ position: 'absolute', top: '10vh', left: '5vw', color: 'red', fontSize: '1vw' }}></p>
                                 }
                                 <br />
                                 <span style={{ color: 'white' }}></span><input className='addmanager' onChange={this.getPwd} type='password' placeholder='请输入密码'></input>
                                 {
-                                    this.state.ap == 0 
-                                    ? <p style={{position:'absolute',top:'17vh',left:'9.7vw',color:'red',fontSize:'0.8vw'}}>密码不能为空！</p>
-                                    : <p style={{position:'absolute',top:'10vh',left:'5vw',color:'red',fontSize:'1vw'}}></p>
+                                    this.state.ap == 0
+                                        ? <p style={{ position: 'absolute', top: '17vh', left: '9.7vw', color: 'red', fontSize: '0.8vw' }}>密码不能为空！</p>
+                                        : <p style={{ position: 'absolute', top: '10vh', left: '5vw', color: 'red', fontSize: '1vw' }}></p>
                                 }
                                 <br />
                                 <span style={{ color: 'white' }}></span><input className='addmanager' onChange={this.getTel} type='text' placeholder='请输入手机号'></input>
                                 {
                                     this.state.at == 0
-                                    ? <p style={{position:'absolute',top:'24.2vh',left:'9.7vw',color:'red',fontSize:'0.8vw'}}>电话不能为空！</p>
-                                    : <p style={{position:'absolute',top:'10vh',left:'5vw',color:'red',fontSize:'1vw'}}></p>
+                                        ? <p style={{ position: 'absolute', top: '24.2vh', left: '9.7vw', color: 'red', fontSize: '0.8vw' }}>电话不能为空！</p>
+                                        : <p style={{ position: 'absolute', top: '10vh', left: '5vw', color: 'red', fontSize: '1vw' }}></p>
                                 }
                             </div>
                         </Modal>
@@ -426,27 +475,43 @@ export default class Managers extends Component {
                             ]}
                         >
                             <div style={{ marginTop: '5vh', textAlign: 'center' }}>
-                                <span style={{ color: 'white' }}></span><input disabled className='altermanager'  type='text' placeholder={this.state.nname}></input>
+                                <span style={{ color: 'white' }}></span><input disabled className='altermanager' type='text' placeholder={this.state.nname}></input>
                                 <br />
-                                <span style={{ color: 'white' }}></span><input disabled className='altermanager'  type='text' placeholder={this.state.ntel}></input>
+                                <span style={{ color: 'white' }}></span><input disabled className='altermanager' type='text' placeholder={this.state.ntel}></input>
                                 <br />
                                 <span style={{ color: 'white' }}></span><input className='altermanager' onChange={this.getNewPwd} type='password' placeholder='请输入新密码'></input>
                                 {
                                     this.state.xp == 0
-                                    ? <p style={{color:'red',fontSize:'0.8vw',position:'absolute',top:'24.3vh',left:'9.6vw'}}>密码不能为空！</p>
-                                    : <p style={{color:'red',fontSize:'0.8vw',position:'absolute',top:'5vh',left:'9.6vw'}}></p>
+                                        ? <p style={{ color: 'red', fontSize: '0.8vw', position: 'absolute', top: '24.3vh', left: '9.6vw' }}>密码不能为空！</p>
+                                        : <p style={{ color: 'red', fontSize: '0.8vw', position: 'absolute', top: '5vh', left: '9.6vw' }}></p>
                                 }
                                 <br />
                                 <span style={{ color: 'white' }}></span><input className='altermanager' onChange={this.getReNewPwd} type='password' placeholder='请再次确认新密码'></input>
                                 {
                                     this.state.xrp == 0
-                                    ? <p style={{color:'red',fontSize:'0.8vw',position:'absolute',top:'31.5vh',left:'9.6vw'}}>密码不能为空！</p>
-                                    : <p style={{color:'red',fontSize:'0.8vw',position:'absolute',top:'10vh',left:'9.6vw'}}></p>
+                                        ? <p style={{ color: 'red', fontSize: '0.8vw', position: 'absolute', top: '31.5vh', left: '9.6vw' }}>密码不能为空！</p>
+                                        : <p style={{ color: 'red', fontSize: '0.8vw', position: 'absolute', top: '10vh', left: '9.6vw' }}></p>
                                 }
                             </div>
                         </Modal>
 
-                        <div style={{ position: 'fixed', height: '7vh', width: '20vw', left: '50vw', top: '88vh' }}>
+                        <Modal
+                            style={{ height: '15vh', backgroundColor: 'rgb(68,182,211)', position: 'fixed', left: '35vw', top: '30vh', paddingBottom: '9vh' }}
+                            visible={this.state.visible2}
+                            onOk={this.handleOk2}
+                            onCancel={this.handleCancel2}
+                            closable={false}
+                            footer={[
+                                <Button key="back" onClick={this.handleCancel2} className='footerstyle' style={{ color: 'rgb(68,182,211)', position: 'absolute', backgroundColor: 'white', left: '30%', bottom: '4vh', width: '6vw', height: '4.2vh', borderRadius: '2vh', border: 'unset', cursor: 'pointer' }}>确认</Button>,
+                                <Button key="cancel" onClick={this.handleOk2} className='footerstyle' style={{ color: 'rgb(68,182,211)', position: 'absolute', backgroundColor: 'white', left: '52%', bottom: '4vh', width: '6vw', height: '4.2vh', borderRadius: '2vh', border: 'unset', cursor: 'pointer' }}>取消</Button>,
+                            ]}
+                        >
+                            <div style={{ marginTop: '5vh', textAlign: 'center' }}>
+                                <span style={{color:'white',fontSize:'1.5vw'}}>{this.state.jiemiName}{this.state.jiemiPwd}</span>
+                            </div>
+                        </Modal>
+
+                        <div style={{ position: 'fixed', height: '7vh', width: '15vw', left: '50vw', top: '88vh' }}>
                             <a style={{ textDecoration: 'none', marginRight: '2vw' }}>
                                 <span onClick={this.setUp} style={{ color: 'RoyalBlue', fontSize: '1.2vw', cursor: 'pointer' }}>上一页</span>
                             </a>
