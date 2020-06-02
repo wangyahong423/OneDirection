@@ -24,7 +24,7 @@ const tabs = [
     { title: '我的收藏', sub: '5' },
 ];
 
-export default class FolPer extends Component {
+export default class Myfanper extends Component {
     constructor() {
         super();
         this.state = {
@@ -43,7 +43,7 @@ export default class FolPer extends Component {
             Plearnlike: 0,
             Pexperiencelike: 0,
             Pexpcollect: 0,
-            nname: '',
+            pname: '',
             llikeData: [],
             elikeData: [],
             mylearnData: [],
@@ -61,8 +61,8 @@ export default class FolPer extends Component {
     }
 
     componentDidMount() {
-        var name = this.props.match.params.nname;
-        var lname1 = this.props.match.params.lname;
+        var name = this.props.match.params.lname;
+        var lname1 = this.props.match.params.nname;
         let url = `http://139.155.44.190:3005/users/getName`;
         let url1 = `http://139.155.44.190:3005/learn/list/`;
         let url2 = `http://139.155.44.190:3005/users/list`;
@@ -96,7 +96,7 @@ export default class FolPer extends Component {
                         data: arr
                     })
                 })
-                console.log('data', this.state.data);
+                console.log('data', arr);
                 axios(url1)
                     .then((res) => {
                         this.setState({
@@ -282,7 +282,6 @@ export default class FolPer extends Component {
                                         this.setState({
                                             Pexperiencelike: PElike
                                         })
-
                                         //我的经验分享
                                         this.setState({
                                             myelikeNum: res.data
@@ -492,6 +491,7 @@ export default class FolPer extends Component {
                                                 console.log('mycollectData:', this.state.mycollectData);
                                             })
                                     })
+
                             })
                         axios(url7)
                             .then((res) => {
@@ -545,14 +545,14 @@ export default class FolPer extends Component {
                     })
             })
         this.setState({
-            lname: lname1,
-            username: name
+            pname: name,
+            lname: lname1,//nname
+            username: name//lname
         })
-        console.log('data', this.state.data);
     }
 
     follow = () => {
-        var user = this.props.match.params.nname;
+        var user = this.props.match.params.lname;
         if (this.state.follow == false) {
             this.setState({
                 follow: true
@@ -1905,7 +1905,7 @@ export default class FolPer extends Component {
         });
     }
 
-    back = () => {
+    back=()=>{
         window.history.back();
     }
 
@@ -1913,7 +1913,6 @@ export default class FolPer extends Component {
         return (
             <div>
                 <div style={bg}>
-                    {/* <Link to={`/follows/${this.state.lname}`}><span style={{ fontSize: '17px', color: 'white', marginLeft: "2vw", paddingTop: '2vh', display: 'block' }} className="iconfont icon-ico_leftarrow"></span></Link> */}
                     <span onClick={this.back} style={{ fontSize: '17px', color: 'white', marginLeft: "2vw", paddingTop: '2vh', display: 'block' }} className="iconfont icon-ico_leftarrow"></span>
                     {
                         this.state.data.map((item) =>
@@ -1921,16 +1920,9 @@ export default class FolPer extends Component {
                                 <img src={item.pic} style={{ height: 80, width: 80, borderRadius: '50%', borderColor: '#37376F', borderWidth: 2, borderStyle: 'solid' }} />
                                 <div>
                                     <span style={{ fontSize: 18, color: '#fff' }}>{item.name}</span>
-                                    {
-                                        item.level > 10
-                                            ? <span style={{ fontSize: '2.5vh', marginLeft: '2vw', color: 'red' }}>Lv.{item.level}</span>
-                                            : <span style={{ position: 'relative' }}>
-                                                <img src={require(`../images/lv${item.level}.png`)} style={{ width: '8vw', height: '5vw', marginLeft: '2vw', position: 'absolute', top: -4 }} />
-                                            </span>
-                                    }
-                                    {/* <span style={{ position: 'relative' }}>
+                                    <span style={{ position: 'relative' }}>
                                         <img src={require(`../images/lv${item.level}.png`)} style={{ width: '8vw', height: '5vw', marginLeft: '2vw', position: 'absolute', top: -4 }} />
-                                    </span> */}
+                                    </span>
                                 </div>
                                 {
                                     this.state.name == this.state.username
@@ -1946,13 +1938,13 @@ export default class FolPer extends Component {
                                         <span style={{ display: 'block', fontSize: 16 }}>{this.state.experiencelike}</span>
                                         <span style={{ display: 'block', fontSize: 16 }}>经验获赞</span>
                                     </span>
-                                    <Link to={`/fans/${item.name}`}>
+                                    <Link to={`/fanlist/${item.name}`}>
                                         <span style={{ height: '5vh', width: '20vw', float: 'left', textAlign: "center", marginTop: '2vh', color: '#fff', fontSize: 14, borderRightWidth: '2px', borderRightColor: '#fff', borderRightStyle: 'solid' }}>
                                             <span style={{ display: 'block', fontSize: 16 }}>{this.state.fans}</span>
                                             <span style={{ display: 'block', fontSize: 16 }}>粉丝</span>
                                         </span>
                                     </Link>
-                                    <Link to={`/follows/${item.name}`}>
+                                    <Link to={`/follist/${item.name}`}>
                                         <span style={{ height: '5vh', width: '20vw', float: 'left', textAlign: "center", marginTop: '2vh', color: '#fff', fontSize: 14 }}>
                                             <span style={{ display: 'block', fontSize: 16 }}>{this.state.follows}</span>
                                             <span style={{ display: 'block', fontSize: 16 }}>关注</span>
@@ -1988,8 +1980,7 @@ export default class FolPer extends Component {
                                                                 ? <img src={`http://139.155.44.190:3005${item.pic}`} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
                                                                 : <img src={item.pic} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
 
-                                                        }
-                                                        {
+                                                        }                                                        {
                                                             item.head != 'http://139.155.44.190:3005/head/null'
                                                                 ? <img src={item.head} style={{ height: '10vh', width: '15vw', borderRadius: '50%', position: 'absolute', left: 4, top: -3 }} />
                                                                 : null
@@ -2018,11 +2009,11 @@ export default class FolPer extends Component {
                                                         }
                                                     </div>
                                                     <div style={{ marginLeft: 76, color: 'gray', fontSize: '2vw' }}>{item.time}</div>
-                                                    <Link to={`/foldetails/${this.state.lname}/${this.state.username}/${item.id}`}>
+                                                    <Link to={`/fandetails/${this.state.lname}/${this.state.username}/${item.id}`}>
                                                         <p style={{ marginLeft: 25, color: 'black', marginTop: 20, fontSize: '17px', width: '87vw', overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{item.content}</p>
                                                     </Link>
                                                     <div style={{ marginTop: 20 }}>
-                                                        <Link to={`/folcom/${this.state.lname}/${this.state.username}/${item.id}`}>
+                                                        <Link to={`/fancom/${this.state.lname}/${this.state.username}/${item.id}`}>
                                                             <sapn className="iconfont icon-pinglun" style={{ fontSize: '24px', marginLeft: '26%', color: 'black' }}></sapn>
                                                             <span style={{ marginLeft: '3%', color: '#000000' }}>{item.comNum}</span>
                                                         </Link>
@@ -2055,8 +2046,7 @@ export default class FolPer extends Component {
                                                             ? <img src={`http://139.155.44.190:3005${item.pic}`} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
                                                             : <img src={item.pic} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
 
-                                                    }
-                                                    {
+                                                    }                                                    {
                                                         item.head != 'http://139.155.44.190:3005/head/null'
                                                             ? <img src={item.head} style={{ height: '10vh', width: '15vw', borderRadius: '50%', position: 'absolute', left: 4, top: -3 }} />
                                                             : null
@@ -2109,8 +2099,7 @@ export default class FolPer extends Component {
                                                             ? <img src={`http://139.155.44.190:3005${item.pic}`} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
                                                             : <img src={item.pic} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
 
-                                                    }
-                                                    {
+                                                    }                                                    {
                                                         item.head != 'http://139.155.44.190:3005/head/null'
                                                             ? <img src={item.head} style={{ height: '10vh', width: '15vw', borderRadius: '50%', position: 'absolute', left: 4, top: -3 }} />
                                                             : null
@@ -2139,11 +2128,11 @@ export default class FolPer extends Component {
                                                     }
                                                 </div>
                                                 <div style={{ marginLeft: 76, color: 'gray', fontSize: '2vw' }}>{item.time}</div>
-                                                <Link to={`/foldetails/${this.state.lname}/${this.state.username}/${item.id}`}>
+                                                <Link to={`/fandetails/${this.state.lname}/${this.state.username}/${item.id}`}>
                                                     <p style={{ marginLeft: 25, color: 'black', marginTop: 20, fontSize: '17px', width: '87vw', overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{item.content}</p>
                                                 </Link>
                                                 <div style={{ marginTop: 20 }}>
-                                                    <Link to={`/folcom/${this.state.lname}/${this.state.username}/${item.id}`}>
+                                                    <Link to={`/fancom/${this.state.lname}/${this.state.username}/${item.id}`}>
                                                         <sapn className="iconfont icon-pinglun" style={{ fontSize: '24px', marginLeft: '26%', color: 'black' }}></sapn>
                                                         <span style={{ marginLeft: '3%', color: '#000000' }}>{item.comNum}</span>
                                                     </Link>
@@ -2175,8 +2164,7 @@ export default class FolPer extends Component {
                                                             ? <img src={`http://139.155.44.190:3005${item.pic}`} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
                                                             : <img src={item.pic} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
 
-                                                    }
-                                                    {
+                                                    }                                                    {
                                                         item.head != 'http://139.155.44.190:3005/head/null'
                                                             ? <img src={item.head} style={{ height: '10vh', width: '15vw', borderRadius: '50%', position: 'absolute', left: 4, top: -3 }} />
                                                             : null
@@ -2244,7 +2232,8 @@ export default class FolPer extends Component {
                                                             : <span style={{ position: 'relative' }}>
                                                                 <img src={require(`../images/lv${item.level}.png`)} style={{ width: '8vw', height: '5vw', marginLeft: '2vw', position: 'absolute', top: -4 }} />
                                                             </span>
-                                                    }                                                    {/* <span style={{ position: 'relative' }}>
+                                                    }
+                                                    {/* <span style={{ position: 'relative' }}>
                                                         <img src={require(`../images/lv${item.level}.png`)} style={{ width: '8vw', height: '5vw', marginLeft: '2vw', position: 'absolute', top: -4 }} />
                                                     </span> */}
                                                     {this.state.name == item.name ? <span onClick={this.mycDelete.bind(this, (idx))} style={{ float: 'right', marginRight: '2vw', color: '#999999', fontSize: 30 }}>×</span> : null}

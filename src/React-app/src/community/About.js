@@ -173,14 +173,13 @@ export default class About extends Component {
               </div>
               <div>
                 <span style={{ fontSize: '2.5vh', lineHeight: 2.5, marginLeft: '3vw' }}>{item.name}</span>
-                {/* {
+                {
                   item.level > 10
                     ? <span style={{ fontSize: '2.5vh', marginLeft: '2vw', color: 'red' }}>Lv.{item.level}</span>
                     : <span style={{ position: 'relative' }}>
-                      <img src={require(`../images/lv${item.level}.png`)} style={{ width: '8vw', height: '5vw', marginLeft: '2vw', position: 'absolute', top: -4 }} />
+                      <img src={`http://139.155.44.190:3005/level/lv${item.level}.png`} style={{ width: '8vw', height: '5vw', marginLeft: '2vw', position: 'absolute', top: -4 }} />
                     </span>
-                } */}
-                <span style={{ fontSize: '2.5vh', marginLeft: '2vw', color: 'red' }}>Lv.{item.level}</span>
+                }
                 {
                   item.card != 'http://139.155.44.190:3005/card/null' || null
                     ? <span style={{ float: 'right', marginRight: '3vw', marginTop: '1vh' }}><img style={{ width: '22vw', height: '7vh' }} src={item.card} /></span>
@@ -209,15 +208,18 @@ export default class About extends Component {
               </div>
               <div style={{ height: '1px', width: '100%' }}></div>
               <div>
-                <span style={{ fontSize: '2.5vh', lineHeight: 2.5, marginLeft: '4vw' }}>{item.name}</span>
-                {/* {
+                {
+                  item.name == this.state.data[0].name
+                    ? <span style={{ fontSize: '2.5vh', lineHeight: 2.5, marginLeft: '4vw', color: 'red' }}>{item.name}</span>
+                    : <span style={{ fontSize: '2.5vh', lineHeight: 2.5, marginLeft: '4vw' }}>{item.name}</span>
+                }
+                {
                   item.level > 10
                     ? <span style={{ fontSize: '2.5vh', marginLeft: '2vw', color: 'red' }}>Lv.{item.level}</span>
                     : <span style={{ position: 'relative' }}>
-                      <img src={'../images/lv1.png'} style={{ width: '8vw', height: '5vw', marginLeft: '2vw', position: 'absolute', top: -4 }} />
+                      <img src={`http://139.155.44.190:3005/level/lv${item.level}.png`} style={{ width: '8vw', height: '5vw', marginLeft: '2vw', position: 'absolute', top: -4 }} />
                     </span>
-                } */}
-                <span style={{ fontSize: '2.5vh', marginLeft: '2vw', color: 'red' }}>Lv.{item.level}</span>
+                }
               </div>
               <div style={{ height: '2px', width: '100%' }}></div>
               <div style={{ marginLeft: '17vw', marginTop: '-10px', fontSize: '2.3vh' }}>{item.content}</div>

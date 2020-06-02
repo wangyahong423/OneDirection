@@ -1909,11 +1909,16 @@ export default class Person extends Component {
         });
     }
 
+    back = () => {
+        window.history.back();
+    }
+
     render() {
         return (
             <div>
                 <div style={bg}>
-                    <Link to="/community"><span style={{ fontSize: '17px', color: 'white', marginLeft: "2vw", paddingTop: '2vh', display: 'block' }} className="iconfont icon-ico_leftarrow"></span></Link>
+                    {/* <Link to="/community"><span style={{ fontSize: '17px', color: 'white', marginLeft: "2vw", paddingTop: '2vh', display: 'block' }} className="iconfont icon-ico_leftarrow"></span></Link> */}
+                    <span onClick={this.back} style={{ fontSize: '17px', color: 'white', marginLeft: "2vw", paddingTop: '2vh', display: 'block' }} className="iconfont icon-ico_leftarrow"></span>
                     {
                         this.state.data.map((item) =>
                             <div style={{ width: '100%', height: '30vh', textAlign: 'center' }}>

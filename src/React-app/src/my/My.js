@@ -57,41 +57,67 @@ export default class My extends Component {
                             college: item.college,
                             pic: "http://139.155.44.190:3005" + item.pic,
                             head: "http://139.155.44.190:3005/head/" + item.head,
-                            lvnum: item.lvnum
+                            level: item.level
                         })
                     }
-                    var num = Math.floor(this.state.lvnum / 15);
-                    let url3 = `http://139.155.44.190:3005/users/list`;
-                    axios(url3)
-                        .then((res) => {
-                            this.setState({
-                                lvlist: res.data
-                            })
-                            this.state.lvlist.map((item) => {
-                                if (item.name == this.state.username) {
-                                    if (num < 10) {
-                                        this.setState({
-                                            level: num + 1
-                                        })
-                                    }
-                                    else {
-                                        this.setState({
-                                            level: 10
-                                        })
-                                    }
-                                    let url4 = `http://139.155.44.190:3005/users/changeLv?level=${this.state.level}&name=${this.state.username}`;
-                                    axios(url4)
-                                        .then((res) => {
-                                            if (res.data.ok) { }
-                                            else {
-                                                alert(res.data.msg)
-                                            }
-                                        })
-                                }
-                            })
-                        })
+                    // var num = Math.floor(this.state.lvnum / 15);
+                    // let url3 = `http://139.155.44.190:3005/users/list`;
+                    // axios(url3)
+                    //     .then((res) => {
+                    //         this.setState({
+                    //             lvlist: res.data
+                    //         })
+                    //         this.state.lvlist.map((item) => {
+                    //             if (item.name == this.state.username) {
+                    //                 if (num < 10) {
+                    //                     this.setState({
+                    //                         level: num + 1
+                    //                     })
+                    //                 }
+                    //                 else {
+                    //                     this.setState({
+                    //                         level: 10
+                    //                     })
+                    //                 }
+                    //                 let url4 = `http://139.155.44.190:3005/users/changeLv?level=${this.state.level}&name=${this.state.username}`;
+                    //                 axios(url4)
+                    //                     .then((res) => {
+                    //                         if (res.data.ok) { }
+                    //                         else {
+                    //                             alert(res.data.msg)
+                    //                         }
+                    //                     })
+                    //             }
+                    //         })
+                    //     })
 
                 })
+            })
+        let url10 = `http://139.155.44.190:3005/learn/list`;
+        axios(url10)
+            .then((res) => {
+                var brr = [];
+                res.data.forEach((item) => {
+                    if (item.name == this.state.username) {
+                        brr.push(item);
+                    }
+                })
+                this.setState({
+                    crr: brr
+                })
+                console.log('crr:', this.state.crr);
+                var scnum = 0;
+                var slnum = 0;
+                var num = 0;
+                this.state.crr.forEach((item) => {
+                    scnum += item.cnum;
+                    slnum += item.likenum;
+                })
+                num = scnum + slnum;
+                this.setState({
+                    sum: num
+                })
+                console.log('snum:', this.state.sum);
             })
     }
     outlogin = () => {
@@ -112,6 +138,11 @@ export default class My extends Component {
             })
 
     }
+
+    tiezi = () => {
+        console.log('tiezi')
+    }
+
     render() {
         return (
             <div>
@@ -119,8 +150,8 @@ export default class My extends Component {
                 <div className="one"></div>
                 <Link to="/changeImg">
                     <div style={{ height: '150px', width: '150px', borderRadius: '50%', opacity: '1', zIndex: "10", marginTop: '-70px', overflow: 'hidden', marginLeft: '20px' }} >
-                        <div style={{position:'relative'}}>
-                            <img src={this.state.pic} style={{ height: '100px', width: '100px', opacity: '1',marginTop:25,marginLeft:25, borderRadius: '50%'}} />
+                        <div style={{ position: 'relative' }}>
+                            <img src={this.state.pic} style={{ height: '100px', width: '100px', opacity: '1', marginTop: 25, marginLeft: 25, borderRadius: '50%' }} />
                             {
                                 this.state.head != 'http://139.155.44.190:3005/head/null'
                                     ? <img src={this.state.head} style={{ height: '120px', width: '120px', borderRadius: '50%', position: 'absolute', left: 12, top: 14 }} />
@@ -131,17 +162,32 @@ export default class My extends Component {
                 </Link>
                 <div style={{ marginTop: '-10vh', marginLeft: '35vw' }}>
                     <div>
-                        <span>{this.state.username}&emsp;</span>
-                        <span style={{ color: 'red' }}>Lv{this.state.level}</span>
+                        <p>{this.state.username}&emsp;</p>
+                        <div style={{ position: 'relative' }}>
+                            <img src={`http://139.155.44.190:3005/level/lv${this.state.level}.png`} style={{ width: '8vw', height: '5vw', position: 'absolute', top: '-5.1vh', left: '8vw' }} />
+                        </div>
                         <p>河北师范大学{this.state.college}</p>
                     </div>
                 </div>
-                {/* {
-                    this.state.head != 'http://139.155.44.190:3005/head/null'
-                        ? <img src={this.state.head} style={{ height: '150px', width: '150px', borderRadius: '50%', position:'absolute',top:190,left:-10,zIndex:1 }} />
-                        : null
-                } */}
-                <div style={{zIndex:999}}>
+                <div style={{ zIndex: 999 }}>
+                    <List style={{ marginTop: '18px', marginBottom: '15px' }}>
+                        <Link to="/myfans">
+                            <Item
+                                arrow="horizontal"
+                                onClick={() => { }}
+                                className='iconfont icon-collection'
+                                style={{ paddingLeft: '20px', borderBottom: '1px solid grey', height: '60px', color: 'black' }}
+                            ><span style={{ marginLeft: '40px', fontSize: '20px' }}>我的粉丝</span></Item>
+                        </Link>
+                        <Link to="/myfollows">
+                            <Item
+                                arrow="horizontal"
+                                onClick={() => { }}
+                                className='iconfont icon-collection'
+                                style={{ paddingLeft: '20px', borderBottom: '1px solid grey', height: '60px', color: 'black' }}
+                            ><span style={{ marginLeft: '40px', fontSize: '20px' }}>我的关注</span></Item>
+                        </Link>
+                    </List>
                     <List style={{ marginTop: '18px', marginBottom: '15px' }}>
                         <Link to="/mynotes">
                             <Item
@@ -151,13 +197,19 @@ export default class My extends Component {
                                 style={{ paddingLeft: '20px', borderBottom: '1px solid grey', height: '60px', color: 'black' }}
                             ><span style={{ marginLeft: '40px', fontSize: '20px' }}>我的笔记</span></Item>
                         </Link>
-                        <Link to="/tiezi">
+                        <Link to="/tiezi" onClick={this.tiezi}>
                             <Item
                                 arrow="horizontal"
                                 onClick={() => { }}
                                 className='iconfont icon-tieziguanli'
                                 style={{ paddingLeft: '20px', borderBottom: '1px solid grey', height: '60px', color: 'black' }}
-                            ><span style={{ marginLeft: '40px', fontSize: '20px' }}>我的帖子</span></Item>
+                            >
+                                <span style={{ marginLeft: '40px', fontSize: '20px' }}>我的帖子</span>
+                                {this.state.sum > 0
+                                    ? <div style={{ color: '#fff', marginLeft: '2vw', height: 28, width: 28, borderRadius:14,backgroundColor: 'red',textAlign:'center',position:'absolute',top:'2vh',left:'25vw'}}>{this.state.sum}</div>
+                                    : null
+                                }
+                            </Item>
                         </Link>
                         <Link to="/myexperience">
                             <Item

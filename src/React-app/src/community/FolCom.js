@@ -313,13 +313,17 @@ export default class FolCom extends Component {
             clicked2: !this.state.clicked2
         })
     }
+    back = () => {
+        window.history.back();
+    }
     render() {
         return (
             <div style={{ position: 'relative' }}>
                 <NavBar
                     style={{ backgroundColor: '#37376F', color: '#fff', position: 'sticky ', top: 0, zIndex: 18, textAlign: 'center', height: '7vh' }}
                     leftContent={[
-                        <Link to={`/folper/${this.state.perlname}/${this.state.pernname}`}><span style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span></Link>
+                        // <Link to={`/folper/${this.state.perlname}/${this.state.pernname}`}><span style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span></Link>
+                        <span onClick={this.back} style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span>
                     ]}
                 >
                     <span>评论</span>
@@ -327,7 +331,7 @@ export default class FolCom extends Component {
                 {
                     this.state.data.map((item, idx) =>
                         <div style={{ background: '#fff', color: 'black' }}>
-                            <div style={{ float: "left",position:'relative' }}>
+                            <div style={{ float: "left", position: 'relative' }}>
                                 <img src={this.state.pic[idx]} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
                                 {
                                     item.head != 'http://139.155.44.190:3005/head/null'
@@ -337,7 +341,13 @@ export default class FolCom extends Component {
                             </div>
                             <div>
                                 <span style={{ fontSize: '2.5vh', lineHeight: 2.5, marginLeft: '3vw' }}>{item.name}</span>
-                                <span style={{ fontSize: '2.5vh', marginLeft: '2vw', color: 'red' }}>Lv.{item.level}</span>
+                                {
+                                    item.level > 10
+                                        ? <span style={{ fontSize: '2.5vh', marginLeft: '2vw', color: 'red' }}>Lv.{item.level}</span>
+                                        : <span style={{ position: 'relative' }}>
+                                            <img src={`http://139.155.44.190:3005/level/lv${item.level}.png`} style={{ width: '8vw', height: '5vw', marginLeft: '2vw', position: 'absolute', top: -4 }} />
+                                        </span>
+                                }
                                 {
                                     item.card != 'http://139.155.44.190:3005/card/null' || null
                                         ? <span style={{ float: 'right', marginRight: '3vw', marginTop: '1vh' }}><img style={{ width: '22vw', height: '7vh' }} src={item.card} /></span>
@@ -359,7 +369,7 @@ export default class FolCom extends Component {
                 {
                     this.state.list.map((item, idx) => (
                         <div style={{ background: '#fff', color: 'black' }}>
-                            <div style={{ float: "left",position:'relative' }}>
+                            <div style={{ float: "left", position: 'relative' }}>
                                 <img src={this.state.photo[idx]} style={{ height: '5vh', width: '10vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
                                 {
                                     item.head != 'http://139.155.44.190:3005/head/null'
@@ -369,9 +379,24 @@ export default class FolCom extends Component {
                             </div>
                             <div style={{ height: '1px', width: '100%' }}></div>
                             <div>
-                                <span style={{ fontSize: '2.5vh', lineHeight: 2.5, marginLeft: '4vw' }}>{item.name}</span>
-                                <span style={{ fontSize: '2.5vh', marginLeft: '2vw', color: 'red' }}>Lv.{item.level}</span>
-                                {this.state.name == item.name ? <span onClick={this.delete.bind(this, (idx))} style={{ float: 'right', marginRight: '2vw', color: '#e8e8e8', fontSize: 30 }}>×</span> : null}
+                                {
+                                    item.name == this.state.data[0].name
+                                        ? <span style={{ fontSize: '2.5vh', lineHeight: 2.5, marginLeft: '4vw', color: 'red' }}>{item.name}</span>
+                                        : <span style={{ fontSize: '2.5vh', lineHeight: 2.5, marginLeft: '4vw' }}>{item.name}</span>
+                                }
+
+                                {
+                                    item.level > 10
+                                        ? <span style={{ fontSize: '2.5vh', marginLeft: '2vw', color: 'red' }}>Lv.{item.level}</span>
+                                        : <span style={{ position: 'relative' }}>
+                                            <img src={`http://139.155.44.190:3005/level/lv${item.level}.png`} style={{ width: '8vw', height: '5vw', marginLeft: '2vw', position: 'absolute', top: -4 }} />
+                                        </span>
+                                }
+                                {
+                                    this.state.name == item.name || this.state.data[0].name == this.state.name
+                                        ? <span onClick={this.delete.bind(this, (idx))} style={{ float: 'right', marginRight: '2vw', color: '#999999', fontSize: 30 }}>×</span>
+                                        : null
+                                }
                             </div>
                             <div style={{ height: '2px', width: '100%' }}></div>
                             <div style={{ marginLeft: '17vw', marginTop: '-10px', fontSize: '2.3vh' }}>{item.content}</div>

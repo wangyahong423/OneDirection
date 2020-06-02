@@ -24,7 +24,7 @@ const tabs = [
     { title: '我的收藏', sub: '5' },
 ];
 
-export default class FolPer extends Component {
+export default class Myfolper extends Component {
     constructor() {
         super();
         this.state = {
@@ -1905,7 +1905,7 @@ export default class FolPer extends Component {
         });
     }
 
-    back = () => {
+    back=()=>{
         window.history.back();
     }
 
@@ -1946,13 +1946,13 @@ export default class FolPer extends Component {
                                         <span style={{ display: 'block', fontSize: 16 }}>{this.state.experiencelike}</span>
                                         <span style={{ display: 'block', fontSize: 16 }}>经验获赞</span>
                                     </span>
-                                    <Link to={`/fans/${item.name}`}>
+                                    <Link to={`/fanlist/${item.name}`}>
                                         <span style={{ height: '5vh', width: '20vw', float: 'left', textAlign: "center", marginTop: '2vh', color: '#fff', fontSize: 14, borderRightWidth: '2px', borderRightColor: '#fff', borderRightStyle: 'solid' }}>
                                             <span style={{ display: 'block', fontSize: 16 }}>{this.state.fans}</span>
                                             <span style={{ display: 'block', fontSize: 16 }}>粉丝</span>
                                         </span>
                                     </Link>
-                                    <Link to={`/follows/${item.name}`}>
+                                    <Link to={`/follist/${item.name}`}>
                                         <span style={{ height: '5vh', width: '20vw', float: 'left', textAlign: "center", marginTop: '2vh', color: '#fff', fontSize: 14 }}>
                                             <span style={{ display: 'block', fontSize: 16 }}>{this.state.follows}</span>
                                             <span style={{ display: 'block', fontSize: 16 }}>关注</span>

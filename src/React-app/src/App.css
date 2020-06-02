@@ -1508,3 +1508,22 @@
   color:blue;
   margin-left: 23vw;
 }
+
+#toyan{
+  height: 6vh;
+  width: 45vw;
+  border-radius: 3vw;
+  border: none;
+  font-size: 3.8vw;
+  margin-left: 10vw;
+  padding-left: 5vw;
+  background-color: '#37376f';
+  margin-top: 3vh;
+  float: left;
+}
+canvas{
+  margin-left: 65vw;
+  border: 1px solid grey;
+  margin-top: -6vh;
+  float: left;
+}

@@ -3,7 +3,7 @@ import { NavBar } from 'antd-mobile';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-export default class Fans extends Component {
+export default class Follows extends Component {
     constructor() {
         super();
         this.state = {
@@ -12,16 +12,13 @@ export default class Fans extends Component {
             name: '',
             follow: [],
             usersFollow: [],
-            all: [],
-            nname: ''
+            all: []
         }
     }
 
     componentDidMount() {
         var name = this.props.match.params.name;
-        var nname = this.props.match.params.nname;
         let url = `http://139.155.44.190:3005/users/getName`;
-        // let url1 = `http://139.155.44.190:3005/learn/list/`;
         let url2 = `http://139.155.44.190:3005/users/list`;
         let url3 = `http://139.155.44.190:3005/follow/list`;
 
@@ -46,12 +43,6 @@ export default class Fans extends Component {
                         data: arr
                     })
                 })
-                console.log('data', arr);
-                // axios(url1)
-                //     .then((res) => {
-                //         this.setState({
-                //             todo: res.data
-                //         })
                 axios(url3)
                     .then((res) => {
                         var myfollow = [];
@@ -63,23 +54,23 @@ export default class Fans extends Component {
                         this.setState({
                             usersFollow: myfollow
                         })
-                        console.log('usersFollows:', this.state.usersFollow);
+
                         var followList = [];
                         for (var i = 0; i < res.data.length; i++) {
-                            if (res.data[i].nname == this.state.data[0].name) {//nname是被关注的人
+                            if (res.data[i].lname == this.state.data[0].name) {
                                 followList.push(res.data[i]);
                             }
                         }
                         console.log('follow0:', followList);
                         followList.forEach((item) => {
                             for (var i = 0; i < this.state.pic.length; i++) {
-                                if (item.lname == this.state.pic[i].name) {
+                                if (item.nname == this.state.pic[i].name) {
                                     item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
                                 }
                             }
                             item.follow = false;
                             for (var f = 0; f < this.state.usersFollow.length; f++) {
-                                if (item.lname == this.state.usersFollow[f].nname) {
+                                if (item.nname == this.state.usersFollow[f].nname) {
                                     item.follow = true;
                                     break;
                                 }
@@ -92,46 +83,13 @@ export default class Fans extends Component {
                         this.setState({
                             follow: followList
                         })
-                        console.log('zuihou:', this.state.follow);
-
-
-                        // var person = []
-                        // this.state.pic.forEach((item) => {
-                        //     for (var p = 0; p < this.state.follow.length; p++) {
-                        //         if (item.name == this.state.follow[p].lname) {
-                        //             person.push(item);
-                        //         }
-                        //     }
-                        // })
-                        // console.log('person1:',person);
-                        // var result = [];
-                        // var obj = {};
-                        // for (var i = 0; i < person.length; i++) {
-                        //     if (!obj[person[i].name]) {
-                        //         result.push(person[i]);
-                        //         obj[person[i].name] = true;
-
-                        //     }
-
-                        // }
-                        // console.log('person:', result);
-                        // this.state.follow.forEach((item) => {
-                        //     for (var a = 0; a < result.length; a++) {
-                        //         if (item.lname == result[a].name) {
-                        //             item.pname = result[a].name
-                        //         }
-                        //     }
-                        //     console.log('pname',item.pname);
-                        // })
-
-                        // console.log('all', this.state.follow);
+                        console.log('follow:', this.state.follow);
                         this.setState({
                             follow: this.state.follow
                         })
-                        console.log('follow', this.state.follow);
                     })
+                console.log('all1', this.state.follow);
             })
-        // })
     }
 
     follow = (idx) => {
@@ -142,7 +100,7 @@ export default class Fans extends Component {
             this.setState({
                 follow: crr
             })
-            let url1 = `http://139.155.44.190:3005/follow/add?lname=${this.state.name}&nname=${this.state.follow[idx].lname}`;
+            let url1 = `http://139.155.44.190:3005/follow/add?lname=${this.state.name}&nname=${this.state.follow[idx].nname}`;
             axios(url1)
                 .then((res) => {
                     console.log(url1);
@@ -158,7 +116,7 @@ export default class Fans extends Component {
             this.setState({
                 follow: crr
             })
-            let url2 = `http://139.155.44.190:3005/follow/delete?nname=${this.state.follow[idx].lname}`;
+            let url2 = `http://139.155.44.190:3005/follow/delete?nname=${this.state.follow[idx].nname}`;
             axios(url2)
                 .then((res) => {
                     console.log(url2);
@@ -188,7 +146,7 @@ export default class Fans extends Component {
                                     <span onClick={this.back} style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span>
                                 ]}
                             >
-                                <span>粉丝列表</span>
+                                <span>关注列表</span>
                             </NavBar>
                         {/* )
                     } */}
@@ -198,16 +156,17 @@ export default class Fans extends Component {
                         {
                             this.state.follow.map((item, idx) =>
                                 <div style={{ background: '#fff', color: 'black', marginBottom: '2vh', height: '10vh' }}>
-                                    <Link to={`/fanper/${item.nname}/${item.lname}`}>
+                                    <Link to={`/myfolper/${item.nname}`}>
                                         <div style={{ float: "left" }}>
                                             <img src={item.pic} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
                                         </div>
                                     </Link>
                                     <div>
-                                        <span style={{ fontSize: '2.5vh', lineHeight: '10vh', marginLeft: '4vw' }}>{item.lname}</span>
+                                        <span style={{ fontSize: '2.5vh', lineHeight: '10vh', marginLeft: '4vw' }}>{item.nname}</span>
                                         {
-                                            item.lname != this.state.name
-                                                ? <span onClick={this.follow.bind(this, (idx))} style={!item.follow ? { height: '5vh', width: '20vw', float: 'right', textAlign: "center", lineHeight: '5vh', marginRight: '2vw', marginTop: '2vh', color: 'red', fontSize: 14, borderRadius: 5, borderWidth: '1px', borderColor: 'red', borderStyle: 'solid' } : { height: '5vh', width: '20vw', float: 'right', textAlign: "center", lineHeight: '5vh', marginRight: '2vw', marginTop: '2vh', color: '#000', fontSize: 14, borderRadius: 5, borderWidth: '1px', borderColor: '#000', borderStyle: 'solid' }}>{!item.follow ? '关注' : '取消关注'}</span>
+                                            item.nname != this.state.name
+                                                ?
+                                                <span onClick={this.follow.bind(this, (idx))} style={!item.follow ? { height: '5vh', width: '20vw', float: 'right', textAlign: "center", lineHeight: '5vh', marginRight: '2vw', marginTop: '2vh', color: 'red', fontSize: 14, borderRadius: 5, borderWidth: '1px', borderColor: 'red', borderStyle: 'solid' } : { height: '5vh', width: '20vw', float: 'right', textAlign: "center", lineHeight: '5vh', marginRight: '2vw', marginTop: '2vh', color: '#000', fontSize: 14, borderRadius: 5, borderWidth: '1px', borderColor: '#000', borderStyle: 'solid' }}>{!item.follow ? '关注' : '取消关注'}</span>
                                                 : null
                                         }
                                     </div>

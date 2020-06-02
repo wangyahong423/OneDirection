@@ -115,6 +115,14 @@ import MyNotes from './my/MyNotes';
 import MynotesDetails from './my/MynotesDetails';
 import MyexperienceDetails from './my/MyexperienceDetails';
 
+// 我的关注与粉丝
+import Myfollows from './my/Myfollows';
+import Myfans from './my/Myfans';
+import Myfolper from './my/Myfolper';
+import Myfanper from './my/Myfanper';
+import FolList from './my/FolList';
+import FanList from './my/FanList';
+
 import Head from './my/Head';
 import Card from './my/Card';
 
@@ -889,6 +897,17 @@ export default class App extends Component {
                     <Route path="/folcom/:lname/:nname/:id" component={FolCom} />
                     <Route path="/fandetails/:nname/:lname/:id" component={FanDetails} />
                     <Route path="/fancom/:nname/:lname/:id" component={FanCom} />
+
+                    {/* 我的关注与粉丝 */}
+                    <Route path="/myfollows" component={Myfollows}/>
+                    <Route path="/myfans" component={Myfans}/>
+                    <Route path="/myfolper/:nname" component={Myfolper}/>
+                    <Route path="/myfanper/:lname" component={Myfanper}/>
+                    <Route path="/fanlist/:name" component={FanList}/>
+                    <Route path="/follist/:name" component={FolList}/>
+                    <Route/>
+                    <Route/>
+                    <Route/>
                 </Router>
             </div>
         )

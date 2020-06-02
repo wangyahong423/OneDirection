@@ -3,11 +3,10 @@ import { NavBar } from 'antd-mobile';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-export default class Follows extends Component {
+export default class Myfollows extends Component {
     constructor() {
         super();
         this.state = {
-            data: [],
             pic: [],
             name: '',
             follow: [],
@@ -17,9 +16,7 @@ export default class Follows extends Component {
     }
 
     componentDidMount() {
-        var name = this.props.match.params.name;
         let url = `http://139.155.44.190:3005/users/getName`;
-        // let url1 = `http://139.155.44.190:3005/learn/list/`;
         let url2 = `http://139.155.44.190:3005/users/list`;
         let url3 = `http://139.155.44.190:3005/follow/list`;
 
@@ -34,22 +31,6 @@ export default class Follows extends Component {
                 this.setState({
                     pic: res.data
                 })
-                console.log(res.data, name);
-                var arr = []
-                res.data.map((item) => {
-                    if (item.name == name) {
-                        arr.push(item);
-                    }
-                    this.setState({
-                        data: arr
-                    })
-                })
-                console.log('data', arr);
-                // axios(url1)
-                //     .then((res) => {
-                //         this.setState({
-                //             todo: res.data
-                //         })
                 axios(url3)
                     .then((res) => {
                         var myfollow = [];
@@ -61,14 +42,12 @@ export default class Follows extends Component {
                         this.setState({
                             usersFollow: myfollow
                         })
-
                         var followList = [];
                         for (var i = 0; i < res.data.length; i++) {
-                            if (res.data[i].lname == this.state.data[0].name) {
+                            if (res.data[i].lname == this.state.name) {
                                 followList.push(res.data[i]);
                             }
                         }
-                        console.log('follow0:', followList);
                         followList.forEach((item) => {
                             for (var i = 0; i < this.state.pic.length; i++) {
                                 if (item.nname == this.state.pic[i].name) {
@@ -95,9 +74,7 @@ export default class Follows extends Component {
                             follow: this.state.follow
                         })
                     })
-                console.log('all1', this.state.follow);
             })
-        // })
     }
 
     follow = (idx) => {
@@ -137,34 +114,31 @@ export default class Follows extends Component {
         }
     }
 
-    back = () => {
+    back=()=>{
         window.history.back();
     }
+
 
     render() {
         return (
             <div>
                 <div>
-                    {/* {
-                        this.state.data.map((item) => */}
                     <NavBar
                         style={{ backgroundColor: '#37376F', color: '#fff', position: 'fixed', top: 0, zIndex: 18, textAlign: 'center', height: '7vh', width: '100%' }}
                         leftContent={[
-                            // <Link to={`/person/${item.name}`}><span style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span></Link>
                             <span onClick={this.back} style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span>
                         ]}
                     >
                         <span>关注列表</span>
                     </NavBar>
-                    {/* )
-                    } */}
+                        )
                 </div>
                 <div style={{ width: '100vw', backgroundColor: '#EFEFF4' }}>
                     <div style={{ marginTop: '9vh' }}>
                         {
                             this.state.follow.map((item, idx) =>
                                 <div style={{ background: '#fff', color: 'black', marginBottom: '2vh', height: '10vh' }}>
-                                    <Link to={`/folper/${item.lname}/${item.nname}`}>
+                                    <Link to={`/myfolper/${item.nname}`}>
                                         <div style={{ float: "left" }}>
                                             <img src={item.pic} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 9 }} />
                                         </div>
@@ -187,3 +161,4 @@ export default class Follows extends Component {
         )
     }
 }
+

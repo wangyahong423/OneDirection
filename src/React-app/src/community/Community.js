@@ -62,6 +62,7 @@ export default class Community extends Component {
                             }
                         }
                         this.setState({ like: likeList });
+                        console.log('like:',this.state.like);
                         axios(url4)
                             .then((res) => {
                                 this.setState({
@@ -126,6 +127,7 @@ export default class Community extends Component {
             crr = this.state.data;
             crr[idx].like = true;
             crr[idx].likeNum++;
+            crr[idx].likenum++;
             this.setState({
                 data: crr
             })
@@ -232,8 +234,13 @@ export default class Community extends Component {
                                     })
                                 });
                         })
-
+                    let url7 = `http://139.155.44.190:3005/learn/changeLike?lid=${this.state.data[idx].id}&likenum=${this.state.data[idx].likenum}`;
+                    axios(url7)
+                        .then((res) => {
+                            console.log(url7);
+                        })
                 })
+            console.log('data:', this.state.data);
         } else if (this.state.data[idx].like == true) {
             crr = this.state.data;
             crr[idx].like = false;
@@ -424,9 +431,6 @@ export default class Community extends Component {
                                                     <img src={require(`../images/lv${item.level}.png`)} style={{ width: '8vw', height: '5vw', marginLeft: '2vw', position: 'absolute', top: -4 }} />
                                                 </span>
                                         }
-                                        {/* <span style={{position:'relative'}}>
-                                            <img src={require(`../images/lv${item.level}.png`)} style={{ width: '8vw', height: '5vw', marginLeft: '2vw',position:'absolute',top:-4 }} />
-                                        </span> */}
                                         {this.state.name == item.name
                                             ? <span onClick={this.delete.bind(this, (idx))} style={{ float: 'right', marginRight: '2vw', color: '#999999', fontSize: 30 }}>×</span>
                                             : <span style={{ float: 'right', marginRight: '2vw', color: '#fff', fontSize: 30 }}>×</span>

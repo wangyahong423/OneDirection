@@ -154,13 +154,18 @@ export default class perDetails extends Component {
         })
     }
 
+    back = () => {
+        window.history.back();
+    }
+
     render() {
         return (
             <div style={{ position: 'relative' }}>
                 <NavBar
                     style={{ backgroundColor: '#37376F', color: '#fff', position: 'sticky ', top: 0, zIndex: 18, textAlign: 'center', height: '7vh' }}
                     leftContent={[
-                        <Link to={`/person/${this.state.pername}`}><span style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span></Link>
+                        // <Link to={`/person/${this.state.pername}`}><span style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span></Link>
+                        <span onClick={this.back} style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span>
                     ]}
                 >
                     <span>详情</span>
@@ -178,7 +183,13 @@ export default class perDetails extends Component {
                             </div>
                             <div>
                                 <span style={{ fontSize: '2.5vh', lineHeight: 2.5, marginLeft: '3vw' }}>{item.name}</span>
-                                <span style={{ fontSize: '2.5vh', marginLeft: '2vw', color: 'red' }}>Lv.{item.level}</span>
+                                {
+                                    item.level > 10
+                                        ? <span style={{ fontSize: '2.5vh', marginLeft: '2vw', color: 'red' }}>Lv.{item.level}</span>
+                                        : <span style={{ position: 'relative' }}>
+                                            <img src={`http://139.155.44.190:3005/level/lv${item.level}.png`} style={{ width: '8vw', height: '5vw', marginLeft: '2vw', position: 'absolute', top: -4 }} />
+                                        </span>
+                                }
                                 {
                                     item.card != 'http://139.155.44.190:3005/card/null' || null
                                         ? <span style={{ float: 'right', marginRight: '3vw', marginTop: '1vh' }}><img style={{ width: '22vw', height: '7vh' }} src={item.card} /></span>
@@ -207,8 +218,19 @@ export default class perDetails extends Component {
                             </div>
                             <div style={{ height: '1px', width: '100%' }}></div>
                             <div>
-                                <span style={{ fontSize: '2.5vh', lineHeight: 2.5, marginLeft: '1vw' }}>{item.name}</span>
-                                <span style={{ fontSize: '2.5vh', marginLeft: '2vw', color: 'red' }}>Lv.{item.level}</span>
+                                {
+                                    item.name == this.state.data[0].name
+                                        ? <span style={{ fontSize: '2.5vh', lineHeight: 2.5, marginLeft: '4vw', color: 'red' }}>{item.name}</span>
+                                        : <span style={{ fontSize: '2.5vh', lineHeight: 2.5, marginLeft: '4vw' }}>{item.name}</span>
+                                }
+
+                                {
+                                    item.level > 10
+                                        ? <span style={{ fontSize: '2.5vh', marginLeft: '2vw', color: 'red' }}>Lv.{item.level}</span>
+                                        : <span style={{ position: 'relative' }}>
+                                            <img src={`http://139.155.44.190:3005/level/lv${item.level}.png`} style={{ width: '8vw', height: '5vw', marginLeft: '2vw', position: 'absolute', top: -4 }} />
+                                        </span>
+                                }
                             </div>
                             <div style={{ height: '2px', width: '100%' }}></div>
                             <div style={{ marginLeft: 70, marginTop: '-10px', fontSize: '2.3vh' }}>{item.content}</div>

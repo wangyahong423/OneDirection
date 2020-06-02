@@ -1904,12 +1904,17 @@ export default class FanPer extends Component {
             behavior: 'smooth',
         });
     }
+    
+    back=()=>{
+        window.history.back();
+    }
 
     render() {
         return (
             <div>
                 <div style={bg}>
-                    <Link to={`/fans/${this.state.lname}`}><span style={{ fontSize: '17px', color: 'white', marginLeft: "2vw", paddingTop: '2vh', display: 'block' }} className="iconfont icon-ico_leftarrow"></span></Link>
+                    {/* <Link to={`/fans/${this.state.lname}`}><span style={{ fontSize: '17px', color: 'white', marginLeft: "2vw", paddingTop: '2vh', display: 'block' }} className="iconfont icon-ico_leftarrow"></span></Link> */}
+                    <span onClick={this.back} style={{ fontSize: '17px', color: 'white', marginLeft: "2vw", paddingTop: '2vh', display: 'block' }} className="iconfont icon-ico_leftarrow"></span>
                     {
                         this.state.data.map((item) =>
                             <div style={{ width: '100%', height: '30vh', textAlign: 'center' }}>

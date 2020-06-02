@@ -46,7 +46,11 @@ export default class MyExperience extends Component {
                 axios(url3).then(res => {
                     res.data.map(item => {
                         if (item.name == re.data.name) {
-                            this.setState({ pic: 'http://139.155.44.190:3005' + item.pic })
+                            this.setState({
+                                pic: 'http://139.155.44.190:3005' + item.pic,
+                                head: 'http://139.155.44.190:3005/head/' + item.head,
+                                level: item.level
+                            })
                         }
                     })
                 })
@@ -107,19 +111,25 @@ export default class MyExperience extends Component {
                         <Link to="/My"><span style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span></Link>
                     ]}>
                     我的经验</NavBar>
-                <div style={{ width: "100vw", height: '7vh', backgroundColor: '#EFEFF4' }}>
+                <div style={{ width: "100vw", height: '7vh', backgroundColor: '#EFEFF4', position: 'fixed', top: '7vh', zIndex: 2 }}>
                     <input placeholder='搜索' onChange={this.changeSearch} style={{ height: '5vh', borderRadius: '20px', border: 'none', marginTop: '1vh', textAlign: 'center', fontSize: '4vw', width: '85vw', float: 'left', borderRight: "none" }}></input>
                     <div onClick={this.clickSend} style={{ width: '15vw', float: 'left', height: '7vh', textAlign: 'center', lineHeight: '6vh', fontSize: '4vw' }}>搜索</div>
                 </div>
-                <div style={{ width: '100vw', backgroundColor: '#EFEFF4' }}>
+                <div style={{ width: '100vw', backgroundColor: '#EFEFF4', marginTop: '7vh' }}>
                     <div>
                         {
                             this.state.data.map((item, idx) =>
                                 <div style={{ background: '#fff', color: 'black', position: 'relative', height: '17vh', marginBottom: '1vh' }}>
                                     <div style={{ float: "left", position: 'absolute', left: '4vw', top: '2vh' }}>
                                         <img src={this.state.pic} style={{ height: '7vh', width: '12vw', borderRadius: '50%' }} />
+                                        {
+                                            this.state.head != 'http://139.155.44.190:3005/head/null'
+                                                ? <img src={this.state.head} style={{ height: '10vh', width: '15vw', borderRadius: '50%', position: 'absolute', left: '-2vw', top: '-2vh' }} />
+                                                : null
+                                        }
                                     </div>
                                     <p style={{ fontSize: '2.5vh', lineHeight: 2.5, position: 'absolute', top: '-2vh', left: '20vw' }}>{item.name}</p>
+                                    <img src={`http://139.155.44.190:3005/level/lv${this.state.level}.png`} style={{ width: '8vw', height: '5vw', marginLeft: '30vw', marginTop: '1.5vh' }} />
                                     <div style={{ color: 'gray', fontSize: '2vw', position: 'absolute', left: '20vw', top: '7vh' }}>{item.time}</div>
                                     <Link to={`/myexperiencedetails/${item.id}`}>
                                         <p style={{
