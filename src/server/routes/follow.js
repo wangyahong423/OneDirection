@@ -69,5 +69,56 @@ router.get('/delete', (req, res) => {
         }
     });
 })
+router.get('/changeL', (req, res) => {
+    var lname = req.query.lname;
+    var learn = req.query.learn;
+    let sql = 'update follow set learn=$1 where lname=$2';
+    con.query(sql, [learn, lname], (err, result) => {
+        if (err) {
+            res.json({ ok: false, msg: '修改失败！' });
+        } else {
+            res.json({ ok: true, msg: '修改成功！' });
+        }
+    });
+});
 
+router.get('/changeE', (req, res) => {
+    var lname = req.query.lname;
+    var experience = req.query.experience;
+    let sql = 'update follow set experience=$1 where lname=$2';
+    con.query(sql, [experience, lname], (err, result) => {
+        if (err) {
+            res.json({ ok: false, msg: '修改失败！' });
+        } else {
+            res.json({ ok: true, msg: '修改成功！' });
+        }
+    });
+});
+router.get('/changeLL', (req, res) => {
+    var lname = req.query.lname;
+    var learn = req.query.learn;
+    var nname = req.query.nname;
+    let sql = 'update follow set learn=$1 where lname=$2 and nname=$3';
+    con.query(sql, [learn, lname,nname], (err, result) => {
+        if (err) {
+            res.json({ ok: false, msg: '修改失败！' });
+        } else {
+            res.json({ ok: true, msg: '修改成功！' });
+        }
+    });
+});
+
+router.get('/changeEE', (req, res) => {
+    var lname = req.query.lname;
+    var nname = req.query.nname;
+    var experience = req.query.experience;
+    let sql = 'update follow set experience=$1 where lname=$2 and nname=$3';
+    con.query(sql, [experience, lname,nname], (err, result) => {
+        if (err) {
+            res.json({ ok: false, msg: '修改失败！' });
+        } else {
+            res.json({ ok: true, msg: '修改成功！' });
+        }
+    });
+});
 module.exports = router;
