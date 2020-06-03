@@ -570,21 +570,22 @@ const App = () => {
   return (
     <>
       <Router
-        backAndroidHandler={() => {
-          if (Actions.currentScene != 'methodPage') {
-            Actions.pop();
-            return true;
-          } else {
+       backAndroidHandler={() => {
+        if(Actions.currentScene == 'login' || Actions.currentScene == 'method' || Actions.currentScene == 'share' || Actions.currentScene == 'my' || Actions.currentScene == 'community'){
             if (new Date().getTime() - now < 2000) {
               BackHandler.exitApp();
-            } else {
-              ToastAndroid.show('确定要退出吗', 100);
+            }
+            else {
+              ToastAndroid.show('再按一次退出应用', 100);
               now = new Date().getTime();
               return true;
             }
-          }
-
-        }}
+        }
+        else{
+          Actions.pop();
+          return true;
+        }
+      }}
       >
         <Scene key='root'>
           <Tabs hideNavBar titleStyle={{ flex: 1, textAlign: 'center', color: '#fff' }} navigationBarStyle={{ backgroundColor: '#37376F' }} title="校园新生通" key='tabbar' activeTintColor='#37376F' inactiveTintColor='black' tabBarStyle={{ backgroundColor: '#fff', borderTopWidth: 0 }}>
@@ -638,7 +639,7 @@ const App = () => {
           <Scene key='practice' component={Practice} title='实践服务类' backButtonImage={require('./assets/gonglve/left.png')} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} navigationBarStyle={{ backgroundColor: '#37376F' }} />
           <Scene key='physical' component={Physical} title='体育健身类' backButtonImage={require('./assets/gonglve/left.png')} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} navigationBarStyle={{ backgroundColor: '#37376F' }} />
           <Scene key='academic' component={Academic} title='学术研究类' backButtonImage={require('./assets/gonglve/left.png')} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} navigationBarStyle={{ backgroundColor: '#37376F' }} />
-          <Scene key='art' component={Art} title='文化艺术类' titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} navigationBarStyle={{ backgroundColor: '#37376F' }} />
+          <Scene key='art' component={Art} title='文化艺术类' backButtonImage={require('./assets/gonglve/left.png')} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} navigationBarStyle={{ backgroundColor: '#37376F' }} />
 
           {/* 学校 */}
           <Scene key='school' component={School} title='学校' backButtonImage={require('./assets/gonglve/left.png')} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} navigationBarStyle={{ backgroundColor: '#37376F' }} />

@@ -54,6 +54,8 @@ export default class Head extends Component {
                         this.setState({
                             college: item.college,
                             pic: "http://139.155.44.190:3005" + item.pic,
+                            head1: "http://139.155.44.190:3005/head/" + item.head,
+
                         })
                         console.log("点击头像", this.state.pic)
                     }

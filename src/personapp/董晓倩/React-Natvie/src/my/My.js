@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Image, AsyncStorage, ScrollView, TouchableOpacity, DeviceEventEmitter, Dimensions, ImageBackground } from 'react-native';
+import { View, Text, Image, AsyncStorage, ScrollView, TouchableOpacity, DeviceEventEmitter, Dimensions, ImageBackground, Alert } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Img from '../community/Img'
@@ -337,19 +337,9 @@ export default class Person extends Component {
         return (
             <ScrollView style={{ backgroundColor: "#fff" }}>
                 <ImageBackground style={{ height: 300, width: '100%', alignItems: "center" }} source={require('../../assets/community/img13.png')} >
-                    <View style={{ height: 50 * s, width: width, flexDirection: "row", justifyContent: "space-between", paddingTop: 10, paddingLeft: 10, paddingRight: 10 }}>
+                    <View style={{ height: 50 * s, width: 50 * s, flexDirection: "row", justifyContent: "space-between", paddingTop: 10, paddingLeft: 10, paddingRight: 10, marginLeft: width * 0.8 }}>
                         <TouchableOpacity onPress={() => Actions.shezhi()} style={{ height: 50 * s, width: 50 * s, justifyContent: "center", alignItems: "center", }}>
                             <Icon style={{ color: "#fff", fontSize: 25 * s, }} name="settings-outline" />
-                        </TouchableOpacity>
-                        <TouchableOpacity style={{ height: 50 * s, width: 50 * s, justifyContent: "center", alignItems: "center" }}>
-                            <Icon style={{ color: "#fff", fontSize: 25 * s, }} name="bell-outline" />
-                            {
-                                this.state.cnum + this.state.likenum ?
-                                    <View style={{ position: "absolute", top: 10, left: 30, width: 20, height: 20, borderRadius: 10, borderColor: '#000', backgroundColor: 'red', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                                        <Text style={{ fontSize: 15, color: '#fff' }}>{this.state.likenum + this.state.cnum}</Text>
-                                    </View>
-                                    :null
-                            }
                         </TouchableOpacity>
                     </View>
                     <TouchableOpacity style={{ width: 100, height: 100 }} onPress={() => Actions.touxiang()}>
@@ -359,21 +349,21 @@ export default class Person extends Component {
                             width: 100 * s,
                             borderRadius: 50 * s,
                             position: 'absolute',
-                            top: -4 * s,
+                            top: -6 * s,
                             right: 1 * s
                         }}
                             source={{ uri: this.state.head }} />
                     </TouchableOpacity>
+
                     <Text style={{ fontSize: 15 * s, color: "#fff", marginTop: 10 * s }}>
                         {this.state.username}&nbsp;&nbsp;&nbsp;
                             <Image style={{ height: 25 * s, width: 40 * s, marginLeft: 10 * s }} source={Img['png' + this.state.level]} />
                     </Text>
                     <Text style={{ fontSize: 15 * s, color: "#fff", marginTop: 5 * s }}>河北师范大学{this.state.college}</Text>
                     <View style={{ flexDirection: 'row', height: 50 * s, width: width * 0.4, marginTop: 10 * s, justifyContent: "space-around", alignItems: "center" }}>
-                        <TouchableOpacity onPress={() => this.fanslist()} style={{ height: 50 * s, width: 50 * s, justifyContent: "center", alignItems: "center" }}>
+                        <TouchableOpacity onPress={() => this.followslist()} style={{ height: 50 * s, width: 50 * s, justifyContent: "center", alignItems: "center" }}>
                             <Text style={{ color: "#fff" }}>关注</Text>
                             <Text style={{ color: "#fff" }}>{this.state.follows}</Text>
-
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => this.fanslist()} style={{ height: 50 * s, width: 50 * s, justifyContent: "center", alignItems: "center" }}>
                             <Text style={{ color: "#fff" }}>粉丝</Text>
@@ -399,8 +389,9 @@ export default class Person extends Component {
                     </View>
 
                     {
-                        this.state.newl
-                            ? <View style={{
+                        this.state.cnum + this.state.likenum
+                            ?
+                            <View style={{
                                 height: 60, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
                                 borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1
                             }}>
@@ -409,11 +400,13 @@ export default class Person extends Component {
                                     <View style={{ height: 50, width: 80, justifyContent: "center", alignItems: "center" }}>
                                         <Icon name="file-document-edit-outline" size={30} color="#5f6fcd" />
                                     </View>
-                                    <View style={{ height: 50, width: width * 0.7 }}>
+                                    <View style={{ height: 50, width: width * 0.633, flexDirection: 'row' }}>
                                         <Text style={{ fontSize: 20, marginTop: 11 }} onPress={() => Actions.tiezi()}>我的帖子</Text>
-
+                                        <View style={{ marginTop: 15, marginLeft: 10, width: 20, height: 20, borderRadius: 10, borderColor: '#000', backgroundColor: 'red', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                                            <Text style={{ fontSize: 15, color: '#fff' }}>{this.state.likenum + this.state.cnum}</Text>
+                                        </View>
                                     </View>
-                                    <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 30, marginTop: 15 }} />
+                                    <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 30, marginTop: 0 }} />
                                 </TouchableOpacity>
                             </View>
                             : <View style={{
@@ -433,7 +426,6 @@ export default class Person extends Component {
                                 </TouchableOpacity>
                             </View>
                     }
-
 
                     <View style={{
                         height: 60, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
@@ -512,4 +504,3 @@ export default class Person extends Component {
         )
     }
 }
-
