@@ -70,10 +70,10 @@ router.get('/delete', (req, res) => {
     });
 })
 router.get('/changeL', (req, res) => {
-    var lname = req.query.lname;
+    var nname = req.query.nname;
     var learn = req.query.learn;
-    let sql = 'update follow set learn=$1 where lname=$2';
-    con.query(sql, [learn, lname], (err, result) => {
+    let sql = 'update follow set learn=$1 where nname=$2';
+    con.query(sql, [learn, nname], (err, result) => {
         if (err) {
             res.json({ ok: false, msg: '修改失败！' });
         } else {
@@ -83,10 +83,10 @@ router.get('/changeL', (req, res) => {
 });
 
 router.get('/changeE', (req, res) => {
-    var lname = req.query.lname;
+    var nname = req.query.nname;
     var experience = req.query.experience;
-    let sql = 'update follow set experience=$1 where lname=$2';
-    con.query(sql, [experience, lname], (err, result) => {
+    let sql = 'update follow set experience=$1 where nname=$2';
+    con.query(sql, [experience, nname], (err, result) => {
         if (err) {
             res.json({ ok: false, msg: '修改失败！' });
         } else {

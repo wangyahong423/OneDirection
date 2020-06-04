@@ -379,6 +379,7 @@ export default class Person extends Component {
                 .then((res) => {
                     var param = 1;
                     DeviceEventEmitter.emit('Prefresh', param);
+                    DeviceEventEmitter.emit('Mrefresh', param);
                     Alert.alert(res.msg);
                 })
         }
@@ -406,7 +407,7 @@ export default class Person extends Component {
                 mycollect: false,//我的收藏
                 style: "我的社区"
             })
-            var value = { name: this.state.all.name, pic: this.state.all.pic, head: this.state.all.head,level: this.state.all.level, title: "issue" };
+            var value = { name: this.state.all.name, pic: this.state.all.pic, head: this.state.all.head, level: this.state.all.level, title: "issue" };
             AsyncStorage.setItem('personname2', JSON.stringify(value));
         }
         else if (data == '我的经验') {
@@ -418,7 +419,7 @@ export default class Person extends Component {
                 mycollect: false,//我的收藏
                 style: "我的经验"
             })
-            var value = { name: this.state.all.name, pic: this.state.all.pic, head: this.state.all.head,level: this.state.all.level, title: "issue" };
+            var value = { name: this.state.all.name, pic: this.state.all.pic, head: this.state.all.head, level: this.state.all.level, title: "issue" };
             AsyncStorage.setItem('personname1', JSON.stringify(value));
         }
         else if (data == '我的收藏') {
@@ -584,7 +585,7 @@ export default class Person extends Component {
                                     }} source={{ uri: this.state.all.pic }} />
                                     <Image style={{
                                         height: 80 * s,
-                                        width: 80* s,
+                                        width: 80 * s,
                                         borderRadius: 40 * s,
                                         // backgroundColor:'green',
                                         position: 'absolute',
