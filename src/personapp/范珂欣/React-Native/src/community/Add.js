@@ -48,6 +48,24 @@ export default class Add extends Component {
                 .then((res) => res.json())
                 .then((res) => {
                     if (res.ok) {
+                        // let url4 = `http://139.155.44.190:3005/learn/list`;
+                        // fetch(url4)
+                        //     .then((res) => res.json())
+                        //     .then((res) => {
+                        //         var id = 0;
+                        //         for (var i = 0; i < res.length; i++) {
+                        //             if (res[i].name == this.state.username && res[i].time == time) {
+                        //                 id = res[i].id;
+                        //                 break;
+                        //             }
+                        //         }
+                        //         let url6 = `http://139.155.44.190:3005/follow/changeL?nname=${this.state.username}&learn=${learn}`;
+                        //         fetch(url6)
+                        //             .then((res) => res.json())
+                        //             .then((res) => {
+                                        
+                        //             });
+                        //     });
                         Actions.pop();
                     } else {
                         Alert.alert(res.msg);
@@ -175,7 +193,7 @@ export default class Add extends Component {
                             <Text style={{ color: '#fff', fontSize: 18 * s }}>发布</Text>
                         </TouchableOpacity>
                     </View>
-                    <ScrollView style={{backgroundColor:"#fff"}}>
+                    <ScrollView style={{ backgroundColor: "#fff" }}>
                         <TextInput
                             placeholder="请输入文本内容，不超过500字"
                             onChangeText={this.con}
