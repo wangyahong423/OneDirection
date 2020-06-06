@@ -48,25 +48,48 @@ export default class Add extends Component {
                 .then((res) => res.json())
                 .then((res) => {
                     if (res.ok) {
-                        // let url4 = `http://139.155.44.190:3005/learn/list`;
-                        // fetch(url4)
-                        //     .then((res) => res.json())
-                        //     .then((res) => {
-                        //         var id = 0;
-                        //         for (var i = 0; i < res.length; i++) {
-                        //             if (res[i].name == this.state.username && res[i].time == time) {
-                        //                 id = res[i].id;
-                        //                 break;
-                        //             }
-                        //         }
-                        //         let url6 = `http://139.155.44.190:3005/follow/changeL?nname=${this.state.username}&learn=${learn}`;
-                        //         fetch(url6)
-                        //             .then((res) => res.json())
-                        //             .then((res) => {
-                                        
-                        //             });
-                        //     });
-                        Actions.pop();
+                        let url4 = `http://139.155.44.190:3005/learn/list`;
+                        fetch(url4)
+                            .then((res) => res.json())
+                            .then((res) => {
+                                var id = 0;
+                                for (var i = 0; i < res.length; i++) {
+                                    if (res[i].name == this.state.username && res[i].time == time) {
+                                        id = res[i].id;
+                                        break;
+                                    }
+                                }
+                                let url6 = `http://139.155.44.190:3005/follow/list`;
+                                fetch(url6)
+                                    .then((res) => res.json())
+                                    .then((res) => {
+                                        var arr = [];
+                                        for (var j = 0; j < res.length; j++) {
+                                            if (res[j].nname == this.state.username) {
+                                                arr.push(res[j]);
+                                            }
+                                        }
+                                        // console.log(arr, id);
+                                        for (var z = 0; z < arr.length; z++) {
+                                            var learn = arr[z].learn;
+                                            if(learn==null || learn==""){
+                                                learn=id;
+                                            }
+                                            else{
+                                                learn=learn+','+id;
+                                            }
+                                            let url46 = `http://139.155.44.190:3005/follow/changeLL?lname=${arr[z].lname}&nname=${this.state.username}&learn=${learn}`;
+                                            fetch(url46)
+                                                .then((res) => res.json())
+                                                .then((res) => {
+                                                    
+                                                });
+                                        }
+
+                                        Actions.pop();
+                                    });
+                            });
+
                     } else {
                         Alert.alert(res.msg);
                     }

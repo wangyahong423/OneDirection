@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, TextInput, AsyncStorage,Dimensions, SafeAreaView, TouchableOpacity, Alert, DeviceEventEmitter } from 'react-native';
+import { Text, View, ScrollView, TextInput, AsyncStorage, Dimensions, SafeAreaView, TouchableOpacity, Alert, DeviceEventEmitter } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
@@ -55,13 +55,52 @@ export default class AddExp extends Component {
                 .then((res) => res.json())
                 .then((res) => {
                     if (res.ok) {
-                        // Alert.alert(res.msg);
-                        Actions.pop();
+                        let url4 = `http://139.155.44.190:3005/experience/list`;
+                        fetch(url4)
+                            .then((res) => res.json())
+                            .then((res) => {
+                                var id = 0;
+                                for (var i = 0; i < res.length; i++) {
+                                    if (res[i].name == this.state.username && res[i].time == time) {
+                                        id = res[i].id;
+                                        break;
+                                    }
+                                }
+                                let url6 = `http://139.155.44.190:3005/follow/list`;
+                                fetch(url6)
+                                    .then((res) => res.json())
+                                    .then((res) => {
+                                        var arr = [];
+                                        for (var j = 0; j < res.length; j++) {
+                                            if (res[j].nname == this.state.username) {
+                                                arr.push(res[j]);
+                                            }
+                                        }
+                                        // console.log(arr, id);
+                                        for (var z = 0; z < arr.length; z++) {
+                                            var experience = arr[z].experience;
+                                            if (experience == null || experience == "") {
+                                                experience = id;
+                                            }
+                                            else {
+                                                experience = experience + ',' + id;
+                                            }
+                                            let url46 = `http://139.155.44.190:3005/follow/changeEE?lname=${arr[z].lname}&nname=${this.state.username}&experience=${experience}`;
+                                            fetch(url46)
+                                                .then((res) => res.json())
+                                                .then((res) => {
+
+                                                });
+                                        }
+
+                                        Actions.pop();
+                                    });
+                            });
                     } else {
                         Alert.alert(res.msg);
                     }
                 });
-                let url2 = `http://139.155.44.190:3005/users/list`;
+            let url2 = `http://139.155.44.190:3005/users/list`;
             fetch(url2)
                 .then((res) => res.json())
                 .then((res) => {

@@ -226,6 +226,8 @@ export default class Details extends Component {
         var param = 1;
         DeviceEventEmitter.emit('refresh', param);
         DeviceEventEmitter.emit('Mrefresh', param);
+        DeviceEventEmitter.emit('NLrefresh', param);
+
     }
     render() {
         return (
@@ -342,7 +344,7 @@ export default class Details extends Component {
                                             top: 5,
                                             left: 10
                                         }}
-                                            source={{ uri: this.state.page.head }} />
+                                            source={{ uri: item.head }} />
                                         <View style={{ marginLeft: 30 * s, marginRight: 60 * s }}>
                                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                                 <Text style={this.state.page.name == item.name ? { fontSize: 15 * s, color: 'red', marginTop: 5 * s } : { fontSize: 15 * s, color: '#37376F', marginTop: 5 * s }}>{item.name}</Text>

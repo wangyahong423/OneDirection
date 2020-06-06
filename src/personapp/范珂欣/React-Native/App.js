@@ -38,6 +38,9 @@ import Myexperence from './src/my/Myexperence';
 import Card from './src/my/Card';
 import Head from './src/my/Head';
 import Xiangqing from './src/my/Xiangqing';
+import NewAdd from './src/my/NewAdd';
+import NewL from './src/my/NewL';
+import NewE from './src/my/NewE';
 
 // 攻略
 import Method from './src/method/Method';
@@ -1124,6 +1127,10 @@ const App = () => {
           <Scene key="card" component={Card} renderTitle="卡片背景选择" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key="head" hideNavBar component={Head} renderTitle="头像框选择" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key="xiangqing" component={Xiangqing} renderTitle="详情" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key="newadd" component={NewAdd} hideNavBar renderTitle="关注人发帖" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key="newl" component={NewL} hideNavBar renderTitle="关注人发帖" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key="newe" component={NewE} hideNavBar renderTitle="关注人发帖" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+        
         </Scene>
       </Router>
     </>
