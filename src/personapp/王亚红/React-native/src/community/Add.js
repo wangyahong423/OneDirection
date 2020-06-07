@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, ScrollView, TextInput, AsyncStorage, Dimensions, SafeAreaView, TouchableOpacity, Alert, DeviceEventEmitter } from 'react-native';
+import { Text, View, ScrollView, TextInput, AsyncStorage, Dimensions, SafeAreaView, TouchableOpacity, Alert, DeviceEventEmitter } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
 export default class Add extends Component {
@@ -9,7 +10,8 @@ export default class Add extends Component {
         this.state = {
             content: '',
             username: '',
-            length: 0
+            length: 0,
+            prompt: []
         };
         this.getData();
     }
@@ -22,17 +24,6 @@ export default class Add extends Component {
                 })
                 console.log("用户名：", this.state.username)
             });
-    }
-       //动态计算TextInput高度来解决TextInput文字始终垂直居中的问题
-       cauculateHeight(e) {
-        if (e.nativeEvent.contentSize.height > 30) {
-            height = e.nativeEvent.contentSize.height;
-        } else {
-            height = this.state.height;
-        }
-        this.setState({
-            height: height
-        })
     }
     con = (e) => {
         this.setState({ content: e });
@@ -51,7 +42,8 @@ export default class Add extends Component {
             var hour = date.getHours().toString();
             var minute = date.getMinutes().toString();
             var time = year + '年' + month + '月' + day + '日' + ' ' + hour + ':' + minute;
-            let url = `http://139.155.44.190:3005/community/addCommunity?content=${this.state.content}&name=${this.state.username}&time=${time}`;
+            let url = `http://139.155.44.190:3005/learn/addLearn?content=${this.state.content}&name=${this.state.username}&time=${time}`;
+            console.log(url);
             fetch(url)
                 .then((res) => res.json())
                 .then((res) => {
@@ -61,6 +53,84 @@ export default class Add extends Component {
                         Alert.alert(res.msg);
                     }
                 });
+            let url2 = `http://139.155.44.190:3005/users/list`;
+            fetch(url2)
+                .then((res) => res.json())
+                .then((res) => {
+                    this.setState({
+                        lvlist: res
+                    })
+                    this.state.lvlist.map((item) => {
+                        if (item.name == this.state.username) {
+                            this.setState({
+                                lvnum: item.lvnum + 2
+                            })
+                            let url3 = `http://139.155.44.190:3005/users/changeLvnum?lvnum=${this.state.lvnum}&name=${this.state.username}`;
+                            fetch(url3)
+                                .then((res) => res.json())
+                                .then((res) => {
+                                    if (res.ok) {
+                                    } else {
+                                        Alert.alert(res.msg);
+                                    }
+                                });
+                            if (this.state.lvnum == 15) {
+                                Alert.alert("恭喜你提升为二级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 16) {
+                                Alert.alert("恭喜你提升为二级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 30) {
+                                Alert.alert("恭喜你提升为三级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 31) {
+                                Alert.alert("恭喜你提升为三级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 45) {
+                                Alert.alert("恭喜你提升为四级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 46) {
+                                Alert.alert("恭喜你提升为四级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 60) {
+                                Alert.alert("恭喜你提升为五级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 61) {
+                                Alert.alert("恭喜你提升为五级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 75) {
+                                Alert.alert("恭喜你提升为六级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 76) {
+                                Alert.alert("恭喜你提升为六级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 90) {
+                                Alert.alert("恭喜你提升为七级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 91) {
+                                Alert.alert("恭喜你提升为七级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 105) {
+                                Alert.alert("恭喜你提升为八级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 106) {
+                                Alert.alert("恭喜你提升为八级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 120) {
+                                Alert.alert("恭喜你提升为九级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 121) {
+                                Alert.alert("恭喜你提升为九级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 135) {
+                                Alert.alert("恭喜你提升为十级用户，快去解锁新的头像吧！")
+                            }
+                            else if (this.state.lvnum == 136) {
+                                Alert.alert("恭喜你提升为十级用户，快去解锁新的头像吧！")
+                            }
+                        }
+                    })
+                })
         }
         else {
             Alert.alert("未填写内容")
@@ -68,32 +138,64 @@ export default class Add extends Component {
         var param = { "content": this.state.content, "name": this.state.username, "time": time };
         DeviceEventEmitter.emit('refresh', param);
     }
+    back = () => {
+        Actions.pop();
+        var param = 1;
+        DeviceEventEmitter.emit('ELrefresh', param);
+        DeviceEventEmitter.emit('Erefresh', param);
+        DeviceEventEmitter.emit('refresh', param);
+    }
     render() {
         return (
-            <SafeAreaView style={{ flex: 1 }}>
-                <View style={{ alignItems: "center" }}>
-                    <ScrollView style={styles.textInputInner}>
+            <SafeAreaView style={{ flex: 1, backgroundColor: "#F1F2F4" }}>
+                <View style={{
+                    height: 300 * s,
+                    borderBottomColor: '#F6F6F6',
+                    borderBottomWidth: 1 * s
+                }}
+                >
+                    <View style={{ width: width, height: 55 * s, backgroundColor: "#37376F", flexDirection: "row", alignItems: "center" }}>
+                        <TouchableOpacity onPress={() => this.back()}>
+                            <Icon style={{ color: "#fff", fontSize: 40 * s }} name="chevron-left" />
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={{
+                                width: 80 * s,
+                                height: 40 * s,
+                                borderRadius: 20 * s,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                marginRight: 5 * s,
+                                position: 'absolute',
+                                right: 0,
+                                marginTop: 20 * s
+                            }}
+                            onPress={this.add}
+                        >
+                            <Text style={{ color: '#fff', fontSize: 18 * s }}>发布</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <ScrollView style={{backgroundColor:"#fff"}}>
                         <TextInput
                             placeholder="请输入文本内容，不超过500字"
-                            placeholderTextColor='#666666'
-                            style={{ height: Math.max(35, this.state.height), fontSize: 16 * s }}
                             onChangeText={this.con}
                             multiline={true}
                             autoFocus={true}
-                            style={{ fontSize: 18 * s }}
+                            style={{ fontSize: 20 * s }}
+                            placeholderTextColor="#AEAFAB"
                         />
                     </ScrollView>
                     <View style={{
                         flexDirection: 'row',
                         position: 'absolute',
-                        right: 10,
+                        right: 0,
                         bottom: 0
                     }}>
-                        <Text style={{ fontSize: 16 * s, color: 'gray' }}>{this.state.length}</Text>
-                        <Text style={{ fontSize: 16 * s }}>/500</Text>
+                        <Text style={{ fontSize: 20 * s, color: 'gray' }}>{this.state.length}</Text>
+                        <Text style={{ fontSize: 20 * s }}>/500</Text>
                     </View>
                 </View>
-                <View>
+                {/* <View>
                     <TouchableOpacity
                         style={{
                             width: 80 * s,
@@ -111,20 +213,9 @@ export default class Add extends Component {
                     >
                         <Text style={{ color: '#fff', fontSize: 17 * s }}>发布</Text>
                     </TouchableOpacity>
-                </View>
+                </View> */}
 
             </SafeAreaView>
         )
     }
 }
-const styles = StyleSheet.create({
-    textInputInner: {
-        marginTop: 10,
-        width: "98%",
-        borderWidth: 1,
-        borderColor: '#ccc',
-        backgroundColor: '#fff',
-        minHeight: 200,
-
-    },
-})

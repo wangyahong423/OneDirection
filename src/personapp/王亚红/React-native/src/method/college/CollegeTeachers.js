@@ -1,21 +1,28 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity, ImageBackground, ScrollView, AsyncStorage } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, ImageBackground, ScrollView, AsyncStorage, Dimensions } from 'react-native';
+
+const { width } = Dimensions.get('window');
+const s = width / 460;
 
 export default class CollegeTeachers extends Component {
     constructor() {
         super();
         this.state = {
             data: [],
-            todo:[],
+            todo: [],
             college: '',
-            username: ''
+            username: '',
+            isLoading:true
         }
     }
 
     componentDidMount() {
+        this.setState({
+            isLoading:true
+        })
         AsyncStorage.getItem('username')
             .then((value) => {
-                let name = { username:value }
+                let name = { username: value }
                 this.setState({
                     username: name.username
                 });
@@ -46,6 +53,9 @@ export default class CollegeTeachers extends Component {
                                         brr.push(item);
                                     }
                                     this.setState({
+                                        isLoading:false
+                                    })
+                                    this.setState({
                                         todo: brr
                                     })
                                 })
@@ -57,7 +67,7 @@ export default class CollegeTeachers extends Component {
     render() {
         return (
             <ImageBackground
-                source={require('../../../assets/gonglve/20151221111650209.jpg')}
+                source={require('../../../assets/gonglve/20151221111650209.png')}
                 style={{ width: '100%', height: '100%' }}
             >
                 <View style={styles.box}>
@@ -65,16 +75,37 @@ export default class CollegeTeachers extends Component {
                         <View style={styles.block}>
                             {
                                 this.state.todo.map((item) => (
-                                    <View style={{paddingLeft:'10%'}}>
+                                    <View style={{ paddingLeft: '10%' }}>
                                         <Text style={{ fontSize: 22 }}>{item.job}</Text>
                                         <Text style={{ fontSize: 18 }}>{item.name}</Text>
                                         <Text style={{ fontSize: 18 }}>{item.tel}</Text>
-                                        <Text style={{ fontSize: 18 }}>{item.email}</Text>
+                                        <Text style={{ fontSize: 18, marginBottom:10 }}>{item.email}</Text>
                                     </View>
                                 )
                                 )}
                         </View>
                     </ScrollView>
+                    {
+                        this.state.isLoading
+                            ? <View
+                                style={{
+                                    position: 'absolute',
+                                    top: 80 * s,
+                                    width: '100%'
+                                }}
+                            >
+                                <View
+                                    style={{
+                                        alignItems: 'center',
+                                        flexDirection: 'row',
+                                        justifyContent: 'center'
+                                    }}
+                                >
+                                    <Text style={{ fontSize: 18 }}>正在获取数据...</Text>
+                                </View>
+                            </View>
+                            : null
+                    }
                 </View>
             </ImageBackground>
         )

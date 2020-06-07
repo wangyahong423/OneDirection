@@ -27,7 +27,7 @@ export default class Learning extends Component {
                         <TouchableOpacity onPress={() => {
                             Linking.openURL('http://xuebao.hebtu.edu.cn/andamagazine/frontArticle.do?bid=2').catch(err => console.error('An error occurred', err));
                         }}>
-                            <Image style={{ height: 220 * s, width: 150 }} source={require('../../../assets/gonglve/news1.jpg')} />
+                            <Image style={{ height: 220 * s, width: 150 }} source={require('../../../assets/gonglve/news1.png')} />
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => {
                             Linking.openURL('http://xuebao.hebtu.edu.cn/andamagazine/frontArticle.do?bid=2').catch(err => console.error('An error occurred', err));
@@ -52,11 +52,11 @@ export default class Learning extends Component {
                         <Text style={{ lineHeight: 25 * s, fontSize: 12 }}>邮政编码：050024</Text>
                         <Text style={{ lineHeight: 25 * s, fontSize: 12 }}>电子邮箱：ziranb@mail.hebtu.edu.cn</Text>
                     </View>
-                    <View style={{ marginLeft: '12%' }}>
+                    <View style={{ marginLeft: '1%' }}>
                         <TouchableOpacity onPress={() => {
                             Linking.openURL('http://xuebao.hebtu.edu.cn/andamagazine/frontArticle.do?bid=1').catch(err => console.error('An error occurred', err));
                         }}>
-                            <Image style={{ height: 220 * s, width: 150 }} source={require('../../../assets/gonglve/news2.jpg')} />
+                            <Image style={{ height: 220 * s, width: 150 }} source={require('../../../assets/gonglve/news2.png')} />
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => {
                             Linking.openURL('http://xuebao.hebtu.edu.cn/andamagazine/frontArticle.do?bid=1').catch(err => console.error('An error occurred', err));
@@ -87,7 +87,7 @@ export default class Learning extends Component {
                         <TouchableOpacity onPress={() => {
                             Linking.openURL('http://xuebao.hebtu.edu.cn/andamagazine/frontArticle.do?bid=3').catch(err => console.error('An error occurred', err));
                         }}>
-                            <Image style={{ height: 220 * s, width: 150 }} source={require('../../../assets/gonglve/news3.jpg')} />
+                            <Image style={{ height: 220 * s, width: 150 }} source={require('../../../assets/gonglve/news3.png')} />
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => {
                             Linking.openURL('http://xuebao.hebtu.edu.cn/andamagazine/frontArticle.do?bid=3').catch(err => console.error('An error occurred', err));

@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, Dimensions, SafeAreaView, Image, AsyncStorage, DeviceEventEmitter } from 'react-native';
+import {
+    Text,
+    View,
+    ScrollView,
+    Dimensions,
+    SafeAreaView,
+    Image,
+    AsyncStorage,
+    DeviceEventEmitter
+} from 'react-native';
+import Img from '../community/Img'
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
 
@@ -13,10 +23,14 @@ export default class Biji extends Component {
             color: [],
             yonghu: [],
             pic: '',
-            username: ''
+            username: '',
+            isLoading: true,
+
         };
     }
     componentDidMount() {
+        this.setState({ isLoading: true })
+
         AsyncStorage.getItem('username')
             .then((res) => {
                 let name = { username: res }
@@ -28,7 +42,21 @@ export default class Biji extends Component {
         let url2 = `http://139.155.44.190:3005/learnlike/list`;
         let url3 = `http://139.155.44.190:3005/users/getName`;
         let url4 = `http://139.155.44.190:3005/users/list`;
-
+        fetch(url4)
+            .then(res => res.json())
+            .then((res) => {
+                this.setState({
+                    todo: res
+                })
+                this.state.todo.map((item) => {
+                    if (item.name == this.state.username) {
+                        this.setState({
+                            head: "http://139.155.44.190:3005/head/" + item.head,
+                            level: item.level
+                        })
+                    }
+                })
+            })
         fetch(url2)
             .then(res => res.json())
             .then((res) => {
@@ -96,6 +124,8 @@ export default class Biji extends Component {
             this.setState({
                 arr: item.id
             })
+            this.setState({ isLoading: false });
+
         })
 
         var self = this;
@@ -226,8 +256,20 @@ export default class Biji extends Component {
                                         borderRadius: 25 * s,
                                         backgroundColor: 'yellow'
                                     }} source={{ uri: this.state.pic }} />
+                                    <Image style={{
+                                        height: 70 * s,
+                                        width: 70 * s,
+                                        borderRadius: 35 * s,
+                                        position: 'absolute',
+                                        top: 3 * s,
+                                        left: 9 * s
+                                    }}
+                                        source={{ uri: this.state.head }} />
                                     <View style={{ marginLeft: 30 * s }}>
-                                        <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
+                                        <View style={{ flexDirection: 'row' }}>
+                                            <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
+                                            <Image style={{ height: 25 * s, width: 40 * s, marginLeft: 20 * s }} source={Img['png' + this.state.level]} />
+                                        </View>
                                         <Text>{item.time}</Text>
                                     </View>
                                 </View>
@@ -238,6 +280,7 @@ export default class Biji extends Component {
                                     marginBottom: 20 * s
                                 }}
                                 >
+                                    <Text style={{ fontSize: 18 * s }}>{item.title}</Text>
                                     <Text style={{ fontSize: 18 * s }}>{item.content}</Text>
                                 </View>
                                 <View style={{ position: 'absolute', top: 10, left: 430 }}>
@@ -249,6 +292,24 @@ export default class Biji extends Component {
                     </View>
 
                 </ScrollView>
+                {
+                    this.state.isLoading
+                        ? <View
+                            style={{
+                                position: 'absolute', 
+                                top: 80 * s,
+                                width: '100%'
+                            }}>
+                            <View style={{
+                                alignItems: 'center',
+                                flexDirection: 'row',
+                                justifyContent: 'center'
+                            }}>
+                                <Text style={{ fontSize: 20, marginTop: 10 }}>正在获取数据...</Text>
+                            </View>
+                        </View>
+                        : null
+                }
             </SafeAreaView >
         )
     }

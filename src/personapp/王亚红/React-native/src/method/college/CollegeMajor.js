@@ -9,13 +9,17 @@ export default class CollegeMajor extends Component {
         super();
         this.state = {
             data: [],
-            todo:[],
+            todo: [],
             college: '',
-            username: ''
+            username: '',
+            isLoading: true
         }
     }
 
     componentDidMount() {
+        this.setState({
+            isLoading: true
+        })
         AsyncStorage.getItem('username')
             .then((value) => {
                 let name = { username: value }
@@ -50,6 +54,9 @@ export default class CollegeMajor extends Component {
                                         brr.push(item);
                                     }
                                     this.setState({
+                                        isLoading: false
+                                    })
+                                    this.setState({
                                         todo: brr
                                     })
                                 })
@@ -60,7 +67,7 @@ export default class CollegeMajor extends Component {
     render() {
         return (
             <ImageBackground
-                source={require('../../../assets/gonglve/20151221111650209.jpg')}
+                source={require('../../../assets/gonglve/20151221111650209.png')}
                 style={{ width: '100%', height: '100%' }}
             >
                 <View style={styles.box}>
@@ -76,6 +83,27 @@ export default class CollegeMajor extends Component {
                                 )}
                         </View>
                     </ScrollView>
+                    {
+                        this.state.isLoading
+                            ? <View
+                                style={{
+                                    position: 'absolute',
+                                    top: 80 * s,
+                                    width: '100%'
+                                }}
+                            >
+                                <View
+                                    style={{
+                                        alignItems: 'center',
+                                        flexDirection: 'row',
+                                        justifyContent: 'center'
+                                    }}
+                                >
+                                    <Text style={{ fontSize: 18 }}>正在获取数据...</Text>
+                                </View>
+                            </View>
+                            : null
+                    }
                 </View>
             </ImageBackground>
         )

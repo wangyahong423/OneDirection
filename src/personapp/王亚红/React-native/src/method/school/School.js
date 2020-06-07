@@ -11,16 +11,16 @@ export default class School extends Component {
                 <View style={{height:250*s,width:'96%',overflow:'hidden',marginLeft:'2%'}}>
                     <Swiper autoplay={true} autoplayDirection={true} autoplayTimeout='1.5' style={styles.wrapper} showsButtons={false}>
                         <View>
-                            <Image source={require('../../../assets/gonglve/method1.jpg')} style={{height:223,width:'100%'}} />
+                            <Image source={require('../../../assets/gonglve/method1.png')} style={{height:223,width:'100%'}} />
                         </View>
                         <View>
-                            <Image source={require('../../../assets/gonglve/method2.jpg')} style={{height:223,width:'100%'}} />
+                            <Image source={require('../../../assets/gonglve/method2.png')} style={{height:223,width:'100%'}} />
                         </View>
                         <View>
-                            <Image source={require('../../../assets/gonglve/method3.jpg')} style={{height:223,width:'100%'}} />
+                            <Image source={require('../../../assets/gonglve/method3.png')} style={{height:223,width:'100%'}} />
                         </View>
                         <View>
-                            <Image source={require('../../../assets/gonglve/method4.jpg')} style={{height:223,width:'100%'}} />
+                            <Image source={require('../../../assets/gonglve/method4.png')} style={{height:223,width:'100%'}} />
                         </View>
                     </Swiper>
                 </View>
