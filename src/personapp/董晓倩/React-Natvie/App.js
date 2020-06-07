@@ -19,7 +19,7 @@ import Fans from './src/community/Fans';
 import Follows from './src/community/Follows';
 import PerExp from './src/community/PerExp';
 import PerLearn from './src/community/PerLearn';
-import Index from './src/community/Index';
+// import Index from './src/community/Index';
 import SearchLearn from './src/community/SearchLearn';
 import SearchExp from './src/community/SearchExp';
 
@@ -38,6 +38,9 @@ import Myexperence from './src/my/Myexperence';
 import Card from './src/my/Card';
 import Head from './src/my/Head';
 import Xiangqing from './src/my/Xiangqing';
+import NewAdd from './src/my/NewAdd';
+import NewL from './src/my/NewL';
+import NewE from './src/my/NewE';
 
 // 攻略
 import Method from './src/method/Method';
@@ -567,25 +570,26 @@ const App = () => {
       <SwiperPage afterInstall={afterInstall} />
     </View>
   }
+  
   return (
     <>
       <Router
-       backAndroidHandler={() => {
-        if(Actions.currentScene == 'login' || Actions.currentScene == 'method' || Actions.currentScene == 'share' || Actions.currentScene == 'my' || Actions.currentScene == 'community'){
-            if (new Date().getTime() - now < 2000) {
-              BackHandler.exitApp();
-            }
-            else {
-              ToastAndroid.show('再按一次退出应用', 100);
-              now = new Date().getTime();
-              return true;
-            }
-        }
-        else{
-          Actions.pop();
-          return true;
-        }
-      }}
+        backAndroidHandler={() => {
+          if(Actions.currentScene == 'login' || Actions.currentScene == 'method' || Actions.currentScene == 'share' || Actions.currentScene == 'my' || Actions.currentScene == 'community'){
+              if (new Date().getTime() - now < 2000) {
+                BackHandler.exitApp();
+              }
+              else {
+                ToastAndroid.show('再按一次退出应用', 100);
+                now = new Date().getTime();
+                return true;
+              }
+          }
+          else{
+            Actions.pop();
+            return true;
+          }
+        }}
       >
         <Scene key='root'>
           <Tabs hideNavBar titleStyle={{ flex: 1, textAlign: 'center', color: '#fff' }} navigationBarStyle={{ backgroundColor: '#37376F' }} title="校园新生通" key='tabbar' activeTintColor='#37376F' inactiveTintColor='black' tabBarStyle={{ backgroundColor: '#fff', borderTopWidth: 0 }}>
@@ -602,7 +606,7 @@ const App = () => {
               <Scene key='share' component={Share} />
             </Scene>
             {/* 我的 */}
-            <Scene hideNavBar key='myPage' title='我的' titleStyle={{ flex: 1, textAlign: 'center', color: '#fff' }} navigationBarStyle={{ backgroundColor: '#37376F' }} icon={({ focused }) => <Icon color={focused ? '#37376F' : 'black'} name='user-o' size={26} />}>
+            <Scene key='myPage' hideNavBar title='我的' titleStyle={{ flex: 1, textAlign: 'center', color: '#fff' }} navigationBarStyle={{ backgroundColor: '#37376F' }} icon={({ focused }) => <Icon color={focused ? '#37376F' : 'black'} name='user-o' size={26} />}>
               <Scene key='my' component={My} />
             </Scene>
           </Tabs>
@@ -610,18 +614,17 @@ const App = () => {
           <Scene initial={!isLogin} hideNavBar key="login" component={Login} />
           <Scene key="signin" hideNavBar component={Signin} />
           <Scene key="choosecollege" hideNavBar component={Choosecollege} title='选择学院' renderRightButton={<View style={{ marginRight: 20 }}><Text style={{ fontSize: 19, color: '#ddd' }}>发送</Text></View>} titleStyle={{ flex: 1, textAlign: 'center', color: '#fff' }} navBarButtonColor='#fff' />
-          {/* <Scene key="forget" component={Forget} title='忘记密码' backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} /> */}
-          <Scene key="forget" hideNavBar component={Forget} />
+          <Scene key="forget" component={Forget} title='忘记密码' backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
 
           {/* 社区 */}
-          <Scene hideNavBar title='评论' key="learndetails" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} component={Details} />
+          <Scene title='评论' hideNavBar key="learndetails" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} component={Details} />
           <Scene key='notesks' title='添加笔记' component={Notes} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} ></Scene>
           <Scene key="person" hideNavBar component={Person} />
           <Scene title='在经验分享中发布的帖子' hideNavBar key="perexp" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} component={PerExp} />
           <Scene title='在社区中发布的帖子' hideNavBar key="perlearn" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} component={PerLearn} />
           <Scene title='关注列表' key="followslist" component={Follows} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene title='粉丝列表' key="fanslist" component={Fans} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
-          <Scene TabNavigator title='测试' key="index" component={Index} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          {/* <Scene TabNavigator title='测试' key="index" component={Index} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} /> */}
           <Scene key="searchlearn" hideNavBar component={SearchLearn} />
           <Scene key="searchexp" hideNavBar component={SearchExp} />
           <Scene key="add" hideNavBar component={Add} />
@@ -639,7 +642,7 @@ const App = () => {
           <Scene key='practice' component={Practice} title='实践服务类' backButtonImage={require('./assets/gonglve/left.png')} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} navigationBarStyle={{ backgroundColor: '#37376F' }} />
           <Scene key='physical' component={Physical} title='体育健身类' backButtonImage={require('./assets/gonglve/left.png')} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} navigationBarStyle={{ backgroundColor: '#37376F' }} />
           <Scene key='academic' component={Academic} title='学术研究类' backButtonImage={require('./assets/gonglve/left.png')} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} navigationBarStyle={{ backgroundColor: '#37376F' }} />
-          <Scene key='art' component={Art} title='文化艺术类' backButtonImage={require('./assets/gonglve/left.png')} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} navigationBarStyle={{ backgroundColor: '#37376F' }} />
+          <Scene key='art' component={Art} title='文化艺术类' titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} navigationBarStyle={{ backgroundColor: '#37376F' }} />
 
           {/* 学校 */}
           <Scene key='school' component={School} title='学校' backButtonImage={require('./assets/gonglve/left.png')} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} navigationBarStyle={{ backgroundColor: '#37376F' }} />
@@ -832,9 +835,9 @@ const App = () => {
           <Scene key='notesDetails' hideNavBar component={NotesDetails} />
           <Scene key='addNotes' hideNavBar component={AddNotes} />
 
-          <Scene key='experience'  title='经验分享' component={Experience} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='experience' title='经验分享' component={Experience} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key='expdetails' title='详情' component={ExpDetails} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
-          <Scene key='addexp' title='发布' hideNavBar component={AddExp} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='addexp' title='发布' component={AddExp} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
 
           <Scene key='math1' title='数学一' component={Math1} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key='choose' title='选择题' component={Choose} backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
@@ -1112,7 +1115,7 @@ const App = () => {
 
           {/* 我的 */}
           <Scene key='biji' component={Biji} title='我的笔记' backButtonImage={require('./assets/left.png')} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} navigationBarStyle={{ backgroundColor: '#37376F' }} />
-          <Scene key='tiezi' hideNavBar component={Xuexidongtai} renderTitle="我的帖子" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key='tiezi' component={Xuexidongtai} renderTitle="我的帖子" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key='tongxun' component={Tongxun} renderTitle="通讯录" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key='guanyu' component={Guanyu} renderTitle="关于我们" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key='fankui' component={Fankui} renderTitle="用户反馈" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
@@ -1124,6 +1127,10 @@ const App = () => {
           <Scene key="card" component={Card} renderTitle="卡片背景选择" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key="head" hideNavBar component={Head} renderTitle="头像框选择" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
           <Scene key="xiangqing" component={Xiangqing} renderTitle="详情" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key="newadd" component={NewAdd} hideNavBar renderTitle="关注人发帖" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key="newl" component={NewL} hideNavBar renderTitle="关注人发帖" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+          <Scene key="newe" component={NewE} hideNavBar renderTitle="关注人发帖" backButtonImage={require('./assets/gonglve/left.png')} navigationBarStyle={{ backgroundColor: '#37376F' }} titleStyle={{ flex: 1, textAlign: 'center', color: 'white', marginLeft: -40 }} />
+        
         </Scene>
       </Router>
     </>

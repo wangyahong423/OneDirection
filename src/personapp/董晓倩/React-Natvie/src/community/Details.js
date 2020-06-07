@@ -65,7 +65,6 @@ export default class Details extends Component {
                                 });
                                 this.setState({ isLoading: false })
                                 this.setState({ list: arr });
-                                console.log(this.state.list);
                             })
                     })
                 var self = this;
@@ -227,27 +226,12 @@ export default class Details extends Component {
         var param = 1;
         DeviceEventEmitter.emit('refresh', param);
         DeviceEventEmitter.emit('Mrefresh', param);
+        DeviceEventEmitter.emit('NLrefresh', param);
+
     }
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
-                <View style={{
-                    width: '100%',
-                    height: 55 * s,
-                    backgroundColor: '#37376F',
-                    alignItems: 'center',
-                    justifyContent: "center",
-                    flexDirection: "row"
-                }}>
-                    <TouchableOpacity
-                        onPress={() => this.back()}
-                        style={{position: "absolute", left: 10 * s}}
-                       >
-                    <Image style={{ height: 20 * s, width: 20 * s,   }} source={require('../../assets/gonglve/left.png')} />
-
-                    </TouchableOpacity>
-                    <Text style={{ color: '#fff', lineHeight: 55 * s, fontSize: 18 * s }}>评论</Text>
-                </View>
                 <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 10 * s }}>
                     <View style={{
                         flexDirection: 'row',
@@ -256,9 +240,9 @@ export default class Details extends Component {
                     }}>
                         <Image style={{
                             marginLeft: 20 * s,
-                            height: 54 * s,
-                            width: 54 * s,
-                            borderRadius: 27 * s
+                            height: 50 * s,
+                            width: 50 * s,
+                            borderRadius: 25 * s
                         }} source={{ uri: this.state.page.pic }} />
                         <Image style={{
                             height: 70 * s,
@@ -266,8 +250,8 @@ export default class Details extends Component {
                             borderRadius: 35 * s,
                             // backgroundColor:'green',
                             position: 'absolute',
-                            top: 5*s,
-                            left: 12*s
+                            top: 5,
+                            left: 10
                         }}
                             source={{ uri: this.state.page.head }} />
                         <View style={{ marginLeft: 30 * s }}>
@@ -348,18 +332,19 @@ export default class Details extends Component {
                                                 height: 50 * s,
                                                 width: 50 * s,
                                                 borderRadius: 25 * s,
+                                                backgroundColor: 'yellow'
                                             }} source={{ uri: item.pic }} />
                                         </TouchableOpacity>
                                         <Image style={{
-                                            height: 58 * s,
-                                            width: 58 * s,
-                                            borderRadius: 24 * s,
+                                            height: 70 * s,
+                                            width: 70 * s,
+                                            borderRadius: 35 * s,
                                             // backgroundColor:'green',
                                             position: 'absolute',
-                                            top: 5*s,
-                                            left: 15*s
+                                            top: 5,
+                                            left: 10
                                         }}
-                                            source={{ uri: this.state.page.head }} />
+                                            source={{ uri: item.head }} />
                                         <View style={{ marginLeft: 30 * s, marginRight: 60 * s }}>
                                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                                 <Text style={this.state.page.name == item.name ? { fontSize: 15 * s, color: 'red', marginTop: 5 * s } : { fontSize: 15 * s, color: '#37376F', marginTop: 5 * s }}>{item.name}</Text>
@@ -405,7 +390,7 @@ export default class Details extends Component {
                             : null
                     }
                 </ScrollView>
-                {/* <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                     <TouchableOpacity style={{
                         width: 300 * s,
                         height: 40 * s,
@@ -423,7 +408,7 @@ export default class Details extends Component {
                     >
                         <Text style={{ color: '#e8e8e8', fontSize: 20 * s }}>返回</Text>
                     </TouchableOpacity>
-                </View> */}
+                </View>
             </SafeAreaView >
         )
     }

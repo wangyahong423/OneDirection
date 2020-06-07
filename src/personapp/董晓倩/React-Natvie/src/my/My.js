@@ -24,7 +24,8 @@ export default class Person extends Component {
             likenum: 0,
             like: [],
             elikenum: 0,
-            ecnum: 0
+            ecnum: 0,
+            num: 0
         }
     }
     componentDidMount() {
@@ -145,22 +146,45 @@ export default class Person extends Component {
                 var num1 = 0;
                 var num2 = 0
                 var nname = [];
-                var lname = []
+                var lname = [];
+                var num = 0;
+                var learn = [];
+                var experience = [];
                 res.forEach(item => {
                     if (item.lname == this.state.username) {//关注
                         nname.push(item.nname)//关注列表
                         num1++;
+                        if (item.learn != null && item.learn != "") {
+                            var a = item.learn.split(",");
+                            num = num + a.length;
+                            for (var i = 0; i < a.length; i++) {
+                                learn.push(a[i]);
+                            }
+
+                        }
+                        if (item.experience != null && item.experience != "") {
+                            var a = item.experience.split(",");
+                            num = num + a.length;
+                            for (var i = 0; i < a.length; i++) {
+                                experience.push(a[i]);
+                            }
+                        }
                     }
                     else if (item.nname == this.state.username) {//粉丝
                         lname.push(item.lname)//粉丝列表
                         num2++;
                     }
                 });
+                var value1 = { learn: learn };
+                AsyncStorage.setItem('newlearn', JSON.stringify(value1));
+                var value2 = { experience: experience };
+                AsyncStorage.setItem('newexperience', JSON.stringify(value2));
                 this.setState({
                     follows: num1,
                     fans: num2,
                     nnameList: nname,
-                    lnameList: lname
+                    lnameList: lname,
+                    num: num
                 })
             })
         var self = this;
@@ -268,29 +292,51 @@ export default class Person extends Component {
                     })
                 })
             let url5 = `http://139.155.44.190:3005/follow/list`;
-
             fetch(url5)
                 .then((res) => res.json())
                 .then((res) => {
                     var num1 = 0;
                     var num2 = 0
                     var nname = [];
-                    var lname = []
+                    var lname = [];
+                    var num = 0;
+                    var learn = [];
+                    var experience = [];
                     res.forEach(item => {
                         if (item.lname == self.state.username) {//关注
                             nname.push(item.nname)//关注列表
                             num1++;
+                            if (item.learn != null && item.learn != "") {
+                                var a = item.learn.split(",");
+                                num = num + a.length;
+                                for (var i = 0; i < a.length; i++) {
+                                    learn.push(a[i]);
+                                }
+
+                            }
+                            if (item.experience != null && item.experience != "") {
+                                var a = item.experience.split(",");
+                                num = num + a.length;
+                                for (var i = 0; i < a.length; i++) {
+                                    experience.push(a[i]);
+                                }
+                            }
                         }
                         else if (item.nname == self.state.username) {//粉丝
                             lname.push(item.lname)//粉丝列表
                             num2++;
                         }
                     });
+                    var value1 = { learn: learn };
+                    AsyncStorage.setItem('newlearn', JSON.stringify(value1));
+                    var value2 = { experience: experience };
+                    AsyncStorage.setItem('newexperience', JSON.stringify(value2));
                     self.setState({
                         follows: num1,
                         fans: num2,
                         nnameList: nname,
-                        lnameList: lname
+                        lnameList: lname,
+                        num: num
                     })
                 })
         })
@@ -377,11 +423,28 @@ export default class Person extends Component {
                     </Text>
                     <Text style={{ fontSize: 15 * s, color: "#fff", marginTop: 5 * s }}>河北师范大学{this.state.college}</Text>
                     <View style={{ flexDirection: 'row', height: 50 * s, width: width * 0.4, marginTop: 10 * s, justifyContent: "space-around", alignItems: "center" }}>
-                        <TouchableOpacity onPress={() => this.followslist()} style={{ height: 50 * s, width: 50 * s, justifyContent: "center", alignItems: "center" }}>
-                            <Text style={{ color: "#fff" }}>关注</Text>
-                            <Text style={{ color: "#fff" }}>{this.state.follows}</Text>
-
-                        </TouchableOpacity>
+                        {
+                            this.state.num
+                                ?
+                                <View style={{ height: 50 * s, width: 50 * s, justifyContent: "center", alignItems: "center" }}>
+                                    <TouchableOpacity onPress={() => this.followslist()} >
+                                        <Text style={{ color: "#fff" }}>关注</Text>
+                                    </TouchableOpacity>
+                                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                        <TouchableOpacity onPress={() => this.followslist()} >
+                                            <Text style={{ color: "#fff" }}>{this.state.follows}</Text>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity onPress={() => Actions.newadd()} style={{ marginTop: 2, marginLeft: 5, width: 15, height: 15, borderRadius: 10, borderColor: '#000', backgroundColor: 'red', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                                            <Text style={{ fontSize: 10, color: '#fff' }}>{this.state.num}</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+                                :
+                                <TouchableOpacity onPress={() => this.followslist()} style={{ height: 50 * s, width: 50 * s, justifyContent: "center", alignItems: "center" }}>
+                                    <Text style={{ color: "#fff" }}>关注</Text>
+                                    <Text style={{ color: "#fff" }}>{this.state.follows}</Text>
+                                </TouchableOpacity>
+                        }
                         <TouchableOpacity onPress={() => this.fanslist()} style={{ height: 50 * s, width: 50 * s, justifyContent: "center", alignItems: "center" }}>
                             <Text style={{ color: "#fff" }}>粉丝</Text>
                             <Text style={{ color: "#fff" }}>{this.state.fans}</Text>
@@ -543,3 +606,4 @@ export default class Person extends Component {
         )
     }
 }
+
