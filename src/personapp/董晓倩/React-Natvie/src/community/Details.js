@@ -256,9 +256,9 @@ export default class Details extends Component {
                     }}>
                         <Image style={{
                             marginLeft: 20 * s,
-                            height: 50 * s,
-                            width: 50 * s,
-                            borderRadius: 25 * s
+                            height: 54 * s,
+                            width: 54 * s,
+                            borderRadius: 27 * s
                         }} source={{ uri: this.state.page.pic }} />
                         <Image style={{
                             height: 70 * s,
@@ -266,8 +266,8 @@ export default class Details extends Component {
                             borderRadius: 35 * s,
                             // backgroundColor:'green',
                             position: 'absolute',
-                            top: 5,
-                            left: 10
+                            top: 5*s,
+                            left: 12*s
                         }}
                             source={{ uri: this.state.page.head }} />
                         <View style={{ marginLeft: 30 * s }}>
@@ -348,17 +348,16 @@ export default class Details extends Component {
                                                 height: 50 * s,
                                                 width: 50 * s,
                                                 borderRadius: 25 * s,
-                                                backgroundColor: 'yellow'
                                             }} source={{ uri: item.pic }} />
                                         </TouchableOpacity>
                                         <Image style={{
-                                            height: 70 * s,
-                                            width: 70 * s,
-                                            borderRadius: 35 * s,
+                                            height: 58 * s,
+                                            width: 58 * s,
+                                            borderRadius: 24 * s,
                                             // backgroundColor:'green',
                                             position: 'absolute',
-                                            top: 5,
-                                            left: 10
+                                            top: 5*s,
+                                            left: 15*s
                                         }}
                                             source={{ uri: this.state.page.head }} />
                                         <View style={{ marginLeft: 30 * s, marginRight: 60 * s }}>

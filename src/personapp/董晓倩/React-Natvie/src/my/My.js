@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Image, AsyncStorage, ScrollView, TouchableOpacity, DeviceEventEmitter, Dimensions, ImageBackground, Alert } from 'react-native';
+import { View, Alert, Text, Image, AsyncStorage, ScrollView, TouchableOpacity, DeviceEventEmitter, Dimensions, ImageBackground } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Img from '../community/Img'
@@ -22,8 +22,9 @@ export default class Person extends Component {
             fans: 0,
             follows: 0,
             likenum: 0,
-            like: []
-
+            like: [],
+            elikenum: 0,
+            ecnum: 0
         }
     }
     componentDidMount() {
@@ -36,6 +37,7 @@ export default class Person extends Component {
             });
         let url2 = `http://139.155.44.190:3005/users/list`;
         let url11 = `http://139.155.44.190:3005/learn/list`;
+        let url111 = `http://139.155.44.190:3005/experience/list`;
         fetch(url11)
             .then((res) => res.json())
             .then((res) => {
@@ -64,6 +66,24 @@ export default class Person extends Component {
                 });
                 // console.log(this.state.likenum);
             });
+        fetch(url111)
+            .then((res) => res.json())
+            .then((res) => {
+                var ecnum = 0;
+                var elikenum = 0;
+                for (var i = 0; i < res.length; i++) {
+                    if (res[i].name == this.state.username) {
+                        elikenum = elikenum + res[i].likenum;
+                        ecnum = ecnum + res[i].cnum;
+                    }
+                }
+                // console.log("arr:"+arr);
+                this.setState({
+                    ecnum: ecnum,
+                    elikenum: elikenum
+                });
+                // console.log(this.state.likenum);
+            });
         fetch(url2)
             .then(res => res.json())
             .then((res) => {
@@ -78,7 +98,7 @@ export default class Person extends Component {
                             lvnum: item.lvnum,//修改
                             head: "http://139.155.44.190:3005/head/" + item.head
                         })
-                        console.log("点击头像", this.state.pic)
+                        // console.log("点击头像", this.state.pic)
                         var num = Math.floor(this.state.lvnum / 15);
                         // console.log("输出num", num)
                         let url3 = `http://139.155.44.190:3005/users/list`;
@@ -147,6 +167,7 @@ export default class Person extends Component {
         this.listener = DeviceEventEmitter.addListener('Mrefresh', function (param) {
             let url2 = `http://139.155.44.190:3005/users/list`;
             let url11 = `http://139.155.44.190:3005/learn/list`;
+            let url111 = `http://139.155.44.190:3005/experience/list`;
             fetch(url11)
                 .then((res) => res.json())
                 .then((res) => {
@@ -173,6 +194,24 @@ export default class Person extends Component {
                         likenum: likenum,
                         like: like
                     });
+                    // console.log(self.state.likenum);
+                });
+            fetch(url111)
+                .then((res) => res.json())
+                .then((res) => {
+                    var ecnum = 0;
+                    var elikenum = 0;
+                    for (var i = 0; i < res.length; i++) {
+                        if (res[i].name == self.state.username) {
+                            elikenum = elikenum + res[i].likenum;
+                            ecnum = ecnum + res[i].cnum;
+                        }
+                    }
+                    // console.log("arr:"+arr);
+                    self.setState({
+                        ecnum: ecnum,
+                        elikenum: elikenum
+                    });
                     // console.log(this.state.likenum);
                 });
             fetch(url2)
@@ -189,7 +228,7 @@ export default class Person extends Component {
                                 lvnum: item.lvnum,//修改
                                 head: "http://139.155.44.190:3005/head/" + item.head
                             })
-                            console.log("点击头像", self.state.pic)
+                            // console.log("点击头像", self.state.pic)
                             var num = Math.floor(self.state.lvnum / 15);
                             // console.log("输出num", num)
                             let url3 = `http://139.155.44.190:3005/users/list`;
@@ -310,29 +349,6 @@ export default class Person extends Component {
         AsyncStorage.setItem('password', '');
         Actions.login();
     }
-    tiezi = () => {
-        // var value = { id: this.state.new };
-        // AsyncStorage.setItem('new', JSON.stringify(value));
-        // console.log('aaa' + value);
-        // if (!this.state.newl) {
-        //     var value = { id: '' }
-        //     AsyncStorage.setItem('new', JSON.stringify(value));
-        // }
-        // for (var i = 0; i < this.state.new.length; i++) {
-        //     var url11 = `http://139.155.44.190:3005/learn/change?newl=${false}&lid=${this.state.new[i]}`;
-        //     console.log(url11);
-        //     fetch(url11)
-        //         .then((res) => res.json())
-        //         .then((res) => {
-        //             console.log(res);
-        //             this.setState({
-        //                 newl: false,
-        //                 // new:[]
-        //             });
-        //         })
-        // }
-        Actions.tiezi();
-    }
     render() {
         return (
             <ScrollView style={{ backgroundColor: "#fff" }}>
@@ -342,6 +358,7 @@ export default class Person extends Component {
                             <Icon style={{ color: "#fff", fontSize: 25 * s, }} name="settings-outline" />
                         </TouchableOpacity>
                     </View>
+
                     <TouchableOpacity style={{ width: 100, height: 100 }} onPress={() => Actions.touxiang()}>
                         <Image source={{ uri: this.state.pic }} style={{ width: 90 * s, height: 90 * s, borderRadius: 45 * s }} />
                         <Image style={{
@@ -349,12 +366,11 @@ export default class Person extends Component {
                             width: 100 * s,
                             borderRadius: 50 * s,
                             position: 'absolute',
-                            top: -6 * s,
-                            right: 1 * s
+                            top: -7 * s,
+                            right: 8 * s
                         }}
                             source={{ uri: this.state.head }} />
                     </TouchableOpacity>
-
                     <Text style={{ fontSize: 15 * s, color: "#fff", marginTop: 10 * s }}>
                         {this.state.username}&nbsp;&nbsp;&nbsp;
                             <Image style={{ height: 25 * s, width: 40 * s, marginLeft: 10 * s }} source={Img['png' + this.state.level]} />
@@ -364,6 +380,7 @@ export default class Person extends Component {
                         <TouchableOpacity onPress={() => this.followslist()} style={{ height: 50 * s, width: 50 * s, justifyContent: "center", alignItems: "center" }}>
                             <Text style={{ color: "#fff" }}>关注</Text>
                             <Text style={{ color: "#fff" }}>{this.state.follows}</Text>
+
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => this.fanslist()} style={{ height: 50 * s, width: 50 * s, justifyContent: "center", alignItems: "center" }}>
                             <Text style={{ color: "#fff" }}>粉丝</Text>
@@ -395,13 +412,13 @@ export default class Person extends Component {
                                 height: 60, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
                                 borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1
                             }}>
-                                <TouchableOpacity onPress={() => this.tiezi()} style={{ flexDirection: 'row', alignItems: "center" }}>
+                                <TouchableOpacity onPress={() => Actions.tiezi()} style={{ flexDirection: 'row', alignItems: "center" }}>
 
                                     <View style={{ height: 50, width: 80, justifyContent: "center", alignItems: "center" }}>
                                         <Icon name="file-document-edit-outline" size={30} color="#5f6fcd" />
                                     </View>
                                     <View style={{ height: 50, width: width * 0.633, flexDirection: 'row' }}>
-                                        <Text style={{ fontSize: 20, marginTop: 11 }} onPress={() => Actions.tiezi()}>我的帖子</Text>
+                                        <Text style={{ fontSize: 20, marginTop: 11 }}>我的帖子</Text>
                                         <View style={{ marginTop: 15, marginLeft: 10, width: 20, height: 20, borderRadius: 10, borderColor: '#000', backgroundColor: 'red', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                                             <Text style={{ fontSize: 15, color: '#fff' }}>{this.state.likenum + this.state.cnum}</Text>
                                         </View>
@@ -413,13 +430,13 @@ export default class Person extends Component {
                                 height: 60, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
                                 borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1
                             }}>
-                                <TouchableOpacity onPress={() => this.tiezi()} style={{ flexDirection: 'row', alignItems: "center" }}>
+                                <TouchableOpacity onPress={() => Actions.tiezi()} style={{ flexDirection: 'row', alignItems: "center" }}>
 
                                     <View style={{ height: 50, width: 80, justifyContent: "center", alignItems: "center" }}>
                                         <Icon name="file-document-edit-outline" size={30} color="#FF999A" />
                                     </View>
                                     <View style={{ height: 50, width: width * 0.7, }}>
-                                        <Text style={{ fontSize: 20, marginTop: 11 }} onPress={() => Actions.tiezi()}>我的帖子</Text>
+                                        <Text style={{ fontSize: 20, marginTop: 11 }}>我的帖子</Text>
 
                                     </View>
                                     <Icon name="chevron-right" size={20} color="#aaa" />
@@ -427,22 +444,44 @@ export default class Person extends Component {
                             </View>
                     }
 
-                    <View style={{
-                        height: 60, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
-                        borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1
-                    }}>
-                        <TouchableOpacity onPress={() => Actions.myexperence()} style={{ flexDirection: 'row', alignItems: "center" }}>
+                    {
+                        this.state.ecnum + this.state.elikenum
+                            ?
+                            <View style={{
+                                height: 60, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
+                                borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1
+                            }}>
+                                <TouchableOpacity onPress={() => Actions.myexperence()} style={{ flexDirection: 'row', alignItems: "center" }}>
 
-                            <View style={{ height: 50, width: 80, justifyContent: "center", alignItems: "center" }}>
-                                <Icon name="lightbulb-on-outline" size={26} color="#5f6fcd" />
+                                    <View style={{ height: 50, width: 80, justifyContent: "center", alignItems: "center" }}>
+                                        <Icon name="lightbulb-on-outline" size={26} color="#5f6fcd" />
+                                    </View>
+                                    <View style={{ height: 50, width: width * 0.633, flexDirection: 'row' }}>
+                                        <Text style={{ fontSize: 20, marginTop: 11 }}>我的经验</Text>
+                                        <View style={{ marginTop: 15, marginLeft: 10, width: 20, height: 20, borderRadius: 10, borderColor: '#000', backgroundColor: 'red', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                                            <Text style={{ fontSize: 15, color: '#fff' }}>{this.state.elikenum + this.state.ecnum}</Text>
+                                        </View>
+                                    </View>
+                                    <Icon name="chevron-right" size={20} color="#aaa" style={{ marginLeft: 30, marginTop: 0 }} />
+                                </TouchableOpacity>
                             </View>
-                            <View style={{ height: 50, width: width * 0.7 }}>
-                                <Text style={{ fontSize: 20, marginTop: 11 }}>我的经验</Text>
+                            : <View style={{
+                                height: 60, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
+                                borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1
+                            }}>
+                                <TouchableOpacity onPress={() => Actions.myexperence()} style={{ flexDirection: 'row', alignItems: "center" }}>
 
+                                    <View style={{ height: 50, width: 80, justifyContent: "center", alignItems: "center" }}>
+                                        <Icon name="lightbulb-on-outline" size={26} color="#5f6fcd" />
+                                    </View>
+                                    <View style={{ height: 50, width: width * 0.7, }}>
+                                        <Text style={{ fontSize: 20, marginTop: 11 }}>我的经验</Text>
+
+                                    </View>
+                                    <Icon name="chevron-right" size={20} color="#aaa" />
+                                </TouchableOpacity>
                             </View>
-                            <Icon name="chevron-right" size={20} color="#aaa" />
-                        </TouchableOpacity>
-                    </View>
+                    }
                     <View style={{
                         height: 60, width: '100%', flexDirection: 'row', borderBottomColor: '#e8e8e8', borderLeftColor: '#ffffff',
                         borderTopColor: '#ffffff', borderRightColor: '#ffffff', borderWidth: 1

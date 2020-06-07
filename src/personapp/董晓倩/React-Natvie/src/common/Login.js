@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TextInput, AsyncStorage, TouchableOpacity, DeviceEventEmitter, Alert, Dimensions, ImageBackground, SafeAreaView } from 'react-native';
+import { View, Text, Image, TextInput, AsyncStorage, TouchableOpacity, DeviceEventEmitter, Alert,Dimensions ,ImageBackground,SafeAreaView} from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import Icon from 'react-native-vector-icons/AntDesign';
-
-// import { BoxShadow } from 'react-native-shadow';
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
 export default class Login extends Component {
@@ -69,16 +66,18 @@ export default class Login extends Component {
                   })
                 }
               })
-            var param = { "college": this.state.college, "pic": this.state.pic }
-            DeviceEventEmitter.emit('refresh', param)
+            // var param = { "college": this.state.college, "pic": this.state.pic }
+            var param=1;
+            DeviceEventEmitter.emit('refresh', param);
+            DeviceEventEmitter.emit('Mrefresh', param);
             Actions.methodPage();//登录成功跳转首页
           }
           else {
-            Alert.alert(res.msg)
-            this.setState({
-              username: '',
-              pwd: ''
-            })
+              Alert.alert(res.msg)
+              this.setState({
+                username:'',
+                pwd:''
+              })
           }
         })
     }
@@ -95,103 +94,88 @@ export default class Login extends Component {
   }
 
   render() {
-    const shadowOpt = {
-      width: 100,
-      height: 100,
-      color: "#000",
-      border: 10,
-      radius: 50,
-      opacity: 0.2,
-      x: 0,
-      y: 8,
-      style: { marginVertical: 5 }
-    }
     return (
-      <SafeAreaView style={{ flex: 1 }}>
-        <ImageBackground style={{ flex: 1, width: '100%', height: "100%" }} source={require('../../assets/login/login8.png')}>
-          <View style={{ alignItems: "center", height: height, width: width, justifyContent: "center" }}>
-            <View style={{ marginTop: -90 * s }}>
-              <Text style={{ color: "#fff", fontSize: 40 * s }}>Welcome</Text>
-            </View>
-            <View
-              style={{ alignItems: 'center', height: height * 0.5, width: width * 0.8, borderRadius: 10 * s, justifyContent: "center", }}>
-              <View
-                style={{
-                  width: '90%',
-                  height: 50 * s,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  marginTop: 20 * s,
-                  borderBottomColor: "#fff",
-                  borderBottomWidth: 1 * s,
-                }}>
-                <Icon style={{ fontSize: 25 * s, color: "#fff", marginLeft: "5%" }} name="user" />
-                <TextInput placeholder="用户名"
-                  onChangeText={this.userhandle}
-                  placeholderTextColor="#fff"
-                  style={{color:"#FFF"}}
-                />
-              </View>
-              <View
-                style={{
-                  width: '90%',
-                  height: 50 * s,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  marginTop: 30 * s,
-                  borderBottomColor: "#fff",
-                  borderBottomWidth: 1 * s,
-                }}>
-                <Icon style={{ fontSize: 25 * s, color: "#fff", marginLeft: "5%" }} name="unlock" />
+      <SafeAreaView style={{ flex: 1, justifyContent: 'center', backgroundColor: 'white' }}>
+        <ImageBackground style={{ flex: 1, width: '100%', height: "100%" }} source={require('../../assets/login/login3.png')}>
+        <View
+          style={{ alignItems: 'center' }}>
+          <Image source={require('../../assets/my3.png')} style={{ width: 100*s, height: 100*s,  borderRadius: 50*s }} />
+          <View
+            style={{
+              width: '70%',
+              marginRight: 10,
+              borderBottomColor: '#e8e8e8', borderLeftColor: '#e8e8e8',
+              borderTopColor: '#e8e8e8', borderRightColor: '#e8e8e8', borderWidth: 1,
+              flexDirection: 'row',
+              alignItems: 'center',
+              paddingLeft: 20,
+              marginTop: 50
+            }}>
 
-                <TextInput
-                  onChangeText={this.pwdhandle}
-                  placeholder="密码"
-                  secureTextEntry={true}
-                  placeholderTextColor="#fff"
-                  style={{color:"#FFF"}}
+            <TextInput placeholder="输入账号"
+              onChangeText={this.userhandle}
+              style={{ marginLeft: 100 }}
+            />
+          </View>
+          <View
+            style={{
+              width: '70%',
+              marginRight: 10,
+              borderBottomColor: '#e8e8e8', borderLeftColor: '#e8e8e8',
+              borderTopColor: '#e8e8e8', borderRightColor: '#e8e8e8',
+              borderWidth: 1,
+              flexDirection: 'row',
+              alignItems: 'center',
+              paddingLeft: 20,
+              marginTop: 30
+            }}>
 
-                />
-              </View>
-              <View style={{ flexDirection: 'row', marginTop: 30 * s, width: "90%", justifyContent: "space-around" }}>
-                <Text style={{ fontSize: 14 * s, color: '#fff' }} onPress={() => { Actions.forget() }}>忘记密码</Text>
-                <Text style={{ fontSize: 14 * s, color: '#fff' }} onPress={() => Actions.signin()}>没有账号？  去注册</Text>
-              </View>
-              <TouchableOpacity
-                style={{
-                  width: '90%',
-                  height: 50 * s,
-                  backgroundColor: "#4874E1",
-                  marginTop: 50*s,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderRadius: 25 * s,
-                }}
-                onPress={this.login}>
-                <Text style={{ color: '#ffffff' }}>登 录</Text>
-              </TouchableOpacity>
-              {
-                this.state.unum == 0
-                  ? <View style={{ position: 'absolute', top: 290 }}><Text></Text></View>
-                  : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 110*s, left: 65 }}><Text style={{ color: 'red', fontSize: 13 }}>请输入用户名！</Text></View>
-              }
-              {
-                this.state.pnum == 0
-                  ? <View style={{ position: 'absolute', top: 290 }}><Text></Text></View>
-                  : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 190*s, left: 65 }}><Text style={{ color: 'red', fontSize: 13 }}>请输入正确的密码！</Text></View>
-              }
-            </View>
+            <TextInput
+              onChangeText={this.pwdhandle}
+              placeholder="输入密码"
+              secureTextEntry={true}
+              style={{ marginLeft: 100 }}
+            />
+          </View>
+          <TouchableOpacity
+            style={{
+              width: '30%',
+              height: 40,
+              backgroundColor: '#37376F',
+              marginTop: 30,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+            onPress={this.login}>
+            <Text style={{ color: '#ffffff' }}>登录</Text>
+          </TouchableOpacity>
+          <View style={{ flexDirection: 'row', marginTop: 50 }}>
+            <Text style={{ fontSize: 18, color: 'blue' }} onPress={()=>{Actions.forget()}}>忘记密码</Text>
+            <Text style={{ fontSize: 18, marginLeft: 150, color: 'blue' }} onPress={() => Actions.signin()}>没有账号？  去注册</Text>
+
           </View>
           {
-            this.state.isloading
-              ? <View style={{ position: 'absolute', top: 650*s, zIndex: 11, left: 190, alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: 14,color:"#fff" }}>正在登录中...</Text></View>
-              : null
+            this.state.unum == 0
+              ? <View style={{ position: 'absolute', top: 290 }}><Text></Text></View>
+              : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 175, left: 65 }}><Text style={{ color: 'red', fontSize: 13 }}>请输入用户名！</Text></View>
           }
           {
-            !this.state.isnull
-              ? <View style={{ position: 'absolute', top: 530, zIndex: 11, left: 180, alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: 14 }}>此用户不存在！</Text></View>
-              : null
+            this.state.pnum == 0
+              ? <View style={{ position: 'absolute', top: 290 }}><Text></Text></View>
+              : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 255, left: 65 }}><Text style={{ color: 'red', fontSize: 13 }}>请输入正确的密码！</Text></View>
           }
+
+        </View>
+        {
+          this.state.isloading
+            ? <View style={{ position: 'absolute', top: 530, zIndex: 11, left: 190, alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: 14 }}>正在登录中...</Text></View>
+            : null
+        }
+        {
+          !this.state.isnull
+            ? <View style={{ position: 'absolute', top: 530, zIndex: 11, left: 180, alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: 14 }}>此用户不存在！</Text></View>
+            : null
+        }
         </ImageBackground>
       </SafeAreaView>
     );

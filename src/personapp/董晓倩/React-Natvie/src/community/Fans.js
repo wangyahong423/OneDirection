@@ -185,7 +185,7 @@ export default class Fans extends Component {
 
     }
     person = (idx) => {
-        var value = { name: this.state.follow[idx].name, pic: this.state.follow[idx].pic, level: this.state.follow[idx].level, college: this.state.follow[idx].college };
+        var value = { name: this.state.follow[idx].name, pic: this.state.follow[idx].pic, level: this.state.follow[idx].level, college: this.state.follow[idx].college,head: this.state.follow[idx].head };
         AsyncStorage.setItem('details', JSON.stringify(value));
         Actions.person();
     }

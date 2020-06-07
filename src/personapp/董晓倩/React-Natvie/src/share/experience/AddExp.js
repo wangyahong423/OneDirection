@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, TextInput, AsyncStorage,Dimensions, SafeAreaView, TouchableOpacity, Alert, DeviceEventEmitter } from 'react-native';
+import { Text, View, ScrollView, TextInput, AsyncStorage, Dimensions, SafeAreaView, TouchableOpacity, Alert, DeviceEventEmitter } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
 export default class AddExp extends Component {
@@ -61,7 +63,7 @@ export default class AddExp extends Component {
                         Alert.alert(res.msg);
                     }
                 });
-                let url2 = `http://139.155.44.190:3005/users/list`;
+            let url2 = `http://139.155.44.190:3005/users/list`;
             fetch(url2)
                 .then((res) => res.json())
                 .then((res) => {
@@ -146,22 +148,50 @@ export default class AddExp extends Component {
         var param = 1;
         DeviceEventEmitter.emit('Erefresh', param);
     }
+    back = () => {
+        Actions.pop();
+        var param = 1;
+        DeviceEventEmitter.emit('Erefresh', param);
+    }
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }}>
                 <View style={{
                     height: 300 * s,
-                    borderBottomColor: '#37376F',
-                    borderBottomWidth: 1 * s
+                    // borderBottomColor: '#37376F',
+                    // borderBottomWidth: 1 * s
                 }}
                 >
-                    <ScrollView>
+                    <View style={{ width: width, height: 55 * s, backgroundColor: "#37376F", flexDirection: "row", alignItems: "center" }}>
+                        <TouchableOpacity onPress={() => this.back()}>
+                            <Icon style={{ color: "#fff", fontSize: 40 * s }} name="chevron-left" />
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={{
+                                width: 80 * s,
+                                height: 40 * s,
+                                borderRadius: 20 * s,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                marginRight: 5 * s,
+                                position: 'absolute',
+                                right: 0,
+                                marginTop: 20 * s
+                            }}
+                        onPress={this.add}
+
+                        >
+                            <Text style={{ color: '#fff', fontSize: 18 * s }}>发布</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <ScrollView style={{backgroundColor:"#fff"}}>
                         <TextInput
                             placeholder="请输入文本内容，不超过500字"
                             onChangeText={this.con}
                             multiline={true}
                             autoFocus={true}
                             style={{ fontSize: 20 * s }}
+                            placeholderTextColor="#AEAFAB"
                         />
                     </ScrollView>
                     <View style={{
@@ -174,26 +204,6 @@ export default class AddExp extends Component {
                         <Text style={{ fontSize: 20 * s }}>/500</Text>
                     </View>
                 </View>
-                <View>
-                    <TouchableOpacity
-                        style={{
-                            width: 80 * s,
-                            height: 40 * s,
-                            borderRadius: 20 * s,
-                            backgroundColor: '#37376F',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            marginRight: 5 * s,
-                            position: 'absolute',
-                            right: 0,
-                            marginTop: 20 * s
-                        }}
-                        onPress={this.add}
-                    >
-                        <Text style={{ color: '#fff', fontSize: 17 * s }}>发布</Text>
-                    </TouchableOpacity>
-                </View>
-
             </SafeAreaView>
         )
     }
