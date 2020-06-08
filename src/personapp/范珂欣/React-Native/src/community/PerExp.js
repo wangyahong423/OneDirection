@@ -685,10 +685,25 @@ export default class PerExp extends Component {
             this.setState({
                 list: crr
             })
+            var num = this.state.list[idx].likenum;
+            if (num == null || num == 0) {
+                num = 1;
+            } else {
+                num = num + 1;
+            }
+            console.log(num)
             let url1 = `http://139.155.44.190:3005/experiencelike/add?eid=${this.state.list[idx].id}&name=${this.state.username}&ename=${this.state.list[idx].name}`;
+            let url11 = `http://139.155.44.190:3005/experience/changeLike?eid=${this.state.list[idx].id}&likenum=${num}`;
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
+                    fetch(url11)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            console.log(url11);
+                            var param = 1;
+                            DeviceEventEmitter.emit('Mrefresh', param);
+                        });
                 });
         }
         else if (this.state.list[idx].like == true) {
@@ -761,10 +776,24 @@ export default class PerExp extends Component {
             this.setState({
                 list: crr
             })
+            var num = this.state.list[idx].cenum;
+            if (num == null || num == 0) {
+                num = 1;
+            } else {
+                num = num + 1;
+            }
             let url1 = `http://139.155.44.190:3005/collect/addCollect?eid=${this.state.list[idx].id}&name=${this.state.username}`;
+            let url11 = `http://139.155.44.190:3005/experience/change?eid=${this.state.list[idx].id}&cnum=${num}`;
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
+                    fetch(url11)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            console.log(url11);
+                            var param = 1;
+                            DeviceEventEmitter.emit('Mrefresh', param);
+                        });
                 });
         }
         else if (this.state.list[idx].collect == true) {

@@ -379,7 +379,6 @@ export default class Person extends Component {
                 .then((res) => {
                     var param = 1;
                     DeviceEventEmitter.emit('Prefresh', param);
-                    DeviceEventEmitter.emit('Mrefresh', param);
                     Alert.alert(res.msg);
                 })
         }
@@ -408,6 +407,7 @@ export default class Person extends Component {
                 style: "我的社区"
             })
             var value = { name: this.state.all.name, pic: this.state.all.pic, head: this.state.all.head, level: this.state.all.level, title: "issue" };
+           console.log("头像框",value)
             AsyncStorage.setItem('personname2', JSON.stringify(value));
         }
         else if (data == '我的经验') {

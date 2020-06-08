@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TextInput, AsyncStorage, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, Image, TextInput, AsyncStorage, TouchableOpacity, StyleSheet, Dimensions ,ImageBackground} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 const { width } = Dimensions.get('window');
 const s = width / 640;
@@ -71,11 +71,8 @@ export default class Fankui extends Component {
     }
     render() {
         return (
-            <View style={{ flex: 1, justifyContent: 'center', backgroundColor: 'white' }}>
-                <View
-                    style={{ alignItems: 'center' }}>
-
-
+            <ImageBackground style={{ flex: 1, justifyContent: 'center', backgroundColor: 'white' }} source={require('../../assets/community/img15.png')}>
+                <View style={{ alignItems: 'center' }}>
                     <TouchableOpacity activeOpacity={1} style={styles.textInputInner1} onPress={() => this.TextInput.focus()} >
                         <TextInput
                             {...this.prop}
@@ -106,15 +103,15 @@ export default class Fankui extends Component {
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={{
-                            width: '30%',
-                            height: 40,
+                            width: '50%',
+                            height: 60*s,
                             backgroundColor: '#37376F',
-                            marginTop: 30,
+                            marginTop: 80*s,
                             alignItems: 'center',
                             justifyContent: 'center',
                         }}
                         onPress={this.handleRegister}>
-                        <Text style={{ color: '#ffffff' }}>提交</Text>
+                        <Text style={{ color: '#ffffff',fontSize:22*s }}>提交</Text>
                     </TouchableOpacity>
                     {
                         this.state.unum == 0
@@ -128,7 +125,7 @@ export default class Fankui extends Component {
                     }
 
                 </View>
-            </View>
+            </ImageBackground>
         );
     }
 }

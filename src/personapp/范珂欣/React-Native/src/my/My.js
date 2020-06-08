@@ -412,8 +412,8 @@ export default class Person extends Component {
                             width: 100 * s,
                             borderRadius: 50 * s,
                             position: 'absolute',
-                            top: -7 * s,
-                            right: 8 * s
+                            top: -5*s,
+                            left:-3*s
                         }}
                             source={{ uri: this.state.head }} />
                     </TouchableOpacity>

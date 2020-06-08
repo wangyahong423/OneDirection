@@ -78,7 +78,6 @@ export default class Xuexidongtai extends Component {
                                                 res.forEach(item => {
                                                     if (item.name == this.state.username) {
                                                         item.like = false;
-                                                        item.level=this.state.lv;
                                                         for (var j = 0; j < this.state.like.length; j++) {
                                                             if (item.id == this.state.like[j].lid) {
                                                                 item.like = true;
@@ -114,7 +113,7 @@ export default class Xuexidongtai extends Component {
                     })
             });
         var self = this;
-        this.listener = DeviceEventEmitter.addListener('freshthree', function (param) {
+        this.listener = DeviceEventEmitter.addListener('ML', function (param) {
             AsyncStorage.getItem('username')
                 .then(res => {
                     let user = { username: res }
@@ -223,7 +222,7 @@ export default class Xuexidongtai extends Component {
 
     details = (idx) => {
         var value = { page: this.state.data[idx] };
-        // console.log('sss' + this.state.data[idx].lv);
+        console.log('sss' + this.state.data[idx].level);
         var arr = this.state.data;
         arr[idx].new = false;
         this.setState({
@@ -248,11 +247,25 @@ export default class Xuexidongtai extends Component {
             this.setState({
                 data: crr
             })
+            var num = this.state.data[idx].likenum;
+            if (num == null || num == 0) {
+                num = 1;
+            } else {
+                num = num + 1;
+            }
             let url1 = `http://139.155.44.190:3005/learnlike/add?lid=${this.state.data[idx].id}&name=${this.state.username}&lname=${this.state.username}`;
+            let url11 = `http://139.155.44.190:3005/learn/changeLike?lid=${this.state.data[idx].id}&likenum=${num}`;
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url1);
+                    // fetch(url11)
+                    //     .then((res) => res.json())
+                    //     .then((res) => {
+                    //         console.log(url11);
+                    //         var param = 1;
+                    //         DeviceEventEmitter.emit('Mrefresh', param);
+                    //         DeviceEventEmitter.emit('ML', param);
+                    //     });
                 });
             let url2 = `http://139.155.44.190:3005/users/list`;
             fetch(url2)
@@ -363,11 +376,27 @@ export default class Xuexidongtai extends Component {
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
+                <View style={{
+                    width: '100%',
+                    height: 55 * s,
+                    backgroundColor: '#37376F',
+                    alignItems: 'center',
+                    flexDirection: "row",
+                    justifyContent: "center"
+                }}>
+                    <TouchableOpacity
+                        style={{ position: "absolute", left: 0 }}
+                        onPress={() => this.back()}
+                    >
+                        <Icon style={{ color: "#fff", fontSize: 40 * s, }} name="chevron-left" />
 
+                    </TouchableOpacity>
+                    <Text style={{ color: '#fff', lineHeight: 55 * s, fontSize: 18 * s }}>我的帖子</Text>
+                </View>
                 <ScrollView style={{ flex: 1 }}>
                     <View>
                         {this.state.data.map((item, idx) =>
-                            <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 20 * s }}>
+                            <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 10 * s }}>
                                 <View style={{
                                     flexDirection: 'row',
                                     height: 80 * s,
@@ -465,7 +494,7 @@ export default class Xuexidongtai extends Component {
                         </View>
                         : null
                 }
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                {/* <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                     <TouchableOpacity style={{
                         width: 300 * s,
                         height: 40 * s,
@@ -483,7 +512,7 @@ export default class Xuexidongtai extends Component {
                     >
                         <Text style={{ color: '#e8e8e8', fontSize: 20 * s }}>返回</Text>
                     </TouchableOpacity>
-                </View>
+                </View> */}
             </SafeAreaView >
         )
     }

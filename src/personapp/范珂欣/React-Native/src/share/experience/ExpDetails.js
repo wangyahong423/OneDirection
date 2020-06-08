@@ -47,7 +47,7 @@ export default class ExpDetails extends Component {
                                     height: 54 * s,
                                     width: 54 * s,
                                     borderRadius: 27 * s,
-                                    // backgroundColor: '#37376F'
+                                    backgroundColor: '#37376F'
                                 }}>
                                     <Image style={{
                                         marginTop: 2 * s,
@@ -58,13 +58,13 @@ export default class ExpDetails extends Component {
                                     }} source={{ uri: this.state.all.pic }} />
                                 </View>
                                 <Image style={{
-                                        height: 60 * s,
-                                        width: 60 * s,
+                                        height: 70 * s,
+                                        width: 70 * s,
                                         borderRadius: 35 * s,
                                         // backgroundColor:'green',
                                         position: 'absolute',
-                                        top: 8*s,
-                                        left:16*s
+                                        top: 4*s,
+                                        left:13*s
                                     }}
                                         source={{ uri: this.state.all.head }} />
                                 <View style={{ marginLeft: 30 * s }}>

@@ -219,9 +219,7 @@ export default class Xiangqing extends Component {
                                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                                 <Text style={this.state.page.name == item.name ? { fontSize: 15 * s, color: 'red', marginTop: 5 * s } : { fontSize: 15 * s, color: '#37376F', marginTop: 5 * s }}>{item.name}</Text>
                                                 <Image style={{ height: 20 * s, width: 35 * s, marginLeft: 10 * s ,marginTop:5*s}} source={Img['png' + item.level]} />
-
                                             </View>
-
                                             <Text style={{ fontSize: 18 * s }}>{item.content}</Text>
                                             <Text style={{ fontSize: 10 * s, color: '#808080', marginTop: 5 * s, marginBottom: 5 * s }}>{item.time}</Text>
                                         </View>
