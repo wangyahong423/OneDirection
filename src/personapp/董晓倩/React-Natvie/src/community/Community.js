@@ -503,38 +503,34 @@ export default class Community extends Component {
                                                 <View>
                                                     <Image style={{
                                                         marginLeft: 20 * s,
-                                                        height: 50 * s,
-                                                        width: 50 * s,
-                                                        borderRadius: 25 * s,
-                                                        backgroundColor: 'yellow'
+                                                        height: 60 * s,
+                                                        width: 60 * s,
+                                                        borderRadius: 30 * s,
                                                     }} source={{ uri: item.pic }} />
                                                     <Image style={{
                                                         height: 70 * s,
-                                                        width: 70 * s,
+                                                        width: 70* s,
                                                         borderRadius: 35 * s,
-                                                        // backgroundColor:'green',
                                                         position: 'absolute',
-                                                        top: -10,
-                                                        right: -10
+                                                        top: -4*s,
+                                                        left:15*s
                                                     }}
                                                         source={{ uri: item.head }} />
                                                 </View>
                                                 : <TouchableOpacity onPress={this.person.bind(this, (idx))}>
                                                     <Image style={{
                                                         marginLeft: 20 * s,
-                                                        height: 50 * s,
-                                                        width: 50 * s,
-                                                        borderRadius: 25 * s,
-                                                        backgroundColor: 'yellow'
+                                                        height: 60 * s,
+                                                        width: 60 * s,
+                                                        borderRadius: 30 * s,
                                                     }} source={{ uri: item.pic }} />
                                                     <Image style={{
                                                         height: 70 * s,
                                                         width: 70 * s,
                                                         borderRadius: 35 * s,
-                                                        // backgroundColor:'green',
                                                         position: 'absolute',
-                                                        top: -10,
-                                                        right: -10
+                                                        top: -4*s,
+                                                        left:15*s
                                                     }}
                                                         source={{ uri: item.head }} />
                                                 </TouchableOpacity>

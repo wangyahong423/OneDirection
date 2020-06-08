@@ -213,17 +213,17 @@ export default class Fans extends Component {
                                 {
                                     item.name == this.state.username
                                         ? null
-                                        : <View style={{ position: "absolute", right: 20 * s, top: 15 * s }}>
+                                        : <View style={{ position: "absolute", right: 20 * s, }}>
                                             {
                                                 this.state.myFol[idx]
                                                     ? <TouchableOpacity
                                                         onPress={this.follow.bind(this, (idx))}
-                                                        style={{ position: "absolute", right: 20 * s, height: 35 * s, width: 90 * s, borderWidth: 1, borderRadius: 20, justifyContent: "center", alignItems: "center" }}>
+                                                        style={{ height: 35 * s, width: 90 * s, borderWidth: 1, borderRadius: 20, justifyContent: "center", alignItems: "center" }}>
                                                         <Text style={{ fontSize: 14 * s }}>取消关注</Text>
                                                     </TouchableOpacity>
                                                     : <TouchableOpacity
                                                         onPress={this.follow.bind(this, (idx))}
-                                                        style={{ flexDirection: "row", position: "absolute", right: 20 * s, height: 35 * s, width: 90 * s, borderWidth: 1, borderRadius: 20, borderColor: "red", justifyContent: "center", alignItems: "center" }}>
+                                                        style={{ flexDirection: "row",  height: 35 * s, width: 90 * s, borderWidth: 1, borderRadius: 20, borderColor: "red", justifyContent: "center", alignItems: "center" }}>
                                                         <Text style={{ color: "red", fontSize: 22 * s, marginRight: 8 * s }}>+</Text>
                                                         <Text style={{ color: "red", fontSize: 16 * s }}>关注</Text>
                                                     </TouchableOpacity>

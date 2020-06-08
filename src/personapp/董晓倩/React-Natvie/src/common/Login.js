@@ -69,10 +69,9 @@ export default class Login extends Component {
                   })
                 }
               })
-              var param=1;
-              DeviceEventEmitter.emit('refresh', param);
-              DeviceEventEmitter.emit('Mrefresh', param);
-              Actions.methodPage();//登录成功跳转首页
+            var param = { "college": this.state.college, "pic": this.state.pic }
+            DeviceEventEmitter.emit('refresh', param)
+            Actions.methodPage();//登录成功跳转首页
           }
           else {
             Alert.alert(res.msg)

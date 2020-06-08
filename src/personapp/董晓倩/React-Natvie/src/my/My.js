@@ -412,8 +412,8 @@ export default class Person extends Component {
                             width: 100 * s,
                             borderRadius: 50 * s,
                             position: 'absolute',
-                            top: -7 * s,
-                            right: 8 * s
+                            top: -5*s,
+                            left:-3*s
                         }}
                             source={{ uri: this.state.head }} />
                     </TouchableOpacity>
@@ -434,7 +434,7 @@ export default class Person extends Component {
                                         <TouchableOpacity onPress={() => this.followslist()} >
                                             <Text style={{ color: "#fff" }}>{this.state.follows}</Text>
                                         </TouchableOpacity>
-                                        <TouchableOpacity onPress={() => Actions.newadd()} style={{ marginTop: 2, marginLeft: 5, width: 15, height: 15, borderRadius: 10, borderColor: '#000', backgroundColor: 'red', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                                        <TouchableOpacity onPress={() => Actions.newadd()} style={{ marginTop: 2, marginLeft: 5, width: 15, height: 15, borderRadius: 10, borderColor: '#000', backgroundColor: 'red', flexDirection: 'row', alignItems: 'center', justifyContent: 'center',position:"absolute",top:-25*s,left:11*s }}>
                                             <Text style={{ fontSize: 10, color: '#fff' }}>{this.state.num}</Text>
                                         </TouchableOpacity>
                                     </View>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, TextInput, AsyncStorage, Dimensions, SafeAreaView, TouchableOpacity, Alert, DeviceEventEmitter } from 'react-native';
+import { Text, View, ScrollView, TextInput,Image, AsyncStorage, Dimensions, SafeAreaView, TouchableOpacity, Alert, DeviceEventEmitter } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const { width, height } = Dimensions.get('window');
@@ -72,17 +72,17 @@ export default class Add extends Component {
                                         // console.log(arr, id);
                                         for (var z = 0; z < arr.length; z++) {
                                             var learn = arr[z].learn;
-                                            if(learn==null || learn==""){
-                                                learn=id;
+                                            if (learn == null || learn == "") {
+                                                learn = id;
                                             }
-                                            else{
-                                                learn=learn+','+id;
+                                            else {
+                                                learn = learn + ',' + id;
                                             }
                                             let url46 = `http://139.155.44.190:3005/follow/changeLL?lname=${arr[z].lname}&nname=${this.state.username}&learn=${learn}`;
                                             fetch(url46)
                                                 .then((res) => res.json())
                                                 .then((res) => {
-                                                    
+
                                                 });
                                         }
 
@@ -197,7 +197,7 @@ export default class Add extends Component {
                 >
                     <View style={{ width: width, height: 55 * s, backgroundColor: "#37376F", flexDirection: "row", alignItems: "center" }}>
                         <TouchableOpacity onPress={() => this.back()}>
-                            <Icon style={{ color: "#fff", fontSize: 40 * s }} name="chevron-left" />
+                            <Image style={{ height: 20 * s, width: 20 * s }} source={require('../../assets/gonglve/left.png')} />
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={{
@@ -236,26 +236,6 @@ export default class Add extends Component {
                         <Text style={{ fontSize: 20 * s }}>/500</Text>
                     </View>
                 </View>
-                {/* <View>
-                    <TouchableOpacity
-                        style={{
-                            width: 80 * s,
-                            height: 40 * s,
-                            borderRadius: 20 * s,
-                            backgroundColor: '#37376F',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            marginRight: 5 * s,
-                            position: 'absolute',
-                            right: 0,
-                            marginTop: 20 * s
-                        }}
-                        onPress={this.add}
-                    >
-                        <Text style={{ color: '#fff', fontSize: 17 * s }}>发布</Text>
-                    </TouchableOpacity>
-                </View> */}
-
             </SafeAreaView>
         )
     }
