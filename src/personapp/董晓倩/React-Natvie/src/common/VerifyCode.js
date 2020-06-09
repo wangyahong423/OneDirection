@@ -292,8 +292,8 @@ export default class VerifyCode extends Component {
                     </TouchableOpacity>
                 </View>
                 <View style={{ flexDirection: "row" }}>
-                    <View style={[props.containerStyle, { marginTop: 25, height: 40 * s, width: '53%', borderBottomWidth: 1, borderBottomColor: "#fff" }]}>
-                        <Icon name="edit" color="#fff" size={30 * s} style={{ marginLeft: 15 * s }} />
+                    <View style={[props.containerStyle, { marginTop: 25, height: 40 * s, width: '43%', borderBottomWidth: 1, borderBottomColor: "#fff",marginRight:20*s }]}>
+                        <Icon name="edit" color="#fff" size={25 * s} style={{ marginLeft: -50 * s }} />
                         <TextInput placeholderTextColor="#fff" style={{ color: "#fff" }}
                             underlineColorAndroid='transparent'
                             {...props}
@@ -302,7 +302,7 @@ export default class VerifyCode extends Component {
                         />
 
                     </View>
-                    <TouchableOpacity onPress={this.refresh} activeOpacity={1}>
+                    <TouchableOpacity onPress={this.refresh} activeOpacity={1}  >
                         <LinearGradient
                             start={{ x: 0, y: 0 }}
                             end={{ x: 1, y: 0 }}

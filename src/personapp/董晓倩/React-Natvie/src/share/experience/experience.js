@@ -653,13 +653,13 @@ export default class Experience extends Component {
                         <TouchableOpacity
                             activeOpacity={0.5}
                             onPress={() => this.onPenLeftDrawer()}
-                            style={{}}
+                            style={{height:40*s,width:width*0.15,justifyContent:"center"}}
                         >
                             <Text style={{ color: "#37376F", fontSize: 18 * s, marginLeft: 10 * s }}>分类</Text>
                         </TouchableOpacity>
                         <View style={{
                             height: 40 * s,
-                            width: '70%',
+                            width: width*0.7,
                             flexDirection: 'row',
                             alignItems: 'center',
                             backgroundColor: '#E3E3E3',
@@ -680,7 +680,7 @@ export default class Experience extends Component {
                             />
                             <Icon style={{ fontSize: 25 * s, marginLeft: 10 * s }} name="search" onPress={() => this.search()} />
                         </View>
-                        <TouchableOpacity style={{ marginLeft: 20 * s }} onPress={() => Actions.addexp()}>
+                        <TouchableOpacity style={{height:40*s,width:width*0.12,alignItems:"center",marginLeft:width*0.03}} onPress={() => Actions.addexp()}>
                             <Text style={{ color: "#37376F", fontSize: 30 * s, marginRight: 15 * s }}>+</Text>
                         </TouchableOpacity>
                     </View>
@@ -708,13 +708,11 @@ export default class Experience extends Component {
                                                             height: 50 * s,
                                                             width: 50 * s,
                                                             borderRadius: 25 * s,
-                                                            backgroundColor: 'yellow'
                                                         }} source={{ uri: item.pic }} />
                                                         <Image style={{
                                                             height: 60 * s,
                                                             width: 60 * s,
                                                             borderRadius: 35 * s,
-                                                            // backgroundColor:'green',
                                                             position: 'absolute',
                                                             top: -5,
                                                             right: -5
@@ -727,16 +725,14 @@ export default class Experience extends Component {
                                                             height: 50 * s,
                                                             width: 50 * s,
                                                             borderRadius: 25 * s,
-                                                            backgroundColor: 'yellow'
                                                         }} source={{ uri: item.pic }} />
                                                         <Image style={{
-                                                            height: 70 * s,
-                                                            width: 70 * s,
+                                                            height: 60 * s,
+                                                            width: 60 * s,
                                                             borderRadius: 35 * s,
-                                                            // backgroundColor:'green',
                                                             position: 'absolute',
-                                                            top: -10,
-                                                            right: -10
+                                                            top: -5,
+                                                            right: -5
                                                         }}
                                                             source={{ uri: item.head }} />
                                                     </TouchableOpacity>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, StyleSheet, Dimensions,Image, TouchableOpacity } from 'react-native';
+import { Text, View, ScrollView,SafeAreaView, StyleSheet, Dimensions,Image, TouchableOpacity } from 'react-native';
 import Swiper from 'react-native-swiper';
 import { Actions } from 'react-native-router-flux';
 const { width } = Dimensions.get('window');
@@ -7,6 +7,7 @@ const s = width / 460;
 export default class School extends Component {
     render() {
         return (
+            
             <ScrollView>
                 <View style={{height:250*s,width:'96%',overflow:'hidden',marginLeft:'2%'}}>
                     <Swiper autoplay={true} autoplayDirection={true} autoplayTimeout='1.5' style={styles.wrapper} showsButtons={false}>

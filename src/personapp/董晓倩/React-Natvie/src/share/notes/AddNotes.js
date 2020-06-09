@@ -12,7 +12,7 @@ export default class AddNotes extends Component {
             username: '',
             title: '',
             show: '',
-            lvlist:'',
+            lvlist: '',
             length: 0,
         };
         this.getData();
@@ -147,49 +147,38 @@ export default class AddNotes extends Component {
         else {
             Alert.alert("不能保存空笔记")
         }
-        var param = { "content": this.state.content, "name": this.state.username, "time": time, "title": this.state.title, "show": this.state.show };
+        var param = 1;
         DeviceEventEmitter.emit('refresh', param);
+
     }
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }}>
-                <ImageBackground style={{ flex: 1, width: '100%', height: height }} source={require('../../../assets/share/notes.png')}>
-                    <View style={{ alignItems: "center" }}>
-                        <ScrollView style={styles.textInputInner}>
-                            <View style={{ flexDirection: "row" }}>
-                                <Text style={{ marginLeft: 10 * s, marginTop: 10 * s }} onPress={() => Actions.pop()}>
-                                    <Icon name="ios-arrow-back" style={{ fontSize: 30 * s, color: "#54487D" }} />
-                                </Text>
-                                <Text style={{ marginLeft: 400 * s }} onPress={this.add}>
-                                    <Icon name="ios-checkmark" style={{ fontSize: 50 * s, color: "#54487D" }} />
-                                </Text>
-                            </View>
-                            <TextInput
-                                placeholder="标题"
-                                placeholderTextColor='#666666'
-                                style={{ fontSize: 20 * s }}
-                                onChangeText={this.titleCon}
-                            />
-                            <TextInput
-                                placeholder="输入笔记内容"
-                                placeholderTextColor='#666666'
-                                onChangeText={this.noteCon}
-                                multiline={true}
-                                autoFocus={true}
-                                style={{ fontSize: 18 * s }}
-                            />
-                        </ScrollView>
+                <ImageBackground style={{ width: '100%', height: height }} source={require('../../../assets/share/notes.png')}>
+                    <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                        <TouchableOpacity style={{ height: 50 * s, width: 30 * s, justifyContent: "center", alignItems: "center" }} onPress={() => Actions.pop()}>
+                            <Icon name="ios-arrow-back" style={{ fontSize: 30 * s, color: "#54487D" }} />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{ height: 50 * s, width: 50 * s, justifyContent: "center", alignItems: "center" }} onPress={this.add}>
+                            <Icon name="ios-checkmark" style={{ fontSize: 50 * s, color: "#54487D" }} />
+                        </TouchableOpacity>
                     </View>
+                    <TextInput
+                        placeholder="标题"
+                        placeholderTextColor='#666666'
+                        style={{ fontSize: 20 * s }}
+                        onChangeText={this.titleCon}
+                    />
+                    <TextInput
+                        placeholder="输入笔记内容"
+                        placeholderTextColor='#666666'
+                        onChangeText={this.noteCon}
+                        multiline={true}
+                        autoFocus={true}
+                        style={{ fontSize: 18 * s }}
+                    />
                 </ImageBackground>
             </SafeAreaView>
         )
     }
 }
-const styles = StyleSheet.create({
-    textInputInner: {
-        width: "100%",
-        height: "100%",
-        borderWidth: 1,
-        borderColor: '#ccc',
-    },
-})

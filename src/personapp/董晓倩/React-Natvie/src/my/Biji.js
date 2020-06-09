@@ -29,7 +29,6 @@ export default class Biji extends Component {
         };
     }
     componentDidMount() {
-        this.setState({ isLoading: true })
 
         AsyncStorage.getItem('username')
             .then((res) => {
@@ -38,6 +37,8 @@ export default class Biji extends Component {
                     username: name.username
                 })
             });
+        this.setState({ isLoading: true })
+
         let url = `http://139.155.44.190:3005/notes/list`;
         let url2 = `http://139.155.44.190:3005/learnlike/list`;
         let url3 = `http://139.155.44.190:3005/users/getName`;
@@ -118,13 +119,14 @@ export default class Biji extends Component {
                 this.setState({
                     data: arr
                 })
+            this.setState({ isLoading: false });
+
             })
 
         this.state.data.map((item) => {
             this.setState({
                 arr: item.id
             })
-            this.setState({ isLoading: false });
 
         })
 
@@ -196,6 +198,8 @@ export default class Biji extends Component {
                     self.setState({
                         data: arr
                     })
+            self.setState({ isLoading: false });
+
                 })
 
             self.state.data.map((item) => {

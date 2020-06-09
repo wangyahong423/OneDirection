@@ -390,19 +390,17 @@ export default class Xuexidongtai extends Component {
                                 }}>
                                     <Image style={{
                                         marginLeft: 20 * s,
-                                        height: 50 * s,
-                                        width: 50 * s,
-                                        borderRadius: 25 * s,
-                                        backgroundColor: 'yellow'
+                                        height: 60 * s,
+                                        width: 60 * s,
+                                        borderRadius: 30 * s,
                                     }} source={{ uri: this.state.pic }} />
                                     <Image style={{
                                         height: 70 * s,
                                         width: 70 * s,
                                         borderRadius: 35 * s,
-                                        // backgroundColor:'green',
                                         position: 'absolute',
-                                        top: 5,
-                                        left: 8
+                                        top: 5*s,
+                                        left: 15*s
                                     }}
                                         source={{ uri: this.state.head }} />
                                     <View style={{ marginLeft: 30 * s }}>

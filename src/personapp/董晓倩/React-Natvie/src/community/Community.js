@@ -178,7 +178,6 @@ export default class Community extends Component {
                                                 // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
                                             });
                                             self.setState({ list: res });
-
                                         });
                                 });
                         });

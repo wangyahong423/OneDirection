@@ -428,7 +428,22 @@ export default class Myexperence extends Component {
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
-
+                  <View style={{
+                    width: '100%',
+                    height: 55 * s,
+                    backgroundColor: '#37376F',
+                    alignItems: 'center',
+                    flexDirection: "row",
+                    justifyContent: "center"
+                }}>
+                    <TouchableOpacity
+                        onPress={() => this.back()}
+                    
+                    style={{position:"absolute",position: "absolute", left: 10*s, }}>
+                    <Image style={{ height: 20 * s, width: 20 * s }} source={require('../../assets/gonglve/left.png')} />
+                    </TouchableOpacity>
+                    <Text style={{ color: '#fff', lineHeight: 55 * s, fontSize: 18 * s }}>我的经验</Text>
+                </View>
                 <ScrollView style={{ flex: 1 }}>
                     <View>
                         {
@@ -531,25 +546,6 @@ export default class Myexperence extends Component {
                         </View>
                         : null
                 }
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                    <TouchableOpacity style={{
-                        width: 300 * s,
-                        height: 40 * s,
-                        borderRadius: 15 * s,
-                        flexDirection: 'row',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: '#37376F',
-                        margin: 10 * s
-                        // position: 'absolute',
-                        // top: 0,
-                        // right: 0
-                    }}
-                        onPress={() => this.back()}
-                    >
-                        <Text style={{ color: '#e8e8e8', fontSize: 20 * s }}>返回</Text>
-                    </TouchableOpacity>
-                </View>
             </SafeAreaView >
         )
     }
