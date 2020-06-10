@@ -374,12 +374,17 @@ export default class Person extends Component {
                 fol: true
             })
             let url = `http://139.155.44.190:3005/follow/add?lname=${this.state.username}&nname=${this.state.all.name}`;
+            let url1 = `http://139.155.44.190:3005/follow/changeP?lname=${this.state.username}&nname=${this.state.all.name}&newp=${true}`;
             fetch(url)
                 .then((res) => res.json())
                 .then((res) => {
-                    var param = 1;
-                    DeviceEventEmitter.emit('Prefresh', param);
-                    Alert.alert(res.msg);
+                    fetch(url1)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            var param = 1;
+                            DeviceEventEmitter.emit('Prefresh', param);
+                            Alert.alert(res.msg);
+                        })
                 })
         }
         else {
@@ -407,7 +412,7 @@ export default class Person extends Component {
                 style: "我的社区"
             })
             var value = { name: this.state.all.name, pic: this.state.all.pic, head: this.state.all.head, level: this.state.all.level, title: "issue" };
-           console.log("头像框",value)
+            console.log("头像框", value)
             AsyncStorage.setItem('personname2', JSON.stringify(value));
         }
         else if (data == '我的经验') {

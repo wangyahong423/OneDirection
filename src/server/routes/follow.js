@@ -135,4 +135,16 @@ router.get('/changeP', (req, res) => {
         }
     });
 });
+router.get('/changePP', (req, res) => {
+    var id = req.query.id;
+    var newp = req.query.newp;
+    let sql = 'update follow set newp=$1 where id=$2';
+    con.query(sql, [newp,id], (err, result) => {
+        if (err) {
+            res.json({ ok: false, msg: '修改失败！' });
+        } else {
+            res.json({ ok: true, msg: '修改成功！' });
+        }
+    });
+});
 module.exports = router;
