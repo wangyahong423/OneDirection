@@ -17,7 +17,7 @@ export default class Undergradute extends Component {
                     <Text style={{ fontSize: 20 * s }}>本科生教育</Text>
                 </View>
             <ScrollView >
-                <View style={{ width: '96%', marginLeft: '2%', marginBottom: '2%' }}>
+                <View style={{ width: '96%', marginLeft: '2%', marginBottom: '7%' }}>
                     <View style={{ justifyContent: 'flex-start', alignItems: 'center', flexDirection: 'row', marginTop: 10 * s }}>
                         <Icon name='appstore-o' size={23} color='#565656' />
                         <Text style={{ lineHeight: 30 * s,color:'#565656' }}>&nbsp;&nbsp;&nbsp;分类模块</Text>

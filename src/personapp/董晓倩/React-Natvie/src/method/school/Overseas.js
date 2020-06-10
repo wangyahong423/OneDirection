@@ -38,7 +38,7 @@ export default class Overseas extends Component {
     render() {
         return (
             <ImageBackground style={{ width: '100%', height: height }} source={require('../../../assets/gonglve/beijing.jpg')}>
-                <View style={{ width: width, height: 70 * s, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                <View style={{ width: width, height: 60 * s, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
                     <TouchableOpacity
                         onPress={() => Actions.pop()}
                         style={{ position: "absolute", position: "absolute", left: 10 * s, }}>
@@ -46,7 +46,7 @@ export default class Overseas extends Component {
                     </TouchableOpacity>
                     <Text style={{ fontSize: 20 * s }}>留学生教育</Text>
                 </View>
-                <ScrollView style={{ width: '96%', marginLeft: '2%', marginTop: '3%', height: '100%' }}>
+                <ScrollView style={{ width: '96%', marginLeft: '2%', marginTop: '3%', height: '100%',marginBottom:"7%" }}>
                     <Text style={{ lineHeight: 20 * s, fontSize: 16 * s }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;河北师范大学于上世纪80年代开始招收海外留学生，是河北省第一批接收外国留学生的省属重点大学之一，目前共培养了来自42个国家的3000余名留学生。河北师范大学根据留学生不同的学习目的、不同的汉语水平、不同的专业背景等具体情况，提供语言进修和学历学位教育两大类项目。其中语言进修教育项目分别设置长期和短期语言课程教学；学历学位教育项目依托学校各招生专业分别提供学士、硕士、博士的课程教学和科学研究。 </Text>
                     <View style={{ flexDirection: 'row', flex: 1, alignItems: 'center', justifyContent: 'center', height: 50 * s }}>
                         <Button onPress={() => { this.zoom() }}>

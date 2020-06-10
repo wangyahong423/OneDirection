@@ -8,7 +8,7 @@ export default class Scholarship extends Component {
     render() {
         return (
             <ImageBackground style={{ width: '100%', height: height }} source={require('../../../assets/gonglve/beijing.jpg')}>
-                <View style={{ width: width, height: 70 * s, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                <View style={{ width: width, height: 60 * s, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
                     <TouchableOpacity
                         onPress={() => Actions.pop()}
                         style={{ position: "absolute", position: "absolute", left: 10 * s, }}>

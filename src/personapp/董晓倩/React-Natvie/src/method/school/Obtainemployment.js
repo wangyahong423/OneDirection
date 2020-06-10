@@ -27,7 +27,7 @@ export default class Obtainemployment extends Component {
                         style={{ position: "absolute", position: "absolute", left: 10 * s, }}>
                         <Icon name="reply" style={{ fontSize: 35 * s }} />
                     </TouchableOpacity>
-                    <Text style={{ fontSize: 20 * s }}>科学研究</Text>
+                    <Text style={{ fontSize: 20 * s }}>就业服务</Text>
                 </View>
                 <ScrollView>
                     <View style={{ flexDirection: 'row', flex: 1, alignItems: 'center', justifyContent: 'center', height: 50 * s }}>

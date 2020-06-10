@@ -9,7 +9,7 @@ export default class Learning extends Component {
     render() {
         return (
             <ImageBackground style={{ width: '100%', height: height }} source={require('../../../assets/gonglve/beijing.jpg')}>
-            <View style={{ width: width, height: 70 * s, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+            <View style={{ width: width, height: 60 * s, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
                 <TouchableOpacity
                     onPress={() => Actions.pop()}
                     style={{ position: "absolute", position: "absolute", left: 10 * s, }}>
@@ -75,7 +75,7 @@ export default class Learning extends Component {
                         
                     </View>
                 </View>
-                <View style={[styles.box,{marginTop:10,marginBottom:10}]}>
+                <View style={[styles.box,{marginTop:10,marginBottom:25}]}>
                     <View>
                         <Text style={{ width: 35 * s, height: '91%', backgroundColor: 'rgb(148,122,107)', color: '#fff', paddingLeft: 10 * s, paddingRight: 10 * s, lineHeight: 31 * s, marginTop: '2%' }}> 教育科学版 </Text>
                     </View>
