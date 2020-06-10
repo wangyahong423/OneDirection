@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, TextInput, Dimensions, StyleSheet, AsyncStorage } from 'react-native'
+import { View, Text, ScrollView, ImageBackground, Dimensions, StyleSheet, AsyncStorage,TouchableOpacity } from 'react-native'
 import { Accordion } from '@ant-design/react-native';
-
-const { width } = Dimensions.get('window');
+import Icon from 'react-native-vector-icons/Entypo';
+import { Actions } from 'react-native-router-flux';
+const { width ,height} = Dimensions.get('window');
 const s = width / 460;
 
 export default class CollegeOther extends Component {
@@ -88,7 +89,15 @@ export default class CollegeOther extends Component {
 
     render() {
         return (
-            <View>
+            <ImageBackground style={{ width: '100%', height: height }} source={require('../../../assets/gonglve/beijing.jpg')}>
+                <View style={{ width: width, height: 70 * s, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                    <TouchableOpacity
+                        onPress={() => Actions.pop()}
+                        style={{ position: "absolute", position: "absolute", left: 10 * s, }}>
+                        <Icon name="reply" style={{ fontSize: 35 * s }} />
+                    </TouchableOpacity>
+                    <Text style={{ fontSize: 20 * s }}>其他学院</Text>
+                </View>
                 <ScrollView>
                     <Accordion
                         sections={this.state.todo}
@@ -103,7 +112,7 @@ export default class CollegeOther extends Component {
                         ? <View
                             style={{
                                 position: 'absolute',
-                                top: 80 * s,
+                                top: 150 * s,
                                 width: '100%'
                             }}
                         >
@@ -119,7 +128,7 @@ export default class CollegeOther extends Component {
                         </View>
                         : null
                 }
-            </View>
+            </ImageBackground>
         )
     }
 }
@@ -136,7 +145,7 @@ const styles = StyleSheet.create({
         fontSize: 20
     },
     content: {
-        backgroundColor: '#ffffff',
+        backgroundColor: 'rgba(255,255,255,0.8)',
         padding: 10 * s
     },
     contentText: {
