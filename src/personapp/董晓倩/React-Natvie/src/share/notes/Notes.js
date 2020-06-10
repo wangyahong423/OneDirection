@@ -96,9 +96,13 @@ export default class Notes extends Component {
             .then((res) => {
                 if (res.false) { }
                 else {
+                    var brr = []
                     res.forEach(item => {
+                        if(item.name==this.state.username){
+                            brr.push(item)
+                        }
                     });
-                    this.setState({ list: res });
+                    this.setState({ list: brr });
                 }
             });
     }
