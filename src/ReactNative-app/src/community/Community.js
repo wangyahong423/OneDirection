@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, StyleSheet, ImageBackground, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert } from 'react-native';
+import { Text, View, ScrollView, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import { Actions } from 'react-native-router-flux';
-import { Button } from '@ant-design/react-native';
+import ActionButton from 'react-native-action-button';
 import Img from './Img'
 
 const { width, height } = Dimensions.get('window');
@@ -19,7 +19,9 @@ export default class Community extends Component {
             likeNum: [],
             comNum: [],
             username: '',
-            isLoading: true
+            isLoading: true,
+            isTop: false,
+
         };
         this.getData();
     }
@@ -98,7 +100,6 @@ export default class Community extends Component {
                                                 }
                                             }
                                             item.comNum = comNum;
-                                            // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
                                         });
                                         this.setState({ isLoading: false });
                                         this.setState({ list: res });
@@ -166,15 +167,14 @@ export default class Community extends Component {
                                                     }
                                                 }
                                                 item.comNum = comNum;
-                                                // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
                                             });
                                             self.setState({ list: res });
-
                                         });
                                 });
                         });
                 });
         });
+       
     }
 
     componentWillUnmount() {
@@ -225,10 +225,23 @@ export default class Community extends Component {
             this.setState({
                 list: crr
             })
+            var num = this.state.list[idx].likenum;
+            if (num == null || num == 0) {
+                num = 1;
+            } else {
+                num = num + 1;
+            }
             let url1 = `http://139.155.44.190:3005/learnlike/add?lid=${this.state.list[idx].id}&name=${this.state.username}&lname=${this.state.list[idx].name}`;
+            let url11 = `http://139.155.44.190:3005/learn/changeLike?lid=${this.state.list[idx].id}&likenum=${num}`;
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
+                    fetch(url11)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            var param = 1;
+                            DeviceEventEmitter.emit('Mrefresh', param);
+                        });
                 });
             let url2 = `http://139.155.44.190:3005/users/list`;
             fetch(url2)
@@ -373,11 +386,9 @@ export default class Community extends Component {
         DeviceEventEmitter.emit('refresh', param);
     }
     person = (idx) => {
-        // var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college ,head: this.state.list[idx].head};
-        // AsyncStorage.setItem('details', JSON.stringify(value));
-        var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college };
+        var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college, head: this.state.list[idx].head };
         AsyncStorage.setItem('details', JSON.stringify(value));
-        var value1 = {name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level,  title: "issue" };
+        var value1 = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, title: "issue", head: this.state.list[idx].head };
         AsyncStorage.setItem('personname2', JSON.stringify(value1));
         var param = 1;
         DeviceEventEmitter.emit('ELrefresh', param);
@@ -388,29 +399,48 @@ export default class Community extends Component {
     add = () => {
         Actions.add()
     }
+    onScroll(evt) {
+        let y = evt.nativeEvent.contentOffset.y;
+        if (y >= 200 && y <= 260 && this.state.tabShow == false) {
+            this.setState({
+                tabShow: true,
+            })
+        }
+        else if (y <= 200 && this.state.tabShow == true) {
+            this.setState({
+                tabShow: false,
+            })
+        }
+        else if (y > 300) {
+            this.setState({
+                isTop: true
+            })
+        }
+        else if (y <= 300) {
+            this.setState({
+                isTop: false
+            })
+        }
+    }
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
-
                 <View style={{
-                    width: '100%',
                     height: 55 * s,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'center'
+                    width: width,
+                    backgroundColor: "#37376F",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flexDirection: "row"
                 }}>
                     <View style={{
                         height: 40 * s,
-                        width: '60%',
+                        width: '75%',
                         flexDirection: 'row',
                         alignItems: 'center',
-                        backgroundColor: '#ffffff',
-                        // borderRadius: 28 * s
-                        borderBottomLeftRadius: 28 * s,
-                        borderTopLeftRadius: 28 * s,
-                        marginLeft: -55 * s,
+                        backgroundColor: '#E3E3E3',
+                        borderRadius: 28 * s,
                     }}>
-
                         <TextInput
                             style={{
                                 height: 50 * s,
@@ -420,34 +450,26 @@ export default class Community extends Component {
                                 fontSize: 15 * s,
                             }}
                             clearButtonMode="while-editing"
-                            placeholderTextColor=''
-                            placeholder="请输入搜索的关键字"
+                            placeholderTextColor='#A6A6A6'
+                            placeholder="搜索"
                             onChangeText={this.change}
                         />
-                        <Button style={{ borderBottomRightRadius: 28 * s, borderTopRightRadius: 28 * s, height: 42 * s, }} onPress={this.search}>
-                            搜索
-                        </Button>
+                        <Icon style={{ fontSize: 25 * s, marginLeft: 10 * s }} name="search" onPress={() => this.search()} />
                     </View>
-                    <TouchableOpacity style={{
-                        position: 'absolute',
-                        top: 15 * s,
-                        right: 30 * s,
-                        marginLeft: 10 * s,
-                        width: 30,
-                        height: 30
-                    }} onPress={this.renovate}>
-                        <Icon
-                            size={30}
-                            name='refresh'
-                        />
+                    <TouchableOpacity style={{ marginLeft: 20 * s, color: "#696969" }} onPress={() => this.add()}>
+                        <Text  style={{ color: "#fff", fontSize: 30 * s, marginLeft: 10 * s }}>+</Text>
                     </TouchableOpacity>
                 </View>
-
-                <ScrollView style={{ flex: 1 }}>
+                <ScrollView
+                    showsVerticalScrollIndicator={false}
+                    onScroll={(evt) => this.onScroll(evt)}
+                    scrollEventThrottle={16}
+                    ref={(r) => this.scrollview = r}
+                    style={{ flex: 1 }}>
                     <View>
                         {
                             this.state.list.map((item, idx) => (
-                                <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 10 * s }}>
+                                <View style={{ backgroundColor: '#fff', width: '100%', marginTop: 10 * s }}>
 
                                     <View style={{
                                         flexDirection: 'row',
@@ -460,38 +482,34 @@ export default class Community extends Component {
                                                 <View>
                                                     <Image style={{
                                                         marginLeft: 20 * s,
-                                                        height: 50 * s,
-                                                        width: 50 * s,
-                                                        borderRadius: 25 * s,
-                                                        backgroundColor: 'yellow'
+                                                        height: 60 * s,
+                                                        width: 60 * s,
+                                                        borderRadius: 30 * s,
                                                     }} source={{ uri: item.pic }} />
                                                     <Image style={{
                                                         height: 70 * s,
-                                                        width: 70 * s,
+                                                        width: 70* s,
                                                         borderRadius: 35 * s,
-                                                        // backgroundColor:'green',
                                                         position: 'absolute',
-                                                        top: -10,
-                                                        right: -10
+                                                        top: -4*s,
+                                                        left:15*s
                                                     }}
                                                         source={{ uri: item.head }} />
                                                 </View>
                                                 : <TouchableOpacity onPress={this.person.bind(this, (idx))}>
                                                     <Image style={{
                                                         marginLeft: 20 * s,
-                                                        height: 50 * s,
-                                                        width: 50 * s,
-                                                        borderRadius: 25 * s,
-                                                        backgroundColor: 'yellow'
+                                                        height: 60 * s,
+                                                        width: 60 * s,
+                                                        borderRadius: 30 * s,
                                                     }} source={{ uri: item.pic }} />
                                                     <Image style={{
                                                         height: 70 * s,
                                                         width: 70 * s,
                                                         borderRadius: 35 * s,
-                                                        // backgroundColor:'green',
                                                         position: 'absolute',
-                                                        top: -10,
-                                                        right: -10
+                                                        top: -4*s,
+                                                        left:15*s
                                                     }}
                                                         source={{ uri: item.head }} />
                                                 </TouchableOpacity>
@@ -501,11 +519,9 @@ export default class Community extends Component {
                                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                                 <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
                                                 <Image style={{ height: 21 * s, width: 36 * s, marginLeft: 10 * s }} source={Img['png' + item.level]} />
-                                                {/* <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: 'red' }}>Lv.{item.level}</Text> */}
                                             </View>
                                             <Text>{item.time}</Text>
                                         </View>
-                                        {/* </ImageBackground > */}
                                     </View>
                                     <View style={{
                                         marginLeft: 30 * s,
@@ -535,7 +551,6 @@ export default class Community extends Component {
                                                 flexDirection: 'row',
                                                 justifyContent: 'center',
                                                 alignItems: 'center',
-                                                // backgroundColor: '#37376F',
                                                 position: 'absolute',
                                                 top: 5,
                                                 right: 5
@@ -546,38 +561,27 @@ export default class Community extends Component {
                                             </TouchableOpacity>
                                             : null
                                     }
-                                    {/* {
-                                        this.state.username
-                                            ?  */}
                                     <View style={{
                                         width: 90 * s,
                                         height: 45 * s,
                                         flexDirection: 'row',
                                         justifyContent: 'center',
                                         alignItems: 'center',
-                                        // backgroundColor: '#37376F',
                                         position: 'absolute',
                                         top: 5,
                                         right: 30
                                     }}
                                     >
                                         <Image style={{
-                                            // marginLeft: 20 * s,
                                             height: 45 * s,
                                             width: 90 * s,
-                                            // borderRadius: 25 * s,
-                                            // backgroundColor: 'yellow'
                                         }}
                                             source={{ uri: item.card }} />
                                     </View>
-                                    {/* : null
-                                    } */}
-
                                 </View>
                             ))
                         }
                     </View>
-
                 </ScrollView>
                 {
                     this.state.isLoading
@@ -597,22 +601,17 @@ export default class Community extends Component {
                         </View>
                         : null
                 }
-                <TouchableOpacity style={{
-                    width: 60 * s,
-                    height: 60 * s,
-                    borderRadius: 30 * s,
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    backgroundColor: '#37376F',
-                    position: 'absolute',
-                    bottom: 20 * s,
-                    right: 20 * s
-                }}
-                    onPress={() => this.add()}
-                >
-                    <Icon style={{ fontSize: 50, color: '#fff' }} name="pencil" />
-                </TouchableOpacity>
+                {
+                    this.state.isTop === true ? <ActionButton
+                        renderIcon={() => (<View style={{ height: 50 * s, width: 50 * s, backgroundColor: "#F8F8F8", borderRadius: 25 * s, justifyContent: "center", alignItems: "center" }}><Image style={{ height: 35 * s, width: 35 * s }} source={require('../../assets/community/icon.png')} /></View>)}
+                        buttonColor="#FFFFFF"
+                        position='right'
+                        verticalOrientation='up'
+                        size={34}
+                        border='#1DA57A'
+                        onPress={() => this.scrollview.scrollTo({ x: 0, y: 0, animated: true })}
+                    /> : <View />
+                }
             </SafeAreaView >
         )
     }

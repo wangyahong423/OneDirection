@@ -84,8 +84,6 @@ body{
   height: 73vh;
   width: 61vw;
   margin: 1vh auto;
-  /* overflow: hidden; */
-  /* background-color: yellowgreen; */
 }
 .search-input{
   height: 5vh;

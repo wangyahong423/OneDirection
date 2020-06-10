@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity, ImageBackground, ScrollView, AsyncStorage, Dimensions } from 'react-native';
-
-const { width } = Dimensions.get('window');
+import Icon from 'react-native-vector-icons/Entypo';
+import { Actions } from 'react-native-router-flux';
+const { width, height } = Dimensions.get('window');
 const s = width / 460;
 
 export default class CollegeTeachers extends Component {
@@ -12,13 +13,13 @@ export default class CollegeTeachers extends Component {
             todo: [],
             college: '',
             username: '',
-            isLoading:true
+            isLoading: true
         }
     }
 
     componentDidMount() {
         this.setState({
-            isLoading:true
+            isLoading: true
         })
         AsyncStorage.getItem('username')
             .then((value) => {
@@ -53,7 +54,7 @@ export default class CollegeTeachers extends Component {
                                         brr.push(item);
                                     }
                                     this.setState({
-                                        isLoading:false
+                                        isLoading: false
                                     })
                                     this.setState({
                                         todo: brr
@@ -66,10 +67,15 @@ export default class CollegeTeachers extends Component {
     }
     render() {
         return (
-            <ImageBackground
-                source={require('../../../assets/gonglve/20151221111650209.png')}
-                style={{ width: '100%', height: '100%' }}
-            >
+            <ImageBackground style={{ width: '100%', height: height }} source={require('../../../assets/gonglve/beijing.jpg')}>
+                <View style={{ width: width, height: 60 * s, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                    <TouchableOpacity
+                        onPress={() => Actions.pop()}
+                        style={{ position: "absolute", position: "absolute", left: 10 * s, }}>
+                        <Icon name="reply" style={{ fontSize: 35 * s }} />
+                    </TouchableOpacity>
+                    <Text style={{ fontSize: 20 * s }}>学院领导</Text>
+                </View>
                 <View style={styles.box}>
                     <ScrollView>
                         <View style={styles.block}>
@@ -79,7 +85,7 @@ export default class CollegeTeachers extends Component {
                                         <Text style={{ fontSize: 22 }}>{item.job}</Text>
                                         <Text style={{ fontSize: 18 }}>{item.name}</Text>
                                         <Text style={{ fontSize: 18 }}>{item.tel}</Text>
-                                        <Text style={{ fontSize: 18, marginBottom:10 }}>{item.email}</Text>
+                                        <Text style={{ fontSize: 18, marginBottom: 10 }}>{item.email}</Text>
                                     </View>
                                 )
                                 )}
@@ -120,6 +126,5 @@ const styles = StyleSheet.create({
         width: '80%',
         margin: '10%',
         backgroundColor: 'rgba(255,255,255,0.6)',
-        // alignItems: 'center'
     }
 });

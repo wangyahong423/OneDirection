@@ -49,12 +49,12 @@ const styles = StyleSheet.create({
   },
   start: {
     position: 'absolute',
-    bottom: 150,
+    bottom: 70,
     width: 120,
     height: 40,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'red',
-    borderRadius: 20,
+    backgroundColor: '#0C6A9A',
+    borderRadius: 5,
   },
 });

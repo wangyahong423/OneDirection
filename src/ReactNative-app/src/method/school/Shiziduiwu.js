@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, SectionList, Dimensions, Animated, Linking, TouchableOpacity, StyleSheet, } from 'react-native'
+import { Text, View, ScrollView, SectionList, Dimensions, Animated, Linking, TouchableOpacity, StyleSheet,ImageBackground } from 'react-native'
 import Icon from 'react-native-vector-icons/Entypo';
 import Button from 'react-native-button';
-const { width } = Dimensions.get('window');
+import { Actions } from 'react-native-router-flux';
+const { width ,height} = Dimensions.get('window');
 const s = width / 460;
 
 export default class Shiziduiwu extends Component {
@@ -20,7 +21,16 @@ export default class Shiziduiwu extends Component {
 
     render() {
         return (
-            <ScrollView style={{ width: '96%', marginLeft: '2%', marginTop: '3%', height: '100%' }}>
+            <ImageBackground style={{ width: '100%', height: height }} source={require('../../../assets/gonglve/beijing.jpg')}>
+                <View style={{ width: width, height: 60 * s, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                    <TouchableOpacity
+                        onPress={() => Actions.pop()}
+                        style={{ position: "absolute", position: "absolute", left: 10 * s, }}>
+                        <Icon name="reply" style={{ fontSize: 35 * s }} />
+                    </TouchableOpacity>
+                    <Text style={{ fontSize: 20 * s }}>师资队伍</Text>
+                </View>
+            <ScrollView style={{ width: '96%', marginLeft: '2%',  height: '100%' }}>
                 <Text style={{lineHeight:20*s}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;近年来学校加大引进和培养优秀人才力度，加强师资队伍建设，师资队伍水平稳步提高。学校现有在职教职工2606名，其中专任教师1617人，教授391人，副教授651人，中科院院士1人，在职省级以上各类优秀专家170余人。 </Text>
                 <View style={{ flexDirection: 'row', flex: 1, alignItems: 'center', justifyContent: 'center', height: 50 * s }}>
                     <Button onPress={() => { this.zoom() }}>
@@ -66,6 +76,7 @@ export default class Shiziduiwu extends Component {
                 />
                 <Text style={{ marginLeft: '4%', marginBottom: 5 * s }}>（统计截止2019年3月）</Text>
             </ScrollView>
+            </ImageBackground>
         )
     }
 }

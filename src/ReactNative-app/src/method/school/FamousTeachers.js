@@ -1,14 +1,23 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, SectionList, Dimensions, Animated, Linking, TouchableOpacity, StyleSheet, } from 'react-native'
+import { Text, View, ScrollView, SectionList, Dimensions, Animated, ImageBackground, TouchableOpacity, StyleSheet, } from 'react-native'
 import Icon from 'react-native-vector-icons/Entypo';
 import Button from 'react-native-button';
-const { width } = Dimensions.get('window');
+import { Actions } from 'react-native-router-flux';
+const { width, height } = Dimensions.get('window');
 const s = width / 460;
 
 export default class FamousTeachers extends Component {
     render() {
         return (
-            <View>
+            <ImageBackground style={{ width: '100%', height: height }} source={require('../../../assets/gonglve/beijing.jpg')}>
+                <View style={{ width: width, height: 70 * s, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                    <TouchableOpacity
+                        onPress={() => Actions.pop()}
+                        style={{ position: "absolute", position: "absolute", left: 10 * s, }}>
+                        <Icon name="reply" style={{ fontSize: 35 * s }} />
+                    </TouchableOpacity>
+                    <Text style={{ fontSize: 20 * s }}>教学名师</Text>
+                </View>
                 <SectionList
                     renderItem={({ item, index, section }) => <Text style={styles.txt} key={index}>{item}</Text>}
                     renderSectionHeader={({ section: { title } }) => (
@@ -21,7 +30,7 @@ export default class FamousTeachers extends Component {
                     ]}
                     keyExtractor={(item, index) => item + index}
                 />
-            </View>
+            </ImageBackground>
         )
     }
 }
@@ -30,21 +39,20 @@ let styles = StyleSheet.create({
         fontWeight: 'bold',
         height: 30 * s,
         width: '90%',
-        marginLeft:'5%',
-        marginTop:'3%',
+        marginLeft: '5%',
         textAlign: 'left',
         paddingLeft: '3%',
         lineHeight: 30 * s,
         backgroundColor: '#258634',
         fontSize: 16,
-        borderRadius:15*s,
-        color:'#fff'
+        borderRadius: 15 * s,
+        color: '#fff'
     },
     txt: {
         fontSize: 14,
         marginLeft: '13%',
         lineHeight: 30,
-        marginTop:10*s,
-        width:'78%'
+        marginTop: 10 * s,
+        width: '78%'
     }
 })

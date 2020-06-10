@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, TextInput, AsyncStorage,Dimensions, SafeAreaView, TouchableOpacity, Alert, DeviceEventEmitter } from 'react-native';
+import { Text, View, ScrollView, TextInput, AsyncStorage, Image, Dimensions, SafeAreaView, TouchableOpacity, Alert, DeviceEventEmitter } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
@@ -25,6 +25,7 @@ export default class AddExp extends Component {
     con = (e) => {
         this.setState({ content: e });
         var length = e.length;
+
         this.setState({ length: length });
         if (length > 500) {
             Alert.alert("文本内容超过上限！");
@@ -44,12 +45,50 @@ export default class AddExp extends Component {
                 .then((res) => res.json())
                 .then((res) => {
                     if (res.ok) {
-                        Actions.pop();
+                        let url4 = `http://139.155.44.190:3005/experience/list`;
+                        fetch(url4)
+                            .then((res) => res.json())
+                            .then((res) => {
+                                var id = 0;
+                                for (var i = 0; i < res.length; i++) {
+                                    if (res[i].name == this.state.username && res[i].time == time) {
+                                        id = res[i].id;
+                                        break;
+                                    }
+                                }
+                                let url6 = `http://139.155.44.190:3005/follow/list`;
+                                fetch(url6)
+                                    .then((res) => res.json())
+                                    .then((res) => {
+                                        var arr = [];
+                                        for (var j = 0; j < res.length; j++) {
+                                            if (res[j].nname == this.state.username) {
+                                                arr.push(res[j]);
+                                            }
+                                        }
+                                        for (var z = 0; z < arr.length; z++) {
+                                            var experience = arr[z].experience;
+                                            if (experience == null || experience == "") {
+                                                experience = id;
+                                            }
+                                            else {
+                                                experience = experience + ',' + id;
+                                            }
+                                            let url46 = `http://139.155.44.190:3005/follow/changeEE?lname=${arr[z].lname}&nname=${this.state.username}&experience=${experience}`;
+                                            fetch(url46)
+                                                .then((res) => res.json())
+                                                .then((res) => {
+
+                                                });
+                                        }
+                                        Actions.pop();
+                                    });
+                            });
                     } else {
                         Alert.alert(res.msg);
                     }
                 });
-                let url2 = `http://139.155.44.190:3005/users/list`;
+            let url2 = `http://139.155.44.190:3005/users/list`;
             fetch(url2)
                 .then((res) => res.json())
                 .then((res) => {
@@ -134,22 +173,52 @@ export default class AddExp extends Component {
         var param = 1;
         DeviceEventEmitter.emit('Erefresh', param);
     }
+    back = () => {
+        Actions.pop();
+        var param = 1;
+        DeviceEventEmitter.emit('ELrefresh', param);
+        DeviceEventEmitter.emit('Erefresh', param);//经验分享
+        DeviceEventEmitter.emit('refresh', param);
+    }
     render() {
         return (
-            <SafeAreaView style={{ flex: 1 }}>
+            <SafeAreaView style={{ flex: 1, backgroundColor: "#F1F2F4" }}>
                 <View style={{
                     height: 300 * s,
-                    borderBottomColor: '#37376F',
+                    borderBottomColor: '#F6F6F6',
                     borderBottomWidth: 1 * s
-                }}
-                >
-                    <ScrollView>
+                }}>
+                    <View style={{ width: width, height: 55 * s, backgroundColor: "#37376F", flexDirection: "row", alignItems: "center" }}>
+                        <TouchableOpacity
+                            onPress={() => this.back()}
+                            style={{ position: "absolute", position: "absolute", left: 10 * s, }}>
+                            <Image style={{ height: 20 * s, width: 20 * s }} source={require('../../../assets/gonglve/left.png')} />
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={{
+                                width: 80 * s,
+                                height: 40 * s,
+                                borderRadius: 20 * s,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                marginRight: 5 * s,
+                                position: 'absolute',
+                                right: 0,
+                                marginTop: 20 * s
+                            }}
+                            onPress={this.add}
+                        >
+                            <Text style={{ color: '#fff', fontSize: 18 * s }}>发布</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <ScrollView style={{ backgroundColor: "#fff" }}>
                         <TextInput
                             placeholder="请输入文本内容，不超过500字"
                             onChangeText={this.con}
                             multiline={true}
                             autoFocus={true}
                             style={{ fontSize: 20 * s }}
+                            placeholderTextColor="#AEAFAB"
                         />
                     </ScrollView>
                     <View style={{
@@ -162,26 +231,6 @@ export default class AddExp extends Component {
                         <Text style={{ fontSize: 20 * s }}>/500</Text>
                     </View>
                 </View>
-                <View>
-                    <TouchableOpacity
-                        style={{
-                            width: 80 * s,
-                            height: 40 * s,
-                            borderRadius: 20 * s,
-                            backgroundColor: '#37376F',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            marginRight: 5 * s,
-                            position: 'absolute',
-                            right: 0,
-                            marginTop: 20 * s
-                        }}
-                        onPress={this.add}
-                    >
-                        <Text style={{ color: '#fff', fontSize: 17 * s }}>发布</Text>
-                    </TouchableOpacity>
-                </View>
-
             </SafeAreaView>
         )
     }

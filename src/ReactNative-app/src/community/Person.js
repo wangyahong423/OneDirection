@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, FlatList, ScrollView, SafeAreaView, TextInput, StatusBar, Dimensions, ImageBackground, Image, TouchableOpacity, AsyncStorage, Alert, DeviceEventEmitter, ShadowPropTypesIOS } from 'react-native';
+import { Text, View, StyleSheet, FlatList, ScrollView, SafeAreaView,  StatusBar, Dimensions, ImageBackground, Image, TouchableOpacity, AsyncStorage, Alert, DeviceEventEmitter, ShadowPropTypesIOS } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Actions } from 'react-native-router-flux';
 import ActionButton from 'react-native-action-button';
@@ -334,7 +334,7 @@ export default class Person extends Component {
         });
     }
     componentWillUnmount() {
-        if(this.listener){
+        if (this.listener) {
             this.listener.remove();
 
         }
@@ -354,7 +354,7 @@ export default class Person extends Component {
         }
         else {
             Alert.alert("还没有关注哦~")
-            
+
         }
     }
     fanslist = () => {
@@ -373,12 +373,17 @@ export default class Person extends Component {
                 fol: true
             })
             let url = `http://139.155.44.190:3005/follow/add?lname=${this.state.username}&nname=${this.state.all.name}`;
+            let url1 = `http://139.155.44.190:3005/follow/changeP?lname=${this.state.username}&nname=${this.state.all.name}&newp=${true}`;
             fetch(url)
                 .then((res) => res.json())
                 .then((res) => {
-                    var param = 1;
-                    DeviceEventEmitter.emit('Prefresh', param);
-                    Alert.alert(res.msg);
+                    fetch(url1)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            var param = 1;
+                            DeviceEventEmitter.emit('Prefresh', param);
+                            Alert.alert("关注成功");
+                        })
                 })
         }
         else {
@@ -391,7 +396,7 @@ export default class Person extends Component {
                 .then((res) => {
                     var param = 1;
                     DeviceEventEmitter.emit('Prefresh', param);
-                    Alert.alert("已经取消关注")
+                    Alert.alert("取消关注")
                 })
         }
     }
@@ -405,7 +410,7 @@ export default class Person extends Component {
                 mycollect: false,//我的收藏
                 style: "我的社区"
             })
-            var value = { name: this.state.all.name, pic: this.state.all.pic, level: this.state.all.level, title: "issue" };
+            var value = { name: this.state.all.name, pic: this.state.all.pic, head: this.state.all.head, level: this.state.all.level, title: "issue" };
             AsyncStorage.setItem('personname2', JSON.stringify(value));
         }
         else if (data == '我的经验') {
@@ -417,7 +422,7 @@ export default class Person extends Component {
                 mycollect: false,//我的收藏
                 style: "我的经验"
             })
-            var value = { name: this.state.all.name, pic: this.state.all.pic, level: this.state.all.level, title: "issue" };
+            var value = { name: this.state.all.name, pic: this.state.all.pic, head: this.state.all.head, level: this.state.all.level, title: "issue" };
             AsyncStorage.setItem('personname1', JSON.stringify(value));
         }
         else if (data == '我的收藏') {
@@ -579,6 +584,15 @@ export default class Person extends Component {
                                         width: 64 * s,
                                         borderRadius: 32 * s
                                     }} source={{ uri: this.state.all.pic }} />
+                                    <Image style={{
+                                        height: 80 * s,
+                                        width: 80 * s,
+                                        borderRadius: 40 * s,
+                                        position: 'absolute',
+                                        top: -5,
+                                        right: -6
+                                    }}
+                                        source={{ uri: this.state.all.head }} />
                                 </View>
                                 <View style={{ marginTop: 15 * s, flexDirection: "row", marginLeft: 50 * s }}>
                                     <Text style={{ fontSize: 18 * s, color: "#fff" }}>{this.state.all.name}</Text>
@@ -600,7 +614,6 @@ export default class Person extends Component {
                                                         <View style={{ height: 35 * s, width: 100, borderRadius: 20, borderColor: "red", borderWidth: 1, justifyContent: "center", alignItems: "center", flexDirection: "row", }}>
                                                             <Text style={{ color: "red", fontSize: 25 * s, marginRight: 10 * s }}  >+</Text>
                                                             <Text style={{ color: "red", fontSize: 16 * s }}>关注</Text>
-
                                                         </View>
                                                 }
                                             </TouchableOpacity>
@@ -656,29 +669,29 @@ export default class Person extends Component {
                         </View>
                         <View style={{
                             paddingTop: 10 * s,
-                            flex:1
+                            flex: 1
                         }}>
                             {
                                 this.state.mylearn
-                                    ? <View style={{flex:1}}>
-                                        <Text style={{ marginBottom: 5 * s ,marginTop:-5*s}}>全部帖子 ({this.state.learn})</Text>
-                                        <View style={{flex:1}}><PerLearn /></View>
+                                    ? <View style={{ flex: 1 }}>
+                                        <Text style={{ marginBottom: 5 * s, marginTop: -5 * s }}>全部帖子 ({this.state.learn})</Text>
+                                        <View style={{ flex: 1 }}><PerLearn /></View>
                                     </View>
-                                    :null
+                                    : null
 
                             }
                             {
                                 this.state.myexp
                                     ? <View>
-                                        <Text style={{ marginBottom: 5 * s ,marginTop:-5*s}}>全部帖子 ({this.state.exp})</Text>
+                                        <Text style={{ marginBottom: 5 * s, marginTop: -5 * s }}>全部帖子 ({this.state.exp})</Text>
                                         <PerExp />
                                     </View>
-                                    :null
+                                    : null
                             }
                             {
                                 this.state.mycollect
                                     ? <View>
-                                        <Text style={{ marginBottom: 5 * s ,marginTop:-5*s}}>全部帖子 ({this.state.collect})</Text>
+                                        <Text style={{ marginBottom: 5 * s, marginTop: -5 * s }}>全部帖子 ({this.state.collect})</Text>
                                         <PerExp />
                                     </View>
                                     : null
@@ -686,7 +699,7 @@ export default class Person extends Component {
                             {
                                 this.state.personlearn
                                     ? <View>
-                                        <Text style={{ marginBottom: 5 * s ,marginTop:-5*s}}>全部帖子 ({this.state.PLLike})</Text>
+                                        <Text style={{ marginBottom: 5 * s, marginTop: -5 * s }}>全部帖子 ({this.state.PLLike})</Text>
                                         <PerLearn />
                                     </View>
                                     : null
@@ -694,7 +707,7 @@ export default class Person extends Component {
                             {
                                 this.state.personexp
                                     ? <View>
-                                        <Text style={{ marginBottom: 5 * s ,marginTop:-5*s}}>全部帖子 ({this.state.PELike})</Text>
+                                        <Text style={{ marginBottom: 5 * s, marginTop: -5 * s }}>全部帖子 ({this.state.PELike})</Text>
                                         <PerExp />
                                     </View>
                                     : null

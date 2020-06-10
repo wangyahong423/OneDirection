@@ -81,11 +81,11 @@ export default class Community extends Component {
         const { match, location, history } = this.props;
         if (location.pathname == '/') {
             this.setState({
-                pathname: '用户管理'
+                pathname: '社区管理'
             })
         } else if (location.pathname == '/community') {
             this.setState({
-                pathname: '社区管理'
+                pathname: '用户管理'
             })
         } else if (location.pathname == '/notes') {
             this.setState({
@@ -205,8 +205,8 @@ export default class Community extends Component {
                                 <th style={{ width: '3vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>头像</th>
                                 <th style={{ width: '5vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>名字</th>
                                 <th style={{ width: '13.5vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>时间</th>
-                                <th style={{ width: '12vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>内容</th>
-                                <th style={{ width: '8vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>Card</th>
+                                <th style={{ width: '15vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>内容</th>
+                                <th style={{ width: '10vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>Card</th>
                                 <th style={{ width: '8vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>操作</th>
                             </tr>
                         </thead>

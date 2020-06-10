@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, StyleSheet, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert } from 'react-native';
-import Icon from 'react-native-vector-icons/EvilIcons';
-import { Actions } from 'react-native-router-flux';
-import { Button } from '@ant-design/react-native';
+import { Text, View, ScrollView, Dimensions } from 'react-native';
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
 export default class Appear extends Component {
@@ -11,10 +8,11 @@ export default class Appear extends Component {
         this.state = {
             tits: [],
             page: 1,
-            // isloading: false
+            isLoading: true,
         }
     }
     componentDidMount() {
+        this.setState({ isLoading: true })
         let url = `http://139.155.44.190:3005/cet4/list`;
         fetch(url)
             .then(res => res.json())
@@ -22,21 +20,19 @@ export default class Appear extends Component {
                 this.setState({
                     tits: res
                 });
-                console.log('tits', this.state.tits)
+                this.setState({ isLoading: false });
             })
-
     }
 
     render() {
         return (
             <View style={{ backgroundColor: '#ffffff', }}>
-                <View style={{height:40*s,flexDirection:'row',}}>
-                    <Text style={{marginLeft:50*s,fontSize:20,marginTop:10*s}}>单词</Text>
-                    <Text style={{marginLeft:120*s,fontSize:20,marginTop:10*s}}>翻译</Text>
-                    <Text style={{marginLeft:130*s,fontSize:20,marginTop:10*s}}>词性</Text>
+                <View style={{ height: 40 * s, flexDirection: 'row', }}>
+                    <Text style={{ marginLeft: 50 * s, fontSize: 20, marginTop: 10 * s }}>单词</Text>
+                    <Text style={{ marginLeft: 120 * s, fontSize: 20, marginTop: 10 * s }}>翻译</Text>
+                    <Text style={{ marginLeft: 130 * s, fontSize: 20, marginTop: 10 * s }}>词性</Text>
                 </View>
                 <ScrollView style={{ backgroundColor: '#ffffff' }}>
-                    
                     {
                         this.state.tits.map((item) => (
                             <View style={{ flexDirection: "row", marginTop: 10 }}>
@@ -47,6 +43,24 @@ export default class Appear extends Component {
                         ))
                     }
                 </ScrollView>
+                {
+                    this.state.isLoading
+                        ? <View
+                            style={{
+                                position: 'absolute',
+                                top: 80 * s,
+                                width: '100%'
+                            }}>
+                            <View style={{
+                                alignItems: 'center',
+                                flexDirection: 'row',
+                                justifyContent: 'center'
+                            }}>
+                                <Text style={{ fontSize: 20, marginTop: 10 }}>正在获取数据...</Text>
+                            </View>
+                        </View>
+                        : null
+                }
             </View>
         )
     }

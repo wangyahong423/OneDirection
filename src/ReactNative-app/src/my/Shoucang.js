@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Image, StyleSheet, AsyncStorage, ScrollView } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+import { View, Text, AsyncStorage, ScrollView } from 'react-native';
 import { Icon } from '@ant-design/react-native';
 export default class Shoucang extends Component {
     constructor() {
@@ -11,9 +10,7 @@ export default class Shoucang extends Component {
         }
     }
     componentDidMount() {
-        let url1 = `http://139.155.44.190:3005/users/getName`;
         let url = `http://139.155.44.190:3005/collect/list`;
-
         AsyncStorage.getItem('username')
             .then((res) => {
                 let name = { username: res }
@@ -21,25 +18,22 @@ export default class Shoucang extends Component {
                     username: name.username
                 })
             });
-                fetch(url)
-                    .then(res => res.json())
-                    .then((res) => {
-                        this.setState({
-                            data: res
-                        })
-                        var arr = [];
-
-                        this.state.data.map((item) => {
-                            if (item.name == this.state.username) {
-                                arr.push(item);
-                            }
-                            this.setState({
-                                data: arr
-                            })
-                        })
+        fetch(url)
+            .then(res => res.json())
+            .then((res) => {
+                this.setState({
+                    data: res
+                })
+                var arr = [];
+                this.state.data.map((item) => {
+                    if (item.name == this.state.username) {
+                        arr.push(item);
+                    }
+                    this.setState({
+                        data: arr
                     })
-
-
+                })
+            })
     }
     delFile = (filepath) => {
         let url1 = `http://139.155.44.190:3005/collect/delete?filepath=${filepath}&name=${this.state.username}`;
@@ -60,7 +54,6 @@ export default class Shoucang extends Component {
                                 <Text style={{ color: 'red', fontSize: 20 }} onPress={this.delFile.bind(this, (item.filepath))}>×</Text>
                             </View>
                         </View>
-
                     })
                 }
             </ScrollView>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, Linking, ScrollView, StyleSheet, Dimensions, Image, TouchableOpacity, ImageBackground } from 'react-native';
+import { Text, View, Linking, ScrollView, StyleSheet, SafeAreaView, Dimensions, Image, TouchableOpacity, ImageBackground } from 'react-native';
 import Swiper from 'react-native-swiper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Actions } from 'react-native-router-flux';
@@ -28,12 +28,12 @@ export default class Method extends Component {
     }
     render() {
         return (
-            <View>
+            <SafeAreaView>
                 <View style={styles.header}>
                     <Text style={{ color: '#fff', lineHeight: 55 * s, fontSize: 18 * s }}>校园新生通</Text>
                 </View>
+                {/* 轮播图 */}
                 <ScrollView >
-                    {/* 轮播图 */}
                     <Swiper autoplay={true} autoplayDirection={true} autoplayTimeout='1.5' style={styles.wrapper} showsButtons={false}>
                         <View>
                             <Image source={require('../../assets/gonglve/method1.png')} style={{ height: 223, width: '100%' }} />
@@ -108,7 +108,7 @@ export default class Method extends Component {
                         </View>
                     </View>
                 </ScrollView>
-            </View>
+            </SafeAreaView>
         )
     }
 }

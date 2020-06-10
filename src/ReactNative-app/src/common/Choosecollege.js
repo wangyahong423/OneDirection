@@ -125,7 +125,9 @@ export default class Choosecollege extends Component {
         this.setState({
             college: v
         })
-        AsyncStorage.setItem('college', v[0])
+        AsyncStorage.setItem('college', v[0],
+            () => { }
+        )
         Actions.pop()
         var param = v[0];
         DeviceEventEmitter.emit("refresh", param)

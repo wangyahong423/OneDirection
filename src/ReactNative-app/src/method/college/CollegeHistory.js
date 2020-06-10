@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, ImageBackground, ScrollView, AsyncStorage, Dimensions } from 'react-native';
-
-const { width } = Dimensions.get('window');
+import { Text, View, StyleSheet, ImageBackground, ScrollView, AsyncStorage, Dimensions, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/Entypo';
+import { Actions } from 'react-native-router-flux';
+const { width, height } = Dimensions.get('window');
 const s = width / 460;
 
 export default class CollegeHistory extends Component {
@@ -65,21 +66,24 @@ export default class CollegeHistory extends Component {
     }
     render() {
         return (
-            <ImageBackground
-                source={require('../../../assets/gonglve/20151221111650209.png')}
-                style={{ width: '100%', height: '100%' }}
-            >
+            <ImageBackground style={{ width: '100%', height: height }} source={require('../../../assets/gonglve/beijing.jpg')}>
+                <View style={{ width: width, height: 60 * s, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                    <TouchableOpacity
+                        onPress={() => Actions.pop()}
+                        style={{ position: "absolute", position: "absolute", left: 10 * s, }}>
+                        <Icon name="reply" style={{ fontSize: 35 * s }} />
+                    </TouchableOpacity>
+                    <Text style={{ fontSize: 20 * s }}>历史介绍</Text>
+                </View>
                 <View style={styles.box}>
                     <ScrollView>
-                        <View style={styles.block}>
-                            {
-                                this.state.todo.map((item) => (
-                                    <View>
-                                        <Text style={{ fontSize: 18 }}>&emsp;&emsp;{item.history}</Text>
-                                    </View>
-                                )
-                                )}
-                        </View>
+                        {
+                            this.state.todo.map((item) => (
+                                <View>
+                                    <Text style={{ fontSize: 16 * s, lineHeight: 30 * s }}>&emsp;&emsp;{item.history}</Text>
+                                </View>
+                            )
+                            )}
                     </ScrollView>
                     {
                         this.state.isLoading
@@ -109,13 +113,8 @@ export default class CollegeHistory extends Component {
 }
 const styles = StyleSheet.create({
     box: {
-        height: '100%',
-        backgroundColor: 'rgba(255,255,255,0.4)'
+        alignItems: "center",
+        width: width * 0.94,
+        marginLeft: width * 0.03
     },
-    block: {
-        width: '80%',
-        margin: '10%',
-        backgroundColor: 'rgba(255,255,255,0.6)',
-        alignItems: 'center'
-    }
 });

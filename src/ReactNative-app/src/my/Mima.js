@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, AsyncStorage, ScrollView, TextInput, } from 'react-native';
+import { View, Text, AsyncStorage, Dimensions, TextInput, ImageBackground, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { Button } from '@ant-design/react-native';
-
+const { width } = Dimensions.get('window');
+const s = width / 640;
 export default class Mima extends Component {
     constructor() {
         super();
@@ -15,8 +15,8 @@ export default class Mima extends Component {
             wnum: 0,
             name: '',
             tel: '',
-            username:'',
-            islogin:false
+            username: '',
+            islogin: false
         }
     }
     getNewPwd = (text) => {
@@ -50,9 +50,7 @@ export default class Mima extends Component {
     getRepwd = () => {
         fetch(`http://139.155.44.190:3005/users/judge?name=${this.state.name}&tel=${this.state.tel}`)
             .then(res => res.json())
-
             .then(
-
                 data => {
                     this.setState({
                         name: this.state.name,
@@ -62,7 +60,6 @@ export default class Mima extends Component {
                         if (data.ok == 1) {
                             fetch(`http://139.155.44.190:3005/users/alter?name=${this.state.name}&pwd=${this.state.newPwd}&tel=${this.state.tel}`)
                                 .then(res => res.json())
-
                                 .then(
                                     data => {
                                     }
@@ -79,7 +76,6 @@ export default class Mima extends Component {
                                         .then((res) => {
                                             if (res.err) {
                                             } else {
-                                                console.log('成功')
                                             }
                                         })
                                 });
@@ -117,69 +113,85 @@ export default class Mima extends Component {
     }
     render() {
         return (
-            <ScrollView style={{ backgroundColor: 'white' }}>
+            <ImageBackground style={{ flex: 1, justifyContent: 'center', alignItems: "center" }} source={require('../../assets/community/img15.png')}>
                 <View style={{ flexDirection: 'row' }}>
                     <View style={{
-                        height: '50%', width: '78%', backgroundColor: '#ffffff', marginLeft: '10%', marginTop: '10%',
+                        height: '50%', width: '78%', backgroundColor: '#ffffff', marginTop: '10%',
                         borderBottomColor: '#e2e2e2', borderLeftColor: 'white',
                         borderTopColor: 'white', borderRightColor: 'white', borderWidth: 2
                     }}>
-                        <TextInput placeholder="请输入昵称" style={{ fontSize: 18 }} onChangeText={this.nameChange} />
+                        <TextInput
+                            placeholderTextColor={'#666666'}
+                            placeholder="请输入昵称" style={{ fontSize: 18 }} onChangeText={this.nameChange} />
                     </View>
                 </View>
                 <View style={{ flexDirection: 'row' }}>
                     <View style={{
-                        height: '50%', width: '78%', backgroundColor: '#ffffff', marginLeft: '10%', marginTop: '10%',
+                        height: '50%', width: '78%', backgroundColor: '#ffffff', marginTop: '10%',
                         borderBottomColor: '#e2e2e2', borderLeftColor: 'white',
                         borderTopColor: 'white', borderRightColor: 'white', borderWidth: 2
                     }}>
-                        <TextInput placeholder="请输入手机号" style={{ fontSize: 18 }} onChangeText={this.telChange} />
+                        <TextInput
+                            placeholderTextColor={'#666666'}
+                            placeholder="请输入手机号" style={{ fontSize: 18 }} onChangeText={this.telChange} />
                     </View>
 
                 </View>
                 <View style={{ flexDirection: 'row' }}>
                     <View style={{
-                        height: '50%', width: '78%', backgroundColor: '#ffffff', marginLeft: '10%', marginTop: '10%',
+                        height: '50%', width: '78%', backgroundColor: '#ffffff', marginTop: '10%',
                         borderBottomColor: '#e2e2e2', borderLeftColor: 'white',
                         borderTopColor: 'white', borderRightColor: 'white', borderWidth: 2
                     }}>
-                        <TextInput placeholder="请输入新密码" style={{ fontSize: 18 }} onChangeText={this.getNewPwd} />
+                        <TextInput
+                            placeholderTextColor={'#666666'}
+                            placeholder="请输入新密码" style={{ fontSize: 18 }} onChangeText={this.getNewPwd} />
                     </View>
                 </View>
                 <View style={{ flexDirection: 'row' }}>
                     <View style={{
-                        height: '50%', width: '78%', backgroundColor: '#ffffff', marginLeft: '10%', marginTop: '10%',
+                        height: '50%', width: '78%', backgroundColor: '#ffffff', marginTop: '10%',
                         borderBottomColor: '#e2e2e2', borderLeftColor: 'white',
                         borderTopColor: 'white', borderRightColor: 'white', borderWidth: 2
                     }}>
-                        <TextInput placeholder="请再次输入新密码" style={{ fontSize: 18 }} onChangeText={this.getReNewPwd} />
+                        <TextInput
+                            placeholderTextColor={'#666666'}
+                            placeholder="请再次输入新密码" style={{ fontSize: 18 }} onChangeText={this.getReNewPwd} />
                     </View>
                 </View>
                 {
                     this.state.unum == 0
                         ? <View style={{ position: 'absolute', top: 290 }}><Text></Text></View>
-                        : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 300, left: 65 }}><Text style={{ color: 'red', fontSize: 13 }}>请输入新密码！</Text></View>
+                        : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 410, left: 65 }}><Text style={{ color: 'red', fontSize: 13 }}>请输入新密码！</Text></View>
                 }
                 {
                     this.state.pnum == 0
                         ? <View style={{ position: 'absolute', top: 290 }}><Text></Text></View>
-                        : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 390, left: 65 }}><Text style={{ color: 'red', fontSize: 13 }}>请再次输入新密码！</Text></View>
+                        : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 510, left: 65 }}><Text style={{ color: 'red', fontSize: 13 }}>请再次输入新密码！</Text></View>
                 }
                 {
                     this.state.vnum == 0
                         ? <View style={{ position: 'absolute', top: 290 }}><Text></Text></View>
-                        : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 100, left: 65 }}><Text style={{ color: 'red', fontSize: 13 }}>请输入昵称！</Text></View>
+                        : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 210, left: 65 }}><Text style={{ color: 'red', fontSize: 13 }}>请输入昵称！</Text></View>
                 }
                 {
                     this.state.wnum == 0
                         ? <View style={{ position: 'absolute', top: 290 }}><Text></Text></View>
-                        : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 200, left: 65 }}><Text style={{ color: 'red', fontSize: 13 }}>请输入手机号！</Text></View>
+                        : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 310, left: 65 }}><Text style={{ color: 'red', fontSize: 13 }}>请输入手机号！</Text></View>
                 }
-                <View style={{ marginTop: '10%', marginLeft: '20%' }}>
-                    <Button style={{ borderRadius: 20, width: '75%' }} onPress={this.getRepwd}>提交</Button>
-                </View>
-
-            </ScrollView>
+                <TouchableOpacity
+                    style={{
+                        width: '50%',
+                        height: 60 * s,
+                        backgroundColor: '#37376F',
+                        marginTop: 80 * s,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}
+                    onPress={this.getRepwd}>
+                    <Text style={{ color: '#ffffff', fontSize: 22 * s }}>提交</Text>
+                </TouchableOpacity>
+            </ImageBackground>
         )
     }
 }

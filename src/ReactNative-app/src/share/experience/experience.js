@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { Text, View, FlatList, ScrollView, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert, DrawerLayoutAndroid } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import { Actions } from 'react-native-router-flux';
-import Img from '../../community/Img'
+import Img from '../../community/Img';
+import ActionButton from 'react-native-action-button';
+
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
 export default class Experience extends Component {
@@ -18,7 +20,9 @@ export default class Experience extends Component {
             likeNum: [],
             colNum: [],
             username: '',
-            isLoading: true
+            isLoading: true,
+            isTop: false,
+
         };
         this.getData();
     }
@@ -30,6 +34,29 @@ export default class Experience extends Component {
                     username: name.username
                 })
             });
+    }
+    onScroll(evt) {
+        let y = evt.nativeEvent.contentOffset.y;
+        if (y >= 200 && y <= 260 && this.state.tabShow == false) {
+            this.setState({
+                tabShow: true,
+            })
+        }
+        else if (y <= 200 && this.state.tabShow == true) {
+            this.setState({
+                tabShow: false,
+            })
+        }
+        else if (y > 300) {
+            this.setState({
+                isTop: true
+            })
+        }
+        else if (y <= 300) {
+            this.setState({
+                isTop: false
+            })
+        }
     }
     componentDidMount() {
         this.setState({ isLoading: true })
@@ -110,7 +137,6 @@ export default class Experience extends Component {
                                                 }
                                             }
                                             item.colNum = colNum;
-                                            // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
                                         });
                                         this.setState({ isLoading: false });
                                         this.setState({ list: res });
@@ -121,10 +147,6 @@ export default class Experience extends Component {
             });
         var self = this;
         this.listener = DeviceEventEmitter.addListener('Erefresh', function (param) {
-            // var arr=self.state.list;
-            // var a = {"content": param.content, "like": false, "likeNum": 0, "name": param.name, "pic": "http://139.155.44.190:3005/images/6.png", "time": param.time};
-            // arr.splice(0,0,a);
-            // self.setState({list:arr});
             fetch(url3)
                 .then((res) => res.json())
                 .then((res) => {
@@ -198,7 +220,6 @@ export default class Experience extends Component {
                                                     }
                                                 }
                                                 item.colNum = colNum;
-                                                // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
                                             });
                                             self.setState({ isLoading: false });
                                             self.setState({ list: res });
@@ -209,7 +230,6 @@ export default class Experience extends Component {
                 });
         });
     }
-
     componentWillUnmount() {
         this.listener.remove();
     }
@@ -245,7 +265,7 @@ export default class Experience extends Component {
 
     }
     details = (idx) => {
-        var value = { name: this.state.list[idx].name, time: this.state.list[idx].time, content: this.state.list[idx].content, pic: this.state.list[idx].pic, level: this.state.list[idx].level,head: this.state.list[idx].head };
+        var value = { name: this.state.list[idx].name, time: this.state.list[idx].time, content: this.state.list[idx].content, pic: this.state.list[idx].pic, level: this.state.list[idx].level, head: this.state.list[idx].head };
         AsyncStorage.setItem('EPage', JSON.stringify(value));
         Actions.expdetails();
     }
@@ -258,10 +278,23 @@ export default class Experience extends Component {
             this.setState({
                 list: crr
             })
+            var num = this.state.list[idx].likenum;
+            if (num == null || num == 0) {
+                num = 1;
+            } else {
+                num = num + 1;
+            }
             let url1 = `http://139.155.44.190:3005/experiencelike/add?eid=${this.state.list[idx].id}&name=${this.state.username}&ename=${this.state.list[idx].name}`;
+            let url11 = `http://139.155.44.190:3005/experience/changeLike?eid=${this.state.list[idx].id}&likenum=${num}`;
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
+                    fetch(url11)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            var param = 1;
+                            DeviceEventEmitter.emit('Mrefresh', param);
+                        });
                 });
         }
         else if (this.state.list[idx].like == true) {
@@ -334,10 +367,23 @@ export default class Experience extends Component {
             this.setState({
                 list: crr
             })
+            var num = this.state.list[idx].cenum;
+            if (num == null || num == 0) {
+                num = 1;
+            } else {
+                num = num + 1;
+            }
             let url1 = `http://139.155.44.190:3005/collect/addCollect?eid=${this.state.list[idx].id}&name=${this.state.username}`;
+            let url11 = `http://139.155.44.190:3005/experience/change?eid=${this.state.list[idx].id}&cnum=${num}`;
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
+                    fetch(url11)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            var param = 1;
+                            DeviceEventEmitter.emit('Mrefresh', param);
+                        });
                 });
         }
         else if (this.state.list[idx].collect == true) {
@@ -448,7 +494,6 @@ export default class Experience extends Component {
                                                     if (item.name == this.state.pic[i].name) {
                                                         item.pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
                                                         item.head = 'http://139.155.44.190:3005/head/' + this.state.pic[i].head;
-
                                                         break;
                                                     }
                                                 }
@@ -518,7 +563,7 @@ export default class Experience extends Component {
     }
 
     person = (idx) => {
-        var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college,head: this.state.list[idx].head };
+        var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college, head: this.state.list[idx].head };
         AsyncStorage.setItem('details', JSON.stringify(value));
         Actions.person();
     }
@@ -558,9 +603,9 @@ export default class Experience extends Component {
                     horizontal={false}
                     numColumns={1}
                     renderItem={({ item }) =>
-                        <TouchableOpacity style={{ backgroundColor: '#eee', margin: 5 * s, height: 20 * s }} onPress={this.classify.bind(this, (item.key))}>
+                        <TouchableOpacity style={{ backgroundColor: '#eee', margin: 5 * s, height: 40 * s, justifyContent: "center" }} onPress={this.classify.bind(this, (item.key))}>
                             <Text style={{
-                                backgroundColor: 'blur'
+                                backgroundColor: 'blur',
                             }}>{item.key}</Text>
                         </TouchableOpacity>
                     }
@@ -569,44 +614,6 @@ export default class Experience extends Component {
         );
         return (
             <SafeAreaView style={{ flex: 1 }} >
-                <View style={{
-                    width: '100%',
-                    height: 70 * s,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                }}>
-                    <View style={{
-                        height: 40 * s,
-                        width: '60%',
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        backgroundColor: '#D7D3D3',
-                        borderRadius: 28 * s
-
-                    }}>
-                        <Icon
-                            style={{
-                                marginLeft: 25 * s,
-                                marginRight: 20 * s
-                            }}
-                            onPress={this.search}
-                            color='#fff' size={20} name='search' />
-                        <TextInput
-                            style={{
-                                height: 50 * s,
-                                width: "80%",
-                                padding: 0,
-                                fontSize: 15 * s
-                            }}
-                            clearButtonMode="while-editing"
-                            placeholderTextColor='#fff'
-                            placeholder="请输入您要搜索的关键字"
-                            onChangeText={this.change}
-                        />
-                    </View>
-
-                </View>
                 <DrawerLayoutAndroid
                     ref={(drawer) => {
                         this.drawer = drawer;
@@ -614,20 +621,59 @@ export default class Experience extends Component {
                     drawerWidth={350 * s}
                     drawerPosition={'left'}
                     renderNavigationView={() => navigationView}>
-                    <View style={{ width: 50 * s, height: 25 * s, borderRadius: 10 * s, backgroundColor: '#37376F', alignItems: 'center', justifyContent: 'center', marginLeft: 10 * s }}>
+                    <View style={{
+                        height: 55 * s,
+                        width: width,
+                        backgroundColor: "#fff",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        flexDirection: "row",
+                        marginBottom: 10 * s
+                    }}>
                         <TouchableOpacity
                             activeOpacity={0.5}
                             onPress={() => this.onPenLeftDrawer()}
-                            style={{}}
+                            style={{ height: 40 * s, width: width * 0.15, justifyContent: "center" }}
                         >
-                            <Text style={{ fontSize: 16, color: '#fff' }}>分类</Text>
+                            <Text style={{ color: "#37376F", fontSize: 18 * s, marginLeft: 10 * s }}>分类</Text>
+                        </TouchableOpacity>
+                        <View style={{
+                            height: 40 * s,
+                            width: width * 0.7,
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            backgroundColor: '#E3E3E3',
+                            borderRadius: 28 * s,
+                        }}>
+                            <TextInput
+                                style={{
+                                    height: 50 * s,
+                                    width: "80%",
+                                    padding: 0,
+                                    marginLeft: 20 * s,
+                                    fontSize: 15 * s,
+                                }}
+                                clearButtonMode="while-editing"
+                                placeholderTextColor='#A6A6A6'
+                                placeholder="搜索"
+                                onChangeText={this.change}
+                            />
+                            <Icon style={{ fontSize: 25 * s, marginLeft: 10 * s }} name="search" onPress={() => this.search()} />
+                        </View>
+                        <TouchableOpacity style={{ height: 40 * s, width: width * 0.12, alignItems: "center", marginLeft: width * 0.03 }} onPress={() => Actions.addexp()}>
+                            <Text style={{ color: "#37376F", fontSize: 30 * s, marginRight: 15 * s }}>+</Text>
                         </TouchableOpacity>
                     </View>
-                    <ScrollView style={{ flex: 1 }}>
+                    <ScrollView
+                        showsVerticalScrollIndicator={false}
+                        onScroll={(evt) => this.onScroll(evt)}
+                        scrollEventThrottle={16}
+                        ref={(r) => this.scrollview = r}
+                        style={{ flex: 1 }}>
                         <View>
                             {
                                 this.state.list.map((item, idx) => (
-                                    <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 20 * s }}>
+                                    <View style={{ backgroundColor: '#fff', width: '100%', marginBottom: 10 * s }}>
                                         <View style={{
                                             flexDirection: 'row',
                                             height: 80 * s,
@@ -642,15 +688,14 @@ export default class Experience extends Component {
                                                             height: 50 * s,
                                                             width: 50 * s,
                                                             borderRadius: 25 * s,
-                                                            backgroundColor: 'yellow'
                                                         }} source={{ uri: item.pic }} />
                                                         <Image style={{
-                                                            height: 70 * s,
-                                                            width: 70 * s,
+                                                            height: 60 * s,
+                                                            width: 60 * s,
                                                             borderRadius: 35 * s,
                                                             position: 'absolute',
-                                                            top: -10,
-                                                            right: -10
+                                                            top: -5,
+                                                            right: -5
                                                         }}
                                                             source={{ uri: item.head }} />
                                                     </View>
@@ -660,15 +705,14 @@ export default class Experience extends Component {
                                                             height: 50 * s,
                                                             width: 50 * s,
                                                             borderRadius: 25 * s,
-                                                            backgroundColor: 'yellow'
                                                         }} source={{ uri: item.pic }} />
                                                         <Image style={{
-                                                            height: 70 * s,
-                                                            width: 70 * s,
+                                                            height: 60 * s,
+                                                            width: 60 * s,
                                                             borderRadius: 35 * s,
                                                             position: 'absolute',
-                                                            top: -10,
-                                                            right: -10
+                                                            top: -5,
+                                                            right: -5
                                                         }}
                                                             source={{ uri: item.head }} />
                                                     </TouchableOpacity>
@@ -723,7 +767,6 @@ export default class Experience extends Component {
                                 ))
                             }
                         </View>
-
                     </ScrollView>
                 </DrawerLayoutAndroid>
                 {
@@ -744,23 +787,17 @@ export default class Experience extends Component {
                         </View>
                         : null
                 }
-                < TouchableOpacity style={{
-                    width: 60 * s,
-                    height: 60 * s,
-                    borderRadius: 30 * s,
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    backgroundColor: '#37376F',
-                    position: 'absolute',
-                    bottom: 0,
-                    right: 0
-                }}
-                    onPress={() => Actions.addexp()
-                    }
-                >
-                    <Text style={{ color: 'white', fontSize: 30 * s }}>+</Text>
-                </TouchableOpacity >
+                {
+                    this.state.isTop === true ? <ActionButton
+                        renderIcon={() => (<View style={{ height: 50 * s, width: 50 * s, backgroundColor: "#F8F8F8", borderRadius: 25 * s, justifyContent: "center", alignItems: "center" }}><Image style={{ height: 35 * s, width: 35 * s }} source={require('../../../assets/community/icon.png')} /></View>)}
+                        buttonColor="#FFFFFF"
+                        position='right'
+                        verticalOrientation='up'
+                        size={34}
+                        border='#1DA57A'
+                        onPress={() => this.scrollview.scrollTo({ x: 0, y: 0, animated: true })}
+                    /> : <View />
+                }
             </SafeAreaView >
         )
     }

@@ -120,11 +120,11 @@ export default class Experience extends Component {
         const { match, location, history } = this.props;
         if (location.pathname == '/') {
             this.setState({
-                pathname: '用户管理'
+                pathname: '社区管理'
             })
         } else if (location.pathname == '/community') {
             this.setState({
-                pathname: '社区管理'
+                pathname: '用户管理'
             })
         } else if (location.pathname == '/notes') {
             this.setState({
@@ -195,11 +195,11 @@ export default class Experience extends Component {
                         <thead style={{ height: '5vh', lineHeight: '5vh' }}>
                             <tr style={{ lineHeight: '5.9vh', backgroundColor: 'rgba(68, 182, 211, 1)' }}>
                                 <th style={{ width: '5vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>ID</th>
-                                <th style={{ width: '3vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>头像</th>
-                                <th style={{ width: '5vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>名字</th>
-                                <th style={{ width: '13.5vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>时间</th>
-                                <th style={{ width: '12vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>内容</th>
-                                <th style={{ width: '8vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>操作</th>
+                                <th style={{ width: '5vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>头像</th>
+                                <th style={{ width: '8vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>名字</th>
+                                <th style={{ width: '15vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>时间</th>
+                                <th style={{ width: '16vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>内容</th>
+                                <th style={{ width: '11vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>操作</th>
                             </tr>
                         </thead>
                         <tbody>

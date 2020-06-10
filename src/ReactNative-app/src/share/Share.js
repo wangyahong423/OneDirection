@@ -10,18 +10,8 @@ export default class Share extends Component {
         return (
             <View style={{ height: '100%' }}>
                 <ImageBackground style={{ flex: 1, width: '100%', height: height }} source={require('../../assets/share/3.png')}>
-                    {/* 顶部 */}
-                    {/* <View style={{
-                        width: '100%',
-                        height: 30 * s,
-                        backgroundColor: '#37376F',
-                        alignItems: 'center',
-                    }}>
-                        <Text style={{ color: '#fff', lineHeight: 30 * s, }}>共享</Text>
-                    </View> */}
-
                     <View>
-                    <View style={{ alignItems: 'center' }}>
+                        <View style={{ alignItems: 'center' }}>
                             <TouchableOpacity
                                 style={{
                                     width: 200 * s,

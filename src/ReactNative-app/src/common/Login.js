@@ -3,7 +3,6 @@ import { View, Text, Image, TextInput, AsyncStorage, TouchableOpacity, DeviceEve
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/AntDesign';
 
-// import { BoxShadow } from 'react-native-shadow';
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
 export default class Login extends Component {
@@ -173,18 +172,18 @@ export default class Login extends Component {
               {
                 this.state.unum == 0
                   ? <View style={{ position: 'absolute', top: 290 }}><Text></Text></View>
-                  : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 175, left: 65 }}><Text style={{ color: 'red', fontSize: 13 }}>请输入用户名！</Text></View>
+                  : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 110*s, left: 65 }}><Text style={{ color: 'red', fontSize: 13 }}>请输入用户名！</Text></View>
               }
               {
                 this.state.pnum == 0
                   ? <View style={{ position: 'absolute', top: 290 }}><Text></Text></View>
-                  : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 255, left: 65 }}><Text style={{ color: 'red', fontSize: 13 }}>请输入正确的密码！</Text></View>
+                  : <View style={{ height: 40, justifyContent: 'center', position: 'absolute', top: 190*s, left: 65 }}><Text style={{ color: 'red', fontSize: 13 }}>请输入正确的密码！</Text></View>
               }
             </View>
           </View>
           {
             this.state.isloading
-              ? <View style={{ position: 'absolute', top: 530, zIndex: 11, left: 190, alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: 14 }}>正在登录中...</Text></View>
+              ? <View style={{ position: 'absolute', top: 650*s, zIndex: 11, left: 190, alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: 14,color:"#fff" }}>正在登录中...</Text></View>
               : null
           }
           {

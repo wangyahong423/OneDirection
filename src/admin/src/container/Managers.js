@@ -19,7 +19,7 @@ export default class Managers extends Component {
             data: [],
             indexList: [],
             current: 1,
-            pageSize: 15,
+            pageSize: 14,
             date: new Date(),
             name: '',
             num: 0,
@@ -215,14 +215,14 @@ export default class Managers extends Component {
         let key2 = Base64.stringify(Utf8.parse("123"))
         console.log(key2)
 
-        const { location } = this.props;
+        const { match, location, history } = this.props;
         if (location.pathname == '/') {
             this.setState({
-                pathname: '用户管理'
+                pathname: '社区管理'
             })
         } else if (location.pathname == '/community') {
             this.setState({
-                pathname: '社区管理'
+                pathname: '用户管理'
             })
         } else if (location.pathname == '/notes') {
             this.setState({
@@ -407,16 +407,18 @@ export default class Managers extends Component {
                     <table style={{ width: '40vw', tableLayout: 'fixed', border: 'none' }}>
                         <thead style={{ height: '5vh', lineHeight: '5vh' }}>
                             <tr style={{ lineHeight: '5.9vh', backgroundColor: 'rgba(68, 182, 211, 1)' }}>
-                                <th style={{ width: '5vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>姓名</th>
-                                <th style={{ width: '8vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>电话</th>
-                                <th style={{ width: '8vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>密码</th>
-                                <th style={{ width: '12vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>操作</th>
+                                <th style={{ width: '7vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>编号</th>
+                                <th style={{ width: '8vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>姓名</th>
+                                <th style={{ width: '11vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>电话</th>
+                                <th style={{ width: '15vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>密码</th>
+                                <th style={{ width: '18vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>操作</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
                                 this.state.indexList.map(
                                     (item, idx) => <tr key={idx} style={{ height: '4vh', lineHeight: '4vh', backgroundColor: 'SkyBlue' }}>
+                                        <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center' }}>{idx}</td>
                                         <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center' }}>{item.name}</td>
                                         <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center' }}>{item.tel}</td>
                                         <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '8vw' }}>{item.pwd}</td>
@@ -510,8 +512,7 @@ export default class Managers extends Component {
                                 <span style={{color:'white',fontSize:'1.5vw'}}>{this.state.jiemiName}{this.state.jiemiPwd}</span>
                             </div>
                         </Modal>
-
-                        <div style={{ position: 'fixed', height: '7vh', width: '15vw', left: '50vw', top: '88vh' }}>
+                        <div style={{ position: 'fixed', height: '7vh', width: '20vw', left: '50vw', top: '88vh' }}>
                             <a style={{ textDecoration: 'none', marginRight: '2vw' }}>
                                 <span onClick={this.setUp} style={{ color: 'RoyalBlue', fontSize: '1.2vw', cursor: 'pointer' }}>上一页</span>
                             </a>

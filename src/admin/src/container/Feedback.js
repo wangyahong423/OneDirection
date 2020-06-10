@@ -15,26 +15,26 @@ export default class Feedback extends Component {
             data: [],
             indexList: [],
             current: 1,
-            pageSize: 15,
+            pageSize: 14,
             date: new Date(),
             name: '',
             num: 0,
             totalPage: 0,
             pathname: '用户管理',
             visible: false,
-            loading:false,
-            contents:'',
-            times:'',
-            tels:''
+            loading: false,
+            contents: '',
+            times: '',
+            tels: ''
         }
     }
 
-    showModal = (content,time,tel,e) => {
+    showModal = (content, time, tel, e) => {
         this.setState({
             visible: true,
-            contents:content,
-            times:time,
-            tels:tel
+            contents: content,
+            times: time,
+            tels: tel
         });
     };
 
@@ -78,11 +78,11 @@ export default class Feedback extends Component {
         const { match, location, history } = this.props;
         if (location.pathname == '/') {
             this.setState({
-                pathname: '用户管理'
+                pathname: '社区管理'
             })
         } else if (location.pathname == '/community') {
             this.setState({
-                pathname: '社区管理'
+                pathname: '用户管理'
             })
         } else if (location.pathname == '/notes') {
             this.setState({
@@ -140,7 +140,7 @@ export default class Feedback extends Component {
                     })
 
                 }
- 
+
             })
     }
     onkeydown = (e) => {
@@ -178,7 +178,7 @@ export default class Feedback extends Component {
                 }
             })
     }
-    
+
     render() {
         let t = this.state.date;
         let ifnoon = ' ' + ((t.getHours() < 12) ? "上午好" : "下午好") + ' ';
@@ -193,22 +193,24 @@ export default class Feedback extends Component {
                     <table style={{ width: '40vw', tableLayout: 'fixed', border: 'none' }}>
                         <thead style={{ height: '5vh', lineHeight: '5vh' }}>
                             <tr style={{ lineHeight: '5.9vh', backgroundColor: 'rgba(68, 182, 211, 1)' }}>
-                                <th style={{ width: '8vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>电话</th>
-                                <th style={{ width: '13.5vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>时间</th>
-                                <th style={{ width: '12vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>内容</th>
-                                <th style={{ width: '8vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>操作</th>
+                                <th style={{ width: '5vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>编号</th>
+                                <th style={{ width: '10vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>电话</th>
+                                <th style={{ width: '16vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>时间</th>
+                                <th style={{ width: '18vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>内容</th>
+                                <th style={{ width: '10.5vw', textAlign: 'center', fontSize: '1.2vw', color: 'white' }}>操作</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
                                 this.state.indexList.map(
                                     (item, idx) => <tr key={idx} style={{ height: '4vh', lineHeight: '4vh', backgroundColor: 'SkyBlue' }}>
+                                        <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center' }}>{idx}</td>
                                         <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center' }}>{item.tel}</td>
                                         <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center' }}>{item.time}</td>
                                         <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '12vw' }}>{item.content}</td>
                                         <td style={{ fontSize: '1.2vw', color: 'white', textAlign: 'center' }}>
                                             <span onClick={this.handleRegister.bind(this, (item.tel), (item.time))} style={{ height: '3vh', width: '5vw', fontFamily: '楷体', fontSize: '1.2vw', cursor: 'pointer' }}>删除</span>
-                                            <span onClick={this.showModal.bind(this, (item.content),(item.time),(item.tel))} style={{ height: '3vh', width: '5vw', fontFamily: '楷体', fontSize: '1.2vw', marginLeft: '10px', cursor: 'pointer' }}>查看</span>
+                                            <span onClick={this.showModal.bind(this, (item.content), (item.time), (item.tel))} style={{ height: '3vh', width: '5vw', fontFamily: '楷体', fontSize: '1.2vw', marginLeft: '10px', cursor: 'pointer' }}>查看</span>
                                         </td>
                                     </tr>
                                 )
@@ -218,20 +220,20 @@ export default class Feedback extends Component {
                         <div>
                             <div id="container">
                                 <Modal
-                                    style={{ height: 'auto', width: '10vw', backgroundColor: 'rgb(68,182,211)',position:'fixed',left:'35vw',top:'40vh',paddingBottom:'7vh' }}
+                                    style={{ height: 'auto', width: '10vw', backgroundColor: 'rgb(68,182,211)', position: 'fixed', left: '35vw', top: '40vh', paddingBottom: '7vh' }}
                                     // title="Basic Modal"
                                     visible={this.state.visible}
                                     onOk={this.handleOk}
                                     onCancel={this.handleCancel}
                                     closable={false}
                                     footer={[
-                                        <Button key="back" onClick={this.handleCancel} style={{color:'rgb(68,182,211)',position:'absolute',right:'1vw',bottom:'2vh'}}>确认</Button>,
+                                        <Button key="back" onClick={this.handleCancel} style={{ color: 'rgb(68,182,211)', position: 'absolute', right: '1vw', bottom: '2vh' }}>确认</Button>,
                                     ]}
                                 >
-                                    <div style={{height:'3.5vh',width:'32vw',marginTop:'2vh',marginLeft:'1vw',borderBottomColor:'white',borderBottomWidth:'1px'}}>
-                                        <p style={{color:'white',fontSize:'18px'}}>电话：{this.state.tels}&emsp;&emsp;&emsp;&emsp;时间：{this.state.times}</p>
+                                    <div style={{ height: '3.5vh', width: '32vw', marginTop: '2vh', marginLeft: '1vw', borderBottomColor: 'white', borderBottomWidth: '1px' }}>
+                                        <p style={{ color: 'white', fontSize: '18px' }}>电话：{this.state.tels}&emsp;&emsp;&emsp;&emsp;时间：{this.state.times}</p>
                                     </div>
-                                    <p style={{color:'white',fontSize:'18px',marginTop:'2vh',marginLeft:'1vw'}}>内容：{this.state.contents}</p>
+                                    <p style={{ color: 'white', fontSize: '18px', marginTop: '2vh', marginLeft: '1vw' }}>内容：{this.state.contents}</p>
                                 </Modal>
                             </div>
                         </div>

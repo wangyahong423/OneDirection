@@ -213,14 +213,9 @@ export default class Home extends Component {
                         </div>
                         <div style={{ width: '80vw', height: '83vh', margin: '-1vh auto', }}>
                             <div className='hometit'>
+                                
                                 <Link to='/' style={{ textDecoration: 'none' }} >
                                     <p className='tab' style={S1} onClick={this.onClick1}>
-                                        <i className='iconfont icon-wode' style={{ color: '#fff', 'fontSize': '1.7vw' }}></i>
-                                        &nbsp;用户管理
-                                    </p>
-                                </Link>
-                                <Link to='/community' style={{ textDecoration: 'none' }} >
-                                    <p className='tab' style={S2} onClick={this.onClick2}>
                                         <i className='iconfont icon-community' style={{ color: '#fff', 'fontSize': '1.7vw' }}></i>
                                         &nbsp;社区管理
                                     </p>
@@ -243,6 +238,12 @@ export default class Home extends Component {
                                         &nbsp;用户反馈
                                     </p>
                                 </Link>
+                                <Link to='/community' style={{ textDecoration: 'none' }} >
+                                    <p className='tab' style={S2} onClick={this.onClick2}>
+                                        <i className='iconfont icon-wode' style={{ color: '#fff', 'fontSize': '1.7vw' }}></i>
+                                        &nbsp;用户管理
+                                    </p>
+                                </Link>
                                 <Link to='/managers' style={{ textDecoration: 'none' }} >
                                     <p className='tab' style={S6} onClick={this.onClick6}>
                                         <i className='iconfont icon--Manager' style={{ color: '#fff', 'fontSize': '1.7vw' }}></i>
@@ -251,8 +252,8 @@ export default class Home extends Component {
                                 </Link>
                             </div>
                             <div>
-                                <Route exact path='/' component={Users} />
-                                <Route exact path='/community' component={Community} />
+                                <Route exact path='/community' component={Users} />
+                                <Route exact path='/' component={Community} />
                                 <Route exact path='/managers' component={Managers} />
                                 <Route exact path='/notes' component={Notes} />
                                 <Route exact path='/feedback' component={Feedback} />

@@ -65,7 +65,6 @@ export default class Xiangqing extends Component {
                                         }
                                         arr.push(item);
                                     }
-
                                 });
                                 this.setState({ isLoading: false })
                                 this.setState({ list: arr });
@@ -93,7 +92,6 @@ export default class Xiangqing extends Component {
                                             }
                                             arr.push(item);
                                         }
-
                                     });
                                     self.setState({ list: arr });
                                 })
@@ -150,7 +148,6 @@ export default class Xiangqing extends Component {
                             height: 66 * s,
                             width: 66 * s,
                             borderRadius: 33 * s,
-                            // backgroundColor:'green',
                             position: 'absolute',
                             top: 7,
                             left: 10
@@ -160,7 +157,6 @@ export default class Xiangqing extends Component {
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                 <Text style={{ fontSize: 18 * s }}>{this.state.page.name}</Text>
                                 <Image style={{ height: 25 * s, width: 40 * s, marginLeft: 10 * s }} source={Img['png' + this.state.page.level]} />
-
                             </View>
                             <Text>{this.state.page.time}</Text>
                         </View>
@@ -175,7 +171,6 @@ export default class Xiangqing extends Component {
                         <Text style={{ fontSize: 18 * s }}>{this.state.page.content}</Text>
                     </View>
                 </View>
-
                 <View
                     style={{
                         borderBottomColor: '#000',
@@ -199,13 +194,11 @@ export default class Xiangqing extends Component {
                                                 height: 50 * s,
                                                 width: 50 * s,
                                                 borderRadius: 25 * s,
-                                                backgroundColor: 'yellow'
                                             }} source={{ uri: item.pic }} />
                                             <Image style={{
                                                 height: 70 * s,
                                                 width: 70 * s,
                                                 borderRadius: 35 * s,
-                                                // backgroundColor:'green',
                                                 position: 'absolute',
                                                 top: -10,
                                                 left: 10
@@ -216,9 +209,7 @@ export default class Xiangqing extends Component {
                                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                                 <Text style={this.state.page.name == item.name ? { fontSize: 15 * s, color: 'red', marginTop: 5 * s } : { fontSize: 15 * s, color: '#37376F', marginTop: 5 * s }}>{item.name}</Text>
                                                 <Image style={{ height: 20 * s, width: 35 * s, marginLeft: 10 * s ,marginTop:5*s}} source={Img['png' + item.level]} />
-
                                             </View>
-
                                             <Text style={{ fontSize: 18 * s }}>{item.content}</Text>
                                             <Text style={{ fontSize: 10 * s, color: '#808080', marginTop: 5 * s, marginBottom: 5 * s }}>{item.time}</Text>
                                         </View>
@@ -232,7 +223,6 @@ export default class Xiangqing extends Component {
                                                 flexDirection: 'row',
                                                 justifyContent: 'center',
                                                 alignItems: 'center',
-                                                // backgroundColor: '#37376F',
                                                 position: 'absolute',
                                                 top: 0,
                                                 right: 0
@@ -259,7 +249,6 @@ export default class Xiangqing extends Component {
                             : null
                     }
                 </ScrollView>
-
             </SafeAreaView >
         )
     }

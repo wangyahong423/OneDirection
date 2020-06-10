@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, ScrollView, TextInput, Dimensions, SafeAreaView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Actions } from 'react-native-router-flux';
 import RNFileSelector from 'react-native-file-selector';
 
 const { width, height } = Dimensions.get('window');
@@ -19,17 +18,14 @@ export default class ShareFile extends Component {
             {
                 title: 'Select File',
                 onDone: (path) => {
-                    console.log('file selected: ' + path)
                 },
                 onCancel: () => {
-                    console.log('cancelled')
                 }
             }
-        )        
+        )
     }
 
     search = (e) => {
-        console.log(e);
     }
     render() {
         return (
@@ -91,10 +87,8 @@ export default class ShareFile extends Component {
                     title={"Select File"}
                     visible={this.state.visible}
                     onDone={() => {
-                        console.log("file selected: " + path);
                     }}
                     onCancel={() => {
-                        console.log("cancelled");
                     }}
                 />
             </SafeAreaView>

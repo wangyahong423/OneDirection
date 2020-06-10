@@ -85,6 +85,7 @@ export default class SearchExp extends Component {
                                                     res[i].pic = this.state.person.pic;
                                                     res[i].college = this.state.person.college;
                                                     res[i].level = this.state.person.level;
+                                                    res[i].head = this.state.person.head;
                                                     res[i].like = false;
                                                     for (var j = 0; j < this.state.like.length; j++) {
                                                         if (res[i].id == this.state.like[j].eid) {
@@ -165,6 +166,7 @@ export default class SearchExp extends Component {
                                                         res[i].pic = self.state.person.pic;
                                                         res[i].college = self.state.person.college;
                                                         res[i].level = self.state.person.level;
+                                                        res[i].head = self.state.person.head;
                                                         res[i].like = false;
                                                         for (var j = 0; j < self.state.like.length; j++) {
                                                             if (res[i].id == self.state.like[j].eid) {
@@ -255,6 +257,7 @@ export default class SearchExp extends Component {
                                                                     if (res[a].name == this.state.pic[i].name) {
                                                                         res[a].pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
                                                                         res[a].college = this.state.pic[i].college;
+                                                                        res[a].head = 'http://139.155.44.190:3005/head/' + this.state.pic[i].head;
                                                                         res[a].level = this.state.pic[i].level;
                                                                         break;
                                                                     }
@@ -350,6 +353,7 @@ export default class SearchExp extends Component {
                                                                     for (var i = 0; i < self.state.pic.length; i++) {
                                                                         if (res[a].name == self.state.pic[i].name) {
                                                                             res[a].pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
+                                                                            res[a].head = 'http://139.155.44.190:3005/head/' + self.state.pic[i].head;
                                                                             res[a].college = self.state.pic[i].college;
                                                                             res[a].level = self.state.pic[i].level;
                                                                             break;
@@ -447,6 +451,7 @@ export default class SearchExp extends Component {
                                                                     if (res[a].name == this.state.pic[i].name) {
                                                                         res[a].pic = 'http://139.155.44.190:3005' + this.state.pic[i].pic;
                                                                         res[a].college = this.state.pic[i].college;
+                                                                        res[a].head = 'http://139.155.44.190:3005/head/' + this.state.pic[i].head;
                                                                         res[a].level = this.state.pic[i].level;
                                                                         break;
                                                                     }
@@ -543,6 +548,7 @@ export default class SearchExp extends Component {
                                                                         if (res[a].name == self.state.pic[i].name) {
                                                                             res[a].pic = 'http://139.155.44.190:3005' + self.state.pic[i].pic;
                                                                             res[a].college = self.state.pic[i].college;
+                                                                            res[a].head = 'http://139.155.44.190:3005/head/' + self.state.pic[i].head;
                                                                             res[a].level = self.state.pic[i].level;
                                                                             break;
                                                                         }
@@ -598,7 +604,10 @@ export default class SearchExp extends Component {
             });
     }
     componentWillUnmount() {
-        this.listener.remove();
+        if (this.listener) {
+            this.listener.remove();
+        }
+
     }
     delete = (idx) => {
         Alert.alert('确认要删除吗', '',
@@ -640,10 +649,23 @@ export default class SearchExp extends Component {
             this.setState({
                 list: crr
             })
+            var num = this.state.list[idx].likenum;
+            if (num == null || num == 0) {
+                num = 1;
+            } else {
+                num = num + 1;
+            }
             let url1 = `http://139.155.44.190:3005/experiencelike/add?eid=${this.state.list[idx].id}&name=${this.state.username}&ename=${this.state.list[idx].name}`;
+            let url11 = `http://139.155.44.190:3005/experience/changeLike?eid=${this.state.list[idx].id}&likenum=${num}`;
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
+                    fetch(url11)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            var param = 1;
+                            DeviceEventEmitter.emit('Mrefresh', param);
+                        });
                 });
         }
         else if (this.state.list[idx].like == true) {
@@ -716,10 +738,23 @@ export default class SearchExp extends Component {
             this.setState({
                 list: crr
             })
+            var num = this.state.list[idx].cenum;
+            if (num == null || num == 0) {
+                num = 1;
+            } else {
+                num = num + 1;
+            }
             let url1 = `http://139.155.44.190:3005/collect/addCollect?eid=${this.state.list[idx].id}&name=${this.state.username}`;
+            let url11 = `http://139.155.44.190:3005/experience/change?eid=${this.state.list[idx].id}&cnum=${num}`;
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
+                    fetch(url11)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            var param = 1;
+                            DeviceEventEmitter.emit('Mrefresh', param);
+                        });
                 });
         }
         else if (this.state.list[idx].collect == true) {
@@ -893,9 +928,16 @@ export default class SearchExp extends Component {
                                         height: 50 * s,
                                         width: 50 * s,
                                         borderRadius: 25 * s,
-                                        backgroundColor: 'yellow'
                                     }} source={{ uri: item.pic }} />
-
+                                    <Image style={{
+                                        height: 66 * s,
+                                        width: 66 * s,
+                                        borderRadius: 33 * s,
+                                        position: 'absolute',
+                                        top: 6,
+                                        left: 12
+                                    }}
+                                        source={{ uri: item.head }} />
                                     <View style={{ marginLeft: 30 * s }}>
                                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                             <Text style={{ fontSize: 18 * s }}>{item.name}</Text>

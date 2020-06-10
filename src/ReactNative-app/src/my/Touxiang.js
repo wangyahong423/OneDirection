@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Image, AsyncStorage, ScrollView, TouchableOpacity, DeviceEventEmitter, StyleSheet, scrollView, Dimensions } from 'react-native';
+import { View, Text, Image, AsyncStorage, ScrollView, TouchableOpacity, DeviceEventEmitter, Dimensions } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 const { width, height } = Dimensions.get('window');
@@ -16,6 +16,7 @@ export default class Touxiang extends Component {
         }
     }
     componentDidMount() {
+        this.setState({ isLoading: true })
 
         AsyncStorage.getItem('username')
             .then((res) => {
@@ -36,9 +37,10 @@ export default class Touxiang extends Component {
                         this.setState({
                             level: item.level
                         })
-                        this.setState({ isLoading: false });
                     }
                 })
+                this.setState({ isLoading: false });
+
             })
     }
     selectImg = (text) => {//获取
@@ -57,8 +59,6 @@ export default class Touxiang extends Component {
         var param = 1;
         DeviceEventEmitter.emit('freshone', param);
         DeviceEventEmitter.emit('refresh', param);
-
-
     }
 
     render() {

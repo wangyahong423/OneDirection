@@ -1,13 +1,22 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, SectionList, Dimensions, Animated, Linking, TouchableOpacity, StyleSheet, Image, } from 'react-native'
+import { Text, View, ScrollView, SectionList, Dimensions, Animated, Linking, TouchableOpacity, StyleSheet, Image, ImageBackground} from 'react-native'
 import Icon from 'react-native-vector-icons/Entypo';
-import Button from 'react-native-button';
-const { width } = Dimensions.get('window');
+import { Actions } from 'react-native-router-flux';
+const { width ,height} = Dimensions.get('window');
 const s = width / 460;
 
 export default class Learning extends Component {
     render() {
         return (
+            <ImageBackground style={{ width: '100%', height: height }} source={require('../../../assets/gonglve/beijing.jpg')}>
+            <View style={{ width: width, height: 60 * s, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                <TouchableOpacity
+                    onPress={() => Actions.pop()}
+                    style={{ position: "absolute", position: "absolute", left: 10 * s, }}>
+                    <Icon name="reply" style={{ fontSize: 35 * s }} />
+                </TouchableOpacity>
+                <Text style={{ fontSize: 20 * s }}>学术期刊</Text>
+            </View>
             <ScrollView>
                 <View style={styles.box}>
                     <View>
@@ -66,7 +75,7 @@ export default class Learning extends Component {
                         
                     </View>
                 </View>
-                <View style={[styles.box,{marginTop:10,marginBottom:10}]}>
+                <View style={[styles.box,{marginTop:10,marginBottom:25}]}>
                     <View>
                         <Text style={{ width: 35 * s, height: '91%', backgroundColor: 'rgb(148,122,107)', color: '#fff', paddingLeft: 10 * s, paddingRight: 10 * s, lineHeight: 31 * s, marginTop: '2%' }}> 教育科学版 </Text>
                     </View>
@@ -98,6 +107,7 @@ export default class Learning extends Component {
                     </View>
                 </View>
             </ScrollView>
+            </ImageBackground>
 
         )
     }

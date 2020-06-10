@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, SafeAreaView, TextInput, Dimensions, ImageBackground, Image, TouchableOpacity, AsyncStorage, Alert, DeviceEventEmitter } from 'react-native';
+import { Text, View, ScrollView, SafeAreaView, TextInput, Dimensions, ImageBackground, AsyncStorage, Alert, DeviceEventEmitter } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Actions } from 'react-native-router-flux';
 const { width, height } = Dimensions.get('window');
