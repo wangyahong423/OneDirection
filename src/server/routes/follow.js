@@ -121,4 +121,18 @@ router.get('/changeEE', (req, res) => {
         }
     });
 });
+
+router.get('/changeP', (req, res) => {
+    var lname = req.query.lname;
+    var nname = req.query.nname;
+    var newp = req.query.newp;
+    let sql = 'update follow set newp=$1 where lname=$2 and nname=$3';
+    con.query(sql, [newp, lname,nname], (err, result) => {
+        if (err) {
+            res.json({ ok: false, msg: '修改失败！' });
+        } else {
+            res.json({ ok: true, msg: '修改成功！' });
+        }
+    });
+});
 module.exports = router;
