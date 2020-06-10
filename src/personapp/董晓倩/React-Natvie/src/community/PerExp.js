@@ -16,32 +16,13 @@ export default class PerExp extends Component {
             personlike: [],
             collect: [],
             personcollect: [],
-            // search: '',
             likeNum: [],
             colNum: [],
             username: '',
             person: [],
             isLoading: true
         };
-        // this.getData();
     }
-    // getData = () => {
-    //     AsyncStorage.getItem('username')
-    //         .then((res) => {
-    //             let name = { username: res }
-    //             this.setState({
-    //                 username: name.username
-    //             })
-    //         });
-    //     AsyncStorage.getItem('personname1')
-    //         .then((res) => {
-    //             this.setState({
-    //                 person: JSON.parse(res)
-    //             })
-    //             console.log(this.state.person.title);
-    //         });
-
-    // }
     componentDidMount() {
         this.setState({ isLoading: true });
         var url1 = `http://139.155.44.190:3005/experience/list`;
@@ -140,10 +121,6 @@ export default class PerExp extends Component {
                         });
                     var self = this;
                     this.listener = DeviceEventEmitter.addListener('PErefresh', function (param) {
-                        // var arr=self.state.list;
-                        // var a = {"content": param.content, "like": false, "likeNum": 0, "name": param.name, "pic": "http://139.155.44.190:3005/images/6.jpg", "time": param.time};
-                        // arr.splice(0,0,a);
-                        // self.setState({list:arr});
                         fetch(url2)
                             .then((res) => res.json())
                             .then((res) => {
@@ -317,17 +294,12 @@ export default class PerExp extends Component {
                                                     this.setState({ isLoading: false });
                                                     this.setState({ list: list });
                                                     this.setState({ all: list });
-                                                    // console.log(list);
                                                 });
                                         });
                                 });
                         });
                     var self = this;
                     this.listener = DeviceEventEmitter.addListener('PErefresh', function (param) {
-                        // var arr=self.state.list;
-                        // var a = {"content": param.content, "like": false, "likeNum": 0, "name": param.name, "pic": "http://139.155.44.190:3005/images/6.jpg", "time": param.time};
-                        // arr.splice(0,0,a);
-                        // self.setState({list:arr});
                         fetch(url3)
                             .then((res) => res.json())
                             .then((res) => {
@@ -412,7 +384,6 @@ export default class PerExp extends Component {
                                                                     }
                                                                     res[a].colNum = colNum;
                                                                     list.push(res[a]);
-                                                                    // console.log(res[a]);
                                                                     break;
                                                                 }
                                                             }
@@ -420,7 +391,6 @@ export default class PerExp extends Component {
                                                         self.setState({ isLoading: false });
                                                         self.setState({ list: list });
                                                         self.setState({ all: list });
-                                                        // console.log(list);
                                                     });
                                             });
                                     });
@@ -526,10 +496,6 @@ export default class PerExp extends Component {
                         });
                     var self = this;
                     this.listener = DeviceEventEmitter.addListener('PErefresh', function (param) {
-                        // var arr=self.state.list;
-                        // var a = {"content": param.content, "like": false, "likeNum": 0, "name": param.name, "pic": "http://139.155.44.190:3005/images/6.jpg", "time": param.time};
-                        // arr.splice(0,0,a);
-                        // self.setState({list:arr});
                         fetch(url3)
                             .then((res) => res.json())
                             .then((res) => {
@@ -614,7 +580,6 @@ export default class PerExp extends Component {
                                                                     }
                                                                     res[a].colNum = colNum;
                                                                     list.push(res[a]);
-                                                                    // console.log(res[a]);
                                                                     break;
                                                                 }
                                                             }
@@ -622,7 +587,6 @@ export default class PerExp extends Component {
                                                         self.setState({ isLoading: false });
                                                         self.setState({ list: list });
                                                         self.setState({ all: list });
-                                                        // console.log(list);
                                                     });
                                             });
                                     });
@@ -630,14 +594,6 @@ export default class PerExp extends Component {
                     });
                 }
             });
-
-
-        // var self1 = this;
-        // this.listener1 = DeviceEventEmitter.addListener('com', function (num){
-        //     console.log(num);
-        // })
-
-
     }
     componentWillUnmount() {
         if (this.listener) {
@@ -685,6 +641,7 @@ export default class PerExp extends Component {
             this.setState({
                 list: crr
             })
+            
             let url1 = `http://139.155.44.190:3005/experiencelike/add?eid=${this.state.list[idx].id}&name=${this.state.username}&ename=${this.state.list[idx].name}`;
             fetch(url1)
                 .then((res) => res.json())
@@ -828,31 +785,6 @@ export default class PerExp extends Component {
                 })
             })
     }
-    // change = (e) => {
-    //     this.setState({
-    //         search: e
-    //     })
-    // }
-    // search = () => {
-    //     let url = `http://139.155.44.190:3005/experience/select?content=${this.state.search}`;
-    //     fetch(url)
-    //         .then((res) => res.json())
-    //         .then((res) => {
-    //             if (res.false) { }
-    //             else {
-    //                 var list = [];
-    //                 for (var i = 0; i < res.length; i++) {
-    //                     for (var j = 0; j < this.state.all.length; j++) {
-    //                         if (res[i].id == this.state.all[j].id) {
-    //                             list.push(this.state.all[j]);
-    //                             break;
-    //                         }
-    //                     }
-    //                 }
-    //                 this.setState({ list: list });
-    //             }
-    //         });
-    // }
     back = () => {
         Actions.pop();
         var param = 1;
@@ -872,10 +804,6 @@ export default class PerExp extends Component {
             this.setState({ list: arr });
         }
     }
-    // cla = () => {
-    //     this.refs['list'].style.display='flex';
-    //     console.log(1);
-    // }
     onPenLeftDrawer() {
         this.drawer.openDrawer();
     }
@@ -886,45 +814,6 @@ export default class PerExp extends Component {
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
-                {/* <View style={{
-                    width: '100%',
-                    height: 70 * s,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                }}>
-                    <View style={{
-                        height: 40 * s,
-                        width: '60%',
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        backgroundColor: '#D7D3D3',
-                        borderRadius: 28 * s
-
-                    }}>
-                        <Icon
-                            style={{
-                                marginLeft: 25 * s,
-                                marginRight: 20 * s
-                            }}
-                            onPress={this.search}
-                            color='#fff' size={20} name='search' />
-                        <TextInput
-                            style={{
-                                height: 50 * s,
-                                width: "80%",
-                                padding: 0,
-                                fontSize: 15 * s
-                            }}
-                            clearButtonMode="while-editing"
-                            // autoFocus={true}
-                            placeholderTextColor='#fff'
-                            placeholder="请输入您要搜索的关键字"
-                            onChangeText={this.change}
-                        />
-                    </View>
-
-                </View> */}
                 <View>
                     {
                         this.state.list.map((item, idx) => (
@@ -1007,12 +896,7 @@ export default class PerExp extends Component {
                 </View>
                 {
                     this.state.isLoading
-                        ? <View
-                            style={{
-                                position: 'absolute',
-                                top: 100 * s,
-                                width: '100%'
-                            }}>
+                        ? 
                             <View style={{
                                 alignItems: 'center',
                                 flexDirection: 'row',
@@ -1020,7 +904,6 @@ export default class PerExp extends Component {
                             }}>
                                 <Text style={{ fontSize: 20, marginTop: 10 }}>正在获取数据...</Text>
                             </View>
-                        </View>
                         : null
                 }
             </SafeAreaView >

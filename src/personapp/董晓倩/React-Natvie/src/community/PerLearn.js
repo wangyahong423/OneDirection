@@ -241,6 +241,7 @@ export default class PerLearn extends Component {
                                                     this.setState({ isLoading: false });
                                                     this.setState({ list: list });
                                                     this.setState({ all: list });
+                                                    console.log("加载", this.state.isLoading)
                                                 });
                                         });
                                 });
@@ -326,6 +327,7 @@ export default class PerLearn extends Component {
                                                         self.setState({ list: list });
                                                         self.setState({ all: list });
                                                     });
+
                                             });
                                     });
                             });
@@ -451,32 +453,6 @@ export default class PerLearn extends Component {
                 });
         }
     }
-    // change = (e) => {
-    //     this.setState({
-    //         search: e
-    //     })
-    // }
-    // search = () => {
-    //     let url = `http://139.155.44.190:3005/learn/select?content=${this.state.search}`;
-    //     fetch(url)
-    //         .then((res) => res.json())
-    //         .then((res) => {
-    //             if (res.false) { }
-    //             else {
-    //                 var list = [];
-    //                 for (var i = 0; i < res.length; i++) {
-    //                     for (var j = 0; j < this.state.all.length; j++) {
-    //                         if (res[i].id == this.state.all[j].id) {
-    //                             list.push(this.state.all[j]);
-    //                             break;
-    //                         }
-    //                     }
-    //                 }
-    //                 this.setState({ list: list });
-    //             }
-    //         });
-
-    // }
     back = () => {
         Actions.pop();
         var param = 1;
@@ -485,41 +461,6 @@ export default class PerLearn extends Component {
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
-                {/* <View style={{
-                    width: '100%',
-                    height: 55 * s,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                }}>
-                    <View style={{
-                        height: 40 * s,
-                        width: '60%',
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        backgroundColor: '#ffffff',
-                        borderBottomLeftRadius: 28 * s,
-                        borderTopLeftRadius: 28 * s,
-                        marginLeft: -55 * s,
-                    }}>
-                        <TextInput
-                            style={{
-                                height: 50 * s,
-                                width: "80%",
-                                padding: 0,
-                                marginLeft: 20 * s,
-                                fontSize: 15 * s,
-                            }}
-                            clearButtonMode="while-editing"
-                            placeholderTextColor=''
-                            placeholder="请输入搜索的关键字"
-                            onChangeText={this.change}
-                        />
-                        <Button style={{ borderBottomRightRadius: 28 * s, borderTopRightRadius: 28 * s, height: 42 * s, }} onPress={this.search}>
-                            搜索
-                        </Button>
-                    </View>
-                </View> */}
                 <View>
                     {
                         this.state.list.map((item, idx) => (
@@ -599,21 +540,15 @@ export default class PerLearn extends Component {
                 </View>
                 {
                     this.state.isLoading
-                        ? <View
-                            style={{
-                                position: 'absolute',
-                                top: 80 * s,
-                                width: '100%'
-                            }}>
-                            <View style={{
-                                alignItems: 'center',
-                                flexDirection: 'row',
-                                justifyContent: 'center'
-                            }}>
-                                <Text style={{ fontSize: 20, marginTop: 10 }}>正在获取数据...</Text>
-                            </View>
+                        ?
+                        <View style={{
+                            alignItems: 'center',
+                            flexDirection: 'row',
+                            justifyContent: 'center'
+                        }}>
+                            <Text style={{ fontSize: 20, marginTop: 10 }}>正在获取数据...</Text>
                         </View>
-                        : null
+                        : <View style={{ width: "100%", height: 50, backgroundColor: "yellow" }}></View>
                 }
             </SafeAreaView >
         )

@@ -16,6 +16,7 @@ export default class Touxiang extends Component {
         }
     }
     componentDidMount() {
+        this.setState({ isLoading: true })
 
         AsyncStorage.getItem('username')
             .then((res) => {
@@ -36,9 +37,10 @@ export default class Touxiang extends Component {
                         this.setState({
                             level: item.level
                         })
-                        this.setState({ isLoading: false });
                     }
                 })
+                this.setState({ isLoading: false });
+
             })
     }
     selectImg = (text) => {//获取
