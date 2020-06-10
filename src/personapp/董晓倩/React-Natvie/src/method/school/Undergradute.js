@@ -1,12 +1,21 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, StyleSheet, TouchableOpacity, Dimensions } from 'react-native'
+import { Text, View, ScrollView, StyleSheet, TouchableOpacity, Dimensions ,ImageBackground,Image} from 'react-native'
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Actions } from 'react-native-router-flux';
-const { width } = Dimensions.get('window');
+const { width ,height} = Dimensions.get('window');
 const s = width / 460;
 export default class Undergradute extends Component {
     render() {
         return (
+            <ImageBackground style={{ width: '100%', height: height }} source={require('../../../assets/gonglve/beijing.jpg')}>
+                <View style={{ width: width, height: 70 * s, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                    <TouchableOpacity
+                        onPress={() => Actions.pop()}
+                        style={{ position: "absolute", position: "absolute", left: 10 * s, }}>
+                        <Image source={require('../../../assets/back.png')} />
+                    </TouchableOpacity>
+                    <Text style={{ fontSize: 20 * s }}>本科生教育</Text>
+                </View>
             <ScrollView >
                 <View style={{ width: '96%', marginLeft: '2%', marginBottom: '2%' }}>
                     <View style={{ justifyContent: 'flex-start', alignItems: 'center', flexDirection: 'row', marginTop: 10 * s }}>
@@ -60,6 +69,7 @@ export default class Undergradute extends Component {
                 </View>
 
             </ScrollView>
+            </ImageBackground>
         )
     }
 }
@@ -67,7 +77,7 @@ let styles = StyleSheet.create({
     six: {
         width: '100%',
         marginTop: 10 * s,
-        backgroundColor: '#fff',
+        backgroundColor: 'rgba(255,255,255,0.4)',
         alignItems: 'center',
     },
     sixOne: {
@@ -85,6 +95,6 @@ let styles = StyleSheet.create({
     jingxi: {
         width: '100%',
         marginTop: 10 * s,
-        backgroundColor: '#fff',
+        backgroundColor: 'rgba(255,255,255,0.4)',
     }
 })

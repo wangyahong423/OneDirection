@@ -3,7 +3,6 @@ import { View, Text, Image, TextInput, AsyncStorage, TouchableOpacity, DeviceEve
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/AntDesign';
 
-// import { BoxShadow } from 'react-native-shadow';
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
 export default class Login extends Component {

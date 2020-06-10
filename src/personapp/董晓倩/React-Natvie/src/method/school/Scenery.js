@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import { Text, View, Image ,Dimensions} from 'react-native'
+import { Text, View, Image, Dimensions, ImageBackground, TouchableOpacity } from 'react-native'
 import Swiper from 'react-native-swiper'
-const { width } = Dimensions.get('window');
+import { Actions } from 'react-native-router-flux';
+import Icon from 'react-native-vector-icons/Entypo';
+const { width ,height} = Dimensions.get('window');
 const s = width / 460;
 let data = [
     {
@@ -277,32 +279,42 @@ let old = [
 export default class Scenery extends Component {
     render() {
         return (
-            <View style={{ width: '100%', height: '100%' }}>
-                <View style={{ height: '48%', width: '96%', marginLeft: '2%', }}>
-                    <Text style={{height:'10%',marginTop:10*s,fontSize:18}}>醉美校园</Text>
-                    <Swiper autoplay={true}  autoplayDirection={true} autoplayTimeout='1.5' showsButtons={false} dotStyle={{display:'none'}}>
-                        {
-                            data.map((value, index) => (
-                                <View>
-                                    <Image source={value.img} style={{ height: '100%', width: '100%' }} />
-                                </View>
-                            ))
-                        }
-                    </Swiper>
+            <ImageBackground style={{ width: '100%', height: height }} source={require('../../../assets/gonglve/beijing.jpg')}>
+                <View style={{ width: width, height: 65 * s, flexDirection: "row", alignItems: "center", justifyContent: "center"}}>
+                    <TouchableOpacity
+                        onPress={() => Actions.pop()}
+                        style={{ position: "absolute", position: "absolute", left: 10 * s, }}>
+                        <Icon name="reply" style={{ fontSize: 35 * s }} />
+                    </TouchableOpacity>
+                    <Text style={{ fontSize: 20 * s }}>校园风光</Text>
                 </View>
-                <View style={{ height: '48%', width: '96%', marginLeft: '2%'}}>
-                    <Text style={{height:'10%',marginTop:10*s,fontSize:18}}>老校区回忆</Text>
-                    <Swiper autoplay={true}  autoplayDirection={true} autoplayTimeout='1.5' showsButtons={false} dotStyle={{display:'none'}}>
-                        {
-                            old.map((value, index) => (
-                                <View>
-                                    <Image source={value.img} style={{ height: '100%', width: '100%' }} />
-                                </View>
-                            ))
-                        }
-                    </Swiper>
+                <View style={{ width: '100%', height: '90%' }}>
+                    <View style={{ height: '48%', width: '96%', marginLeft: '2%', }}>
+                        <Text style={{ height: '10%', marginTop: 10 * s, fontSize: 18 }}>醉美校园</Text>
+                        <Swiper autoplay={true} autoplayDirection={true} autoplayTimeout='1.5' showsButtons={false} dotStyle={{ display: 'none' }}>
+                            {
+                                data.map((value, index) => (
+                                    <View>
+                                        <Image source={value.img} style={{ height: '100%', width: '100%' }} />
+                                    </View>
+                                ))
+                            }
+                        </Swiper>
+                    </View>
+                    <View style={{ height: '48%', width: '96%', marginLeft: '2%' }}>
+                        <Text style={{ height: '10%', marginTop: 10 * s, fontSize: 18 }}>老校区回忆</Text>
+                        <Swiper autoplay={true} autoplayDirection={true} autoplayTimeout='1.5' showsButtons={false} dotStyle={{ display: 'none' }}>
+                            {
+                                old.map((value, index) => (
+                                    <View>
+                                        <Image source={value.img} style={{ height: '100%', width: '100%' }} />
+                                    </View>
+                                ))
+                            }
+                        </Swiper>
+                    </View>
                 </View>
-            </View>
+            </ImageBackground>
         )
     }
 }

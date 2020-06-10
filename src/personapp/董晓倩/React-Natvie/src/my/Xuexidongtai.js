@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
-import { Text, View, ScrollView, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter } from 'react-native';
+import { Text, View, ScrollView, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter } from 'react-native';
 import Img from '../community/Img'
 import Icon from 'react-native-vector-icons/EvilIcons';
 
@@ -102,7 +102,6 @@ export default class Xuexidongtai extends Component {
                                                         }
                                                         item.comNum = comNum;
                                                         brr.push(item);
-                                                        // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
                                                     }
                                                 });
                                                 this.setState({ isLoading: false });
@@ -186,7 +185,6 @@ export default class Xuexidongtai extends Component {
                                                             }
                                                             item.comNum = comNum;
                                                             brr.push(item);
-                                                            // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
                                                         }
                                                     });
                                                     self.setState({ data: brr });
@@ -222,19 +220,12 @@ export default class Xuexidongtai extends Component {
 
     details = (idx) => {
         var value = { page: this.state.data[idx] };
-        console.log('sss' + this.state.data[idx].level);
         var arr = this.state.data;
         arr[idx].new = false;
         this.setState({
             data: arr
         })
         AsyncStorage.setItem('mPage', JSON.stringify(value));
-        // var value2={lv:this.state.lv}
-        // AsyncStorage.setItem('lv', JSON.stringify(value2));
-
-        // AsyncStorage.getItem('mPage')
-        //     .then((value) => {
-        //     })
         Actions.xiangqing();
     }
 
@@ -251,7 +242,6 @@ export default class Xuexidongtai extends Component {
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url1);
                 });
             let url2 = `http://139.155.44.190:3005/users/list`;
             fetch(url2)
@@ -312,7 +302,6 @@ export default class Xuexidongtai extends Component {
             fetch(url2)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url2);
                 });
         }
     }
@@ -321,7 +310,6 @@ export default class Xuexidongtai extends Component {
         fetch(url1)
             .then((res) => res.json())
             .then((res) => {
-                console.log(url1);
             });
         var arr = this.state.data;
         arr[idx].likenum = 0;
@@ -334,7 +322,6 @@ export default class Xuexidongtai extends Component {
         fetch(url1)
             .then((res) => res.json())
             .then((res) => {
-                console.log(url1);
             });
         var arr = this.state.data;
         arr[idx].cnum = 0;
@@ -375,7 +362,6 @@ export default class Xuexidongtai extends Component {
                         onPress={() => this.back()}
                     >
                         <Icon style={{ color: "#fff", fontSize: 40 * s, }} name="chevron-left" />
-
                     </TouchableOpacity>
                     <Text style={{ color: '#fff', lineHeight: 55 * s, fontSize: 18 * s }}>我的帖子</Text>
                 </View>
@@ -456,9 +442,7 @@ export default class Xuexidongtai extends Component {
                                 </View>
                             </View>
                         )}
-
                     </View>
-
                 </ScrollView>
                 {
                     this.state.isLoading
@@ -478,25 +462,6 @@ export default class Xuexidongtai extends Component {
                         </View>
                         : null
                 }
-                {/* <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                    <TouchableOpacity style={{
-                        width: 300 * s,
-                        height: 40 * s,
-                        borderRadius: 15 * s,
-                        flexDirection: 'row',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: '#37376F',
-                        margin: 10 * s
-                        // position: 'absolute',
-                        // top: 0,
-                        // right: 0
-                    }}
-                        onPress={() => this.back()}
-                    >
-                        <Text style={{ color: '#e8e8e8', fontSize: 20 * s }}>返回</Text>
-                    </TouchableOpacity>
-                </View> */}
             </SafeAreaView >
         )
     }

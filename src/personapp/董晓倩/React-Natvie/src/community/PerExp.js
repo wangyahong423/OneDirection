@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, FlatList, ScrollView, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert, DrawerLayoutAndroid } from 'react-native';
+import { Text, View,Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import { Actions } from 'react-native-router-flux';
 import Img from './Img'
@@ -286,7 +286,6 @@ export default class PerExp extends Component {
                                                                 }
                                                                 res[a].colNum = colNum;
                                                                 list.push(res[a]);
-                                                                // console.log(res[a]);
                                                                 break;
                                                             }
                                                         }
@@ -481,7 +480,6 @@ export default class PerExp extends Component {
                                                                 }
                                                                 res[a].colNum = colNum;
                                                                 list.push(res[a]);
-                                                                // console.log(res[a]);
                                                                 break;
                                                             }
                                                         }
@@ -489,7 +487,6 @@ export default class PerExp extends Component {
                                                     this.setState({ isLoading: false });
                                                     this.setState({ list: list });
                                                     this.setState({ all: list });
-                                                    // console.log(list);
                                                 });
                                         });
                                 });
@@ -641,11 +638,23 @@ export default class PerExp extends Component {
             this.setState({
                 list: crr
             })
-            
+            var num = this.state.list[idx].likenum;
+            if (num == null || num == 0) {
+                num = 1;
+            } else {
+                num = num + 1;
+            }
             let url1 = `http://139.155.44.190:3005/experiencelike/add?eid=${this.state.list[idx].id}&name=${this.state.username}&ename=${this.state.list[idx].name}`;
+            let url11 = `http://139.155.44.190:3005/experience/changeLike?eid=${this.state.list[idx].id}&likenum=${num}`;
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
+                    fetch(url11)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            var param = 1;
+                            DeviceEventEmitter.emit('Mrefresh', param);
+                        });
                 });
         }
         else if (this.state.list[idx].like == true) {
@@ -718,10 +727,23 @@ export default class PerExp extends Component {
             this.setState({
                 list: crr
             })
+            var num = this.state.list[idx].cenum;
+            if (num == null || num == 0) {
+                num = 1;
+            } else {
+                num = num + 1;
+            }
             let url1 = `http://139.155.44.190:3005/collect/addCollect?eid=${this.state.list[idx].id}&name=${this.state.username}`;
+            let url11 = `http://139.155.44.190:3005/experience/change?eid=${this.state.list[idx].id}&cnum=${num}`;
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
+                    fetch(url11)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            var param = 1;
+                            DeviceEventEmitter.emit('Mrefresh', param);
+                        });
                 });
         }
         else if (this.state.list[idx].collect == true) {
@@ -785,6 +807,7 @@ export default class PerExp extends Component {
                 })
             })
     }
+    
     back = () => {
         Actions.pop();
         var param = 1;
@@ -835,7 +858,6 @@ export default class PerExp extends Component {
                                         height: 66 * s,
                                         width: 66 * s,
                                         borderRadius: 33 * s,
-                                        // backgroundColor:'green',
                                         position: 'absolute',
                                         top: 6,
                                         left: 12
@@ -844,7 +866,6 @@ export default class PerExp extends Component {
                                     <View style={{ marginLeft: 30 * s }}>
                                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                             <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
-                                            {/* <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: 'red' }}>Lv.{item.level}</Text> */}
                                             <Image style={{ height: 20 * s, width: 35 * s, marginLeft: 10 * s }} source={Img['png' + item.level]} />
 
                                         </View>
@@ -879,7 +900,6 @@ export default class PerExp extends Component {
                                             flexDirection: 'row',
                                             justifyContent: 'center',
                                             alignItems: 'center',
-                                            // backgroundColor: '#37376F',
                                             position: 'absolute',
                                             top: 5,
                                             right: 5
@@ -896,18 +916,17 @@ export default class PerExp extends Component {
                 </View>
                 {
                     this.state.isLoading
-                        ? 
-                            <View style={{
-                                alignItems: 'center',
-                                flexDirection: 'row',
-                                justifyContent: 'center'
-                            }}>
-                                <Text style={{ fontSize: 20, marginTop: 10 }}>正在获取数据...</Text>
-                            </View>
+                        ?
+                        <View style={{
+                            alignItems: 'center',
+                            flexDirection: 'row',
+                            justifyContent: 'center'
+                        }}>
+                            <Text style={{ fontSize: 20, marginTop: 10 }}>正在获取数据...</Text>
+                        </View>
                         : null
                 }
             </SafeAreaView >
-
         )
     }
 }

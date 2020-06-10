@@ -238,7 +238,6 @@ export default class Myexperence extends Component {
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url1)
                 });
         }
         else if (this.state.list[idx].like == true) {
@@ -252,7 +251,6 @@ export default class Myexperence extends Component {
             fetch(url2)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url2);
                 });
         }
         let url2 = `http://139.155.44.190:3005/users/list`;
@@ -330,7 +328,6 @@ export default class Myexperence extends Component {
             fetch(url2)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url2);
                 });
         }
         let url2 = `http://139.155.44.190:3005/users/list`;
@@ -387,7 +384,6 @@ export default class Myexperence extends Component {
         fetch(url1)
             .then((res) => res.json())
             .then((res) => {
-                console.log(url1);
             });
         var arr = this.state.list;
         arr[idx].likenum = 0;
@@ -400,7 +396,6 @@ export default class Myexperence extends Component {
         fetch(url1)
             .then((res) => res.json())
             .then((res) => {
-                console.log(url1);
             });
         var arr = this.state.list;
         arr[idx].cnum = 0;
@@ -428,7 +423,7 @@ export default class Myexperence extends Component {
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
-                  <View style={{
+                <View style={{
                     width: '100%',
                     height: 55 * s,
                     backgroundColor: '#37376F',
@@ -438,9 +433,9 @@ export default class Myexperence extends Component {
                 }}>
                     <TouchableOpacity
                         onPress={() => this.back()}
-                    
-                    style={{position:"absolute",position: "absolute", left: 10*s, }}>
-                    <Image style={{ height: 20 * s, width: 20 * s }} source={require('../../assets/gonglve/left.png')} />
+
+                        style={{ position: "absolute", position: "absolute", left: 10 * s, }}>
+                        <Image style={{ height: 20 * s, width: 20 * s }} source={require('../../assets/gonglve/left.png')} />
                     </TouchableOpacity>
                     <Text style={{ color: '#fff', lineHeight: 55 * s, fontSize: 18 * s }}>我的经验</Text>
                 </View>
@@ -461,13 +456,11 @@ export default class Myexperence extends Component {
                                                 height: 50 * s,
                                                 width: 50 * s,
                                                 borderRadius: 25 * s,
-                                                backgroundColor: 'yellow'
                                             }} source={{ uri: this.state.pic }} />
                                             <Image style={{
                                                 height: 60 * s,
                                                 width: 60 * s,
                                                 borderRadius: 35 * s,
-                                                // backgroundColor:'green',
                                                 position: 'absolute',
                                                 top: -5,
                                                 right: -5
@@ -479,7 +472,6 @@ export default class Myexperence extends Component {
                                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                                 <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
                                                 <Image style={{ height: 21 * s, width: 36 * s, marginLeft: 10 * s }} source={Img['png' + this.state.lv]} />
-                                                {/* <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: 'red' }}>Lv.{item.level}</Text> */}
                                             </View>
                                             <Text>{item.time}</Text>
                                         </View>
@@ -524,9 +516,7 @@ export default class Myexperence extends Component {
                                 </View>
                             ))
                         }
-
                     </View>
-
                 </ScrollView>
                 {
                     this.state.isLoading

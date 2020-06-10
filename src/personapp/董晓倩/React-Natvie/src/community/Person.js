@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, FlatList, ScrollView, SafeAreaView, TextInput, StatusBar, Dimensions, ImageBackground, Image, TouchableOpacity, AsyncStorage, Alert, DeviceEventEmitter, ShadowPropTypesIOS } from 'react-native';
+import { Text, View, StyleSheet, FlatList, ScrollView, SafeAreaView,  StatusBar, Dimensions, ImageBackground, Image, TouchableOpacity, AsyncStorage, Alert, DeviceEventEmitter, ShadowPropTypesIOS } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Actions } from 'react-native-router-flux';
 import ActionButton from 'react-native-action-button';
@@ -58,7 +58,6 @@ export default class Person extends Component {
                 this.setState({
                     all: JSON.parse(res)
                 })
-                console.log("详情", this.state.all)
             });
     }
     componentDidMount() {
@@ -374,12 +373,17 @@ export default class Person extends Component {
                 fol: true
             })
             let url = `http://139.155.44.190:3005/follow/add?lname=${this.state.username}&nname=${this.state.all.name}`;
+            let url1 = `http://139.155.44.190:3005/follow/changeP?lname=${this.state.username}&nname=${this.state.all.name}&newp=${true}`;
             fetch(url)
                 .then((res) => res.json())
                 .then((res) => {
-                    var param = 1;
-                    DeviceEventEmitter.emit('Prefresh', param);
-                    Alert.alert(res.msg);
+                    fetch(url1)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            var param = 1;
+                            DeviceEventEmitter.emit('Prefresh', param);
+                            Alert.alert("关注成功");
+                        })
                 })
         }
         else {
@@ -392,7 +396,7 @@ export default class Person extends Component {
                 .then((res) => {
                     var param = 1;
                     DeviceEventEmitter.emit('Prefresh', param);
-                    Alert.alert("已经取消关注")
+                    Alert.alert("取消关注")
                 })
         }
     }
@@ -407,7 +411,6 @@ export default class Person extends Component {
                 style: "我的社区"
             })
             var value = { name: this.state.all.name, pic: this.state.all.pic, head: this.state.all.head, level: this.state.all.level, title: "issue" };
-           console.log("头像框",value)
             AsyncStorage.setItem('personname2', JSON.stringify(value));
         }
         else if (data == '我的经验') {
@@ -460,7 +463,6 @@ export default class Person extends Component {
         }
     }
     search = () => {
-        console.log("搜索", this.state.mylearn)
         var value = { mylearn: this.state.all.mylearn, myexp: this.state.myexp, mycollect: this.state.mycollect, personlearn: this.state.personlearn, personexp: this.state.personexp };
         AsyncStorage.setItem('searchlearn', JSON.stringify(value));
         if (this.state.mylearn || this.state.personlearn) {
@@ -475,7 +477,6 @@ export default class Person extends Component {
     }
     onScroll(evt) {
         let y = evt.nativeEvent.contentOffset.y;
-        console.log("距离", y)
         if (y >= 200 && y <= 260 && this.state.tabShow == false) {
             this.setState({
                 tabShow: true,
@@ -587,7 +588,6 @@ export default class Person extends Component {
                                         height: 80 * s,
                                         width: 80 * s,
                                         borderRadius: 40 * s,
-                                        // backgroundColor:'green',
                                         position: 'absolute',
                                         top: -5,
                                         right: -6
@@ -614,7 +614,6 @@ export default class Person extends Component {
                                                         <View style={{ height: 35 * s, width: 100, borderRadius: 20, borderColor: "red", borderWidth: 1, justifyContent: "center", alignItems: "center", flexDirection: "row", }}>
                                                             <Text style={{ color: "red", fontSize: 25 * s, marginRight: 10 * s }}  >+</Text>
                                                             <Text style={{ color: "red", fontSize: 16 * s }}>关注</Text>
-
                                                         </View>
                                                 }
                                             </TouchableOpacity>

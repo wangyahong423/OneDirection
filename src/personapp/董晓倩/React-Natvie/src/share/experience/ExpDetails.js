@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { Text, View, ScrollView, SafeAreaView, TextInput, Dimensions, ImageBackground, Image, TouchableOpacity, AsyncStorage, Alert, DeviceEventEmitter } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { Actions } from 'react-native-router-flux';
 import Img from "../../community/Img"
 
 const { width, height } = Dimensions.get('window');
@@ -27,13 +25,11 @@ export default class ExpDetails extends Component {
                 this.setState({
                     all: JSON.parse(res)
                 })
-                console.log("all",this.state.all.head)
             });
     }
 
     render() {
         return (
-            // <ImageBackground style={{ flex: 1, width: '100%', height: height }} source={require('../../../assets/share/3-6.png')}>
             <SafeAreaView style={{ flex: 1,  }} >
                     <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center',backgroundColor:"#fff" }}>
                         <View style={{ width: '90%', marginBottom: 5 * s, opacity: 1.0 }}>
@@ -61,7 +57,6 @@ export default class ExpDetails extends Component {
                                         height: 70 * s,
                                         width: 70 * s,
                                         borderRadius: 35 * s,
-                                        // backgroundColor:'green',
                                         position: 'absolute',
                                         top: 4*s,
                                         left:13*s
@@ -89,7 +84,6 @@ export default class ExpDetails extends Component {
                         </View>
                     </View>
             </SafeAreaView >
-            // </ImageBackground >
         )
     }
 }

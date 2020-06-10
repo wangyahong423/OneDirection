@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
         borderWidth: 1
     },
     countdownStartStyle: {
-        // backgroundColor: '#fff',
         backgroundColor: 'rgba(255,255,255,0)',
         borderRadius: 10,
         borderColor: "#fff",

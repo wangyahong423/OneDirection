@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, ScrollView, TextInput, ImageBackground, AsyncStorage, Dimensions, SafeAreaView, TouchableOpacity, Alert, DeviceEventEmitter } from 'react-native';
+import { View, TextInput, ImageBackground, AsyncStorage, Dimensions, SafeAreaView, TouchableOpacity, Alert, DeviceEventEmitter } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/Ionicons';
 const { width, height } = Dimensions.get('window');
@@ -149,7 +149,6 @@ export default class AddNotes extends Component {
         }
         var param = 1;
         DeviceEventEmitter.emit('refresh', param);
-
     }
     render() {
         return (

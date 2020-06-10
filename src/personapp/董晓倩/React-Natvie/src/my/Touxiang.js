@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Image, AsyncStorage, ScrollView, TouchableOpacity, DeviceEventEmitter, StyleSheet, scrollView, Dimensions } from 'react-native';
+import { View, Text, Image, AsyncStorage, ScrollView, TouchableOpacity, DeviceEventEmitter, Dimensions } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 const { width, height } = Dimensions.get('window');
@@ -47,11 +47,9 @@ export default class Touxiang extends Component {
         this.setState({
             pic: text
         })
-        console.log("头像", this.state.pic)
     }
 
     imgChange = () => {//提交
-        // console.log("输出头像", this.state.pic)
         let url = `http://139.155.44.190:3005/users/change?name=${this.state.username}&pic=${this.state.pic}`;
         fetch(url)
             .then(res => res.json())
@@ -61,9 +59,6 @@ export default class Touxiang extends Component {
         var param = 1;
         DeviceEventEmitter.emit('freshone', param);
         DeviceEventEmitter.emit('refresh', param);
-        console.log("输出头像", this.state.pic)
-
-
     }
 
     render() {

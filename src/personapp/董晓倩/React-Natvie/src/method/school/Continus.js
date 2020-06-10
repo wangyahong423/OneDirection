@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, SectionList, Dimensions, Animated, Linking, TouchableOpacity, StyleSheet, } from 'react-native'
+import { Text, View, ScrollView, SectionList, Dimensions, Animated, Linking, TouchableOpacity,  ImageBackground, } from 'react-native'
 import Icon from 'react-native-vector-icons/Entypo';
 import Button from 'react-native-button';
-const { width } = Dimensions.get('window');
+import { Actions } from 'react-native-router-flux';
+
+const { width ,height} = Dimensions.get('window');
 const s = width / 460;
 
 export default class Continus extends Component {
@@ -19,6 +21,15 @@ export default class Continus extends Component {
     }
     render() {
         return (
+            <ImageBackground style={{ width: '100%', height: height }} source={require('../../../assets/gonglve/beijing.jpg')}>
+            <View style={{ width: width, height: 70 * s, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                <TouchableOpacity
+                    onPress={() => Actions.pop()}
+                    style={{ position: "absolute", position: "absolute", left: 10 * s, }}>
+                    <Icon name="reply" style={{ fontSize: 35 * s }} />
+                </TouchableOpacity>
+                <Text style={{ fontSize: 20 * s }}>继续教育</Text>
+            </View>
             <ScrollView>
                 <View style={{ flexDirection: 'row', flex: 1, alignItems: 'center', justifyContent: 'center',marginTop:10*s,marginLeft:-45}}>
                     <Button onPress={() => { this.zoom() }}>
@@ -60,6 +71,7 @@ export default class Continus extends Component {
                     <Text style={{ lineHeight: 25 * s, fontSize: 16 }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;河北师范大学师资力量雄厚，拥有一支高水平的研究生导师队伍。截止2018年12月，学校共有导师895人，其中博士研究生导师149人，硕士研究生导师746人。学校拥有一大批国内外著名学者，其中中国科学院院士1人，省级以上各类优秀专家113人次。</Text>
                 </View>
             </ScrollView>
+            </ImageBackground>
         )
     }
 }

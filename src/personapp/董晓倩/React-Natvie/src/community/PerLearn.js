@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, StyleSheet, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert } from 'react-native';
+import { Text, View,  Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import { Actions } from 'react-native-router-flux';
-import { Button } from '@ant-design/react-native';
 import Img from './Img'
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
@@ -15,7 +14,6 @@ export default class PerLearn extends Component {
             like: [],
             personlike: [],
             lvlist: [],
-            // search: '',
             likeNum: [],
             comNum: [],
             all: [],
@@ -42,7 +40,6 @@ export default class PerLearn extends Component {
                 this.setState({
                     person: JSON.parse(res)
                 })
-                console.log("我的社区personname2", this.state.person)
                 if (this.state.person.title == 'issue') {
                     fetch(url2)
                         .then((res) => res.json())
@@ -241,7 +238,6 @@ export default class PerLearn extends Component {
                                                     this.setState({ isLoading: false });
                                                     this.setState({ list: list });
                                                     this.setState({ all: list });
-                                                    console.log("加载", this.state.isLoading)
                                                 });
                                         });
                                 });
@@ -327,7 +323,6 @@ export default class PerLearn extends Component {
                                                         self.setState({ list: list });
                                                         self.setState({ all: list });
                                                     });
-
                                             });
                                     });
                             });
@@ -339,7 +334,6 @@ export default class PerLearn extends Component {
     componentWillUnmount() {
         if (this.listener) {
             this.listener.remove();
-
         }
     }
     delete = (idx) => {
@@ -386,10 +380,23 @@ export default class PerLearn extends Component {
             this.setState({
                 list: crr
             })
+            var num = this.state.list[idx].likenum;
+            if (num == null || num == 0) {
+                num = 1;
+            } else {
+                num = num + 1;
+            }
             let url1 = `http://139.155.44.190:3005/learnlike/add?lid=${this.state.list[idx].id}&name=${this.state.username}&lname=${this.state.list[idx].name}`;
+            let url11 = `http://139.155.44.190:3005/learn/changeLike?lid=${this.state.list[idx].id}&likenum=${num}`;
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
+                    fetch(url11)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            var param = 1;
+                            DeviceEventEmitter.emit('Mrefresh', param);
+                        });
                 });
             let url2 = `http://139.155.44.190:3005/users/list`;
             fetch(url2)
@@ -475,14 +482,12 @@ export default class PerLearn extends Component {
                                         height: 50 * s,
                                         width: 50 * s,
                                         borderRadius: 25 * s,
-                                        backgroundColor: 'yellow'
                                     }}
                                         source={{ uri: item.pic }} />
                                     <Image style={{
                                         height: 66 * s,
                                         width: 66 * s,
                                         borderRadius: 33 * s,
-                                        // backgroundColor:'green',
                                         position: 'absolute',
                                         top: 6,
                                         left: 12
@@ -540,15 +545,15 @@ export default class PerLearn extends Component {
                 </View>
                 {
                     this.state.isLoading
-                        ?
-                        <View style={{
-                            alignItems: 'center',
-                            flexDirection: 'row',
-                            justifyContent: 'center'
-                        }}>
-                            <Text style={{ fontSize: 20, marginTop: 10 }}>正在获取数据...</Text>
-                        </View>
-                        : <View style={{ width: "100%", height: 50, backgroundColor: "yellow" }}></View>
+                        ? 
+                            <View style={{
+                                alignItems: 'center',
+                                flexDirection: 'row',
+                                justifyContent: 'center'
+                            }}>
+                                <Text style={{ fontSize: 20, marginTop: 10 }}>正在获取数据...</Text>
+                            </View>
+                        : null
                 }
             </SafeAreaView >
         )

@@ -20,21 +20,12 @@ export default class AddExp extends Component {
                 this.setState({
                     username: name.username
                 })
-                console.log("用户名：", this.state.username)
             });
     }
     con = (e) => {
         this.setState({ content: e });
         var length = e.length;
-        // var length = 0;
-        // for (var i = 0; i < e.length; i++) {
-        //     if (32 <= e[i].charCodeAt() && e[i].charCodeAt() <= 126) {
-        //         length++;
-        //     }
-        //     else {
-        //         length = length + 2;
-        //     }
-        // }
+
         this.setState({ length: length });
         if (length > 500) {
             Alert.alert("文本内容超过上限！");
@@ -50,7 +41,6 @@ export default class AddExp extends Component {
             var minute = date.getMinutes().toString();
             var time = year + '年' + month + '月' + day + '日' + ' ' + hour + ':' + minute;
             let url = `http://139.155.44.190:3005/experience/add?content=${this.state.content}&name=${this.state.username}&time=${time}`;
-            console.log(url);
             fetch(url)
                 .then((res) => res.json())
                 .then((res) => {
@@ -76,7 +66,6 @@ export default class AddExp extends Component {
                                                 arr.push(res[j]);
                                             }
                                         }
-                                        // console.log(arr, id);
                                         for (var z = 0; z < arr.length; z++) {
                                             var experience = arr[z].experience;
                                             if (experience == null || experience == "") {
@@ -92,7 +81,6 @@ export default class AddExp extends Component {
 
                                                 });
                                         }
-
                                         Actions.pop();
                                     });
                             });
@@ -196,9 +184,9 @@ export default class AddExp extends Component {
         return (
             <SafeAreaView style={{ flex: 1, backgroundColor: "#F1F2F4" }}>
                 <View style={{
-                   height: 300 * s,
-                   borderBottomColor: '#F6F6F6',
-                   borderBottomWidth: 1 * s
+                    height: 300 * s,
+                    borderBottomColor: '#F6F6F6',
+                    borderBottomWidth: 1 * s
                 }}>
                     <View style={{ width: width, height: 55 * s, backgroundColor: "#37376F", flexDirection: "row", alignItems: "center" }}>
                         <TouchableOpacity

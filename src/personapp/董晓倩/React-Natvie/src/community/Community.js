@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, StyleSheet, ImageBackground, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert } from 'react-native';
+import { Text, View, ScrollView, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
-// import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Actions } from 'react-native-router-flux';
-import { Button } from '@ant-design/react-native';
 import ActionButton from 'react-native-action-button';
 import Img from './Img'
 
@@ -102,7 +100,6 @@ export default class Community extends Component {
                                                 }
                                             }
                                             item.comNum = comNum;
-                                            // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
                                         });
                                         this.setState({ isLoading: false });
                                         this.setState({ list: res });
@@ -112,11 +109,6 @@ export default class Community extends Component {
             });
         var self = this;
         this.listener = DeviceEventEmitter.addListener('refresh', function (param) {
-            // var arr=self.state.list;
-            // var a = {"content": param.content, "like": false, "likeNum": 0, "name": param.name, "pic": "http://139.155.44.190:3005/images/6.jpg", "time": param.time};
-            // arr.splice(0,0,a);
-            // self.setState({list:arr});
-            // console.log(param);
             fetch(url3)
                 .then((res) => res.json())
                 .then((res) => {
@@ -175,7 +167,6 @@ export default class Community extends Component {
                                                     }
                                                 }
                                                 item.comNum = comNum;
-                                                // item.content = item.content.length > 20 ? item.content.slice(0, 20) + '...' : item.content;
                                             });
                                             self.setState({ list: res });
                                         });
@@ -183,15 +174,11 @@ export default class Community extends Component {
                         });
                 });
         });
-        // var self1 = this;
-        // this.listener1 = DeviceEventEmitter.addListener('com', function (num){
-        //     console.log(num);
-        // })
+       
     }
 
     componentWillUnmount() {
         this.listener.remove();
-        // this.listener1.remove();
     }
     delete = (idx) => {
         Alert.alert('确认要删除吗', '',
@@ -252,7 +239,6 @@ export default class Community extends Component {
                     fetch(url11)
                         .then((res) => res.json())
                         .then((res) => {
-                            console.log(url11);
                             var param = 1;
                             DeviceEventEmitter.emit('Mrefresh', param);
                         });
@@ -316,9 +302,7 @@ export default class Community extends Component {
             fetch(url2)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url2);
                 });
-            console.log('aaa' + this.state.list[idx].likenum)//null
         }
     }
     change = (e) => {
@@ -402,9 +386,6 @@ export default class Community extends Component {
         DeviceEventEmitter.emit('refresh', param);
     }
     person = (idx) => {
-        // var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college ,head: this.state.list[idx].head};
-        // AsyncStorage.setItem('details', JSON.stringify(value));
-        // console.log("详情values",value)
         var value = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, college: this.state.list[idx].college, head: this.state.list[idx].head };
         AsyncStorage.setItem('details', JSON.stringify(value));
         var value1 = { name: this.state.list[idx].name, pic: this.state.list[idx].pic, level: this.state.list[idx].level, title: "issue", head: this.state.list[idx].head };
@@ -420,7 +401,6 @@ export default class Community extends Component {
     }
     onScroll(evt) {
         let y = evt.nativeEvent.contentOffset.y;
-        console.log("距离", y)
         if (y >= 200 && y <= 260 && this.state.tabShow == false) {
             this.setState({
                 tabShow: true,
@@ -539,11 +519,9 @@ export default class Community extends Component {
                                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                                 <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
                                                 <Image style={{ height: 21 * s, width: 36 * s, marginLeft: 10 * s }} source={Img['png' + item.level]} />
-                                                {/* <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: 'red' }}>Lv.{item.level}</Text> */}
                                             </View>
                                             <Text>{item.time}</Text>
                                         </View>
-                                        {/* </ImageBackground > */}
                                     </View>
                                     <View style={{
                                         marginLeft: 30 * s,
@@ -623,11 +601,6 @@ export default class Community extends Component {
                         </View>
                         : null
                 }
-                {/* {
-                    this.state.istop ?
-                        <View style={{ height100, width: width, backgroundColor: "red" }}></View>
-                        : <View />
-                } */}
                 {
                     this.state.isTop === true ? <ActionButton
                         renderIcon={() => (<View style={{ height: 50 * s, width: 50 * s, backgroundColor: "#F8F8F8", borderRadius: 25 * s, justifyContent: "center", alignItems: "center" }}><Image style={{ height: 35 * s, width: 35 * s }} source={require('../../assets/community/icon.png')} /></View>)}

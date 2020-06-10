@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, SafeAreaView, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import { Text, View, ScrollView, StyleSheet, Dimensions } from 'react-native';
 import { Accordion } from '@ant-design/react-native';
 
 const { width } = Dimensions.get('window');
@@ -22,7 +22,7 @@ export default class question1 extends Component {
                 content8: '【解析】词义理解题。由precept所在句可猜测precept应与example相对，且与下文的preach意思相近，故D正确。',
                 content9: '5. 【答案】[A]',
                 content10: '【解析】推理判断题。第3段提到父母应该避免讲一套做一套，结合最后一段可得出结论：关于思想道德教育问题，父母应以身作则，带头遵循，故A正确。',
-                
+
             }]
         }
     }
@@ -37,17 +37,16 @@ export default class question1 extends Component {
     _renderContent = section => {
         return (
             <View style={styles.content}>
-                <Text style={[{ color: 'red',marginTop:5*s }, styles.contentText]}>&emsp;&emsp;{section.content1}</Text>
+                <Text style={[{ color: 'red', marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content1}</Text>
                 <Text style={styles.contentText}>&emsp;&emsp;{section.content2}</Text>
-                <Text style={[{ color: 'red',marginTop:5*s }, styles.contentText]}>&emsp;&emsp;{section.content3}</Text>
+                <Text style={[{ color: 'red', marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content3}</Text>
                 <Text style={styles.contentText}>&emsp;&emsp;{section.content4}</Text>
-                <Text style={[{ color: 'red',marginTop:5*s }, styles.contentText]}>&emsp;&emsp;{section.content5}</Text>
+                <Text style={[{ color: 'red', marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content5}</Text>
                 <Text style={styles.contentText}>&emsp;&emsp;{section.content6}</Text>
-                <Text style={[{ color: 'red',marginTop:5*s }, styles.contentText]}>&emsp;&emsp;{section.content7}</Text>
+                <Text style={[{ color: 'red', marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content7}</Text>
                 <Text style={styles.contentText}>&emsp;&emsp;{section.content8}</Text>
-                <Text style={[{ color: 'red',marginTop:5*s }, styles.contentText]}>&emsp;&emsp;{section.content9}</Text>
+                <Text style={[{ color: 'red', marginTop: 5 * s }, styles.contentText]}>&emsp;&emsp;{section.content9}</Text>
                 <Text style={styles.contentText}>&emsp;&emsp;{section.content10}</Text>
-                
             </View>
         );
     };
@@ -72,83 +71,83 @@ export default class question1 extends Component {
                         <Text style={{ fontSize: 16 * s }}>
                             &emsp;&emsp;{`“A sudden awareness of a marked difference between their parents’ principles and their morals can be a dangerous disappointment.”`}
                         </Text>
-                        <Text style={{fontSize:19,marginTop:5*s, fontStyle: 'italic',color:'green'}}>
-                        Choose correct answers to the question:
+                        <Text style={{ fontSize: 19, marginTop: 5 * s, fontStyle: 'italic', color: 'green' }}>
+                            Choose correct answers to the question:
                         </Text>
-                        <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        1.Eagerly watching the child’s acquisition of new skill ______
+                        <Text style={{ fontSize: 16 * s, marginTop: 5 * s }}>
+                            1.Eagerly watching the child’s acquisition of new skill ______
                         </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　A.can be avoided
+                        <Text style={{ fontSize: 15 * s }}>
+                            A.can be avoided
                         </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　B.is universal among parents
+                        <Text style={{ fontSize: 15 * s }}>
+                            B.is universal among parents
                         </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　C.sets up dangerous states of worry in the child
+                        <Text style={{ fontSize: 15 * s }}>
+                            C.sets up dangerous states of worry in the child
                         </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　D.will make him lose interest in learning new things
+                        <Text style={{ fontSize: 15 * s }}>
+                            D.will make him lose interest in learning new things
                         </Text>
-                        <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        2.In the process of children’s learning new skills parents ________
+                        <Text style={{ fontSize: 16 * s, marginTop: 5 * s }}>
+                            2.In the process of children’s learning new skills parents ________
                         </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　A.should encourage them to read before they know the meaning of the words they read
+                        <Text style={{ fontSize: 15 * s }}>
+                            A.should encourage them to read before they know the meaning of the words they read
                         </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　B.should not expect too much of them
+                        <Text style={{ fontSize: 15 * s }}>
+                            B.should not expect too much of them
                         </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　C. should achieve a balance between pushing them too hard and leaving them on their own
+                        <Text style={{ fontSize: 15 * s }}>
+                            C. should achieve a balance between pushing them too hard and leaving them on their own
                         </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　D.should creative as many learning opportunities as possible
+                        <Text style={{ fontSize: 15 * s }}>
+                            D.should creative as many learning opportunities as possible
                         </Text>
-                        <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        3.The second paragraph mainly tells us that _________
+                        <Text style={{ fontSize: 16 * s, marginTop: 5 * s }}>
+                            3.The second paragraph mainly tells us that _________
                         </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　A. parents should be strict with their children
+                        <Text style={{ fontSize: 15 * s }}>
+                            A. parents should be strict with their children
                         </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　B. parental controls reflect only the needs of the parents and the values of the community.
+                        <Text style={{ fontSize: 15 * s }}>
+                            B. parental controls reflect only the needs of the parents and the values of the community.
                         </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　C. parental restrictions vary, and are not always enforced for the benefit of the children alone.
+                        <Text style={{ fontSize: 15 * s }}>
+                            C. parental restrictions vary, and are not always enforced for the benefit of the children alone.
                         </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　D.parental vary in their strictness towards their children according to the situation.
+                        <Text style={{ fontSize: 15 * s }}>
+                            D.parental vary in their strictness towards their children according to the situation.
                         </Text>
-                        <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        4.The word “precept” (Line3, Para.3) probably means “_______”
+                        <Text style={{ fontSize: 16 * s, marginTop: 5 * s }}>
+                            4.The word “precept” (Line3, Para.3) probably means “_______”
                         </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　A.Idea
+                        <Text style={{ fontSize: 15 * s }}>
+                            A.Idea
                         </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　B.punishment
+                        <Text style={{ fontSize: 15 * s }}>
+                            B.punishment
                         </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　C.behavior
+                        <Text style={{ fontSize: 15 * s }}>
+                            C.behavior
                         </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　D. instruction
+                        <Text style={{ fontSize: 15 * s }}>
+                            D. instruction
                         </Text>
-                        <Text style={{fontSize:16 * s ,marginTop:5*s}}>
-                        5.In moral matters, parents should ________
+                        <Text style={{ fontSize: 16 * s, marginTop: 5 * s }}>
+                            5.In moral matters, parents should ________
                         </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　A.observe the rules themselves
+                        <Text style={{ fontSize: 15 * s }}>
+                            A.observe the rules themselves
                         </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　B.be aware of the marked difference between adults and children
+                        <Text style={{ fontSize: 15 * s }}>
+                            B.be aware of the marked difference between adults and children
                         </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　C.forbid things which have no foundation in morality
+                        <Text style={{ fontSize: 15 * s }}>
+                            C.forbid things which have no foundation in morality
                         </Text>
-                        <Text style={{fontSize:15 * s }}>
-                        　D.consistently ensure the security of their children
+                        <Text style={{ fontSize: 15 * s }}>
+                            D.consistently ensure the security of their children
                         </Text>
                     </View>
                 </View>
@@ -172,8 +171,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 10 * s,
-        marginLeft:'40%',
-        marginBottom:20*s
+        marginLeft: '40%',
+        marginBottom: 20 * s
     },
     headerText: {
         fontSize: 16,

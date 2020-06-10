@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Image, AsyncStorage, SafeAreaView, Dimensions, ScrollView, TouchableOpacity, DeviceEventEmitter } from 'react-native';
+import { View, Text, Image, AsyncStorage, SafeAreaView, Dimensions, ScrollView, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
@@ -48,7 +48,6 @@ export default class Card extends Component {
     }
     selected = (idx) => {
         var card = this.state.list[idx].key;
-        console.log(card);
         var list = this.state.list;
         for (var i = 0; i < list.length; i++) {
             list[i].color = false;
@@ -60,7 +59,6 @@ export default class Card extends Component {
         })
     }
     sure = () => {
-        console.log("输出", this.state.card)
         let url = `http://139.155.44.190:3005/users/changeCard?name=${this.state.username}&card=${this.state.card}`;
         fetch(url)
             .then(res => res.json())

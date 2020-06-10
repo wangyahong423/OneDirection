@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
-import { Text, View, ScrollView, TextInput, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter } from 'react-native';
+import { Text, View, ScrollView, Dimensions, SafeAreaView, TouchableOpacity, Image, AsyncStorage, DeviceEventEmitter } from 'react-native';
 import Img from '../community/Img'
 import Icon from 'react-native-vector-icons/EvilIcons';
 
@@ -82,7 +82,6 @@ export default class NewL extends Component {
                                                                     res[b].level = this.state.arr[c].level;
                                                                     res[b].head = 'http://139.155.44.190:3005/head/' + this.state.arr[c].head;
                                                                     res[b].college = this.state.arr[c].college;
-                                                                    // console.log(this.state.arr[c])
                                                                     break;
                                                                 }
                                                             }
@@ -118,7 +117,6 @@ export default class NewL extends Component {
                                                 }
                                                 this.setState({ isLoading: false });
                                                 this.setState({ data: brr });
-                                                // console.log(brr)
                                             });
                                     });
                             });
@@ -171,7 +169,6 @@ export default class NewL extends Component {
                                                                         res[b].level = self.state.arr[c].level;
                                                                         res[b].head = 'http://139.155.44.190:3005/head/' + self.state.arr[c].head;
                                                                         res[b].college = self.state.arr[c].college;
-                                                                        // console.log(self.state.arr[c])
                                                                         break;
                                                                     }
                                                                 }
@@ -202,12 +199,10 @@ export default class NewL extends Component {
                                                                 brr.push(res[b]);
                                                                 break;
                                                             }
-
                                                         }
                                                     }
                                                     self.setState({ isLoading: false });
                                                     self.setState({ data: brr });
-                                                    // console.log(brr)
                                                 });
                                         });
                                 });
@@ -234,11 +229,23 @@ export default class NewL extends Component {
             this.setState({
                 data: crr
             })
-            let url1 = `http://139.155.44.190:3005/learnlike/add?lid=${this.state.data[idx].id}&name=${this.state.username}&lname=${this.state.data[idx].id}`;
+            var num = this.state.data[idx].likenum;
+            if (num == null || num == 0) {
+                num = 1;
+            } else {
+                num = num + 1;
+            }
+            let url1 = `http://139.155.44.190:3005/learnlike/add?lid=${this.state.data[idx].id}&name=${this.state.username}&lname=${this.state.data[idx].name}`;
+            let url11 = `http://139.155.44.190:3005/learn/changeLike?lid=${this.state.data[idx].id}&likenum=${num}`;
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url1);
+                    fetch(url11)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            var param = 1;
+                            DeviceEventEmitter.emit('Mrefresh', param);
+                        });
                 });
             let url2 = `http://139.155.44.190:3005/users/list`;
             fetch(url2)
@@ -299,14 +306,11 @@ export default class NewL extends Component {
             fetch(url2)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url2);
                 });
         }
     }
     back = () => {
-
         Actions.pop()
-
     }
     render() {
         return (
@@ -326,13 +330,11 @@ export default class NewL extends Component {
                                         height: 50 * s,
                                         width: 50 * s,
                                         borderRadius: 25 * s,
-                                        backgroundColor: 'yellow'
                                     }} source={{ uri: item.pic }} />
                                     <Image style={{
                                         height: 70 * s,
                                         width: 70 * s,
                                         borderRadius: 35 * s,
-                                        // backgroundColor:'green',
                                         position: 'absolute',
                                         top: 5,
                                         left: 8
@@ -347,7 +349,6 @@ export default class NewL extends Component {
                                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                                 <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
                                                 <Image style={{ height: 25 * s, width: 40 * s, marginLeft: 10 * s }} source={Img['png' + item.level]} />
-                                                {/* <Text>{item.level}</Text> */}
                                             </View>
                                         </View>
                                         <Text>{item.time}</Text>
@@ -375,9 +376,7 @@ export default class NewL extends Component {
 
                             </View>
                         )}
-
                     </View>
-
                 </ScrollView>
                 {
                     this.state.isLoading
@@ -407,9 +406,6 @@ export default class NewL extends Component {
                         alignItems: 'center',
                         backgroundColor: '#37376F',
                         margin: 10 * s
-                        // position: 'absolute',
-                        // top: 0,
-                        // right: 0
                     }}
                         onPress={() => this.back()}
                     >

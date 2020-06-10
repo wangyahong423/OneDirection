@@ -29,7 +29,6 @@ export default class Biji extends Component {
         };
     }
     componentDidMount() {
-
         AsyncStorage.getItem('username')
             .then((res) => {
                 let name = { username: res }
@@ -38,7 +37,6 @@ export default class Biji extends Component {
                 })
             });
         this.setState({ isLoading: true })
-
         let url = `http://139.155.44.190:3005/notes/list`;
         let url2 = `http://139.155.44.190:3005/learnlike/list`;
         let url3 = `http://139.155.44.190:3005/users/getName`;
@@ -95,8 +93,6 @@ export default class Biji extends Component {
                     color: arr
                 })
             })
-
-
         fetch(url4)
             .then(res => res.json())
             .then(res => {
@@ -106,7 +102,6 @@ export default class Biji extends Component {
                     }
                 })
             })
-
         fetch(url)
             .then(res => res.json())
             .then((res) => {
@@ -119,15 +114,13 @@ export default class Biji extends Component {
                 this.setState({
                     data: arr
                 })
-            this.setState({ isLoading: false });
-
+                this.setState({ isLoading: false });
             })
 
         this.state.data.map((item) => {
             this.setState({
                 arr: item.id
             })
-
         })
 
         var self = this;
@@ -136,7 +129,6 @@ export default class Biji extends Component {
             let url2 = `http://139.155.44.190:3005/learnlike/list`;
             let url3 = `http://139.155.44.190:3005/users/getName`;
             let url4 = `http://139.155.44.190:3005/users/list`;
-
             fetch(url2)
                 .then(res => res.json())
                 .then((res) => {
@@ -174,8 +166,6 @@ export default class Biji extends Component {
                         color: arr
                     })
                 })
-
-
             fetch(url4)
                 .then(res => res.json())
                 .then(res => {
@@ -185,7 +175,6 @@ export default class Biji extends Component {
                         }
                     })
                 })
-
             fetch(url)
                 .then(res => res.json())
                 .then((res) => {
@@ -198,25 +187,19 @@ export default class Biji extends Component {
                     self.setState({
                         data: arr
                     })
-            self.setState({ isLoading: false });
-
+                    self.setState({ isLoading: false });
                 })
-
             self.state.data.map((item) => {
                 self.setState({
                     arr: item.id
                 })
             })
         })
-
     }
-
-
     clickSend = (id) => {
         let url = `http://139.155.44.190:3005/notes/select?content=${this.state.search}`;
         fetch(url)
             .then(res => res.json())
-
             .then((res) => {
                 if (res.false) {
                 } else {
@@ -230,7 +213,6 @@ export default class Biji extends Component {
             })
     };
     delTie = (id) => {
-
         let url9 = `http://139.155.44.190:3005/notes/deleteNote?id=${id}`
         fetch(url9)
             .then(res => res.json())
@@ -243,7 +225,6 @@ export default class Biji extends Component {
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
-
                 <ScrollView style={{ flex: 1 }}>
                     <View>
                         {this.state.data.map((item, idx) =>
@@ -292,9 +273,7 @@ export default class Biji extends Component {
                                 </View>
                             </View>
                         )}
-
                     </View>
-
                 </ScrollView>
                 {
                     this.state.isLoading

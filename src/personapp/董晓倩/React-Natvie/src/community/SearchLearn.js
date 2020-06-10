@@ -41,7 +41,6 @@ export default class SearchLearn extends Component {
                 this.setState({
                     person: JSON.parse(res)
                 })
-                console.log("我的社区2", this.state.person)
                 if (this.state.person.title == 'issue') {
                     fetch(url2)
                         .then((res) => res.json())
@@ -381,10 +380,24 @@ export default class SearchLearn extends Component {
             this.setState({
                 list: crr
             })
+           
+            var num = this.state.list[idx].likenum;
+            if (num == null || num == 0) {
+                num = 1;
+            } else {
+                num = num + 1;
+            }
             let url1 = `http://139.155.44.190:3005/learnlike/add?lid=${this.state.list[idx].id}&name=${this.state.username}&lname=${this.state.list[idx].name}`;
+            let url11 = `http://139.155.44.190:3005/learn/changeLike?lid=${this.state.list[idx].id}&likenum=${num}`;
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
+                    fetch(url11)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            var param = 1;
+                            DeviceEventEmitter.emit('Mrefresh', param);
+                        });
                 });
             let url2 = `http://139.155.44.190:3005/users/list`;
             fetch(url2)
@@ -486,8 +499,6 @@ export default class SearchLearn extends Component {
                     width: '100%',
                     height: 60 * s,
                     flexDirection: 'row',
-                    // alignItems: 'center',
-                    // justifyContent: 'center'
                 }}>
                     <View style={{ height: 55 * s, width: width, backgroundColor: "#fff", justifyContent: "center", alignItems: "center", flexDirection: "row" }}>
                         <View style={{
@@ -497,8 +508,6 @@ export default class SearchLearn extends Component {
                             alignItems: 'center',
                             backgroundColor: '#E3E3E3',
                             borderRadius: 28 * s,
-                            // borderTopLeftRadius: 28 * s,
-                            // marginLeft: -55 * s,
                         }}>
                             <TextInput
                                 style={{
@@ -514,15 +523,11 @@ export default class SearchLearn extends Component {
                                 onChangeText={this.change}
                             />
                             <Icon style={{ fontSize: 25 * s, marginLeft: 10 * s }} name="search" onPress={() => this.search()} />
-                            {/* <Button style={{ borderBottomRightRadius: 28 * s, borderTopRightRadius: 28 * s, height: 42 * s, }} onPress={this.search}>
-                            搜索
-                        </Button> */}
                         </View>
                         <TouchableOpacity style={{ marginLeft: 20 * s, color: "#696969" }} onPress={() => this.back()}>
                             <Text style={{ fontSize: 17 * s, color: "#696969" }}>取消</Text>
                         </TouchableOpacity>
                     </View>
-
                 </View>
                 <View>
                     {
@@ -538,14 +543,12 @@ export default class SearchLearn extends Component {
                                         height: 50 * s,
                                         width: 50 * s,
                                         borderRadius: 25 * s,
-                                        backgroundColor: 'yellow'
                                     }}
                                         source={{ uri: item.pic }} />
                                     <Image style={{
                                         height: 66 * s,
                                         width: 66 * s,
                                         borderRadius: 33 * s,
-                                        // backgroundColor:'green',
                                         position: 'absolute',
                                         top: 3,
                                         left: 12

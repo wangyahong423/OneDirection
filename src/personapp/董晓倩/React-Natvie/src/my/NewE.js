@@ -80,7 +80,6 @@ export default class NewE extends Component {
                                                             res[i].level = this.state.arr[c].level;
                                                             res[i].head = 'http://139.155.44.190:3005/head/' + this.state.arr[c].head;
                                                             res[i].college = this.state.arr[c].college;
-                                                            // console.log(this.state.arr[c])
                                                             break;
                                                         }
                                                     }
@@ -233,13 +232,26 @@ export default class NewE extends Component {
             this.setState({
                 list: crr
             })
+            var num = this.state.list[idx].likenum;
+            if (num == null || num == 0) {
+                num = 1;
+            } else {
+                num = num + 1;
+            }
             let url1 = `http://139.155.44.190:3005/experiencelike/add?eid=${this.state.list[idx].id}&name=${this.state.username}&ename=${this.state.list[idx].name}`;
+            let url11 = `http://139.155.44.190:3005/experience/changeLike?eid=${this.state.list[idx].id}&likenum=${num}`;
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url1)
+                    fetch(url11)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            var param = 1;
+                            DeviceEventEmitter.emit('Mrefresh', param);
+                        });
                 });
         }
+
         else if (this.state.list[idx].like == true) {
             crr = this.state.list;
             crr[idx].like = false;
@@ -251,7 +263,6 @@ export default class NewE extends Component {
             fetch(url2)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url2);
                 });
         }
         let url2 = `http://139.155.44.190:3005/users/list`;
@@ -311,11 +322,23 @@ export default class NewE extends Component {
             this.setState({
                 list: crr
             })
+            var num = this.state.list[idx].cenum;
+            if (num == null || num == 0) {
+                num = 1;
+            } else {
+                num = num + 1;
+            }
             let url1 = `http://139.155.44.190:3005/collect/addCollect?eid=${this.state.list[idx].id}&name=${this.state.username}`;
+            let url11 = `http://139.155.44.190:3005/experience/change?eid=${this.state.list[idx].id}&cnum=${num}`;
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
-
+                    fetch(url11)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            var param = 1;
+                            DeviceEventEmitter.emit('Mrefresh', param);
+                        });
                 });
         }
         else if (this.state.list[idx].collect == true) {
@@ -329,7 +352,6 @@ export default class NewE extends Component {
             fetch(url2)
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log(url2);
                 });
         }
         let url2 = `http://139.155.44.190:3005/users/list`;
@@ -400,7 +422,6 @@ export default class NewE extends Component {
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }} >
-
                 <ScrollView style={{ flex: 1 }}>
                     <View>
                         {
@@ -411,32 +432,27 @@ export default class NewE extends Component {
                                         height: 80 * s,
                                         alignItems: 'center'
                                     }}>
-
                                         <View>
                                             <Image style={{
                                                 marginLeft: 20 * s,
                                                 height: 50 * s,
                                                 width: 50 * s,
                                                 borderRadius: 25 * s,
-                                                backgroundColor: 'yellow'
                                             }} source={{ uri: item.pic }} />
                                             <Image style={{
                                                 height: 60 * s,
                                                 width: 60 * s,
                                                 borderRadius: 35 * s,
-                                                // backgroundColor:'green',
                                                 position: 'absolute',
                                                 top: -5,
                                                 right: -5
                                             }}
                                                 source={{ uri: item.head }} />
                                         </View>
-
                                         <View style={{ marginLeft: 30 * s }}>
                                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                                 <Text style={{ fontSize: 18 * s }}>{item.name}</Text>
                                                 <Image style={{ height: 21 * s, width: 36 * s, marginLeft: 10 * s }} source={Img['png' + item.level]} />
-                                                {/* <Text style={{ fontSize: 15 * s, marginLeft: 10 * s, color: 'red' }}>Lv.{item.level}</Text> */}
                                             </View>
                                             <Text>{item.time}</Text>
                                         </View>
@@ -463,9 +479,7 @@ export default class NewE extends Component {
                                 </View>
                             ))
                         }
-
                     </View>
-
                 </ScrollView>
                 {
                     this.state.isLoading
@@ -495,9 +509,6 @@ export default class NewE extends Component {
                         alignItems: 'center',
                         backgroundColor: '#37376F',
                         margin: 10 * s
-                        // position: 'absolute',
-                        // top: 0,
-                        // right: 0
                     }}
                         onPress={() => this.back()}
                     >

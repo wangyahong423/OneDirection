@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Image, StyleSheet, AsyncStorage, ScrollView, Dimensions, TouchableOpacity, DeviceEventEmitter } from 'react-native';
+import { View, Text, AsyncStorage, ScrollView, Dimensions, TouchableOpacity, DeviceEventEmitter } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 const { width } = Dimensions.get('window');
@@ -58,9 +58,7 @@ export default class NewAdd extends Component {
                             fetch(url2)
                                 .then((res) => res.json())
                                 .then((res) => {
-                                    console.log(url2);
                                 });
-                            // console.log(url2)
                         }
                     }
                 }
@@ -85,7 +83,6 @@ export default class NewAdd extends Component {
                                 .then((res) => {
 
                                 });
-                            console.log(url2)
                         }
                     }
                 }
@@ -112,21 +109,18 @@ export default class NewAdd extends Component {
                                 <Text style={{ fontSize: 18, lineHeight: 60 * s, marginRight: 10 * s }} >{this.state.learn}</Text>
                                 <Icon name="chevron-right" style={{ marginRight: 30 * s }} size={20} color="#aaa" />
                             </View>
-
                         </TouchableOpacity>
                         : <TouchableOpacity style={{
                             height: 60 * s, width: '100%', flexDirection: 'row', borderBottomColor: '#dedede', borderWidth: 1, borderTopColor: '#dedede',
                             borderLeftColor: 'white', borderRightColor: 'white', backgroundColor: "white",
                             flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'
                         }}
-
                         >
                             <Text style={{ fontSize: 18, lineHeight: 60 * s, marginLeft: 30 * s }} >社区</Text>
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                 <Text style={{ fontSize: 18, lineHeight: 60 * s, marginRight: 10 * s }} >{this.state.learn}</Text>
                                 <Icon name="chevron-right" style={{ marginRight: 30 * s }} size={20} color="#aaa" />
                             </View>
-
                         </TouchableOpacity>
                 }
                 {
@@ -143,21 +137,18 @@ export default class NewAdd extends Component {
                                 <Text style={{ fontSize: 18, lineHeight: 60 * s, marginRight: 10 * s }} >{this.state.experience}</Text>
                                 <Icon name="chevron-right" style={{ marginRight: 30 * s }} size={20} color="#aaa" />
                             </View>
-
                         </TouchableOpacity>
                         : <TouchableOpacity style={{
                             height: 60 * s, width: '100%', flexDirection: 'row', borderBottomColor: '#dedede', borderWidth: 1, borderTopColor: '#dedede',
                             borderLeftColor: 'white', borderRightColor: 'white', backgroundColor: "white",
                             flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'
                         }}
-
                         >
                             <Text style={{ fontSize: 18, lineHeight: 60 * s, marginLeft: 30 * s }} >经验分享</Text>
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                 <Text style={{ fontSize: 18, lineHeight: 60 * s, marginRight: 10 * s }} >{this.state.experience}</Text>
                                 <Icon name="chevron-right" style={{ marginRight: 30 * s }} size={20} color="#aaa" />
                             </View>
-
                         </TouchableOpacity>
                 }
 

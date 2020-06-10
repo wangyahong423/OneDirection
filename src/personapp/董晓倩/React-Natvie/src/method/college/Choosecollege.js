@@ -126,7 +126,7 @@ export default class Choosecollege extends Component {
             college: v
         })
         AsyncStorage.setItem('college', v[0],
-            () => { console.log('学院为:', v[0]) }
+            () => {  }
         )
         Actions.pop()
         var param = v[0];
@@ -141,8 +141,6 @@ export default class Choosecollege extends Component {
                         data={this.pickerData}
                         cols={1}
                         mode="dropdown"
-                        // itemStyle={{ height: 50 * s, alignItems: 'center', justifyContent: 'center' }}
-                        // indicatorStyle={{ height: 100 * s, alignItems: 'center', justifyContent: 'center' }}
                         value={Array.from(this.state.college)}
                         onChange={this.setData}
                     >

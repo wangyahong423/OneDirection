@@ -126,7 +126,7 @@ export default class Choosecollege extends Component {
             college: v
         })
         AsyncStorage.setItem('college', v[0],
-            () => { console.log('学院为:', v[0]) }
+            () => { }
         )
         Actions.pop()
         var param = v[0];

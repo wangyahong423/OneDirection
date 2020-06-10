@@ -84,9 +84,6 @@ export default class Mima extends Component {
                             <TextInput onChangeText={this.getReNewPwd} secureTextEntry={true} placeholder="请再次确认新密码" placeholderTextColor="#fff" style={{ color: "#fff" }} />
                         </View>
                     </View>
-                    {/* <View style={{ marginTop: height*0.1, marginLeft: '20%' }}>
-                        <Button style={{ borderRadius: 20, width: '75%', backgroundColor: '#4874E1' }} onPress={this.getRepwd}><Text style={{ color: 'white' }}>重置密码</Text></Button>
-                    </View> */}
                     <View style={{ justifyContent: "center", alignItems: "center" }}>
                         <TouchableOpacity style={{ justifyContent: "center", alignItems: "center" ,borderRadius: 23 * s, width: width * 0.6, backgroundColor: '#4874E1', height: 46 * s, marginTop: 50 * s }} onPress={this.getRepwd}>
                             <Text style={{ color: 'white' }}>重置密码</Text>

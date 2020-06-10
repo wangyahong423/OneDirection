@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View, ScrollView, TextInput,Image, AsyncStorage, Dimensions, SafeAreaView, TouchableOpacity, Alert, DeviceEventEmitter } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
 export default class Add extends Component {
@@ -22,7 +21,6 @@ export default class Add extends Component {
                 this.setState({
                     username: name.username
                 })
-                console.log("用户名：", this.state.username)
             });
     }
     con = (e) => {
@@ -43,7 +41,6 @@ export default class Add extends Component {
             var minute = date.getMinutes().toString();
             var time = year + '年' + month + '月' + day + '日' + ' ' + hour + ':' + minute;
             let url = `http://139.155.44.190:3005/learn/addLearn?content=${this.state.content}&name=${this.state.username}&time=${time}`;
-            console.log(url);
             fetch(url)
                 .then((res) => res.json())
                 .then((res) => {
@@ -69,7 +66,6 @@ export default class Add extends Component {
                                                 arr.push(res[j]);
                                             }
                                         }
-                                        // console.log(arr, id);
                                         for (var z = 0; z < arr.length; z++) {
                                             var learn = arr[z].learn;
                                             if (learn == null || learn == "") {
@@ -85,7 +81,6 @@ export default class Add extends Component {
 
                                                 });
                                         }
-
                                         Actions.pop();
                                     });
                             });

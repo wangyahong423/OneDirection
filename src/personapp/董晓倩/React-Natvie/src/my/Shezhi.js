@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Image, StyleSheet, AsyncStorage, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
+import { Text, AsyncStorage, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const { width } = Dimensions.get('window');
@@ -25,7 +25,6 @@ export default class Shezhi extends Component {
                     .then((res) => {
                         if (res.err) {
                         } else {
-                            console.log('成功')
                         }
                     })
             });

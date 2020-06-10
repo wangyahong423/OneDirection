@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TextInput, AsyncStorage, TouchableOpacity, StyleSheet, Dimensions ,ImageBackground} from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, ImageBackground } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 const { width } = Dimensions.get('window');
 const s = width / 640;
@@ -19,14 +19,12 @@ export default class Fankui extends Component {
         if (text !== '') {
             this.setState({ tel: text, unum: 0 })
         }
-
     }
     pwdhandle = (text) => {
         if (text !== '') {
             this.setState({ content: text, pnum: 0 })
         }
     }
-
     handleRegister = () => {
         if (this.state.tel != '' && this.state.content != "") {
             var date = new Date();
@@ -45,7 +43,6 @@ export default class Fankui extends Component {
                     } else {
                         alert(res.msg);
                     }
-
                 })
         }
         else if (this.state.tel == '') {
@@ -104,14 +101,14 @@ export default class Fankui extends Component {
                     <TouchableOpacity
                         style={{
                             width: '50%',
-                            height: 60*s,
+                            height: 60 * s,
                             backgroundColor: '#37376F',
-                            marginTop: 80*s,
+                            marginTop: 80 * s,
                             alignItems: 'center',
                             justifyContent: 'center',
                         }}
                         onPress={this.handleRegister}>
-                        <Text style={{ color: '#ffffff',fontSize:22*s }}>提交</Text>
+                        <Text style={{ color: '#ffffff', fontSize: 22 * s }}>提交</Text>
                     </TouchableOpacity>
                     {
                         this.state.unum == 0
@@ -136,13 +133,13 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#ccc',
         backgroundColor: '#fff',
-        minHeight:220
+        minHeight: 220
     },
     textInputInner1: {
         width: "80%",
         borderWidth: 1,
         borderColor: '#ccc',
         backgroundColor: '#fff',
-        minHeight:10
+        minHeight: 10
     },
 })

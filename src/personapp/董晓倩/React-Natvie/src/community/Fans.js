@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, SafeAreaView, TextInput, Dimensions, ImageBackground, Image, TouchableOpacity, AsyncStorage, Alert, DeviceEventEmitter, ShadowPropTypesIOS } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { Text, View, ScrollView, SafeAreaView,  Dimensions,  Image, TouchableOpacity, AsyncStorage, Alert, DeviceEventEmitter } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 const { width, height } = Dimensions.get('window');
 const s = width / 460;
@@ -92,7 +91,7 @@ export default class Fans extends Component {
                     })
             });
         var self = this;
-        this.listener = DeviceEventEmitter.addListener('refresh', function (param) {
+        this.listener = DeviceEventEmitter.addListener('Fansrefresh', function (param) {
             fetch(url1)
                 .then((res) => res.json())
                 .then((res) => {
@@ -156,11 +155,18 @@ export default class Fans extends Component {
             this.setState({
                 myFol: arr
             })
+            let url1 = `http://139.155.44.190:3005/follow/changeP?lname=${this.state.username}&nname=${this.state.follow[id].name}&newp=${true}`;
             let url = `http://139.155.44.190:3005/follow/add?lname=${this.state.username}&nname=${this.state.follow[id].name}`;
             fetch(url)
                 .then((res) => res.json())
                 .then((res) => {
-                    Alert.alert(res.msg);
+                    fetch(url1)
+                    .then((res) => res.json())
+                    .then((res) => {
+                        var param = 1;
+                        DeviceEventEmitter.emit('Fansrefresh', param);
+                        Alert.alert("关注成功");
+                    })
                 })
         }
         else {
@@ -182,7 +188,6 @@ export default class Fans extends Component {
                     Alert.alert("已经取消关注")
                 })
         }
-
     }
     person = (idx) => {
         var value = { name: this.state.follow[idx].name, pic: this.state.follow[idx].pic, level: this.state.follow[idx].level, college: this.state.follow[idx].college,head: this.state.follow[idx].head };
@@ -203,7 +208,6 @@ export default class Fans extends Component {
                                     height: 60 * s,
                                     width: 60 * s,
                                     borderRadius: 30 * s,
-                                    // backgroundColor:'green',
                                     position: 'absolute',
                                     top: 0,
                                     left: 15
@@ -235,7 +239,6 @@ export default class Fans extends Component {
                     }
                 </ScrollView>
             </SafeAreaView>
-
         )
     }
 }

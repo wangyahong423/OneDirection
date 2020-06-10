@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, SafeAreaView, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import { Text, View, ScrollView, StyleSheet, Dimensions } from 'react-native';
 import { Accordion } from '@ant-design/react-native';
 
 const { width } = Dimensions.get('window');
@@ -22,7 +22,6 @@ export default class question1 extends Component {
                 content8: '【解析】事实细节题。第4段中出现了几个比较数字，考题要求找到此段首句提到的收人增加25%的参照点。第2段第1句中的Getting through university 表明这类学生收人增加25%的参照对象是没读大学的人，且从第4段第3句中的the list和第4句即可以确定这一段是在比较大学毕业与18岁毕业(即没读大学)收入的不同，因此C正确。',
                 content9: '5. 【答案】[D]',
                 content10: '【解析】推理判断题。结论往往出现在文章结尾,要想答对此题,一定要仔细体会本文末句。本文虽然重点讨论文科没有经济效益，但是作者并没有做出主观判断，故A、B、C都不正确，而作者在文章最后讲到了人文学科虽然经济效益不佳但学习过程更有趣，故D符合作者意思。',
-                
             }]
         }
     }
@@ -47,7 +46,6 @@ export default class question1 extends Component {
                 <Text style={styles.contentText}>&emsp;&emsp;{section.content8}</Text>
                 <Text style={[{ color: 'red',marginTop:5*s }, styles.contentText]}>&emsp;&emsp;{section.content9}</Text>
                 <Text style={styles.contentText}>&emsp;&emsp;{section.content10}</Text>
-                
             </View>
         );
     };
