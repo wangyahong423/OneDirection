@@ -170,9 +170,9 @@ let data = [
     }
 ]
 let old = [
-    // {
-    //     img: require('../../../assets/gonglve/ctdxy1.png'),
-    // },
+    {
+        img: require('../../../assets/gonglve/ctdxy1.png'),
+    },
     {
         img: require('../../../assets/gonglve/ctdxy2.png'),
     },
@@ -182,9 +182,9 @@ let old = [
     {
         img: require('../../../assets/gonglve/ctdxy4.png'),
     },
-    // {
-    //     img: require('../../../assets/gonglve/ctdxy5.png'),
-    // },
+    {
+        img: require('../../../assets/gonglve/ctdxy5.png'),
+    },
     {
         img: require('../../../assets/gonglve/ctdxy6.png'),
     },
@@ -200,81 +200,81 @@ let old = [
     {
         img: require('../../../assets/gonglve/ctdxy10.png'),
     },
-    {
-        img: require('../../../assets/gonglve/ctdxy11.png'),
-    },
-    {
-        img: require('../../../assets/gonglve/ctdxy12.png'),
-    },
-    {
-        img: require('../../../assets/gonglve/ctdxy13.png'),
-    },
+    // {
+    //     img: require('../../../assets/gonglve/ctdxy11.png'),
+    // },
+    // {
+    //     img: require('../../../assets/gonglve/ctdxy12.png'),
+    // },
+    // {
+    //     img: require('../../../assets/gonglve/ctdxy13.png'),
+    // },
     // {
     //     img: require('../../../assets/gonglve/ctdxy14.png'),
     // },
     // {
     //     img: require('../../../assets/gonglve/ctdxy15.png'),
     // },
-    {
-        img: require('../../../assets/gonglve/ctdxy16.png'),
-    },
+    // {
+    //     img: require('../../../assets/gonglve/ctdxy16.png'),
+    // },
     // {
     //     img: require('../../../assets/gonglve/ctdxy17.png'),
     // },
-    {
-        img: require('../../../assets/gonglve/ctdxy18.png'),
-    },
-    {
-        img: require('../../../assets/gonglve/ctdxy19.png'),
-    },
-    {
-        img: require('../../../assets/gonglve/ctdxy20.png'),
-    },
+    // {
+    //     img: require('../../../assets/gonglve/ctdxy18.png'),
+    // },
+    // {
+    //     img: require('../../../assets/gonglve/ctdxy19.png'),
+    // },
+    // {
+    //     img: require('../../../assets/gonglve/ctdxy20.png'),
+    // },
     // {
     //     img: require('../../../assets/gonglve/ctdxy21.png'),
     // },
-    {
-        img: require('../../../assets/gonglve/ctdxy22.png'),
-    },
-    {
-        img: require('../../../assets/gonglve/ctdxy23.png'),
-    },
-    {
-        img: require('../../../assets/gonglve/ctdxy24.png'),
-    },
-    {
-        img: require('../../../assets/gonglve/ctdxy25.png'),
-    },
-    {
-        img: require('../../../assets/gonglve/ctdxy26.png'),
-    },
-    {
-        img: require('../../../assets/gonglve/ctdxy27.png'),
-    },
-    {
-        img: require('../../../assets/gonglve/ctdxy28.png'),
-    },
-    {
-        img: require('../../../assets/gonglve/ctdxy29.png'),
-    },
-    {
-        img: require('../../../assets/gonglve/ctdxy20.png'),
-    },
-    {
-        img: require('../../../assets/gonglve/ctdxy31.png'),
-    },
-    {
-        img: require('../../../assets/gonglve/ctdxy32.png'),
-    },
-    {
-        img: require('../../../assets/gonglve/ctdxy33.png'),
-    },
-    {
-        img: require('../../../assets/gonglve/ctdxy34.png'),
-    },
-    {
-        img: require('../../../assets/gonglve/ctdxy35.png'),
-    },
+    // {
+    //     img: require('../../../assets/gonglve/ctdxy22.png'),
+    // },
+    // {
+    //     img: require('../../../assets/gonglve/ctdxy23.png'),
+    // },
+    // {
+    //     img: require('../../../assets/gonglve/ctdxy24.png'),
+    // },
+    // {
+    //     img: require('../../../assets/gonglve/ctdxy25.png'),
+    // },
+    // {
+    //     img: require('../../../assets/gonglve/ctdxy26.png'),
+    // },
+    // {
+    //     img: require('../../../assets/gonglve/ctdxy27.png'),
+    // },
+    // {
+    //     img: require('../../../assets/gonglve/ctdxy28.png'),
+    // },
+    // {
+    //     img: require('../../../assets/gonglve/ctdxy29.png'),
+    // },
+    // {
+    //     img: require('../../../assets/gonglve/ctdxy20.png'),
+    // },
+    // {
+    //     img: require('../../../assets/gonglve/ctdxy31.png'),
+    // },
+    // {
+    //     img: require('../../../assets/gonglve/ctdxy32.png'),
+    // },
+    // {
+    //     img: require('../../../assets/gonglve/ctdxy33.png'),
+    // },
+    // {
+    //     img: require('../../../assets/gonglve/ctdxy34.png'),
+    // },
+    // {
+    //     img: require('../../../assets/gonglve/ctdxy35.png'),
+    // },
 ]
 export default class Scenery extends Component {
     render() {

@@ -100,6 +100,7 @@ export default class CollegeOther extends Component {
                 </View>
                 <ScrollView>
                     <Accordion
+                    style={{marginBottom:'6%'}}
                         sections={this.state.todo}
                         activeSections={this.state.activeSections}
                         renderHeader={this._renderHeader}

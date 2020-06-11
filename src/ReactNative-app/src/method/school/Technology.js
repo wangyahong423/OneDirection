@@ -42,7 +42,7 @@ export default class Technology extends Component {
                             <Text style={{ color: 'blue' }}>   &nbsp;科&nbsp;技&nbsp;处</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={{ width: '94%', marginLeft: '3%', marginBottom: '3%' }}>
+                    <View style={{ width: '94%', marginLeft: '3%', marginBottom: '7%' }}>
                         <Text style={{ lineHeight: 25 * s, fontSize: 16 }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;河北师范大学是一所综合型的师范类院校。科研工作在学校发展中处于重要地位，是学校求生存、谋发展中最有效、最持久的决定性因素。学校科研工作的基本思路是：发挥优势，突出重点，力求他有我优；融合渗透，突出特色，力求他无我有；统筹兼顾，远近结合，做到基础研究与应用研究并重；协同合作，做大做强，提高科研项目和成果的竞争力。</Text>
                         <Text style={{ lineHeight: 15 * s, fontSize: 10 }}></Text>
                         <Text style={{ lineHeight: 25 * s, fontSize: 16 }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学校在自然科学研究方面具有深厚的基础，现有国家重点学科1个，博士后科研流动站3个，燕赵学者岗位2个，河北省高校强势特色学科3个，省级重点学科8个、省级重点实验室7个。 学校设有数学研究中心、生态环境研究中心、杂交小麦研究所等17个科研机构。</Text>

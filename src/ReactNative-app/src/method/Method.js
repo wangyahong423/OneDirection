@@ -100,7 +100,7 @@ export default class Method extends Component {
                                     <View style={{ height: 70 * s, width: 70 * s, alignItems: 'center', justifyContent: 'center', borderRadius: 35 * s, backgroundColor: '#efcd00' }}><Icon name='hand-stop-o' size={36} color="white" /></View>
                                     <Text style={{ marginTop: 10 * s, color: '#efcd00' }}>就业服务</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity onPress={() => { Linking.openURL('http://heshida.jiuyeb.cn/').catch(err => console.error('An error occurred', err)); }} style={styles.yjzd}>
+                                <TouchableOpacity onPress={() => { Linking.openURL('http://xyh.hebtu.edu.cn/').catch(err => console.error('An error occurred', err)); }} style={styles.yjzd}>
                                     <View style={{ height: 70 * s, width: 70 * s, alignItems: 'center', justifyContent: 'center', borderRadius: 35 * s, backgroundColor: '#12ed5a' }}><Icon name='handshake-o' size={36} color="white" /></View>
                                     <Text style={{ marginTop: 10 * s, color: '#12ed5a' }}>校友会</Text>
                                 </TouchableOpacity>
