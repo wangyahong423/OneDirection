@@ -44,14 +44,12 @@ export default class Myfans extends Component {
                         this.setState({
                             usersFollow: myfollow
                         })
-                        console.log('usersFollows:', this.state.usersFollow);
                         var followList = [];
                         for (var i = 0; i < res.data.length; i++) {
                             if (res.data[i].nname == this.state.name) {//nname是被关注的人
                                 followList.push(res.data[i]);
                             }
                         }
-                        console.log('follow0:', followList);
                         followList.forEach((item) => {
                             for (var i = 0; i < this.state.pic.length; i++) {
                                 if (item.lname == this.state.pic[i].name) {
@@ -67,18 +65,15 @@ export default class Myfans extends Component {
                                 else {
                                     item.follow = false;
                                 }
-                                console.log('22', this.state.usersFollow);
                             }
                         })
                         this.setState({
                             follow: followList
                         })
-                        console.log('zuihou:', this.state.follow);
 
                         this.setState({
                             follow: this.state.follow
                         })
-                        console.log('follow', this.state.follow);
                     })
             })
     }
@@ -92,11 +87,16 @@ export default class Myfans extends Component {
                 follow: crr
             })
             let url1 = `http://139.155.44.190:3005/follow/add?lname=${this.state.name}&nname=${this.state.follow[idx].lname}`;
+            let url3 = `http://139.155.44.190:3005/follow/changeP?lname=${this.state.name}&nname=${this.state.follow[idx].lname}&newp=${true}`;
             axios(url1)
                 .then((res) => {
                     console.log(url1);
                     if (res.data.ok) {
                         alert(res.data.msg);
+                        axios(url3)
+                            .then((res) => {
+
+                            })
                     } else {
                         alert(res.data.msg);
                     }

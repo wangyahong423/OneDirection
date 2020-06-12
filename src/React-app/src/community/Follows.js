@@ -44,12 +44,6 @@ export default class Follows extends Component {
                         data: arr
                     })
                 })
-                console.log('data', arr);
-                // axios(url1)
-                //     .then((res) => {
-                //         this.setState({
-                //             todo: res.data
-                //         })
                 axios(url3)
                     .then((res) => {
                         var myfollow = [];
@@ -68,7 +62,6 @@ export default class Follows extends Component {
                                 followList.push(res.data[i]);
                             }
                         }
-                        console.log('follow0:', followList);
                         followList.forEach((item) => {
                             for (var i = 0; i < this.state.pic.length; i++) {
                                 if (item.nname == this.state.pic[i].name) {
@@ -84,20 +77,16 @@ export default class Follows extends Component {
                                 else {
                                     item.follow = false;
                                 }
-                                console.log('22', this.state.usersFollow);
                             }
                         })
                         this.setState({
                             follow: followList
                         })
-                        console.log('follow:', this.state.follow);
                         this.setState({
                             follow: this.state.follow
                         })
                     })
-                console.log('all1', this.state.follow);
             })
-        // })
     }
 
     follow = (idx) => {
@@ -109,11 +98,16 @@ export default class Follows extends Component {
                 follow: crr
             })
             let url1 = `http://139.155.44.190:3005/follow/add?lname=${this.state.name}&nname=${this.state.follow[idx].nname}`;
+            let url3 = `http://139.155.44.190:3005/follow/changeP?lname=${this.state.name}&nname=${this.state.follow[idx].nname}&newp=${true}`;
             axios(url1)
                 .then((res) => {
                     console.log(url1);
                     if (res.data.ok) {
                         alert(res.data.msg);
+                        axios(url3)
+                        .then((res)=>{
+                            
+                        })
                     } else {
                         alert(res.data.msg);
                     }

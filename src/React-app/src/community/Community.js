@@ -412,7 +412,7 @@ export default class Community extends Component {
                         {
                             this.state.data.map((item, idx) =>
                                 <div style={{ background: '#fff', color: 'black', marginBottom: '1vh' }}>
-                                    <Link to={`/person/${item.name}`}>
+                                    <Link to={item.name != this.state.name?`/person/${item.name}`:'/community'}>
                                         <div style={{ float: "left", flex: 'row', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
                                             <img src={item.pic} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 5 }} />
                                             {
@@ -447,7 +447,7 @@ export default class Community extends Component {
                                     </Link>
                                     <div style={{ marginTop: 20 }}>
                                         <Link to={`/pinglunone/${item.id}`}>
-                                            <sapn className="iconfont icon-pinglun" style={{ marginLeft: '27%', fontSize: '24px', color: 'black' }}></sapn>
+                                            <sapn className="iconfont icon-icon-test-sy" style={{ marginLeft: '27%', fontSize: '24px', color: 'black' }}></sapn>
                                             <span style={{ marginLeft: '3%', color: '#000000' }}>{item.comNum}</span>
                                         </Link>
                                         <sapn className="iconfont icon-dianzan" onClick={this.change.bind(this, (idx))} style={item.like ? { color: 'red', fontSize: '24px', marginLeft: '26%' } : { fontSize: '24px', marginLeft: '26%' }}></sapn>

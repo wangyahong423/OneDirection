@@ -21,7 +21,7 @@ export default class About extends Component {
 
   componentDidMount() {
     var id = this.props.match.params.id;
-    let url = `http://139.155.44.190:3005/learn/list/` + id;
+    let url = `http://139.155.44.190:3005/learn/list/`;
     let url1 = `http://139.155.44.190:3005/learntalk/list/`;
     let url3 = `http://139.155.44.190:3005/users/getName`;
     let url4 = `http://139.155.44.190:3005/users/list`;

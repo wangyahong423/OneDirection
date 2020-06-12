@@ -548,7 +548,6 @@ export default class Myfolper extends Component {
             lname: lname1,
             username: name
         })
-        console.log('data', this.state.data);
     }
 
     follow = () => {
@@ -558,11 +557,15 @@ export default class Myfolper extends Component {
                 follow: true
             })
             let url1 = `http://139.155.44.190:3005/follow/add?lname=${this.state.name}&nname=${user}`;
+            let url3 = `http://139.155.44.190:3005/follow/changeP?lname=${this.state.name}&nname=${this.state.user}&newp=${true}`;
             axios(url1)
                 .then((res) => {
-                    // console.log(url1);
                     if (res.data.ok) {
                         alert(res.data.msg);
+                        axios(url3)
+                            .then((res) => {
+
+                            })
                     } else {
                         alert(res.data.msg);
                     }
@@ -1905,7 +1908,7 @@ export default class Myfolper extends Component {
         });
     }
 
-    back=()=>{
+    back = () => {
         window.history.back();
     }
 

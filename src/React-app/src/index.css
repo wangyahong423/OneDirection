@@ -13,8 +13,10 @@ code {
 }
 
 .one{
-  height:260px;
+  height:360px;
   width:100%;
-  background-image: url('./my/img/gonglve2.jpg');
-  opacity:1
+  background: url('./my/img/img13.png') no-repeat center center;
+  opacity:1;
+  background-size:cover;
+  background-color: #ffffff;
 }

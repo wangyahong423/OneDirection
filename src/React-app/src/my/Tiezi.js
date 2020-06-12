@@ -319,7 +319,7 @@ export default class Tiezi extends Component {
                   <div style={{ float: "left", flex: 'row', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
                     <img src={this.state.pic} style={{ height: '7vh', width: '12vw', borderRadius: '50%', marginLeft: 15, marginTop: 5 }} />
                     {
-                      item.head != 'http://139.155.44.190:3005/head/null'
+                      this.state.head != 'http://139.155.44.190:3005/head/null'
                         ? <img src={this.state.head} style={{ height: '10vh', width: '15vw', borderRadius: '50%', position: 'absolute', left: 4, top: -3 }} />
                         : null
                     }
@@ -345,7 +345,7 @@ export default class Tiezi extends Component {
                   <div style={{ marginTop: 20,position:'relative'}}>
                     <Link to={`/xuexiyouknow/${item.id}`}>
                       {/* <div style={{position:'relative'}}> */}
-                      <sapn className="iconfont icon-pinglun" style={{ marginLeft: '27%', fontSize: '24px', color: 'black' }}></sapn>
+                      <sapn className="iconfont icon-icon-test-sy" style={{ marginLeft: '27%', fontSize: '24px', color: 'black' }}></sapn>
                       <span style={{ marginLeft: '3%', color: '#000000' }}>{item.comNum}</span>
                       {item.cnum > 0
                         ? <div onClick={this.change.bind(this, (idx))} style={{ color: '#fff', marginLeft: '2vw', height: 20, width: 20, borderRadius: 10, backgroundColor: 'red', textAlign: 'center',position:'absolute',top:'0.5vh',left:'35vw'}}>+{item.cnum}</div>

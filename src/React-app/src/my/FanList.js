@@ -98,11 +98,16 @@ export default class FanList extends Component {
                 follow: crr
             })
             let url1 = `http://139.155.44.190:3005/follow/add?lname=${this.state.name}&nname=${this.state.follow[idx].lname}`;
+            let url3 = `http://139.155.44.190:3005/follow/changeP?lname=${this.state.name}&nname=${this.state.follow[idx].lname}&newp=${true}`;
             axios(url1)
                 .then((res) => {
                     console.log(url1);
                     if (res.data.ok) {
                         alert(res.data.msg);
+                        axios(url3)
+                            .then((res) => {
+
+                            })
                     } else {
                         alert(res.data.msg);
                     }
@@ -126,7 +131,7 @@ export default class FanList extends Component {
         }
     }
 
-    back=()=>{
+    back = () => {
         window.history.back();
     }
 
@@ -136,16 +141,16 @@ export default class FanList extends Component {
                 <div>
                     {/* {
                         this.state.data.map((item) => */}
-                            <NavBar
-                                style={{ backgroundColor: '#37376F', color: '#fff', position: 'fixed', top: 0, zIndex: 18, textAlign: 'center', height: '7vh', width: '100%' }}
-                                leftContent={[
-                                    // <Link to={`/person/${item.name}`}><span style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span></Link>
-                                    <span onClick={this.back} style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span>
-                                ]}
-                            >
-                                <span>粉丝列表</span>
-                            </NavBar>
-                        {/* ) */}
+                    <NavBar
+                        style={{ backgroundColor: '#37376F', color: '#fff', position: 'fixed', top: 0, zIndex: 18, textAlign: 'center', height: '7vh', width: '100%' }}
+                        leftContent={[
+                            // <Link to={`/person/${item.name}`}><span style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span></Link>
+                            <span onClick={this.back} style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span>
+                        ]}
+                    >
+                        <span>粉丝列表</span>
+                    </NavBar>
+                    {/* ) */}
                     {/* } */}
                 </div>
                 <div style={{ width: '100vw', backgroundColor: '#EFEFF4' }}>

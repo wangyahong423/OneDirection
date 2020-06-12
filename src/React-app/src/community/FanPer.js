@@ -73,7 +73,6 @@ export default class FanPer extends Component {
         let url7 = `http://139.155.44.190:3005/collect/list`;
         let url8 = `http://139.155.44.190:3005/learntalk/list`;
 
-        console.log('name:', name);
         axios(url)
             .then((res) => {
                 this.setState({
@@ -96,7 +95,6 @@ export default class FanPer extends Component {
                         data: arr
                     })
                 })
-                console.log('data', arr);
                 axios(url1)
                     .then((res) => {
                         this.setState({
@@ -198,7 +196,6 @@ export default class FanPer extends Component {
                                         this.setState({
                                             mylearnData: list1
                                         })
-                                        console.log('mylearnData:', this.state.mylearnData);
                                         //我赞过的社区帖子
                                         var list4 = [];
                                         for (var p = 0; p < this.state.perLlike.length; p++) {
@@ -245,7 +242,6 @@ export default class FanPer extends Component {
                                         this.setState({
                                             llikeData: list4
                                         });
-                                        console.log('llikeData:', this.state.llikeData);
                                     })
                             })
                         axios(url3)
@@ -367,7 +363,6 @@ export default class FanPer extends Component {
                                                     }
                                                 })
                                                 this.setState({ myexpData: list2 });
-                                                console.log('myexpData:', this.state.myexpData);
                                                 //我赞过的经验分享帖子
                                                 var list5 = [];
                                                 for (var p = 0; p < perelikeList.length; p++) {
@@ -423,7 +418,6 @@ export default class FanPer extends Component {
                                                 this.setState({
                                                     elikeData: list5
                                                 })
-                                                console.log('elikeData:', this.state.elikeData);
                                                 //我的收藏
                                                 var percollectList = [];
                                                 for (var i = 0; i < res.data.length; i++) {
@@ -488,7 +482,6 @@ export default class FanPer extends Component {
                                                 this.setState({
                                                     mycollectData: list3
                                                 });
-                                                console.log('mycollectData:', this.state.mycollectData);
                                             })
                                     })
 
@@ -558,11 +551,15 @@ export default class FanPer extends Component {
                 follow: true
             })
             let url1 = `http://139.155.44.190:3005/follow/add?lname=${this.state.name}&nname=${user}`;
+            let url2 = `http://139.155.44.190:3005/follow/changeP?lname=${this.state.name}&nname=${this.state.user}&newp=${true}`;
             axios(url1)
                 .then((res) => {
-                    // console.log(url1);
                     if (res.data.ok) {
                         alert(res.data.msg);
+                        axios(url2)
+                            .then((res) => {
+
+                            })
                     } else {
                         alert(res.data.msg);
                     }
@@ -575,7 +572,6 @@ export default class FanPer extends Component {
             let url2 = `http://139.155.44.190:3005/follow/delete?nname=${user}`;
             axios(url2)
                 .then((res) => {
-                    // console.log(url2);
                     if (res.data.ok) {
                         alert(res.data.msg);
                     } else {
@@ -598,7 +594,6 @@ export default class FanPer extends Component {
             let url1 = `http://139.155.44.190:3005/learnlike/add?lid=${this.state.llikeData[idx].id}&name=${this.state.name}&lname=${this.state.llikeData[idx].name}`;
             axios(url1)
                 .then((res) => {
-                    console.log(url1);
                 });
             let url2 = `http://139.155.44.190:3005/users/list`;
             axios(url2)
@@ -708,7 +703,6 @@ export default class FanPer extends Component {
             let url2 = `http://139.155.44.190:3005/learnlike/delete?lid=${this.state.llikeData[idx].id}&name=${this.state.name}`;
             axios(url2)
                 .then((res) => {
-                    console.log(url2);
                 });
         }
     }
@@ -725,7 +719,6 @@ export default class FanPer extends Component {
             let url1 = `http://139.155.44.190:3005/experiencelike/add?eid=${this.state.elikeData[idx].id}&name=${this.state.name}&ename=${this.state.elikeData[idx].name}`;
             axios(url1)
                 .then((res) => {
-                    console.log(url1);
                 });
             let url2 = `http://139.155.44.190:3005/users/list`;
             axios(url2)
@@ -835,7 +828,6 @@ export default class FanPer extends Component {
             let url2 = `http://139.155.44.190:3005/experiencelike/delete?eid=${this.state.elikeData[idx].id}&name=${this.state.name}`
             axios(url2)
                 .then((res) => {
-                    console.log(url2);
                 });
         }
     }
@@ -853,7 +845,6 @@ export default class FanPer extends Component {
             let url1 = `http://139.155.44.190:3005/collect/addCollect?eid=${this.state.elikeData[idx].id}&name=${this.state.name}`;
             axios(url1)
                 .then((res) => {
-                    console.log(url1);
                 });
             let url2 = `http://139.155.44.190:3005/users/list`;
             axios(url2)
@@ -963,7 +954,6 @@ export default class FanPer extends Component {
             let url2 = `http://139.155.44.190:3005/collect/deleteCollect?eid=${this.state.elikeData[idx].id}&name=${this.state.name}`;
             axios(url2)
                 .then((res) => {
-                    console.log(url2);
                 });
         }
     }
@@ -981,7 +971,6 @@ export default class FanPer extends Component {
             let url1 = `http://139.155.44.190:3005/learnlike/add?lid=${this.state.mylearnData[idx].id}&name=${this.state.name}&lname=${this.state.mylearnData[idx].name}`;
             axios(url1)
                 .then((res) => {
-                    console.log(url1);
                 });
             let url2 = `http://139.155.44.190:3005/users/list`;
             axios(url2)
@@ -1091,7 +1080,6 @@ export default class FanPer extends Component {
             let url2 = `http://139.155.44.190:3005/learnlike/delete?lid=${this.state.mylearnData[idx].id}&name=${this.state.name}`
             axios(url2)
                 .then((res) => {
-                    console.log(url2);
                 });
         }
     }
@@ -1109,7 +1097,6 @@ export default class FanPer extends Component {
             let url1 = `http://139.155.44.190:3005/experiencelike/add?eid=${this.state.myexpData[idx].id}&name=${this.state.name}&ename=${this.state.myexpData[idx].name}`;
             axios(url1)
                 .then((res) => {
-                    console.log(url1);
                 });
             let url2 = `http://139.155.44.190:3005/users/list`;
             axios(url2)
@@ -1219,7 +1206,6 @@ export default class FanPer extends Component {
             let url2 = `http://139.155.44.190:3005/experiencelike/delete?eid=${this.state.myexpData[idx].id}&name=${this.state.name}`;
             axios(url2)
                 .then((res) => {
-                    console.log(url2);
                 });
         }
     }
@@ -1236,7 +1222,6 @@ export default class FanPer extends Component {
             let url1 = `http://139.155.44.190:3005/collect/addCollect?eid=${this.state.myexpData[idx].id}&name=${this.state.name}`;
             axios(url1)
                 .then((res) => {
-                    console.log(url1);
                 });
             let url2 = `http://139.155.44.190:3005/users/list`;
             axios(url2)
@@ -1346,7 +1331,6 @@ export default class FanPer extends Component {
             let url2 = `http://139.155.44.190:3005/collect/deleteCollect?eid=${this.state.myexpData[idx].id}&name=${this.state.name}`;
             axios(url2)
                 .then((res) => {
-                    console.log(url2);
                 });
         }
     }
@@ -1364,7 +1348,6 @@ export default class FanPer extends Component {
             let url1 = `http://139.155.44.190:3005/experiencelike/add?eid=${this.state.mycollectData[idx].id}&name=${this.state.name}&ename=${this.state.mycollectData[idx].name}`;
             axios(url1)
                 .then((res) => {
-                    console.log(url1);
                 });
             let url2 = `http://139.155.44.190:3005/users/list`;
             axios(url2)
@@ -1474,7 +1457,6 @@ export default class FanPer extends Component {
             let url2 = `http://139.155.44.190:3005/experiencelike/delete?eid=${this.state.list[idx].id}&name=${this.state.name}`;
             axios(url2)
                 .then((res) => {
-                    console.log(url2);
                 });
         }
     }
@@ -1492,7 +1474,6 @@ export default class FanPer extends Component {
             let url1 = `http://139.155.44.190:3005/collect/addCollect?eid=${this.state.mycollectData[idx].id}&name=${this.state.name}`;
             axios(url1)
                 .then((res) => {
-                    console.log(url1);
                 });
             let url2 = `http://139.155.44.190:3005/users/list`;
             axios(url2)
@@ -1602,7 +1583,6 @@ export default class FanPer extends Component {
             let url2 = `http://139.155.44.190:3005/collect/deleteCollect?eid=${this.state.mycollectData[idx].id}&name=${this.state.name}`;
             axios(url2)
                 .then((res) => {
-                    console.log(url2);
                 });
         }
     }
@@ -1904,8 +1884,8 @@ export default class FanPer extends Component {
             behavior: 'smooth',
         });
     }
-    
-    back=()=>{
+
+    back = () => {
         window.history.back();
     }
 

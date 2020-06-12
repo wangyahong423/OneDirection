@@ -55,7 +55,7 @@ export default class Card extends Component {
                 <NavBar
                     style={{ backgroundColor: '#37376F', color: '#fff', zIndex: 10, textAlign: 'center', height: '7vh', position: 'sticky', top: 0 }}
                     leftContent={[
-                        <Link to="/shezhi"><span className="iconfont icon-ico_leftarrow"></span></Link>
+                        <Link to="/My"><span className="iconfont icon-ico_leftarrow"></span></Link>
                     ]}
                 >
                     <span>卡片背景选择</span>
@@ -69,7 +69,7 @@ export default class Card extends Component {
                                     : <img style={{ width: 200, height: 100, borderColor: '#fff', borderWidth: 1, borderStyle: 'solid' }} />
                             }
                             <div style={{ flexDirection: 'row', alignItems: 'center', display: 'inline-block', position: 'absolute', top: 25,left:'60%' }}>
-                                <p style={{ display: 'inline-block' }}>使用此头像框 </p>
+                                <p style={{ display: 'inline-block' }}>使用此卡片 </p>
                                 <div style={item.color ? { width: 10, height: 10, borderRadius: '50%', borderColor: '#000', backgroundColor: 'red', borderWidth: 1, borderStyle: 'solid', display: 'inline-block' } : { width: 10, height: 10, borderRadius: '50%', borderColor: '#000', borderWidth: 1, borderStyle: "solid", display: 'inline-block' }}></div>
                             </div>
                         </div>

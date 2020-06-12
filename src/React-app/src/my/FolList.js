@@ -61,7 +61,6 @@ export default class Follows extends Component {
                                 followList.push(res.data[i]);
                             }
                         }
-                        console.log('follow0:', followList);
                         followList.forEach((item) => {
                             for (var i = 0; i < this.state.pic.length; i++) {
                                 if (item.nname == this.state.pic[i].name) {
@@ -77,18 +76,15 @@ export default class Follows extends Component {
                                 else {
                                     item.follow = false;
                                 }
-                                console.log('22', this.state.usersFollow);
                             }
                         })
                         this.setState({
                             follow: followList
                         })
-                        console.log('follow:', this.state.follow);
                         this.setState({
                             follow: this.state.follow
                         })
                     })
-                console.log('all1', this.state.follow);
             })
     }
 
@@ -101,11 +97,16 @@ export default class Follows extends Component {
                 follow: crr
             })
             let url1 = `http://139.155.44.190:3005/follow/add?lname=${this.state.name}&nname=${this.state.follow[idx].nname}`;
+            let url3 = `http://139.155.44.190:3005/follow/changeP?lname=${this.state.name}&nname=${this.state.follow[idx].nname}&newp=${true}`;
             axios(url1)
                 .then((res) => {
                     console.log(url1);
                     if (res.data.ok) {
                         alert(res.data.msg);
+                        axios(url3)
+                            .then((res) => {
+
+                            })
                     } else {
                         alert(res.data.msg);
                     }
@@ -129,7 +130,7 @@ export default class Follows extends Component {
         }
     }
 
-    back=()=>{
+    back = () => {
         window.history.back();
     }
 
@@ -139,16 +140,16 @@ export default class Follows extends Component {
                 <div>
                     {/* {
                         this.state.data.map((item) => */}
-                            <NavBar
-                                style={{ backgroundColor: '#37376F', color: '#fff', position: 'fixed', top: 0, zIndex: 18, textAlign: 'center', height: '7vh', width: '100%' }}
-                                leftContent={[
-                                    // <Link to={`/person/${item.name}`}><span style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span></Link>
-                                    <span onClick={this.back} style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span>
-                                ]}
-                            >
-                                <span>关注列表</span>
-                            </NavBar>
-                        {/* )
+                    <NavBar
+                        style={{ backgroundColor: '#37376F', color: '#fff', position: 'fixed', top: 0, zIndex: 18, textAlign: 'center', height: '7vh', width: '100%' }}
+                        leftContent={[
+                            // <Link to={`/person/${item.name}`}><span style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span></Link>
+                            <span onClick={this.back} style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span>
+                        ]}
+                    >
+                        <span>关注列表</span>
+                    </NavBar>
+                    {/* )
                     } */}
                 </div>
                 <div style={{ width: '100vw', backgroundColor: '#EFEFF4' }}>

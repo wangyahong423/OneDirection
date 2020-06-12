@@ -24,14 +24,14 @@ class Add extends Component {
         })
         axios(url1)
           .then((res) => {
-            res.data.forEach((item)=>{
-              if(item.name == this.state.name){
+            res.data.forEach((item) => {
+              if (item.name == this.state.name) {
                 this.setState({
-                  card:item.card
+                  card: item.card
                 })
               }
             })
-            console.log('card:',this.state.card)
+            console.log('card:', this.state.card)
           })
       })
   }
@@ -176,6 +176,43 @@ class Add extends Component {
                     })
                   })
 
+              })
+
+            let url4 = `http://139.155.44.190:3005/learn/list`;
+            axios(url4)
+              .then((res) => {
+                var id = 0;
+                for (var i = 0; i < res.data.length; i++) {
+                  if (res.data[i].name == this.state.name && res.data[i].time == this.state.time) {
+                    id = res.data[i].id;
+                    break;
+                  }
+                }
+                let url5 = `http://139.155.44.190:3005/follow/list`;
+                axios(url5)
+                  .then((res) => {
+                    var arr = [];
+                    for (var j = 0; j < res.data.length; j++) {
+                      if (res.data[j].nname == this.state.name) {
+                        arr.push(res.data[j]);
+                      }
+                    }
+                    console.log(arr, id);
+                    for (var z = 0; z < arr.length; z++) {
+                      var learn = arr[z].learn;
+                      if (learn == null || learn == "") {
+                        learn = id;
+                      }
+                      else {
+                        learn = learn + ',' + id;
+                      }
+                      let url45 = `http://139.155.44.190:3005/follow/changeLL?lname=${arr[z].lname}&nname=${this.state.name}&learn=${learn}`;
+                      axios(url45)
+                        .then((res) => {
+                          console.log(url45)
+                        });
+                    }
+                  })
               })
           } else {
             alert(res.data.msg);

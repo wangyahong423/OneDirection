@@ -564,10 +564,15 @@ export default class Person extends Component {
                 follow: true
             })
             let url1 = `http://139.155.44.190:3005/follow/add?lname=${this.state.name}&nname=${this.state.username}`;
+            let url3 = `http://139.155.44.190:3005/follow/changeP?lname=${this.state.name}&nname=${this.state.username}&newp=${true}`;
             axios(url1)
                 .then((res) => {
                     if (res.data.ok) {
                         alert(res.data.msg);
+                        axios(url3)
+                            .then((res) => {
+
+                            })
                     } else {
                         alert(res.data.msg);
                     }

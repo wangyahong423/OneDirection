@@ -14,7 +14,9 @@ export default class My extends Component {
             todo: [],
             username: '',
             head: '',
-            islogin: false
+            islogin: false,
+            newp: [],
+            pnum: 0
         }
     }
     componentDidMount() {
@@ -25,26 +27,6 @@ export default class My extends Component {
                     username: res.data.name
                 })
             })
-        // let url = `http://139.155.44.190:3005/users/list`;
-        // axios(url)
-        //     .then((res) => {
-        //         if (res.err) {
-        //         } else {
-        //             this.setState({
-        //                 data: res.data
-        //             })
-        //             let arr = [];
-        //             this.state.data.map((item) => {
-        //                 if (item.name === this.state.username) {
-        //                     arr.push(item)
-        //                 }
-        //                 this.setState({
-        //                     data: arr
-        //                 })
-        //             })
-        //             console.log('data:', arr);
-        //         }
-        //     })
         let url2 = `http://139.155.44.190:3005/users/list`;
         axios(url2)
             .then((res) => {
@@ -60,36 +42,6 @@ export default class My extends Component {
                             level: item.level
                         })
                     }
-                    // var num = Math.floor(this.state.lvnum / 15);
-                    // let url3 = `http://139.155.44.190:3005/users/list`;
-                    // axios(url3)
-                    //     .then((res) => {
-                    //         this.setState({
-                    //             lvlist: res.data
-                    //         })
-                    //         this.state.lvlist.map((item) => {
-                    //             if (item.name == this.state.username) {
-                    //                 if (num < 10) {
-                    //                     this.setState({
-                    //                         level: num + 1
-                    //                     })
-                    //                 }
-                    //                 else {
-                    //                     this.setState({
-                    //                         level: 10
-                    //                     })
-                    //                 }
-                    //                 let url4 = `http://139.155.44.190:3005/users/changeLv?level=${this.state.level}&name=${this.state.username}`;
-                    //                 axios(url4)
-                    //                     .then((res) => {
-                    //                         if (res.data.ok) { }
-                    //                         else {
-                    //                             alert(res.data.msg)
-                    //                         }
-                    //                     })
-                    //             }
-                    //         })
-                    //     })
 
                 })
             })
@@ -119,7 +71,98 @@ export default class My extends Component {
                 })
                 console.log('snum:', this.state.sum);
             })
+
+        let url8 = `http://139.155.44.190:3005/experience/list`;
+        axios(url8)
+            .then((res) => {
+                var drr = [];
+                res.data.forEach((item) => {
+                    if (item.name == this.state.username) {
+                        drr.push(item);
+                    }
+                })
+                this.setState({
+                    qrr: drr
+                })
+                console.log('qrr:', this.state.qrr);
+                var ecnum = 0;
+                var elnum = 0;
+                var num1 = 0;
+                this.state.qrr.forEach((item) => {
+                    ecnum += item.cnum;
+                    elnum += item.likenum;
+                })
+                num1 = ecnum + elnum;
+                this.setState({
+                    sum1: num1
+                })
+                console.log('sum1:', this.state.sum1);
+            })
+
+        let url7 = `http://139.155.44.190:3005/follow/list`;
+        axios(url7)
+            .then((res) => {
+                var follow = 0;
+                var fan = 0;
+                var znum = 0;
+                var learn = [];
+                var experience = [];
+                var newp = [];
+                var pnum = 0;
+                res.data.forEach((item) => {
+                    if (item.lname == this.state.username) {
+                        follow++;
+                        if (item.learn != null && item.learn != "") {
+                            var a = item.learn.split(",");
+                            znum = znum + a.length;
+                            for (var i = 0; i < a.length; i++) {
+                                learn.push(a[i]);
+                            }
+                            console.log('learn:', learn);
+                        }
+                        if (item.experience != null && item.experience != "") {
+                            var a = item.experience.split(",");
+                            znum = znum + a.length;
+                            for (var i = 0; i < a.length; i++) {
+                                experience.push(a[i]);
+                            }
+                            console.log('experience:', experience);
+                        }
+                    }
+                    if (item.nname == this.state.username) {
+                        fan++;
+                        if (item.newp == true) {
+                            pnum++;
+                            newp.push(item.id);
+                        }
+                    }
+                })
+                this.setState({
+                    follows: follow,
+                    fans: fan,
+                    nums: znum,
+                    newp: newp,
+                    pnum: pnum
+                })
+                console.log('newp:',this.state.newp);
+                console.log('pnum:', this.state.pnum);
+            })
     }
+
+    fanlist = ()=>{
+        for (var i = 0; i < this.state.newp.length; i++) {
+            let url = `http://139.155.44.190:3005/follow/changePP?id=${this.state.newp[i]}&newp=${false}`;
+            axios(url)
+            .then((res)=>{
+
+            })
+            this.setState({
+                newp:[],
+                pnum:0
+            })
+        }
+    }
+
     outlogin = () => {
         let url5 = `http://139.155.44.190:3005/users/getName`;
         axios(url5)
@@ -145,55 +188,71 @@ export default class My extends Component {
 
     render() {
         return (
-            <div>
-                <NavBar style={{ width: '100%', backgroundColor: '#37376f', color: '#fff', position: 'fixed ', top: '0', zIndex: 1, height: '7vh' }}>我的</NavBar>
-                <div className="one"></div>
-                <Link to="/changeImg">
-                    <div style={{ height: '150px', width: '150px', borderRadius: '50%', opacity: '1', zIndex: "10", marginTop: '-70px', overflow: 'hidden', marginLeft: '20px' }} >
-                        <div style={{ position: 'relative' }}>
-                            <img src={this.state.pic} style={{ height: '100px', width: '100px', opacity: '1', marginTop: 25, marginLeft: 25, borderRadius: '50%' }} />
+            <div style={{ backgroundColor: '#fff' }}>
+                <div className="one" style={{ position: 'sticky', top: 0, zIndex: 999 }}>
+                    <div style={{ paddingTop: '4vh' }}>
+                        <Link to="/shezhi"><span className='iconfont icon-shezhi1' style={{ color: '#fff', fontSize: 25, float: 'right', marginRight: "5%" }}></span></Link>
+                    </div>
+                    <Link to="/changeImg">
+                        <div style={{ height: '120px', width: '30%', borderRadius: '50%', opacity: '1', marginLeft: '35%', marginTop: '5vh', display: 'flex', flexDirection: 'column' }}>
+                            <img src={this.state.pic} style={{ height: '100px', width: '100px', opacity: '1', borderRadius: '50%', alignSelf: 'center' }} />
                             {
                                 this.state.head != 'http://139.155.44.190:3005/head/null'
-                                    ? <img src={this.state.head} style={{ height: '120px', width: '120px', borderRadius: '50%', position: 'absolute', left: 12, top: 14 }} />
+                                    ? <img src={this.state.head} style={{ height: '120px', width: '120px', borderRadius: '50%', alignSelf: 'center', marginTop: '-115px' }} />
                                     : null
                             }
                         </div>
-                    </div>
-                </Link>
-                <div style={{ marginTop: '-10vh', marginLeft: '35vw' }}>
-                    <div>
-                        <p>{this.state.username}&emsp;</p>
-                        <div style={{ position: 'relative' }}>
-                            <img src={`http://139.155.44.190:3005/level/lv${this.state.level}.png`} style={{ width: '8vw', height: '5vw', position: 'absolute', top: '-5.1vh', left: '8vw' }} />
+                    </Link>
+                    <div style={{ fontSize: 16, color: '#fff' }}>
+                        <div style={{ width: '15%', height: '4vh', marginLeft: '42.5%', position: 'relative' }}>
+                            <span style={{ position: 'absolute', top: '0.9vh', float: 'left' }}>{this.state.username}</span>
+                            <img src={`http://139.155.44.190:3005/level/lv${this.state.level}.png`} style={{ width: '8vw', height: '4vh', float: 'right' }} />
                         </div>
-                        <p>河北师范大学{this.state.college}</p>
+                        <p style={{ textAlign: 'center' }}>河北师范大学{this.state.college}</p>
+                        <div style={{ width: '25%', backgroundColor: 'pink', marginLeft: '37.5%', marginTop: '5%', color: '#fff' }}>
+                            <Link to="/myfollows" style={{ color: '#fff' }}>
+                                <div style={{ float: 'left', width: '30%', height: '5vh', color: '#fff', textAlign: 'center' }}>
+                                    <span>关注</span>
+                                    {
+                                        this.state.nums > 0
+                                            ? <Link to="/newadd" style={{ color: '#fff' }}>
+                                                <div style={{ display: 'inline-block', textAlign: 'center' }}>
+                                                    <div style={{ float: 'left' }}>
+                                                        {this.state.follows}
+                                                    </div>
+                                                    <div style={{ float: 'right', color: '#fff', height: 18, width: 18, borderRadius: 9, backgroundColor: 'red', textAlign: 'center' }}>{this.state.nums}</div>
+                                                </div>
+                                            </Link>
+                                            : <span style={{ color: '#fff' }}>{this.state.follows}</span>
+                                    }
+                                </div>
+                            </Link>
+                            <Link to="/myfans" style={{ color: '#fff' }}>
+                                <div style={{ float: 'right', width: '30%', height: '5vh', textAlign: 'center', color: '#fff' }}>
+                                    <span>粉丝</span>
+                                    {
+                                        this.state.pnum > 0
+                                            ? <div onClick={this.fanlist} style={{ display: 'inline-block', textAlign: 'center' }}>
+                                                <div style={{ float: 'left' }}>
+                                                    {this.state.fans}
+                                                </div>
+                                                <div style={{ float: 'right', color: '#fff', height: 18, width: 18, borderRadius: 9, backgroundColor: 'red', textAlign: 'center' }}>{this.state.pnum}</div>
+                                            </div>
+                                            : <span>{this.state.fans}</span>
+                                    }
+                                </div>
+                            </Link>
+                        </div>
                     </div>
                 </div>
-                <div style={{ zIndex: 999 }}>
-                    <List style={{ marginTop: '18px', marginBottom: '15px' }}>
-                        <Link to="/myfans">
-                            <Item
-                                arrow="horizontal"
-                                onClick={() => { }}
-                                className='iconfont icon-collection'
-                                style={{ paddingLeft: '20px', borderBottom: '1px solid grey', height: '60px', color: 'black' }}
-                            ><span style={{ marginLeft: '40px', fontSize: '20px' }}>我的粉丝</span></Item>
-                        </Link>
-                        <Link to="/myfollows">
-                            <Item
-                                arrow="horizontal"
-                                onClick={() => { }}
-                                className='iconfont icon-collection'
-                                style={{ paddingLeft: '20px', borderBottom: '1px solid grey', height: '60px', color: 'black' }}
-                            ><span style={{ marginLeft: '40px', fontSize: '20px' }}>我的关注</span></Item>
-                        </Link>
-                    </List>
-                    <List style={{ marginTop: '18px', marginBottom: '15px' }}>
+
+                <div>
+                    <List style={{ marginBottom: '5vh' }}>
                         <Link to="/mynotes">
                             <Item
                                 arrow="horizontal"
                                 onClick={() => { }}
-                                className='iconfont icon-collection'
+                                className='iconfont icon-yumaobi'
                                 style={{ paddingLeft: '20px', borderBottom: '1px solid grey', height: '60px', color: 'black' }}
                             ><span style={{ marginLeft: '40px', fontSize: '20px' }}>我的笔记</span></Item>
                         </Link>
@@ -201,12 +260,12 @@ export default class My extends Component {
                             <Item
                                 arrow="horizontal"
                                 onClick={() => { }}
-                                className='iconfont icon-tieziguanli'
+                                className='iconfont icon-biji1'
                                 style={{ paddingLeft: '20px', borderBottom: '1px solid grey', height: '60px', color: 'black' }}
                             >
                                 <span style={{ marginLeft: '40px', fontSize: '20px' }}>我的帖子</span>
                                 {this.state.sum > 0
-                                    ? <div style={{ color: '#fff', marginLeft: '2vw', height: 28, width: 28, borderRadius:14,backgroundColor: 'red',textAlign:'center',position:'absolute',top:'2vh',left:'25vw'}}>{this.state.sum}</div>
+                                    ? <div style={{ color: '#fff', marginLeft: '2vw', height: 18, width: 18, borderRadius: 9, backgroundColor: 'red', textAlign: 'center', position: 'absolute', top: '3vh', left: '25vw' }}>{this.state.sum}</div>
                                     : null
                                 }
                             </Item>
@@ -215,58 +274,41 @@ export default class My extends Component {
                             <Item
                                 arrow="horizontal"
                                 onClick={() => { }}
-                                className='iconfont icon-icon--'
-                                style={{ paddingLeft: '16px', height: '60px', color: 'black', fontSize: '22px' }}
+                                className='iconfont icon-dengpao'
+                                style={{ paddingLeft: '20px', borderBottom: '1px solid grey', height: '60px', color: 'black', position: "relative" }}
                             ><span style={{ marginLeft: '40px', fontSize: '20px' }}>我的经验</span></Item>
+                            {this.state.sum1 > 0
+                                ? <div style={{ color: '#fff', height: 18, width: 18, borderRadius: 9, backgroundColor: 'red', textAlign: 'center', position: 'absolute', top: '20vh', left: '33.5vw' }}>{this.state.sum1}</div>
+                                : null
+                            }
                         </Link>
-                    </List>
-                    <List style={{ marginBottom: '15px' }}>
                         <Link to="/tongxunlvone">
                             <Item
                                 arrow="horizontal"
                                 onClick={() => { }}
-                                className='iconfont icon-tongxunlu'
+                                className='iconfont icon-dianhua'
                                 style={{ paddingLeft: '20px', borderBottom: '1px solid grey', height: '60px', color: 'black' }}
                             ><span style={{ marginLeft: '40px', fontSize: '20px' }}>通讯录</span></Item>
                         </Link>
-                        <Link to="/wm">
+                        <Link to="/head">
                             <Item
                                 arrow="horizontal"
                                 onClick={() => { }}
-                                className='iconfont icon-tuandui'
-                                style={{ paddingLeft: '20px', height: '60px', color: 'black' }}
-                            ><span style={{ marginLeft: '40px', fontSize: '20px' }}>关于我们</span></Item>
+                                className='iconfont icon-shoucang1'
+                                style={{ paddingLeft: '20px', borderBottom: '1px solid grey', height: '60px', color: 'black' }}
+                            ><span style={{ marginLeft: '40px', fontSize: '20px' }}>头像框</span></Item>
+                        </Link>
+                        <Link to="/card">
+                            <Item
+                                arrow="horizontal"
+                                onClick={() => { }}
+                                className='iconfont icon-tupian-copy'
+                                style={{ paddingLeft: '20px', borderBottom: '1px solid grey', height: '60px', color: 'black' }}
+                            ><span style={{ marginLeft: '40px', fontSize: '20px' }}>卡片</span></Item>
                         </Link>
                     </List>
-                    <List>
-                        <Link to="/yonghufankui">
-                            <Item
-                                arrow="horizontal"
-                                onClick={() => { }}
-                                className='iconfont icon-fankui'
-                                style={{ paddingLeft: '20px', borderBottom: '1px solid grey', height: '60px', color: 'black' }}
-                            ><span style={{ marginLeft: '40px', fontSize: '20px' }}>用户反馈</span></Item>
-                        </Link>
-                        <Link to="/fuwu">
-                            <Item
-                                arrow="horizontal"
-                                onClick={() => { }}
-                                className='iconfont icon-fankui'
-                                style={{ paddingLeft: '20px', borderBottom: '1px solid grey', height: '60px', color: 'black' }}
-                            ><span style={{ marginLeft: '40px', fontSize: '20px' }}>用户协议</span></Item>
-                        </Link>
-                        <Link to="/shezhi">
-                            <Item
-                                arrow="horizontal"
-                                onClick={() => { }}
-                                className='iconfont icon-shezhi1'
-                                style={{ paddingLeft: '20px', height: '60px', color: 'black' }}
-                            ><span style={{ marginLeft: '40px', fontSize: '20px' }}>设置</span></Item>
-                        </Link>
-                    </List>
-                    <span onClick={() => { this.outlogin() }} style={{ color: 'grey', fontSize: 14, lineHeight: '30px', marginLeft: '42%' }}>退出登录</span>
                 </div>
-            </div>
+            </div >
         )
     }
 }

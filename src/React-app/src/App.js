@@ -445,6 +445,14 @@ import FolCom from './community/FolCom';
 import FanDetails from './community/FanDetails';
 import FanCom from './community/FanCom';
 
+//我关注的人发帖子
+import NewAdd from './my/NewAdd';
+import NewE from './my/NewE';
+import NewL from './my/NewL';
+import NewLcom from './my/NewLcom';
+import NewLdetails from './my/NewLdetails';
+import NewEdetails from './my/NewEdetails';
+
 export default class App extends Component {
     render() {
         return (
@@ -905,9 +913,14 @@ export default class App extends Component {
                     <Route path="/myfanper/:lname" component={Myfanper}/>
                     <Route path="/fanlist/:name" component={FanList}/>
                     <Route path="/follist/:name" component={FolList}/>
-                    <Route/>
-                    <Route/>
-                    <Route/>
+                    
+                    <Route path="/newadd" component={NewAdd}/>
+                    <Route path="/newe" component={NewE}/>
+                    <Route path="/newl" component={NewL}/>
+                    <Route path="/newlcom/:id" component={NewLcom}/>
+                    <Route path="/newldetails/:id" component={NewLdetails}/>
+                    <Route path="/newedetails/:id" component={NewEdetails}/>
+
                 </Router>
             </div>
         )

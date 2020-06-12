@@ -8,7 +8,7 @@ export default class Women extends Component {
         <NavBar
           style={{ backgroundColor: '#37376F', color: '#fff', position: 'sticky ', top: '20', zIndex: 10, textAlign: 'center', height: '7vh' }}
           leftContent={[
-            <Link to="/my"><span style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span></Link>
+            <Link to="/shezhi"><span style={{ fontSize: '17px', color: 'white' }} className="iconfont icon-ico_leftarrow"></span></Link>
           ]}
         >
           <span>关于我们</span>

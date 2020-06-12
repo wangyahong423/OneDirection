@@ -59,7 +59,7 @@ export default class Head extends Component {
                 <NavBar
                     style={{ backgroundColor: '#37376F', color: '#fff', zIndex: 10, textAlign: 'center', height: '7vh', position: 'sticky', top: 0 }}
                     leftContent={[
-                        <Link to="/shezhi"><span className="iconfont icon-ico_leftarrow"></span></Link>
+                        <Link to="/My"><span className="iconfont icon-ico_leftarrow"></span></Link>
                     ]}
                 >
                     <span>头像框选择</span>

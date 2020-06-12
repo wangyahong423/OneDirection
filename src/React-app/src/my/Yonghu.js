@@ -40,7 +40,7 @@ export default class Yonghu extends Component {
         <NavBar
           style={{ backgroundColor: '#37376F', color: '#fff', position: 'fixed ', width: "100vw", top: '0', zIndex: 10, textAlign: 'center', height: '7vh' }}
           leftContent={[
-            <Link to="/My"><span className="iconfont icon-ico_leftarrow"></span></Link>
+            <Link to="/shezhi"><span className="iconfont icon-ico_leftarrow"></span></Link>
           ]}
         >
           <span>用户反馈</span>
